@@ -1,6 +1,6 @@
 
 $( document ).ready(function() {
-    $( ".mainBody" ).load( "views/index.html", function() {
+    $( ".mainFooter" ).load( "footer.html", function() {
   		console.log( "Load was performed." );
 	});
 });
