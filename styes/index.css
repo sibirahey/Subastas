@@ -9,22 +9,19 @@
 .mainBody > .subastasDestacadasMain > .subastasDestacadasLarge{
 
 	display: block;
+	height:auto;
 	width: 50%;
 	float: left;
-/*	border-style: dotted;*/
-	height: 400px;
 }
 
 .mainBody > .subastasDestacadasMain > .subastasDestacadasSmallLote,
 .mainBody > .subastasDestacadasMain > .subastasDestacadasSmallAnuncio
 {
-
-
 	display: block;
+	height: auto;
 	width: 50%;
 	float: left;
-/*	border-style: dotted;*/
-	height: 200px;
+	background-size:contain;
 }
 
 .mainBody > .subastasDestacadasMain > .subastasDestacadasLarge > div,
@@ -46,19 +43,19 @@
 
 .mainBody > .subastasDestacadasMain > .subastasDestacadasLarge > .contenedorImagenPrinSubasta
 {
-	position: absolute;
+	position: relative;
 	left: 0;
 	top: 0;
-	height: 400px;
+	width: 100%;
 
 }
 .mainBody > .subastasDestacadasMain > .subastasDestacadasSmallLote > .contenedorImagenPrinSubasta,
 .mainBody > .subastasDestacadasMain > .subastasDestacadasSmallAnuncio > .contenedorImagenPrinSubasta
 {
 
-	position: absolute;
+	position: relative;
 	left: 0;
 	top: 0;
-	height: 200px;
+	width: 100%;
 
 }
