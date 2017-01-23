@@ -1,43 +1,21 @@
-*{
-	float:left;
-	position:relative;
-	display:block;
-	margin:0;
-	padding:0;
-	box-sizing: border-box;
-	font-family: 'open sans', sans-serif;
-}
+*{float:left;position:relative;display:block;margin:0;padding:0;box-sizing: border-box;font-family: 'open sans', sans-serif;}
 html,
-body{
-	height:100%;
-	width:100%;
-}
-.mainContainer{
-	height:inherit;
-	width:inherit;
-	overflow:auto;
-}
-.mainHeader{
-	width:inherit;
-}
-	.mainHeader > div{
-		width:inherit;
-	}
+body{height:100%;width:100%;}
+.mainContainer{height:inherit;width:inherit;overflow:auto;}
+.mainHeader{width:inherit;}
+	.mainHeader > div{width:inherit;}
 	.mainHeader > div:nth-child(1){height: 80px;}
 	.mainHeader > div:nth-child(2){height: 50px;},
 	.mainHeader > div:nth-child(3){height: 50px;}
 		.mainHeader > div:nth-child(1) > h1 {width: calc(100% - 160px);text-align:center;line-height:80px;}
 		.mainHeader > div:nth-child(1) > div:nth-child(2),
-		.mainHeader > div:nth-child(1) > div:nth-child(3) {width:80px;line-height:30px; text-align:center;vertical-align: text-bottom;}
-		.mainHeader  > ul{
-			height: inherit;
-			width: 100%;
-		}
+		.mainHeader > div:nth-child(1) > div:nth-child(3) {width:80px;line-height:30px; text-align:center;vertical-align: text-bottom;color:#AAAAAA;}
+		.mainHeader  > ul{height: inherit;width: 100%;box-shadow: 0 4px 10px -5px #000000;z-index: 1;font-size: 0.8em;font-weight: 500;}
 			.mainHeader > ul > li:nth-child(1),
 			.mainHeader > ul > li:nth-child(2),
 			.mainHeader > ul > li:nth-child(3),
 			.mainHeader > ul > li:nth-child(4),
-			.mainHeader > ul > li:nth-child(5){height:40px;width:calc((100% - 80px) / 5);text-align:center;border-top:1px solid #E2E2E2;border-bottom:1px solid #E2E2E2;padding:5px 0;}
+			.mainHeader > ul > li:nth-child(5){height:40px;width:calc((100% - 80px) / 5);text-align:center;border-top:1px solid #E2E2E2;border-bottom:1px solid #E2E2E2;padding:5px 10px 5px 0;}
 			.mainHeader > ul > li:nth-child(1) > label,
 			.mainHeader > ul > li:nth-child(2) > label,
 			.mainHeader > ul > li:nth-child(3) > label,
@@ -55,27 +33,125 @@ body{
 	.mainBody > .mbLeft{float:inherit;height: 100%;width:300px;}
 		.mainBody > .mbLeft > div {float:inherit;height: 300px;width:100%;}
 	.mainBody > .mbRight{float:inherit;height: 100%;width:calc(100% - 300px);}
-.mainFooter{
-	height:140px;
-	width:inherit;
-	border-top:1px solid #B4B4B4;
-}
+.mainFooter{height:140px;width:inherit;border-top:1px solid #B4B4B4;}
 .modalWindow{}
 .btnTwitter,
-.btnFacebook {
-	background-position:center center;
-	background-repeat:no-repeat;
+.btnFacebook {background-position:center center;background-repeat:no-repeat;background-size:contain;border:none;padding:2px;float:inherit;display:inherit;height:40px;width:40px;}
+.btnTwitter{background-image:url("../images/logoTwitter.svg");}
+.btnFacebook{background-image:url("../images/logoFacebook.svg");}
+
+/*---------- INDEX.HTML ---------*/
+.mainBody > .subastasDestacadasMain {
+	width: 100%;
+}
+	.mainBody > .subastasDestacadasMain > div {
+		overflow:hidden;
+	}
+.mainBody > .subastasDestacadasMain > .subastasDestacadasLarge{
+	height:600px;
+	width: 50%;
+}
+	.mainBody > .subastasDestacadasMain > .subastasDestacadasLarge > div:not(img){
+		position:absolute;
+		height:200px;
+		width: 100%;
+		padding-top:25px;
+	}
+		.mainBody > .subastasDestacadasMain > .subastasDestacadasLarge > div:not(img) > div {
+			clear:both;
+			float: right;
+		}
+		.mainBody > .subastasDestacadasMain > .subastasDestacadasLarge > div:not(img) > div.modelo {
+			font-size: 2em;
+			line-height:32px;
+    		text-transform: uppercase;
+    		color: #969696;
+    		padding-right:10px;
+		}
+		.mainBody > .subastasDestacadasMain > .subastasDestacadasLarge > div:not(img) > div.modelo > b {
+			color:#FD5D50;
+		}
+		.mainBody > .subastasDestacadasMain > .subastasDestacadasLarge > div:not(img) > div.pujaInicial{
+			font-size: 1em;
+    		text-transform: uppercase;
+    		padding-right:10px;
+		}
+
+.mainBody > .subastasDestacadasMain > .subastasDestacadasSmallLote,
+.mainBody > .subastasDestacadasMain > .subastasDestacadasSmallAnuncio {
+	height: 300px;
+	width: 50%;
+	background:#000000;
 	background-size:contain;
-	border:none;
-	padding:2px;
-	float:inherit;
-	display:inherit;
-	height:40px;
-	width:40px;
 }
-.btnTwitter{
-	background-image:url("../images/logoTwitter.svg");
+	.mainBody > .subastasDestacadasMain > .subastasDestacadasSmallLote > div:not(img),
+	.mainBody > .subastasDestacadasMain > .subastasDestacadasSmallAnuncio > div:not(img){
+		position:absolute;
+		height:200px;
+		width: 100%;
+		padding-top:20px;
+	}
+		.mainBody > .subastasDestacadasMain > .subastasDestacadasSmallLote > div:not(img) > div,
+		.mainBody > .subastasDestacadasMain > .subastasDestacadasSmallAnuncio > div:not(img) > div{
+			clear:both;
+			color: #ffffff;
+		}
+.mainBody > .subastasDestacadasMain > .subastasDestacadasLarge > .contenedorImagenPrinSubasta {
+ 	left: 0;
+	bottom: 0;
+	width: 100%;
+	position:absolute;
+	background-size:contain;
 }
-.btnFacebook{
-	background-image:url("../images/logoFacebook.svg");
+.mainBody > .subastasDestacadasMain > .subastasDestacadasSmallLote > .contenedorImagenPrinSubasta,
+.mainBody > .subastasDestacadasMain > .subastasDestacadasSmallAnuncio > .contenedorImagenPrinSubasta {
+ 	right: 0;
+	bottom: 0;
+	height: 100%;
+	position:absolute;
+	background-size:contain;
 }
+.mainBody > .subastasDestacadasMain > .subastasDestacadasSmallLote > .contenedorImagenPrinSubasta:after,
+.mainBody > .subastasDestacadasMain > .subastasDestacadasSmallAnuncio > .contenedorImagenPrinSubasta:after {
+ 	content: "";
+  	position: absolute;
+}
+.mainBody > .subastasDestacadasMain > .subastasDestacadasBottom {
+	height:180px;
+	line-height: 180px;	
+}
+.descripcionSubasta {
+  width: 260px;
+  height: 60px;
+  background: red;
+  color: white;
+  font-size: 11px;
+  letter-spacing: 0.2em;
+  text-align: center;
+  text-transform: uppercase;
+  background: #FD5A54; /* For browsers that do not support gradients */
+  background: -webkit-linear-gradient(left, #FD5A54 80%, #60221F); /* For Safari 5.1 to 6.0 */
+  background: -o-linear-gradient(right, #FD5A54  80%, #60221F); /* For Opera 11.1 to 12.0 */
+  background: -moz-linear-gradient(right, #FD5A54  80%, #60221F); /* For Firefox 3.6 to 15 */
+  background: linear-gradient(to right, #FD5A54  80%, #60221F); /* Standard syntax */
+}
+.descripcionSubasta:after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 0;
+  height: 0;
+  border-left: 20px solid #fff;
+  border-top: 30px solid transparent;
+  border-bottom: 30px solid transparent;
+}
+.descripcionSubasta > div{
+	clear:both;
+	float:right;
+	margin-right:20px;
+}
+.descripcionSubasta > div:first-child{
+	margin-top:10px;
+}
+/*---------- ENDS INDEX.HTML --------*/
