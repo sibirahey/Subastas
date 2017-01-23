@@ -37,16 +37,16 @@ body{
 			.mainHeader > ul > li:nth-child(2),
 			.mainHeader > ul > li:nth-child(3),
 			.mainHeader > ul > li:nth-child(4),
-			.mainHeader > ul > li:nth-child(5){height:40px;width:calc((100% - 80px) / 5);text-align:center;border-top:1px solid #B4B4B4;border-bottom:1px solid #B4B4B4;padding:5px 0;}
+			.mainHeader > ul > li:nth-child(5){height:40px;width:calc((100% - 80px) / 5);text-align:center;border-top:1px solid #E2E2E2;border-bottom:1px solid #E2E2E2;padding:5px 0;}
 			.mainHeader > ul > li:nth-child(1) > label,
 			.mainHeader > ul > li:nth-child(2) > label,
 			.mainHeader > ul > li:nth-child(3) > label,
 			.mainHeader > ul > li:nth-child(4) > label,
-			.mainHeader > ul > li:nth-child(5) > label{border-right:1px solid #B4B4B4;line-height:30px;width: 100%;}
+			.mainHeader > ul > li:nth-child(5) > label{border-right:1px solid #E2E2E2;line-height:30px;width: 100%;}
 			.mainHeader > ul > li:nth-child(6),
 			.mainHeader > ul > li:nth-child(7){height:40px;width: 40px}
 			
-		.mainHeader > div:nth-child(3) > label{float:right; clear:both;height: 25px;width:250px;border-left:1px dotted #B4B4B4;text-indent:5px;}
+		.mainHeader > div:nth-child(3) > label{float:right; clear:both;height: 25px;width:250px;border-left:1px dotted #E2E2E2;text-indent:5px;}
 		
 .mainBody{
 	min-height: calc(100% - 180px);
