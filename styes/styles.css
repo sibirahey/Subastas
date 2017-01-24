@@ -28,6 +28,7 @@ body{height:100%;width:100%;}
 	.mainBody > .mbLeft{float:inherit;height: 100%;width:300px;}
 		.mainBody > .mbLeft > div {float:inherit;height: 300px;width:100%;}
 	.mainBody > .mbRight{float:inherit;height: 100%;width:calc(100% - 300px);}
+<<<<<<< HEAD
 .mainFooter{height:140px;width:inherit;border-top:1px solid #E2E2E2;margin-top:20px;}
 	.mainFooter > .logoImg,
 	.mainFooter > .menuBottom,
@@ -41,6 +42,9 @@ body{height:100%;width:100%;}
 			text-align:center;
 			font-size:0.8em;
 		}
+=======
+.mainFooter{height:140px;border-top:1px solid #E2E2E2;margin-top:20px;}
+>>>>>>> origin/v2
 .modalWindow{}
 .btnTwitter,
 .btnFacebook {background-position:center center;background-repeat:no-repeat;background-size:contain;border:none;padding:2px;float:inherit;display:inherit;height:40px;width:40px;}
@@ -107,6 +111,7 @@ body{height:100%;width:100%;}
 			clear:both;
 			color: #ffffff;
 			margin-left:20px;
+<<<<<<< HEAD
 		}
 		.mainBody > .subastasDestacadasMain > .subastasDestacadasSmallAnuncio > div:not(img) > div.txtSubastaAbierta{
 			position: absolute;	
@@ -133,6 +138,34 @@ body{height:100%;width:100%;}
 		.mainBody > .subastasDestacadasMain > .subastasDestacadasSmallLote > div > div.modelo {
 			margin-top:20px;
 		}
+=======
+		}
+		.mainBody > .subastasDestacadasMain > .subastasDestacadasSmallAnuncio > div:not(img) > div.txtSubastaAbierta{
+			position: absolute;	
+		}
+			.mainBody > .subastasDestacadasMain > .subastasDestacadasSmallAnuncio > div:not(img) > div.txtSubastaAbierta > div.tituloSubasta,
+			.mainBody > .subastasDestacadasMain > .subastasDestacadasSmallAnuncio > div:not(img) > div.txtSubastaAbierta > div.fechaSubasta {
+				font-size: 1.6em;
+				font-weight:500;
+			}
+			
+			.mainBody > .subastasDestacadasMain > .subastasDestacadasSmallAnuncio > div:not(img) > div.txtSubastaAbierta > div.loteSubasta{
+				margin-top:30px;
+				font-size:1.4em;
+				color: #FFEA51;
+			}
+		.mainBody > .subastasDestacadasMain > .subastasDestacadasSmallLote > div > div.tituloSubasta {
+			font-size:2em;
+			font-weight:600;
+		}
+		.mainBody > .subastasDestacadasMain > .subastasDestacadasSmallLote > div > div.loteSubasta {
+			font-size:1.4em;
+			color: #FFEA51;
+		}
+		.mainBody > .subastasDestacadasMain > .subastasDestacadasSmallLote > div > div.modelo {
+			margin-top:20px;
+		}
+>>>>>>> origin/v2
 		.mainBody > .subastasDestacadasMain > .subastasDestacadasSmallLote > div > div.verDetalle {
 			margin-top:10px;
 		}
@@ -170,6 +203,7 @@ body{height:100%;width:100%;}
 	background: -o-linear-gradient(right, rgba(0,0,0,0.6) 60%, rgba(0,0,0,0)); /* For Opera 11.1 to 12.0 */
 	background: -moz-linear-gradient(right, rgba(0,0,0,0.6) 60%, rgba(0,0,0,0)); /* For Firefox 3.6 to 15 */
 	background: linear-gradient(to right, rgba(0,0,0,0.6) 60%, rgba(0,0,0,0)); /* Standard syntax */
+<<<<<<< HEAD
 }
 .mainBody > .subastasDestacadasMain > .subastasDestacadasBottom{
 	display:inline-block;
@@ -209,6 +243,47 @@ body{height:100%;width:100%;}
 	border-bottom:1px solid #E1E1E1;
 	border-top:1px solid #E1E1E1;
 	height:180px;
+=======
+}
+.mainBody > .subastasDestacadasMain > .subastasDestacadasBottom{
+	display:inline-block;
+	float:right;
+	overflow:hidden;
+	margin-top:10px;
+}
+.mainBody > .subastasDestacadasMain > .subastasDestacadasBottom:nth-child(6) {
+	border:1px solid #E1E1E1;
+	height:180px;
+	width:calc(100% - 674px);
+	margin-right:6px;	
+}
+.mainBody > .subastasDestacadasMain > .subastasDestacadasBottom:nth-child(6) > label {
+	font-size:1.2em;
+	font-weight:600;
+	text-align:center;
+	width: calc(100% - 350px);
+	line-height:26px;
+	clear: both;
+}
+.mainBody > .subastasDestacadasMain > .subastasDestacadasBottom:nth-child(6) > img {
+	position:absolute;
+	top:0;
+	right:0;	
+}
+.mainBody > .subastasDestacadasMain > .subastasDestacadasBottom:nth-child(6) > label:first-of-type {
+	margin-top:60px;
+}
+.mainBody > .subastasDestacadasMain > .subastasDestacadasBottom:nth-child(5) {
+	border-bottom:1px solid #E1E1E1;
+	border-top:1px solid #E1E1E1;
+	height:180px;
+	width:320px;
+}
+.mainBody > .subastasDestacadasMain > .subastasDestacadasBottom:nth-child(4) {
+	border-bottom:1px solid #E1E1E1;
+	border-top:1px solid #E1E1E1;
+	height:180px;
+>>>>>>> origin/v2
 	width: 340px;
 }
 .descripcionSubasta {
