@@ -80,7 +80,7 @@ function cargaVehiculos(idSubasta)
 	  	 			});
 	  	 			if(total > 0)
 	  	 			{
-						$("#btnOcultarGrdVehiculos").show();
+						$("#grdVehiculos").show();
 
 	  	 			}
 			}
@@ -130,9 +130,9 @@ $( document ).ready(function() {
 
 			buscaSubastas();
 		});
-		$("#btnOcultarGrdVehiculos").hide();
+		$("#grdVehiculos").hide();
 		$("#btnOcultarGrdVehiculos").click(function(){
-			$("#btnOcultarGrdVehiculos").hide();
+			$("#grdVehiculos").hide();
 		});
 	});
 	
