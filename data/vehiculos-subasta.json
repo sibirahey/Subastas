@@ -1,0 +1,7 @@
+{
+    "vehiculos":[
+        {   "idSubasta": 1, "foto":"fotos/nassau.jpg", "vehiculo":"Aiyumo Nassau 125 2010", "descripcion": "Con daños, Gasolina, Negro", "ubicacion":"Tarragona"},
+        {   "idSubasta": 1, "foto":"fotos/audiA4plata.jpg", "vehiculo":"Audi A4 Avant 2.6 V6 2006", "descripcion": "Con daños, Gasolina, Plateado", "ubicacion":"Murcia"}
+
+    ]
+}

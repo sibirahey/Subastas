@@ -22,7 +22,7 @@ $( document ).ready(function() {
 	function Anterior(){
 		var idx = parseInt($("#modalImgGaleria").attr("attr-idx")) -2;
 		if(idx < 0){
-		
+			
 			$("#modalImgGaleria").attr("src", $($("#modalSnapshots > div > img")[$("#modalSnapshots > div > img").length-1]).attr("src"));
 			$("#modalImgGaleria").attr("alt", $($("#modalSnapshots > div > img")[$("#modalSnapshots > div > img").length-1]).attr("alt"));
 			$("#modalImgGaleria").attr("attr-idx", $($("#modalSnapshots > div > img")[$("#modalSnapshots > div > img").length-1]).attr("attr-idx"));
