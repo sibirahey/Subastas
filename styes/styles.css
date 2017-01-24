@@ -28,7 +28,19 @@ body{height:100%;width:100%;}
 	.mainBody > .mbLeft{float:inherit;height: 100%;width:300px;}
 		.mainBody > .mbLeft > div {float:inherit;height: 300px;width:100%;}
 	.mainBody > .mbRight{float:inherit;height: 100%;width:calc(100% - 300px);}
-.mainFooter{height:140px;border-top:1px solid #E2E2E2;margin-top:20px;}
+.mainFooter{height:140px;width:inherit;border-top:1px solid #E2E2E2;margin-top:20px;}
+	.mainFooter > .logoImg,
+	.mainFooter > .menuBottom,
+	.mainFooter > .menuSocialNetworks{
+		height: 100%;
+		width:20%;
+	}
+		.mainFooter > .menuBottom > label,
+		.mainFooter > .menuSocialNetworks > label{
+			clear:both;
+			text-align:center;
+			font-size:0.8em;
+		}
 .modalWindow{}
 .btnTwitter,
 .btnFacebook {background-position:center center;background-repeat:no-repeat;background-size:contain;border:none;padding:2px;float:inherit;display:inherit;height:40px;width:40px;}
