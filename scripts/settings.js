@@ -11,7 +11,7 @@ function cargaCatalogosEstados(estado)
 				$.each( data["estados"], function( i, item ) {
 					
 					
-	     			$("#cmbEstado").append('<option value="'+item.id+'">'+item.estado +'</option>');
+	     			//$("#cmbEstado").append('<option value="'+item.id+'">'+item.estado +'</option>');
 	     			if(item.id == estado){
 	     				$("#cmbEstado").append('<option value="'+item.id+'" selected="selected">'+item.estado +'</option>');
 	     			}
