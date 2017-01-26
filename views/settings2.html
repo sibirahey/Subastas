@@ -1,42 +1,48 @@
-<<<<<<< HEAD
-<div>
-	<div>
-		
-		<div>
-			<div>EMPRESA:</div>
-			<select id="cmbEmpresa" ></select>
-		</div>
-		<div>	
-			<div>VIGENCIA:</div>
-			<div>Del: <input type="text" id="dp1"/> al: <input type="text" id="dp2"></div>
-		</div>
-	</div>
-	<div>
-		<div>Caracter&iacute;sticas de la subasta</div>
-	</div>
+<h1>CONFIGURACI&Oacute;N SUBASTA</h1>
+<div class="cnfgSubastaContainer">
 	
+		
 	<div>
-		<input type="radio" name="tipoOferta" value="1" checked /> Oferta &uacute;nica
-		<input type="radio" name="tipoOferta" value="2" /> Multi oferta
+		<label>EMPRESA:</label>
+		<select id="cmbEmpresa" ></select>
+	</div>
+	<div>	
+		<label>VIGENCIA:</label>
+		<div>
+			<label>Del: </label>
+			<input type="text" id="dp1"/> 
+			<label>al:</label>
+		 	<input type="text" id="dp2">
+	 	</div>
+	</div>
+	<div>
+		<label>Caracter&iacute;sticas de la subasta</label>
+		<label for="tipoOfertaUnica">Oferta &uacute;nica</label>
+		<input type="radio" name="tipoOfertaUnica" value="1" checked /> 
+		<label for="tipoOfertaMulti">Multi oferta</label>
+		<input type="radio" name="tipoOfertaMulti" value="2" />
 	</div>
 	<div>
 		
 		<div>
+			<label>Multi Empresa</lael>
 			<input type="checkbox" id="chkMulti" />
-			<div>Multi Empresa</div>
+			
 		</div>
 		<div>	
-		    <div class="toggles">
-      			
-    		</div>
-    		<div>	
-				<div>Valor m&iacute;nimo de incremento:</div>
-				<div>$<input type="text" value="$" id="txtInc"/></div>
+		    <div class="toggles"></div>
+    		<div>
+				<div>Valor m&iacute;nimo de incremento entre ofertas:</div>
+				<div>
+					<input type="text" value="$" id="txtInc"/>
+				</div>
 			</div>
 		</div>
 	</div>
 </div>
-<div>VEH&Iacute;CULOS EN SUBASTA</div>
+
+
+<h2>VEH&Iacute;CULOS EN SUBASTA</h1>
 
 <div id="grdVehiculos">
 	
@@ -51,62 +57,7 @@
 	</div>
 </div>
 <div>
-	<div>Guardar</div>
-	<div>Publicar</div>
-=======
-<div>
-	<div>
-		
-		<div>
-			<div>EMPRESA:</div>
-			<select id="cmbEmpresa" ></select>
-		</div>
-		<div>	
-			<div>VIGENCIA:</div>
-			<div>Del: <input type="text" id="dp1"/> al: <input type="text" id="dp2"></div>
-		</div>
-	</div>
-	<div>
-		<div>Caracter&iacute;sticas de la subasta</div>
-	</div>
+	<button type="button" class="btnGuardar">Guardar</button>
+	<button type=button class="btnPublicar">Publicar</button>
+</div>
 	
-	<div>
-		<input type="radio" name="tipoOferta" value="1" checked /> Oferta &uacute;nica
-		<input type="radio" name="tipoOferta" value="2" /> Multi oferta
-	</div>
-	<div>
-		
-		<div>
-			<input type="checkbox" id="chkMulti" />
-			<div>Multi Empresa</div>
-		</div>
-		<div>	
-		    <div class="toggles">
-      			
-    		</div>
-    		<div>	
-				<div>Valor m&iacute;nimo de incremento:</div>
-				<div>$<input type="text" value="$" id="txtInc"/></div>
-			</div>
-		</div>
-	</div>
-</div>
-<div>VEH&Iacute;CULOS EN SUBASTA</div>
-
-<div id="grdVehiculos">
-	
-	<div>
-		<div></div>
-		<div></div>
-		<div>AUTOS</div>
-		<div>UBICACI&Oacute;N</div>
-		<div>KIL&Oacute;METROS</div>
-		<div>FOTOS</div>
-		<div>SALIDA</div>
-	</div>
-</div>
-<div>
-	<div>Guardar</div>
-	<div>Publicar</div>
->>>>>>> origin/master
-</div>

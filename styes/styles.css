@@ -26,13 +26,13 @@ body{height:100%;width:100%;}
 			.mainHeader > ul > li:nth-child(7){height:40px;width: 40px}
 		.mainHeader > div:nth-child(3) > label{float:right; clear:both;width:300px;border-left:1px dotted #E2E2E2;text-indent:5px;}
 		.mainHeader > div:nth-child(3) > label:last-child{font-size:2em;font-weight:600;}
-.mainBody{min-height: calc(100% - 180px);width:inherit;max-width:1024px;margin:0 auto;padding:10px;float:none;}
+.mainBody{min-height: calc(100% - 180px);width:inherit;max-width:1024px;margin:0 auto;padding:10px;float:none;clear: both;}
 	.mainBody > .mbLeft{height: 100%;width:400px;padding:0 60px;}
 	.mainBody > .mbRight{height: 100%;width:calc(100% - 400px);}
 .mainFooter{height:140px;width:100%;border-top:1px solid #E2E2E2;margin-top:20px;padding:10px 0;}
 .modalWindow{}
 .btnTwitter,
-.btnFacebook {background-position:center center;background-repeat:no-repeat;background-size:contain;border:nonev;padding:2px;float:inherit;display:inherit;height:40px;width:40px;}
+.btnFacebook {background-position:center center;background-repeat:no-repeat;background-size:contain;border:none;padding:2px;float:inherit;display:inherit;height:40px;width:40px;}
 .btnTwitter{background-image:url("../images/logoTwitter.svg");}
 .btnFacebook{background-image:url("../images/logoFacebook.svg");}
 /*--------- FOOTER ---------*/
@@ -352,3 +352,264 @@ body{height:100%;width:100%;}
 	text-align:center;
 }
 /*---------- ENDS INTERNAS ---------*/
+/*---------- SETTINGS ----------*/
+.galleryunselected{
+	border-style: solid;
+	border-color: red;
+}
+.galleryselected{
+	border-style: solid;
+	border-color: blue;
+}
+.cnfgSubastaContainer{
+	float:none;
+	clear:both;
+	height:	260px;
+	width: 80%;
+	padding:10px;
+	margin:0 auto;
+	border:1px solid #BCBCBC;
+	border-radius:20px;
+	background-color:#EEEEEE;
+	font-size:0.9em;
+}
+	.cnfgSubastaContainer > div{
+		width:100%;
+		margin-bottom:10px;
+	}
+	.cnfgSubastaContainer label,
+	.cnfgSubastaContainer input,
+	.cnfgSubastaContainer select{height:30px;line-height:30px;}
+		.cnfgSubastaContainer > div > label:first-of-type {width:100%;margin-bottom:5px;}
+	.cnfgSubastaContainer > div:nth-child(1) {width:40%;}
+		.cnfgSubastaContainer > div:nth-child(1) > #cmbEmpresa{width:90%;}
+		
+	.cnfgSubastaContainer > div:nth-child(2) {width:60%;}
+		.cnfgSubastaContainer > div:nth-child(2) > div > .ui-datepicker-trigger{
+			height:30px;
+			width:30px;
+			border:none;
+			background-color:transparent;
+			cursor:pointer;
+		}
+			.cnfgSubastaContainer > div:nth-child(2) > div > .ui-datepicker-trigger > img{
+				height:100%;
+				width:100%;
+			}
+	.cnfgSubastaContainer > label:first-of-type{width:100%;}
+#grdVehiculos:not(.grdVehiculos2){
+	background-color:#F0F0F0;
+	border:1px solid #C8C8C8;
+	float:none;
+	clear:both;
+	overflow:auto;
+	min-height:300px;
+	height:auto;
+	width: 80%;
+	margin:0 auto;
+}
+#grdVehiculos:not(.grdVehiculos2) > div:first-child{
+	color:#ffffff;
+	height:30px;
+	line-height:30px;
+	width: 100%;
+	background: #FD5A54; /* For browsers that do not support gradients */
+	background: -webkit-linear-gradient(top, #464646, #787878); /* For Safari 5.1 to 6.0 */
+ 	background: -o-linear-gradient(top, #464646, #787878); /* For Opera 11.1 to 12.0 */
+ 	background: -moz-linear-gradient(top, #464646, #787878); /* For Firefox 3.6 to 15 */
+ 	background: linear-gradient(to top, #464646, #787878); /* Standard syntax */
+}
+#grdVehiculos:not(.grdVehiculos2) > div:first-child > div:nth-child(1){height:30px;width: 40px;}
+#grdVehiculos:not(.grdVehiculos2) > div:first-child > div:nth-child(2){height:30px;width: 100px;}
+#grdVehiculos:not(.grdVehiculos2) > div:first-child > div{height:30px;width:calc((100% - 140px) / 5)}
+#grdVehiculos:not(.grdVehiculos2) > div:not(:first-child){
+	min-height:80px;
+	padding:5px 0;
+	width:100%;
+}
+	#grdVehiculos:not(.grdVehiculos2) > div:not(:first-child) > div:nth-child(1){height:30px;width: 40px;}
+		#grdVehiculos:not(.grdVehiculos2) > div:not(:first-child) > div:nth-child(1) > input[type="checkbox"]{
+			float:none;
+			margin:0 auto;
+		}
+	#grdVehiculos:not(.grdVehiculos2) > div:not(:first-child) > div:nth-child(2){height:30px;width: 100px;}
+	#grdVehiculos:not(.grdVehiculos2) > div:not(:first-child) > div{width:calc((100% - 140px) / 5)}
+	#grdVehiculos:not(.grdVehiculos2) > div:not(:first-child) > div:nth-child(odd){}
+	#grdVehiculos:not(.grdVehiculos2) > div:not(:first-child):nth-child(even){background-color:#ffffff;}
+.btnGuardar,
+.btnPublicar{
+	cursor:pointer;
+	border:none;
+	margin:10px;
+	line-height:30px;
+	font-weight:400;
+	text-align:center;
+	height:30px;
+	width:140px;
+	color:#F7E827;	
+	background: #FD5A54; /* For browsers that do not support gradients */
+	background: -webkit-linear-gradient(top, #464646, #787878); /* For Safari 5.1 to 6.0 */
+ 	background: -o-linear-gradient(top, #464646, #787878); /* For Opera 11.1 to 12.0 */
+ 	background: -moz-linear-gradient(top, #464646, #787878); /* For Firefox 3.6 to 15 */
+ 	background: linear-gradient(to top, #464646, #787878); /* Standard syntax */
+}
+.bscrSubastaContainer{
+	float:none;
+	clear:both;
+	height:	120px;
+	width: 80%;
+	padding:10px;
+	margin:0 auto 20px;
+	border:1px solid #BCBCBC;
+	border-radius:20px;
+	background-color:#EEEEEE;
+	font-size:0.9em;
+}
+.bscrSubastaContainer > div{
+	width:40%;
+	margin:0 0 20px 5%;
+}
+.bscrSubastaContainer > div > label{
+	width:100%;
+}
+.bscrSubastaContainer > div > select{
+	width:90%;
+}
+.bscrSubastaContainer #btnBuscar{
+	float:none;
+	clear:both;
+	cursor:pointer;
+	border:none;
+	margin:0 auto;
+	line-height:30px;
+	font-weight:400;
+	text-align:center;
+	height:30px;
+	width:90%;
+	color:#F7E827;	
+	background: #FD5A54; /* For browsers that do not support gradients */
+	background: -webkit-linear-gradient(top, #464646, #787878); /* For Safari 5.1 to 6.0 */
+ 	background: -o-linear-gradient(top, #464646, #787878); /* For Opera 11.1 to 12.0 */
+ 	background: -moz-linear-gradient(top, #464646, #787878); /* For Firefox 3.6 to 15 */
+ 	background: linear-gradient(to top, #464646, #787878); /* Standard syntax */
+}
+#grdResultados{
+	clear:both;
+	height:auto;
+	width: 80%;
+	margin:0 10% 20px;
+	background-color: #F0F0F0;
+    border: 1px solid #C8C8C8;
+}
+#grdResultados > div{
+	width:100%;
+}
+#grdResultados > div:first-of-type{
+	color:#FFFFFF;	
+	background: #FD5A54; /* For browsers that do not support gradients */
+	background: -webkit-linear-gradient(top, #464646, #787878); /* For Safari 5.1 to 6.0 */
+ 	background: -o-linear-gradient(top, #464646, #787878); /* For Opera 11.1 to 12.0 */
+ 	background: -moz-linear-gradient(top, #464646, #787878); /* For Firefox 3.6 to 15 */
+ 	background: linear-gradient(to top, #464646, #787878); /* Standard syntax */
+}
+	#grdResultados > div:first-of-type > div{
+		width:calc((100% - 30px) / 5);
+		text-align: center;
+	}
+	#grdResultados > div:first-of-type > div:first-of-type{
+		width:30px;
+		text-align: center;
+	}
+	
+#grdResultados > div:not(:first-of-type):nth-child(even){
+	background-color:#ffffff;
+}
+#grdResultados > div:not(:first-of-type) > div{
+	width:calc((100% - 30px) / 5);
+	text-align: center;
+}
+#grdResultados > div:not(:first-of-type) > div:first-of-type{
+	width:30px;
+	text-align: center;
+}
+
+#btnNuevaSubasta{
+	float:none;
+	clear:both;
+	line-height:30px;
+	height:30px;
+	width:120px;
+	margin:0 auto 20px;
+	text-align:center;
+	color:#F7E827;
+	border:none;	
+	background: #FD5A54; /* For browsers that do not support gradients */
+	background: -webkit-linear-gradient(top, #464646, #787878); /* For Safari 5.1 to 6.0 */
+ 	background: -o-linear-gradient(top, #464646, #787878); /* For Opera 11.1 to 12.0 */
+ 	background: -moz-linear-gradient(top, #464646, #787878); /* For Firefox 3.6 to 15 */
+ 	background: linear-gradient(to top, #464646, #787878); /* Standard syntax */
+}
+#grdVehiculos.grdVehiculos2{
+	background-color:#F0F0F0;
+	border:1px solid #C8C8C8;
+	float:left;
+	clear:both;
+	height:	auto;
+	width: 80%;
+	margin:0 10%;
+}
+#grdVehiculos.grdVehiculos2 > div:first-child{
+	color:#ffffff;
+	height:30px;
+	line-height:30px;
+	width: 100%;
+	background: #FD5A54; /* For browsers that do not support gradients */
+	background: -webkit-linear-gradient(top, #464646, #787878); /* For Safari 5.1 to 6.0 */
+ 	background: -o-linear-gradient(top, #464646, #787878); /* For Opera 11.1 to 12.0 */
+ 	background: -moz-linear-gradient(top, #464646, #787878); /* For Firefox 3.6 to 15 */
+ 	background: linear-gradient(to top, #464646, #787878); /* Standard syntax */
+}
+#grdVehiculos.grdVehiculos2 > div:first-child > button{
+	background-color:#000000;
+	cursor:pointer;
+	position:absolute;
+	color:#ffffff;
+	font-weight:600;
+	border:1px solid #ffffff;
+	border-radius:15px;
+	height:30px;
+	width:30px;
+	top:-15px;
+	right:-15px;
+}
+#grdVehiculos.grdVehiculos2 > div:first-child > label{
+	line-height:30px;
+	text-align:center;
+}
+#grdVehiculos.grdVehiculos2 > div:first-child > label:nth-child(1){
+	width:80%
+}
+#grdVehiculos.grdVehiculos2 > div:first-child > label:nth-child(2){
+	width:20%
+}
+#grdVehiculos.grdVehiculos2 > div:not(first-child):nth-child(odd){
+	background-color:#ffffff;
+}
+#grdVehiculos.grdVehiculos2 > div:not(first-child){
+	width: 100%;
+}
+#grdVehiculos.grdVehiculos2 > div:not(first-child) > div:nth-child(1){
+	width:20%
+}
+	#grdVehiculos.grdVehiculos2 > div:not(first-child) > div:nth-child(1) > img{
+		height:auto;
+		width:80%;
+		margin: 5px 10%;
+	}
+#grdVehiculos.grdVehiculos2 > div:not(first-child) > div:nth-child(2){
+	width:60%
+}
+#grdVehiculos.grdVehiculos2 > div:not(first-child) > div:nth-child(3){
+	width:20%
+}
+/*---------- ENDS SETTINGS ----------*/
