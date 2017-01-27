@@ -13,9 +13,10 @@ function cargaCatalogosEmpresas(empresa) {
 				} else {
 					$("#cmbEmpresa").append('<option value="' + item.id + '">' + item.empresa + '</option>');
 				}
-
-				var toogleItem = '<label for="empresa' + i + '">' + item.empresa + '</label>';
-				toogleItem += '<input type="checkbox" name="empresa' + i + '" id="empresa' + i + '">';
+				
+				var toogleItem = '<input type="checkbox" name="empresa' + i + '" id="empresa' + i + '">';
+				toogleItem += '<label for="empresa' + i + '">' + item.empresa + '</label>';
+				
 				$(".toggles").append(toogleItem);
 			});
 		}
@@ -107,5 +108,4 @@ $(document).ready(function() {
 		cargaVehiculos();
 
 	});
-	
 });

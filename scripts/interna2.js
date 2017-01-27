@@ -46,7 +46,7 @@ $( document ).ready(function() {
 var dialog = $( "#modal" ).dialog({
 						      autoOpen: false,
 						      height: 400,
-						      width: 350,
+						      width: 400,
 						      modal: true,
 						      buttons: {
 						        "Anteror": Anterior,

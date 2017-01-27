@@ -16,26 +16,27 @@
 	 	</div>
 	</div>
 	<div>
-		<label>Caracter&iacute;sticas de la subasta</label>
-		<label for="tipoOfertaUnica">Oferta &uacute;nica</label>
-		<input type="radio" name="tipoOfertaUnica" value="1" checked /> 
-		<label for="tipoOfertaMulti">Multi oferta</label>
-		<input type="radio" name="tipoOfertaMulti" value="2" />
+		<h3>Caracter&iacute;sticas de la subasta</h3>
+		<div>
+			<input type="radio" name="tipoOfertaUnica" value="1" checked />
+			<label for="tipoOfertaUnica">Oferta &uacute;nica</label>
+		</div>
+		<div>
+			<input type="radio" name="tipoOfertaMulti" value="2" />
+			<label for="tipoOfertaMulti">Multi oferta</label>
+		</div>
 	</div>
 	<div>
 		
 		<div>
-			<label>Multi Empresa</lael>
+			<label for="chkMulti">Multi Empresa</lael>
 			<input type="checkbox" id="chkMulti" />
-			
 		</div>
-		<div>	
-		    <div class="toggles"></div>
-    		<div>
-				<div>Valor m&iacute;nimo de incremento entre ofertas:</div>
-				<div>
-					<input type="text" value="$" id="txtInc"/>
-				</div>
+	    <div class="toggles" style="display:none;"></div>
+		<div>
+			<label>Valor m&iacute;nimo de incremento entre ofertas:</label>
+			<div>
+				<input type="text" value="$" id="txtInc"/>
 			</div>
 		</div>
 	</div>
@@ -56,7 +57,7 @@
 		<div>SALIDA</div>
 	</div>
 </div>
-<div>
+<div class="btnContainer">
 	<button type="button" class="btnGuardar">Guardar</button>
 	<button type=button class="btnPublicar">Publicar</button>
 </div>
