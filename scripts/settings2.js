@@ -60,10 +60,9 @@ function cargaVehiculos() {
 				renglon += "<div>" + item.vehiculo + "</div>";
 				renglon += "<div>" + item.descripcion + "</div>";
 				renglon += "</div>";
-
 				renglon += "<div>" + item.ubicacion + "</div>";
 				renglon += "<div>" + item.kms + "</div>";
-				renglon += "<div><img src='images/image-gallery.jpg' width='40px' onclick='muestraGaleria(" + item.idVehiculo + ");' /></div>";
+				renglon += "<div><img src='images/icoCamara.svg' width='40px' onclick='muestraGaleria(" + item.idVehiculo + ");' /></div>";
 				renglon += "<div>" + item.salida + "</div>";
 				renglon += "<div style='display:none;' id='gallery" + item.idVehiculo + "'>";
 				$.each(item.imagenes, function(j, item2) {

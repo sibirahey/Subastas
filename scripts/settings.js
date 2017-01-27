@@ -94,7 +94,7 @@ function buscaSubastas() {
 					renglon += "<div>" + item.estatus + "</div>";
 					renglon += "<div>" + item.fechaInicio + "</div>";
 					renglon += "<div>" + item.fechaFin + "</div>";
-					renglon += '<img alt="AUTOS" onclick="cargaVehiculos(' + item.id + ');" />';
+					renglon += '<img src="images/icoAuto.svg" alt="AUTOS" onclick="cargaVehiculos(' + item.id + ');" />';
 					renglon += "</div>";
 
 					$("#grdResultados").append(renglon);

@@ -1,6 +1,6 @@
-*:not(.ui-datepicker-next):not(thead):not(tbody):not(td):not(tr):not(.ui-state-default):not(.ui-datepicker-title):not(span):not(th):not(table){float:left;position:relative;display:block;margin:0;padding:0;box-sizing: border-box;font-family: 'Open Sans', sans-serif;font-weight: 300;font-style: normal;}
+*:not(thead):not(tbody):not(td):not(tr):not(span):not(th):not(table){float:left;position:relative;display:block;margin:0;padding:0;box-sizing: border-box;font-family: 'Open Sans', sans-serif;font-weight: 300;font-style: normal;}
 html,
-body{height:100%;width:100%;}
+body{height:100%;width:100%;background-color:#F0F0F0;}
 .mainContainer{height:inherit;width:inherit;overflow:auto;}
 .mainHeader{width:inherit;}
 	.mainHeader > div{width:inherit;}
@@ -367,7 +367,7 @@ body{height:100%;width:100%;}
 	padding:10px !important;
 	margin:0 10% !important;
 	border:1px solid #BCBCBC;
-	border-radius:20px;
+	border-radius:8px;
 	background-color:#EEEEEE;
 	font-size:0.9em;
 }
@@ -405,7 +405,7 @@ body{height:100%;width:100%;}
 	.cnfgSubastaContainer > div:nth-child(4) > div:nth-child(2){width: calc(100% - 180px)}
 	.cnfgSubastaContainer > label:first-of-type{width:100%;}
 #grdVehiculos:not(.grdVehiculos2){
-	background-color:#F0F0F0;
+	background-color:#FFFFFF;
 	border:1px solid #C8C8C8;
 	float:none;
 	clear:both;
@@ -414,6 +414,7 @@ body{height:100%;width:100%;}
 	height:auto;
 	width: 80%;
 	margin:0 auto;
+	font-size:0.8em;
 }
 #grdVehiculos:not(.grdVehiculos2) > div:first-child{
 	color:#ffffff;
@@ -441,8 +442,6 @@ body{height:100%;width:100%;}
 		}
 	#grdVehiculos:not(.grdVehiculos2) > div:not(:first-child) > div:nth-child(2){height:30px;width: 100px;}
 	#grdVehiculos:not(.grdVehiculos2) > div:not(:first-child) > div{width:calc((100% - 140px) / 5)}
-	#grdVehiculos:not(.grdVehiculos2) > div:not(:first-child) > div:nth-child(odd){}
-	#grdVehiculos:not(.grdVehiculos2) > div:not(:first-child):nth-child(even){background-color:#ffffff;}
 .btnGuardar,
 .btnPublicar{
 	float:right !important;
@@ -469,7 +468,7 @@ body{height:100%;width:100%;}
 	padding:10px;
 	margin:0 auto 20px;
 	border:1px solid #BCBCBC;
-	border-radius:20px;
+	border-radius:8px;
 	background-color:#EEEEEE;
 	font-size:0.9em;
 }
@@ -506,13 +505,15 @@ body{height:100%;width:100%;}
 	height:auto;
 	width: 80%;
 	margin:0 10% 20px;
-	background-color: #F0F0F0;
+	background-color: #FFFFFF;
     border: 1px solid #C8C8C8;
+    font-size:0.8em;
 }
 #grdResultados > div{
 	width:100%;
 }
 #grdResultados > div:first-of-type{
+	line-height:30px;
 	color:#FFFFFF;	
 	background: #FD5A54; /* For browsers that do not support gradients */
 	background: -webkit-linear-gradient(top, #464646, #787878); /* For Safari 5.1 to 6.0 */
@@ -529,9 +530,7 @@ body{height:100%;width:100%;}
 		text-align: center;
 	}
 	
-#grdResultados > div:not(:first-of-type):nth-child(even){
-	background-color:#ffffff;
-}
+
 #grdResultados > div:not(:first-of-type) > div{
 	width:calc((100% - 30px) / 5);
 	text-align: center;
@@ -540,7 +539,14 @@ body{height:100%;width:100%;}
 	width:30px;
 	text-align: center;
 }
-
+#grdResultados > div:not(:first-of-type) > img{
+	background-size:cover;
+	height:24px;
+	width:auto;
+	float:none;
+	cursor:pointer;
+	margin:10px auto 0;
+}
 #btnNuevaSubasta{
 	float:none;
 	clear:both;
@@ -558,13 +564,14 @@ body{height:100%;width:100%;}
  	background: linear-gradient(to top, #464646, #787878); /* Standard syntax */
 }
 #grdVehiculos.grdVehiculos2{
-	background-color:#F0F0F0;
+	background-color:#ffffff;
 	border:1px solid #C8C8C8;
 	float:left;
 	clear:both;
 	height:	auto;
 	width: 80%;
 	margin:0 10%;
+	font-size:0.8em;
 }
 #grdVehiculos.grdVehiculos2 > div:first-child{
 	color:#ffffff;
@@ -578,17 +585,18 @@ body{height:100%;width:100%;}
  	background: linear-gradient(to top, #464646, #787878); /* Standard syntax */
 }
 #grdVehiculos.grdVehiculos2 > div:first-child > button{
-	background-color:#000000;
+	background-color:#3C3C3C;
 	cursor:pointer;
 	position:absolute;
 	color:#ffffff;
 	font-weight:600;
-	border:1px solid #ffffff;
+	border:2px solid #ffffff;
 	border-radius:15px;
 	height:30px;
 	width:30px;
 	top:-15px;
 	right:-15px;
+	box-shadow:0 4px 12px -4px rgba(0,0,0,0.6);
 }
 #grdVehiculos.grdVehiculos2 > div:first-child > label{
 	line-height:30px;
