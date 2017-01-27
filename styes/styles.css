@@ -1,4 +1,4 @@
-*:not(thead):not(tbody):not(td):not(tr){float:left;position:relative;display:block;margin:0;padding:0;box-sizing: border-box;font-family: 'Open Sans', sans-serif;font-weight: 300;font-style: normal;}
+*:not(.ui-datepicker-next):not(thead):not(tbody):not(td):not(tr):not(.ui-state-default):not(.ui-datepicker-title):not(span):not(th):not(table){float:left;position:relative;display:block;margin:0;padding:0;box-sizing: border-box;font-family: 'Open Sans', sans-serif;font-weight: 300;font-style: normal;}
 html,
 body{height:100%;width:100%;}
 .mainContainer{height:inherit;width:inherit;overflow:auto;}
