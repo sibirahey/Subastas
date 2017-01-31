@@ -1,6 +1,7 @@
 
 {
     "estados":[
+        {   "id":0,  "estado":"... seleccione una opción"  },
         {   "id": 1, "estado": "Aguascalientes" },
         {   "id": 2, "estado": "Baja California" },
         {   "id": 3, "estado": "Baja California Sur" },
@@ -40,5 +41,36 @@
         {   "id":2, "empresa":"Grupo Cifra W" },
         {   "id":3, "empresa":"Televisa S.A." },
         {   "id":4, "empresa":"TV Azteca" }
-    ]
+    ],
+    "marcas":[
+        { "id":0, "marca":"... seleccione una opción" },
+        { "id":1, "marca":"Audi" },
+        { "id":2, "marca":"BMW" },
+        { "id":3, "marca":"Chevrolet" }
+
+    ],
+    "modelos":[
+        { "id":0, "modelo":"... seleccione una opción", "marcaid":"0" },
+        { "id":1, "modelo":"A4 Avant", "marcaid":"1" },
+        { "id":2, "modelo":"A6 1.8 T", "marcaid":"1" },
+        { "id":3, "modelo":"A6 2.5 STDI", "marcaid":"1" },
+        { "id":4, "modelo":"A6 Coupé 2.2 E", "marcaid":"1" },
+        { "id":5, "modelo":"118d", "marcaid":"2" },
+        { "id":6, "modelo":"Kalos 1.2 SE", "marcaid":"3" }
+    ], 
+     "vfus":[
+        { "id":0, "vfu":"... seleccione una opción" },
+        { "id":1, "vfu":"vfu 1" },
+        { "id":2, "vfu":"vfu 2" }
+    ],
+     "combustibles":[
+        { "id":0, "combustible" : "... seleccione una opción" },
+        { "id":1, "combustible" : "Gasolina" },
+        { "id":2, "combustible" : "Diesel" }
+     ],
+     "ubicaciones":[
+        { "id":0, "ubicacion":"... seleccione una opción" },
+        { "id":1, "ubicacion":"ubicación 1" },
+        { "id":2, "ubicacion":"ubicación 2" }
+     ]
 }
