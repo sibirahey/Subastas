@@ -1,6 +1,6 @@
-*:not(thead):not(tbody):not(td):not(tr):not(span):not(th):not(table){float:left;position:relative;display:block;margin:0;padding:0;box-sizing: border-box;font-family: 'Open Sans', sans-serif;font-weight: 300;font-style: normal;}
+*:not(thead):not(tbody):not(td):not(tr){float:left;position:relative;display:block;margin:0;padding:0;box-sizing: border-box;font-family: 'Open Sans', sans-serif;font-weight: 300;font-style: normal;outline:none;}
 html,
-body{height:100%;width:100%;background-color:#F0F0F0;}
+body{height:100%;width:100%;}
 .mainContainer{height:inherit;width:inherit;overflow:auto;}
 .mainHeader{width:inherit;}
 	.mainHeader > div{width:inherit;}
@@ -352,13 +352,10 @@ body{height:100%;width:100%;background-color:#F0F0F0;}
 }
 /*---------- ENDS INTERNAS ---------*/
 /*---------- SETTINGS ----------*/
-.galleryunselected{
-	border-style: solid;
-	border-color: red;
-}
-.galleryselected{
-	border-style: solid;
-	border-color: blue;
+.mainBody > h2{
+	width: 80%;
+	margin:10px 10% !important;
+	font-weight:500;
 }
 .cnfgSubastaContainer{
 	clear:both;
@@ -369,20 +366,20 @@ body{height:100%;width:100%;background-color:#F0F0F0;}
 	border:1px solid #BCBCBC;
 	border-radius:8px;
 	background-color:#EEEEEE;
-	font-size:0.9em;
+	font-size:0.8em;
 }
 	.cnfgSubastaContainer > div{
 		width:100%;
 		margin-bottom:10px;
 	}
-	
+	.cnfgSubastaContainer label{margin-right:6px;}
 	.cnfgSubastaContainer label,
 	.cnfgSubastaContainer input,
 	.cnfgSubastaContainer select{height:30px;line-height:30px;}
 		.cnfgSubastaContainer > div > h3 {width:100%;margin-bottom:5px;}
 	.cnfgSubastaContainer > div:nth-child(1) {width:40%;}
 		.cnfgSubastaContainer > div:nth-child(1) > #cmbEmpresa{width:90%;}
-		
+	
 	.cnfgSubastaContainer > div:nth-child(2) {width:60%;}
 		.cnfgSubastaContainer > div:nth-child(2) > div > .ui-datepicker-trigger{
 			height:30px;
@@ -392,8 +389,8 @@ body{height:100%;width:100%;background-color:#F0F0F0;}
 			cursor:pointer;
 		}
 			.cnfgSubastaContainer > div:nth-child(2) > div > .ui-datepicker-trigger > img{
-				height:100%;
-				width:100%;
+				margin:0 15%; 
+				width:70%;
 			}
 	.cnfgSubastaContainer > div:nth-child(3) > div:first-of-type{
 		margin-left:40px;
@@ -402,19 +399,18 @@ body{height:100%;width:100%;background-color:#F0F0F0;}
 		width:120px;
 	}
 	.cnfgSubastaContainer > div:nth-child(4) > div:nth-child(1){width: 180px;}
-	.cnfgSubastaContainer > div:nth-child(4) > div:nth-child(2){width: calc(100% - 180px)}
+	.cnfgSubastaContainer > div:nth-child(4) > div:nth-child(2){width: 180px;left:110px;}
 	.cnfgSubastaContainer > label:first-of-type{width:100%;}
 #grdVehiculos:not(.grdVehiculos2){
-	background-color:#FFFFFF;
+	background-color:#F0F0F0;
 	border:1px solid #C8C8C8;
 	float:none;
 	clear:both;
 	overflow:auto;
-	min-height:300px;
 	height:auto;
 	width: 80%;
 	margin:0 auto;
-	font-size:0.8em;
+	font-size: 0.8em;
 }
 #grdVehiculos:not(.grdVehiculos2) > div:first-child{
 	color:#ffffff;
@@ -429,7 +425,7 @@ body{height:100%;width:100%;background-color:#F0F0F0;}
 }
 #grdVehiculos:not(.grdVehiculos2) > div:first-child > div:nth-child(1){height:30px;width: 40px;}
 #grdVehiculos:not(.grdVehiculos2) > div:first-child > div:nth-child(2){height:30px;width: 100px;}
-#grdVehiculos:not(.grdVehiculos2) > div:first-child > div{height:30px;width:calc((100% - 140px) / 5)}
+#grdVehiculos:not(.grdVehiculos2) > div:first-child > div{height:30px;width:calc((100% - 140px) / 5);text-align:center;}
 #grdVehiculos:not(.grdVehiculos2) > div:not(:first-child){
 	min-height:80px;
 	padding:5px 0;
@@ -441,7 +437,11 @@ body{height:100%;width:100%;background-color:#F0F0F0;}
 			margin:0 auto;
 		}
 	#grdVehiculos:not(.grdVehiculos2) > div:not(:first-child) > div:nth-child(2){height:30px;width: 100px;}
+		#grdVehiculos:not(.grdVehiculos2) > div:not(:first-child) > div:nth-child(2) > img{width: 90px;height:auto;margin:5px;}
 	#grdVehiculos:not(.grdVehiculos2) > div:not(:first-child) > div{width:calc((100% - 140px) / 5)}
+		#grdVehiculos:not(.grdVehiculos2) > div:not(:first-child) > div > img {float:none; margin:0 auto;cursor:pointer;width:30px;}
+	#grdVehiculos:not(.grdVehiculos2) > div:not(:first-child) > div:nth-child(odd){}
+	#grdVehiculos:not(.grdVehiculos2) > div:not(:first-child):nth-child(even){background-color:#ffffff;}
 .btnGuardar,
 .btnPublicar{
 	float:right !important;
@@ -505,7 +505,7 @@ body{height:100%;width:100%;background-color:#F0F0F0;}
 	height:auto;
 	width: 80%;
 	margin:0 10% 20px;
-	background-color: #FFFFFF;
+	background-color: #F0F0F0;
     border: 1px solid #C8C8C8;
     font-size:0.8em;
 }
@@ -513,13 +513,15 @@ body{height:100%;width:100%;background-color:#F0F0F0;}
 	width:100%;
 }
 #grdResultados > div:first-of-type{
-	line-height:30px;
 	color:#FFFFFF;	
 	background: #FD5A54; /* For browsers that do not support gradients */
 	background: -webkit-linear-gradient(top, #464646, #787878); /* For Safari 5.1 to 6.0 */
  	background: -o-linear-gradient(top, #464646, #787878); /* For Opera 11.1 to 12.0 */
  	background: -moz-linear-gradient(top, #464646, #787878); /* For Firefox 3.6 to 15 */
  	background: linear-gradient(to top, #464646, #787878); /* Standard syntax */
+    height: 30px;
+    line-height: 30px;
+    font-size: 0.8em;
 }
 	#grdResultados > div:first-of-type > div{
 		width:calc((100% - 30px) / 5);
@@ -530,9 +532,11 @@ body{height:100%;width:100%;background-color:#F0F0F0;}
 		text-align: center;
 	}
 	
-
+#grdResultados > div:not(:first-of-type):nth-child(even){
+	background-color:#ffffff;
+}
 #grdResultados > div:not(:first-of-type) > div{
-	width:calc((100% - 30px) / 5);
+	width:calc((100% - 90px) / 4);
 	text-align: center;
 }
 #grdResultados > div:not(:first-of-type) > div:first-of-type{
@@ -540,12 +544,9 @@ body{height:100%;width:100%;background-color:#F0F0F0;}
 	text-align: center;
 }
 #grdResultados > div:not(:first-of-type) > img{
-	background-size:cover;
-	height:24px;
-	width:auto;
-	float:none;
 	cursor:pointer;
-	margin:10px auto 0;
+	padding:10px;
+	width: 60px;
 }
 #btnNuevaSubasta{
 	float:none;
@@ -564,7 +565,7 @@ body{height:100%;width:100%;background-color:#F0F0F0;}
  	background: linear-gradient(to top, #464646, #787878); /* Standard syntax */
 }
 #grdVehiculos.grdVehiculos2{
-	background-color:#ffffff;
+	background-color:#F0F0F0;
 	border:1px solid #C8C8C8;
 	float:left;
 	clear:both;
@@ -590,13 +591,13 @@ body{height:100%;width:100%;background-color:#F0F0F0;}
 	position:absolute;
 	color:#ffffff;
 	font-weight:600;
-	border:2px solid #ffffff;
+	border:1px solid #ffffff;
 	border-radius:15px;
 	height:30px;
 	width:30px;
 	top:-15px;
 	right:-15px;
-	box-shadow:0 4px 12px -4px rgba(0,0,0,0.6);
+	box-shadow: 0 2px 4px 1px rgba(0,0,0,0.6);
 }
 #grdVehiculos.grdVehiculos2 > div:first-child > label{
 	line-height:30px;
@@ -626,6 +627,7 @@ body{height:100%;width:100%;background-color:#F0F0F0;}
 	width:60%
 }
 #grdVehiculos.grdVehiculos2 > div:not(first-child) > div:nth-child(3){
+	text-align:center;
 	width:20%
 }
 .toggles{
@@ -637,17 +639,55 @@ body{height:100%;width:100%;background-color:#F0F0F0;}
 	box-shadow:0 3px 6px rgba(0,0,0,0.6);
 	z-index: 2;
 }
+.toggles > .closeMulti,
+.toggles > .closeMulti:hover{
+	position: absolute;
+    top: -12px;
+    right: -12px;
+    height: 30px;
+    width: 30px !important;
+    border-radius: 50%;
+    padding: 0;
+    text-align: center !important;
+    background-color: #3C3C3C;
+    cursor: pointer;
+    color: #ffffff;
+    font-weight: 600;
+    border: 1px solid #ffffff;
+    box-shadow: 0 2px 4px 1px rgba(0,0,0,0.6);
+    z-index: 2;
+}
 .toggles > input[type="checkbox"]{
 	width:15px;
 	margin:0 4px;
 }
 .toggles > label{
-	width:calc(100% - 23px);
+	width:calc(100% - 30px);
 }
 .btnContainer{
 	width:80%;
 	margin:0 10% !important;
 }
+
+.muestraGaleria > .galleryunselected,
+.muestraGaleria > .galleryselected{
+    width: calc((100% / 3) - 8px);
+    height: 80px;
+    margin: 4px 4px;
+}
+.muestraGaleria > .galleryunselected{
+	border:4px solid #C3C3C3;
+}
+.muestraGaleria > .galleryselected{
+	border:4px solid blue;
+}
+.muestraGaleria > .galleryunselected > img,
+.muestraGaleria > .galleryselected > img{
+	height: 100%;
+    background-size: contain;
+    width: 100%;
+}
+
 /*---------- MODAL FIXES----------*/
 #modal{
 	width: 100% !important;	
@@ -668,14 +708,45 @@ body{height:100%;width:100%;background-color:#F0F0F0;}
 .ui-dialog-buttonpane{
 	width: 100%;
 }
-.ui-widget-header > button[title="Close"]{
-	border-radius: 50% !important;
-	height:30px !important;
-	width:30px !important;
-    right: -16px;
-    top: -6px;
+.no-titlebar .ui-dialog-titlebar{
+	padding:0 !important;
+	height:0px !important;
+	border: none !important;
 }
-
+.no-titlebar button[title="Close"]{
+	background-color: #3C3C3C;
+    cursor: pointer;
+    position: absolute;
+    color: #ffffff;
+    font-weight: 600;
+    border: 1px solid #ffffff;
+    border-radius: 15px;
+    height: 30px;
+    width: 30px;
+    top: -15px;
+    right: -15px;
+    box-shadow: 0 2px 4px 1px rgba(0,0,0,0.6);
+}
+.no-titlebar .ui-state-hover .ui-icon, 
+.no-titlebar .ui-state-focus .ui-icon, 
+.no-titlebar .ui-button:hover .ui-icon, 
+.no-titlebar .ui-button:focus .ui-icon {
+    background-image: url(../images/ui-icons_ffffff_256x240.png) !important;
+}
+.ui-button .ui-icon {
+    background-image: url(../images/ui-icons_ffffff_256x240.png) !important;
+}
+/*--------- CALENDAR FIXES --------*/
+.ui-datepicker table {
+	display:table;
+}
+.ui-datepicker th{
+	display:table-cell !important;
+	float: none;
+}
+.ui-datepicker .ui-datepicker-title,.ui-state-default, .ui-widget-content .ui-state-default, .ui-widget-header .ui-state-default, .ui-button, html .ui-button.ui-state-disabled:hover, html .ui-button.ui-state-disabled:active{
+	float:none;
+}
 /*---------- ENDS SETTINGS ----------*/
 /*--------- --------*/
 .ui-state-default a{

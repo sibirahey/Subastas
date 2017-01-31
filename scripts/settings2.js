@@ -14,7 +14,7 @@ function cargaCatalogosEmpresas(empresa) {
 					$("#cmbEmpresa").append('<option value="' + item.id + '">' + item.empresa + '</option>');
 				}
 				
-				var toogleItem = '<input type="checkbox" name="empresa' + i + '" id="empresa' + i + '">';
+				var toogleItem = '<input class="empresaCB" type="checkbox" name="empresa' + i + '" id="empresa' + i + '">';
 				toogleItem += '<label for="empresa' + i + '">' + item.empresa + '</label>';
 				
 				$(".toggles").append(toogleItem);
@@ -27,10 +27,14 @@ function muestraGaleria(idx) {
 
 	var dialog = $("#gallery" + idx).dialog({
 		autoOpen : false,
-		height : 400,
-		width : 350,
-		modal : true
+		height : 200,
+		width : 380,
+		modal : true,
+		dialogClass: 'no-titlebar'
 	});
+	
+	$("#gallery" + idx).addClass('muestraGaleria');
+	
 	dialog.dialog("open");
 }
 
@@ -77,26 +81,43 @@ function cargaVehiculos() {
 
 		}
 	});
+	checkCB();
+};
 
+function checkCB(){
+	
+	$('#chkMulti').change(function() {
+        if($(this).is(":checked")) {
+        	$('.toggles ').show();
+        }
+    });
+    
+    $('.closeMulti').on('click',function(){
+    	$('.toggles ').hide();
+    });
+    
+    $('.toggles > input[type="checkbox"]:first-of-type').change(function(){
+    	if($(this).is(":checked")) {
+        	$('.toggles').find('input[type="checkbox"]').addClass('cunts');
+        }
+    });
 }
 
-
 $(document).ready(function() {
-
 	$(".mainBody").load("views/settings2.html", function() {
-
+	
 		cargaCatalogosEmpresas(-1);
 
 		$("#dp1").datepicker({
 			showOn : "button",
-			buttonImage : "images/calendar-icon.png",
+			buttonImage : "images/time.svg",
 			buttonImageOnly : false,
 			buttonText : "Select date"
 		});
 
 		$("#dp2").datepicker({
 			showOn : "button",
-			buttonImage : "images/calendar-icon.png",
+			buttonImage : "images/time.svg",
 			buttonImageOnly : false,
 			buttonText : "Select date"
 		});
@@ -105,6 +126,8 @@ $(document).ready(function() {
 		});
 
 		cargaVehiculos();
+		$('.dateTimeHeader').hide();
 
 	});
+	
 });

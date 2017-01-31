@@ -121,6 +121,8 @@ $(document).ready(function() {
 		$("#btnOcultarGrdVehiculos").click(function() {
 			$("#grdVehiculos").hide();
 		});
+		
+		$('.dateTimeHeader').hide();
 	});
 
 });
