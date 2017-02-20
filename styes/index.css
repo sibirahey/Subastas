@@ -1,75 +1,21 @@
-.mainBody > .subastasDestacadasMain 
-{
-	display: block;
-	width: 100%;
-    
-
+.menuitem:hover{
+	cursor:pointer;
+	font-weight: bold;
 }
 
-.mainBody > .subastasDestacadasMain > .subastasDestacadasLarge{
-
-	display: block;
-	width: 50%;
-	float: left;
-/*	border-style: dotted;*/
-	height: 400px;
+.submenuitem:hover{
+	cursor:pointer;
+	font-weight: bold;
 }
+.divRegistro{
 
-.mainBody > .subastasDestacadasMain > .subastasDestacadasSmallLote,
-.mainBody > .subastasDestacadasMain > .subastasDestacadasSmallAnuncio
-{
-
-
-	display: block;
-	width: 50%;
-	float: left;
-	height: 200px;
+	display: block !important;
+	width: 100%; 
+	padding-top: 20px;
 }
+.divRegistro > input{
 
-.mainBody > .subastasDestacadasMain > .subastasDestacadasLarge > div,
-.mainBody > .subastasDestacadasMain > .subastasDestacadasSmallLote > div,
-.mainBody > .subastasDestacadasMain > .subastasDestacadasSmallAnuncio > div,
-.mainBody > .subastasDestacadasMain > .subastasDestacadasSmallAnuncio > div > div
-{
-	width: 100%;
-	float: left;
-}
-.mainBody > .subastasDestacadasMain > .subastasDestacadasSmallLote > div > p,
-.mainBody > .subastasDestacadasMain > .subastasDestacadasSmallAnuncio > div > p
-
-{
-	width: 20%;
-	float: left;
-}
-
-
-.mainBody > .subastasDestacadasMain > .subastasDestacadasLarge > .contenedorImagenPrinSubasta
-{
+	left: 200px;
 	position: absolute;
-	left: 0;
-	top: 0;
-	height: 400px;
-
-}
-.mainBody > .subastasDestacadasMain > .subastasDestacadasSmallLote > .contenedorImagenPrinSubasta,
-.mainBody > .subastasDestacadasMain > .subastasDestacadasSmallAnuncio > .contenedorImagenPrinSubasta
-{
-
-	position: absolute;
-	left: 0;
-	top: 0;
-	height: 200px;
-
-}
-.seccionesIndex > div {
-
-	width: 300px !important;
-}
-.cal1
-{
-
-	float:none !important;
-	display:inline !important;
-
 }
 
