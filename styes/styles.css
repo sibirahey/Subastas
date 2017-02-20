@@ -5,16 +5,11 @@ body{height:100%;width:100%;}
 .mainHeader{width:inherit;}
 	.mainHeader > div{width:inherit;}
 	.mainHeader > div:nth-child(1){height: 80px;}
-	.mainHeader > div:nth-child(2){height: 50px;}
+	.mainHeader > div:nth-child(2){height: 50px;},
 	.mainHeader > div:nth-child(3){height: 50px;}
 		.mainHeader > div:nth-child(1) > h1 {width: calc(100% - 160px);text-align:center;line-height:80px;}
 		.mainHeader > div:nth-child(1) > div:nth-child(2),
-		.mainHeader > div:nth-child(1) > div:nth-child(3){width:80px;line-height:30px; text-align:center;vertical-align: text-bottom;color:#AAAAAA;position:absolute;bottom:0;cursor: pointer;}
-			.mainHeader > div:nth-child(1) > div:nth-child(2):hover,
-			.mainHeader > div:nth-child(1) > div:nth-child(3):hover{color:blue;}
-		.mainHeader > div:nth-child(1) > div:nth-child(2){right:80px;}
-		.mainHeader > div:nth-child(1) > div:nth-child(3){right:0;}
-		
+		.mainHeader > div:nth-child(1) > div:nth-child(3) {width:80px;line-height:30px; text-align:center;vertical-align: text-bottom;color:#AAAAAA;}
 		.mainHeader  > ul{height: inherit;width: 100%;box-shadow: 0 4px 10px -5px #000000;z-index: 1;font-size: 0.8em;font-weight: 500;}
 			.mainHeader > ul > li:nth-child(1),
 			.mainHeader > ul > li:nth-child(2),
@@ -30,16 +25,13 @@ body{height:100%;width:100%;}
 			.mainHeader > ul > li:nth-child(7){height:40px;width: 40px}
 		.mainHeader > div:nth-child(3) > label{float:right; clear:both;width:300px;border-left:1px dotted #E2E2E2;text-indent:5px;}
 		.mainHeader > div:nth-child(3) > label:last-child{font-size:2em;font-weight:600;}
-		.mainHeader  > ul > li:hover{ background-color:#F5F5F5;}
-		.mainHeader  > ul > li > label:hover{cursor: pointer; }
-		
 .mainBody{min-height: calc(100% - 180px);width:inherit;max-width:1024px;margin:0 auto;padding:10px;float:none;clear: both;}
 	.mainBody > .mbLeft{height: 100%;width:400px;padding:0 60px;}
 	.mainBody > .mbRight{height: 100%;width:calc(100% - 400px);}
 .mainFooter{height:140px;width:100%;border-top:1px solid #E2E2E2;margin-top:20px;padding:10px 0;}
 .modalWindow{}
 .btnTwitter,
-.btnFacebook {background-position:center center;background-repeat:no-repeat;background-size:contain;border:none;padding:2px;float:inherit;display:inherit;height:40px;width:40px;cursor:pointer;}
+.btnFacebook {background-position:center center;background-repeat:no-repeat;background-size:contain;border:none;padding:2px;float:inherit;display:inherit;height:40px;width:40px;}
 .btnTwitter{background-image:url("../images/logoTwitter.svg");}
 .btnFacebook{background-image:url("../images/logoFacebook.svg");}
 /*--------- FOOTER ---------*/
@@ -270,7 +262,6 @@ body{height:100%;width:100%;}
 }
 .grayGradientHeader > label {text-align:right;float:right	}
 .mainBody > .mbLeft > div > img {height: auto;width:100%;}
-.mainBody > .mbLeft > div > img:first-of-type {cursor:zoom-in;}
 #imgSnapshots > div{
 	width: calc((100% - 12px) / 3);
     margin: 2px;
@@ -320,7 +311,7 @@ body{height:100%;width:100%;}
 	width: 100%;
 	font-size:0.8em;
 }
-.mainBody > .mbRight > div > div > div:not(.infoSubasta):not(.wndwPujarAhora){
+.mainBody > .mbRight > div > div > div{
     width: calc(50% - 20px);
     border-bottom: 1px dotted #000000;
     margin: 2px 10px;
@@ -335,53 +326,19 @@ body{height:100%;width:100%;}
 	}
 .btnPujar{
 	color:#F7E827;
-	margin:10px;
 	height:35px;
-	width: calc(50% - 20px);
+	width:50%;
 	border:none;
     background: #FD5A54;
     background: -webkit-linear-gradient(top, #464646, #787878);
     background: -o-linear-gradient(top, #464646, #787878);
     background: -moz-linear-gradient(top, #464646, #787878);
     background: linear-gradient(to top, #464646, #787878);
-    cursor:pointer;
 }
 .infoSubasta{
-	background-color:#FAFAFA;
-	margin:10px;
-	border:1px solid #DCDCDC;
-	width: calc(50% - 20px);
-	padding:20px 10px;
-}
-.infoSubasta > div{
-	width:100%;
-	text-align:right;
-	margin-bottom:10px;
-	border-bottom:1px dotted #c3c3c3;
-}
-.infoSubasta > div > label:nth-child(1){
-	width:38%;
-	text-transform: uppercase;
-    font-family: 'Oswald', sans-serif;
-    font-weight: 500;
-}
-.infoSubasta > div > label:nth-child(2){
-	width:62%;
-}
-
-	.infoSubasta > div > label:nth-child(2) > span:nth-child(1){
-		width:70px;
-		text-align:right;
-	}
-	.infoSubasta > div > label:nth-child(2) > span:nth-child(2){
-		width:calc(100% - 70px);
-		text-align:right;
-		color:#2A9936;
-	}
-.infoSubasta > div:nth-child(2) > label:nth-child(2){
-	font-size:1.6em;
-	font-weight:600;
-	color:#F36519;
+	background-color:#F5F5F5;
+	padding:10px;
+	border:1px solid #B4B4B4;
 }
 .lftCtlgnln,
 .lftCtprtSbsts,
@@ -393,79 +350,6 @@ body{height:100%;width:100%;}
 	width: 100%;
 	text-align:center;
 }
-.wndwPujarAhora{
-	position: absolute;
-	width:340px !important;
-	background-color:#EEEEEE;
-	border:1px solid #5A5A5A;
-	border-radius:8px;
-	box-shadow: 0 4px 8px rgba(0,0,0,0.6);
-	padding:10px;
-	bottom:0;
-	left:100px;
-}
-.wndwPujarAhora > .btnClose{
-	background-color: #3C3C3C;
-    cursor: pointer;
-    position: absolute;
-    color: #ffffff;
-    font-weight: 600;
-    border: 1px solid #ffffff;
-    border-radius: 15px;
-    height: 30px;
-    width: 30px;
-    top: -15px;
-    right: -15px;
-    box-shadow: 0 2px 4px 1px rgba(0,0,0,0.6);
-}
-.wndwPujarAhora > div,
-.wndwPujarAhora > label{
-	width:100%;
-	text-align:center;
-	margin:10px;
-}
-	.wndwPujarAhora > div:nth-child(2) > label{
-		width: 65px;
-		text-align:right;
-		line-height:30px;
-		font-size:1em;
-		font-weight:600;
-	}
-	.wndwPujarAhora > div:nth-child(2) > input{
-		height:30px;
-		width:calc(100% - 200px);
-		margin:0 10px;
-	}
-	.wndwPujarAhora > div:nth-child(2) > button{
-		height:30px;
-		width: 80px;
-		cursor:pointer;
-		font-size:0.8em;
-		font-weight:600;
-		text-align: center;
-	    color: #F7E827;
-	    border: none;
-	    background: #FD5A54;
-	    background: -webkit-linear-gradient(top, #464646, #787878);
-	    background: -o-linear-gradient(top, #464646, #787878);
-	    background: -moz-linear-gradient(top, #464646, #787878);
-	    background: linear-gradient(to top, #464646, #787878);
-	}
-	.wndwPujarAhora > div:nth-child(3) > label{
-		width: 100%;
-		text-align:center;
-	}
-	.wndwPujarAhora > div:nth-child(3) > label:nth-child(1){
-		font-size: 1.6em;
-		font-weight: bold;
-	}
-	.wndwPujarAhora > div:nth-child(3) > label:nth-child(2){
-		font-size: 1.2em;	
-	}
-	.wndwPujarAhora > div:nth-child(3) > label:nth-child(3){
-		font-size:1.6em;
-		font-weight:bold;
-	}
 /*---------- ENDS INTERNAS ---------*/
 /*---------- SETTINGS ----------*/
 .mainBody > h2{

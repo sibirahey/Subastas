@@ -96,7 +96,7 @@ function checkCB(){
     	$('.toggles ').hide();
     });
     
-    $('.toggles .empresaCB:first-of-type').change(function(){
+    $('.toggles > input[type="checkbox"]:first-of-type').change(function(){
     	if($(this).is(":checked")) {
         	$('.toggles').find('input[type="checkbox"]').addClass('cunts');
         }
