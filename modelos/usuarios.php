@@ -5,7 +5,7 @@ class usuarios
 
   
 
-    public function __construct($nombre ="", $appaterno = "", $apmaterno = "", $correo ="", $verificado = 0, $contrasena="", $valido=0)
+    public function __construct($nombre ="", $appaterno = "", $apmaterno = "", $correo ="", $verificado = 0, $contrasena="", $valido=0, $publico = 1)
     {
         $this->nombre = $nombre;
         $this->appaterno = $appaterno;
@@ -14,6 +14,7 @@ class usuarios
         $this->verificado = $verificado;
         $this->contrasena = $contrasena;
         $this->valido = $valido;
+        $this->publico = $publico;
     }
 
     // Datos de la tabla "usuario"
@@ -148,7 +149,7 @@ class usuarios
         $password = $_POST["password"];
        
             // Sentencia INSERT
-        $comando = "SELECT nombre, appaterno, apmaterno, correo, verificado, contrasena from usuario where correo =? ";
+        $comando = "SELECT nombre, appaterno, apmaterno, correo, verificado, contrasena, publico from usuario where correo =? ";
         
         $sentencia = ConexionBD::obtenerInstancia()->obtenerBD()->prepare($comando);
         $sentencia->bindParam(1, $mail);
@@ -170,6 +171,7 @@ class usuarios
             $usuario->verificado = $fetch["verificado"];
             $usuario->contrasena = $fetch["contrasena"];
             $usuario->valido = $valido;
+            $usuario->publico = $fetch["publico"];
 
             return $usuario;
         } 

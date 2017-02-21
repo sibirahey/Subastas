@@ -222,7 +222,7 @@ $( document ).ready(function() {
             var data = data.responseJSON;
             console.log(data);
             if(data["valido"] == 1){
-              alert("OK");
+              window.location.href = "main.html?v="+data["publico"];
             }else{
               alert("Error de usuario o contraseña");
             }
