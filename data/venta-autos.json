@@ -1,0 +1,36 @@
+{
+	"vehiculos": [{
+		"idVehiculo": 1,
+		"foto": "fotos/accord1.jpg",		
+		"descripcion": "Remato accord 2003, Factura de seguro con respaldo de original sin golpes, Interiores en piel, excelente manejo, caja motor y suspension al 100",
+		"estado": "Distrito Federal",
+		"estadocve": 9,
+		"marca": "Honda",
+		"marcacve": 3,
+		"modelo": "Accord",
+		"modelocve": 4,
+		"puertas": 5,
+		"anio": 2003,
+		"kmsint": 213000,
+		"kms": "213,000 km",
+		"precio": "$49,000 MXN",		
+		"imagenes": ["accord1.jpg", "accord2.jpg", "accord3.jpg", "accord4.jpg", "accord5.jpg", "accord6.jpg"]
+	}, {
+		"idVehiculo": 1,
+		"foto": "fotos/accord1.jpg",		
+		"descripcion": "Remato accord 2003, Factura de seguro con respaldo de original sin golpes, Interiores en piel, excelente manejo, caja motor y suspension al 100",
+		"estado": "Distrito Federal",
+		"estadocve": 9,
+		"marca": "Honda",
+		"marcacve": 3,
+		"modelo": "Accord",
+		"modelocve": 4,
+		"puertas": 5,
+		"anio": 2003,
+		"kmsint": 213000,
+		"kms": "213,000 km",
+		"precio": "$49,000 MXN",		
+		"imagenes": ["accord1.jpg", "accord2.jpg", "accord3.jpg", "accord4.jpg", "accord5.jpg", "accord6.jpg"]
+	}
+	]
+}
