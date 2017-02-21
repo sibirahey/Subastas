@@ -220,6 +220,13 @@ $( document ).ready(function() {
 
        postrequest("usuarios/login", oLogin, function(data){
             var data = data.responseJSON;
+            console.log(data);
+            if(data["valido"] == 1){
+              alert("OK");
+            }else{
+              alert("Error de usuario o contraseña");
+            }
+
           });
     });
   }
