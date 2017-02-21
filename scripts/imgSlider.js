@@ -17,7 +17,7 @@ jssor_1_slider_init = function() {
 
     var jssor_1_options = {
       $AutoPlay: true,
-      $Idle: 2000,
+      $Idle: 3000,
       $CaptionSliderOptions: {
         $Class: $JssorCaptionSlideo$,
         $Transitions: jssor_1_SlideoTransitions,
@@ -40,11 +40,11 @@ jssor_1_slider_init = function() {
     function ScaleSlider() {
         var refSize = jssor_1_slider.$Elmt.parentNode.clientWidth;
         if (refSize) {
-            refSize = Math.min(refSize, 600);
+            refSize = Math.min(refSize, 900);
             jssor_1_slider.$ScaleWidth(refSize);
         }
         else {
-            window.setTimeout(ScaleSlider, 30);
+            window.setTimeout(ScaleSlider, 100);
         }
     }
     ScaleSlider();
