@@ -20,7 +20,7 @@ $( document ).ready(function() {
   });
 	
 	function asignaFunciones(){
-
+		jssor_1_slider_init();
 		$(".menuitem").click(function(){
 
        //obtiene la propiedad name del elemento del menu y busca la vista con el mismo nombre y lo carga con ajax
