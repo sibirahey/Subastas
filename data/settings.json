@@ -1,6 +1,9 @@
 {
 	"estados": [
 		{
+			"id": -1,
+			"estado": "==TODOS=="
+		}, {
 			"id": 1,
 			"estado": "Aguascalientes"
 		}, 
@@ -182,6 +185,78 @@
 			"id": 4,
 			"modelo": "Accord",
 			"marcaid": 3
+		}
+
+	],
+
+	"kilometros": [{
+			"id": -1,
+			"km": "==TODOS==",
+			"minKM": 0,
+			"maxKM": 0
+		}, {
+			"id": 1,
+			"km": "0Km A 50Km",
+			"minKM": 0,
+			"maxKM": 50
+		}, {
+			"id": 2,
+			"km": "51Km A 100Km",
+			"minKM": 51,
+			"maxKM": 100
+		}, {
+			"id": 3,
+			"km": "101Km A 150Km",
+			"minKM": 101,
+			"maxKM": 150
+		},
+		{
+			"id": 4,
+			"km": "151 Km A 200Km",
+			"minKM": 151,
+			"maxKM": 200
+		},
+		{
+			"id": 5,
+			"km": "mas de 200Km",
+			"minKM": 200,
+			"maxKM": 0
+		}
+
+	],
+
+	"precios": [{
+			"id": -1,
+			"precio": "==TODOS==",
+			"min": 0,
+			"max": 0
+		}, {
+			"id": 1,
+			"precio": "$0 A $50,000",
+			"min": 0,
+			"max": 50000
+		}, {
+			"id": 2,
+			"precio": "$51,000 A $100,000",
+			"min": 51000,
+			"max": 100000
+		}, {
+			"id": 3,
+			"precio": "$101,000 A $150,000",
+			"min": 101000,
+			"max": 150000
+		},
+		{
+			"id": 4,
+			"precio": "$151,000 A $200,000",
+			"min": 151000,
+			"max": 200000
+		},
+		{
+			"id": 5,
+			"precio": "mas de $200,000",
+			"min": 200000,
+			"max": 0
 		}
 
 	]

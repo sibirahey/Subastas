@@ -10,10 +10,11 @@
 		"modelo": "Accord",
 		"modelocve": 4,
 		"puertas": 5,
-		"anio": 2003,
-		"kmsint": 213000,
-		"kms": "213,000 km",
-		"precio": "$49,000 MXN",		
+		"anio": 2002,
+		"kmsint": 100000,
+		"kms": "100,000 km",
+		"precio": "$49,000 MXN",
+		"precioint": 49000,		
 		"imagenes": ["accord1.jpg", "accord2.jpg", "accord3.jpg", "accord4.jpg", "accord5.jpg", "accord6.jpg"]
 	}, {
 		"idVehiculo": 1,
@@ -29,8 +30,26 @@
 		"anio": 2003,
 		"kmsint": 213000,
 		"kms": "213,000 km",
-		"precio": "$49,000 MXN",		
+		"precio": "$49,000 MXN",
+		"precioint": 49000,		
 		"imagenes": ["accord1.jpg", "accord2.jpg", "accord3.jpg", "accord4.jpg", "accord5.jpg", "accord6.jpg"]
+	}, {
+		"idVehiculo": 1,
+		"foto": "fotos/audiA4avant.jpg",		
+		"descripcion": "Remato accord 2003, Factura de seguro con respaldo de original sin golpes, Interiores en piel, excelente manejo, caja motor y suspension al 100",
+		"estado": "Chiapas",
+		"estadocve": 5,
+		"marca": "NISSAN",
+		"marcacve": 1,
+		"modelo": "March",
+		"modelocve": 1,
+		"puertas": 5,
+		"anio": 2003,
+		"kmsint": 50000,
+		"kms": "50,000 km",
+		"precio": "$95,000 MXN",
+		"precioint": 95000,		
+		"imagenes": ["audiA4avant1.jpg", "audiA4avant2.jpg", "audiA4avant3.jpg", "audiA4avant4.jpg", "audiA4avant5.jpg", "audiA4avant.jpg"]
 	}
 	]
 }
