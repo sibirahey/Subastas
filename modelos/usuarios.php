@@ -2,6 +2,20 @@
 
 class usuarios
 {
+
+  
+
+    public function __construct($nombre ="", $appaterno = "", $apmaterno = "", $correo ="", $verificado = 0, $contrasena="", $valido=0)
+    {
+        $this->nombre = $nombre;
+        $this->appaterno = $appaterno;
+        $this->apmaterno = $apmaterno;
+        $this->correo = $correo;
+        $this->verificado = $verificado;
+        $this->contrasena = $contrasena;
+        $this->valido = $valido;
+    }
+
     // Datos de la tabla "usuario"
     const NOMBRE_TABLA = "usuario";
     const APPATERNO = "appaterno";
@@ -16,6 +30,7 @@ class usuarios
     const MAIL_BIENVENIDO = "Bienvenido a Escudería";
     const ESTADO_CREACION_EXITOSA = 200;
     const ESTADO_CREACION_FALLIDA = 400;
+    const PASSWORD_DEFAULT = "1234567890";
 
 
 
@@ -128,23 +143,41 @@ class usuarios
     }
 
     private function login(){
-        print_r($_POST);
-        $mail = $_POST["email"];
-        $password = self::encriptarContrasena( $_POST["password"]);
-       
         
-
+        $mail = $_POST["email"];
+        $password = $_POST["password"];
+       
             // Sentencia INSERT
-        $comando = "SELECT nombre, appaterno, apmaterno, correo, verificado from usuario where correo =? and contrasena=?";
+        $comando = "SELECT nombre, appaterno, apmaterno, correo, verificado, contrasena from usuario where correo =? ";
         
         $sentencia = ConexionBD::obtenerInstancia()->obtenerBD()->prepare($comando);
         $sentencia->bindParam(1, $mail);
-        $sentencia->bindParam(2, $password);
-        print_r($comando);
-         if ($sentencia->execute())
-            return $sentencia->fetch(PDO::FETCH_ASSOC);
+        
+       
+       
+
+        if ($sentencia->execute())
+        {
+            $fetch = $sentencia->fetch(PDO::FETCH_ASSOC);
+            
+            $valido = password_verify($password, $fetch["contrasena"]);
+           
+            $usuario = new usuarios();
+            $usuario->nombre = $fetch["nombre"];
+            $usuario->appaterno = $fetch["appaterno"];
+            $usuario->apmaterno = $fetch["apmaterno"];
+            $usuario->correo = $fetch["correo"];
+            $usuario->verificado = $fetch["verificado"];
+            $usuario->contrasena = $fetch["contrasena"];
+            $usuario->valido = $valido;
+
+            return $usuario;
+        } 
         else
-            return null;
+            return "error";
+    
+    }
+
 
     private function obtenerUsuarioPorCorreo($correo)
     {

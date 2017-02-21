@@ -77,8 +77,7 @@ function ejecutaModeloPost($vista, $mod, $arr)
     		$vista->imprimir(usuarios::post($arr));
     		break;
     	case 'categorias':
-    		
-			$vista->imprimir(categorias::post($arr));
+    		$vista->imprimir(categorias::post($arr));
     		break;
     	default:
     		# code...
