@@ -7,7 +7,7 @@ $( document ).ready(function() {
     console.log( "Cargo index." );
     //asigna función click a cada elemento del menú
   	asignaFunciones();
-
+	
   	$("h1").click(function(){
       cargaHTML(".mainBody","views/index.html", "", function() {
   		  console.log( "carga home");
@@ -15,6 +15,7 @@ $( document ).ready(function() {
       });
 
     });
+    
 
   });
 	
