@@ -1,9 +1,12 @@
 {
 	"estados": [
 		{
+<<<<<<< HEAD
+=======
 			"id": -1,
 			"estado": "==TODOS=="
 		}, {
+>>>>>>> origin/master
 			"id": 1,
 			"estado": "Aguascalientes"
 		}, 
@@ -132,6 +135,40 @@
 			"estado": "Zacatecas"
 		}
 	],
+<<<<<<< HEAD
+	"empresas": [
+	{
+		"id": -1,
+		"empresa": "==TODAS=="
+	},
+	{
+		"id": 1,
+		"empresa": "Grupo Bimbo S.A."
+	},
+	{
+		"id": 2,
+		"empresa": "Grupo Cifra W"
+	}, 
+	{
+		"id": 3,
+		"empresa": "Televisa S.A."
+	}, 
+	{
+		"id": 4,
+		"empresa": "TV Azteca"
+	}
+	],
+	"marcas": [
+	{
+		"id": -1,
+		"marca": "==TODAS=="
+	}, 
+	{
+		"id": 1,
+		"marca": "NISSAN"
+	}, 
+	{
+=======
 	"empresas": [{
 		"id": -1,
 		"empresa": "==TODAS=="
@@ -155,12 +192,39 @@
 		"id": 1,
 		"marca": "NISSAN"
 	}, {
+>>>>>>> origin/master
 		"id": 2,
 		"marca": "FORD"
 	},
 	{
 		"id": 3,
 		"marca": "HONDA"
+<<<<<<< HEAD
+	},
+	{
+		"id": 4,
+		"marca": "PEUGEOT"
+	}
+	],
+
+	"modelos": [
+		{
+			"id": -1,
+			"modelo": "==TODOS==",
+			"marcaid": -1
+		}, 
+		{
+			"id": 1,
+			"modelo": "March",
+			"marcaid": 1
+		}, 
+		{
+			"id": 2,
+			"modelo": "Tsuru",
+			"marcaid": 1
+		}, 
+		{
+=======
 	}
 	],
 
@@ -177,6 +241,7 @@
 			"modelo": "Tsuru",
 			"marcaid": 1
 		}, {
+>>>>>>> origin/master
 			"id": 3,
 			"modelo": "Focus",
 			"marcaid": 2
@@ -185,6 +250,20 @@
 			"id": 4,
 			"modelo": "Accord",
 			"marcaid": 3
+<<<<<<< HEAD
+		},
+		{
+			"id": 5,
+			"modelo": "Peugeot",
+			"marcaid": 4
+		},
+		{
+			"id": 6,
+			"modelo": "Tiida",
+			"marcaid": 1
+		}
+
+=======
 		}
 
 	],
@@ -258,6 +337,7 @@
 			"min": 200000,
 			"max": 0
 		}
+>>>>>>> origin/master
 
 	]
 }

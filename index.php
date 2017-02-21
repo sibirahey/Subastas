@@ -3,8 +3,9 @@ require_once("views/VistaApi.php");
 require_once("views/VistaJson.php");
 require_once("modelos/usuarios.php");
 require_once("modelos/categorias.php");
-require_once( 'utilidades/ConexionBD.php');
-require_once( 'utilidades/ExcepcionApi.php');
+require_once('utilidades/ConexionBD.php');
+require_once('utilidades/ExcepcionApi.php');
+require_once('utilidades/Utilerias.php');
 
 //print ConexionBD::obtenerInstancia()->obtenerBD()->errorCode();
 //print_r(array_shift($_GET['PATH_INFO']));
@@ -70,6 +71,7 @@ switch ($metodo) {
 
 function ejecutaModeloPost($vista, $mod, $arr)
 {
+
     switch ($mod) {
     	case 'usuarios':
     		$vista->imprimir(usuarios::post($arr));

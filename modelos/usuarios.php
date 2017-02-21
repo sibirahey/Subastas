@@ -4,33 +4,39 @@ class usuarios
 {
     // Datos de la tabla "usuario"
     const NOMBRE_TABLA = "usuario";
+    const APPATERNO = "appaterno";
+    const APMATERNO = "apmaterno";
+    const FECHA_NAC = "fecha_nacimiento";
     const ID_USUARIO = "idUsuario";
     const NOMBRE = "nombre";
     const CONTRASENA = "contrasena";
     const CORREO = "correo";
+    const VERIFICADO = "verificado";
     const CLAVE_API = "claveApi";
-    const ESTADO_CREACION_EXITOSA = "creacion exitosa";
+    const MAIL_BIENVENIDO = "Bienvenido a Escudería";
+    const ESTADO_CREACION_EXITOSA = 200;
+    const ESTADO_CREACION_FALLIDA = 400;
+
+
 
     public static function post($peticion)
     {
         if ($peticion[0] == 'registro') {
             return self::registrar();
         } else if ($peticion[0] == 'login') {
-            return self::loguear();
+            return self::login();
         } else {
             throw new ExcepcionApi(self::ESTADO_URL_INCORRECTA, "Url mal formada", 400);
         }
     }   
 
     
-    private function crear($datosUsuario)
+    private function crear($usuario)
     {
-        $nombre = $datosUsuario->nombre;
+        
+        $contrasenaEncriptada = self::encriptarContrasena( $usuario["password"]);
 
-        $contrasena = $datosUsuario->contrasena;
-        $contrasenaEncriptada = self::encriptarContrasena($contrasena);
-
-        $correo = $datosUsuario->correo;
+       
 
         $claveApi = self::generarClaveApi();
 
@@ -41,27 +47,51 @@ class usuarios
             // Sentencia INSERT
             $comando = "INSERT INTO " . self::NOMBRE_TABLA . " ( " .
                 self::NOMBRE . "," .
+                self::APPATERNO . "," .
+                self::APMATERNO . "," .
                 self::CONTRASENA . "," .
+                self::FECHA_NAC . "," .
                 self::CLAVE_API . "," .
-                self::CORREO . ")" .
-                " VALUES(?,?,?,?)";
+                self::CORREO . "," .
+                self::VERIFICADO . ")" .
+                " VALUES(?,?,?,?,?,?,?,?)";
+
+        
 
             $sentencia = $pdo->prepare($comando);
 
-            $sentencia->bindParam(1, $nombre);
-            $sentencia->bindParam(2, $contrasenaEncriptada);
-            $sentencia->bindParam(3, $claveApi);
-            $sentencia->bindParam(4, $correo);
 
+            $sentencia->bindParam(1, $usuario["nombre"]);
+                       
+            $sentencia->bindParam(2, $usuario["appaterno"]);
+                       
+            $sentencia->bindParam(3, $usuario["apmaterno"]);
+
+            $sentencia->bindParam(4, $contrasenaEncriptada);
+            $fecha = $usuario["yyyy"]."-".$usuario["mm"]."-".$usuario["dd"];
+            
+            $sentencia->bindParam(5, $fecha);
+            
+            $sentencia->bindParam(6, $claveApi);
+            $sentencia->bindParam(7, $usuario["email"]);
+            $verificado = 0;
+            $sentencia->bindParam(8, $verificado);
+            
+
+ 
             $resultado = $sentencia->execute();
-
+            
             if ($resultado) {
+
+                envia_mail($usuario["email"], MAIL_BIENVENIDO, "<html><body>Bienvenido a escudería, para terminar su registro por favor confirme su mail: <a href=\"msusano.com/Subastas/usuarios/confirmar/". $claveApi."\">Confirmar mail</a></body></html>", "yo@msusano.com" );
                 return self::ESTADO_CREACION_EXITOSA;
             } else {
                 return self::ESTADO_CREACION_FALLIDA;
             }
         } catch (PDOException $e) {
-            throw new ExcepcionApi(self::ESTADO_ERROR_BD, $e->getMessage());
+            
+            throw new ExcepcionApi(self::ESTADO_URL_INCORRECTA, $e->getMessage(), 400);
+            
         }
 
     }
@@ -81,12 +111,12 @@ class usuarios
         $cuerpo = file_get_contents('php://input');
         $usuario = json_decode($cuerpo);
 
-        $resultado = self::crear($usuario);
+        $resultado = self::crear($_POST);
 
         switch ($resultado) {
             case self::ESTADO_CREACION_EXITOSA:
                http_response_code(200);
-               throw new ExcepcionApi(self::ESTADO_CREACION_EXITOSA, "OK");
+               return "OK";
                
                 break;
             case self::ESTADO_CREACION_FALLIDA:
@@ -96,6 +126,25 @@ class usuarios
                 throw new ExcepcionApi(self::ESTADO_FALLA_DESCONOCIDA, "Falla desconocida", 400);
         }
     }
+
+    private function login(){
+        print_r($_POST);
+        $mail = $_POST["email"];
+        $password = self::encriptarContrasena( $_POST["password"]);
+       
+        
+
+            // Sentencia INSERT
+        $comando = "SELECT nombre, appaterno, apmaterno, correo, verificado from usuario where correo =? and contrasena=?";
+        
+        $sentencia = ConexionBD::obtenerInstancia()->obtenerBD()->prepare($comando);
+        $sentencia->bindParam(1, $mail);
+        $sentencia->bindParam(2, $password);
+        print_r($comando);
+         if ($sentencia->execute())
+            return $sentencia->fetch(PDO::FETCH_ASSOC);
+        else
+            return null;
 
     private function obtenerUsuarioPorCorreo($correo)
     {

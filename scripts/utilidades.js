@@ -5,3 +5,4 @@ function cargaHTML(contendor, url, name, callback){
   $(contendor).attr("name",name);
   $(contendor).load( url+"?rand="+rand, callback);
 }
+
