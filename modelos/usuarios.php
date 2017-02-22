@@ -1,11 +1,12 @@
 <?php
 
+
 class usuarios
 {
 
   
 
-    public function __construct($nombre ="", $appaterno = "", $apmaterno = "", $correo ="", $verificado = 0, $contrasena="", $valido=0, $publico = 1)
+    public function __construct($nombre ="", $appaterno = "", $apmaterno = "", $correo ="", $verificado = 0, $contrasena="", $valido=0, $publico = 1,$registroExitoso = 0)
     {
         $this->nombre = $nombre;
         $this->appaterno = $appaterno;
@@ -15,6 +16,7 @@ class usuarios
         $this->contrasena = $contrasena;
         $this->valido = $valido;
         $this->publico = $publico;
+        $this->registroExitoso = $registroExitoso;
     }
 
     // Datos de la tabla "usuario"
@@ -93,14 +95,14 @@ class usuarios
             $verificado = 0;
             $sentencia->bindParam(8, $verificado);
             
-
- 
             $resultado = $sentencia->execute();
             
             if ($resultado) {
 
-                envia_mail($usuario["email"], MAIL_BIENVENIDO, "<html><body>Bienvenido a escudería, para terminar su registro por favor confirme su mail: <a href=\"msusano.com/Subastas/usuarios/confirmar/". $claveApi."\">Confirmar mail</a></body></html>", "yo@msusano.com" );
+                envia_mail($usuario["email"], self::MAIL_BIENVENIDO, "<html><body>Bienvenido a escudería, para terminar su registro por favor confirme su mail: <a href=\"msusano.com/Subastas/usuarios/confirmar/". $claveApi."\">Confirmar mail</a></body></html>", "yo@msusano.com" );
                 return self::ESTADO_CREACION_EXITOSA;
+                
+
             } else {
                 return self::ESTADO_CREACION_FALLIDA;
             }
@@ -129,13 +131,16 @@ class usuarios
 
         $resultado = self::crear($_POST);
 
+        $usu = new usuarios();
         switch ($resultado) {
             case self::ESTADO_CREACION_EXITOSA:
                http_response_code(200);
-               return "OK";
                
+               $usu->registroExitoso = 1;
+               return $usu;
                 break;
             case self::ESTADO_CREACION_FALLIDA:
+            $usu->registroExitoso = 0;
                 throw new ExcepcionApi(self::ESTADO_CREACION_FALLIDA, "Ha ocurrido un error");
                 break;
             default:

@@ -69,7 +69,7 @@ $( document ).ready(function() {
         
       for (cat in data.responseJSON){
      
-        $("#divPreferencias").append('<div><input type="checkbox" attr-data="'+ data.responseJSON[cat].id+'" class="chkPref" />'+data.responseJSON[cat].descripcion +"</div>" );
+        $("#divPreferencias").append('<div class="divRegistro"><input type="checkbox" attr-data="'+ data.responseJSON[cat].id+'" class="chkPref" />'+data.responseJSON[cat].descripcion +"</div>" );
       }
 
     });
@@ -77,7 +77,7 @@ $( document ).ready(function() {
     $("#btnEula").click(function(){
 
       $( function() {
-        $( "#dialogEula" ).dialog();
+        $( "#dialogEula" ).dialog({ maxWidth: 600, width: 600, maxHeight:500, height:500, title:"Términos y condiciones" });
       });
 
     });
@@ -88,7 +88,7 @@ $( document ).ready(function() {
   *
   */
     $("#btnGuardar").click(function(){
-
+    debugger;
       var oUsuario = new Usuario();
       oUsuario.nombre = $("#registroNombre").val();
       oUsuario.appaterno = $("#registroApPaterno").val();
@@ -117,8 +117,10 @@ $( document ).ready(function() {
 
       
        postrequest("usuarios/registro", oUsuario, function(data){
-            if(data.responseJSON=="OK"){
-              /// ir a main    
+         
+            if(data.responseJSON.registroExitoso == 1){
+                  alert("Su registro fue exitoso");
+                  window.location.href = "main.html?v=1";
             };
           });
 
@@ -189,7 +191,7 @@ $( document ).ready(function() {
 
       if(i > 0){
           $(".divError").show();
-          $(".divError").text("Algunos de los campos están vacíos: " + msj);
+          $(".divError").html("Algunos de los campos están vacíos: <br/><br/>" + msj);
           return false;
 
       }else{
@@ -210,25 +212,34 @@ $( document ).ready(function() {
   *Login
   *
   */
-  function cargaFuncionesLogin(){
-    $("#btnLogin").click(function(){
-      debugger;
-      
-      oLogin = new Login();
-      oLogin.email = $("#loginMail").val();
-      oLogin.password = $("#loginPassword").val();
+  function doLogin(){
+    oLogin = new Login();
+    oLogin.email = $("#loginMail").val();
+    oLogin.password = $("#loginPassword").val();  
 
        postrequest("usuarios/login", oLogin, function(data){
             var data = data.responseJSON;
             console.log(data);
             if(data["valido"] == 1){
+              sessionStorage.setItem("usuario", data);
               window.location.href = "main.html?v="+data["publico"];
             }else{
               alert("Error de usuario o contraseña");
             }
 
           });
+  }
+  function cargaFuncionesLogin(){
+
+
+    $("#btnLogin").click(function(){
+      doLogin();
     });
+    $("#loginPassword").keypress(function(e) {
+    if(e.which == 13) {
+       doLogin();
+    }
+});
   }
 
 }); 
