@@ -17,13 +17,8 @@ class VistaJson extends VistaApi
      */
     public function imprimir($cuerpo)
     {
-        if($cuerpo == "OK"){
-            http_response_code(200);
-        }else{ 
-            if ($this->estado) {
-                http_response_code($this->estado);
-            }
-        }
+        http_response_code(200);
+        
         header('Content-Type: application/json; charset=utf8');
         echo json_encode($cuerpo, JSON_PRETTY_PRINT);
         exit;

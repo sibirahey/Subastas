@@ -20,7 +20,7 @@ $( document ).ready(function() {
   });
 	
 	function asignaFunciones(){
-
+		jssor_1_slider_init();
 		$(".menuitem").click(function(){
 
        //obtiene la propiedad name del elemento del menu y busca la vista con el mismo nombre y lo carga con ajax
@@ -220,6 +220,13 @@ $( document ).ready(function() {
 
        postrequest("usuarios/login", oLogin, function(data){
             var data = data.responseJSON;
+            console.log(data);
+            if(data["valido"] == 1){
+              window.location.href = "main.html?v="+data["publico"];
+            }else{
+              alert("Error de usuario o contraseña");
+            }
+
           });
     });
   }
