@@ -121,7 +121,7 @@
 	},
 	{
 		"idVehiculo": 8,
-		"foto": "fotos/escape.jpg",		
+		"foto": "fotos/escape1.jpg",		
 		"descripcion": "Automática, eléctrica, clima, papelería en regla original, muy buen manejo, llantas nuevas, rines, motor y transmisión en muy buen estado, impecables condiciones generales, lista para carretera!!",
 		"estado": "Nuevo León",
 		"estadocve": 19,
@@ -138,7 +138,7 @@
 	},
 	{
 		"idVehiculo": 9,
-		"foto": "fotos/altima.jpg",		
+		"foto": "fotos/altima1.jpg",		
 		"descripcion": "Automático , clima, eléctrico, factura original, muy buenas condiciones estéticas ",
 		"estado": "Nuevo León",
 		"estadocve": 19,
