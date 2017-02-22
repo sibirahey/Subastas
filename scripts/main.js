@@ -1,7 +1,47 @@
+$(document).ready(function(){
+
+  cargaHTML(".mainBody", "views/main.html","", function() {
+  		$("#searchBox").keypress(function(e) {
+		    if(e.which == 13) {
+		        $("#searchBody").html("");
+          		if(sessionStorage.getItem('key') == "1"){
+		  			CargaDatosPrivado();
+		  		}else{
+		  			CargaDatosPublico();
+		  		}
+
+		    }
+		});
+		console.log(JSON.stringify(sessionStorage));
+  		if(sessionStorage.getItem('key') == "1"){
+  			CargaDatosPrivado();
+  		}else{
+  			CargaDatosPublico();
+  		}
 
 
+  	});
+
+  });
 
 function CargaDatosPublico(){
+	postrequest("data/venta-autos.json", '', function(data){
+			debugger;	
+			$.each(data.vehiculos,function(i,item){
+				
+				console.log(JSON.stringify(item));
+				if($("#searchBox").val()== "" || item.marca.toLowerCase().indexOf($("#searchBox").val().toLowerCase())>=0 || item.modelo.toLowerCase().indexOf($("#searchBox").val().toLowerCase())>=0){
+					$("#searchBody").append(regresaRenglonVenta(item))
+				}
+
+
+
+			});
+	});
+
+}
+
+function CargaDatosPrivado(){
 	
 	postrequest("data/subastas.json", '', function(data){
 			
@@ -9,7 +49,7 @@ function CargaDatosPublico(){
 				
 				
 				if($("#searchBox").val()== "" || item.empresa.toLowerCase().indexOf($("#searchBox").val().toLowerCase())>=0){
-					$("#searchBody").append(regresaRenglonVenta(item))
+					$("#searchBody").append(regresaRenglonSubasta(item))
 				}
 
 
@@ -24,28 +64,45 @@ function VerSubasta(o){
 
 
 }
-$(document).ready(function(){
-
-  cargaHTML(".mainBody", "views/main.html","", function() {
-  		$("#searchBox").keypress(function(e) {
-		    if(e.which == 13) {
-		        $("#searchBody").html("");
-		        CargaDatosPublico();
-
-		    }
-		});
-  		CargaDatosPublico();
 
 
-  	});
-
-  });
-
-function regresaRenglonVenta(item){
+function regresaRenglonSubasta(item){
 
 	var renglon = '<div class="searchItem">';
 	renglon += '			<div class="searchItemHead" attr-id="'+item.id+'" onclick="VerSubasta(this);"><h3>'+item.empresa+'</h3></div>';
-	renglon += '			<div class="searchItemImg"><img src="images/autos/auto.jpg"/></div>';
+
+	renglon += '		<div class="searchItemBody">';
+	renglon += '			<div>';
+	renglon += '				<h4>Subasta </h4>';
+	renglon += '				<label>['+item.estatus+']</label>';
+	renglon += '				</div>';
+	renglon += '				<div>';
+	renglon += '					<h4>Inicia:</h4>';
+	renglon += '					<label>'+item.fechaInicio+'</label>';
+	renglon += '				</div>';
+	renglon += '				<div>';
+	renglon += '					<h4>Finaliza:</h4>';
+	renglon += '					<label>'+item.fechaFin+'</label>';
+	renglon += '				</div>';
+	renglon += '				<div>';
+	renglon += '					<h4>Tipo de oferta:</h4>';
+	renglon += '					<label>'+item.tipo+'</label>';
+	renglon += '				</div>';
+	renglon += '			</div>';
+	renglon += '</div>';
+	return renglon;
+
+
+}
+
+function regresaRenglonVenta(item){
+
+
+
+
+	var renglon = '<div class="searchItem">';
+	renglon += '			<div class="searchItemHead" attr-id="'+item.idVehiculo+'" onclick="VerSubasta(this);"><h3>'+item.marca+'['+item.modelo+']</h3></div>';
+	renglon += '			<div class="searchItemImg"><img src="'+item.foto+'"/></div>';
 	renglon += '		<div class="searchItemBody">';
 	renglon += '			<div>';
 	renglon += '				<h4>Subasta </h4>';

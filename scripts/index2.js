@@ -218,12 +218,16 @@ $( document ).ready(function() {
       oLogin.password = $("#loginPassword").val();
 
        postrequest("usuarios/login", oLogin, function(data){
-            var data = data.responseJSON;
+           
 
 
             if(data["valido"] == 1){
               window.location.href = "main.html";
-              sessionStorage.setItem('usuario', 'data');
+              sessionStorage.setItem('nombre', data["nombre"] + " " + data["appaterno"] + " " +data["apmaterno"]);
+              sessionStorage.setItem('correo', data["correo"]);
+              sessionStorage.setItem('publico', data["publico"]);
+
+                 
             }else{
               alert("Error de usuario o contraseña");
             }
