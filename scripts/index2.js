@@ -67,9 +67,10 @@ $( document ).ready(function() {
 
     postrequest("categorias/listar", {"estatus":"1"}, function(data){
         
-      for (cat in data.responseJSON){
-     
-        $("#divPreferencias").append('<div><input type="checkbox" attr-data="'+ data.responseJSON[cat].id+'" class="chkPref" />'+data.responseJSON[cat].descripcion +"</div>" );
+      for (cat in data){
+        debugger;
+
+        $("#divPreferencias").append('<div ><input type="checkbox" attr-data="'+ data[cat].id+'" class="chkPref" />'+data[cat].descripcion +"</div>" );
       }
 
     });
