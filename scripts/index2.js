@@ -212,7 +212,6 @@ $( document ).ready(function() {
   */
   function cargaFuncionesLogin(){
     $("#btnLogin").click(function(){
-      debugger;
       
       oLogin = new Login();
       oLogin.email = $("#loginMail").val();
@@ -220,9 +219,11 @@ $( document ).ready(function() {
 
        postrequest("usuarios/login", oLogin, function(data){
             var data = data.responseJSON;
-            console.log(data);
+
+
             if(data["valido"] == 1){
-              window.location.href = "main.html?v="+data["publico"];
+              window.location.href = "main.html";
+              sessionStorage.setItem('usuario', 'data');
             }else{
               alert("Error de usuario o contraseña");
             }
