@@ -886,6 +886,15 @@ img[data-u="image"]{
 	height:calc(100% - 60px);
 	width:100%;
 }
+.sdContainer > div{
+	height:190px;
+	width: 270px;
+}
+.sdContainer > div > img{
+	height:100%;
+	width: 100%;
+	background-size:contain;
+}
 .searchItem{
 	height:200px;
 	width:90%;
