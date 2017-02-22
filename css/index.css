@@ -1,0 +1,29 @@
+.menuitem:hover{
+	cursor:pointer;
+	font-weight: bold;
+}
+
+.submenuitem:hover{
+	cursor:pointer;
+	font-weight: bold;
+}
+.divRegistro{
+
+	display: block;
+	width: 100%; 
+	padding-top: 20px;
+	height:40px;
+}
+.divRegistro > input{
+
+	left: 200px;
+	position: absolute;
+}
+.divError{
+	color: red;
+}
+.divErrorPassword{
+
+	color: red;
+
+}
