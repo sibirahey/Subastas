@@ -4,7 +4,7 @@ $(document).ready(function(){
   		$("#searchBox").keypress(function(e) {
 		    if(e.which == 13) {
 		        $("#searchBody").html("");
-          		if(sessionStorage.getItem('key') == "1"){
+          		if(sessionStorage.getItem('publico') == 1){
 		  			CargaDatosPrivado();
 		  		}else{
 		  			CargaDatosPublico();
@@ -12,8 +12,9 @@ $(document).ready(function(){
 
 		    }
 		});
-		console.log(JSON.stringify(sessionStorage));
-  		if(sessionStorage.getItem('key') == "1"){
+		console.log("key:"+sessionStorage.getItem('publico'));
+
+  		if(sessionStorage.getItem('publico') == 1){
   			CargaDatosPrivado();
   		}else{
   			CargaDatosPublico();
@@ -29,7 +30,7 @@ function CargaDatosPublico(){
 				
 			$.each(data.vehiculos,function(i,item){
 				
-				console.log(JSON.stringify(item));
+				
 				if($("#searchBox").val()== "" || item.marca.toLowerCase().indexOf($("#searchBox").val().toLowerCase())>=0 || item.modelo.toLowerCase().indexOf($("#searchBox").val().toLowerCase())>=0){
 					$("#searchBody").append(regresaRenglonVenta(item))
 				}
