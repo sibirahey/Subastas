@@ -80,7 +80,17 @@ function cargaCatalogos(idDef) {
 			
 		}
 	});
-alert("si AQUI si");
+	debugger
+	var end = 1950;
+	var  start = new Date().getFullYear();
+	var options = "";
+	$("#cmbAnio").append('<option value ="-1">==TODOS==</option>');
+	for(var year = start ; year >=end; year--){
+  		$("#cmbAnio").append('<option value ="'+ year +'">'+ year +'</option>');
+	}
+	
+
+
 
 }
 
@@ -150,7 +160,7 @@ function cargaVehiculos() {
 };
 
 function FiltrarAutos(item){
-
+	debugger
 	var precioMax = $('#cmbPrecio option:selected').attr('max');
 	var precioMin = $('#cmbPrecio option:selected').attr('min');
 
@@ -158,7 +168,7 @@ function FiltrarAutos(item){
 	var kmMin = $('#cmbKilometros option:selected').attr('min');
 	var valida = true;
  	if ( $('#cmbPrecio').val() != -1){
- 		if (((precioMin < item.precioint < precioMax)|| (precioMax ==0 && precioMin >0 && item.precioint>precioMin)) ){
+ 		if (((precioMin <item.precioint && item.precioint < precioMax)|| (precioMax ==0 && precioMin >0 && item.precioint>precioMin)) ){
 
  			valida =true;
 
@@ -172,7 +182,7 @@ function FiltrarAutos(item){
 
  	if ( $('#cmbKilometros').val() != -1) {
 
- 		if((kmMin < item.kmsint < kmMax)|| (kmMax ==0 && kmMin >0 && item.kmsint>kmMin) ){
+ 		if((kmMin < item.kmsint && item.kmsint < kmMax)|| (kmMax ==0 && kmMin >0 && item.kmsint>kmMin) ){
 
  			valida = true;
 
@@ -202,13 +212,21 @@ function FiltrarAutos(item){
 
  	if($('#cmbMarcas').val() !=-1){
 
- 		if ($('#cmbMarcas').val() !=-1) {
+ 		if ($('#cmbMarcas').val() == item.marcacve) {
  			valida = true;
  		}else{
  			return false;
  		}
  	}
 
+if($('#cmbAnio').val() !=-1){
+
+ 		if ($('#cmbAnio').val() == item.anio) {
+ 			valida = true;
+ 		}else{
+ 			return false;
+ 		}
+ 	}
 	return valida;
 
 }
