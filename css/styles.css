@@ -874,6 +874,9 @@ body{height:100%;width:100%;}
 	width:60%;
 	
 }
+div[data-u="image"]{
+	background-size: contain;
+}
 #searchBar{
 	width:100%;
 	height:60px;
