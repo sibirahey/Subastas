@@ -26,7 +26,7 @@ $(document).ready(function(){
 
 function CargaDatosPublico(){
 	postrequest("data/venta-autos.json", '', function(data){
-			debugger;	
+				
 			$.each(data.vehiculos,function(i,item){
 				
 				console.log(JSON.stringify(item));
@@ -101,8 +101,8 @@ function regresaRenglonVenta(item){
 
 
 	var renglon = '<div class="searchItem">';
-	renglon += '			<div class="searchItemHead" attr-id="'+item.idVehiculo+'" onclick="VerSubasta(this);"><h3>'+item.marca+'['+item.modelo+']</h3></div>';
-	renglon += '			<div class="searchItemImg"><img src="'+item.foto+'"/></div>';
+	renglon += '			<div class="searchItemHead" attr-id="'+item.idVehiculo+'" onclick="VerDetalleAuto(this);"><h3>'+item.marca+'['+item.modelo+']</h3></div>';
+	renglon += '			<div class="searchItemImg"><img attr-id="'+item.idVehiculo+'" onclick="VerDetalleAuto(this);" src="'+item.foto+'"/></div>';
 	renglon += '		<div class="searchItemBody">';
 	renglon += '			<div>';
 	renglon += '				<h4>Año: </h4>';
@@ -154,6 +154,11 @@ function CargaSubasta(subasta){
 		$('.dateTimeHeader').hide();
 
 	});
+}
+
+function VerDetalleAuto(o)
+{
+	$(".mainBody").load("views/interna2.html", function() {});
 }
 
 //***********************
