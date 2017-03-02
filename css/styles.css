@@ -1,7 +1,22 @@
 *:not(thead):not(tbody):not(td):not(tr){float:left;position:relative;display:block;margin:0;padding:0;box-sizing: border-box;font-family: 'Open Sans', sans-serif;font-weight: 300;font-style: normal;outline:none;}
-html,
-body{height:100%;width:100%;}
-.mainContainer{height:inherit;width:inherit;overflow:auto;}
+html{
+	height:100%;
+	width:100%;
+	background-image: url("../img/background010.jpg");
+	
+	background-size: cover;
+	background-position: top center;
+	overflow:hidden;
+}
+body{
+	height:100%;
+	width:1024px;
+	float:none !important;
+	margin:0 auto !important;
+	background-color:#ffffff;
+	box-shadow: 0 0 16px rgba(0,0,0,0.75);
+}
+.mainContainer{height:100%;width:100%;overflow:auto;}
 .mainHeader{width:inherit;}
 	.mainHeader > div{width:inherit;}
 	.mainHeader > div:nth-child(1){height: 80px;}
@@ -31,14 +46,44 @@ body{height:100%;width:100%;}
 		.mainHeader > div:nth-child(3) > label:last-child{font-size:2em;font-weight:600;}
 		.mainHeader  > ul > li:hover{ background-color:#C8C8C8;}
 		.mainHeader  > ul > li > label:hover{cursor: pointer; }
-		
-.mainBody{min-height: calc(100% - 180px);width:inherit;max-width:1024px;margin:0 auto;padding:10px;float:none;clear: both;}
+.mainMinusHeader{
+	height:calc(100% - 120px);
+	width: 100%;
+	overflow:auto;
+}
+.mainBody{
+	height: calc(100% - 160px);
+    width: 100%;
+    padding: 10px;
+    overflow: auto;
+}
 	.mainBody > .mbLeft{height: 100%;width:400px;padding:0 60px;}
 	.mainBody > .mbRight{height: 100%;width:calc(100% - 400px);}
-.mainFooter{height:140px;width:100%;border-top:1px solid #E2E2E2;margin-top:20px;padding:10px 0;}
+.mainFooter{
+	height: 140px;
+    width: 100%;
+    border-top: 1px solid #E2E2E2;
+    margin-top: 20px;
+    padding: 10px 0;
+    position: relative;
+    bottom: 0;
+    border-top: 1px solid #BCBCBC;
+    background-color: #EEEEEE;
+}
 .modalWindow{}
 .btnTwitter,
-.btnFacebook {background-position:center center;background-repeat:no-repeat;background-size:contain;border:none;padding:2px;float:inherit;display:inherit;height:40px;width:40px;cursor:pointer;}
+.btnFacebook {
+	background-position: center center;
+    background-repeat: no-repeat;
+    background-size: contain;
+    border: none;
+    margin: 5px;
+    float: inherit;
+    display: inherit;
+    height: 30px;
+    width: 30px;
+    cursor: pointer;
+}
 .btnTwitter{background-image:url("../images/logoTwitter.svg");}
 .btnFacebook{background-image:url("../images/logoFacebook.svg");}
 /*--------- FOOTER ---------*/
@@ -310,7 +355,7 @@ body{height:100%;width:100%;}
 	width:300px !important;
 }
 .mbRightMainB{
-	height: 100%;
+	/*height: 100%;*/
 }
 .3mbRightMainB > div:nth-child(2){
 	
@@ -866,7 +911,9 @@ body{height:100%;width:100%;}
 	float:none;
 }
 /*---------- ENDS SETTINGS ----------*/
+/*--------- LOGIN ---------*/
 
+/*--------- ENDS LOGIN ---------*/
 /*---------- MAIN--------*/
 #divBusqueda{
 	min-height:200px;
@@ -880,15 +927,48 @@ img[data-u="image"]{
 #searchBar{
 	width:100%;
 	height:60px;
-	border-bottom: 1px solid #CECECE;
 }
+	#searchBar > input{
+		height: 40px;
+	    width: 300px;
+	    text-indent: 10px;
+	    line-height: 40px;
+	    font-size: 1em;
+	    width: calc(90% - 40px);
+    	margin: 10px 0 10px 5%;
+	}
+	#searchBar > .btnSearch{
+		color: #F7E827;
+	    border: none;
+	    background: #FD5A54;
+	    background: -webkit-linear-gradient(top, #464646, #787878);
+	    background: -o-linear-gradient(top, #464646, #787878);
+	    background: -moz-linear-gradient(top, #464646, #787878);
+	    background: linear-gradient(to top, #464646, #787878);
+	    height: 40px;
+	    width: 40px;
+	    font-size: 20px;
+	    margin: 10px 5% 10px 0;
+	    cursor:pointer;
+	}
+	#searchBar > .btnSearch:hover{
+		font-size:22px;
+	}
+		#searchBar > .btnSearch > i{
+		    height: 100%;
+		    width: 100%;
+		    line-height: 40px;
+		    text-align: center;
+		}
 #searchBody{
 	height:calc(100% - 60px);
 	width:100%;
+	overflow:auto;
 }
 .sdContainer > div{
-	height:190px;
-	width: 270px;
+	height: 190px;
+    width: 30%;
+    margin: 10px 1.5%;
 }
 .sdContainer > div > img{
 	height:100%;
@@ -900,25 +980,48 @@ img[data-u="image"]{
 	width:90%;
 	margin: 10px 5%;
     border: 1px solid #e6e6e6;
+    background-color:#ffffff;
 }
 	.searchItem > .searchItemHead{
 		height:40px;
 		width: 100%;
-		background-color: rgba(0,0,0,0.1);
+		color: #F7E827;
+	    border: none;
+	    background: #FD5A54;
+	    background: -webkit-linear-gradient(top, #464646, #787878);
+	    background: -o-linear-gradient(top, #464646, #787878);
+	    background: -moz-linear-gradient(top, #464646, #787878);
+	    background: linear-gradient(to top, #464646, #787878);
+	    line-height: 40px;
+    	text-indent: 6px;
+    	cursor:pointer;
 	}
 	.searchItem > .searchItemImg{
 		height:calc(100% - 40px);
-		width: 50%;
+		width: 35%;
 	}
 		.searchItem > .searchItemImg > img{
-			height:100%;
-			width:100%;
-			background-size:contain;
+			height: 100%;
+		    width: 100%;
+		    background-size: cover;
+		    background-position: center center;
+		    padding: 10px;
 		}
 	.searchItem > .searchItemBody{
 		height:calc(100% - 40px);
-		width: 50%;
+		width: 65%;
+		padding: 10px 0;
+		font-size:0.9em;
 	}
+		.searchItem > .searchItemBody > div{
+			height:30px;
+			width: 100%;
+		}
+			.searchItem > .searchItemBody > div > h4{
+				font-weight:bold;
+				width: 120px;
+				text-align:right;
+			}
 #divServicios{
 	border-left: 1px solid #B4B4B4;
 	min-height:200px;
@@ -928,20 +1031,26 @@ img[data-u="image"]{
 	#divServicios #divOfertas,
 	#divServicios #divForInfo,
 	#divServicios #divOffers{
-		height:100px;
-		width:90%;
-		margin: 10px 5%;
+		height: 200px;
+	    width: 90%;
+	    margin: 10px 5%;
+	    border: 1px solid #e6e6e6;
+	    background-color: #ffffff;
 	}
 	#divServicios #divOfertas{
-		background-color:red;	
 	}
 	#divServicios #divForInfo{
-		background-color:orange;
 	}
 	#divServicios #divOffers{
-		background-color:yellow;
 	}
 /*---------- FIN MAIN--------*/
+/*---------- REGISTRO ---------*/
+.registroMain{
+	float: none;
+	width: 600px;
+	margin: 30px auto 0;	
+}
+/*---------- REGISTRO ---------*/
 /*---------- CAROUSEL --------*/
      /* jssor slider bullet navigator skin 01 css */
         /*
@@ -965,7 +1074,7 @@ img[data-u="image"]{
             cursor: pointer;
             border: #000 1px solid;
         }
-        .jssorb01 div { background-color: gray; }
+        .jssorb01 div { background-color: gray;border-radius:50% }
         .jssorb01 div:hover, .jssorb01 .av:hover { background-color: #d3d3d3; }
         .jssorb01 .av { background-color: #fff; }
         .jssorb01 .dn, .jssorb01 .dn:hover { background-color: #555555; }
