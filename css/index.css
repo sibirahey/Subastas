@@ -10,9 +10,13 @@
 .loginMain{
     float: none;
     margin: 100px auto 0;
-    height: 300px;
-    width: 500px;
+    height: 240px;
+    width: 600px;
+    border-left: 1px solid #cccccc;
+    border-right: 1px solid #cccccc;
+    padding: 10px;
 }
+.divBotonera,
 .divRegistro,
 .divLogin{
 	width: 100%; 
@@ -27,7 +31,7 @@
 .divRegistro > label:not([for="placa"]):not([for="registroEULA"]),
 .divRegistro > input:not([type="checkbox"]){
 	width: 90%;
-	margin: 0 5% 10px;
+	margin: 0 5% 6px;
 }
 label[for="placa"]{
 	margin: 0 10px 10px 5%;
@@ -35,17 +39,14 @@ label[for="placa"]{
 }
 .divLogin > input,
 .divRegistro > input{
-	height:40px;
+	height:30px;
 	text-indent:10px;
 	font-size:1.2em;
 }
 #divPreferencias{
 	width: 90%;
 	margin: 10px 5% 10px;
-	height:50px;
 	line-height:50px;
-	font-size:1.4em;
-	
 }
 #btnLogin{
 	height:40px;
@@ -81,14 +82,14 @@ label[for="placa"]{
 	margin-left:5%;
 }
 label[for="registroEULA"]{
-	line-height:40px;
+	line-height:30px;
 	text-indent:10px;
 }
 #btnEula{
 	width: 50%;
     margin: 5px 25%;
-    background-color: #2e61ff;
-    color: white;
+    color: #2e61ff;
+    text-decoration:underline;
     text-align: center;
     line-height: 20px;
     font-size:0.8em;

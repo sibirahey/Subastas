@@ -3,9 +3,15 @@ require_once("views/VistaApi.php");
 require_once("views/VistaJson.php");
 require_once("modelos/usuarios.php");
 require_once("modelos/categorias.php");
+require_once("modelos/empresas.php");
+require_once("modelos/tiposubastas.php");
+require_once("modelos/subastas.php");
+require_once("modelos/subasta-empresa.php");
+require_once("modelos/cotizacion.php");
 require_once('utilidades/ConexionBD.php');
 require_once('utilidades/ExcepcionApi.php');
 require_once('utilidades/Utilerias.php');
+
 
 //print ConexionBD::obtenerInstancia()->obtenerBD()->errorCode();
 //print_r(array_shift($_GET['PATH_INFO']));
@@ -79,7 +85,19 @@ function ejecutaModeloPost($vista, $mod, $arr)
     	case 'categorias':
     		$vista->imprimir(categorias::post($arr));
     		break;
-    	default:
+        case 'empresas':
+            $vista->imprimir(empresas::post($arr));
+            break;
+        case 'tiposubastas':
+            $vista->imprimir(tiposubastas::post($arr));
+            break;
+        case 'subastas':
+            $vista->imprimir(subastas::post($arr));
+            break;
+        case 'cotizacion':
+            $vista->imprimir(cotizacion::post($arr));
+            break;
+        default:
     		# code...
     		break;
     }

@@ -6,3 +6,13 @@ function cargaHTML(contendor, url, name, callback){
   $(contendor).load( url+"?rand="+rand, callback);
 }
 
+function esAdmin(){
+	if (sessionStorage.getItem("es_admin") == 1){
+		return true;
+	}else{
+		return false;
+
+	}
+
+}
+

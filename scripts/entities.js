@@ -30,3 +30,16 @@ function Login(email, password){
 	this.email = email;
 	this.password = password;
 }
+
+function Empresa(id,nombre,estatus){
+	this.estatus = estatus;
+	this.id = id;
+	this.nombre= nombre;
+}
+function Subastas(nombreSubasta, IdTipoSubasta, fechaInicio, fechaFin, empresas){
+	this.nombreSubasta = nombreSubasta;
+	this.IdTipoSubasta = IdTipoSubasta;
+	this.fechaInicio = fechaInicio;
+	this.fechaFin = fechaFin;
+	this.empresas = empresas;
+}	

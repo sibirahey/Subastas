@@ -1,4 +1,3 @@
-
 var calendars = {};
 
 $( document ).ready(function() {
@@ -70,7 +69,7 @@ $( document ).ready(function() {
       for (cat in data){
         debugger;
 
-        $("#divPreferencias").append('<div ><input type="checkbox" attr-data="'+ data[cat].id+'" class="chkPref" />'+data[cat].descripcion +"</div>" );
+        $("#divPreferencias").append('<div class="divRegistro"><input type="checkbox" attr-data="'+ data[cat].id+'" class="chkPref" />'+data[cat].descripcion +"</div>" );
       }
 
     });
@@ -78,7 +77,17 @@ $( document ).ready(function() {
     $("#btnEula").click(function(){
 
       $( function() {
-        $( "#dialogEula" ).dialog();
+        $( "#dialogEula" ).dialog({
+        	height:400,
+        	width:500,
+        	modal:true,
+        	title: "Terminos y Condiciones",
+        	buttons: {
+		        Ok: function() {
+		          $( this ).dialog( "close" );
+		        }
+		      }
+        });
       });
 
     });
@@ -89,6 +98,7 @@ $( document ).ready(function() {
   *
   */
     $("#btnGuardar").click(function(){
+
 
       var oUsuario = new Usuario();
       oUsuario.nombre = $("#registroNombre").val();
@@ -118,9 +128,15 @@ $( document ).ready(function() {
 
       
        postrequest("usuarios/registro", oUsuario, function(data){
-            if(data.responseJSON=="OK"){
-              /// ir a main    
+
+            if(data=="OK"){
+              window.location.href = "main.html";
+
+              sessionStorage.setItem('nombre', $("#registroNombre").val() +" " + $("#registroApPaterno").val() +" " + $("#registroApMaterno").val());
+              sessionStorage.setItem('correo', $("#registroMail").val());
+              sessionStorage.setItem('publico', 0);
             };
+
           });
 
 
@@ -220,13 +236,15 @@ $( document ).ready(function() {
 
        postrequest("usuarios/login", oLogin, function(data){
            
+            debugger;
 
-
-            if(data["valido"] == 1){
+            if(data.valido){
+              
               window.location.href = "main.html";
               sessionStorage.setItem('nombre', data["nombre"] + " " + data["appaterno"] + " " +data["apmaterno"]);
               sessionStorage.setItem('correo', data["correo"]);
               sessionStorage.setItem('publico', data["publico"]);
+              sessionStorage.setItem('es_admin', data["esadmin"]);
 
                  
             }else{
@@ -238,5 +256,4 @@ $( document ).ready(function() {
   }
 
 }); 
-
 

@@ -1,0 +1,65 @@
+<div class="divBotonera">
+	<div>Nueva</div>
+</div>
+<div class="divHeaderContenido" style="border-color:blue; border-style: solid; border-width: 1px;">
+	<div class="divRegistro">
+		<label for="txtNombreSubasta" >Lote</label>
+		<input type="text" id="txtNombreSubasta" name="txtNombreSubasta" />
+	</div>
+	<div class="divRegistro">
+		<label for="txtFechaInicio" >Fecha inicio:</label>
+		<input type="text" id="txtFechaInicio" name="txtFechaInicio" />
+	</div>
+	<div class="divRegistro">
+		<label for="txtFechaFin" >Fecha final:</label>
+		<input type="text" id="txtFechaFin" name="txtFechaFin" />
+	</div>
+	<div class="divRegistro" id="divTipoSubastas">
+
+	</div>
+	<div class="divRegistro">
+		<label for="cmbEmpresas" >Empresas</label>
+		<select id="cmbEmpresas" name="cmbEmpresas" ></select>
+		<div id="btnNuevaEmpresa"> [ Nueva ]</div>
+		<div id="btnAgregaEmpresa"> [ + ]</div>
+	</div>
+	<div class="divRegistro" id="lstEmpresa">
+	</div>
+	<div class="divRegistro" >
+		<div id="btnGuardarSubasta">Guardar Subasta</div>
+	</div>
+
+</div>
+<div id="divListaSubastas" style="border-color:blue; border-style: solid;  border-width: 1px;">
+	<div id="divListaBotonera" style="border-color:red; border-style: solid;  border-width: 1px;">
+		<div class="divItemBotonera">
+			<label for="cmbEmpresasFiltro" >Empresas</label>
+			<select id="cmbEmpresasFiltro" name="cmbEmpresasFiltro" ></select>
+		</div>
+		<div class="divItemBotonera">
+			<label for="cmbPublicada" >Estatus de publicación: </label>
+			<select id="cmbPublicada" name="cmbPublicada" >
+				<option value="-1"> == Todas ==</option>
+				<option value="0">No publicadas</option>
+				<option value="1">Publicadas</option>
+			</select>
+		</div>
+		<div class="divItemBotonera">
+			<div id="btnFiltrar">FILTRAR</div>
+		</div>
+
+	</div>
+	<div id="divListaContenido"></div>
+</div>
+<div id="modalEmpresa">
+	<div class="divRegistro">
+		<label for="txtNombreEmpresa" >Empresa:</label>
+		<input type="text" id="txtNombreEmpresa" name="txtNombreEmpresa" />
+	</div>
+	<div class="divRegistro">
+		<div id="btnGuardaEmpresa">Guardar</div>
+	</div>
+</div>
+<div class="divContenido">
+	
+</div>

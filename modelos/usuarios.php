@@ -5,7 +5,7 @@ class usuarios
 
   
 
-    public function __construct($nombre ="", $appaterno = "", $apmaterno = "", $correo ="", $verificado = 0, $contrasena="", $valido=0, $publico = 1)
+    public function __construct($nombre ="", $appaterno = "", $apmaterno = "", $correo ="", $verificado = 0, $contrasena="", $valido=0, $publico = 1, $esadmin=0)
     {
         $this->nombre = $nombre;
         $this->appaterno = $appaterno;
@@ -15,6 +15,7 @@ class usuarios
         $this->contrasena = $contrasena;
         $this->valido = $valido;
         $this->publico = $publico;
+        $this->esadmin= $esadmin;
     }
 
     // Datos de la tabla "usuario"
@@ -84,19 +85,22 @@ class usuarios
             $sentencia->bindParam(3, $usuario["apmaterno"]);
 
             $sentencia->bindParam(4, $contrasenaEncriptada);
+         
             $fecha = $usuario["yyyy"]."-".$usuario["mm"]."-".$usuario["dd"];
             
             $sentencia->bindParam(5, $fecha);
             
             $sentencia->bindParam(6, $claveApi);
+
             $sentencia->bindParam(7, $usuario["email"]);
+
             $verificado = 0;
             $sentencia->bindParam(8, $verificado);
             
 
  
             $resultado = $sentencia->execute();
-            
+           
             if ($resultado) {
 
                 envia_mail($usuario["email"], MAIL_BIENVENIDO, "<html><body>Bienvenido a escudería, para terminar su registro por favor confirme su mail: <a href=\"msusano.com/Subastas/usuarios/confirmar/". $claveApi."\">Confirmar mail</a></body></html>", "yo@msusano.com" );
@@ -105,7 +109,7 @@ class usuarios
                 return self::ESTADO_CREACION_FALLIDA;
             }
         } catch (PDOException $e) {
-            
+
             throw new ExcepcionApi(self::ESTADO_URL_INCORRECTA, $e->getMessage(), 400);
             
         }
@@ -149,7 +153,7 @@ class usuarios
         $password = $_POST["password"];
        
             // Sentencia INSERT
-        $comando = "SELECT nombre, appaterno, apmaterno, correo, verificado, contrasena, publico from usuario where correo =? ";
+        $comando = "SELECT nombre, appaterno, apmaterno, correo, verificado, contrasena, publico, es_admin from usuario where correo =? ";
         
         $sentencia = ConexionBD::obtenerInstancia()->obtenerBD()->prepare($comando);
         $sentencia->bindParam(1, $mail);
@@ -172,6 +176,7 @@ class usuarios
             $usuario->contrasena = $fetch["contrasena"];
             $usuario->valido = $valido;
             $usuario->publico = $fetch["publico"];
+            $usuario->esadmin = $fetch["es_admin"];
 
             return $usuario;
         } 

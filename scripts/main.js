@@ -1,6 +1,12 @@
 $(document).ready(function(){
 
-  cargaHTML(".mainBody", "views/main.html","", function() {
+  CargaContenidoMain();
+
+  });
+
+function CargaContenidoMain(){
+
+	cargaHTML(".mainBody", "views/main.html","", function() {
   		$("#searchBox").keypress(function(e) {
 		    if(e.which == 13) {
 		        $("#searchBody").html("");
@@ -22,8 +28,7 @@ $(document).ready(function(){
 
 
   	});
-
-  });
+}
 
 function CargaDatosPublico(){
 	postrequest("data/venta-autos.json", '', function(data){
@@ -114,12 +119,12 @@ function regresaRenglonVenta(item){
 	renglon += '					<label>'+item.kms+'</label>';
 	renglon += '				</div>';
 	renglon += '				<div>';
-	renglon += '					<h4>Descripción: </h4>';
-	renglon += '					<label>'+item.descripcion+'</label>';
-	renglon += '				</div>';
-	renglon += '				<div>';
 	renglon += '					<h4>Precio: </h4>';
 	renglon += '					<label>'+item.precio+'</label>';
+	renglon += '				</div>';
+	renglon += '				<div>';
+	renglon += '					<h4>Descripción: </h4>';
+	renglon += '					<label>'+item.descripcion+'</label>';
 	renglon += '				</div>';
 	renglon += '			</div>';
 	renglon += '</div>';
