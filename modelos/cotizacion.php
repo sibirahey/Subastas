@@ -29,59 +29,8 @@ class cotizacion
         }
     }   
 
-    private function crearServicios($cotizacion){
-
-        try{
-
-            $pdo = ConexionBD::obtenerInstancia()->obtenerBD();
-
-            // Sentencia INSERT
-            $comando = "INSERT INTO " . self::NOMBRE_TABLA . " ( " .
-                self::NOMBRE . "," .
-                self::CORREO . "," .
-                self::TELEFONO . "," .
-                self::MARCA . "," .
-                self::MODELO . "," .
-                self::TIPO . "," .
-                self::ESTATUS . "," .
-                " VALUES(?,?,?,?,?,?)";
-
-            $sentencia = $pdo->prepare($comando);
-
-            $sentencia->bindParam(1, $cotizacion["nombre"]);
-                       
-            $sentencia->bindParam(2, $cotizacion["correo"]);
-                       
-            $sentencia->bindParam(3, $cotizacion["telefono"]);
-            
-            $sentencia->bindParam(4, $cotizacion["marca"]);
-            
-            $sentencia->bindParam(5, $cotizacion["modelo"]);
-
-            $sentencia->bindParam(6, $cotizacion["tipo"]);
-
-            $Estatus = 1;
-            $sentencia->bindParam(7, $Estatus);
  
-            $resultado = $sentencia->execute();
-           
-            if ($resultado) {
-
-               return self::ESTADO_CREACION_EXITOSA;
-            } else {
-                return self::ESTADO_CREACION_FALLIDA;
-            }
-
-        } catch (PDOException $e) {
-
-            throw new ExcepcionApi(self::ESTADO_URL_INCORRECTA, $e->getMessage(), 400);
-            
-        }
-
-
-
-    }
-    private function crear($cotizacion)
+    private function crear($cotiza)
     {
         try {
 
@@ -95,22 +44,22 @@ class cotizacion
                 self::MARCA . "," .
                 self::MODELO . "," .
                 self::TIPO . "," .
-                self::ESTATUS . "," .
-                " VALUES(?,?,?,?,?,?)";
-
+                self::ESTATUS . ")" .
+                " VALUES(?,?,?,?,?,?,?)";
+                
             $sentencia = $pdo->prepare($comando);
 
-            $sentencia->bindParam(1, $cotizacion["nombre"]);
+            $sentencia->bindParam(1, $cotiza["nombre"]);
                        
-            $sentencia->bindParam(2, $cotizacion["correo"]);
+            $sentencia->bindParam(2, $cotiza["correo"]);
                        
-            $sentencia->bindParam(3, $cotizacion["telefono"]);
+            $sentencia->bindParam(3, $cotiza["telefono"]);
             
-            $sentencia->bindParam(4, $cotizacion["marca"]);
+            $sentencia->bindParam(4, $cotiza["marca"]);
             
-            $sentencia->bindParam(5, $cotizacion["modelo"]);
+            $sentencia->bindParam(5, $cotiza["modelo"]);
 
-            $sentencia->bindParam(6, $cotizacion["tipo"]);
+            $sentencia->bindParam(6, $cotiza["tipo"]);
 
             $Estatus = 1;
             $sentencia->bindParam(7, $Estatus);
@@ -118,13 +67,17 @@ class cotizacion
             $resultado = $sentencia->execute();
            
             if ($resultado) {
+                 $cotizacionId =$pdo->lastInsertId();
 
-               return self::ESTADO_CREACION_EXITOSA;
+               
+
+                   cotizacionservicios::registrarCS($cotizacionId,$cotiza["subServicios"]);
+               return $cotizacionId;
             } else {
                 return self::ESTADO_CREACION_FALLIDA;
             }
         } catch (PDOException $e) {
-
+            
             throw new ExcepcionApi(self::ESTADO_URL_INCORRECTA, $e->getMessage(), 400);
             
         }
@@ -139,53 +92,21 @@ class cotizacion
 
         $resultado = self::crear($_POST);
 
-        switch ($resultado) {
-            case self::ESTADO_CREACION_EXITOSA:
-                //self::registraServicios($_POST);
-               http_response_code(200);
-               return "OK";
-               
-                break;
-            case self::ESTADO_CREACION_FALLIDA:
-                throw new ExcepcionApi(self::ESTADO_CREACION_FALLIDA, "Ha ocurrido un error");
-                break;
-            default:
-                throw new ExcepcionApi(self::ESTADO_FALLA_DESCONOCIDA, "Falla desconocida", 400);
-        }
-    }
-
-    private function registraServicios(){
-
-        $cuerpo = file_get_contents('php://input');
-        $usuario = json_decode($cuerpo);
-
-        $resultado =self::crearServicios($_POST);
-
-        switch ($resultado) {
-            case self:: ESTADO_CREACION_EXITOSA:    
+        switch (sizeof($resultado)) {
+            case 0:
                 http_response_code(200);
-                return "OK";
+               throw new ExcepcionApi(self::SIN_RESULTADOS, "OK",200, null);
                 break;
             
-            case self::ESTADO_CREACION_FALLIDA:
-                throw new ExcepcionApi(self::ESTADO_CREACION_FALLIDA, "Ha ocurrido un error");
-                break;
             default:
-                throw new ExcepcionApi(self::ESTADO_FALLA_DESCONOCIDA, "Falla desconocida", 400);
+                 http_response_code(200);
+                 return $resultado;
                 break;
         }
 
-    }
-
-
-    private function ConsultaIncr(){
-
-          $comando = "SELECT AUTO_INCREMENT FROM  INFORMATION_SCHEMA.TABLES WHERE TABLE_SCHEMA = 'msusano' AND   TABLE_NAME   = 'usuario';";
-        
-           $sentencia = ConexionBD::obtenerInstancia()->obtenerBD()->prepare($comando);
-        $sentencia->bindParam(1, $mail);
-        
 
     }
+
+  
     
 }

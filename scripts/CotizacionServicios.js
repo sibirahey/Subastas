@@ -1,21 +1,14 @@
 function cargaServicios(idServicio) {
 
-	$.ajax({
-		dataType : "json",
-		url : "data/Servicios.json",
-		data : "data",
-		success : function(data) {
+	postrequest("servicios/listar",{"estatus":"1"},function(data){
 
-			$.each(data["Servicio"], function(i, item) {
-//$("#lstServicios").append('<li class:"submenuitem" id ="'+item.idServicio+'">'+item.Nombre+'</li>');
-					$("#divLstServicios").append('<div><div class:"submenuitem" id ="'+item.idServicio+'" onClick="cargaServiciosCotizar(this)">'+item.Nombre+'</div></div>');
+		for(serv in data){
+			$("#divLstServicios").append('<div><div class:"submenuitem" id ="'+data[serv].idServicios+'" onClick="cargaServiciosCotizar(this)">'+data[serv].nombre+'</div></div>');
 			
-				
-				
-			});
 		}
-	});
-	
+
+		
+	})
 
 }
 
@@ -23,66 +16,130 @@ function cargaServicios(idServicio) {
 function cargaServiciosCotizar(O) {
 	$(".rows").remove();
 	var idServicio = $(O).attr('id');
-	$.ajax({
-		dataType : "json",
-		url : "data/Servicios.json",
-		data : "data",
-		success : function(data) {
 
-			$.each(data["Servicio"], function(i, item) {
+	postrequest('subservicio/listar',{"estatus":"1","idServicio":idServicio},function(data){
+		for (subServ in data){
 
-				if (idServicio>0){
-					
-					if (item.idServicio == idServicio){
+			if (data[subServ].idSubservicio != undefined){
+				var Renglon;
+			
+				
 
-						$.each(item["Servicios"],function(j,subitem){
+			if(sessionStorage.getItem('esAdministrador')!=1){
+				Renglon = '<div class="rows" id="1">';
+				Renglon+= '<div class:"servicioRow" id ="' + data[subServ].idSubservicio + '">' + data[subServ].nombre + '</div>';			
+				Renglon+= '<button id="btnAgregarS" idServicios="' + data[subServ].idSubservicio + '" idServicio="' + data[subServ].idServicio + '" onClick="AgregarServicio(this);">Cotizar</button>';
+				Renglon+='</div>';
 
-							//$("#DetalleServicio").append('<li class:"servicioRow" id ="'+subitem.idServicios+'">'+item.nombreServicios+'</li>');
-							var Renglon = '<div class="rows">';
-							Renglon+= '<div class:"servicioRow" id ="'+subitem.idServicios+'">'+subitem.nombreServicios+'</div>';
-							Renglon+= '<button id="btnAgregarS" idServicios="'+subitem.idServicios+'" idServicio="'+item.idServicio+'" onClick="AgregarServicio(this);">Cotizar</button>';
-							Renglon+='</div>';
 
-							$("#divDetalleServicios").append(Renglon);
+			}else{
+				Renglon = '<div class="rows" id="0">';
+				Renglon+= '<input type="text" name ="servicio" id ="txt' +data[subServ].idServicio+ data[subServ].idSubservicio + '" value = "' + data[subServ].nombre + '"/>';			
+				Renglon+= '<button id="btnGuardarS" idServicios="' + data[subServ].idSubservicio + '" idServicio="' + data[subServ].idServicio + '" onClick="ActualizarSubServicio(this);">Guardar</button>';
+				Renglon+='</div>';
+			}
 
-						});
+				$("#divDetalleServicios").append(Renglon);
+			}
 
-					}
-
-				}
-			});
 		}
+
+		if(sessionStorage.getItem('esAdministrador') == 1){
+
+			
+			var Renglon = '<div class="rows" id="0">';
+				Renglon+= '<input type="text" name ="servicio" id ="txt'+idServicio+'0" value ="Agregar"/>';			
+				Renglon+= '<button id="btnGuardarS" idServicios="0" idServicio="'+idServicio+' onClick="ActualizarSubServicio(this);">Nuevo</button>';
+				Renglon+='</div>';
+
+				$("#divDetalleServicios").append(Renglon);
+
+		}
+
 	});
-	
+
+}
+
+function ActualizarSubServicio(obj){
+ debugger;
+ 	var objSubServicio = new SubServicios();
+
+	objSubServicio.idServicio= $(obj).attr("idServicio");
+	objSubServicio.idSubServicio = $(obj).attr("idServicios");
+	objSubServicio.nombre = $("#txt"+objSubServicio.idServicio+objSubServicio.idSubServicio).val();
+	objSubServicio.estatus = '1';
+	objSubServicio.requisitos = 'X';
+	if (objSubServicio.idSubServicio >0){
+
+		postrequest('subservicio/actualizar',objSubServicio,function(data){
+
+			debugger;
+		});
+	}else{
+
+		postrequest('subservicio/registro',objSubServicio,function(data){
+
+			debugger;
+		});
+
+	}
+
 
 }
 
 
 
-
-
 function AgregarServicio(obj) {
 
-	var servicio = $(obj).attr('idServicio');
-	var servicios= $(obj).attr('idServicios');
+	
 	var sc = sessionStorage.getItem('serviciosCotizar');
 	var serviciosCotizar=[];
-
+	var objServicioCotizar = new CotizacionServicio();
+	objServicioCotizar.idServicio = $(obj).attr('idServicio');
+	objServicioCotizar.idSubServicios= $(obj).attr('idServicios');
 	if(sc != undefined){
 
 	 serviciosCotizar= JSON.parse(sc);
 
 
 	}
-	
-	serviciosCotizar.push({servicio:servicio,servicios:servicios });
 
-	sessionStorage.setItem('serviciosCotizar',JSON.stringify(serviciosCotizar));
+
+	var i =0;
+	var indexRemove;
+	var result = $.grep(serviciosCotizar, function(e)
+		{ 
+			
+			if(e.idSubServicios== objServicioCotizar.idSubServicios && e.idServicio== objServicioCotizar.idServicio ){
+				indexRemove = i;
+				return e;
+
+			}else{
+
+				i++;
+			}
+			
+		});
+
+	if (result.length >0){			
+
+				 	serviciosCotizar.splice(indexRemove,1);
+
+
+	}else{
+		serviciosCotizar.push(objServicioCotizar);
+
+		}
+		sessionStorage.setItem('serviciosCotizar',JSON.stringify(serviciosCotizar));
+	
 
 	if (serviciosCotizar.length !=0){
 
 		$('#divCotizacion').show();
 
+	}else{
+
+		$('#divCotizacion').hide();
 	}
 
 
@@ -101,29 +158,28 @@ function enviarCotizacion(){
 		&& modelo != "" && tipo != "" && nombre != undefined && correo != undefined && telefono != undefined && marca != undefined
 		&& modelo != undefined && tipo != undefined ){
 
-		var datos ={"nombre":"Sergio Angel Meza Cervantes","correo":"serch_scm@hotmail.com","telefono":"555555555555","marca":"NISSAN","modelo":"SENTRA","tipo":"SEDAN"};
-		 postrequest("Cotizacion/registro", datos, function(data){
-        debugger;
-      for (cat in data){
-        
-        $('#divCotizacion').hidden();
-
-       }
-
-    },errorinserta);
-
+		var objcotizacion = new Cotizacion();
+		objcotizacion.nombre= nombre;
+		objcotizacion.correo = correo;
+		objcotizacion.telefono = telefono;
+		objcotizacion.marca = marca;
+		objcotizacion.modelo = modelo;
+		objcotizacion.tipo = tipo;
+		objcotizacion.estatus=1;
+		objcotizacion.subServicios = JSON.parse( sessionStorage.getItem("serviciosCotizar"));
+		 postrequest("cotizacion/registro", objcotizacion, function(data){
+    });
 
 	}else{
 
 		alert("Debe Llenar todos los campos");
-
 	}
 
 }
-function errorinserta(e){
-	debugger;
-	alert(e);
-}
+
+
+
+
 function muestraGaleria(idx) {
 
 	var dialog = $("#gallery" + idx).dialog({
@@ -159,5 +215,7 @@ $(document).ready(function() {
 		
 	});
 	sessionStorage.removeItem('serviciosCotizar');
+
+	sessionStorage.setItem('esAdministrador','1');
 	
 });

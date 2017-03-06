@@ -8,6 +8,9 @@ require_once("modelos/tiposubastas.php");
 require_once("modelos/subastas.php");
 require_once("modelos/subasta-empresa.php");
 require_once("modelos/cotizacion.php");
+require_once("modelos/cotizacion-servicios.php");
+require_once("modelos/servicios.php");
+require_once("modelos/subServicios.php");
 require_once('utilidades/ConexionBD.php');
 require_once('utilidades/ExcepcionApi.php');
 require_once('utilidades/Utilerias.php');
@@ -96,6 +99,12 @@ function ejecutaModeloPost($vista, $mod, $arr)
             break;
         case 'cotizacion':
             $vista->imprimir(cotizacion::post($arr));
+            break;
+        case 'servicios':
+            $vista->imprimir(servicios::post($arr));
+        break;
+        case 'subservicio':
+            $vista->imprimir(subservicio::post($arr));
             break;
         default:
     		# code...

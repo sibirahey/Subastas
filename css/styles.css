@@ -1193,17 +1193,23 @@ button[title="Close"]{
 	height:100%;
 	width:200px;
 }
-.CotizacionServicios > div#divServicios > div{
+.CotizacionServicios > div#divServicios > div#divLstServicios{
 	
 		height:100%;
 	width:100%;
 }
 
-.CotizacionServicios > div#divServicios >div > div{
+.CotizacionServicios > div#divServicios >div#divLstServicios > div{
 	
-		height:15px;
+		height:30px;
 	width:100%;
 }
+.CotizacionServicios > div#divServicios >div#divLstServicios > div >div{
+	
+		height:30px;
+	width:100%;
+}
+
 .CotizacionServicios >div#divDetalleServicios{
 	height:100%;
 	width:200px;
@@ -1211,10 +1217,25 @@ button[title="Close"]{
 
 .CotizacionServicios > div#divDetalleServicios >div{
 
-	height: 15px;
+	height: 30px;
 	width: 100%;
 }
 
+.CotizacionServicios > div#divDetalleServicios >div > div{
+
+	height: 15px;
+	width: 70%;
+}
+
+.CotizacionServicios > div#divDetalleServicios >div > input{
+
+	height: 15px;
+	width: 70%;
+}
+.CotizacionServicios >div#divDetalleServicios >div>button{
+	height: 15px;
+	width: 30%;
+}
 
 .CotizacionServicios > div#divCotizacion {
 

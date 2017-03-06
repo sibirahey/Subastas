@@ -67,8 +67,8 @@ function CargaFuncionesAdminSubastas(){
 		
 		$.each( $(".empresasSeleccionadas"), function( key, value ) {
 		  
-		  
 		  oSubastas.empresas.push( $(value).attr("attr-idx"));
+		  
 		});
 		
 

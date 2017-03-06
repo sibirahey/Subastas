@@ -104,10 +104,7 @@ class empresas
 
     private function registrar($empresa)
     {
-        
- 
         try {
-
             $pdo = ConexionBD::obtenerInstancia()->obtenerBD();
 
             // Sentencia INSERT
@@ -119,13 +116,9 @@ class empresas
             $sentencia = $pdo->prepare($comando);
             $sentencia->bindParam(1, $empresa["nombreEmpresa"]);
             $sentencia->bindParam(2, $empresa["estatus"]);
-                       
-            
-
  
             $resultado = $sentencia->execute();
-
-          
+            
             if ($resultado) {
                 return $pdo->lastInsertId();
             } else {
