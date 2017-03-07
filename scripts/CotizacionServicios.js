@@ -25,18 +25,21 @@ function cargaServiciosCotizar(O) {
 			
 				
 
-			if(sessionStorage.getItem('esAdministrador')!=1){
+			//if(sessionStorage.getItem('esAdministrador')!=1){
 				Renglon = '<div class="rows" id="1">';
-				Renglon+= '<div class:"servicioRow" id ="' + data[subServ].idSubservicio + '">' + data[subServ].nombre + '</div>';			
+				Renglon+= '<div class:"servicioeditado" id ="servicio' + data[subServ].idSubservicio + '">' + data[subServ].nombre + '</div>';			
+				if(sessionStorage.getItem('esAdministrador')==1)
+					Renglon+= '<input type="text" class="editarServicio" name ="servicio" id ="txt' +data[subServ].idServicio+ data[subServ].idSubservicio + '" value = "' + data[subServ].nombre + '" style="display: none;"/>';			
+				
 				Renglon+= '<button id="btnAgregarS" idServicios="' + data[subServ].idSubservicio + '" idServicio="' + data[subServ].idServicio + '" onClick="AgregarServicio(this);">Cotizar</button>';
+				
+				if(sessionStorage.getItem('esAdministrador')==1)
+					Renglon+= '<button id="btnGuardarS"  idServicios="' + data[subServ].idSubservicio + '" idServicio="' + data[subServ].idServicio + '" onClick="ActualizarSubServicio(this);">Editar</button>';
+				
 				Renglon+='</div>';
 
+			if(sessionStorage.getItem('esAdministrador')!=1){
 
-			}else{
-				Renglon = '<div class="rows" id="0">';
-				Renglon+= '<input type="text" name ="servicio" id ="txt' +data[subServ].idServicio+ data[subServ].idSubservicio + '" value = "' + data[subServ].nombre + '"/>';			
-				Renglon+= '<button id="btnGuardarS" idServicios="' + data[subServ].idSubservicio + '" idServicio="' + data[subServ].idServicio + '" onClick="ActualizarSubServicio(this);">Guardar</button>';
-				Renglon+='</div>';
 			}
 
 				$("#divDetalleServicios").append(Renglon);
@@ -45,11 +48,10 @@ function cargaServiciosCotizar(O) {
 		}
 
 		if(sessionStorage.getItem('esAdministrador') == 1){
-
 			
 			var Renglon = '<div class="rows" id="0">';
-				Renglon+= '<input type="text" name ="servicio" id ="txt'+idServicio+'0" value ="Agregar"/>';			
-				Renglon+= '<button id="btnGuardarS" idServicios="0" idServicio="'+idServicio+' onClick="ActualizarSubServicio(this);">Nuevo</button>';
+				Renglon+= '<input type="text" name ="servicio" class="txtNuevo" id ="txt'+idServicio+'0" value ="Agregar" style="display:none;"/>';			
+				Renglon+= '<button id="btnGuardarS" idServicios="0" idServicio="'+idServicio+'" onClick="ActualizarSubServicio(this);">Agregar</button>';
 				Renglon+='</div>';
 
 				$("#divDetalleServicios").append(Renglon);
@@ -61,29 +63,34 @@ function cargaServiciosCotizar(O) {
 }
 
 function ActualizarSubServicio(obj){
- debugger;
- 	var objSubServicio = new SubServicios();
 
-	objSubServicio.idServicio= $(obj).attr("idServicio");
-	objSubServicio.idSubServicio = $(obj).attr("idServicios");
-	objSubServicio.nombre = $("#txt"+objSubServicio.idServicio+objSubServicio.idSubServicio).val();
-	objSubServicio.estatus = '1';
-	objSubServicio.requisitos = 'X';
-	if (objSubServicio.idSubServicio >0){
+	if ($("#txt"+$(obj).attr("idServicio")+$(obj).attr("idServicios")).is(":visible")){
+	 	var objSubServicio = new SubServicios();
 
-		postrequest('subservicio/actualizar',objSubServicio,function(data){
+		objSubServicio.idServicio= $(obj).attr("idServicio");
+		objSubServicio.idSubServicio = $(obj).attr("idServicios");
+		objSubServicio.nombre = $("#txt"+objSubServicio.idServicio+objSubServicio.idSubServicio).val();
+		objSubServicio.estatus = '1';
+		objSubServicio.requisitos = 'X';
+		if (objSubServicio.idSubServicio >0){
 
-			debugger;
-		});
-	}else{
+			postrequest('subservicio/actualizar',objSubServicio,function(data){
 
-		postrequest('subservicio/registro',objSubServicio,function(data){
 
-			debugger;
-		});
+			});
+		}else{
 
+			postrequest('subservicio/registro',objSubServicio,function(data){
+
+				debugger;
+			});
+
+		}	
+	} else {
+
+		$("#txt"+$(obj).attr("idServicio")+$(obj).attr("idServicios")).show();
+		$("#servicio" +$(obj).attr("idServicio")).hide();
 	}
-
 
 }
 
@@ -216,6 +223,6 @@ $(document).ready(function() {
 	});
 	sessionStorage.removeItem('serviciosCotizar');
 
-	sessionStorage.setItem('esAdministrador','1');
+	//sessionStorage.setItem('esAdministrador','1');
 	
 });

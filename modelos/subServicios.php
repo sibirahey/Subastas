@@ -35,7 +35,7 @@ class subservicio
     private function crear($subServicio)
     {
         try {
-
+           
             $pdo = ConexionBD::obtenerInstancia()->obtenerBD();
 
             // Sentencia INSERT
@@ -48,12 +48,15 @@ class subservicio
                 
             $sentencia = $pdo->prepare($comando);
 
-            $sentencia->bindParam(1, $cotiza["nombre"]);
+            $sentencia->bindParam(1, $subServicio["idServicio"]);
                        
-            $sentencia->bindParam(2, $cotiza["correo"]);
+            $sentencia->bindParam(2, $subServicio["nombre"]);
                        
-            $sentencia->bindParam(3, $cotiza["telefono"]);
-          
+            $sentencia->bindParam(3, $subServicio["requisitos"]);
+                       
+            $sentencia->bindParam(4, $subServicio["estatus"]);
+            
+
  
             $resultado = $sentencia->execute();
            
@@ -81,7 +84,7 @@ class subservicio
             case self::ESTADO_CREACION_EXITOSA:
                 //self::registraServicios($_POST);
                http_response_code(200);
-               return "OK";
+               return 1;
                
                 break;
             case self::ESTADO_CREACION_FALLIDA:
@@ -164,33 +167,30 @@ class subservicio
     private function factualizar($subservicio){
         
          try{
-            print_r($subServicio);
-        $idSubServicio = $subservicios["idSubServicio"];
-        $idServicio = $subservicios["idServicio"];
-        $nombre = $subservicios["nombre"];
-        $Requisitos = $subservicios["requisitos"];
-        $estatus = $subservicios["estatus"];
+           // print_r($subservicio);
+            $pdo = ConexionBD::obtenerInstancia()->obtenerBD();
+
+        $idSubServicio = $subservicio["idSubServicio"];
+        $idServicio = $subservicio["idServicio"];
+        $nombre = $subservicio["nombre"];
+        $Requisitos = $subservicio["requisitos"];
+        $estatus = $subservicio["estatus"];
 
         $comando = "UPDATE " . self::NOMBRE_TABLA .
-                " SET " . self::NOMBRE . "=?" .",".
-                self::REQUISITOS . "=?" .",".
-                self::ESTATUS . "=?" . 
-                " WHERE " . self::IDSUBSERVICIO . "=?" . 
-                " AND " . self::IDSERVICIO . "=?";
+                " SET " . self::NOMBRE . "='" . $nombre . "'," .
+                self::REQUISITOS . "='". $Requisitos ."'," .
+                self::ESTATUS . "=" . $estatus . 
+                " WHERE " . self::IDSUBSERVICIO . "=". $idSubServicio . 
+                " AND " . self::IDSERVICIO . "=" .$idServicio;
                 
-        $sentencia = ConexionBD::obtenerInstancia()->obtenerBD()->prepare($comando);
-
-        $sentencia->bindParam(1,$nombre);
-        $sentencia->bindParam(2,$Requisitos);
-        $sentencia->bindParam(3,$estatus);
-        $sentencia->bindParam(4,$idSubServicio);
-        $sentencia->bindParam(5,$idServicio);
-        
+        $sentencia = $pdo->prepare($comando);
+       
         //print_r($comando);
 
         $restultado = $sentencia->execute();
 
-        print_r($resultado->affected_rows);
+       
+
         if($resultado){
 
             return  self::ESTADO_ACTUALIZACION_EXITOSA;
@@ -200,7 +200,7 @@ class subservicio
             return self::ESTADO_ACTUALIZACION_FALLIDA;
         }
      }catch(PDOException $e){
-
+        print_r($e);
          throw new ExcepcionApi(ESTADO_BD_ERROR,$e->getMessage(), 400);
         
      }

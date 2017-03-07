@@ -1186,12 +1186,12 @@ button[title="Close"]{
 .CotizacionServicios{
 	clear:both;
 	height:80%;
-	width:80%;
+	width:100%;
 	font-size:0.8em;
 }
 .CotizacionServicios >div#divServicios{
 	height:100%;
-	width:200px;
+	width:25%;
 }
 .CotizacionServicios > div#divServicios > div#divLstServicios{
 	
@@ -1212,7 +1212,7 @@ button[title="Close"]{
 
 .CotizacionServicios >div#divDetalleServicios{
 	height:100%;
-	width:200px;
+	width:45%;
 }
 
 .CotizacionServicios > div#divDetalleServicios >div{
@@ -1234,13 +1234,13 @@ button[title="Close"]{
 }
 .CotizacionServicios >div#divDetalleServicios >div>button{
 	height: 15px;
-	width: 30%;
+	width: 15%;
 }
 
 .CotizacionServicios > div#divCotizacion {
 
 	height:100%;
-	width:300px;
+	width:30%;
 	display: none;
 }
 .CotizacionServicios > div#divCotizacion >div{
