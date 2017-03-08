@@ -125,9 +125,22 @@ class subservicio
             self::NOMBRE . "," . 
             self::REQUISITOS . ",".
             self::ESTATUS . 
-            " FROM " . self::NOMBRE_TABLA .
-            (($estatus >0) ? " WHERE " . self::ESTATUS . "=?":"") .
-            (($idServicio > 0) ? " AND " . self::IDSERVICIO . "=?":"");
+            " FROM " . self::NOMBRE_TABLA;
+            $condicion="";
+            if (($estatus >0) ||($idServicio > 0))
+                $comando = $comando . " WHERE ";
+          
+            if ($estatus >0)  {
+                $condicion = $condicion . self::ESTATUS ." =? ";
+            }
+            if ($idServicio) {
+                if(strlen($condicion))
+                    $condicion = $condicion . " AND ";
+
+                $condicion = $condicion . self::IDSERVICIO ." =? ";
+            }
+            $comando = $comando . $condicion;
+         
 
         $sentencia = ConexionBD::obtenerInstancia()->obtenerBD()->prepare($comando);
 
@@ -135,7 +148,7 @@ class subservicio
                    $sentencia->bindParam(1,$estatus);
                 }        
         if ($idServicio >0) {
-            $sentencia->bindParam(2,$idServicio);
+            $sentencia->bindParam((($estatus > 0) ? 2:1),$idServicio);
         }
 
         if ($sentencia->execute())
@@ -152,45 +165,54 @@ class subservicio
 
         
          $resultado =  self::factualizar($_POST);
+         
          switch ($resultado) {
-             case self::ESTADO_CREACION_EXITOSA:
+             case self::ESTADO_ACTUALIZACION_EXITOSA:
                  http_response_code(200);
-                 return 'OK';
+                 return '1';
                  break;
-            
+            case self::ESTADO_ACTUALIZACION_FALLIDA:
+                return '0';
+                break;
              default:
                  throw new ExcepcionApi(self::ESTADO_CREACION_FALLIDA, "Ha ocurrido un error");
          }
 
     }   
 
-    private function factualizar($subservicio){
+    private function factualizar($ss){
         
          try{
            // print_r($subservicio);
             $pdo = ConexionBD::obtenerInstancia()->obtenerBD();
 
-        $idSubServicio = $subservicio["idSubServicio"];
-        $idServicio = $subservicio["idServicio"];
-        $nombre = $subservicio["nombre"];
-        $Requisitos = $subservicio["requisitos"];
-        $estatus = $subservicio["estatus"];
+        $idSubServicio = $ss["idSubServicio"];
+        $idServicio = $ss["idServicio"];
+        $nombre = $ss["nombre"];
+        $Requisitos = $ss["requisitos"];
+        $estatus = $ss["estatus"];
 
         $comando = "UPDATE " . self::NOMBRE_TABLA .
-                " SET " . self::NOMBRE . "='" . $nombre . "'," .
-                self::REQUISITOS . "='". $Requisitos ."'," .
-                self::ESTATUS . "=" . $estatus . 
-                " WHERE " . self::IDSUBSERVICIO . "=". $idSubServicio . 
-                " AND " . self::IDSERVICIO . "=" .$idServicio;
+                " SET " . self::NOMBRE . "=?" . "," .
+                self::REQUISITOS . "=?"  ."," .
+                self::ESTATUS . "=?" . 
+                " WHERE " . self::IDSUBSERVICIO . "=?" . 
+                " AND " . self::IDSERVICIO . "=?";
                 
         $sentencia = $pdo->prepare($comando);
-       
-        //print_r($comando);
+        
+        $sentencia->bindParam(1,$nombre);
+        $sentencia->bindParam(2,$Requisitos);
+        $sentencia->bindParam(3,$estatus);
+        $sentencia->bindParam(4,$idSubServicio);
+        $sentencia->bindParam(5,$idServicio);
 
-        $restultado = $sentencia->execute();
 
-       
+ //$comando = "UPDATE subservicios SET nombre='Afinacion de ',Requisitos='esto',estatus=0 WHERE idSubservicio=1 AND idServicio=1";
+       // $sentencia =$pdo->prepare($comando);
 
+         $resultado = $sentencia->execute();
+         //$ColAfected = $sentencia->rowCount();
         if($resultado){
 
             return  self::ESTADO_ACTUALIZACION_EXITOSA;
