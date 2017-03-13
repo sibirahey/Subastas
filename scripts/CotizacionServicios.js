@@ -23,33 +23,30 @@ function cargaServiciosCotizar(O) {
 			if (data[subServ].idSubservicio != undefined){
 				var Renglon;
 			
-				
-
-			//if(sessionStorage.getItem('esAdministrador')!=1){
+				var ids='idSubServicio="' + data[subServ].idSubservicio + '" idServicio="' + data[subServ].idServicio+'" ';
+				var idNombre=data[subServ].idServicio+ data[subServ].idSubservicio;
+			
 				Renglon = '<div class="rows" id="1">';
 				Renglon+= '<div class:"servicioeditado" id ="Subservicio' + data[subServ].idSubservicio + '">' + data[subServ].nombre + '</div>';			
 				if(sessionStorage.getItem('esAdministrador')==1)
 					Renglon+= '<input type="text" class="editarServicio" name ="servicio" id ="txt' +data[subServ].idServicio+ data[subServ].idSubservicio + '" value = "' + data[subServ].nombre + '" style="display: none;"/>';			
 				
-				Renglon+= '<button id="btnAgregarS" idSubServicio="' + data[subServ].idSubservicio + '" idServicio="' + data[subServ].idServicio + '" onClick="AgregarServicio(this);">Cotizar</button>';
+				Renglon+= '<button id="btnAgregarS" '+ids+ ' onClick="AgregarServicio(this);">Cotizar</button>';
 				
 				if(sessionStorage.getItem('esAdministrador')==1)
 					Renglon+= '<button id="btnGuardarS"  idSubServicio="' + data[subServ].idSubservicio + '" idServicio="' + data[subServ].idServicio + '" onClick="ActualizarSubServicio(this);">Editar</button>';
 				
 				if (idServicio ==3 && sessionStorage.getItem('esAdministrador') == 1){
 
-					Renglon+='<div id="uploadFile'+data[subServ].idServicio+ data[subServ].idSubservicio+'" style="display:none;" >';
-	
-					
-						Renglon+= agregaControlUpload('idSubServicio="' + data[subServ].idSubservicio + '" idServicio="' + data[subServ].idServicio + '"') ;
-
-					Renglon+=  '</div>';
+					Renglon+='<div id="uploadFile'+idNombre+'" style="display:none;" >';
+					Renglon+='<div id="divFile'+idNombre+'" style="display:none;" >Archivo</div>';
+					Renglon+='<button id="btnSubir"'+ids+ ' onClick="SubirArchivo(this);">Subir Archivo</button>';
+					Renglon+='</div>'
 				}
 
 				if (idServicio ==3 ){
 
-					Renglon+='<div id="requisitos'+data[subServ].idServicio+ data[subServ].idSubservicio+'"  >';
-	
+					Renglon+='<div id="requisitos'+idNombre+'"  >';
 					Renglon+='<a target="_blank" href ="data/CambioPropEdoMex.pdf">Requisitos</a> ';
 					Renglon+=  '</div>';
 				}
@@ -131,6 +128,12 @@ function ActualizarSubServicio(obj){
 
 		}
 	}
+
+}
+
+function SubirArchivo(obj){
+
+
 
 }
 
