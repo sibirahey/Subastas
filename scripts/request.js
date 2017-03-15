@@ -1,4 +1,4 @@
-var siteurl = "http://localhost:8888/Subastas/";
+var siteurl = "http://localhost/Subastas/";
 
 function postrequest(url, data, complete, fnerror){
 

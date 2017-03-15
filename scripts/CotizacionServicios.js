@@ -283,8 +283,8 @@ $(document).ready(function() {
 	});
 	sessionStorage.removeItem('serviciosCotizar');
 
-	$("input[name=cotizaNombre]").val(sessionStorage('nombre')); 
-	$("input[name=cotizaCorreo]").val(sessionStorage('correo'));
+	//$("input[name=cotizaNombre]").val(sessionStorage('nombre')); 
+	//$("input[name=cotizaCorreo]").val(sessionStorage('correo'));
 
 
 });

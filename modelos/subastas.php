@@ -19,6 +19,7 @@ class subastas
     const ID_TIPOSUBASTA = "IdTipoSubasta";
     const FECHA_INICIO = "fechaInicio";
     const FECHA_FIN = "fechaFin";
+    const INCREMENTO = "fechaFin";
     const SIN_RESULTADOS = "No se encontraron resultados";
     const LISTO = "OK";
     const ESTADO_CREACION_EXITOSA = "OK";
@@ -60,7 +61,7 @@ class subastas
     }
     private function listar($datosListar)
     {
-        print_r($_POST);
+        
         $estatus = $_POST['estatus'];
         $estatusWhere = "";
         $empresa = $_POST['empresa'];
@@ -77,7 +78,7 @@ class subastas
         
         $comando = "select idSubasta, nombreSubasta, idTipoSubasta, tipo.tipoSubasta, fechaInicio, fechaFin, CASE WHEN curdate() BETWEEN fechaInicio and fechaFin then 'ACTIVA' WHEN curdate() < fechaInicio then 'AGENDADA' else 'TERMINADA' end as estatus, visible, case visible when 0 then 'NO PUBLICADA' else 'PUBLICADA' end as publicada,(select GROUP_CONCAT(emp.nombreEmpresa) from subastaempresa se, empresas emp where s.idSubasta = se.idSubasta and se.idEmpresa = emp.idEmpresa) as empresas from subastas s, tiposubastas tipo " . $empresaFrom." where s.idTipoSubasta = tipo.idTipo  " . $empresaWhere . $estatusWhere ;
         
-        print_r($comando);
+     
 
 
 
@@ -130,8 +131,9 @@ class subastas
                 self::NOMBRE_SUBASTA . ",".
                 self::ID_TIPOSUBASTA . "," .
                 self::FECHA_INICIO . "," .
-                self::FECHA_FIN . ")" .
-                " VALUES(?,?,?,?)";
+                self::FECHA_FIN . ",".
+                self::INCREMENTO.")" .
+                " VALUES(?,?,?,?,?)";
  
             
 
@@ -141,6 +143,7 @@ class subastas
             $sentencia->bindParam(2, $subastas["IdTipoSubasta"]);
             $sentencia->bindParam(3, $subastas["fechaInicio"]);
             $sentencia->bindParam(4, $subastas["fechaFin"]);
+            $sentencia->bindParam(5, $subastas["incremento"]);
                    
         
 

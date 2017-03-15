@@ -95,3 +95,26 @@ label[for="registroEULA"]{
     font-size:0.8em;
     cursor:pointer;
 }
+.button{
+	cursor: pointer;
+
+}
+.button:hover{
+	cursor: pointer;
+	color: blue;
+}
+.divRenglonTabla {
+	display: block;
+	width: 33%;
+}
+.divRenglonTabla > div {
+	display: block;
+	width: 100%;
+}
+#divAdminSubastas{
+	display: block;
+	width: 50%;
+}
+#divAutos{
+	width:49%;
+}

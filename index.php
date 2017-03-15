@@ -11,6 +11,12 @@ require_once("modelos/cotizacion.php");
 require_once("modelos/cotizacion-servicios.php");
 require_once("modelos/servicios.php");
 require_once("modelos/subServicios.php");
+require_once("modelos/estados.php");
+require_once("modelos/municipios.php");
+require_once("modelos/marcas.php");
+require_once("modelos/modelos.php");
+require_once("modelos/features.php");
+require_once("modelos/transmisiones.php");
 require_once('utilidades/ConexionBD.php');
 require_once('utilidades/ExcepcionApi.php');
 require_once('utilidades/Utilerias.php');
@@ -102,9 +108,27 @@ function ejecutaModeloPost($vista, $mod, $arr)
             break;
         case 'servicios':
             $vista->imprimir(servicios::post($arr));
-        break;
+            break;
         case 'subservicio':
             $vista->imprimir(subservicio::post($arr));
+            break;
+        case 'estados':
+            $vista->imprimir(estados::post($arr));
+            break;
+        case 'municipios':
+            $vista->imprimir(municipios::post($arr));
+            break;
+        case 'marcas':
+            $vista->imprimir(marcas::post($arr));
+            break;
+        case 'modelos':
+            $vista->imprimir(modelos::post($arr));
+            break;
+        case 'transmisiones':
+            $vista->imprimir(transmisiones::post($arr));
+            break;
+        case 'features':
+            $vista->imprimir(features::post($arr));
             break;
         default:
     		# code...

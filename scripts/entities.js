@@ -11,14 +11,6 @@ function Usuario(nombre, appaterno, apmaterno, password, verificapassword, dd, m
 	this.categorias = categorias;
 	this.fecha_nacimiento = new Date();
 	this.email = email;
-	/*
-	for(var i in categorias){
-		var foo = new UsuarioCategorias();
-		foo.idUsuario = 0;
-		foo.idCategoria = categorias[i].idCategoria;
-		this.categorias.push(foo);
-	}
-	*/
 
 }
 function UsuarioCategorias(idUsuario, idCategoria){
@@ -36,14 +28,14 @@ function Empresa(id,nombre,estatus){
 	this.id = id;
 	this.nombre= nombre;
 }
-function Subastas(nombreSubasta, IdTipoSubasta, fechaInicio, fechaFin, empresas){
+function Subastas(nombreSubasta, IdTipoSubasta, fechaInicio, fechaFin, empresas, incremento){
 	this.nombreSubasta = nombreSubasta;
 	this.IdTipoSubasta = IdTipoSubasta;
 	this.fechaInicio = fechaInicio;
 	this.fechaFin = fechaFin;
 	this.empresas = empresas;
+	this.incremento = incremento;
 }	
-
 function Cotizacion(idUsuario,nombre,correo,telefono,marca,modelo,tipo,estatus,subServicios){
 
 	this.idUsuario = idUsuario;
