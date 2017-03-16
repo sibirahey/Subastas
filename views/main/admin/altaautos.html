@@ -6,15 +6,24 @@
 	<div class="divRegistro">
 		<label for="cbMarcaAuto" >Marca:</label>
 		<select id="cbMarcaAuto" name="cbMarcaAuto" ></select> 
+		<div id="btnAddMarca" class="fa fa-plus-square-o"></div>
 	</div>
 	<div class="divRegistro">
 		<label for="cbModeloAuto" >Modelo:</label>
-		<select id="cbModeloAuto" name="cbModeloAuto" ></select> 
+		<select id="cbModeloAuto" name="cbModeloAuto" >
+			<option value="0">== Seleccione ==</option>
+		</select> 
 	</div>
+	<div class="divRegistro">
+		<label for="cbColorAuto" >Color:</label>
+		<select id="cbColorAuto" name="cbColorAuto" ></select> 
+	</div>
+	<!--
 	<div class="divRegistro">
 		<label for="cbMSubtipoAuto" >Subtipo:</label>
 		<select id="cbMSubtipoAuto" name="cbMSubtipoAuto" ></select> 
 	</div>
+	-->
 	<div class="divRegistro">
 		<label for="cbAnioAuto" >Año:</label>
 		<select id="cbAnioAuto" name="cbAnioAuto" ></select> 
@@ -33,25 +42,30 @@
 	</div>
 	<div class="divRegistro">
 		<label for="cbCiudadAuto" >Ciudad</label>
-		<select name="cbCiudadAuto" id="cbCiudadAuto"></select>  
+		<select name="cbCiudadAuto" id="cbCiudadAuto">
+			<option value="0">== Seleccione ==</option>
+		</select>  
 	</div>
 	<div class="divRegistro">
-	    <div class="col-xs-5">
-	        <select name="from[]" id="cbFeaturesAutos" class="form-control" size="8" multiple="multiple">
-	           
-	        </select>
-	    </div>
+	   	<label for="cbFeaturesAutos" class="chosen-select chosen-rtl" >Características</label>
+        <select id="cbFeaturesAutos" >
+    	</select>
+    	<div id="btnAddFeature" class="fa fa-plus-square-o"></div>
+    	<div id="divFeatureContainer"></div>
 	    
-	    <div class="col-xs-2">
-	        <button type="button" id="multiselect_rightAll" class="btn btn-block"><i class="glyphicon glyphicon-forward"></i></button>
-	        <button type="button" id="multiselect_rightSelected" class="btn btn-block"><i class="glyphicon glyphicon-chevron-right"></i></button>
-	        <button type="button" id="multiselect_leftSelected" class="btn btn-block"><i class="glyphicon glyphicon-chevron-left"></i></button>
-	        <button type="button" id="multiselect_leftAll" class="btn btn-block"><i class="glyphicon glyphicon-backward"></i></button>
-	    </div>
-	    
-	    <div class="col-xs-5">
-	        <select name="to[]" id="cbFeaturesAutos_to" class="form-control" size="8" multiple="multiple"></select>
-	    </div>
 	</div>
-
+	<div class="divRegistro">
+		<input id="fotoAuto" type="file" name="sortpic" />
+		<div type="button" id="btnUpload" class="fa fa-upload"   ></div>
+		<div id="fotosSubidas" ></div>
+	</div>
+	<div id="dialog" title="Basic dialog">
+  		<div class="divRegistro">
+			<label for="txtDescripcion" >KM:</label>
+			<input type="text" name="txtDescripcion" id="txtDescripcion" /> 
+		</div>
+		<div class="divRegistro">
+			<div id="btnGuardarCatalogo" class="fa fa-floppy-o"></div>
+		</div>
+	</div>
 </div>

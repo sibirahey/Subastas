@@ -43,7 +43,10 @@ function CargaSelectEstados(control){
  function CargaSelectMunicipios(control, id_estado){
 
  	postrequest("municipios/listar?rand="+Math.random(), {"estatus":"1", "id_estado":id_estado}, function(data){
-      
+      if(data.mensaje == "OK"){
+        return;
+      }
+
       $(control).html("");
       for (i in data){
 
@@ -56,8 +59,8 @@ function CargaSelectEstados(control){
  function CargaSelectMarcas(control, id_marca, estatus){
   
   postrequest("marcas/listar?rand="+Math.random(), {"estatus":estatus}, function(data){
-      
-
+      $(control).html("");
+      $(control).append('<option value="0">== Seleccione ==</option>' );  
       for (i in data){
 
         $(control).append('<option value="'+data[i].id+'" '+((data[i].id == id_marca) ? 'selected="selected"':'' ) +' >' + data[i].descripcion + '</option>' );
@@ -69,12 +72,14 @@ function CargaSelectEstados(control){
  function CargaSelectModelos(control, control_marca, id_modelo, estatus){
   
   postrequest("modelos/listar?rand="+Math.random(), {"estatus":estatus, "id_marca":$(control_marca).val()}, function(data){
+      
       $(control).html("");
+      if(data.mensaje != "OK"){
+        for (i in data){
 
-      for (i in data){
 
-
-        $(control).append('<option value="'+data[i].id+'" '+((data[i].id == id_modelo) ? 'selected="selected"':'' ) +' >' + data[i].descripcion + '</option>' );
+          $(control).append('<option value="'+data[i].id+'" '+((data[i].id == id_modelo) ? 'selected="selected"':'' ) +' >' + data[i].descripcion + '</option>' );
+        }
       }
 
     });
@@ -98,19 +103,27 @@ function CargaSelectFeatures(control, features, estatus){
   
   postrequest("features/listar?rand="+Math.random(), {"estatus":estatus}, function(data){
       
+      $(control).append('<option value="0" >== Seleccione ==</option>' );
 
       for (i in data){
 
-        if(features.indexOf(data[i].descripcion) > -1 ){
-          $(control+"_to").append('<option value="'+data[i].id+'" >' + data[i].descripcion + '</option>' );
-
-        }else{
-
           $(control).append('<option value="'+data[i].id+'" >' + data[i].descripcion + '</option>' );
-        }
-
-
         
+      }
+  });
+
+}
+
+function CargaSelectColores(control, id_color, estatus){
+  
+  $(control).append('<option value="0">== Seleccione ==</option>' );  
+  postrequest("colores/listar?rand="+Math.random(), {"estatus":estatus}, function(data){
+      
+
+      for (i in data){
+
+
+        $(control).append('<option value="'+data[i].id+'" '+((data[i].id == id_color) ? 'selected="selected"':'' ) +' >' + data[i].descripcion + '</option>' );
       }
 
   });

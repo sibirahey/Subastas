@@ -16,6 +16,7 @@ require_once("modelos/municipios.php");
 require_once("modelos/marcas.php");
 require_once("modelos/modelos.php");
 require_once("modelos/features.php");
+require_once("modelos/colores.php");
 require_once("modelos/transmisiones.php");
 require_once('utilidades/ConexionBD.php');
 require_once('utilidades/ExcepcionApi.php');
@@ -129,6 +130,9 @@ function ejecutaModeloPost($vista, $mod, $arr)
             break;
         case 'features':
             $vista->imprimir(features::post($arr));
+            break;
+        case 'colores':
+            $vista->imprimir(colores::post($arr));
             break;
         default:
     		# code...
