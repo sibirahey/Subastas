@@ -49,10 +49,11 @@ function Cotizacion(idUsuario,nombre,correo,telefono,marca,modelo,tipo,estatus,s
 	this.subServicios = subServicios;
 
 }
-function CotizacionServicio(idServicio,idSubServicios){
+function CotizacionServicio(idServicio,idSubServicios,nombreSubServicio){
 
 	this.idSubServicios = idSubServicios;
 	this.idServicio = idServicio;
+	this.nombreSubServicio = nombreSubServicio;
 
 }
 function SubServicios (idSubServicio,idServicio,nombre,requisitos,estatus){
