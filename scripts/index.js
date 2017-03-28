@@ -1,14 +1,17 @@
-
 var calendars = {};
+var map;
 
 $( document ).ready(function() {
-    $( ".mainBody" ).load( "views/index.html", function() {
-  		console.log( "Load was performed." );
-
-	    //calendars.clndr1 = $('.cal1').clndr();
 	
+    $( ".mainBody" ).load( "views/index.html", function() {
+  		
+  		console.log( "index was loaded index.js" );
+		
 	});
 	
-
-
+	
+	
 });
+
+
+

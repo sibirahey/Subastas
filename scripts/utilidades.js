@@ -29,7 +29,7 @@ function CargaAnioAutos(anio){
 
 function CargaSelectEstados(control){
 
- 	postrequest("estados/listar?rand="+Math.random(), {"estatus":"1"}, function(data){
+  postrequest("estados/listar?rand="+Math.random(), {"estatus":"1"}, function(data){
       
       $(control).append('<option value="0">== Seleccione ==</option>' );  
       for (i in data){
@@ -42,7 +42,7 @@ function CargaSelectEstados(control){
  } 
  function CargaSelectMunicipios(control, id_estado){
 
- 	postrequest("municipios/listar?rand="+Math.random(), {"estatus":"1", "id_estado":id_estado}, function(data){
+  postrequest("municipios/listar?rand="+Math.random(), {"estatus":"1", "id_estado":id_estado}, function(data){
       if(data.mensaje == "OK"){
         return;
       }
@@ -128,4 +128,14 @@ function CargaSelectColores(control, id_color, estatus){
 
   });
 
+}
+function getUrlVars() {
+    var vars = [], hash;
+    var hashes = window.location.href.slice(window.location.href.indexOf('?') + 1).split('&');
+    for (var i = 0; i < hashes.length; i++) {
+        hash = hashes[i].split('=');
+        vars.push(hash[0]);
+        vars[hash[0]] = hash[1];
+    }
+    return vars;
 }

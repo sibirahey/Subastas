@@ -87,6 +87,7 @@ function removeFeature(o){
 		$("#cbFeaturesAutos").append('<option value="'+$(o).attr("attr-id")+'" >' + $(o).attr("attr-text") + '</option>' );
 		$(o).parent().remove();
 }
+/*
 function clearFileInput(id) 
 { 
     var oldInput = document.getElementById(id); 
@@ -104,3 +105,5 @@ function clearFileInput(id)
 }
 
 clearFileInput("fileInput");
+
+*/

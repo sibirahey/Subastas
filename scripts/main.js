@@ -101,37 +101,40 @@ function regresaRenglonSubasta(item){
 
 }
 
-function regresaRenglonVenta(item){
 
 
 
+function regresaRenglonVenta(item) {
 
 	var renglon = '<div class="searchItem">';
-	renglon += '			<div class="searchItemHead" attr-id="'+item.idVehiculo+'" onclick="VerDetalleAuto(this);"><h3>'+item.marca+'['+item.modelo+']</h3></div>';
-	renglon += '			<div class="searchItemImg"><img attr-id="'+item.idVehiculo+'" onclick="VerDetalleAuto(this);" src="'+item.foto+'"/></div>';
+	//renglon += '		<div class="searchItemHead" attr-id="' + item.idVehiculo + '" onclick="VerDetalleAuto(this);"><h3>' + item.marca + '[' + item.modelo + ']</h3></div>';
+	renglon += '		<img attr-id="' + item.idVehiculo + '" onclick="VerDetalleAuto(this);" src="' + item.foto + '"/>';
 	renglon += '		<div class="searchItemBody">';
 	renglon += '			<div>';
+	renglon += '			 	<h3>' + item.marca + '[' + item.modelo + ']</h3>';
 	renglon += '				<h4>Año: </h4>';
-	renglon += '				<label>'+item.anio+'</label>';
+	renglon += '				<label>' + item.anio + '</label>';
 	renglon += '				</div>';
 	renglon += '				<div>';
 	renglon += '					<h4>Kilometraje: </h4>';
-	renglon += '					<label>'+item.kms+'</label>';
+	renglon += '					<label>' + item.kms + '</label>';
 	renglon += '				</div>';
 	renglon += '				<div>';
 	renglon += '					<h4>Precio: </h4>';
-	renglon += '					<label>'+item.precio+'</label>';
+	renglon += '					<label>' + item.precio + '</label>';
 	renglon += '				</div>';
 	renglon += '				<div>';
 	renglon += '					<h4>Descripción: </h4>';
-	renglon += '					<label>'+item.descripcion+'</label>';
+	renglon += '					<label>' + item.descripcion + '</label>';
 	renglon += '				</div>';
 	renglon += '			</div>';
 	renglon += '</div>';
 	return renglon;
 
-
 }
+
+
+
 
 function CargaSubasta(subasta){
 

@@ -1,10 +1,28 @@
+<img src="images/banner970x90.png" class="banner970x90"/>
+
+<div class="registroLeft">
+    <div class="registroLeftMenu">
+        <div>
+            <div class="list-group-item">Registro<i class="fa  fa-chevron-right" aria-hidden="true"></i></div>
+            <a href="#">Ingresa tus datos<img src="images/registroMenu01.png"/></a>
+            <a href="#">Confirmar<img src="images/registroMenu02.png"/></a>
+            <a href="#">Ingresar<img src="images/registroMenu03.png"/></a>
+        </div>
+        <div>
+            <a href="#">Administrar tu Cuenta</a>
+            <a href="#">Preguntas frecuentes</a>
+            <a href="#">Contactanos</a>
+        </div>
+    </div>
+    <img class="banner300x600" src="images/banner300x600.png">
+</div>
+
 <div class="registroMain">
-    <h2>Registro</h2>
     <div class="divRegistro divError">
         
     </div>
     <div class="divRegistro">
-        <label for="registroNombre">Nombre</label>
+        <label for="registroNombre"><b>*</b>Nombre</label>
         <input type="text" name="nombre" id="registroNombre" />
     </div>
 
@@ -17,15 +35,15 @@
         <input type="text" name="apmaterno" id="registroApMaterno" />
     </div>
     <div class="divRegistro">
-        <label for="registroMail">Correo electrónico</label>
+        <label for="registroMail"><b>*</b>Correo electrónico</label>
         <input name="email" id="registroMail" />
     </div>
     <div class="divRegistro">
-        <label for="password">Password</label>
+        <label for="password"><b>*</b>Password</label>
         <input type="password" name="password" id="registroPassword" />
     </div>
     <div class="divRegistro">
-        <label for="repetirPass">Repetir password</label>
+        <label for="repetirPass"><b>*</b>Repetir password</label>
         <input type="password" name="repetirPass" id="registroRepetirPass" />
     </div>
     <div class="divRegistro divErrorPassword">
@@ -46,6 +64,11 @@
     </div>
     <div class="divRegistro">
         <input type="checkbox" name="eula" id="registroEULA" /> 
+        <!--<label class="switch">
+          <input type="checkbox" name="eula" id="registroEULA">
+          <div class="slider round"></div>
+        </label>-->
+        
         <label for="registroEULA">Estoy de acuerdo con los términos y condiciones</label>
         
     </div>

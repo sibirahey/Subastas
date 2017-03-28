@@ -3,11 +3,16 @@ var fnToLoad= "";
 
 $( document ).ready(function() {
     $( ".mainHeader" ).load( "views/header.html", function() {
-  		$("#divMenuPrincipal").append("<li><label>NOSOTROS</label></li>");
+  		
+  		$("#divMenuPrincipal").append('<li class="menuitem" name="dashboard"><label>DASHBOARD</label></li>');
+  		$("#divMenuPrincipal").append('<li class="menuitem" name="ventaautos" ><label>VENTA DE AUTOS</label></li>');
   		if (esAdmin()){
-			$("#divMenuPrincipal").append('<li class="menuitem" name="homeadmin"><label>ADMININISTRADOR DE HOME</label></li>');
+			$("#divMenuPrincipal").append('<li class="menuitem" name="homeadmin"> <label>ADMININISTRADOR DE HOME</label></li>');
 			$("#divMenuPrincipal").append('<li class="menuitem" name="subastasadmin" ><label>ADMININISTRADOR DE SUBASTAS</label></li>');
+			$("#divMenuPrincipal").append('<li class="menuitem" name="subastasadmin" ><label>ADMININISTRADOR VENTA DE AUTOS</label></li>');
 		}
+		
+		
 
 		$(".menuitem").click(function(){
 			

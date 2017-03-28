@@ -1,0 +1,24 @@
+@media (max-width: 970px) {
+	.banner970x90{
+		height:auto;
+		width: 100%;	
+	}
+	.divSeguridad,
+	.divVideoTips{
+		width: 100%;
+		margin:0;
+	}
+	.divSeccion {
+	    margin: 0;
+	}
+	.banner300x250,
+	.banner300x600{
+		display:none;
+	}
+	.infoSeguridad {
+	    width: 100%;
+	}
+	.localizaGasolineras iframe {
+	    width: 100%;
+    }
+}

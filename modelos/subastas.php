@@ -19,7 +19,7 @@ class subastas
     const ID_TIPOSUBASTA = "IdTipoSubasta";
     const FECHA_INICIO = "fechaInicio";
     const FECHA_FIN = "fechaFin";
-    const INCREMENTO = "fechaFin";
+    const INCREMENTO = "incremento";
     const SIN_RESULTADOS = "No se encontraron resultados";
     const LISTO = "OK";
     const ESTADO_CREACION_EXITOSA = "OK";
@@ -121,7 +121,7 @@ class subastas
     private function registrar($subastas)
     {
         
- 
+        
         try {
 
             $pdo = ConexionBD::obtenerInstancia()->obtenerBD();
@@ -145,7 +145,7 @@ class subastas
             $sentencia->bindParam(4, $subastas["fechaFin"]);
             $sentencia->bindParam(5, $subastas["incremento"]);
                    
-        
+
 
 
             $resultado = $sentencia->execute();
@@ -163,6 +163,7 @@ class subastas
             }
         } catch (PDOException $e) {
 
+            print_r($e);
             throw new ExcepcionApi(self::ESTADO_URL_INCORRECTA, $e->getMessage(), 400);
             
         }

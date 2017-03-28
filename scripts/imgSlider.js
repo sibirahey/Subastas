@@ -15,41 +15,38 @@ jssor_1_slider_init = function() {
       [{b:0,d:1000,o:-0.4,rX:2,rY:1},{b:1000,d:1000,rY:1},{b:2000,d:1000,rX:-1},{b:3000,d:1000,rY:-1},{b:4000,d:1000,o:0.4,rX:-1,rY:-1}]
     ];
 
-    var jssor_1_options = {
-      $AutoPlay: true,
-      $Idle: 3000,
-      $CaptionSliderOptions: {
-        $Class: $JssorCaptionSlideo$,
-        $Transitions: jssor_1_SlideoTransitions,
-        $Breaks: [
-          [{d:2000,b:1000}]
-        ]
-      },
-      $ArrowNavigatorOptions: {
-        $Class: $JssorArrowNavigator$
-      },
-      $BulletNavigatorOptions: {
-        $Class: $JssorBulletNavigator$
-      }
-    };
+    jQuery(document).ready(function ($) {
 
-    var jssor_1_slider = new $JssorSlider$("jssor_1", jssor_1_options);
+            var jssor_1_options = {
+              $AutoPlay: true,
+              $SlideDuration: 3000,
+              $SlideEasing: $Jease$.$OutQuint,
+              $ArrowNavigatorOptions: {
+                $Class: $JssorArrowNavigator$
+              },
+              $BulletNavigatorOptions: {
+                $Class: $JssorBulletNavigator$
+              }
+            };
 
-    /*responsive code begin*/
-    /*you can remove responsive code if you don't want the slider scales while window resizing*/
-    function ScaleSlider() {
-        var refSize = jssor_1_slider.$Elmt.parentNode.clientWidth;
-        if (refSize) {
-            refSize = Math.min(refSize, 900);
-            jssor_1_slider.$ScaleWidth(refSize);
-        }
-        else {
-            window.setTimeout(ScaleSlider, 100);
-        }
-    }
-    ScaleSlider();
-    $Jssor$.$AddEvent(window, "load", ScaleSlider);
-    $Jssor$.$AddEvent(window, "resize", ScaleSlider);
-    $Jssor$.$AddEvent(window, "orientationchange", ScaleSlider);
-    /*responsive code end*/
+            var jssor_1_slider = new $JssorSlider$("jssor_1", jssor_1_options);
+
+            /*responsive code begin*/
+            /*remove responsive code if you don't want the slider scales while window resizing*/
+            function ScaleSlider() {
+                var refSize = jssor_1_slider.$Elmt.parentNode.clientWidth;
+                if (refSize) {
+                    refSize = Math.min(refSize, 1920);
+                    jssor_1_slider.$ScaleWidth(refSize);
+                }
+                else {
+                    window.setTimeout(ScaleSlider, 30);
+                }
+            }
+            ScaleSlider();
+            $(window).bind("load", ScaleSlider);
+            $(window).bind("resize", ScaleSlider);
+            $(window).bind("orientationchange", ScaleSlider);
+            /*responsive code end*/
+        });
 };

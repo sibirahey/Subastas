@@ -1,5 +1,5 @@
 function cargaServicios(idServicio) {
-
+	
 	postrequest("servicios/listar",{"estatus":"1"},function(data){
 
 		for(serv in data){
@@ -14,6 +14,7 @@ function cargaServicios(idServicio) {
 
 
 function cargaServiciosCotizar(O) {
+	
 	$(".rows").remove();
 	var idServicio = $(O).attr('idServicio');
 
@@ -28,15 +29,15 @@ function cargaServiciosCotizar(O) {
 			
 				Renglon = '<div class="rows" id="1">';
 				Renglon+= '<div class:"servicioeditado" id ="Subservicio' + data[subServ].idSubservicio + '">' + data[subServ].nombre + '</div>';			
-				if(sessionStorage.getItem('es_admin')==1)
+				if(sessionStorage.getItem('esAdministrador')==1)
 					Renglon+= '<input type="text" class="editarServicio" name ="servicio" id ="txt' +data[subServ].idServicio+ data[subServ].idSubservicio + '" value = "' + data[subServ].nombre + '" style="display: none;"/>';			
 				
 				Renglon+= '<button id="btnAgregarS" '+ids+ ' onClick="AgregarServicio(this);">Cotizar</button>';
 				
-				if(sessionStorage.getItem('es_admin')==1)
+				if(sessionStorage.getItem('esAdministrador')==1)
 					Renglon+= '<button id="btnGuardarS"  idSubServicio="' + data[subServ].idSubservicio + '" idServicio="' + data[subServ].idServicio + '" onClick="ActualizarSubServicio(this);">Editar</button>';
 				
-				if (idServicio ==3 && sessionStorage.getItem('es_admin') == 1){
+				if (idServicio ==3 && sessionStorage.getItem('esAdministrador') == 1){
 
 					Renglon+='<div id="uploadFile'+idNombre+'" style="display:none;" >';
 					Renglon+='<div id="divFile'+idNombre+'" style="display:none;" >Archivo</div>';
@@ -52,7 +53,7 @@ function cargaServiciosCotizar(O) {
 				}
 				Renglon+='</div>';
 
-			if(sessionStorage.getItem('es_admin')!=1){
+			if(sessionStorage.getItem('esAdministrador')!=1){
 
 			}
 
@@ -61,7 +62,7 @@ function cargaServiciosCotizar(O) {
 
 		}
 
-		if(sessionStorage.getItem('es_admin') == 1){
+		if(sessionStorage.getItem('esAdministrador') == 1){
 			
 			var Renglon = '<div class="rows" id="0">';
 				Renglon+= '<input type="text" name ="servicio" class="txtNuevoServ" id ="txtNuevoServicio" value ="Agregar" style="display:none;"/>';			
@@ -177,24 +178,33 @@ function AgregarServicio(obj) {
 	objServicioCotizar.idServicio = $(obj).attr('idServicio');
 	objServicioCotizar.idSubServicios= $(obj).attr('idSubServicio');
 	if(sc != undefined){
+
 	 serviciosCotizar= JSON.parse(sc);
 
+
 	}
+
+
 	var i =0;
 	var indexRemove;
 	var result = $.grep(serviciosCotizar, function(e)
 		{ 
+			
 			if(e.idSubServicios== objServicioCotizar.idSubServicios && e.idServicio== objServicioCotizar.idServicio ){
 				indexRemove = i;
 				return e;
+
 			}else{
+
 				i++;
 			}
+			
 		});
 
 	if (result.length >0){			
 
 				 	serviciosCotizar.splice(indexRemove,1);
+
 
 	}else{
 		serviciosCotizar.push(objServicioCotizar);
@@ -202,6 +212,7 @@ function AgregarServicio(obj) {
 		}
 		sessionStorage.setItem('serviciosCotizar',JSON.stringify(serviciosCotizar));
 	
+
 	if (serviciosCotizar.length !=0){
 
 		$('#divCotizacion').show();
@@ -210,6 +221,8 @@ function AgregarServicio(obj) {
 
 		$('#divCotizacion').hide();
 	}
+
+
 }
 
 function enviarCotizacion(){
@@ -271,23 +284,19 @@ function seleccionaImagen(obj) {
 	}
 }
 
-$(document).ready(function() {
-	$(".mainBody").load("views/CotizacionServicios.html", function() {
-	
+function initCargaServicios() {
+		
 		cargaServicios(-1);
 
 		$("#SolicitarCotizacion").click(function(){
-		enviarCotizacion();
-	});
+			enviarCotizacion();
+	
 		
-	});
-	sessionStorage.removeItem('serviciosCotizar');
+		});
+		sessionStorage.removeItem('serviciosCotizar');
 
-	//$("input[name=cotizaNombre]").val(sessionStorage('nombre')); 
-	//$("input[name=cotizaCorreo]").val(sessionStorage('correo'));
-
-
-});
+	
+}
 
 function agregaControlUpload(ids){
 
