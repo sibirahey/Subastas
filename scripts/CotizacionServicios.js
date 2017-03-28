@@ -136,6 +136,7 @@ function SubirArchivo(obj){
 
 
 
+
 }
 
 function NuevoSubServicio(obj){
@@ -167,7 +168,23 @@ function NuevoSubServicio(obj){
 
 }
 
+function cargaLista(){
+	$('.scRow').remove();
+	var serviciosCotizar=[];
+	 serviciosCotizar= JSON.parse(sessionStorage.getItem('serviciosCotizar'));
+	$.each(serviciosCotizar,function(index,value){
+		debugger;
+		 var r = '<div class="scRow" >';
+		  r += '<label>'+ value.nombreSubServicio +'</label>';
+		  r += '<button idSubServicio="' + value.idSubServicios + '" idServicio="' + value.idServicio+'" onClick="AgregarServicio(this);">Quitar</button>';
+		  r+= '</div>';
 
+		  $('#divListaCS').append(r);
+
+	});
+	 
+
+}
 
 function AgregarServicio(obj) {
 
@@ -177,6 +194,7 @@ function AgregarServicio(obj) {
 	var objServicioCotizar = new CotizacionServicio();
 	objServicioCotizar.idServicio = $(obj).attr('idServicio');
 	objServicioCotizar.idSubServicios= $(obj).attr('idSubServicio');
+	objServicioCotizar.nombreSubServicio =$('#Subservicio' + objServicioCotizar.idSubServicios).text();
 	if(sc != undefined){
 
 	 serviciosCotizar= JSON.parse(sc);
@@ -204,6 +222,7 @@ function AgregarServicio(obj) {
 	if (result.length >0){			
 
 				 	serviciosCotizar.splice(indexRemove,1);
+				 	
 
 
 	}else{
@@ -222,6 +241,7 @@ function AgregarServicio(obj) {
 		$('#divCotizacion').hide();
 	}
 
+	cargaLista();
 
 }
 
