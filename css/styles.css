@@ -1892,11 +1892,32 @@ button[name="contactoEnviar"]{
 	width: 300px
 }
 /*---------- ENDS BANNERS ---------*/
+/*---------- ADMINISTRADOR DE SUBASTAS---------*/
+.divBotonera{
+	clear:both;
+	margin: 0 auto;
+	float:none;
+	max-width: 1024px;
+}
+#divAdminSubastas{
+	clear:both;
+	margin: 0 auto;
+	float:none;
+	max-width: 1024px;
+}
+#divAutos{
+	clear:both;
+	margin: 0 auto;
+	float:none;
+	max-width: 1024px;
+}
 #divListaSubastas{
-    max-width: 1024px;
-    margin: 0 calc(50% - 512px);
     width: 100%;
 }
+#divListaBotonera{
+	width:100%;
+}
+/*---------- ENDS ADMINISTRADOR DE SUBASTAS---------*/
 /*---------  SWITCH ---------*/
 
 /* The switch - the box around the slider */
