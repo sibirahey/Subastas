@@ -1,6 +1,8 @@
 var calendars = {};
 $(document).ready(function() {
 	//carga el contenido del index
+
+	checkCookie();
 	$(".logoHeader").click(function(){
 
 		window.location = siteurl+"home.php";
@@ -25,7 +27,7 @@ $(document).ready(function() {
 			});
 
 		});
-		console.log("Cargo header.");
+		
 
 		
 		var urlvars = getUrlVars();
@@ -292,11 +294,18 @@ $(document).ready(function() {
 
 				if (data.valido) {
 
-					window.location.href = "main.php";
+					debugger;
 					sessionStorage.setItem('nombre', data["nombre"] + " " + data["appaterno"] + " " + data["apmaterno"]);
 					sessionStorage.setItem('correo', data["correo"]);
 					sessionStorage.setItem('publico', data["publico"]);
 					sessionStorage.setItem('es_admin', data["esadmin"]);
+					sessionStorage.setItem('claveapi', data["claveapi"]);
+					
+					if($("#rememberme").is(':checked')){
+						
+						setCookie("escuderia-rememberme", data["claveapi"], true);
+					}
+					window.location.href = "main.php";
 
 				} else {
 					alert("Error de usuario o contraseña");
@@ -304,6 +313,7 @@ $(document).ready(function() {
 
 			});
 		}
+		
 	}
 
 });

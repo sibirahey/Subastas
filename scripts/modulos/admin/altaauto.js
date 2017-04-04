@@ -63,14 +63,19 @@ function CargaFuncionesRegistroAuto(idSubasta){
 		});
 
 	$("#btnGuardaAuto").click(function (){
+		
+		debugger;
 		oAuto = new Autos();
 		oAuto.idAuto = $("#btnGuardaAuto").attr("attr-idsubasta");
-		if(parseInt($("#btnGuardaAuto").attr("attr-idsubasta")) > 0){
+		if(parseInt($("#btnGuardaAuto").attr("attr-subastaid")) > 0){
 			oAuto.enVenta  = 0;
+			oAuto.idSubasta = $("#btnGuardaAuto").attr("attr-subastaid");
 		}else{
 			oAuto.enVenta = 1;
+			oAuto.idSubasta = 0;
 
 		}
+		oAuto.precio = $("#precioAuto").val();
 		oAuto.marca = $("#cbMarcaAuto").val();
 		oAuto.modelo = $("#cbModeloAuto").val();
 		oAuto.color = $("#cbColorAuto").val();
@@ -84,6 +89,7 @@ function CargaFuncionesRegistroAuto(idSubasta){
 		oAuto.publicado = 1;
 		oAuto.features = [];
 		oAuto.fotos = [];
+
 
 		
 
@@ -176,4 +182,4 @@ function clearFileInput(id)
     oldInput.parentNode.replaceChild(newInput, oldInput); 
 }
 
-clearFileInput("fileInput");
+

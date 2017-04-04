@@ -5,7 +5,7 @@ $(document).ready(function(){
   });
 
 function CargaContenidoMain(){
-	debugger;
+
 	cargaHTML(".mainBody", "views/main.html","", function() {
   		$("#searchBox").keypress(function(e) {
 		    if(e.which == 13) {
@@ -100,52 +100,6 @@ function regresaRenglonSubasta(item){
 
 
 }
-
-
-
-
-function regresaRenglonVenta(item) {
-
-	var renglon = '<div class="searchItem">';
-	//renglon += '		<div class="searchItemHead" attr-id="' + item.idVehiculo + '" onclick="VerDetalleAuto(this);"><h3>' + item.marca + '[' + item.modelo + ']</h3></div>';
-	renglon += '		<img attr-id="' + item.idVehiculo + '" onclick="VerDetalleAuto(this);" src="' + item.foto + '"/>';
-	renglon += '		<div class="searchItemBody">';
-	renglon += '			<div>';
-	renglon += '			 	<h3>' + item.marca + '[' + item.modelo + ']</h3>';
-	renglon += '				<h4>Año: </h4>';
-	renglon += '				<label>' + item.anio + '</label>';
-	renglon += '				</div>';
-	renglon += '				<div>';
-	renglon += '				<img src="images/icoKilometraje.svg"/>';
-	// renglon += '					<h4>Kilometraje: </h4>';
-	renglon += '					<label>' + item.kms + '</label>';
-	renglon += '				</div>';
-	renglon += '				<div>';
-	renglon += '					<img src="images/icoPrecio.svg"/>';
-	renglon += '					<label>' + item.precio + '</label>';
-	renglon += '				</div>';
-	renglon += '				<div>';
-	renglon += '					<img src="images/icoMotor.svg"/>';
-	renglon += '					<label>' + item.motor + '</label>';
-	renglon += '				</div>';
-	renglon += '				<div>';
-	renglon += '					<img src="images/icoTransmision.svg"/>';
-	renglon += '					<label>' + item.transmision + '</label>';
-	renglon += '				</div>';
-	renglon += '				<div>';
-	renglon += '					<img src="images/icoTransmision.svg"/>';
-	renglon += '					<label>' + item.cc + '</label>';
-	renglon += '				</div>';
-	renglon += '				<div>';
-	renglon += '					<h4>Descripción: </h4>';
-	renglon += '					<label>' + item.descripcion + '</label>';
-	renglon += '				</div>';
-	renglon += '			</div>';
-	renglon += '</div>';
-	return renglon;
-
-}
-
 
 
 
@@ -272,7 +226,6 @@ function cargaVehiculos() {
 		}
 	});
 	checkCB();
-	
 };
 
 function checkCB(){

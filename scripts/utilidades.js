@@ -139,3 +139,94 @@ function getUrlVars() {
     }
     return vars;
 }
+
+
+function setCookie(cname, cvalue, exdays) {
+    var d = new Date();
+    d.setTime(d.getTime() + (exdays*24*60*60*1000));
+    var expires = "expires="+ d.toUTCString();
+    document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
+} 
+
+
+function getCookie(cname) {
+    var name = cname + "=";
+    var decodedCookie = decodeURIComponent(document.cookie);
+    var ca = decodedCookie.split(';');
+    for(var i = 0; i <ca.length; i++) {
+        var c = ca[i];
+        while (c.charAt(0) == ' ') {
+            c = c.substring(1);
+        }
+        if (c.indexOf(name) == 0) {
+            return c.substring(name.length, c.length);
+        }
+    }
+    return "";
+} 
+
+function checkCookie() {
+    debugger;
+    var rememberme = getCookie("escuderia-rememberme");
+    if (rememberme != "") {
+        postrequest("usuarios/rememberme", {"claveapi" : rememberme  }, function(data) {
+
+        if (data.valido) {
+
+          
+          sessionStorage.setItem('nombre', data["nombre"] + " " + data["appaterno"] + " " + data["apmaterno"]);
+          sessionStorage.setItem('correo', data["correo"]);
+          sessionStorage.setItem('publico', data["publico"]);
+          sessionStorage.setItem('es_admin', data["esadmin"]);
+          sessionStorage.setItem('claveapi', data["claveapi"]);
+          setCookie("escuderia-rememberme", data["claveapi"], true);
+          
+          window.location.href = "main.php";
+
+        } else {
+          alert("Error de usuario o contraseña");
+        }
+
+      });
+
+    } 
+} 
+
+function cargaAutosPorSubasta(subastaID, controlid ){
+  postrequest("autos/subasta", {"idsubasta" : subastaID  }, function(data) {
+    var html = "";
+    $(controlid).append(html);
+  });
+
+}
+
+
+function regresaRenglonVenta(item){
+
+
+  var renglon = '<div class="searchItem">';
+  renglon += '      <div class="searchItemHead" attr-id="'+item.idVehiculo+'" onclick="VerDetalleAuto(this);"><h3>'+item.marca+'['+item.modelo+']</h3></div>';
+  renglon += '      <div class="searchItemImg"><img attr-id="'+item.idVehiculo+'" onclick="VerDetalleAuto(this);" src="'+item.foto+'"/></div>';
+  renglon += '    <div class="searchItemBody">';
+  renglon += '      <div>';
+  renglon += '        <h4>Año: </h4>';
+  renglon += '        <label>'+item.anio+'</label>';
+  renglon += '        </div>';
+  renglon += '        <div>';
+  renglon += '          <h4>Kilometraje: </h4>';
+  renglon += '          <label>'+item.kms+'</label>';
+  renglon += '        </div>';
+  renglon += '        <div>';
+  renglon += '          <h4>Precio: </h4>';
+  renglon += '          <label>'+item.precio+'</label>';
+  renglon += '        </div>';
+  renglon += '        <div>';
+  renglon += '          <h4>Descripción: </h4>';
+  renglon += '          <label>'+item.descripcion+'</label>';
+  renglon += '        </div>';
+  renglon += '      </div>';
+  renglon += '</div>';
+  return renglon;
+
+
+}
