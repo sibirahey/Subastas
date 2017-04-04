@@ -14,7 +14,7 @@ class autosfotos
     // Datos de la tabla "usuario"
     const NOMBRE_TABLA = "auto_fotos";
     const ID_AUTO = "idAuto";
-    const ID_FOTO = "idFeature";
+    const ID_FOTO = "idFoto";
    
     const SIN_RESULTADOS = "No se encontraron resultados";
     const LISTO = "OK";

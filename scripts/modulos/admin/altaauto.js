@@ -32,12 +32,10 @@ function CargaFuncionesRegistroAuto(idSubasta){
 	});
 
 	 $("#btnUpload").click(function() {
-		    alert("entro")
 		    
 		    var file_data = $('#fotoAuto').prop('files')[0];   
 		    var form_data = new FormData();                  
 		    form_data.append('file', file_data);
-		    alert(form_data);                             
 		    $.ajax({
 		                url: 'upload.php', // point to server-side PHP script 
 		                dataType: 'text',  // what to expect back from the PHP script, if anything
@@ -54,7 +52,7 @@ function CargaFuncionesRegistroAuto(idSubasta){
 		                	}else{
 
 		                		var filename = $('input[type=file]').val().replace(/C:\\fakepath\\/i, '');
-								$("#fotosSubidas").append("<div class='fotosAuto' attr-id='"+php_script_response+"'><span>"+filename+"</span><img src='" + siteurl +  "uploads/" + php_script_response + "' /></div>");
+								$("#fotosSubidas").append("<div class='fotosAuto' attr-id='"+php_script_response+"'><span>"+filename+"</span><img width='100px' src='" + siteurl +  "uploads/" + php_script_response + "' /></div>");
 								clearFileInput('fotoAuto');
 		                		
 		                	}
@@ -65,7 +63,7 @@ function CargaFuncionesRegistroAuto(idSubasta){
 		});
 
 	$("#btnGuardaAuto").click(function (){
-		oAuto = new Auto();
+		oAuto = new Autos();
 		oAuto.idAuto = $("#btnGuardaAuto").attr("attr-idsubasta");
 		if(parseInt($("#btnGuardaAuto").attr("attr-idsubasta")) > 0){
 			oAuto.enVenta  = 0;
