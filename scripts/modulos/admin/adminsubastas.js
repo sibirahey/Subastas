@@ -189,7 +189,8 @@ function CargaSubastas(estatus, empresa){
 			div += '	</div>';
 			div += '	<div>';
 			div += '		<div type="button" class="fa fa-pencil-square-o fa-2x button btnEditarSubasta" attr-id="' + data[i].idSubasta +'" alt="editar" ></div>';
-			div += '		<div attr-id="' + data[i].idSubasta +'" attr-nombresubasta="'+data[i].nombreSubasta+'" class="btnAdministraAutos fa fa-car fa-2x button" text="administrar autos" ></div>';
+			div += '		<div attr-id="' + data[i].idSubasta +'" attr-nombresubasta="'+data[i].nombreSubasta+'" class="btnAdministraAutos fa fa-plus-circle fa-2x button" text="administrar autos" ></div>';
+			div += '		<div attr-id="' + data[i].idSubasta +'" attr-nombresubasta="'+data[i].nombreSubasta+'" class="btnVerAutos fa fa-car fa-2x button" text="administrar autos" ></div>';
 			div += '	</div>';
 			div += '	<div><label>Tipo de subasta: </label>'+data[i].tipoSubasta+'</div>';		
 			div += '	<div><label>Vigencia: </label>'+data[i].fechaInicio+' - ' + data[i].fechaFin +'</div>';		
@@ -206,19 +207,32 @@ function CargaSubastas(estatus, empresa){
 		
 		$(".btnAdministraAutos").click(function(){
 			 var nombreSubasta = $(this).attr("attr-nombresubasta");
-		 	$( "#divRegistroAutos").load( "views/main/admin/altaautos.html?rand="+Math.random(), function() {
-		 		 
+			 var idSubasta = $(this).attr("attr-id");
 
-		 		 $("#divRegistroAutos").show();
-		 		 $("#btnAgregaAuto").attr("class",$("#btnAgregaAuto").attr("class").replace("-down","-up"));
-		 		 $("#divSubastaNombre").html(nombreSubasta);
-		 		 $("#divSubastaNombre").show();
-		 		 $("#divSubastaNombre").css("display","");
+			 
+			if(idSubasta > 0){
+			 	$( "#divRegistroAutos").load( "views/main/admin/altaautos.html?rand="+Math.random(), function() {
+			 		 
 
-		 		 CargaFuncionesRegistroAuto();
-		 		 $("#btnGuardaAuto").attr("attr-subastaid",$(this).attr("attr-id"));
+			 		 $("#divRegistroAutos").show();
+			 		 $("#btnAgregaAuto").attr("class",$("#btnAgregaAuto").attr("class").replace("-down","-up"));
+			 		 $("#divSubastaNombre").html(nombreSubasta);
+			 		 $("#divSubastaNombre").show();
+			 		 $("#divSubastaNombre").css("display","");
+		 		 	 $("#btnGuardaAuto").attr("attr-nombresubasta", nombreSubasta);
+			 		 $("#btnGuardaAuto").attr("attr-subastaid", idSubasta);
+			 		 CargaFuncionesRegistroAuto();
+			 		 
+				 });
+			 }
+		});
 
-			 });
+		$(".btnVerAutos").click(function(){
+		 	var nombreSubasta = $(this).attr("attr-nombresubasta");
+			 var idSubasta = $(this).attr("attr-id");
+
+			 cargaAutosPorSubasta(idSubasta, "#divAutos" );
+
 
 		});
 
