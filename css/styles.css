@@ -33,7 +33,7 @@ select{
 	width: 100%;
 }
 .logoHeader {
-	width: calc(100% - 160px);
+	width: calc(100% - 200px);
 	height: 60px;
 	background-image: url(../images/logoHeader.svg);
 	background-repeat: no-repeat;
@@ -49,14 +49,22 @@ select{
 	opacity: 0.6;
 	cursor: pointer;
 }
- .menuitemindex{
+.menuitemindex{
  	color: #EBC01C;
 	height: 40px;
-	width: 200px;
 	text-align: center;
 	line-height: 40px;
-	margin-top: 20px;
-	opacity: 0.6;
+	padding:0 6px;
+ }
+.menuitemindex > label{
+	cursor:pointer;
+	opacity:0.6
+}
+ 	.menuitemindex > label:hover{
+ 		opacity:1;
+ 	}
+ .menuitemwelcome{
+ 	width: 200px;
  }
 .menuitem:first-of-type, .menuitemindex:first-of-type {
 	margin-right: 1px solid #EBC01C;
@@ -453,7 +461,7 @@ label[for="placa"] {
 	line-height: 40px;
 }
 .divLogin > input, .divRegistro > input {
-	height: 30px;
+	height: 40px;
 	text-indent: 10px;
 	font-size: 1.2em;
 }
@@ -470,11 +478,7 @@ label[for="placa"] {
 	line-height: 40px;
 	color: #F7E827;
 	border: none;
-	background: #FD5A54;
-	background: -webkit-linear-gradient(top, #464646, #787878);
-	background: -o-linear-gradient(top, #464646, #787878);
-	background: -moz-linear-gradient(top, #464646, #787878);
-	background: linear-gradient(to top, #464646, #787878);
+	background: #5BAB71;
 	line-height: 40px;
 	text-indent: 6px;
 	cursor: pointer;
@@ -1191,11 +1195,12 @@ div:not(:first-child):nth-child(even) {
 	overflow: hidden;
 }
 .floatingWindow{
-	height: 400px;
+	height: 420px;
 	width: 400px;
 	background-color:rgba(0,0,0,0.6);
 	margin:calc(50% - 400px) calc(50% - 200px);
 	padding-top:160px;
+	box-shadow: 0 0 6px #000000;
 }
 .floatingWindow > input,
 .floatingWindow > button,
@@ -1211,32 +1216,37 @@ div:not(:first-child):nth-child(even) {
 .floatingWindow > button{
 	cursor: pointer;
 }
-.floatingWindow > a{
-	text-decoration:none;
-	color:#ffffff;
-	opacity: 0.6;
-}
+
 .floatingWindow > a:hover{
 	opacity: 1
 }
 .logoLogin{
 	background-image: url('../images/logoSlogan.svg');
-	background-position:center center;
-	background-repeat:no-repeat;
 	height:100px;
 	width:350px;
 	top:40px;
 	margin-left: calc(50% - 175px);
-	position:absolute;
-
 }
+
 .logoCar{
-    background-image: url(../images/logoCar.svg);
+    background-image: url('../images/logoCar.svg');
     height: 100px;
     top: -60px;
     width: 270px;
     margin-left: calc(50% - 135px);
-    position:absolute;
+}
+.logoLogin,
+.logoCar{
+	background-position:center center;
+	background-repeat:no-repeat;
+	position:absolute;
+	text-shadow:0 0 2px #000000;
+}
+.divRegistro label{
+	color: #ffffff;
+    opacity: 0.6;
+    font-size: 1.2em;
+    font-weight: 300;
 }
 /*--------- ENDS LOGIN ---------*/
 /*---------- MAIN--------*/
@@ -1760,7 +1770,8 @@ a[data-u="any"] {
 	width: 100%;
 }
 .divVideoTips > .vidContainer,
-.divVideoTips > .vidContainer > video{
+.divVideoTips > .vidContainer > video,
+.divVideoTips > .vidContainer > iframe{
 	width: 100%;
 }
 .divVideoTips > .vidContainer > video{
@@ -1879,6 +1890,11 @@ button[name="contactoEnviar"]{
 	width: 300px
 }
 /*---------- ENDS BANNERS ---------*/
+#divListaSubastas{
+    max-width: 1024px;
+    margin: 0 calc(50% - 512px);
+    width: 100%;
+}
 /*---------  SWITCH ---------*/
 
 /* The switch - the box around the slider */
