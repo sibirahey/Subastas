@@ -1198,7 +1198,9 @@ div:not(:first-child):nth-child(even) {
 	height: 420px;
 	width: 400px;
 	background-color:rgba(0,0,0,0.6);
-	margin:calc(50% - 400px) calc(50% - 200px);
+	margin-top:calc(50% - 420px) ;
+	margin-left:calc(50% - 200px);
+	margin-right:calc(50% - 200px);
 	padding-top:160px;
 	box-shadow: 0 0 6px #000000;
 }
