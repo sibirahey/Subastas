@@ -1,3 +1,4 @@
+DirectoryIndex home.php
 #Fix Rewrite
 Options -Multiviews
 RewriteEngine on
