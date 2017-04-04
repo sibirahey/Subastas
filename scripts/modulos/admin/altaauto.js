@@ -1,11 +1,14 @@
-function CargaFuncionesRegistroAuto(){
+function CargaFuncionesRegistroAuto(idSubasta){
 	$("#dialog").hide();
 	$("#cbAnioAuto").html(CargaAnioAutos(0));
 	$("#btnAddFeature").click(function(){
+		
 		$("#divFeatureContainer").append(
-			"<div class='feature' attr-id='feature-"+("#cbFeaturesAutos").val()+"'><span onclick='removeFeature(this);' class='fa fa-times' attr-id='" +$("#cbFeaturesAutos").val()+ "' attr-text='"+ $("#cbFeaturesAutos option[value='"+$("#cbFeaturesAutos").val()+"']").text()+"'>"+ $("#cbFeaturesAutos option[value='"+$("#cbFeaturesAutos").val()+"']").text() + "</span></div>"
-
-			);
+			"<div class='feature' attr-featureid='" + $("#cbFeaturesAutos").val() + "' attr-id='feature-"+$("#cbFeaturesAutos").val()+"'>"+
+			"<span onclick='removeFeature(this);' class='fa fa-times' attr-id='" +$("#cbFeaturesAutos").val()+ "' attr-text='"+ $("#cbFeaturesAutos option[value='"+$("#cbFeaturesAutos").val()+"']").text()+"'>"+ 
+			$("#cbFeaturesAutos option[value='"+$("#cbFeaturesAutos").val()+"']").text() + 
+			"</span></div>"
+		);
 		$("#cbFeaturesAutos option[value='"+$("#cbFeaturesAutos").val()+"']").remove();
 
 	});
@@ -51,28 +54,100 @@ function CargaFuncionesRegistroAuto(){
 		                	}else{
 
 		                		var filename = $('input[type=file]').val().replace(/C:\\fakepath\\/i, '');
-								$("#fotosSubidas").append("<div id='file' attr-id='"+php_script_response+"'>"+filename+"</div>");
+								$("#fotosSubidas").append("<div class='fotosAuto' attr-id='"+php_script_response+"'><span>"+filename+"</span><img src='" + siteurl +  "uploads/" + php_script_response + "' /></div>");
 								clearFileInput('fotoAuto');
-		                		alert(php_script_response);
+		                		
 		                	}
 		                    
 		                }
 		     });
 		    
 		});
-	CargaSelectColores("#cbColorAuto", 0, 1);
+
+	$("#btnGuardaAuto").click(function (){
+		oAuto = new Auto();
+		oAuto.idAuto = $("#btnGuardaAuto").attr("attr-idsubasta");
+		if(parseInt($("#btnGuardaAuto").attr("attr-idsubasta")) > 0){
+			oAuto.enVenta  = 0;
+		}else{
+			oAuto.enVenta = 1;
+
+		}
+		oAuto.marca = $("#cbMarcaAuto").val();
+		oAuto.modelo = $("#cbModeloAuto").val();
+		oAuto.color = $("#cbColorAuto").val();
+		oAuto.anio = $("#cbAnioAuto").val();
+		oAuto.km = $("#cbKMAuto").val();
+		oAuto.transmision = $("#cbTipoTransmisionAuto").val();
+		oAuto.estado = $("#cbEstadoAuto").val();
+		oAuto.ciudad = $("#cbCiudadAuto").val();
+		oAuto.descripcion = JSON.stringify($("#txtaDescripcionAuto").val());
+		oAuto.estatus = 1;
+		oAuto.publicado = 1;
+		oAuto.features = [];
+		oAuto.fotos = [];
+
+		
+
+		$.each( $(".feature"), function( key, value ) {
+			  oAuto.features.push( $(value).attr("attr-featureid"));
+		});
+
+		$.each( $(".fotosAuto"), function( key, value ) {
+			  oAuto.fotos.push( $(value).attr("attr-id"));
+		});
+		
+
+		postrequest("autos/guardar", oAuto, function(data){
+
+			debugger;
+			if(data > 0){
+				alert("Los datos se guardaron correctamente");
+				//CargaSubastas(-1,-1);
+			}else{
+				alert("Ocurrió un error al guardar");
+
+			}
+		});
+
+
+
+
+	});
+		CargaSelectColores("#cbColorAuto", 0, 1);
 	
 	
-   $("#btnAddMarca").click(function(){
+   		$("#btnAddMarca").click(function(){
 		$( "#dialog" ).attr("title", "Agregar Marca");
 		$( "#dialog" ).attr("operacion", "marcas" );
+   		$("#labelTxtDescripcion").html("Marca:");
    		$( "#dialog" ).dialog();
+
+   		
    		
 
    });
    $("#btnGuardarCatalogo").click(function(){
-   		postrequest($( "#dialog" ).attr("operacion")+"/guardar", {"nombreEmpresa": $("#txtNombreEmpresa").val(),"estatus":"1"}, function(data){
+   		
+   		oObj = null;
+   		if($( "#dialog" ).attr("operacion") == "marcas"){
 
+   			oObj = new Marca();
+
+   			oObj.id = 0;
+			oObj.descripcion = $("#txtDescripcion").val();
+			oObj.estatus = 1;
+   		}
+   		postrequest($( "#dialog" ).attr("operacion")+"/guardar", oObj, function(data){
+   			if(data > 0){
+				alert("La operación se realizó con éxito");
+				if($( "#dialog" ).attr("operacion") == "marcas"){
+					$("#cbMarcaAuto").html("");
+					CargaSelectMarcas("#cbMarcaAuto", 0,1);
+					( "#dialog" ).dialog('close');
+				}
+
+			}
 
    		});
 
@@ -87,7 +162,6 @@ function removeFeature(o){
 		$("#cbFeaturesAutos").append('<option value="'+$(o).attr("attr-id")+'" >' + $(o).attr("attr-text") + '</option>' );
 		$(o).parent().remove();
 }
-/*
 function clearFileInput(id) 
 { 
     var oldInput = document.getElementById(id); 
@@ -105,5 +179,3 @@ function clearFileInput(id)
 }
 
 clearFileInput("fileInput");
-
-*/

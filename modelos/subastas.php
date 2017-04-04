@@ -20,6 +20,7 @@ class subastas
     const FECHA_INICIO = "fechaInicio";
     const FECHA_FIN = "fechaFin";
     const INCREMENTO = "incremento";
+    const VISIBLE = "visible";
     const SIN_RESULTADOS = "No se encontraron resultados";
     const LISTO = "OK";
     const ESTADO_CREACION_EXITOSA = "OK";
@@ -28,12 +29,12 @@ class subastas
     public static function post($peticion)
     {
      
-      
         if ($peticion[0] == 'listar') {
             return self::listarSubastas();
         }else if ($peticion[0] == 'guardar') {
             return self::registrarOut();
-        }
+        }else if ($peticion[0] == 'publicar')
+            return self::publicaOut();
         else {
             throw new ExcepcionApi(self::ESTADO_URL_INCORRECTA, "Url mal formada", 400);
         }
@@ -67,6 +68,8 @@ class subastas
         $empresa = $_POST['empresa'];
         $empresaFrom = "";
         $empresaWhere = "";
+        $subastaId = $_POST['subastaId'];
+        $subastaIdWhere = "";
 
         if($estatus > -1){
             $estatusWhere = " and visible = " .$estatus;
@@ -75,11 +78,12 @@ class subastas
             $empresaFrom = ", empresas e "; 
             $empresaWhere = " and e.idEmpresa = " . $empresa;
         }
-        
-        $comando = "select idSubasta, nombreSubasta, idTipoSubasta, tipo.tipoSubasta, fechaInicio, fechaFin, CASE WHEN curdate() BETWEEN fechaInicio and fechaFin then 'ACTIVA' WHEN curdate() < fechaInicio then 'AGENDADA' else 'TERMINADA' end as estatus, visible, case visible when 0 then 'NO PUBLICADA' else 'PUBLICADA' end as publicada,(select GROUP_CONCAT(emp.nombreEmpresa) from subastaempresa se, empresas emp where s.idSubasta = se.idSubasta and se.idEmpresa = emp.idEmpresa) as empresas from subastas s, tiposubastas tipo " . $empresaFrom." where s.idTipoSubasta = tipo.idTipo  " . $empresaWhere . $estatusWhere ;
-        
-     
+        if($subastaId > -1){
+            $subastaIdWhere = " and idSubasta = ".$subastaId;
 
+        }
+        
+        $comando = "select idSubasta, nombreSubasta, idTipoSubasta, tipo.tipoSubasta, fechaInicio, fechaFin, CASE WHEN curdate() BETWEEN fechaInicio and fechaFin then 'ACTIVA' WHEN curdate() < fechaInicio then 'AGENDADA' else 'TERMINADA' end as estatus, visible, case visible when 0 then 'NO PUBLICADA' else 'PUBLICADA' end as publicada,(select GROUP_CONCAT(emp.nombreEmpresa) from subastaempresa se, empresas emp where s.idSubasta = se.idSubasta and se.idEmpresa = emp.idEmpresa) as empresas, (select GROUP_CONCAT(emp.idEmpresa) from subastaempresa se, empresas emp where s.idSubasta = se.idSubasta and se.idEmpresa = emp.idEmpresa) as empresasId,incremento from subastas s, tiposubastas tipo " . $empresaFrom." where s.idTipoSubasta = tipo.idTipo  " . $empresaWhere . $estatusWhere . $subastaIdWhere ; 
 
 
         $sentencia = ConexionBD::obtenerInstancia()->obtenerBD()->prepare($comando);
@@ -118,6 +122,28 @@ class subastas
         }
     }
 
+    private function publicaOut(){
+
+        $cuerpo = file_get_contents('php://input');
+        $usuario = json_decode($cuerpo);
+        
+        $resultado = self::publicar($_POST);
+        
+        switch ($resultado) {
+            case self::ESTADO_CREACION_EXITOSA:
+               http_response_code(200);
+               return "OK";
+               
+                break;
+            case self::ESTADO_CREACION_FALLIDA:
+                throw new ExcepcionApi(self::ESTADO_CREACION_FALLIDA, "Ha ocurrido un error");
+                break;
+            default:
+                http_response_code(200);
+                return $resultado;
+        }
+    }
+
     private function registrar($subastas)
     {
         
@@ -126,24 +152,102 @@ class subastas
 
             $pdo = ConexionBD::obtenerInstancia()->obtenerBD();
 
+
+            if($subastas["idSubasta"] == "0"){
             // Sentencia INSERT
-            $comando = "INSERT INTO " . self::NOMBRE_TABLA . " ( " .
-                self::NOMBRE_SUBASTA . ",".
-                self::ID_TIPOSUBASTA . "," .
-                self::FECHA_INICIO . "," .
-                self::FECHA_FIN . ",".
-                self::INCREMENTO.")" .
-                " VALUES(?,?,?,?,?)";
+                $comando = "INSERT INTO " . self::NOMBRE_TABLA . " ( " .
+                    self::NOMBRE_SUBASTA . ",".
+                    self::ID_TIPOSUBASTA . "," .
+                    self::FECHA_INICIO . "," .
+                    self::FECHA_FIN . ",".
+                    self::INCREMENTO.")" .
+                    " VALUES(?,?,?,?,?)";
+     
+                
+
+                    
+                $sentencia = $pdo->prepare($comando);
+                $sentencia->bindParam(1, $subastas["nombreSubasta"]);
+                $sentencia->bindParam(2, $subastas["IdTipoSubasta"]);
+                $sentencia->bindParam(3, $subastas["fechaInicio"]);
+                $sentencia->bindParam(4, $subastas["fechaFin"]);
+                $sentencia->bindParam(5, $subastas["incremento"]);
+                       
+
+
+
+                $resultado = $sentencia->execute();
+
+              
+                if ($resultado) {
+                    $subastaid = $pdo->lastInsertId();
+
+
+                    subastasempresa::registrar($subastas["empresas"], $subastaid);
+                    return $subastaid;
+                } else {
+                    return -1;
+                }
+            }
+            else{
+                $comando = "UPDATE " . self::NOMBRE_TABLA . " SET  ".
+                self::NOMBRE_SUBASTA . "= ?, ".
+                self::ID_TIPOSUBASTA . "= ?, ".
+                self::FECHA_INICIO . "= ?, ".
+                self::FECHA_FIN . " = ?, ".
+                self::INCREMENTO." = ?" .
+                " WHERE ".self::ID_SUBASTA." = ?";
+
+                $sentencia = $pdo->prepare($comando);
+                $sentencia->bindParam(1, $subastas["nombreSubasta"]);
+                $sentencia->bindParam(2, $subastas["IdTipoSubasta"]);
+                $sentencia->bindParam(3, $subastas["fechaInicio"]);
+                $sentencia->bindParam(4, $subastas["fechaFin"]);
+                $sentencia->bindParam(5, $subastas["incremento"]);
+                $sentencia->bindParam(6, $subastas["idSubasta"]);
+                $resultado = $sentencia->execute();
+
+              
+                if ($resultado) {
+                    subastasempresa::eliminaEmpresas( $subastas["idSubasta"]);
+                    subastasempresa::registrar($subastas["empresas"], $subastas["idSubasta"]);
+                    return  $subastas["idSubasta"];
+                } else {
+                    return -1;
+                }    
+
+            }
+
+            
+        } catch (PDOException $e) {
+
+            print_r($e);
+            throw new ExcepcionApi(self::ESTADO_URL_INCORRECTA, $e->getMessage(), 400);
+            
+        }
+
+    }
+
+    private function publicar($subastas)
+    {   
+        
+        
+        
+        try {
+
+            $pdo = ConexionBD::obtenerInstancia()->obtenerBD();
+
+            // Sentencia INSERT
+            $comando = "UPDATE " . self::NOMBRE_TABLA . " SET  " .
+                self::VISIBLE . " = ? WHERE ".self::ID_SUBASTA." = ?";
  
             
 
                 
             $sentencia = $pdo->prepare($comando);
-            $sentencia->bindParam(1, $subastas["nombreSubasta"]);
-            $sentencia->bindParam(2, $subastas["IdTipoSubasta"]);
-            $sentencia->bindParam(3, $subastas["fechaInicio"]);
-            $sentencia->bindParam(4, $subastas["fechaFin"]);
-            $sentencia->bindParam(5, $subastas["incremento"]);
+            $sentencia->bindParam(1, $subastas["visible"]);
+            $sentencia->bindParam(2, $subastas["idSubasta"]);
+            
                    
 
 
@@ -152,11 +256,9 @@ class subastas
 
           
             if ($resultado) {
-                $subastaid = $pdo->lastInsertId();
+                
 
-
-                subastasempresa::registrar($subastas["empresas"], $subastaid);
-                return $subastaid;
+                return $subastas["idSubasta"];
 
             } else {
                 return -1;

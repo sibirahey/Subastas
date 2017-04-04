@@ -36,12 +36,14 @@ function Empresa(id,nombre,estatus){
 	this.id = id;
 	this.nombre= nombre;
 }
-function Subastas(nombreSubasta, IdTipoSubasta, fechaInicio, fechaFin, empresas){
+function Subastas(idSubasta, nombreSubasta, IdTipoSubasta, fechaInicio, fechaFin, empresas, visible){
+	this.idSubasta = idSubasta;
 	this.nombreSubasta = nombreSubasta;
 	this.IdTipoSubasta = IdTipoSubasta;
 	this.fechaInicio = fechaInicio;
 	this.fechaFin = fechaFin;
 	this.empresas = empresas;
+	this.visible = 1;
 }	
 
 function Cotizacion(idUsuario,nombre,correo,telefono,marca,modelo,tipo,estatus,subServicios){
@@ -57,11 +59,10 @@ function Cotizacion(idUsuario,nombre,correo,telefono,marca,modelo,tipo,estatus,s
 	this.subServicios = subServicios;
 
 }
-function CotizacionServicio(idServicio,idSubServicios,nombreSubServicio){
+function CotizacionServicio(idServicio,idSubServicios){
 
 	this.idSubServicios = idSubServicios;
 	this.idServicio = idServicio;
-	this.nombreSubServicio = nombreSubServicio;
 
 }
 function SubServicios (idSubServicio,idServicio,nombre,requisitos,estatus){
@@ -69,5 +70,29 @@ function SubServicios (idSubServicio,idServicio,nombre,requisitos,estatus){
 	this.idServicio = idServicio;
 	this.nombre = nombre;
 	this.requisitos = requisitos;
+	this.estatus = estatus;
+}
+function Autos(idAuto, enVenta, marca, modelo, color, anio, km, transmision, estado, ciudad, descripcion, estatus, publicado, fechaCreacion, features, fotos){
+ 	
+    this.idAuto = idAuto;
+    this.enVenta = enVenta;
+    this.marca = marca;
+    this.modelo = modelo;
+    this.color = color;
+    this.anio = anio;
+    this.km = km;
+    this.transmision = transmision;
+    this.estado = transmision; 
+    this.ciudad = ciudad;
+    this.descripcion = descripcion;
+    this.estatus  = estatus;
+    this.publicado = publicado;
+    this.fechaCreacion = fechaCreacion;
+    this.features = features;
+    this.fotos = fotos;
+}
+function Marca(id, descripcion, estatus){
+	this.id = id;
+	this.descripcion = descripcion;
 	this.estatus = estatus;
 }

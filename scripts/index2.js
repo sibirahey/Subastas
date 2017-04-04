@@ -67,8 +67,11 @@ $(document).ready(function() {
 	function asignaFunciones() {
 		//inicializa el carrusel
 		
-		
 		$(".menuitem").click(function() {
+			window.location = "?s="+$(this).attr("name");
+		});
+
+		$(".menuitemindex").click(function() {
 			window.location = "?s="+$(this).attr("name");
 		});
 

@@ -12,14 +12,30 @@ function CargaFunciones(){
 
 }
 
+function LimpiarSubasta(){
+
+	$("#txtNombreSubasta").val("");
+	$("#txtIncremento").val("");
+	$("#lstEmpresa").html("");
+	$("#cmbEmpresas").val(-1);
+	$("#btnGuardarSubasta").attr("attr-idsubasta","0");
+	CargaSubastas(-1,-1);
+}
+
 //Administrador Subastas
+
+function AgregaEmpresa(idEmpresa, nombreEmpresa){
+
+	$("#lstEmpresa").append("<div attr-idx='"+idEmpresa+"' class='empresasSeleccionadas divRegistro'>"+nombreEmpresa+"</div>")
+}
 function CargaFuncionesAdminSubastas(){
 
 	$("#modalEmpresa").hide();		
 	$(".divHeaderContenido").hide();
-	$( "#txtFechaInicio" ).datepicker({ minDate: 0});
-	$( "#txtFechaFin" ).datepicker(	{ minDate: +1});
+	$("#txtFechaInicio" ).datepicker();
+	$("#txtFechaFin" ).datepicker();
 	$("#divRegistroAutos").hide();
+
 
 	$("#btnNuevaEmpresa").click(function(){
 	  		
@@ -39,8 +55,8 @@ function CargaFuncionesAdminSubastas(){
 	  	});
 	$("#btnAgregaEmpresa").click(function () {
 		if($("#cmbEmpresas option:selected").val() > 0)
+			AgregaEmpresa($("#cmbEmpresas option:selected").val(), $("#cmbEmpresas option:selected").text());
 		
-		$("#lstEmpresa").append("<div attr-idx='"+$("#cmbEmpresas option:selected").val()+"' class='empresasSeleccionadas divRegistro'>"+$("#cmbEmpresas option:selected").text()+"</div>")
 	});
 	$("#btnGuardaEmpresa").click(function(){
 		postrequest("empresas/guardar", {"nombreEmpresa": $("#txtNombreEmpresa").val(),"estatus":"1"}, function(data){
@@ -66,7 +82,14 @@ function CargaFuncionesAdminSubastas(){
 		oSubastas.fechaFin = $("#txtFechaFin").datepicker('getDate').getFullYear() + "-"+($("#txtFechaFin").datepicker('getDate').getMonth() + 1)+"-"+$("#txtFechaFin").datepicker('getDate').getDate();;
 		oSubastas.empresas = [];
 		oSubastas.incremento = $("#txtIncremento").val(); 
+		if($(this).attr("attr-idsubasta") == "0"){
+			oSubastas.idSubasta = 0;
+		}else{
+
+			oSubastas.idSubasta = $(this).attr("attr-idsubasta");
+		}
 		
+
 		$.each( $(".empresasSeleccionadas"), function( key, value ) {
 		  
 		  
@@ -79,10 +102,15 @@ function CargaFuncionesAdminSubastas(){
 			debugger;
 			if(data > 0){
 				alert("La subasta fue creada con éxito");
+				CargaSubastas(-1,-1);
+
 			}
 		});
 
 	});
+
+
+
 
 
 	$("#btnFiltrar").click(function() {
@@ -149,8 +177,9 @@ function CargaTipoSubastas(estatus){
 
 }
 
+
 function CargaSubastas(estatus, empresa){
-	postrequest("subastas/listar", {"estatus":estatus, "empresa":  empresa }, function(data){
+	postrequest("subastas/listar", {"estatus":estatus, "empresa":  empresa, "subastaId":-1 }, function(data){
 		$("#divListaContenido").html("");	
 		for (i in data){
 			var div = '';
@@ -159,7 +188,7 @@ function CargaSubastas(estatus, empresa){
 			div += '		<label>Subata: </label><label>'+data[i].nombreSubasta + "</label>";
 			div += '	</div>';
 			div += '	<div>';
-			div += '		<div type="button" class="fa fa-pencil-square-o fa-2x button" attr-id="' + data[i].idSubasta +'" alt="editar" ></div>';
+			div += '		<div type="button" class="fa fa-pencil-square-o fa-2x button btnEditarSubasta" attr-id="' + data[i].idSubasta +'" alt="editar" ></div>';
 			div += '		<div attr-id="' + data[i].idSubasta +'" attr-nombresubasta="'+data[i].nombreSubasta+'" class="btnAdministraAutos fa fa-car fa-2x button" text="administrar autos" ></div>';
 			div += '	</div>';
 			div += '	<div><label>Tipo de subasta: </label>'+data[i].tipoSubasta+'</div>';		
@@ -178,13 +207,73 @@ function CargaSubastas(estatus, empresa){
 		$(".btnAdministraAutos").click(function(){
 			 var nombreSubasta = $(this).attr("attr-nombresubasta");
 		 	$( "#divRegistroAutos").load( "views/main/admin/altaautos.html?rand="+Math.random(), function() {
-		 		 $("#btnAgregaAuto").click();
+		 		 
+
+		 		 $("#divRegistroAutos").show();
+		 		 $("#btnAgregaAuto").attr("class",$("#btnAgregaAuto").attr("class").replace("-down","-up"));
 		 		 $("#divSubastaNombre").html(nombreSubasta);
 		 		 $("#divSubastaNombre").show();
 		 		 $("#divSubastaNombre").css("display","");
+
 		 		 CargaFuncionesRegistroAuto();
+		 		 $("#btnGuardaAuto").attr("attr-subastaid",$(this).attr("attr-id"));
 
 			 });
+
+		});
+
+		$(".btnEditarSubasta").click(function(){
+			
+			CargaInfoSubasta($(this).attr("attr-id"));
+
+		});
+
+		
+
+		function CargaInfoSubasta(idSubasta){
+
+			postrequest("subastas/listar", {"estatus":-1, "empresa":  -1, "subastaId":idSubasta }, function(data){
+				
+				$("#txtNombreSubasta").val(data[0].nombreSubasta);
+				var parts = data[0].fechaInicio.split('-');
+				var parts2 = data[0].fechaFin.split('-');
+				
+				$("input[name=tiposubastas][value=" + data[0].idTipoSubasta + "]").attr('checked', 'checked');
+				$('#txtFechaInicio').datepicker("setDate", parts[1]+"/"+parts[2]+"/"+parts[0]);
+				$('#txtFechaFin').datepicker("setDate", parts2[1]+"/"+parts2[2]+"/"+parts2[0]);
+				$("#txtIncremento").val(data[0].incremento);
+				$("#btnGuardarSubasta").attr("attr-idsubasta", data[0].idSubasta);
+				$("#lstEmpresa").html("");
+				var empresas = data[0].empresas.split(',');
+				var empresasIds = data[0].empresasId.split(',');
+				for(var i = 0; i < empresas.length; i++){
+					AgregaEmpresa(empresasIds[i], empresas[i]);
+
+				}
+
+
+
+				
+				
+			});
+		}
+
+
+
+		$(".btnPublicar").click(function(){
+			var visible = ($(this).prop("checked")) ? 1 : 0; 
+			var idSubasta = $(this).attr("attr-id");
+
+			oSubastas = new Subastas();
+			oSubastas.idSubasta = idSubasta;
+			oSubastas.visible = visible;
+			postrequest("subastas/publicar", oSubastas, function(data){
+
+				if(data > 0){
+				alert("La operación se realizó exitosamente");
+			}
+			})
+			
 
 		});
 		
@@ -196,6 +285,4 @@ function CargaSubastas(estatus, empresa){
 //Home
 function CargaFuncionesAdminHome(){
 
-	
-	
 }
