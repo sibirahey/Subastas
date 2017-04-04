@@ -18,6 +18,9 @@ require_once("modelos/modelos.php");
 require_once("modelos/features.php");
 require_once("modelos/colores.php");
 require_once("modelos/transmisiones.php");
+require_once("modelos/autos.php");
+require_once("modelos/autos-features.php");
+require_once("modelos/autos-fotos.php");
 require_once('utilidades/ConexionBD.php');
 require_once('utilidades/ExcepcionApi.php');
 require_once('utilidades/Utilerias.php');
@@ -133,6 +136,9 @@ function ejecutaModeloPost($vista, $mod, $arr)
             break;
         case 'colores':
             $vista->imprimir(colores::post($arr));
+            break;
+        case 'autos':
+            $vista->imprimir(autos::post($arr));
             break;
         default:
     		# code...

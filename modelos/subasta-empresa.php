@@ -80,12 +80,49 @@ class subastasempresa
             return null;
     }
 
-    
+    public static function eliminaEmpresas($idSubasta){
+        try {
+
+            
+            $pdo = ConexionBD::obtenerInstancia()->obtenerBD();
+
+                // Sentencia INSERT
+                $comando = "DELETE FROM  " . self::NOMBRE_TABLA . " WHERE  " .
+                    self::ID_SUBASTA . " = ?";
+                    
+
+                
+
+
+                $sentencia = $pdo->prepare($comando);
+                $sentencia->bindParam(1, $idSubasta);
+                       
+
+                $resultado = $sentencia->execute();
+
+              
+                if ($resultado) {
+                    return $resultado;
+                } else {
+                    return -1;
+                }
+
+                        
+            
+            return -1;
+        } catch (PDOException $e) {
+            
+            print_r($e);
+            throw new ExcepcionApi(self::ESTADO_URL_INCORRECTA, $e->getMessage(), 400);
+            
+        }
+
+    }    
 
     public static function registrar($empresas, $idSubasta)
     {
         
- 
+        $resultado = false;
         try {
 
             
@@ -106,22 +143,19 @@ class subastasempresa
                 $sentencia->bindParam(1, $idSubasta);
                 $sentencia->bindParam(2, $v);
              
-                       
-            
-
 
                 $resultado = $sentencia->execute();
-
-              
-                if ($resultado) {
-                    return $resultado;
-                } else {
-                    return -1;
-                }
+               
 
                         
             }
-            return -1;
+
+             if ($resultado) {
+                return $resultado;
+            } else {
+                return false;
+            }
+            
         } catch (PDOException $e) {
             
             print_r($e);

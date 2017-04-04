@@ -24,6 +24,9 @@ body {
 textarea {
    resize: none;
 }
+select{
+	height: 30px;
+}
 /*----------------- --------------*/
 .mainContainer {
 	height: 100%;
@@ -46,10 +49,19 @@ textarea {
 	opacity: 0.6;
 	cursor: pointer;
 }
-.menuitem:first-of-type {
+ .menuitemindex{
+ 	color: #EBC01C;
+	height: 40px;
+	width: 200px;
+	text-align: center;
+	line-height: 40px;
+	margin-top: 20px;
+	opacity: 0.6;
+ }
+.menuitem:first-of-type, .menuitemindex:first-of-type {
 	margin-right: 1px solid #EBC01C;
 }
-.menuitem:hover {
+.menuitem:hover, .menuitemindex:hover {
 	opacity: 1;
 }
 .mainHeader {
@@ -869,7 +881,7 @@ div:not(:first-child) > div:nth-child(odd) {
 div:not(:first-child):nth-child(even) {
 	background-color: #ffffff;
 }
-.btnGuardar, .btnPublicar {
+.btnGuardar, .btnPublicar, #btnGuardaAuto {
 	float: right !important;
 	cursor: pointer;
 	border: none;
@@ -1454,7 +1466,7 @@ img[data-u="image"] {
     color:#1E2328;
 }
 
-.registroMain {
+.registroMain, .divHeaderContenido {
 	width: 600px;
 	padding: 10px;
 }
@@ -1465,7 +1477,7 @@ img[data-u="image"] {
 	font-size: 1.5em;
 	font-weight: 400;
 }
-#btnGuardar {
+#btnGuardar, #btnGuardarSubasta {
 	height: 80px;
 	line-height:80px;
 	width: 90%;

@@ -68,7 +68,8 @@ class modelos
             self::ID_MARCA .
             " FROM " . self::NOMBRE_TABLA .
             " WHERE ". self::ID_MARCA ." = ?".
-            (($estatus >= -1) ? " AND " . self::ESTATUS . "=?" : "");
+            (($estatus >= -1) ? " AND " . self::ESTATUS . "=?" : "").
+            " ORDER BY ".self::DESCRIPCION." ASC";
 
 
 

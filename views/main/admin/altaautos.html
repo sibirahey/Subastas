@@ -1,7 +1,5 @@
 <div id="divSubastaNombre" style="displa:none"></div>
-<div class="divBotonera" >
-	<div id="btnGuardaAuto" attr-subastaid="0" class="fa fa-floppy-o fa-2x"></div>
-</div>
+
 <div>
 	<div class="divRegistro">
 		<label for="cbMarcaAuto" >Marca:</label>
@@ -52,16 +50,26 @@
     	</select>
     	<div id="btnAddFeature" class="fa fa-plus-square-o"></div>
     	<div id="divFeatureContainer"></div>
-	    
+	</div>
+	<div class="divRegistro">
+		<label for="txtaDescripcionAuto" >Descripción:</label>
+		<textarea id="txtaDescripcionAuto" maxlength="1000" ></textarea> 
+	</div>
+	<div class="divRegistro">
+		<label for="chkPublicadoAutos" >Publicar:</label>
+		<input type="checkbox" name="chkPublicadoAutos" id="chkPublicadoAutos" checked="checked" /> 
 	</div>
 	<div class="divRegistro">
 		<input id="fotoAuto" type="file" name="sortpic" />
 		<div type="button" id="btnUpload" class="fa fa-upload"   ></div>
 		<div id="fotosSubidas" ></div>
 	</div>
+	<div class="divRegistro">
+		<button id="btnGuardaAuto" attr-subastaid="0">Guardar</button>
+	</div>
 	<div id="dialog" title="Basic dialog">
   		<div class="divRegistro">
-			<label for="txtDescripcion" >KM:</label>
+			<label id="labelTxtDescripcion" for="txtDescripcion" >KM:</label>
 			<input type="text" name="txtDescripcion" id="txtDescripcion" /> 
 		</div>
 		<div class="divRegistro">

@@ -10,6 +10,7 @@
   
   <link href="https://fonts.googleapis.com/css?family=Oswald:300,400,700&amp;subset=latin-ext" rel="stylesheet"/>
   <link href="https://fonts.googleapis.com/css?family=Open+Sans+Condensed:300,700" rel="stylesheet"/>
+  <link href="hhttps://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css<?php echo "?".rand(0, 9999999); ?>"  rel="stylesheet"/>
 
   <script type="text/javascript" src="scripts/jquery-1.12.4.js"></script>
   <script type="text/javascript" src="scripts/jquery-ui.js"></script>
@@ -19,7 +20,7 @@
   <script type="text/javascript" src="scripts/main.js<?php echo "?".rand(0, 9999999); ?>"></script>
   <script type="text/javascript" src="scripts/header.js<?php echo "?".rand(0, 9999999); ?>"></script>
   <script type="text/javascript" src="scripts/admin.js<?php echo "?".rand(0, 9999999); ?>"></script>  
-  <script type="text/javascript" src="scripts/footer.js<?php echo "?".rand(0, 9999999); ?>"></script>
+  <!-- <script type="text/javascript" src="scripts/footer.js<?php echo "?".rand(0, 9999999); ?>"></script> -->
   <script type="text/javascript" src="scripts/utilidades.js<?php echo "?".rand(0, 9999999); ?>"></script>
   <script type="text/javascript" src="scripts/request.js<?php echo "?".rand(0, 9999999); ?>"></script>
   <script type="text/javascript" src="scripts/imgSlider.js<?php echo "?".rand(0, 9999999); ?>"></script>
@@ -52,9 +53,9 @@
         </div>
         <!-- contenedor del cuerpo principal del sitio -->
         <div class="mainMinusHeader">
-            <div id="btnClose">[X]</div>
+            <!-- <div id="btnClose">[X]</div> -->
             <div class="mainBody"></div>
-            <div class="mainFooter"></div>
+            <!-- <div class="mainFooter"></div> -->
         </div>
     </div>
     

@@ -2,19 +2,50 @@ var fnToLoad= "";
 
 
 $( document ).ready(function() {
-    $( ".mainHeader" ).load( "views/header.html", function() {
+
+	
+
+	cargaHTML(".mainHeader", "views/header.html", "header", function() {
+
+    	debugger;
+    	
   		
-  		$("#divMenuPrincipal").append('<li class="menuitem" name="dashboard"><label>DASHBOARD</label></li>');
-  		$("#divMenuPrincipal").append('<li class="menuitem" name="ventaautos" ><label>VENTA DE AUTOS</label></li>');
-  		if (esAdmin()){
-			$("#divMenuPrincipal").append('<li class="menuitem" name="homeadmin"> <label>ADMININISTRADOR DE HOME</label></li>');
-			$("#divMenuPrincipal").append('<li class="menuitem" name="subastasadmin" ><label>ADMININISTRADOR DE SUBASTAS</label></li>');
-			$("#divMenuPrincipal").append('<li class="menuitem" name="subastasadmin" ><label>ADMININISTRADOR VENTA DE AUTOS</label></li>');
-		}
-		
+  		if(sessionStorage["nombre"] != undefined){
+  			
+
+			$.each( $(".menuitemlogin"), function( key, value ) {
+			  
+			  $(value).hide();
+			});
+
+
+  			$(".menuitemwelcome").html("Bienvenido: " +sessionStorage["nombre"]);
+  			$(".menuitemwelcome").show();
+  			$(".menuitemwelcome").css("width","160px");
+
+
+  			$("#divMenuPrincipal").html("");
+  			$("#divMenuPrincipal").append('<li class="menuitemindex" name="dashboard"><label>DASHBOARD</label></li>');
+  			$("#divMenuPrincipal").append('<li class="menuitemindex" name="ventaautos" ><label>VENTA DE AUTOS</label></li>');
+	  		if (esAdmin()){
+				$("#divMenuPrincipal").append('<li class="menuitemindex" name="homeadmin"> <label>ADMININISTRADOR DE HOME</label></li>');
+				$("#divMenuPrincipal").append('<li class="menuitemindex" name="subastasadmin" ><label>ADMININISTRADOR DE SUBASTAS</label></li>');
+				$("#divMenuPrincipal").append('<li class="menuitemindex" name="subastasadmin" ><label>ADMININISTRADOR VENTA DE AUTOS</label></li>');
+			}
+
+
+  		}else{
+
+  			$.each( $(".menuitemlogin"), function( key, value ) {
+			  
+			  $(value).show();
+			});
+  			$(".menuitemwelcome").hide();
+  		}
+  				
 		
 
-		$(".menuitem").click(function(){
+		$(".menuitemindex").click(function(){
 			
 			CargaContenidoAdmin(this);
 	      
@@ -32,6 +63,8 @@ $( document ).ready(function() {
       	});
 
 	}
+
+	
 });
 
 
