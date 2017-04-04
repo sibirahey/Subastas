@@ -5,7 +5,7 @@ $(document).ready(function(){
   });
 
 function CargaContenidoMain(){
-
+	debugger;
 	cargaHTML(".mainBody", "views/main.html","", function() {
   		$("#searchBox").keypress(function(e) {
 		    if(e.which == 13) {
@@ -116,12 +116,25 @@ function regresaRenglonVenta(item) {
 	renglon += '				<label>' + item.anio + '</label>';
 	renglon += '				</div>';
 	renglon += '				<div>';
-	renglon += '					<h4>Kilometraje: </h4>';
+	renglon += '				<img src="images/icoKilometraje.svg"/>';
+	// renglon += '					<h4>Kilometraje: </h4>';
 	renglon += '					<label>' + item.kms + '</label>';
 	renglon += '				</div>';
 	renglon += '				<div>';
-	renglon += '					<h4>Precio: </h4>';
+	renglon += '					<img src="images/icoPrecio.svg"/>';
 	renglon += '					<label>' + item.precio + '</label>';
+	renglon += '				</div>';
+	renglon += '				<div>';
+	renglon += '					<img src="images/icoMotor.svg"/>';
+	renglon += '					<label>' + item.motor + '</label>';
+	renglon += '				</div>';
+	renglon += '				<div>';
+	renglon += '					<img src="images/icoTransmision.svg"/>';
+	renglon += '					<label>' + item.transmision + '</label>';
+	renglon += '				</div>';
+	renglon += '				<div>';
+	renglon += '					<img src="images/icoTransmision.svg"/>';
+	renglon += '					<label>' + item.cc + '</label>';
 	renglon += '				</div>';
 	renglon += '				<div>';
 	renglon += '					<h4>Descripción: </h4>';
@@ -259,6 +272,7 @@ function cargaVehiculos() {
 		}
 	});
 	checkCB();
+	
 };
 
 function checkCB(){

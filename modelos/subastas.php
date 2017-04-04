@@ -29,6 +29,7 @@ class subastas
     public static function post($peticion)
     {
      
+	 	
         if ($peticion[0] == 'listar') {
             return self::listarSubastas();
         }else if ($peticion[0] == 'guardar') {
@@ -42,7 +43,7 @@ class subastas
 
     
     private function listarSubastas()
-    {
+    {   
         $cuerpo = file_get_contents('php://input');
         $subastas = json_decode($cuerpo);
         
@@ -63,6 +64,8 @@ class subastas
     private function listar($datosListar)
     {
         
+		
+		
         $estatus = $_POST['estatus'];
         $estatusWhere = "";
         $empresa = $_POST['empresa'];

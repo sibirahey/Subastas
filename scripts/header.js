@@ -21,16 +21,15 @@ $( document ).ready(function() {
 
   			$(".menuitemwelcome").html("Bienvenido: " +sessionStorage["nombre"]);
   			$(".menuitemwelcome").show();
-  			$(".menuitemwelcome").css("width","160px");
-
-
+  			
   			$("#divMenuPrincipal").html("");
-  			$("#divMenuPrincipal").append('<li class="menuitemindex" name="dashboard"><label>DASHBOARD</label></li>');
+  			$("#divMenuPrincipal").append('<li class="menuitemindex" name="main"><label>DASHBOARD</label></li>');
   			$("#divMenuPrincipal").append('<li class="menuitemindex" name="ventaautos" ><label>VENTA DE AUTOS</label></li>');
 	  		if (esAdmin()){
 				$("#divMenuPrincipal").append('<li class="menuitemindex" name="homeadmin"> <label>ADMININISTRADOR DE HOME</label></li>');
 				$("#divMenuPrincipal").append('<li class="menuitemindex" name="subastasadmin" ><label>ADMININISTRADOR DE SUBASTAS</label></li>');
-				$("#divMenuPrincipal").append('<li class="menuitemindex" name="subastasadmin" ><label>ADMININISTRADOR VENTA DE AUTOS</label></li>');
+				$("#divMenuPrincipal").append('<li class="menuitemindex" name="altaautos" ><label>ADMININISTRADOR VENTA DE AUTOS</label></li>');				
+				
 			}
 
 
@@ -43,7 +42,9 @@ $( document ).ready(function() {
   			$(".menuitemwelcome").hide();
   		}
   				
-		
+		jssor_1_slider_init();
+		$('.jssorContainer').find('video').get(0).play();
+		$('.jssorContainer').find('video').get(1).play();
 
 		$(".menuitemindex").click(function(){
 			
@@ -59,11 +60,12 @@ $( document ).ready(function() {
     function CargaContenidoAdmin(o){
  		fnToLoad = $(o).attr("name");
      	cargaHTML(".mainBody","views/main/admin/"+ $(o).attr("name")+".html", $(o).attr("name"),function() {
+     		debugger;
       		CargaFunciones();
       	});
 
 	}
-
+	debugger;
 	
 });
 

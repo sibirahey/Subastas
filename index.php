@@ -70,7 +70,7 @@ switch ($metodo) {
         break;
 
     case 'post':
-
+	
     	ejecutaModeloPost($vista, $modelo, $arreglo);
     	//$vista->imprimir(usuarios::post($arreglo));
 		
@@ -91,7 +91,7 @@ switch ($metodo) {
 function ejecutaModeloPost($vista, $mod, $arr)
 {
 
-    switch ($mod) {
+    switch (strtolower($mod)) {
     	case 'usuarios':
     		$vista->imprimir(usuarios::post($arr));
     		break;
@@ -104,7 +104,7 @@ function ejecutaModeloPost($vista, $mod, $arr)
         case 'tiposubastas':
             $vista->imprimir(tiposubastas::post($arr));
             break;
-        case 'subastas':
+        case 'subastas':			
             $vista->imprimir(subastas::post($arr));
             break;
         case 'cotizacion':
