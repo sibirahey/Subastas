@@ -58,7 +58,8 @@ select{
  }
 .menuitemindex > label{
 	cursor:pointer;
-	opacity:0.6
+	opacity:0.6;
+	font-size:0.9em;
 }
  	.menuitemindex > label:hover{
  		opacity:1;
@@ -1198,7 +1199,7 @@ div:not(:first-child):nth-child(even) {
 	height: 420px;
 	width: 400px;
 	background-color:rgba(0,0,0,0.6);
-	margin-top:calc(50% - 420px) ;
+	margin-top:250px;
 	margin-left:calc(50% - 200px);
 	margin-right:calc(50% - 200px);
 	padding-top:160px;
@@ -1893,22 +1894,11 @@ button[name="contactoEnviar"]{
 }
 /*---------- ENDS BANNERS ---------*/
 /*---------- ADMINISTRADOR DE SUBASTAS---------*/
-.divBotonera{
-	clear:both;
-	margin: 0 auto;
-	float:none;
-	max-width: 1024px;
-}
-#divAdminSubastas{
-	clear:both;
-	margin: 0 auto;
-	float:none;
-	max-width: 1024px;
-}
+.divBotonera,
+#divAdminSubastas,
 #divAutos{
 	clear:both;
-	margin: 0 auto;
-	float:none;
+	margin: 20px calc(50% - 512px);
 	max-width: 1024px;
 }
 #divListaSubastas{
@@ -1917,6 +1907,44 @@ button[name="contactoEnviar"]{
 #divListaBotonera{
 	width:100%;
 }
+#divListaContenido{
+	float:left;	
+}
+.divRenglonTabla{
+    float: left;
+    width: 236px;
+    height: 450px;
+    margin: 10px;
+    background-color: #ffffff;
+    border:1px solid #D2D2D2;
+    padding: 12px;
+}
+.divRenglonTabla > div{
+	width:100%;
+	padding: 6px 0;
+}
+	.divRenglonTabla > div:nth-child(1) > label{
+		width:100%;
+		text-align:center;
+	}
+	
+	.divRenglonTabla > div:nth-child(2) > div{
+		width:33.3%;
+		text-align:center;
+		cursor: pointer;
+		color:#3281B3;
+		opacity:0.6;
+	}
+	.divRenglonTabla > div:nth-child(2) > div:hover{
+		opacity:1;
+	}
+	.divRenglonTabla > div{
+		text-align: center;
+	}
+	.divRenglonTabla > div > label{
+		width:100%;
+		text-align: center;
+	}
 /*---------- ENDS ADMINISTRADOR DE SUBASTAS---------*/
 /*---------  SWITCH ---------*/
 

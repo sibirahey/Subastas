@@ -7,7 +7,7 @@ $( document ).ready(function() {
 
 	cargaHTML(".mainHeader", "views/header.html", "header", function() {
 
-    	debugger;
+    	//debugger;
     	
   		
   		if(sessionStorage["nombre"] != undefined){
@@ -21,7 +21,6 @@ $( document ).ready(function() {
 
   			$(".menuitemwelcome").html("Bienvenido: " +sessionStorage["nombre"]);
   			$(".menuitemwelcome").show();
-  			$(".menuitemwelcome").css("width","160px");
 
 
   			$("#divMenuPrincipal").html("");
@@ -42,7 +41,10 @@ $( document ).ready(function() {
 			});
   			$(".menuitemwelcome").hide();
   		}
-  				
+		
+		jssor_1_slider_init();
+		$('.jssorContainer').find('video').get(0).play();
+		$('.jssorContainer').find('video').get(1).play();
 		
 
 		$(".menuitemindex").click(function(){
