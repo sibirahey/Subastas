@@ -446,14 +446,31 @@ select{
 	border-right: 1px solid #cccccc;
 	padding: 10px;
 }
+.divBotonera,
+#divListaBotonera{
+    background-color: #ffffff;
+    border-radius: 4px;
+    border: 1px solid #D2D2D2;
+    padding:6px;
+}
+	.divBotonera > label{
+		line-height:32px;
+	}
 .divBotonera, .divRegistro, .divLogin {
 	width: 100%;
+}
+#divListaBotonera > .divItemBotonera{
+	float:left;
+	margin: 0 10px;
 }
 .divRegistro
 .divError, .divErrorPassword {
 	color: red;
 }
-.divLogin > label, .divLogin > input, .divRegistro > label:not([for="placa"]):not([for="registroEULA"]):not(.switch):not([for="switch"]), .divRegistro > input:not([type="checkbox"]) {
+.divLogin > label, .divLogin > input, 
+.divRegistro > label:not([for="placa"]):not([for="registroEULA"]):not(.switch):not([for="switch"]), 
+.divRegistro > input:not([type="checkbox"]),
+.divRegistro  input:not([type="radio"])  {
 	width: 90%;
 	margin: 0 5% 6px;
 }
@@ -1246,7 +1263,7 @@ div:not(:first-child):nth-child(even) {
 	text-shadow:0 0 2px #000000;
 }
 .divRegistro label{
-	color: #ffffff;
+	color: #3C4146;
     opacity: 0.6;
     font-size: 1.2em;
     font-weight: 300;
@@ -1478,8 +1495,14 @@ img[data-u="image"] {
     line-height: 40px;
     color:#1E2328;
 }
-
-.registroMain, .divHeaderContenido {
+.divHeaderContenido{
+	width: 100%;
+    background-color: #ffffff;
+    border-radius: 4px;
+    border: 1px solid #D2D2D2;
+    padding: 6px;
+}
+.registroMain {
 	width: 600px;
 	padding: 10px;
 }
@@ -1894,6 +1917,11 @@ button[name="contactoEnviar"]{
 }
 /*---------- ENDS BANNERS ---------*/
 /*---------- ADMINISTRADOR DE SUBASTAS---------*/
+#btnAgregarSubasta{
+	margin: 0 10px;
+	color: #3281B3;
+	cursor:pointer;
+}
 .divBotonera,
 #divAdminSubastas,
 #divAutos{
