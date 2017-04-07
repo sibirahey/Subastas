@@ -29,6 +29,8 @@ class colores
       
         if ($peticion[0] == 'listar') {
             return self::lista();
+        }else if ($peticion[0] == 'guardar'){
+            return self::registraOut();
         }
         else {
             throw new ExcepcionApi(self::ESTADO_URL_INCORRECTA, "Url mal formada", 400);
@@ -80,6 +82,86 @@ class colores
             return $sentencia->fetchall(PDO::FETCH_ASSOC);
         else
             return null;
+    }
+
+    private function registraOut(){
+
+        $resultado = self::registra($_POST);
+
+        switch ($resultado) {
+            case ESTADO_CREACION_EXITOSA:
+                http_response_code(200);
+                return "OK";
+            break;
+            case ESTADO_CREACION_FALLIDA:
+                throw new ExcepcionApi(self::ESTADO_CREACION_FALLIDA, "Ha ocurrido un error");
+            break;
+            default:
+                http_response_code(200);
+                return$resultado;
+        }
+
+    }
+
+    private function resgistra($colores){
+
+       try{
+
+         $pdo = ConexionBD::obtenerInstancia()->obtenerBD();
+        if ($colores["id"] == "0") {
+            
+            $comando = "INSERT INTO " . self::NOMBRE_TABLA . " ( " .
+                self::ID . "," .
+                self::DESCRIPCION . "," .
+                self::ESTATUS . ")" .
+                " VALUES (?,?,?)";
+
+                $sentencia = $pdo->prepare($comando);
+                $sentencia->bindParam(1,$colores["id"]);
+                $sentencia->bindParam(2,$colores["descripcion"]);
+                $sentencia->bindParam(3,$colores["estatus"]);
+
+                $resultado = $sentencia->execute();
+
+                if ($resultado) {
+                    return $pdo->lastInsertId();
+                }else{
+                    return -1;
+                }
+
+        }else{
+
+            $comando = "UPDATE " . self::NOMBRE_TABLA . " SET " .
+                self::DESCRIPCION . " = ?," .
+                self::ESTATUS . " = ?" .
+                " WHERE " . self::ID . " =?";
+
+                $sentencia = $pdo->prepare($comando);
+                $sentencia->bindParam(1,$colores["descripcion"]);
+                $sentencia->bindParam(2,$colores["estatus"]);
+                $sentencia->bindParam(3,$colores["id"]);
+
+                $resultado = $sentencia->execute();
+                if ($resultado) {
+                    return $colores["id"];
+                }else
+                {
+                    return -1;
+                }
+
+
+
+        }
+
+
+       } catch(PDOEsception $e){
+
+            print_r ($e);
+            throw new ExcepcionApi(self::ESTADO_URL_INCORRECTA,$e->getMessage(),400);
+            
+
+       }
+
     }
 
     

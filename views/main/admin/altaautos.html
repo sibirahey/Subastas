@@ -4,17 +4,19 @@
 	<div class="divRegistro">
 		<label for="cbMarcaAuto" >Marca:</label>
 		<select id="cbMarcaAuto" name="cbMarcaAuto" ></select> 
-		<div id="btnAddMarca" class="fa fa-plus-square-o"></div>
+		<div id="btnAddMarca" operacion="marcas" title="Agregar Marca"  desc="Marca:" class="fa fa-plus-square-o"></div>
 	</div>
 	<div class="divRegistro">
 		<label for="cbModeloAuto" >Modelo:</label>
 		<select id="cbModeloAuto" name="cbModeloAuto" >
 			<option value="0">== Seleccione ==</option>
 		</select> 
+		<div id="btnAddModelo" operacion="modelos" title="Agregar Modelo" desc="Modelo:" class="fa fa-plus-square-o"></div>
 	</div>
 	<div class="divRegistro">
 		<label for="cbColorAuto" >Color:</label>
 		<select id="cbColorAuto" name="cbColorAuto" ></select> 
+		<div id="btnAddColor" operacion="colores" title="Agregar Color" desc="Color:" class="fa fa-plus-square-o"></div>
 	</div>
 	<!--
 	<div class="divRegistro">
@@ -49,6 +51,7 @@
         <select id="cbFeaturesAutos" >
     	</select>
     	<div id="btnAddFeature" class="fa fa-plus-square-o"></div>
+    	<div id="btnAddCaracteristicas" operacion="features" title="Agregar Caracteristicas" desc="caracteristica:" class="fa fa-plus-square-o">Nueva</div>
     	<div id="divFeatureContainer"></div>
 	</div>
 	<div class="divRegistro">
