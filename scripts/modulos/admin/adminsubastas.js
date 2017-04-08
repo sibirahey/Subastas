@@ -1,4 +1,3 @@
-
 function CargaFunciones(){
 
 	switch(fnToLoad){
@@ -118,12 +117,14 @@ function CargaFuncionesAdminSubastas(){
 			CargaSubastas( $("#cmbPublicada option:selected").val() ,$("#cmbEmpresasFiltro option:selected").val());
 			
 	});
+	
 	$("#btnAgregarSubasta").click(function(){
+		 $( ".divHeaderContenido" ).dialog( "open" );
 		if($(".divHeaderContenido").css("display") == "none"){
-			$(".divHeaderContenido").show();
+			// $(".divHeaderContenido").show();
 			$("#btnAgregarSubasta").attr("class",$("#btnAgregarSubasta").attr("class").replace("-down","-up"));
 		}else{
-			$(".divHeaderContenido").hide();
+			// $(".divHeaderContenido").hide();
 			$("#btnAgregarSubasta").attr("class",$("#btnAgregarSubasta").attr("class").replace("-up","-down"));;
 
 		}
@@ -131,11 +132,12 @@ function CargaFuncionesAdminSubastas(){
 	});
 
 	$("#btnAgregaAuto").click(function(){
+		$("#divRegistroAutos").dialog("open");
 		if($("#divRegistroAutos").css("display") == "none"){
-			$("#divRegistroAutos").show();
+			//$("#divRegistroAutos").show();
 			$("#btnAgregaAuto").attr("class",$("#btnAgregaAuto").attr("class").replace("-down","-up"));
 		}else{
-			$("#divRegistroAutos").hide();
+			//$("#divRegistroAutos").hide();
 			$("#btnAgregaAuto").attr("class",$("#btnAgregaAuto").attr("class").replace("-up","-down"));;
 
 		}
@@ -225,6 +227,8 @@ function CargaSubastas(estatus, empresa){
 			 		 
 				 });
 			 }
+			 
+			 $("#divRegistroAutos").dialog("open"); 
 		});
 
 		$(".btnVerAutos").click(function(){
@@ -264,12 +268,9 @@ function CargaSubastas(estatus, empresa){
 					AgregaEmpresa(empresasIds[i], empresas[i]);
 
 				}
-
-
-
-				
-				
 			});
+			
+			$( ".divHeaderContenido" ).dialog( "open" );
 		}
 
 
@@ -293,6 +294,43 @@ function CargaSubastas(estatus, empresa){
 		
 	
 	}); //end postrequest
+	
+	
+	$(function() {
+		$(".divHeaderContenido").dialog({
+			autoOpen : false,
+			modal: true,
+			width: 500,
+			resizable: false,
+			show : {
+				effect : "blind",
+				duration : 500
+			},
+			hide : {
+				effect : "blind",
+				duration : 500
+			}
+		});
+
+	});
+	$(function() {
+		$("#divRegistroAutos").dialog({
+			autoOpen : false,
+			modal: true,
+			maxHeight: 500,
+			width: 500,
+			resizable: false,
+			show : {
+				effect : "blind",
+				duration : 500
+			},
+			hide : {
+				effect : "blind",
+				duration : 500
+			}
+		});
+
+	});
 }
 
 
@@ -300,3 +338,4 @@ function CargaSubastas(estatus, empresa){
 function CargaFuncionesAdminHome(){
 
 }
+
