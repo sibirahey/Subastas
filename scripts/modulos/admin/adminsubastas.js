@@ -113,12 +113,15 @@ function CargaFuncionesAdminSubastas(){
 
 
 	$("#btnFiltrar").click(function() {
-		
-			CargaSubastas( $("#cmbPublicada option:selected").val() ,$("#cmbEmpresasFiltro option:selected").val());
+		debugger;
+			CargaSubastas( $("#cmbPublicada option:selected").val(),$("#cmbEmpresasFiltro option:selected").val());
 			
 	});
 	
 	$("#btnAgregarSubasta").click(function(){
+		$('#txtNombreSubasta').val('');
+		$('#txtFechaInicio').val('');
+		$('#txtFechaFin').val('');
 		 $( ".divHeaderContenido" ).dialog( "open" );
 		if($(".divHeaderContenido").css("display") == "none"){
 			// $(".divHeaderContenido").show();
@@ -184,15 +187,16 @@ function CargaSubastas(estatus, empresa){
 	postrequest("subastas/listar", {"estatus":estatus, "empresa":  empresa, "subastaId":-1 }, function(data){
 		$("#divListaContenido").html("");	
 		for (i in data){
+			
 			var div = '';
 			div += '<div class="divRenglonTabla">';
 			div += '	<div>';
-			div += '		<label>Subata: </label><label>'+data[i].nombreSubasta + "</label>";
+			div += '		<label>Subasta: </label><label>'+data[i].nombreSubasta + "</label>";
 			div += '	</div>';
 			div += '	<div>';
-			div += '		<div type="button" class="fa fa-pencil-square-o fa-2x button btnEditarSubasta" attr-id="' + data[i].idSubasta +'" alt="editar" ></div>';
-			div += '		<div attr-id="' + data[i].idSubasta +'" attr-nombresubasta="'+data[i].nombreSubasta+'" class="btnAdministraAutos fa fa-plus-circle fa-2x button" text="administrar autos" ></div>';
-			div += '		<div attr-id="' + data[i].idSubasta +'" attr-nombresubasta="'+data[i].nombreSubasta+'" class="btnVerAutos fa fa-car fa-2x button" text="administrar autos" ></div>';
+			div += '		<div type="button" class="fa fa-pencil-square-o button btnEditarSubasta" attr-id="' + data[i].idSubasta +'" alt="editar" ></div>';
+			div += '		<div attr-id="' + data[i].idSubasta +'" attr-nombresubasta="'+data[i].nombreSubasta+'" class="btnAdministraAutos fa fa-plus-circle button" text="administrar autos" ></div>';
+			div += '		<div attr-id="' + data[i].idSubasta +'" attr-nombresubasta="'+data[i].nombreSubasta+'" class="btnVerAutos fa fa-car button" text="administrar autos" ></div>';
 			div += '	</div>';
 			div += '	<div><label>Tipo de subasta: </label>'+data[i].tipoSubasta+'</div>';		
 			div += '	<div><label>Vigencia: </label>'+data[i].fechaInicio+' - ' + data[i].fechaFin +'</div>';		
@@ -232,6 +236,7 @@ function CargaSubastas(estatus, empresa){
 		});
 
 		$(".btnVerAutos").click(function(){
+			debugger;
 		 	var nombreSubasta = $(this).attr("attr-nombresubasta");
 			 var idSubasta = $(this).attr("attr-id");
 
