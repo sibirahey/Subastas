@@ -121,35 +121,71 @@ function CargaFuncionesRegistroAuto(idSubasta){
 		CargaSelectColores("#cbColorAuto", 0, 1);
 	
 	
-   		$("#btnAddMarca").click(function(){
-		$( "#dialog" ).attr("title", "Agregar Marca");
-		$( "#dialog" ).attr("operacion", "marcas" );
-   		$("#labelTxtDescripcion").html("Marca:");
+   		$("#btnAddMarca").add("#btnAddModelo").add("#btnAddColor").add("#btnAddCaracteristicas").click(function(){
+   			$("#txtDescripcion").val("");
+		$( "#dialog" ).attr("title", $(this).attr("title"));
+		$( "#dialog" ).attr("operacion", $(this).attr("operacion") );
+   		$("#labelTxtDescripcion").html($(this).attr("desc"));
    		$( "#dialog" ).dialog();
 
    		
    		
 
    });
-   $("#btnGuardarCatalogo").click(function(){
+    $("#btnGuardarCatalogo").click(function(){
    		
    		oObj = null;
-   		if($( "#dialog" ).attr("operacion") == "marcas"){
-
+   		var operacion = $( "#dialog" ).attr("operacion");
+   		switch(operacion){
+   			case "marcas":
    			oObj = new Marca();
+			break;
+			case "modelos":
+			oObj = new Modelo();
+			oObj.idMarca = $("#cbMarcaAuto").val();
+			if ($("#cbMarcaAuto").val() == 0 ){
+				alert("Seleccione una marca para poder agregar el modelo.");
+				return;
+			}
+   			break;
+   			case "colores":
+   			oObj = new Colores();
+   			break;
+   			case "features":
+   			oObj = new Caracteristicas();
+   			break;
+   			default:
+   			 alert("Operación no valida");
+   			 break;
+
+   		}
 
    			oObj.id = 0;
-			oObj.descripcion = $("#txtDescripcion").val();
-			oObj.estatus = 1;
-   		}
+   			oObj.descripcion = $("#txtDescripcion").val();
+   			oObj.estatus = 1;
+   			
+
    		postrequest($( "#dialog" ).attr("operacion")+"/guardar", oObj, function(data){
    			if(data > 0){
 				alert("La operación se realizó con éxito");
 				if($( "#dialog" ).attr("operacion") == "marcas"){
 					$("#cbMarcaAuto").html("");
 					CargaSelectMarcas("#cbMarcaAuto", 0,1);
-					( "#dialog" ).dialog('close');
 				}
+				if($( "#dialog" ).attr("operacion") == "modelos"){
+					$("#cbModeloAuto").html("");
+					CargaSelectModelos("#cbModeloAuto", "#cbMarcaAuto", 0, 1);
+				}
+				if($( "#dialog" ).attr("operacion") == "colores"){
+					$("#cbColorAuto").html("");
+					CargaSelectColores("#cbColorAuto", 0, 1);
+				}
+				if($( "#dialog" ).attr("operacion") == "features"){
+					$("#cbFeaturesAutos").html("");
+					CargaSelectFeatures("#cbFeaturesAutos","",1);
+				}
+
+				( "#dialog" ).dialog('close');
 
 			}
 

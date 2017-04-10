@@ -107,8 +107,9 @@ class features
                 $comando = "INSERT INTO " . self::NOMBRE_TABLA . " ( " .
                     self::ID . "," .
                     self::DESC . "," .
-                    self::ESTATUS . "" .
+                    self::ESTATUS . ") " .
                     "VALUES (?,?,?)";
+
                     $sentencia =  $pdo->prepare($comando);
                     $sentencia->bindParam(1,$carac["id"]);
                     $sentencia->bindParam(2,$carac["descripcion"]);
