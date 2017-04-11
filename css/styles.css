@@ -49,6 +49,9 @@ select{
 	opacity: 0.6;
 	cursor: pointer;
 }
+.menuitemlogin{
+	float:right;
+}
 .menuitemindex{
  	color: #EBC01C;
 	height: 40px;
@@ -487,12 +490,15 @@ select{
 .divRegistro{
 	line-height:40px;
 }
+#divTipoSubastas > .divRegistro {
+	width: 50%;
+}
 .divLogin > .floatingWindow > div > label,
 .divLogin > .floatingWindow > div > input, 
 .divRegistro > label:not([for="placa"]):not([for="registroEULA"]):not(.switch):not([for="switch"]), 
 .divRegistro > input:not([type="checkbox"]):not([type="radio"]),
-.divRegistro > .divRegistro,
-.divRegistro > select{
+.divRegistro > .divRegistro/*,
+.divRegistro > select*/{
 	width: 90%;
 	margin: 0 5% 6px;
 }
@@ -2026,9 +2032,12 @@ button[name="contactoEnviar"]{
 			border-left: 1px solid #D2D2D2;
 		    border-right: 1px solid #D2D2D2;
 		}
-	.divRenglonTabla > div > label{
+	.divRenglonTabla > div > label:not(.switch){
 		width:100%;
 		text-align: center;
+	}
+	.divRenglonTabla .switch {
+		    margin-left: calc(50% - 30px);
 	}
 /*---------- ENDS ADMINISTRADOR DE SUBASTAS---------*/
 /*---------  SWITCH ---------*/

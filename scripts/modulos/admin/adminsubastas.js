@@ -39,7 +39,6 @@ function CargaFuncionesAdminSubastas(){
 	$("#btnNuevaEmpresa").click(function(){
 	  		
 			$("#modalEmpresa").dialog({
-	        	height:200,
 	        	width:500,
 	        	modal:true,
 	        	title: "Agrega empresa",
@@ -113,7 +112,7 @@ function CargaFuncionesAdminSubastas(){
 
 
 	$("#btnFiltrar").click(function() {
-		debugger;
+		//debugger;
 			CargaSubastas( $("#cmbPublicada option:selected").val(),$("#cmbEmpresasFiltro option:selected").val());
 			
 	});
@@ -177,6 +176,7 @@ function CargaTipoSubastas(estatus){
 	postrequest("tiposubastas/listar", {"estatus":"1"}, function(data){
 		for (i in data){
 			$("#divTipoSubastas").append('<div class="divRegistro"><input type="radio" name="tiposubastas" id="tiposubastas" value="'+data[i].idTipo+'" >'+data[i].tipoSubasta+'</input></div>');
+			
 		}
 	});
 
@@ -202,7 +202,9 @@ function CargaSubastas(estatus, empresa){
 			div += '	<div><label>Vigencia: </label>'+data[i].fechaInicio+' - ' + data[i].fechaFin +'</div>';		
 			div += '	<div><label>Estatus: </label>'+data[i].estatus + '</div>';		
 			div += '	<div><label>Empresas:</label>'+data[i].empresas + '</div>';		
-			div += '	<div><label>Publicada:</label>'+data[i].publicada + '<input type="checkbox" attr-id="' + data[i].idSubasta +'" class="btnPublicar" '+ ((data[i].visible == 0) ? "" : "checked" )+ ' /></div>';
+			//div += '	<div><label>Publicada:</label>'+data[i].publicada + '<input type="checkbox" attr-id="' + data[i].idSubasta +'" class="btnPublicar" '+ ((data[i].visible == 0) ? "" : "checked" )+ ' /></div>';
+			div += '    <div><label>Publicada:</label><label>'+data[i].publicada + '</label></div>';
+			div += '	<div><label class="switch"><input type="checkbox" attr-id="' + data[i].idSubasta +'" class="btnPublicar" '+ ((data[i].visible == 0) ? "" : "checked" )+ ' /><div class="slider round"></div></label></div>';
 			div += '	<div></div>';	
 			div += '</div>';
 
@@ -281,6 +283,9 @@ function CargaSubastas(estatus, empresa){
 
 
 		$(".btnPublicar").click(function(){
+			
+			
+			
 			var visible = ($(this).prop("checked")) ? 1 : 0; 
 			var idSubasta = $(this).attr("attr-id");
 
@@ -294,6 +299,7 @@ function CargaSubastas(estatus, empresa){
 			}
 			})
 			
+			CargaSubastas( $("#cmbPublicada option:selected").val(),$("#cmbEmpresasFiltro option:selected").val());
 
 		});
 		
