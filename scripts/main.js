@@ -1,6 +1,15 @@
 $(document).ready(function(){
 
-  CargaContenidoMain();
+  
+	var urlvars = getUrlVars();
+	if(urlvars["accion"] != undefined){
+		$(".mainBody").load("views/interna2.html?id="+urlvars["id"], function() {});
+	}else{
+ 
+  		CargaContenidoMain();
+	}
+
+
 
   });
 

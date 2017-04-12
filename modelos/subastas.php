@@ -34,8 +34,11 @@ class subastas
             return self::listarSubastas();
         }else if ($peticion[0] == 'guardar') {
             return self::registrarOut();
-        }else if ($peticion[0] == 'publicar')
+        }else if ($peticion[0] == 'publicar'){
             return self::publicaOut();
+        }else if ($peticion[0] == 'xusuario'){
+
+        }
         else {
             throw new ExcepcionApi(self::ESTADO_URL_INCORRECTA, "Url mal formada", 400);
         }

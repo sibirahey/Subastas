@@ -193,6 +193,7 @@ function checkCookie() {
 } 
 
 function cargaAutosPorSubasta(subastaID, controlid ){
+
   $(controlid).html("");
   postrequest("autos/subasta", {"idsubasta" : subastaID  }, function(data) {
     
@@ -233,5 +234,23 @@ function regresaRenglonVenta(item){
   renglon += '</div>';
   return renglon;
 
+
+}
+
+function VerDetalleAuto(o)
+{
+  window.location = "?accion=detalleauto&id="+$(o).attr("attr-id");
+ 
+}
+
+function ObtieneSubastasPorUsuario(){
+  postrequest("subastas/xusuario", {"idsubasta" : subastaID  }, function(data) {
+    
+    for(var val in data){
+      debugger;
+      $(controlid).append(regresaRenglonVenta(data[val]));  
+    }
+    
+  });
 
 }

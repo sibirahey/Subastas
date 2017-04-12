@@ -242,10 +242,15 @@ function CargaSubastas(estatus, empresa){
 		$(".btnVerAutos").click(function(){
 			debugger;
 		 	var nombreSubasta = $(this).attr("attr-nombresubasta");
-			 var idSubasta = $(this).attr("attr-id");
+			var idSubasta = $(this).attr("attr-id");
+  			$("#divAutos").show();
+			cargaAutosPorSubasta(idSubasta, "#divListaAutos" );
 
-			 cargaAutosPorSubasta(idSubasta, "#divAutos" );
 
+		});
+
+		$("#btnCerrarListaAuto").click(function(){
+			$("#divAutos").hide();
 
 		});
 
