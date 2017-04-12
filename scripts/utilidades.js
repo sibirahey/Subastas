@@ -193,9 +193,14 @@ function checkCookie() {
 } 
 
 function cargaAutosPorSubasta(subastaID, controlid ){
+  $(controlid).html("");
   postrequest("autos/subasta", {"idsubasta" : subastaID  }, function(data) {
-    var html = "";
-    $(controlid).append(html);
+    
+    for(var val in data){
+      debugger;
+      $(controlid).append(regresaRenglonVenta(data[val]));  
+    }
+    
   });
 
 }
@@ -205,8 +210,8 @@ function regresaRenglonVenta(item){
 
 
   var renglon = '<div class="searchItem">';
-  renglon += '      <div class="searchItemHead" attr-id="'+item.idVehiculo+'" onclick="VerDetalleAuto(this);"><h3>'+item.marca+'['+item.modelo+']</h3></div>';
-  renglon += '      <div class="searchItemImg"><img attr-id="'+item.idVehiculo+'" onclick="VerDetalleAuto(this);" src="'+item.foto+'"/></div>';
+  renglon += '      <div class="searchItemHead" attr-id="'+item.idAuto+'" onclick="VerDetalleAuto(this);"><h3>'+item.marca+'['+item.modelo+']</h3></div>';
+  renglon += '      <div class="searchItemImg"><img attr-id="'+item.idAuto+'" width="100px" onclick="VerDetalleAuto(this);" src="'+ siteurl+ 'uploads/'+item.foto+'"/></div>';
   renglon += '    <div class="searchItemBody">';
   renglon += '      <div>';
   renglon += '        <h4>Año: </h4>';
