@@ -199,9 +199,6 @@ function CargaSubastas(estatus, empresa){
 			div += '		<div attr-id="' + data[i].idSubasta +'" attr-nombresubasta="'+data[i].nombreSubasta+'" class="btnAdministraAutos fa fa-plus-circle fa-2x button" text="administrar autos" ></div>';
 			div += '		<div attr-id="' + data[i].idSubasta +'" attr-nombresubasta="'+data[i].nombreSubasta+'" class="btnVerAutos fa fa-car fa-2x button" text="administrar autos" ></div>';
 			div += '		<div attr-id="' + data[i].idSubasta +'" attr-nombresubasta="'+data[i].nombreSubasta+'" class="btnAgregarUsuariosAutos fa fa-user-plus fa-2x button" text="administrar autos" ></div>';
-			div += '		<div type="button" class="fa fa-pencil-square-o button btnEditarSubasta" attr-id="' + data[i].idSubasta +'" alt="editar" ></div>';
-			div += '		<div attr-id="' + data[i].idSubasta +'" attr-nombresubasta="'+data[i].nombreSubasta+'" class="btnAdministraAutos fa fa-plus-circle button" text="administrar autos" ></div>';
-			div += '		<div attr-id="' + data[i].idSubasta +'" attr-nombresubasta="'+data[i].nombreSubasta+'" class="btnVerAutos fa fa-car button" text="administrar autos" ></div>';
 			div += '	</div>';
 			div += '	<div><label>Tipo de subasta: </label>'+data[i].tipoSubasta+'</div>';		
 			div += '	<div><label>Vigencia: </label>'+data[i].fechaInicio+' - ' + data[i].fechaFin +'</div>';		
@@ -255,7 +252,14 @@ function CargaSubastas(estatus, empresa){
 		$(".btnAgregarUsuariosAutos").click(function(){
 		 	var nombreSubasta = $(this).attr("attr-nombresubasta");
 			var idSubasta = $(this).attr("attr-id");
-			$("#divAdministraUsuarios").show();
+
+
+			
+
+
+
+			$("#divAdministraUsuarios").dialog("open"); 
+			
 			
 
 
@@ -353,6 +357,8 @@ function CargaSubastas(estatus, empresa){
 	}); //end postrequest
 	
 	
+
+
 	$(function() {
 		$(".divHeaderContenido").dialog({
 			autoOpen : false,
@@ -386,6 +392,25 @@ function CargaSubastas(estatus, empresa){
 				duration : 500
 			}
 		});
+
+	});
+
+	$(function(){
+		$("#divAdministraUsuarios").dialog({
+				title: "Invitar usuarios",
+				autoOpen : false,
+				modal: true,
+				width: 500,
+				resizable: false,
+				show : {
+					effect : "blind",
+					duration : 500
+				},
+				hide : {
+					effect : "blind",
+					duration : 500
+				}
+			});
 
 	});
 }

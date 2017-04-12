@@ -36,9 +36,9 @@ function CargaDatosPublico(){
 			$.each(data.vehiculos,function(i,item){
 				
 				
-				if($("#searchBox").val()== "" || item.marca.toLowerCase().indexOf($("#searchBox").val().toLowerCase())>=0 || item.modelo.toLowerCase().indexOf($("#searchBox").val().toLowerCase())>=0){
-					$("#searchBody").append(regresaRenglonVenta(item))
-				}
+				// if($("#searchBox").val()== "" || item.marca.toLowerCase().indexOf($("#searchBox").val().toLowerCase())>=0 || item.modelo.toLowerCase().indexOf($("#searchBox").val().toLowerCase())>=0){
+				// 	$("#searchBody").append(regresaRenglonVenta(item))
+				// }
 
 
 
