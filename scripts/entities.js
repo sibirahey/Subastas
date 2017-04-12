@@ -99,3 +99,25 @@ function Marca(id, descripcion, estatus){
 	this.descripcion = descripcion;
 	this.estatus = estatus;
 }
+
+
+function Modelo(id,descripcion,estatus,idMarca){
+	this.id = id;
+	this.descripcion = descripcion;
+	this.estatus = estatus;
+	this.idMarca = idMarca;
+}
+
+function Caracteristicas(id,descripcion,estatus){
+
+	this.id = id;
+	this.descripcion = descripcion;
+	this.estatus = estatus;
+
+}
+function Colores(id,descripcion,estatus){
+
+	this.id = id;
+	this.descripcion = descripcion;
+	this.estatus = estatus;
+}

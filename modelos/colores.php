@@ -103,7 +103,7 @@ class colores
 
     }
 
-    private function resgistra($colores){
+    private function registra($colores){
 
        try{
 
