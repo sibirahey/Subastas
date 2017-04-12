@@ -178,14 +178,12 @@ function checkCookie() {
           sessionStorage.setItem('correo', data["correo"]);
           sessionStorage.setItem('publico', data["publico"]);
           sessionStorage.setItem('es_admin', data["esadmin"]);
-          sessionStorage.setItem('claveapi', data["claveapi"]);
-          setCookie("escuderia-rememberme", data["claveapi"], true);
-          
+          sessionStorage.setItem('claveApi', data["claveApi"]);
+          setCookie("escuderia-rememberme", data["claveApi"], true);
+          debugger;
           window.location.href = "main.php";
 
-        } else {
-          alert("Error de usuario o contraseña");
-        }
+        } 
 
       });
 

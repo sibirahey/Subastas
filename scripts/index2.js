@@ -299,11 +299,11 @@ $(document).ready(function() {
 					sessionStorage.setItem('correo', data["correo"]);
 					sessionStorage.setItem('publico', data["publico"]);
 					sessionStorage.setItem('es_admin', data["esadmin"]);
-					sessionStorage.setItem('claveapi', data["claveapi"]);
+					sessionStorage.setItem('claveapi', data["claveApi"]);
 					
 					if($("#rememberme").is(':checked')){
 						
-						setCookie("escuderia-rememberme", data["claveapi"], true);
+						setCookie("escuderia-rememberme", data["claveApi"], true);
 					}
 					window.location.href = "main.php";
 

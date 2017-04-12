@@ -5,7 +5,7 @@ class usuarios
 
   
 
-    public function __construct($nombre ="", $appaterno = "", $apmaterno = "", $correo ="", $verificado = 0, $contrasena="", $valido=0, $publico = 1, $esadmin=0)
+    public function __construct($nombre ="", $appaterno = "", $apmaterno = "", $correo ="", $verificado = 0, $contrasena="", $valido=0, $publico = 1, $esadmin=0, $claveApi = "")
     {
         $this->nombre = $nombre;
         $this->appaterno = $appaterno;
@@ -16,6 +16,7 @@ class usuarios
         $this->valido = $valido;
         $this->publico = $publico;
         $this->esadmin= $esadmin;
+        $this->claveApi = $claveApi;
    
     }
 
@@ -44,7 +45,10 @@ class usuarios
             return self::registrar();
         } else if ($peticion[0] == 'login') {
             return self::login();
-        } else {
+        }else if ($peticion[0] == 'rememberme'){
+            return self::rememberme();
+        } 
+        else {
             throw new ExcepcionApi(self::ESTADO_URL_INCORRECTA, "Url mal formada", 400);
         }
     }   
@@ -190,7 +194,7 @@ class usuarios
                 $usuarioid = $pdo->lastInsertId();
 
 
-                print_r("----INSERT[ " + $usuarioid."] ");
+                
 
             }
 
@@ -252,6 +256,37 @@ class usuarios
         }
     }
 
+    private function rememberme(){
+        $claveapi = $_POST["claveapi"];
+        $comando = "SELECT nombre, appaterno, apmaterno, correo, verificado, contrasena, publico, es_admin from usuario where ".self::CLAVE_API." = '".$claveapi."' and curdate() < vigencia ";
+        $sentencia = ConexionBD::obtenerInstancia()->obtenerBD()->prepare($comando);
+        $sentencia->bindParam(1, $claveapi);
+
+        if ($sentencia->execute())
+        {
+            $fetch = $sentencia->fetch(PDO::FETCH_ASSOC);
+            $usuario = new usuarios();
+            if($fetch["contrasena"] != null){
+           
+                
+                $usuario->nombre = $fetch["nombre"];
+                $usuario->appaterno = $fetch["appaterno"];
+                $usuario->apmaterno = $fetch["apmaterno"];
+                $usuario->correo = $fetch["correo"];
+                $usuario->verificado = $fetch["verificado"];
+                $usuario->contrasena = $fetch["contrasena"];
+                $usuario->valido = 1;
+                $usuario->publico = $fetch["publico"];
+                $usuario->esadmin = $fetch["es_admin"];
+            }
+
+            return $usuario;
+        } 
+        else
+            return "error";
+
+    }
+
     private function login(){
         
         $mail = $_POST["email"];
@@ -260,18 +295,23 @@ class usuarios
             // Sentencia INSERT
         $comando = "SELECT nombre, appaterno, apmaterno, correo, verificado, contrasena, publico, es_admin from usuario where correo =? ";
         
-        $sentencia = ConexionBD::obtenerInstancia()->obtenerBD()->prepare($comando);
-        $sentencia->bindParam(1, $mail);
         
-       
-       
-
+         $pdo = ConexionBD::obtenerInstancia()->obtenerBD();
+         $sentencia = $pdo->prepare($comando);
+        $sentencia->bindParam(1, $mail);
         if ($sentencia->execute())
         {
             $fetch = $sentencia->fetch(PDO::FETCH_ASSOC);
             
             $valido = password_verify($password, $fetch["contrasena"]);
-           
+            
+            if($valido == 1){
+                $claveApi = self::generarClaveApi();
+                $comando = "update ".self::NOMBRE_TABLA." set claveApi = '".$claveApi."' where correo = '".  $mail."'";
+                $sentencia = $pdo->prepare($comando);
+                $sentencia->execute();
+
+            }
             $usuario = new usuarios();
             $usuario->nombre = $fetch["nombre"];
             $usuario->appaterno = $fetch["appaterno"];
@@ -282,11 +322,21 @@ class usuarios
             $usuario->valido = $valido;
             $usuario->publico = $fetch["publico"];
             $usuario->esadmin = $fetch["es_admin"];
+            $usuario->claveApi =  $claveApi;
+
+
+         
+
+
 
             return $usuario;
         } 
         else
             return "error";
+       
+       
+
+        
     
     }
 

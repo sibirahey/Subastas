@@ -6,6 +6,11 @@ $(document).ready(function(){
 		$(".mainBody").load("views/interna2.html?id="+urlvars["id"], function() {});
 	}else{
  
+  		postrequest("subastas/xusuario", {"idusuario":sessionStorage["claveApi"]},function(data){
+  			alert(data);
+
+  		});
+
   		CargaContenidoMain();
 	}
 

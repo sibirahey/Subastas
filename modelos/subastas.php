@@ -37,7 +37,7 @@ class subastas
         }else if ($peticion[0] == 'publicar'){
             return self::publicaOut();
         }else if ($peticion[0] == 'xusuario'){
-
+            return self::xusuario();
         }
         else {
             throw new ExcepcionApi(self::ESTADO_URL_INCORRECTA, "Url mal formada", 400);
@@ -99,6 +99,32 @@ class subastas
             $sentencia->bindParam(1, $estatus);
         }
 */
+        if ($sentencia->execute())
+            return $sentencia->fetchall(PDO::FETCH_ASSOC);
+        else
+            return null;
+        
+    }
+
+     private function xusuario()
+    {
+        
+        $comando = "select s.idSubasta, nombreSubasta, idTipoSubasta, tipo.tipoSubasta, fechaInicio, fechaFin, 
+(CASE WHEN curdate() BETWEEN fechaInicio and fechaFin then 'ACTIVA' WHEN curdate() < fechaInicio then 'AGENDADA' else 'TERMINADA' end )as estatus, visible, 
+(case visible when 0 then 'NO PUBLICADA' else 'PUBLICADA' end) as publicada,
+(select GROUP_CONCAT(emp.nombreEmpresa) from subastaempresa se, empresas emp where s.idSubasta = se.idSubasta and se.idEmpresa = emp.idEmpresa) as empresas, (select GROUP_CONCAT(emp.idEmpresa) from subastaempresa se, empresas emp where s.idSubasta = se.idSubasta and se.idEmpresa = emp.idEmpresa) as empresasId,incremento from subastas s, tiposubastas tipo  where s.idTipoSubasta = tipo.idTipo 
+and s.idSubasta in (select su.idSubasta from subasta_usuario su, usuario u where su.idUsuario = u.idUsuario
+and u.claveApi = ?)";
+
+print_r();$comando 
+
+        $pdo = ConexionBD::obtenerInstancia()->obtenerBD();
+        $sentencia = ->prepare($comando);
+        
+
+            $sentencia->bindParam(1, $_POST["idusuario"]);
+        
+
         if ($sentencia->execute())
             return $sentencia->fetchall(PDO::FETCH_ASSOC);
         else
