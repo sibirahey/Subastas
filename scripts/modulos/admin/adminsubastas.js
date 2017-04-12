@@ -34,6 +34,7 @@ function CargaFuncionesAdminSubastas(){
 	$("#txtFechaInicio" ).datepicker();
 	$("#txtFechaFin" ).datepicker();
 	$("#divRegistroAutos").hide();
+	$("#divAdministraUsuarios").hide();
 
 
 	$("#btnNuevaEmpresa").click(function(){
@@ -193,6 +194,7 @@ function CargaSubastas(estatus, empresa){
 			div += '		<div type="button" class="fa fa-pencil-square-o fa-2x button btnEditarSubasta" attr-id="' + data[i].idSubasta +'" alt="editar" ></div>';
 			div += '		<div attr-id="' + data[i].idSubasta +'" attr-nombresubasta="'+data[i].nombreSubasta+'" class="btnAdministraAutos fa fa-plus-circle fa-2x button" text="administrar autos" ></div>';
 			div += '		<div attr-id="' + data[i].idSubasta +'" attr-nombresubasta="'+data[i].nombreSubasta+'" class="btnVerAutos fa fa-car fa-2x button" text="administrar autos" ></div>';
+			div += '		<div attr-id="' + data[i].idSubasta +'" attr-nombresubasta="'+data[i].nombreSubasta+'" class="btnAgregarUsuariosAutos fa fa-user-plus fa-2x button" text="administrar autos" ></div>';
 			div += '	</div>';
 			div += '	<div><label>Tipo de subasta: </label>'+data[i].tipoSubasta+'</div>';		
 			div += '	<div><label>Vigencia: </label>'+data[i].fechaInicio+' - ' + data[i].fechaFin +'</div>';		
@@ -238,6 +240,47 @@ function CargaSubastas(estatus, empresa){
 			 cargaAutosPorSubasta(idSubasta, "#divAutos" );
 
 
+		});
+
+		$(".btnAgregarUsuariosAutos").click(function(){
+		 	var nombreSubasta = $(this).attr("attr-nombresubasta");
+			var idSubasta = $(this).attr("attr-id");
+			$("#divAdministraUsuarios").show();
+			
+
+
+		});
+
+		$("#btnUploadUserList").click(function() {
+		    
+		    var file_data = $('#listausuarios').prop('files')[0];   
+		    var form_data = new FormData();                  
+		    form_data.append('file', file_data);
+		    form_data.append('accion', 'listausuarios');
+		    $.ajax({
+		                url: 'upload.php', // point to server-side PHP script 
+		                dataType: 'text',  // what to expect back from the PHP script, if anything
+		                cache: false,
+		                contentType: false,
+		                processData: false,
+		                data: form_data,                         
+		                type: 'post',
+		                success: function(php_script_response){
+		                	if(php_script_response.substring(0, 2) == "ERR"){
+								alert(php_script_response);
+								
+
+		                	}else{
+
+		                		var filename = $('input[type=file]').val().replace(/C:\\fakepath\\/i, '');
+								$("#fotosSubidas").append("<div class='fotosAuto' attr-id='"+php_script_response+"'><span>"+filename+"</span><img width='100px' src='" + siteurl +  "uploads/" + php_script_response + "' /></div>");
+								clearFileInput('fotoAuto');
+		                		
+		                	}
+		                    
+		                }
+		     });
+		    
 		});
 
 		$(".btnEditarSubasta").click(function(){

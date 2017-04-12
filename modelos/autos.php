@@ -16,6 +16,7 @@ class autos
     const NOMBRE_TABLA = "autos";
     const IDAUTO = "idAuto";
     const ENVENTA = "enVenta";
+    const PRECIO = "precio";
     const MARCA = "marca";
     const MODELO = "modelo";
     const COLOR = "color";
@@ -40,10 +41,11 @@ class autos
     {
      
       
-        if ($peticion[0] == 'listar') {
-            return self::listarSubastas();
-        }else if ($peticion[0] == 'guardar') {
+        if ($peticion[0] == 'guardar') {
             return self::registrarOut();
+        }
+        else if($peticion[0] == 'subasta'){
+            return self::listarPorSubastas();
         }
         else {
             throw new ExcepcionApi(self::ESTADO_URL_INCORRECTA, "Url mal formada", 400);
@@ -51,61 +53,40 @@ class autos
     }   
 
     
-    private function listarSubastas()
-    {
-        $cuerpo = file_get_contents('php://input');
-        $subastas = json_decode($cuerpo);
-        
-        $resultado = self::listar($subastas);
-       
-        switch (sizeof($resultado)) {
-            case 0:
-               http_response_code(200);
-               throw new ExcepcionApi(self::SIN_RESULTADOS, "OK",200, null);
-               break;
-            
-            default:
-                http_response_code(200);
-                return $resultado;
-        }
-        
-    }
-    private function listar($datosListar)
-    {
-        
-        $estatus = $_POST['estatus'];
-        $estatusWhere = "";
-        $empresa = $_POST['empresa'];
-        $empresaFrom = "";
-        $empresaWhere = "";
 
-        if($estatus > -1){
-            $estatusWhere = " and visible = " .$estatus;
-        }
-        if($empresa > -1){
-            $empresaFrom = ", empresas e "; 
-            $empresaWhere = " and e.idEmpresa = " . $empresa;
-        }
+    private function listarPorSubastas()
+    {
         
-        $comando = "select idSubasta, nombreSubasta, idTipoSubasta, tipo.tipoSubasta, fechaInicio, fechaFin, CASE WHEN curdate() BETWEEN fechaInicio and fechaFin then 'ACTIVA' WHEN curdate() < fechaInicio then 'AGENDADA' else 'TERMINADA' end as estatus, visible, case visible when 0 then 'NO PUBLICADA' else 'PUBLICADA' end as publicada,(select GROUP_CONCAT(emp.nombreEmpresa) from subastaempresa se, empresas emp where s.idSubasta = se.idSubasta and se.idEmpresa = emp.idEmpresa) as empresas from subastas s, tiposubastas tipo " . $empresaFrom." where s.idTipoSubasta = tipo.idTipo  " . $empresaWhere . $estatusWhere ;
+        $idsubasta = $_POST['idsubasta'];
+        
+        $comando =  " SELECT au.idAuto, au.enVenta, au.precio, au.marca as marcaid, marca.descripcion as marca, au.modelo as modeloid, modelo.descripcion as modelo, ".
+                    " au.color as colorid, au.descripcion as color, au.anio, au.km, au.km, au.transmision as transmisionid, trans.descripcion as transmision, ".
+                    " au.estado as estadoid, est.nombre as estado, au.ciudad as ciudadid, mun.nombre as ciudad, au.descripcion, au.estatus, ".
+                    " au.publicado, au.fechaCreacion, aus.subastaId, ".
+                    " (select idFoto from auto_fotos where idAuto = au.idAuto limit 1) as foto, ".
+                    " (select GROUP_CONCAT(idFoto) from auto_fotos where idAuto = au.idAuto) AS fotos ".
+                    " FROM subastas_autos as aus, autos as au, cat_marca as marca, cat_modelo as modelo, cat_colores as color, cat_transmision as trans, estados as est, municipios as mun ".
+                    " WHERE aus.subastaId = ?  ".
+                    " and aus.autoId = au.idAuto  ".
+                    " and au.marca = marca.id  ".
+                    " and au.modelo = modelo.id  ".
+                    " and au.color = color.id  ".
+                    " and au.transmision = trans.id  ".
+                    " and au.estado = est.id ".
+                    " and au.ciudad = mun.id ";
         
      
-
-
-
         $sentencia = ConexionBD::obtenerInstancia()->obtenerBD()->prepare($comando);
         
-        /*
-        if($estatus >= 0){
-            $sentencia->bindParam(1, $estatus);
-        }
-*/
+        $sentencia->bindParam(1, $idsubasta);
+     
         if ($sentencia->execute())
             return $sentencia->fetchall(PDO::FETCH_ASSOC);
         else
             return null;
         
     }
+
 
     private function registrarOut()
     {
@@ -140,6 +121,7 @@ class autos
             // Sentencia INSERT
             $comando = "INSERT INTO " . self::NOMBRE_TABLA . " ( " .
                 self::ENVENTA . "," .
+                self::PRECIO ."," .
                 self::MARCA . "," .
                 self::MODELO . ",".
                 self::COLOR . ",".
@@ -151,22 +133,23 @@ class autos
                 self::DESCRIPCION . ",".
                 self::ESTATUS . ",".
                 self::PUBLICADO .")" .
-                " VALUES(?,?,?,?,?,?,?,?,?,?,?,?)";
- 
+                " VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?)";
+            
                 
             $sentencia = $pdo->prepare($comando);
             $sentencia->bindParam(1, $auto["enVenta"]);
-            $sentencia->bindParam(2, $auto["marca"]);
-            $sentencia->bindParam(3, $auto["modelo"]);
-            $sentencia->bindParam(4, $auto["color"]);
-            $sentencia->bindParam(5, $auto["anio"]);
-            $sentencia->bindParam(6, $auto["km"]);                          
-            $sentencia->bindParam(7, $auto["transmision"]);                          
-            $sentencia->bindParam(8, $auto["estado"]);                          
-            $sentencia->bindParam(9, $auto["ciudad"]);                          
-            $sentencia->bindParam(10, $auto["descripcion"]);     
-            $sentencia->bindParam(11, $auto["estatus"]);                          
-            $sentencia->bindParam(12, $auto["publicado"]);                          
+            $sentencia->bindParam(2, $auto["precio"]);
+            $sentencia->bindParam(3, $auto["marca"]);
+            $sentencia->bindParam(4, $auto["modelo"]);
+            $sentencia->bindParam(5, $auto["color"]);
+            $sentencia->bindParam(6, $auto["anio"]);
+            $sentencia->bindParam(7, $auto["km"]);                          
+            $sentencia->bindParam(8, $auto["transmision"]);                          
+            $sentencia->bindParam(9, $auto["estado"]);                          
+            $sentencia->bindParam(10, $auto["ciudad"]);                          
+            $sentencia->bindParam(11, $auto["descripcion"]);     
+            $sentencia->bindParam(12, $auto["estatus"]);                          
+            $sentencia->bindParam(13, $auto["publicado"]);                          
 
             //idAuto, enVenta, marca, modelo, color, anio, km, transmision, estado, ciudad, descripcion, estatus, publicado, fechaCreacion
                    
@@ -182,7 +165,14 @@ class autos
 
                 autosfeatures::registrar($auto["features"], $idAuto);
                 autosfotos::registrar($auto["fotos"], $idAuto);
-                return $idAuto;
+
+                if($auto["idSubasta"] > 0){
+
+                  subastasautos::registrar($idAuto, $auto["idSubasta"]);  
+                }
+                 
+                return $idAuto; 
+                
 
             } else {
                 return -1;

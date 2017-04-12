@@ -21,6 +21,7 @@ require_once("modelos/transmisiones.php");
 require_once("modelos/autos.php");
 require_once("modelos/autos-features.php");
 require_once("modelos/autos-fotos.php");
+require_once("modelos/subasta-autos.php");
 require_once('utilidades/ConexionBD.php');
 require_once('utilidades/ExcepcionApi.php');
 require_once('utilidades/Utilerias.php');

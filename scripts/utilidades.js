@@ -214,7 +214,7 @@ function regresaRenglonVenta(item){
   renglon += '        </div>';
   renglon += '        <div>';
   renglon += '          <h4>Kilometraje: </h4>';
-  renglon += '          <label>'+item.kms+'</label>';
+  renglon += '          <label>'+item.km+'</label>';
   renglon += '        </div>';
   renglon += '        <div>';
   renglon += '          <h4>Precio: </h4>';

@@ -16,6 +16,7 @@ class usuarios
         $this->valido = $valido;
         $this->publico = $publico;
         $this->esadmin= $esadmin;
+   
     }
 
     // Datos de la tabla "usuario"
@@ -32,6 +33,7 @@ class usuarios
     const MAIL_BIENVENIDO = "Bienvenido a Escudería";
     const ESTADO_CREACION_EXITOSA = 200;
     const ESTADO_CREACION_FALLIDA = 400;
+    const ESTADO_URL_INCORRECTA = "Error en el método";
     const PASSWORD_DEFAULT = "1234567890";
 
 
@@ -72,7 +74,6 @@ class usuarios
                 self::CORREO . "," .
                 self::VERIFICADO . ")" .
                 " VALUES(?,?,?,?,?,?,?,?)";
-
         
 
             $sentencia = $pdo->prepare($comando);
@@ -110,6 +111,56 @@ class usuarios
             }
         } catch (PDOException $e) {
 
+            throw new ExcepcionApi(self::ESTADO_URL_INCORRECTA, $e->getMessage(), 400);
+            
+        }
+
+    }
+
+    public function invitarUsuario($usuario){
+      
+       
+
+        $claveApi = self::generarClaveApi();
+
+        try {
+
+            $pdo = ConexionBD::obtenerInstancia()->obtenerBD();
+
+            // Sentencia INSERT
+            $comando = "INSERT INTO " . self::NOMBRE_TABLA . " ( " .
+                self::NOMBRE . "," .
+                self::APPATERNO . "," .
+                self::APMATERNO . "," .
+                self::CORREO . "," .
+                self::VERIFICADO . "," .
+                self::CLAVE_API . ")" .
+                " VALUES(?,?,?,?,?,?)";
+        
+
+            $sentencia = $pdo->prepare($comando);
+
+            $usuario->verificado = 0;
+            
+            
+            $sentencia->bindParam(1, $usuario->nombre);
+            $sentencia->bindParam(2, $usuario->appaterno);
+            $sentencia->bindParam(3, $usuario->apmaterno);
+            $sentencia->bindParam(4, $usuario->correo);
+            $sentencia->bindParam(5, $usuario->verificado);
+            $sentencia->bindParam(6, $claveApi);
+            $resultado = $sentencia->execute();
+
+            if ($resultado) {
+
+                envia_mail($usuario->correo, MAIL_BIENVENIDO, "<html><body>Bienvenido a escudería, para terminar su registro por favor confirme su mail: <a href=\"msusano.com/Subastas/usuarios/confirmar/". $claveApi."\">Confirmar mail</a></body></html>", "yo@msusano.com" );
+                return self::ESTADO_CREACION_EXITOSA;
+            } else {
+                return self::ESTADO_CREACION_FALLIDA;
+            }
+        } catch (PDOException $e) {
+
+            print_r($e);
             throw new ExcepcionApi(self::ESTADO_URL_INCORRECTA, $e->getMessage(), 400);
             
         }
