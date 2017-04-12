@@ -104,7 +104,11 @@ class usuarios
            
             if ($resultado) {
 
-                envia_mail($usuario["email"], MAIL_BIENVENIDO, "<html><body>Bienvenido a escudería, para terminar su registro por favor confirme su mail: <a href=\"msusano.com/Subastas/usuarios/confirmar/". $claveApi."\">Confirmar mail</a></body></html>", "yo@msusano.com" );
+
+
+
+
+                envia_mail($usuario["email"], self::MAIL_BIENVENIDO, "<html><body>Bienvenido a escudería, para terminar su registro por favor confirme su mail: <a href=\"msusano.com/Subastas/usuarios/confirmar/". $claveApi."\">Confirmar mail</a></body></html>", "yo@msusano.com" );
                 return self::ESTADO_CREACION_EXITOSA;
             } else {
                 return self::ESTADO_CREACION_FALLIDA;
@@ -117,7 +121,7 @@ class usuarios
 
     }
 
-    public function invitarUsuario($usuario){
+    public function invitarUsuario($usuario, $idSubasta){
       
        
 
@@ -127,33 +131,83 @@ class usuarios
 
             $pdo = ConexionBD::obtenerInstancia()->obtenerBD();
 
-            // Sentencia INSERT
-            $comando = "INSERT INTO " . self::NOMBRE_TABLA . " ( " .
-                self::NOMBRE . "," .
-                self::APPATERNO . "," .
-                self::APMATERNO . "," .
-                self::CORREO . "," .
-                self::VERIFICADO . "," .
-                self::CLAVE_API . ")" .
-                " VALUES(?,?,?,?,?,?)";
-        
+
+            $comando = "SELECT ".self::ID_USUARIO.",".self::CORREO." from ". self::NOMBRE_TABLA . " where ".self::CORREO . " = ? limit 1";
 
             $sentencia = $pdo->prepare($comando);
 
-            $usuario->verificado = 0;
-            
-            
-            $sentencia->bindParam(1, $usuario->nombre);
-            $sentencia->bindParam(2, $usuario->appaterno);
-            $sentencia->bindParam(3, $usuario->apmaterno);
-            $sentencia->bindParam(4, $usuario->correo);
-            $sentencia->bindParam(5, $usuario->verificado);
-            $sentencia->bindParam(6, $claveApi);
-            $resultado = $sentencia->execute();
+            $sentencia->bindParam(1, $usuario->correo);
 
-            if ($resultado) {
+            $cuenta = 0;
+            $resultado = false;
+            $usuarioid = 0;
 
-                envia_mail($usuario->correo, MAIL_BIENVENIDO, "<html><body>Bienvenido a escudería, para terminar su registro por favor confirme su mail: <a href=\"msusano.com/Subastas/usuarios/confirmar/". $claveApi."\">Confirmar mail</a></body></html>", "yo@msusano.com" );
+            if ($sentencia->execute()){
+                $resultado = $sentencia->fetchall(PDO::FETCH_ASSOC);
+                $cuenta = count($resultado);
+                if($cuenta > 0 ){
+                    $usuarioid = $resultado[0][self::ID_USUARIO];
+                }
+
+           
+                
+            }
+            else{
+                $cuenta = 0;
+            }
+
+
+            
+
+            if($cuenta < 1){
+            
+
+     
+
+                $comando = "INSERT INTO " . self::NOMBRE_TABLA . " ( " .
+                    self::NOMBRE . "," .
+                    self::APPATERNO . "," .
+                    self::APMATERNO . "," .
+                    self::CORREO . "," .
+                    self::VERIFICADO . "," .
+                    self::CLAVE_API .")" .
+                    " VALUES(?,?,?,?,?,?)";
+            
+
+                $sentencia = $pdo->prepare($comando);
+
+                $usuario->verificado = 0;
+                
+                
+                $sentencia->bindParam(1, $usuario->nombre);
+                $sentencia->bindParam(2, $usuario->appaterno);
+                $sentencia->bindParam(3, $usuario->apmaterno);
+                $sentencia->bindParam(4, $usuario->correo);
+                $sentencia->bindParam(5, $usuario->verificado);
+                $sentencia->bindParam(6, $claveApi);
+                
+                $resultado = $sentencia->execute();
+                $usuarioid = $pdo->lastInsertId();
+
+
+                print_r("----INSERT[ " + $usuarioid."] ");
+
+            }
+
+            
+            if ($usuarioid > 0) {
+
+                $comando = " insert into subasta_usuario ( idSubasta, idUsuario) values (?,?)";
+                
+
+                $sentencia = $pdo->prepare($comando);
+
+                $sentencia->bindParam(1, $idSubasta);
+                $sentencia->bindParam(2, $usuarioid);
+
+                $sentencia->execute();
+
+                envia_mail($usuario->correo, self::MAIL_BIENVENIDO, "<html><body>Bienvenido a escudería, para terminar su registro por favor confirme su mail: <a href=\"msusano.com/Subastas/usuarios/confirmar/". $claveApi."\">Confirmar mail</a></body></html>", "yo@msusano.com" );
                 return self::ESTADO_CREACION_EXITOSA;
             } else {
                 return self::ESTADO_CREACION_FALLIDA;

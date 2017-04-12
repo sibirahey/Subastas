@@ -252,12 +252,7 @@ function CargaSubastas(estatus, empresa){
 		$(".btnAgregarUsuariosAutos").click(function(){
 		 	var nombreSubasta = $(this).attr("attr-nombresubasta");
 			var idSubasta = $(this).attr("attr-id");
-
-
-			
-
-
-
+			$("#btnUploadUserList").attr("idSubasta",idSubasta)
 			$("#divAdministraUsuarios").dialog("open"); 
 			
 			
@@ -271,6 +266,7 @@ function CargaSubastas(estatus, empresa){
 		    var form_data = new FormData();                  
 		    form_data.append('file', file_data);
 		    form_data.append('accion', 'listausuarios');
+		    form_data.append('idsubasta', $(this).attr("idSubasta"));
 		    $.ajax({
 		                url: 'upload.php', // point to server-side PHP script 
 		                dataType: 'text',  // what to expect back from the PHP script, if anything
@@ -283,12 +279,11 @@ function CargaSubastas(estatus, empresa){
 		                	if(php_script_response.substring(0, 2) == "ERR"){
 								alert(php_script_response);
 								
-
+								$("#divAdministraUsuarios").dialog("close"); 
 		                	}else{
-
+		                		alert("La operación se realizó correctamente");
 		                		var filename = $('input[type=file]').val().replace(/C:\\fakepath\\/i, '');
-								$("#fotosSubidas").append("<div class='fotosAuto' attr-id='"+php_script_response+"'><span>"+filename+"</span><img width='100px' src='" + siteurl +  "uploads/" + php_script_response + "' /></div>");
-								clearFileInput('fotoAuto');
+							
 		                		
 		                	}
 		                    

@@ -36,8 +36,25 @@ require_once('utilidades/Utilerias.php');
         $guid = guidv4();
 
         if($_POST["accion"] == "listausuarios"){
+
+
+
+
+
             move_uploaded_file($_FILES['file']['tmp_name'], 'userlist/' . $guid.".".$ext);
             echo $guid.".".$ext;
+
+            
+            $pdo = ConexionBD::obtenerInstancia()->obtenerBD();
+            
+            $comando = "delete from subasta_usuario where idSubasta = ".$_POST["idsubasta"];
+
+            $sentencia = $pdo->prepare($comando);
+
+            $sentencia->execute();
+
+            
+
 
             $fila = 1;
             if (($gestor = fopen('userlist/' . $guid.".".$ext, "r")) !== FALSE) {
@@ -64,7 +81,7 @@ require_once('utilidades/Utilerias.php');
                                     $usuario->publico = 0;
                                     $usuario->esadmin = 0;
                                     
-                                    usuarios::invitarUsuario($usuario);
+                                    usuarios::invitarUsuario($usuario, $_POST["idsubasta"]);
 
 
                                 }
