@@ -1,6 +1,12 @@
+var typingTimer;
+var doneTypingIntervalo = 1000;
+
 function CargaFuncionesRegistroAuto(idSubasta){
 	$("#dialog").hide();
+	$('#btnActualizaCatalogo').hide();
+	$('#btnEliminaCatalogo').hide();
 	$("#cbAnioAuto").html(CargaAnioAutos(0));
+	$("#btnAddModelo").hide();
 	$("#btnAddFeature").click(function(){
 		
 		$("#divFeatureContainer").append(
@@ -27,7 +33,15 @@ function CargaFuncionesRegistroAuto(idSubasta){
 	});
 
 	$("#cbMarcaAuto").change(function(){
+		if($(this).val() >0){
+			$("#btnAddModelo").show();
+		}else{
 
+			$("#btnAddModelo").hide();
+
+		}
+		$("#btnAddMarca").attr('idItem',$(this).val());
+		$("#btnAddMarca").attr('Nombre',$(this).val());
 		CargaSelectModelos("#cbModeloAuto", "#cbMarcaAuto", 0, 1);
 	});
 
@@ -61,6 +75,11 @@ function CargaFuncionesRegistroAuto(idSubasta){
 		     });
 		    
 		});
+
+	 
+	  SoloNumericos("#precioAuto");
+	  SoloNumericos("#cbKMAuto");
+
 
 	$("#btnGuardaAuto").click(function (){
 		
@@ -102,17 +121,22 @@ function CargaFuncionesRegistroAuto(idSubasta){
 		});
 		
 
+		if (validaCamposAltaAutos(oAuto)){
+			debugger;
 		postrequest("autos/guardar", oAuto, function(data){
 
-			debugger;
+			
 			if(data > 0){
-				alert("Los datos se guardaron correctamente");
-				//CargaSubastas(-1,-1);
-			}else{
-				alert("Ocurrió un error al guardar");
+					alert("Los datos se guardaron correctamente");
+					$("#divRegistroAutos").dialog("close"); 
+					//CargaSubastas(-1,-1);
+				}else{
+					alert("Ocurrió un error al guardar");
 
-			}
-		});
+				}
+			});
+
+		}
 
 
 
@@ -121,21 +145,23 @@ function CargaFuncionesRegistroAuto(idSubasta){
 		CargaSelectColores("#cbColorAuto", 0, 1);
 	
 	
-   		$("#btnAddMarca").add("#btnAddModelo").add("#btnAddColor").add("#btnAddCaracteristicas").click(function(){
-   			$("#txtDescripcion").val("");
+   	$("#btnAddMarca").add("#btnAddModelo").add("#btnAddColor").add("#btnAddCaracteristicas").click(function(){
+   		$("#txtDescripcion").val("");
+   		$("#labelMensaje").text("");
+   		$('#btnActualizaCatalogo').hide();
+		$('#btnEliminaCatalogo').hide();
 		$( "#dialog" ).attr("title", $(this).attr("title"));
 		$( "#dialog" ).attr("operacion", $(this).attr("operacion") );
    		$("#labelTxtDescripcion").html($(this).attr("desc"));
    		$( "#dialog" ).dialog();
-
-   		
-   		
-
    });
-    $("#btnGuardarCatalogo").click(function(){
+
+
+    $("#btnGuardarCatalogo").add("#btnActualizaCatalogo").add('#btnEliminaCatalogo').click(function(){
    		
    		oObj = null;
    		var operacion = $( "#dialog" ).attr("operacion");
+   		
    		switch(operacion){
    			case "marcas":
    			oObj = new Marca();
@@ -160,9 +186,19 @@ function CargaFuncionesRegistroAuto(idSubasta){
 
    		}
 
+
+   		oObj.estatus = 1;
+   		if($(this).attr('idMarca') >0){
+   			oObj.id = $(this).attr('idMarca');
+   			if($(this).attr('estatus')==0)
+   				oObj.estatus = 0;
+   		}
+   		else{
    			oObj.id = 0;
-   			oObj.descripcion = $("#txtDescripcion").val();
-   			oObj.estatus = 1;
+   		}
+   		
+   		oObj.descripcion = $("#txtDescripcion").val();
+   			
    			
 
    		postrequest($( "#dialog" ).attr("operacion")+"/guardar", oObj, function(data){
@@ -185,18 +221,72 @@ function CargaFuncionesRegistroAuto(idSubasta){
 					CargaSelectFeatures("#cbFeaturesAutos","",1);
 				}
 
-				( "#dialog" ).dialog('close');
+				$("#dialog").dialog('close');
 
 			}
 
    		});
 
    });
-   
-	
+
+	eventoFinalizaEscritura('#txtDescripcion',buscaexistente,typingTimer,doneTypingIntervalo);
+
 
 
 }
+function buscaexistente(){
+
+	var txtDesc=$("#txtDescripcion").val().toUpperCase();
+	var tipomsj = "";
+	var elemento;
+	switch($( "#dialog" ).attr("operacion") ){
+		case "marcas":
+			tipomsj = "una Marca";
+			elemento = $('#cbMarcaAuto').find("option:icontains('"+txtDesc+"')");
+		break;
+		case "modelos":
+			tipomsj = "un Modelo";
+			elemento = $('#cbModeloAuto').find("option:icontains('"+txtDesc+"')");
+		break;
+
+		case "colores":
+			tipomsj = "un Color";
+			elemento = $('#cbColorAuto').find("option:icontains('"+txtDesc+"')");
+		break;
+
+		case "features":
+			tipomsj = "una Característica";
+			elemento = $('#cbFeaturesAutos').find("option:icontains('"+txtDesc+"')");
+		break;
+	}
+
+	if (elemento.text().toUpperCase() == txtDesc ){
+		$('#labelMensaje').text('Ya existe '+tipomsj+' con este nombre');
+		
+		$('#btnActualizaCatalogo').attr('idMarca',elemento.val());
+		$("#btnActualizaCatalogo").show();
+		
+		$('#btnEliminaCatalogo').attr('idMarca',elemento.val());
+		$('#btnEliminaCatalogo').attr('estatus','0');
+		$("#btnEliminaCatalogo").show();
+		
+
+	}else{
+		$('#labelMensaje').text('');
+		$('#btnActualizaCatalogo').attr('idMarca','0');
+		$('#btnActualizaCatalogo').hide();
+
+		$('#btnEliminaCatalogo').attr('idMarca','0');
+		$('#btnEliminaCatalogo').attr('estatus','1');
+		$('#btnEliminaCatalogo').hide();
+		
+
+		
+	}
+
+
+}
+
 function removeFeature(o){
 
 		$("#cbFeaturesAutos").append('<option value="'+$(o).attr("attr-id")+'" >' + $(o).attr("attr-text") + '</option>' );
@@ -218,4 +308,56 @@ function clearFileInput(id)
     oldInput.parentNode.replaceChild(newInput, oldInput); 
 }
 
+function validatextoVacio(inputElement,elementobloq){
 
+  $(inputElement).blur(function(){
+
+      if($(this).length ==0){
+      		$(elementobloq).prop("disabled",true);
+      }else{
+      	$(elementobloq).prop("disabled", false);
+      }
+
+  });
+
+}
+
+
+function validaCamposAltaAutos(item){
+	debugger;
+	var validado = true;
+		if (item.precio == '' || item.precio == undefined){
+			validado = false;
+		}
+		if (item.marca == '' || item.marca == undefined || item.marca == '0'){
+			validado = false;
+		}
+		if (item.modelo == '' || item.modelo == undefined || item.modelo == '0'){
+			validado = false;
+		}
+		if (item.color == '' || item.color == undefined || item.color == '0'){
+			validado = false;
+		}
+		if (item.anio == '' || item.anio == undefined){
+			validado = false;
+		}
+		if (item.km == '' || item.km == undefined){
+			validado = false;
+		}
+		if (item.transmision == '' || item.transmision == undefined || item.transmision == '0'){
+			validado = false;
+		}
+		if (item.estado == '' || item.estado == undefined || item.estado == '0'){
+			validado = false;
+		}
+		if (item.ciudad == '' || item.ciudad == undefined || item.ciudad == '0'){
+			validado = false;
+		}
+
+
+		if (!validado){
+			alert("Favor de llenar todos los campos requeridos");
+		}
+		return validado;
+
+}

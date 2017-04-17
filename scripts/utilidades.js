@@ -74,6 +74,7 @@ debugger;
   postrequest("modelos/listar?rand="+Math.random(), {"estatus":estatus, "id_marca":$(control_marca).val()}, function(data){
       
       $(control).html("");
+       $(control).append('<option value="0">== Seleccione ==</option>' );  
       if(data.mensaje != "OK"){
         for (i in data){
 
@@ -244,10 +245,55 @@ function ObtieneSubastasPorUsuario(){
   postrequest("subastas/xusuario", {"idsubasta" : subastaID  }, function(data) {
     
     for(var val in data){
-      debugger;
+      
       $(controlid).append(regresaRenglonVenta(data[val]));  
     }
     
   });
 
 }
+
+function eventoFinalizaEscritura(textdiv,FuncionFinaliza,timer,intervalo){
+ //definir variables timer intervalo 
+ 
+ $(textdiv).on('keyup', function(){
+  
+    clearTimeout(timer);
+    timer = setTimeout(FuncionFinaliza,intervalo);
+  });
+
+  $(textdiv).on('keydown', function(){
+    clearTimeout(timer);
+  });
+
+
+}
+
+jQuery.expr[':'].icontains = function(a, i, m) {
+  return jQuery(a).text().toUpperCase()
+      .indexOf(m[3].toUpperCase()) >= 0;
+};
+
+
+function SoloNumericos(inputItem){
+
+   $(inputItem).on("keypress keyup",function (event) {
+        // Allow: backspace, delete, tab, escape, enter and .
+      if (//$.inArray(event.keyCode, [46, 8, 9, 27, 13, 110, 190]) !== -1 ||
+             // Allow: Ctrl+A, Command+A
+            (event.keyCode === 65 && (event.ctrlKey === true || event.metaKey === true)) || 
+             // Allow: home, end, left, right, down, up
+            (event.keyCode >= 35 && event.keyCode <= 40)) {
+                 // let it happen, don't do anything
+                 return;
+        }
+            //this.value = this.value.replace(/[^0-9\.]/g,'');
+     //$(this).val($(this).val().replace(/[^0-9\.]/,''));
+
+            if ((event.which != 46 || $(this).val().indexOf('.') != -1) && (event.which < 48 || event.which > 57)) {
+                event.preventDefault();
+            }
+        });
+}
+
+
