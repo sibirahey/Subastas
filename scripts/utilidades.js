@@ -28,7 +28,7 @@ function CargaAnioAutos(anio){
 
 
 function CargaSelectEstados(control){
-
+debugger;
   postrequest("estados/listar?rand="+Math.random(), {"estatus":"1"}, function(data){
       
       $(control).append('<option value="0">== Seleccione ==</option>' );  
@@ -191,12 +191,11 @@ function checkCookie() {
 } 
 
 function cargaAutosPorSubasta(subastaID, controlid ){
-
+debugger;
   $(controlid).html("");
   postrequest("autos/subasta", {"idsubasta" : subastaID  }, function(data) {
     
     for(var val in data){
-      debugger;
       $(controlid).append(regresaRenglonVenta(data[val]));  
     }
     

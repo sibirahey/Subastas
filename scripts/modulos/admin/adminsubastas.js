@@ -7,6 +7,9 @@ function CargaFunciones(){
 		case "homeadmin":
 			CargaFuncionesAdminHome();
 			break;
+		case "ventaautos":
+			cargaVehiculos();
+			break;
 	}
 
 }
@@ -320,6 +323,21 @@ function CargaSubastas(estatus, empresa){
 			modal: true,
 			width: 500,
 			resizable: false,
+			dialogClass: "no-close",
+			  buttons: [
+			    {
+			      text: "Cancelar",
+			      click: function() {
+			        $( this ).dialog( "close" );
+			      }
+			    },
+			    {
+			      text: "Guardar Subasta",
+			      click: function() {
+			        $("#btnGuardarSubasta").click();
+			      }
+			    }
+			  ],
 			show : {
 				effect : "blind",
 				duration : 500

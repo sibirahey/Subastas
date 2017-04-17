@@ -59,8 +59,10 @@ $( document ).ready(function() {
 	});
 
     function CargaContenidoAdmin(o){
+    	//debugger;
  		fnToLoad = $(o).attr("name");
      	cargaHTML(".mainBody","views/main/admin/"+ $(o).attr("name")+".html", $(o).attr("name"),function() {
+     		//debugger;
       		CargaFunciones();
       	});
 

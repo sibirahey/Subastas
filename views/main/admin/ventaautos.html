@@ -1,103 +1,51 @@
-<img src="images/banner970x90.png" class="banner970x90"/>
-<div class="menuLeftMain">
-    <div class="mainFiltros">
-        <h3>Filtros</h3>
-        <div>
-            <label>Marca</label>
-            <select>
-                <option value="volvo">Volvo</option>
-                <option value="saab">Saab</option>
-                <option value="mercedes">Mercedes</option>
-                <option value="audi">Audi</option>
-            </select>
-        </div>
-        <div>
-            <label>Modelo</label>
-            <select>
-                <option value="volvo">Volvo</option>
-                <option value="saab">Saab</option>
-                <option value="mercedes">Mercedes</option>
-                <option value="audi">Audi</option>
-            </select>
-        </div>
-        <div>
-            <label>Año</label>
-            <select>
-                <option value="volvo">Volvo</option>
-                <option value="saab">Saab</option>
-                <option value="mercedes">Mercedes</option>
-                <option value="audi">Audi</option>
-            </select>
-        </div>
-        <div>
-            <label>Precio Minimo:</label>
-            <input type="text" placeholder="$"/>
-        </div>
-        <div>
-            <label>Precio Maximo:</label>
-            <input type="text" placeholder="$"/>
-        </div>
-        <div>
-            <input type="checkbox" />
-            <label>TODOS</label>
-        </div>
-        <div>
-            <input type="checkbox" />
-            <label>DEPORTIVO</label>
-        </div>
-        <div>
-            <input type="checkbox" />
-            <label>HATCKBACK</label>
-        </div>
-        <div>
-            <input type="checkbox" />
-            <label>MINIVAN</label>
-        </div>
-        <div>
-            <input type="checkbox" />
-            <label>PICKUP</label>
-        </div>
-        <div>
-            <input type="checkbox" />
-            <label>SEDAN</label>
-        </div>
-        <div>
-            <input type="checkbox" />
-            <label>SUV</label>
-        </div>
-        <div>
-            <input type="checkbox" />
-            <label>VAGONETA</label>
-        </div>
+<h2>BUSQUEDA DE AUTOS</h2>
+<div class="cnfgSubastaContainer">
+    <div>
+        <label>DESCRIPCION:</label>
+        <input type="text" name="desc">
     </div>
-    <img class="banner300x250" src="images/banner300x250.png">
-</div>
-<div id="divBusqueda">
-    <div id="searchBar">
-        <input type="text" id="searchBox" />
-        <div class="btnSearch">
-            <i class="fa fa-search" aria-hidden="true"></i>
-        </div>
+    <div>
+        <label>ESTADOS:</label>
+        <select id="cmbEstados" ></select>
     </div>
-    <div id="searchBody">
+    <div>
+        <label>PRECIO:</label>
+        <select id="cmbPrecio" ></select>
+    </div>
+    <div>
+        <label>KILOMETROS:</label>
+        <select id="cmbKilometros" ></select>
+    </div>
+    <div>
+        <label>MARCA:</label>
+        <select id="cmbMarcas" ></select>
+    </div>
+    <div>
+        <label>MODELO:</label>
+        <select id="cmbModelos" ></select>
+    </div>
+    <div>
+        <label>AÑO:</label>
+        <select id="cmbAnio" ></select>
+    </div>
+    <div class="btnContainer">
+        <button type="button" class="btnBuscar" onclick="cargaVehiculos()">
+            <label>Buscar</label>
+            <i class="fa fa-search fa-2x"></i>
+        </button>
+    </div>
 
-    </div>
 </div>
-<div id="divServicios">
 
-    <div id="divForInfo">
-        <h2>Tu Informaci&oacute;n:</h2>
-        <div>
-            <div>
-                Terminacion de tu placa:
-            </div>
-            <label></label>
-            <div class="colorPlaca"></div>
-            <h4>:</h4>
-            <h5></h5>
-        </div>
-    </div>
-    <div id="divOffers">
-        <img src="images/participarSubastas.jpg"/>
+<h2>VEH&Iacute;CULOS</h1>
+<div id="grdVehiculos">
+    <div class="rHeader">
+        <div></div>
+        <div>AUTOS</div>
+        <div>UBICACI&Oacute;N</div>
+        <div>KIL&Oacute;METROS</div>
+        <div>FOTOS</div>
+        <div>PRECIO</div>
+        <div></div>
     </div>
 </div>
