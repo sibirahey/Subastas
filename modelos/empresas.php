@@ -109,28 +109,53 @@ class empresas
         try {
 
             $pdo = ConexionBD::obtenerInstancia()->obtenerBD();
+            if ($empresa["idEmpresa"] == "0"){
 
-            // Sentencia INSERT
-            $comando = "INSERT INTO " . self::NOMBRE_TABLA . " ( " .
-                self::DESCRIPCION . "," .
-                self::ESTATUS . ")" .
-                " VALUES(?,?)";
 
-            $sentencia = $pdo->prepare($comando);
-            $sentencia->bindParam(1, $empresa["nombreEmpresa"]);
-            $sentencia->bindParam(2, $empresa["estatus"]);
+                // Sentencia INSERT
+                    $comando = "INSERT INTO " . self::NOMBRE_TABLA . " ( " .
+                            self::DESCRIPCION . "," .
+                            self::ESTATUS . ")" .
+                            " VALUES(?,?)";
+
+                    $sentencia = $pdo->prepare($comando);
+                    $sentencia->bindParam(1, $empresa["nombreEmpresa"]);
+                    $sentencia->bindParam(2, $empresa["estatus"]);
                        
             
 
  
-            $resultado = $sentencia->execute();
+                  $resultado = $sentencia->execute();
 
           
-            if ($resultado) {
-                return $pdo->lastInsertId();
-            } else {
+             if ($resultado) {
+                 return $pdo->lastInsertId();
+                } else {
                 return -1;
             }
+
+          }else{
+            $comando = "UPDATE " . self::NOMBRE_TABLA . " set " .
+                        self::DESCRIPCION . " = ? ," . 
+                        self::ESTATUS . " = ? " .
+                        " WHERE " . self::ID_EMPRESA . " = ? ";
+                        $sentencia = $pdo->prepare($comando);
+                        $sentencia->bindParam(1, $empresa["nombreEmpresa"]);
+                        $sentencia->bindParam(2, $empresa["estatus"]);
+                        $sentencia->bindParam(3,$empresa["idEmpresa"]);
+
+                        $resultado = $sentencia->execute();
+
+            if($resultado){
+                return $empresa["idEmpresa"];
+            } else{
+                return -1;
+            }
+
+          }
+
+
+
         } catch (PDOException $e) {
             
 
