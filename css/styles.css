@@ -84,7 +84,8 @@ select {
 	background-color: rgb(30,35,40);
 	box-shadow: 0 3px 6px rgb(0,0,0);
 }
-.mainHeader > div:nth-child(1) > div:nth-child(2), .mainHeader > div:nth-child(1) > div:nth-child(3) {
+.mainHeader > div:nth-child(1) > div:nth-child(2), 
+.mainHeader > div:nth-child(1) > div:nth-child(3) {
 	width: 80px;
 	line-height: 30px;
 	text-align: center;
@@ -94,7 +95,8 @@ select {
 	bottom: 0;
 	cursor: pointer;
 }
-.mainHeader > div:nth-child(1) > div:nth-child(2):hover, .mainHeader > div:nth-child(1) > div:nth-child(3):hover {
+.mainHeader > div:nth-child(1) > div:nth-child(2):hover, 
+.mainHeader > div:nth-child(1) > div:nth-child(3):hover {
 	color: blue;
 }
 
@@ -108,7 +110,11 @@ select {
 	background-color: rgb(80,85,90);
 	color: #ffffff;
 }
-.mainHeader > ul > li:nth-child(1), .mainHeader > ul > li:nth-child(2), .mainHeader > ul > li:nth-child(3), .mainHeader > ul > li:nth-child(4), .mainHeader > ul > li:nth-child(5) {
+.mainHeader > ul > li:nth-child(1), 
+.mainHeader > ul > li:nth-child(2), 
+.mainHeader > ul > li:nth-child(3), 
+.mainHeader > ul > li:nth-child(4), 
+.mainHeader > ul > li:nth-child(5) {
 	height: 40px;
 	width: calc((100% - 80px) /5 );
 	text-align: center;
@@ -116,12 +122,17 @@ select {
 	border-bottom: 1px solid #E2E2E2;
 	padding: 5px 10px 5px 0;
 }
-.mainHeader > ul > li:nth-child(1) > label, .mainHeader > ul > li:nth-child(2) > label, .mainHeader > ul > li:nth-child(3) > label, .mainHeader > ul > li:nth-child(4) > label, .mainHeader > ul > li:nth-child(5) > label {
+.mainHeader > ul > li:nth-child(1) > label, 
+.mainHeader > ul > li:nth-child(2) > label, 
+.mainHeader > ul > li:nth-child(3) > label, 
+.mainHeader > ul > li:nth-child(4) > label, 
+.mainHeader > ul > li:nth-child(5) > label {
 	border-right: 1px solid #E2E2E2;
 	line-height: 30px;
 	width: 100%;
 }
-.mainHeader > ul > li:nth-child(6), .mainHeader > ul > li:nth-child(7) {
+.mainHeader > ul > li:nth-child(6), 
+.mainHeader > ul > li:nth-child(7) {
 	height: 40px;
 	width: 40px
 }
@@ -160,7 +171,8 @@ select {
 	height: 40px;
 	opacity: 0.8;
 }
-.menuPrincipal > div:hover, .menuPrincipal > img:hover {
+.menuPrincipal > div:hover, 
+.menuPrincipal > img:hover {
 	opacity: 1;
 }
 .mainMinusHeader {
@@ -266,7 +278,8 @@ select {
 	padding-right: 20px;
 }
 
-.mainBody > .subastasDestacadasMain > .subastasDestacadasSmallLote, .mainBody > .subastasDestacadasMain > .subastasDestacadasSmallAnuncio {
+.mainBody > .subastasDestacadasMain > .subastasDestacadasSmallLote, 
+.mainBody > .subastasDestacadasMain > .subastasDestacadasSmallAnuncio {
 	height: 298px;
 	width: calc(50% - 6px);
 	background: #000000;
@@ -274,14 +287,16 @@ select {
 	border: 1px solid #E1E1E1;
 	margin: 0 0 2px 6px;
 }
-.mainBody > .subastasDestacadasMain > .subastasDestacadasSmallLote > div:not(img), .mainBody > .subastasDestacadasMain > .subastasDestacadasSmallAnuncio > div:not(img) {
+.mainBody > .subastasDestacadasMain > .subastasDestacadasSmallLote > div:not(img), 
+.mainBody > .subastasDestacadasMain > .subastasDestacadasSmallAnuncio > div:not(img) {
 	position: absolute;
 	width: 100%;
 	padding-top: 20px;
 	z-index: 2;
 	text-shadow: 0 2px 2px rgba(0,0,0,0.6);
 }
-.mainBody > .subastasDestacadasMain > .subastasDestacadasSmallLote > div:not(img) > div, .mainBody > .subastasDestacadasMain > .subastasDestacadasSmallAnuncio > div:not(img) > div > div {
+.mainBody > .subastasDestacadasMain > .subastasDestacadasSmallLote > div:not(img) > div, 
+.mainBody > .subastasDestacadasMain > .subastasDestacadasSmallAnuncio > div:not(img) > div > div {
 	clear: both;
 	color: #ffffff;
 	margin-left: 20px;
@@ -289,7 +304,8 @@ select {
 .mainBody > .subastasDestacadasMain > .subastasDestacadasSmallAnuncio > div:not(img) > div.txtSubastaAbierta {
 	position: absolute;
 }
-.mainBody > .subastasDestacadasMain > .subastasDestacadasSmallAnuncio > div:not(img) > div.txtSubastaAbierta > div.tituloSubasta, .mainBody > .subastasDestacadasMain > .subastasDestacadasSmallAnuncio > div:not(img) > div.txtSubastaAbierta > div.fechaSubasta {
+.mainBody > .subastasDestacadasMain > .subastasDestacadasSmallAnuncio > div:not(img) > div.txtSubastaAbierta > div.tituloSubasta, 
+.mainBody > .subastasDestacadasMain > .subastasDestacadasSmallAnuncio > div:not(img) > div.txtSubastaAbierta > div.fechaSubasta {
 	font-size: 1.6em;
 	font-weight: 500;
 }
@@ -313,7 +329,8 @@ select {
 .mainBody > .subastasDestacadasMain > .subastasDestacadasSmallLote > div > div.verDetalle {
 	margin-top: 10px;
 }
-.mainBody > .subastasDestacadasMain > .subastasDestacadasSmallLote > div:not(img) > div > a, .mainBody > .subastasDestacadasMain > .subastasDestacadasSmallAnuncio > div:not(img) > div > div > a {
+.mainBody > .subastasDestacadasMain > .subastasDestacadasSmallLote > div:not(img) > div > a, 
+.mainBody > .subastasDestacadasMain > .subastasDestacadasSmallAnuncio > div:not(img) > div > div > a {
 	text-decoration: none;
 	color: #ffffff;
 }
@@ -324,14 +341,16 @@ select {
 	position: absolute;
 	background-size: contain;
 }
-.mainBody > .subastasDestacadasMain > .subastasDestacadasSmallLote > .contenedorImagenPrinSubasta, .mainBody > .subastasDestacadasMain > .subastasDestacadasSmallAnuncio > .contenedorImagenPrinSubasta {
+.mainBody > .subastasDestacadasMain > .subastasDestacadasSmallLote > .contenedorImagenPrinSubasta, 
+.mainBody > .subastasDestacadasMain > .subastasDestacadasSmallAnuncio > .contenedorImagenPrinSubasta {
 	right: 0;
 	bottom: 0;
 	height: 100%;
 	position: absolute;
 	background-size: contain;
 }
-.mainBody > .subastasDestacadasMain > .subastasDestacadasSmallLote:after, .mainBody > .subastasDestacadasMain > .subastasDestacadasSmallAnuncio:after {
+.mainBody > .subastasDestacadasMain > .subastasDestacadasSmallLote:after, 
+.mainBody > .subastasDestacadasMain > .subastasDestacadasSmallAnuncio:after {
 	content: "";
 	position: absolute;
 	left: 0;
@@ -520,14 +539,6 @@ select {
     background-color: #3281B3;
     border-radius: 2px;
 }
-/*.divLogin > .floatingWindow > div > label, 
-.divLogin > .floatingWindow > div > input, 
-.divRegistro > label:not([for="placa"]):not([for="registroEULA"]):not(.switch):not([for="switch"]), 
-.divRegistro > input:not([type="checkbox"]):not([type="radio"]), 
-.divRegistro > .divRegistro{
-	width: 90%;
-	margin: 0 5% 6px;
-}*/
 .divLogin > .floatingWindow > div > label {
 	color: #ffffff;
 }
@@ -589,9 +600,7 @@ label[for="registroEULA"] {
 	font-size: 0.8em;
 	cursor: pointer;
 }
-
 /*---------- ENDS REGISTRATE / ENTRAR ---------*/
-
 /*---------- INTERNAS ---------*/
 .grayGradientHeader {
 	color: #F7E827;
@@ -811,17 +820,16 @@ label[for="registroEULA"] {
 /*---------- ENDS INTERNAS ---------*/
 /*---------- SETTINGS ----------*/
 .mainBody > h2 {
-	width: 80%;
-	margin: 10px 10% !important;
+	width: 1024px;
+	margin: 10px calc(50% - 512px);
 	font-weight: 500;
 }
 .cnfgSubastaContainer {
 	clear: both;
-	margin: 0 calc(50% - 512px );
+	margin: 20px calc(50% - 512px ) 0;
 	width: 1024px;
-	padding: 10px 20px;
+	padding: 16px 20px;
 	border: 1px solid #BCBCBC;
-	border-radius: 4px;
 	background-color: #FFFFFF;
 	font-size: 0.8em;
 }
@@ -833,10 +841,13 @@ label[for="registroEULA"] {
 }
 .cnfgSubastaContainer > div:nth-child(2),
 .cnfgSubastaContainer > div:nth-child(3),
-.cnfgSubastaContainer > div:nth-child(4),
-.cnfgSubastaContainer > div:nth-child(5),
-.cnfgSubastaContainer > div:nth-child(6) {
+.cnfgSubastaContainer > div:nth-child(4){
 	width: 33.3%;
+}
+.cnfgSubastaContainer > div:nth-child(5),
+.cnfgSubastaContainer > div:nth-child(6),
+.cnfgSubastaContainer > div:nth-child(7){
+	width: calc((100% - 130px) / 3);
 }
 .cnfgSubastaContainer > div > label,
 .cnfgSubastaContainer > div > div > label{
@@ -852,7 +863,7 @@ label[for="registroEULA"] {
 	border-radius: 0;
 }
 .cnfgSubastaContainer > div > input{
-	width:calc(100% - 110px);
+	width:calc(100% - 120px);
 	height:40px;
 }
 .cnfgSubastaContainer > div.btnContainer{
@@ -879,21 +890,18 @@ label[for="registroEULA"] {
 	height:40px;
 	text-align:left;
 	line-height:40px;
+	font-size:1.6em;
 }
 .cnfgSubastaContainer > .btnContainer > .btnBuscar{
 	height:40px;
 	line-height:40px;
 } 
 .cnfgSubastaContainer > .btnContainer > .btnBuscar > label{
-	line-height: 40px;
-    padding: 0 14px;
-    font-size:1.4em;
+    line-height: 40px;
+    padding: 0 8px;
+    font-size: 1.2em;
 }
-.cnfgSubastaContainer > .btnContainer > .btnBuscar > label:{
-	line-height: 40px;
-    padding: 0 14px;
-    font-size:1.4em;
-}
+
 /*
 .cnfgSubastaContainer > div:nth-child(1) > #cmbEmpresa {
 	width: 90%;
@@ -930,36 +938,32 @@ label[for="registroEULA"] {
 	width: 100%;
 }*/
 #grdVehiculos:not(.grdVehiculos2){
-background-color:#F0F0F0;
-border:1px solid #C8C8C8;
-clear:both;
-height:auto;
-width: 1024px;
-margin:0 calc(50% - 512px);
-font-size: 0.8em;
-}
+	background-color:#F0F0F0;
+	border:1px solid #C8C8C8;
+	clear:both;
+	height:auto;
+	width: 1024px;
+	margin:30px calc(50% - 512px) 0;
+	font-size: 0.8em;
+	}
 #grdVehiculos:not(.grdVehiculos2) > div:first-child {
 	color: #ffffff;
-	height: 30px;
-	line-height: 30px;
+	height: 40px;
+	line-height: 40px;
 	width: 100%;
-	background: #FD5A54; /* For browsers that do not support gradients */
-	background: -webkit-linear-gradient(top, #464646, #787878); /* For Safari 5.1 to 6.0 */
-	background: -o-linear-gradient(top, #464646, #787878); /* For Opera 11.1 to 12.0 */
-	background: -moz-linear-gradient(top, #464646, #787878); /* For Firefox 3.6 to 15 */
-	background: linear-gradient(to top, #464646, #787878); /* Standard syntax */
+	background-color: rgb(30,35,40); 
 }
 #grdVehiculos:not(.grdVehiculos2) > div:first-child > div:nth-child(1) {
-	height: 30px;
-	width: 40px;
+	height: 40px;
+	width: 100px;
 }
 #grdVehiculos:not(.grdVehiculos2) > div:first-child > div:nth-child(5) {
-	height: 30px;
+	height: 40px;
 	width: 100px;
 }
 #grdVehiculos:not(.grdVehiculos2) > div:first-child > div {
-	height: 30px;
-	width: calc((100% - 140px) / 5);
+	height: 40px;
+	width: calc((100% - 240px) / 5);
 	text-align: center;
 }
 #grdVehiculos:not(.grdVehiculos2) > div:not(:first-child) {
@@ -968,7 +972,7 @@ font-size: 0.8em;
 	width: 100%;
 }
 #grdVehiculos:not(.grdVehiculos2) > div:not(:first-child) > div:nth-child(1) {
-	width: 40px;
+	width: 100px;
 }
 #grdVehiculos:not(.grdVehiculos2) > div:not(:first-child) > div:nth-child(1) > input[type="checkbox"] {
 	float: none;
@@ -996,21 +1000,37 @@ font-size: 0.8em;
 	border:none;
 }
 #grdVehiculos:not(.grdVehiculos2) > div:not(:first-child) > div {
-	width: calc((100% - 140px) / 5);
+	width: calc((100% - 240px) / 5);
 }
-#grdVehiculos:not(.grdVehiculos2) > div:not(:first-child) > div > img {
+/*#grdVehiculos:not(.grdVehiculos2) > div:not(:first-child) > div > img {
 	float: none;
 	margin: 0 auto;
 	cursor: pointer;
 	width: 30px;
 	fill:#1D93D0;
-}
+}*/
 #grdVehiculos:not(.grdVehiculos2) > div:not(:first-child) > div:nth-child(odd) {
 }
 #grdVehiculos:not(.grdVehiculos2) > div:not(:first-child):nth-child(even) {
 	background-color: #ffffff;
 }
-.btnGuardar, .btnPublicar, #btnGuardaAuto {
+#grdVehiculos:not(.grdVehiculos2) > div:not(:first-child) > div:first-child{
+	margin-top:10px;
+	overflow: hidden;
+	height:100px;
+}
+#grdVehiculos:not(.grdVehiculos2) > div:not(:first-child) > div > img{
+	width: 90%;
+	margin: 0 5%;
+	background-size:cover;
+	background-repeat:no-repeat;
+	background-position: center;
+}
+
+
+.btnGuardar, 
+.btnPublicar, 
+#btnGuardaAuto {
 	float: right !important;
 	cursor: pointer;
 	border: none;
@@ -1235,7 +1255,8 @@ font-size: 0.8em;
 	margin: 0 10%;
 }
 
-.muestraGaleria > .galleryunselected, .muestraGaleria > .galleryselected {
+.muestraGaleria > .galleryunselected, 
+.muestraGaleria > .galleryselected {
 	width: calc((100% / 3)   - 8px );
 	height: 80px;
 	margin: 4px 4px;
@@ -1246,7 +1267,8 @@ font-size: 0.8em;
 .muestraGaleria > .galleryselected {
 	border: 4px solid blue;
 }
-.muestraGaleria > .galleryunselected > img, .muestraGaleria > .galleryselected > img {
+.muestraGaleria > .galleryunselected > img, 
+.muestraGaleria > .galleryselected > img {
 	height: 100%;
 	background-size: contain;
 	width: 100%;
@@ -1290,7 +1312,10 @@ font-size: 0.8em;
 	right: -15px;
 	box-shadow: 0 2px 4px 1px rgba(0,0,0,0.6);
 }
-.no-titlebar .ui-state-hover .ui-icon, .no-titlebar .ui-state-focus .ui-icon, .no-titlebar .ui-button:hover .ui-icon, .no-titlebar .ui-button:focus .ui-icon {
+.no-titlebar .ui-state-hover .ui-icon, 
+.no-titlebar .ui-state-focus .ui-icon, 
+.no-titlebar .ui-button:hover .ui-icon, 
+.no-titlebar .ui-button:focus .ui-icon {
 	background-image: url(../images/ui-icons_ffffff_256x240.png) !important;
 }
 .ui-button .ui-icon {
@@ -1304,7 +1329,13 @@ font-size: 0.8em;
 	display: table-cell !important;
 	float: none;
 }
-.ui-datepicker .ui-datepicker-title, .ui-state-default, .ui-widget-content .ui-state-default, .ui-widget-header .ui-state-default, .ui-button, html .ui-button.ui-state-disabled:hover, html .ui-button.ui-state-disabled:active {
+.ui-datepicker .ui-datepicker-title, 
+.ui-state-default, 
+.ui-widget-content .ui-state-default, 
+.ui-widget-header .ui-state-default, 
+.ui-button, 
+html .ui-button.ui-state-disabled:hover, 
+html .ui-button.ui-state-disabled:active {
 	float: none;
 }
 .ui-state-default a {

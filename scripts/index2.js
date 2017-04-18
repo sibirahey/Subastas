@@ -57,6 +57,7 @@ $(document).ready(function() {
 				cargaFuncionesLogin();
 				$('.mainHeader').hide();
 				$('.mainFooter').hide();
+				$('#loginMail').focus();
 			}else if (seccion == "servicios"){
 				initCargaServicios();
 			}
@@ -67,7 +68,6 @@ $(document).ready(function() {
 	}
 
 	function asignaFunciones() {
-		//inicializa el carrusel
 		
 		$(".menuitem").click(function() {
 			window.location = "?s="+$(this).attr("name");

@@ -132,15 +132,15 @@ function cargaVehiculos() {
 			$.each(data["vehiculos"], function(i, item) {
 				// if (FiltrarAutos(item)) {
 					var renglon = "<div value class='rows'>";
-					renglon += '<div><img alt="' + item.vehiculo + '" width="40px" src="' + item.foto + '"  /></div>';
+					renglon += '<div><img alt="' + item.vehiculo + '" src="' + item.foto + '"  /></div>';
 					renglon += "<div>" + item.descripcion + "</div>";					renglon += "<div>" + item.estado + "</div>";
 					renglon += "<div>" + item.kms + "</div>";
-					renglon += "<div><img src='images/icoCamara.svg' width='40px' onclick='muestraGaleria(" + item.idVehiculo + ");' /></div>";
+					renglon += "<div><img src='images/icoCamara.svg' onclick='muestraGaleria(" + item.idVehiculo + ");' /></div>";
 					renglon += "<div>" + item.precio + "</div>";
 					renglon += "<div><button>AGREGAR</button></div>";
 					renglon += "<div style='display:none;' id='gallery" + item.idVehiculo + "'>";
 					$.each(item.imagenes, function(j, item2) {
-						renglon += "<div class='galleryunselected'><img width='80px' src='fotos/" + item2 + "' onclick='seleccionaImagen(this);' /></div>"
+						renglon += "<div class='galleryunselected'><img src='fotos/" + item2 + "' onclick='seleccionaImagen(this);' onerror='images/missingImage.jpg' /></div>"
 					});
 					renglon += "</div>";
 
