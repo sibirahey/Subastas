@@ -34,13 +34,13 @@ $vista = new VistaJson();
 
 set_exception_handler(function ($exception) use ($vista) {
 	    $cuerpo = array(
-	        "estado" => $exception->estado,
+	        "estados" => $exception->estados,
 	        "mensaje" => $exception->getMessage()
 	    );
 	    if ($exception->getCode()) {
-	        $vista->estado = $exception->getCode();
+	        $vista->estados = $exception->getCode();
 	    } else {
-	        $vista->estado = 500;
+	        $vista->estados = 500;
 	    }
 
 	    $vista->imprimir($cuerpo);

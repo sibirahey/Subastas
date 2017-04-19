@@ -1,92 +1,126 @@
 
 <div class="divBotonera">
-	<label>Nueva Subasta</lable><div id="btnAgregarSubasta" class="fa fa-caret-down fa-2x"></div>
+    <label>Nueva Subasta</lable><div id="btnAgregarSubasta" class="fa fa-plus-circle fa-2x"></div>
 </div>
+
+<div id="divListaBotonera">
+    <div class="divItemBotonera">
+        <label for="cmbEmpresasFiltro" >Empresas</label>
+        <select id="cmbEmpresasFiltro" name="cmbEmpresasFiltro" ></select>
+    </div>
+    <div class="divItemBotonera">
+        <label for="cmbPublicada" >Estatus de publicación: </label>
+        <select id="cmbPublicada" name="cmbPublicada" >
+            <option value="-1"> == Todas ==</option>
+            <option value="0">No publicadas</option>
+            <option value="1">Publicadas</option>
+        </select>
+    </div>
+    <div class="divItemBotonera">
+        <div id="btnFiltrar">
+            FILTRAR
+        </div>
+    </div>
+
+</div>
+
 <div id="divAdminSubastas">
-	<div class="divHeaderContenido">
-		<div class="divRegistro">
-			<label for="txtNombreSubasta" >Lote</label>
-			<input type="text" id="txtNombreSubasta" name="txtNombreSubasta" />
-		</div>
-		<div class="divRegistro">
-			<label for="txtFechaInicio" >Fecha inicio:</label>
-			<input type="text" id="txtFechaInicio" name="txtFechaInicio" />
-		</div>
-		<div class="divRegistro">
-			<label for="txtFechaFin" >Fecha final:</label>
-			<input type="text" id="txtFechaFin" name="txtFechaFin" />
-		</div>
-		<div class="divRegistro" id="divTipoSubastas">
+    <div class="divHeaderContenido">
+        <div class="divRegistro">
+            <label for="txtNombreSubasta" >Lote</label>
+            <input type="text" id="txtNombreSubasta" name="txtNombreSubasta" />
+        </div>
+        <div class="divRegistro">
+            <label for="txtFechaInicio" >Fecha inicio:</label>
+            <input type="text" id="txtFechaInicio" name="txtFechaInicio" />
+        </div>
+        <div class="divRegistro">
+            <label for="txtFechaFin" >Fecha final:</label>
+            <input type="text" id="txtFechaFin" name="txtFechaFin" />
+        </div>
+        <div class="divRegistro" id="divTipoSubastas">
+            <label>Tipo de Subasta:</label>
 
-		</div>
-		<div class="divRegistro">
-			<label for="txtIncremento" >Incremento:</label>
-			<input type="text" id="txtIncremento" name="txtIncremento" />
-		</div>
-		<div class="divRegistro">
-			<label for="cmbEmpresas" >Empresas</label>
-			<select id="cmbEmpresas" name="cmbEmpresas" ></select>
-			<div id="btnNuevaEmpresa"> [ Nueva ]</div>
-			<div id="btnAgregaEmpresa"> [ + ]</div>
-		</div>
-		<div class="divRegistro" id="lstEmpresa">
-		</div>
-		<div class="divRegistro" >
-			<button id="btnGuardarSubasta" attr-idsubasta="0">Guardar Subasta</button>
-		</div>
+        </div>
+        <div class="divRegistro">
+            <label for="txtIncremento" >Incremento:</label>
+            <input type="text" id="txtIncremento" name="txtIncremento" />
+        </div>
+        <div class="divRegistro">
+            <label for="cmbEmpresas" >Empresas</label>
+            <select id="cmbEmpresas" name="cmbEmpresas" ></select>
+            <div id="btnNuevaEmpresa">
+                <i class="fa fa-plus-circle fa-2x"></i>
+            </div>
+            <div id="btnAgregaEmpresa">
+                <i class="fa fa-check-circle fa-2x"></i>
+            </div>
+        </div>
+        <div class="divRegistro" id="lstEmpresa"></div>
+        <!-- <div class="divRegistro" >
+            <button id="btnGuardarSubasta" attr-idsubasta="0">
+                Guardar Subasta
+            </button>
+        </div> -->
 
-	</div>
-	<div id="divListaSubastas">
-		<div id="divListaBotonera">
-			<div class="divItemBotonera">
-				<label for="cmbEmpresasFiltro" >Empresas</label>
-				<select id="cmbEmpresasFiltro" name="cmbEmpresasFiltro" ></select>
-			</div>
-			<div class="divItemBotonera">
-				<label for="cmbPublicada" >Estatus de publicación: </label>
-				<select id="cmbPublicada" name="cmbPublicada" >
-					<option value="-1"> == Todas ==</option>
-					<option value="0">No publicadas</option>
-					<option value="1">Publicadas</option>
-				</select>
-			</div>
-			<div class="divItemBotonera">
-				<div id="btnFiltrar">FILTRAR</div>
-			</div>
+    </div>
+    <div id="divListaSubastas">
+        <!-- <div id="divListaBotonera">
+        <div class="divItemBotonera">
+        <label for="cmbEmpresasFiltro" >Empresas</label>
+        <select id="cmbEmpresasFiltro" name="cmbEmpresasFiltro" ></select>
+        </div>
+        <div class="divItemBotonera">
+        <label for="cmbPublicada" >Estatus de publicación: </label>
+        <select id="cmbPublicada" name="cmbPublicada" >
+        <option value="-1"> == Todas ==</option>
+        <option value="0">No publicadas</option>
+        <option value="1">Publicadas</option>
+        </select>
+        </div>
+        <div class="divItemBotonera">
+        <div id="btnFiltrar">FILTRAR</div>
+        </div>
 
-		</div>
-		<div id="divListaContenido"></div>
-	</div>
-	<div id="divAdministraUsuarios">
-		<div class="divRegistro">
-			<input id="listausuarios" type="file" name="listausuarios" />
-			<div type="button" id="btnUploadUserList" class="fa fa-upload"   ></div>
-			<div id="listaUsuariosSubidos" ></div>
-		</div>
+        </div> -->
+        <div id="divListaContenido"></div>
+    </div>
+    <div id="divAdministraUsuarios">
+        <div class="divRegistro">
+            <input id="listausuarios" type="file" name="listausuarios" />
+            <div type="button" id="btnUploadUserList" class="fa fa-upload"   ></div>
+            <div id="listaUsuariosSubidos" ></div>
+        </div>
 
-	</div>
-	<div id="modalEmpresa">
-		<div class="divRegistro">
-			<label for="txtNombreEmpresa" >Empresa:</label>
-			<input type="text" id="txtNombreEmpresa" name="txtNombreEmpresa" />
-		</div>
-		<div class="divRegistro">
-			<div id="btnGuardaEmpresa">Guardar</div>
-		</div>
-	</div>
+    </div>
+    <div id="modalEmpresa">
+        <div >
+            <label for="txtNombreEmpresa" >Empresa:</label>
+            <input type="text" id="txtNombreEmpresa" name="txtNombreEmpresa" />
+            <label id="labelMsjEmpresa"></label>
+            <div id="btnGuardaEmpresa">
+                <i class="fa fa-save fa-2x"></i>
+            </div>
+            <div id="btnEliminaEmpresa" style="display: none;">
+                <i class="fa fa-save fa-2x"></i>
+            </div>
+
+        </div>
+    </div>
 </div>
-<div id="divAutos">
-	<div id="btnCerrarListaAuto" >Cerar</div>
-	<div id="divRegistroAutos">Registro Autos</div>
-	<div id="divListaAutos"></div>
+<div class="divContenido" id="divAutos" style="display: none;">
+    <div id="btnCerrarListaAuto" >
+        Cerar
+    </div>
+    <div id="divRegistroAutos">
+        Registro Autos
+    </div>
+    <div id="divListaAutos"></div>
 </div>
-
+<!--
 <div class="divContenido" id="divAutos">
-	
+
 </div>
 
-
-
-
-<div class="divContenido" id="divAutos"></div>
+<div class="divContenido" id="divAutos"></div> -->
 
