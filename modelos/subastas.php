@@ -116,13 +116,13 @@ class subastas
 and s.idSubasta in (select su.idSubasta from subasta_usuario su, usuario u where su.idUsuario = u.idUsuario
 and u.claveApi = ?)";
 
-print_r();$comando 
+        //print_r($comando);
 
         $pdo = ConexionBD::obtenerInstancia()->obtenerBD();
-        $sentencia = ->prepare($comando);
+        $sentencia = $pdo->prepare($comando);
         
 
-            $sentencia->bindParam(1, $_POST["idusuario"]);
+        $sentencia->bindParam(1, $_POST["idusuario"]);
         
 
         if ($sentencia->execute())

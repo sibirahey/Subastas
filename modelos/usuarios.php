@@ -258,7 +258,7 @@ class usuarios
 
     private function rememberme(){
         $claveapi = $_POST["claveapi"];
-        $comando = "SELECT nombre, appaterno, apmaterno, correo, verificado, contrasena, publico, es_admin from usuario where ".self::CLAVE_API." = '".$claveapi."' and curdate() < vigencia ";
+        $comando = "SELECT nombre, appaterno, apmaterno, correo, verificado, contrasena, publico, es_admin, claveApi from usuario where ".self::CLAVE_API." = '".$claveapi."' and curdate() < vigencia ";
         $sentencia = ConexionBD::obtenerInstancia()->obtenerBD()->prepare($comando);
         $sentencia->bindParam(1, $claveapi);
 
@@ -278,6 +278,7 @@ class usuarios
                 $usuario->valido = 1;
                 $usuario->publico = $fetch["publico"];
                 $usuario->esadmin = $fetch["es_admin"];
+                $usuario->claveApi = $fetch["claveApi"];
             }
 
             return $usuario;

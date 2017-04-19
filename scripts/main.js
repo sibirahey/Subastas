@@ -3,13 +3,11 @@ $(document).ready(function(){
   
 	var urlvars = getUrlVars();
 	if(urlvars["accion"] != undefined){
+		
 		$(".mainBody").load("views/interna2.html?id="+urlvars["id"], function() {});
 	}else{
- 
-  		postrequest("subastas/xusuario", {"idusuario":sessionStorage["claveApi"]},function(data){
-  			alert(data);
-
-  		});
+ 			
+  		
 
   		CargaContenidoMain();
 	}
@@ -21,6 +19,21 @@ $(document).ready(function(){
 function CargaContenidoMain(){
 
 	cargaHTML(".mainBody", "views/main.html","", function() {
+
+		postrequest("subastas/xusuario", {"idusuario":sessionStorage.claveapi },function(data){
+
+			alert(data.length);
+
+// <div id="seccInfoSeguridad" class="divSeccion divSeguridad">
+// 	<h2>Infografías de Seguridad</h2>
+// 	<img class="infoSeguridad" src="images/infoSeguridad.png">
+// 	<img class="banner300x600" src="images/banner300x600.png">
+// </div>
+
+			});
+  		});
+
+
   		$("#searchBox").keypress(function(e) {
 		    if(e.which == 13) {
 		        $("#searchBody").html("");
