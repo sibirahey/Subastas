@@ -135,29 +135,29 @@ class autos
                 $sentencia->bindParam($paramNum,$precioFin);
                 $paramNum++;
             }
-            ($anio <=0) {
+            if ($anio <=0) {
 
                 $sentencia->bindParam($paramNum,$anio);
                 $paramNum++;
             } 
-            ($kmIni <=0 && $kmFin<=0){
+            if ($kmIni <=0 && $kmFin<=0){
 
                 $sentencia->bindParam($paramNum, $kmIni);
                 $paramNum++;
                 $sentencia->bindParam($paramNum,$kmFin);
                 $paramNum++;
             }  
-            ($marcaid <=0) {
+            if ($marcaid <=0) {
 
                 $sentencia->bindParam($paramNum,$marcaid);
                 $paramNum++;
             }
-            ($estadoId<=0) {
+            if ($estadoId<=0) {
 
                 $sentencia->bindParam($paramNum,$estadoId);
                 $paramNum++;
             }
-            ($descripcion =="") {
+            if ($descripcion =="") {
 
                 $sentencia->bindParam($paramNum,$descripcion);
                 
