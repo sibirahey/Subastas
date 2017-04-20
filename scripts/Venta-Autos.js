@@ -1,92 +1,15 @@
 function cargaCatalogos(idDef) {
 
-	$.ajax({
-		dataType : "json",
-		url : "data/settings.json",
-		data : "data",
-		success : function(data) {
-
-			$.each(data["marcas"], function(i, item) {
-
-				if (item.id == idDef) {
-					$("#cmbMarcas").append('<option value="' + item.id + '" selected="selected">' + item.marca + '</option>');
-				} else {
-					$("#cmbMarcas").append('<option value="' + item.id + '">' + item.marca + '</option>');
-				}
-
-				var toogleItem = '<input class="marcaCB" type="checkbox" name="marca' + i + '" id="marca' + i + '">';
-				toogleItem += '<label for="marca' + i + '">' + item.marca + '</label>';
-
-				$(".toggles").append(toogleItem);
-			});
-			$.each(data["modelos"], function(i, item) {
-
-				if (item.id == idDef) {
-					$("#cmbModelos").append('<option value="' + item.id + '" selected="selected">' + item.modelo + '</option>');
-				} else {
-					$("#cmbModelos").append('<option value="' + item.id + '">' + item.modelo + '</option>');
-				}
-
-				var toogleItem = '<input class="marcaCB" type="checkbox" name="modelo' + i + '" id="modelo' + i + '">';
-				toogleItem += '<label for="modelo' + i + '">' + item.modelo + '</label>';
-				$(".toggles").append(toogleItem);
-
-			});
-
-			$.each(data["estados"], function(i, item) {
-
-				if (item.id == idDef) {
-					$("#cmbEstados").append('<option value="' + item.id + '" selected="selected">' + item.estado + '</option>');
-				} else {
-					$("#cmbEstados").append('<option value="' + item.id + '">' + item.estado + '</option>');
-				}
-
-				var toogleItem = '<input class="marcaCB" type="checkbox" name="estado' + i + '" id="estado' + i + '">';
-				toogleItem += '<label for="estado' + i + '">' + item.estado + '</label>';
-
-				$(".toggles").append(toogleItem);
-
-			});
-			$.each(data["precios"], function(i, item) {
-
-				if (item.id == idDef) {
-					$("#cmbPrecio").append('<option value="' + item.id + '" selected="selected' + '" min="' + item.min + '" max="' + item.max + '">' + item.precio + '</option>');
-				} else {
-					$("#cmbPrecio").append('<option value="' + item.id + '" min="' + item.min + '" max="' + item.max + '">' + item.precio + '</option>');
-				}
-
-				var toogleItem = '<input class="marcaCB" type="checkbox" name="precio' + i + '" id="precio' + i + '">';
-				toogleItem += '<label for="precio' + i + '">' + item.precio + '</label>';
-
-				$(".toggles").append(toogleItem);
-
-			});
-
-			$.each(data["kilometros"], function(i, item) {
-
-				if (item.id == idDef) {
-					$("#cmbKilometros").append('<option value="' + item.id + '" selected="selected' + '" min="' + item.minKM + '" max="' + item.maxKM + '">' + item.km + '</option>');
-				} else {
-					$("#cmbKilometros").append('<option value="' + item.id + '" min="' + item.minKM + '" max="' + item.maxKM + '">' + item.km + '</option>');
-				}
-
-				var toogleItem = '<input class="marcaCB" type="checkbox" name="kilometro' + i + '" id="kilometro' + i + '">';
-				toogleItem += '<label for="kilometro' + i + '">' + item.km + '</label>';
-
-				$(".toggles").append(toogleItem);
-
-			});
-
-		}
-	});
-	var end = 1950;
-	var start = new Date().getFullYear();
-	var options = "";
-	$("#cmbAnio").append('<option value ="-1">==TODOS==</option>');
-	for (var year = start; year >= end; year--) {
-		$("#cmbAnio").append('<option value ="' + year + '">' + year + '</option>');
-	}
-
+		CargaSelectEstados("#cmbEstados");
+	//CargaSelectMunicipios("#cbCiudadAuto", $("#cbEstadoAuto").val());
+	CargaSelectMarcas("#cmbMarcas", 0,1);
+	CargaSelectModelos("#cmbModelos", "#cmbMarcas", 0, 1);
+	//CargaSelectTipoTransmision("#cbTipoTransmisionAuto", 0, 1);
+ 	//CargaSelectFeatures("#cbFeaturesAutos","",1);
+ 	$("#cmbAnio").html(CargaAnioAutos(0));
+$("#cmbMarcas").change(function(){
+	CargaSelectModelos("#cmbModelos", "#cmbMarcas", 0, 1);
+});
 }
 
 function muestraGaleria(idx) {

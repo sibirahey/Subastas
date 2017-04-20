@@ -851,7 +851,13 @@ label[for="registroEULA"] {
 }
 .cnfgSubastaContainer > div > label,
 .cnfgSubastaContainer > div > div > label{
-	width:100px;
+	width:110px;
+	text-align:right;
+	line-height:40px;
+	margin-right:10px;
+}
+.cnfgSubastaContainer > div > label.A{
+	width:20px;
 	text-align:right;
 	line-height:40px;
 	margin-right:10px;
@@ -864,6 +870,10 @@ label[for="registroEULA"] {
 }
 .cnfgSubastaContainer > div > input{
 	width:calc(100% - 120px);
+	height:40px;
+}
+.cnfgSubastaContainer > div.rango > input{
+	width:calc(100% - 240px);
 	height:40px;
 }
 .cnfgSubastaContainer > div.btnContainer{

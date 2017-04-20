@@ -46,6 +46,8 @@ class autos
         }
         else if($peticion[0] == 'subasta'){
             return self::listarPorSubastas();
+        }else if($peticion[0] == 'listar'){
+            return self::listar();
         }
         else {
             throw new ExcepcionApi(self::ESTADO_URL_INCORRECTA, "Url mal formada", 400);
@@ -85,6 +87,90 @@ class autos
         else
             return null;
         
+   }
+
+    private function listar(){
+
+        $precioIni = $_POST["precioIni"];
+        $precioFin = $_POST["precioFin"];
+        $kmIni = $_POST["kmIni"];
+        $kmFin = $_POST["kmFin"];
+        $anio = $_POST["anio"];
+        $marcaId = $_POST["marcaId"];
+        $estadoId = $_POST["estadoId"];
+        $descripcion = $_POST["descripcion"];
+
+        $comando ="SELECT au.idAuto, au.enVenta, au.precio, au.marca as marcaid, marca.descripcion as marca, au.modelo as modeloid, modelo.descripcion as modelo," . 
+            " au.color as colorid, au.descripcion as color, au.anio, au.km, au.km, au.transmision as transmisionid, trans.descripcion as transmision, " . 
+            " au.estado as estadoid, est.nombre as estado, au.ciudad as ciudadid, mun.nombre as ciudad, au.descripcion, au.estatus," . 
+            " au.publicado, au.fechaCreacion, " . 
+            " (select idFoto from auto_fotos where idAuto = au.idAuto limit 1) as foto," . 
+            " (select GROUP_CONCAT(idFoto) from auto_fotos where idAuto = au.idAuto) AS fotos " . 
+            " FROM  autos as au, cat_marca as marca, cat_modelo as modelo, cat_colores as color, cat_transmision as trans, estados as est, municipios as mun " . 
+            " WHERE  au.marca = marca.id" . 
+            " and au.modelo = modelo.id" . 
+            " and au.color = color.id" . 
+            " and au.transmision = trans.id" . 
+            " and au.estado = est.id" . 
+            " and au.ciudad = mun.id" . 
+            " and au.enVenta = 1" . 
+            (($precioIni <=0 && $precioFin <=0)? "":" and precio between  ? AND ?") . 
+            (($anio <=0) ?"":" and anio = ?") . 
+            (($kmIni <=0 && $kmFin<=0) ? "" : " and au.km between ? AND ?") . 
+            (($marcaid <=0) ? "" : " and au.marca = ?") . 
+            (($estadoId<=0) ? "" : " and au.estado = ?")  . 
+            (($descripcion =='') ? "" :  "and au.descripcion like '%?%'");
+
+
+
+
+
+            $sentencia =ConexionBD::obtenerInstancia()->obtenerBD()->prepare($comando);
+
+           $paramNum = 1;
+
+            if ($precioIni <=0 && $precioFin <=0){
+                $sentencia->bindParam($paramNum, $precioIni);
+                $paramNum++;
+                $sentencia->bindParam($paramNum,$precioFin);
+                $paramNum++;
+            }
+            ($anio <=0) {
+
+                $sentencia->bindParam($paramNum,$anio);
+                $paramNum++;
+            } 
+            ($kmIni <=0 && $kmFin<=0){
+
+                $sentencia->bindParam($paramNum, $kmIni);
+                $paramNum++;
+                $sentencia->bindParam($paramNum,$kmFin);
+                $paramNum++;
+            }  
+            ($marcaid <=0) {
+
+                $sentencia->bindParam($paramNum,$marcaid);
+                $paramNum++;
+            }
+            ($estadoId<=0) {
+
+                $sentencia->bindParam($paramNum,$estadoId);
+                $paramNum++;
+            }
+            ($descripcion =="") {
+
+                $sentencia->bindParam($paramNum,$descripcion);
+                
+            }
+
+            if ($sentencia->execute()){
+                return $sentencia->fetchall(PDO::FETCH_ASSOC);
+            }else
+            {
+                return null;
+            }
+
+            
     }
 
 
