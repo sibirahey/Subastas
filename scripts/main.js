@@ -230,7 +230,7 @@ function cargaVehiculos() {
 			$.each(data["vehiculos"], function(i, item) {
 				var renglon = "<div>";
 				renglon += '<div onclick="verDetalle('+item.idVehiculo+');"><input type="checkbox" attr="attr-idx' + item.idVehiculo + '"  /></div>';
-				renglon += '<div><img alt="' + item.vehiculo + '" width="40px" src="' + item.foto + '" onclick="verDetalle('+item.idVehiculo+');"  /></div>';
+				renglon += '<div><img onerror=\'imgError(this)\'; alt="' + item.vehiculo + '" width="40px" src="' + item.foto + '" onclick="verDetalle('+item.idVehiculo+');"  /></div>';
 				renglon += "<div>";
 				renglon += "<div>" + item.vehiculo + "</div>";
 				renglon += "<div>" + item.descripcion + "</div>";
@@ -241,7 +241,7 @@ function cargaVehiculos() {
 				renglon += "<div>" + item.salida + "</div>";
 				renglon += "<div style='display:none;' id='gallery" + item.idVehiculo + "'>";
 				$.each(item.imagenes, function(j, item2) {
-					renglon += "<div class='galleryunselected'><img width='80px' src='fotos/" + item2 + "' onclick='seleccionaImagen(this);' /></div>"
+					renglon += "<div class='galleryunselected'><img width='80px' src='fotos/" + item2 + "' onclick='seleccionaImagen(this);' onerror='imgError(this)'; /></div>"
 				});
 				renglon += "</div>";
 
@@ -280,4 +280,9 @@ function verDetalle(idVehiculo){
 	
 	});
 
+}
+function imgError(image) {
+    image.onerror = "";
+    image.src = "images/imagenNoDisponible.svg";
+    return true;
 }
