@@ -24,9 +24,9 @@ body {
 textarea {
 	resize: none;
 }
-/*select {
+select {
 	height: 30px;
-}*/
+}
 /*----------------- --------------*/
 .mainContainer {
 	height: 100%;
@@ -493,19 +493,6 @@ textarea {
 	line-height: 30px;
 	margin-right: 20px;
 }
-#divListaBotonera > .divItemBotonera select,
-#divListaBotonera > .divItemBotonera input[type="text"]{
-	border:none;
-	border-bottom:1px solid #8C8C8C;
-	-webkit-transition : border 500ms ease-out;
-	-moz-transition : border-bottom 500ms ease-out;
-	-o-transition : border-bottom 500ms ease-out;
-	transition : border-bottom 500ms ease-out;
-}
-#divListaBotonera > .divItemBotonera select:focus,
-#divListaBotonera > .divItemBotonera input[type="text"]:focus{
-	border-bottom:1px solid #468CF0;	
-}
 #btnFiltrar {
 	height: 30px;
 	padding: 0 20px;
@@ -846,7 +833,7 @@ label[for="registroEULA"] {
 	background-color: #FFFFFF;
 	font-size: 0.8em;
 }
-/*.cnfgSubastaContainer > div{
+.cnfgSubastaContainer > div{
 	height:50px;
 }
 .cnfgSubastaContainer > div:nth-child(1){
@@ -864,13 +851,7 @@ label[for="registroEULA"] {
 }
 .cnfgSubastaContainer > div > label,
 .cnfgSubastaContainer > div > div > label{
-	width:110px;
-	text-align:right;
-	line-height:40px;
-	margin-right:10px;
-}
-.cnfgSubastaContainer > div > label.A{
-	width:20px;
+	width:100px;
 	text-align:right;
 	line-height:40px;
 	margin-right:10px;
@@ -883,10 +864,6 @@ label[for="registroEULA"] {
 }
 .cnfgSubastaContainer > div > input{
 	width:calc(100% - 120px);
-	height:40px;
-}
-.cnfgSubastaContainer > div.rango > input{
-	width:calc(100% - 240px);
 	height:40px;
 }
 .cnfgSubastaContainer > div.btnContainer{
@@ -924,21 +901,6 @@ label[for="registroEULA"] {
     padding: 0 8px;
     font-size: 1.2em;
 }
-.cnfgSubastaContainer input[type="text"],
-.cnfgSubastaContainer select{
-	border:none;
-	border-bottom:1px solid #8C8C8C;
-	-webkit-transition : border 500ms ease-out;
-	-moz-transition : border-bottom 500ms ease-out;
-	-o-transition : border-bottom 500ms ease-out;
-	transition : border-bottom 500ms ease-out;
-}
-.cnfgSubastaContainer input[type="text"]:focus,
-.cnfgSubastaContainer select:focus{
-	border-bottom:1px solid #F5F5F5;
-}*/
-
-
 
 /*
 .cnfgSubastaContainer > div:nth-child(1) > #cmbEmpresa {
@@ -1004,10 +966,6 @@ label[for="registroEULA"] {
 	width: calc((100% - 240px) / 5);
 	text-align: center;
 }
-#grdVehiculos:not(.grdVehiculos2) > div:first-child > div:nth-child(6) {
-	text-align: right;
-    padding-right: 20px;
-}
 #grdVehiculos:not(.grdVehiculos2) > div:not(:first-child) {
 	min-height: 80px;
 	padding: 5px 0;
@@ -1031,7 +989,7 @@ label[for="registroEULA"] {
 #grdVehiculos:not(.grdVehiculos2) > div:not(:first-child) > div:nth-child(6){
 	text-align:right;
 }
-/*#grdVehiculos:not(.grdVehiculos2) > div:not(:first-child) > div:nth-child(7) > button{
+#grdVehiculos:not(.grdVehiculos2) > div:not(:first-child) > div:nth-child(7) > button{
 	height:30px;
 	width:80px;
 	line-height:30px;
@@ -1040,7 +998,7 @@ label[for="registroEULA"] {
 	float:none;
 	margin: 0 auto;
 	border:none;
-}*/
+}
 #grdVehiculos:not(.grdVehiculos2) > div:not(:first-child) > div {
 	width: calc((100% - 240px) / 5);
 }
@@ -1292,10 +1250,10 @@ label[for="registroEULA"] {
 .toggles > label {
 	width: calc(100% - 30px);
 }
-/*.btnContainer {
+.btnContainer {
 	width: 80%;
 	margin: 0 10%;
-}*/
+}
 
 .muestraGaleria > .galleryunselected, 
 .muestraGaleria > .galleryselected {
@@ -2273,10 +2231,6 @@ input:checked + .slider:before {
 	border-radius: 0;
 	width:calc(100% - 260px);
 }
-.divHeaderContenido > .divRegistro > input,
-.divHeaderContenido > .divRegistro > select{
-	
-}
 .divHeaderContenido > .divRegistro > #btnNuevaEmpresa,
 .divHeaderContenido > .divRegistro > #btnAgregaEmpresa{
 	height:40px;
@@ -2328,11 +2282,5 @@ input:checked + .slider:before {
 }
 /*--------- ENDS AGREGA EMPRESA ---------*/
 /*--------- VENTA AUTOS---------*/
-/*--------- ENDS VENTA AUTOS ---------*/
-/*--------- VENTA AUTOS---------*/
-#divRegistroAutos .divRegistro > label{
-	width: 150px;
-	text-align:right;
-	padding-right:8px;
-}
+
 /*--------- ENDS VENTA AUTOS ---------*/
