@@ -7855,7 +7855,7 @@ input[type=range]:focus::-ms-fill-upper {
   }
 }
 
-.slider:not(.switch) {
+.slider:not(.switch):not(.round) {
   position: relative;
   height: 400px;
   width: 100%;

@@ -1,108 +1,54 @@
-<!-- <h2>BUSQUEDA DE AUTOS</h2> -->
-<div class="cnfgSubastaContainer">
-    <div>
-        <label>DESCRIPCION:</label>
-        <input type="text" name="desc">
-    </div>
-    <div>
-        <label>ESTADOS:</label>
-        <select id="cmbEstados" ></select>
-    </div>
-    <div class = "rango">
-        <label>PRECIO DE:</label>
-        <!--<select id="cmbPrecio" ></select>-->
-        <input type="text" name="txtPrecioIni">
-        <label class="A">A:</label>
-        <input type="text" name="txtPrecioFin">
-    </div>
-    <div class ="rango">
-        <label>KILOMETROS DE:</label>
-        <!--<select id="cmbKilometros" ></select>-->
-        <input type="text" name="txtKmIni">
-        <label class="A">A:</label>
-        <input type="text" name="txtKmFin">
-    </div>
-    <div>
-        <label>MARCA:</label>
-        <select id="cmbMarcas" ></select>
-    </div>
-    <div>
-        <label>MODELO:</label>
-        <select id="cmbModelos" ></select>
-    </div>
-    <div>
-        <label>AÑO:</label>
-        <select id="cmbAnio" ></select>
-    </div>
-    <div class="btnContainer">
-        <button type="button" class="btnBuscar" onclick="cargaVehiculos()">
-            <label>Buscar</label>
-            <i class="fa fa-search"></i>
-        </button>
-    </div>
-
 <div class="cnfgSubastaContainer row">
     <form class="col s12">
 	    <div class="input-field col s12">
 	        <label for="desc">DESCRIPCION:</label>
 	        <input id="desc" type="text" class="validate" name="desc">
 	    </div>
-	    <div class="input-field col s4">
-	        <label>ESTADOS:</label>
-	        <select id="cmbEstados" ></select>
+	    <div class="rango col s6">
+	    	<div class="input-field col s6">
+		        <label for="txtPrecioIni">PRECIO DE:</label>
+		        <input type="text" name="txtPrecioIni">
+	        </div>
+	        <div class="input-field col s6">
+		        <label class="A" for="txtPrecioFin">A:</label>
+		        <input type="text" name="txtPrecioFin">
+	        </div>
 	    </div>
-	    <div class="input-field col s4">
-	        <label>PRECIO:</label>
-	        <select id="cmbPrecio" ></select>
-	    </div>
-	    <div class="input-field col s4">
-	        <label>KILOMETROS:</label>
-	        <select id="cmbKilometros" ></select>
+	    <div class="rango col s6">
+	        <div class="input-field col s6">
+		        <label for="txtKmIni">KILOMETROS DE:</label>
+		        <input type="text" name="txtKmIni">
+	        </div>
+	        <div class="input-field col s6">
+		        <label class="A" for="txtKmFin">A:</label>
+		        <input type="text" name="txtKmFin">
+	        </div>
 	    </div>
 	    <div class="input-field col s3">
-	        <label>MARCA:</label>
-	        <select id="cmbMarcas" ></select>
+	        <select id="cmbEstados" name="cmbEstados"></select>
+	        
 	    </div>
 	    <div class="input-field col s3">
-	        <label>MODELO:</label>
-	        <select id="cmbModelos" ></select>
+	        <select id="cmbMarcas" name="cmbMarcas"></select>
+	        
 	    </div>
-	    <div class="input-field col s3">
-	        <label>AÑO:</label>
-	        <select id="cmbAnio" ></select>
+	    <div class="input-field col s2">
+	        <select id="cmbModelos" name="cmbModelos"></select>
+	        
 	    </div>
-	    <div class="btnContainer input-field col s3">
+	    <div class="input-field col s2">
+	        <select id="cmbAnio" name="cmbAnio"></select>	        
+	    </div>
+	    <div class="btnContainer input-field col s2">
 	        <button type="button" class="btnBuscar btn waves-effect waves-light right light-blue lighten-1" type="submit" onclick="cargaVehiculos()">
 	            Buscar
 	            <i class="material-icons right">search</i>
 	        </button>
 	    </div>
-	    
-	    
-	    
-	    <!-- <div class="row">
-			<form class="col s12">
-				<div class="row">
-					<div class="input-field col s6">
-						<input placeholder="Placeholder" id="first_name" type="text" class="validate">
-						<label for="first_name">First Name</label>
-					</div>
-					<div class="input-field col s6">
-						<input id="last_name" type="text" class="validate">
-						<label for="last_name">Last Name</label>
-					</div>
-				</div>
-			</form>
-		</div> -->
-	    
-	    
-	    
-	    
-	    
 	</form>
 </div>
 
-<!-- <h2>VEH&Iacute;CULOS</h1> -->
+
 <div id="grdVehiculos">
     <div class="rHeader">
         <div></div>

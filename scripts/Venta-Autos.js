@@ -1,15 +1,15 @@
 function cargaCatalogos(idDef) {
-
-		CargaSelectEstados("#cmbEstados");
+	debugger;
+	CargaSelectEstados("#cmbEstados");
 	//CargaSelectMunicipios("#cbCiudadAuto", $("#cbEstadoAuto").val());
 	CargaSelectMarcas("#cmbMarcas", 0,1);
 	CargaSelectModelos("#cmbModelos", "#cmbMarcas", 0, 1);
 	//CargaSelectTipoTransmision("#cbTipoTransmisionAuto", 0, 1);
  	//CargaSelectFeatures("#cbFeaturesAutos","",1);
  	$("#cmbAnio").html(CargaAnioAutos(0));
-$("#cmbMarcas").change(function(){
-	CargaSelectModelos("#cmbModelos", "#cmbMarcas", 0, 1);
-});
+	$("#cmbMarcas").change(function(){
+		CargaSelectModelos("#cmbModelos", "#cmbMarcas", 0, 1);
+	});
 }
 
 function muestraGaleria(idx) {
@@ -94,11 +94,11 @@ function imgError(image) {
 }
 
 function FiltrarAutos(item) {
-	 var precioMax = $('#cmbPrecio option:selected').attr('max');
-	 var precioMin = $('#cmbPrecio option:selected').attr('min');
+	 var precioMax = $('#cmbPrecio').attr('max');
+	 var precioMin = $('#cmbPrecio').attr('min');
  
-	 var kmMax = $('#cmbKilometros option:selected').attr('max');
-	 var kmMin = $('#cmbKilometros option:selected').attr('min');
+	 var kmMax = $('#cmbKilometros').attr('max');
+	 var kmMin = $('#cmbKilometros').attr('min');
 	 var valida = true;
 	if ($('#cmbPrecio').val() != -1) {
 		if (((precioMin < item.precioint && item.precioint < precioMax) || (precioMax == 0 && precioMin > 0 && item.precioint > precioMin))) {

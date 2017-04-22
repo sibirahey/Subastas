@@ -18,7 +18,11 @@ function esAdmin(){
 
 function CargaAnioAutos(anio){
   var options = "";
+ 
+  options += '<option value="0" disabled selected>Año</option>';
+ 
   for(i = (new Date().getFullYear() + 1); i > 1950; i--){
+    
     options += '<option value="'+i+'" '  + ((i == anio) ? 'selected="selected"' : '' )+' >' + i+'</option>';
 
   }
@@ -28,10 +32,10 @@ function CargaAnioAutos(anio){
 
 
 function CargaSelectEstados(control){
-debugger;
+	
   postrequest("estados/listar?rand="+Math.random(), {"estatus":"1"}, function(data){
       
-      $(control).append('<option value="0">== Seleccione ==</option>' );  
+      $(control).append('<option value="0" disabled selected>Estado</option>' );  
       for (i in data){
 
         $(control).append('<option value="'+data[i].id+'">' + data[i].nombre + '</option>' );
@@ -60,7 +64,7 @@ debugger;
   
   postrequest("marcas/listar?rand="+Math.random(), {"estatus":estatus}, function(data){
       $(control).html("");
-      $(control).append('<option value="0">== Seleccione ==</option>' );  
+      $(control).append('<option value="0" disabled selected>Marca</option>' );  
       for (i in data){
 
         $(control).append('<option value="'+data[i].id+'" '+((data[i].id == id_marca) ? 'selected="selected"':'' ) +' >' + data[i].descripcion + '</option>' );
@@ -74,7 +78,7 @@ debugger;
   postrequest("modelos/listar?rand="+Math.random(), {"estatus":estatus, "id_marca":$(control_marca).val()}, function(data){
       
       $(control).html("");
-       $(control).append('<option value="0">== Seleccione ==</option>' );  
+       $(control).append('<option value="0" disabled selected>Modelo</option>' );  
       if(data.mensaje != "OK"){
         for (i in data){
 
@@ -104,7 +108,7 @@ function CargaSelectFeatures(control, features, estatus){
   
   postrequest("features/listar?rand="+Math.random(), {"estatus":estatus}, function(data){
       
-      $(control).append('<option value="0" >== Seleccione ==</option>' );
+      $(control).append('<option value="0" disabled selected></option>' );
 
       for (i in data){
 
@@ -117,7 +121,7 @@ function CargaSelectFeatures(control, features, estatus){
 
 function CargaSelectColores(control, id_color, estatus){
   
-  $(control).append('<option value="0">== Seleccione ==</option>' );  
+  $(control).append('<option value="0" disabled selected></option>' );  
   postrequest("colores/listar?rand="+Math.random(), {"estatus":estatus}, function(data){
       
 
@@ -167,7 +171,7 @@ function getCookie(cname) {
 } 
 
 function checkCookie() {
-    debugger;
+    
     var rememberme = getCookie("escuderia-rememberme");
     if (rememberme != "") {
         postrequest("usuarios/rememberme", {"claveapi" : rememberme  }, function(data) {
@@ -181,7 +185,7 @@ function checkCookie() {
           sessionStorage.setItem('es_admin', data["esadmin"]);
           sessionStorage.setItem('claveApi', data["claveApi"]);
           setCookie("escuderia-rememberme", data["claveApi"], true);
-          debugger;
+          
           window.location.href = "main.php";
 
         } 
@@ -192,7 +196,7 @@ function checkCookie() {
 } 
 
 function cargaAutosPorSubasta(subastaID, controlid ){
-debugger;
+
   $(controlid).html("");
   postrequest("autos/subasta", {"idsubasta" : subastaID  }, function(data) {
     

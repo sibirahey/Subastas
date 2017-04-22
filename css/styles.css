@@ -2125,12 +2125,12 @@ button[name="contactoEnviar"] {
 	margin: 20px 0 0 calc(50% - 512px);
 	width:180px;
 }
-#divAutos {
+/*#divAutos {
 	margin: 20px calc(50% - 512px) 0 0;
-}
-#divAutos > label {
+}*/
+/*#divAutos > label {
 	display: none;
-}
+}*/
 #divListaSubastas {
 	width: 100%;
 }

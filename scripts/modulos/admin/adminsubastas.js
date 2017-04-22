@@ -39,7 +39,7 @@ function CargaFuncionesAdminSubastas(){
 	$(".divHeaderContenido").hide();
 	$("#txtFechaInicio" ).datepicker();
 	$("#txtFechaFin" ).datepicker();
-	$("#divRegistroAutos").hide();
+	//$("#divRegistroAutos").hide();
 	$("#divAdministraUsuarios").hide();
 
 
@@ -143,7 +143,7 @@ function CargaFuncionesAdminSubastas(){
 	});
 
 	$("#btnAgregaAuto").click(function(){
-			$("#divRegistroAutos").dialog("open");
+			//$("#divRegistroAutos").dialog("open");
 	});
 
 	CargaEmpresas(0);
@@ -345,7 +345,7 @@ function CargaSubastas(estatus, empresa){
 	
 	$(function() {
 		$(".divHeaderContenido").dialog({
-			title: "Nueva Subasta",
+			//title: "Nueva Subasta",
 			autoOpen : false,
 			modal: true,
 			width: 500,
