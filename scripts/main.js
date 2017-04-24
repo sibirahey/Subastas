@@ -1,27 +1,3 @@
-$(document).ready(function(){
-	
-  
-	var urlvars = getUrlVars();
-	
-	if(urlvars["accion"] == undefined || urlvars["accion"] == "dashboard"){
-		
-		$(".mainBody").load("views/main/dashboard.html", function() {});
-	}else{
- 		
- 		fnToLoad = urlvars["accion"];
-  		
-  		cargaHTML(".mainBody","views/main/admin/"+ urlvars["accion"] +".html", urlvars["accion"],function() {
-     		
-			if(urlvars["accion"] == "homeadmin")
-			{
-
-				CargaFuncionesAdminHome();
-			}else{
-
-      			CargaFunciones();
-      		}
-      	});
-	}
 $(document).ready(function() {
 
 	var urlvars = getUrlVars();
@@ -39,38 +15,6 @@ $(document).ready(function() {
 function CargaContenidoMain() {
 
 	cargaHTML(".mainBody", "views/main.html", "", function() {
-
-		
-			
-		postrequest("subastas/xusuario", {"idusuario":sessionStorage.claveApi },function(data){
-
-			alert(data.length);
-
-		});
-  	});
-
-
-	$("#searchBox").keypress(function(e) {
-	    if(e.which == 13) {
-	        $("#searchBody").html("");
-	  		if(sessionStorage.getItem('publico') == 1){
-	  			CargaDatosPrivado();
-	  		}else{
-	  			CargaDatosPublico();
-	  		}
-
-	    }
-	});
-	console.log("key:"+sessionStorage.getItem('publico'));
-
-	if(sessionStorage.getItem('publico') == 1){
-		CargaDatosPrivado();
-	}else{
-		CargaDatosPublico();
-	}
-
-
-};
 
 		postrequest("subastas/xusuario", {
 			"idusuario" : sessionStorage.claveapi
