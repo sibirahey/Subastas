@@ -19,8 +19,7 @@
 
   <script type="text/javascript" src="scripts/main.js<?php echo "?".rand(0, 9999999); ?>"></script>
   <script type="text/javascript" src="scripts/header.js<?php echo "?".rand(0, 9999999); ?>"></script>
-  <script type="text/javascript" src="scripts/admin.js<?php echo "?".rand(0, 9999999); ?>"></script>  
-  <!-- <script type="text/javascript" src="scripts/footer.js<?php echo "?".rand(0, 9999999); ?>"></script> -->
+  <script type="text/javascript" src="scripts/admin.js<?php echo "?".rand(0, 9999999); ?>"></script> 
   <script type="text/javascript" src="scripts/utilidades.js<?php echo "?".rand(0, 9999999); ?>"></script>
   <script type="text/javascript" src="scripts/request.js<?php echo "?".rand(0, 9999999); ?>"></script>
   <script type="text/javascript" src="scripts/imgSlider.js<?php echo "?".rand(0, 9999999); ?>"></script>
@@ -29,6 +28,7 @@
   <script type="text/javascript" src="scripts/modulos/admin/adminsubastas.js<?php echo "?".rand(0, 9999999); ?>"></script>
   <script type="text/javascript" src="scripts/modulos/admin/altaauto.js<?php echo "?".rand(0, 9999999); ?>"></script>
   <script type="text/javascript" src="scripts/Venta-Autos.js<?php echo "?".rand(0, 9999999); ?>"></script>
+  <script type="text/javascript" src="scripts/adminhome.js<?php echo "?".rand(0, 9999999); ?>"></script>
   
 </head>
 <body>

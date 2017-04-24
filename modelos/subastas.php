@@ -121,7 +121,7 @@ and u.claveApi = ?)";
         $pdo = ConexionBD::obtenerInstancia()->obtenerBD();
         $sentencia = $pdo->prepare($comando);
         
-
+        print_r($_POST);
         $sentencia->bindParam(1, $_POST["idusuario"]);
         
 

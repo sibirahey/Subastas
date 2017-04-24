@@ -121,3 +121,10 @@ function Colores(id,descripcion,estatus){
 	this.descripcion = descripcion;
 	this.estatus = estatus;
 }
+
+function Home(banner970x90_01, infoSeguridad, banner300x600){
+
+	this.banner970x90_01 = banner970x90_01;
+	this.infoSeguridad = infoSeguridad;
+	this.banner300x600 = banner300x600;
+}

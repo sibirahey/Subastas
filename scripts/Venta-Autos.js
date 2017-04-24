@@ -149,7 +149,8 @@ function FiltrarAutos(item) {
 	return valida;
 
 }
-	
+
+/*	
 $(document).ready(function() {
 	$(".mainBody").load("views/main/admin/ventaautos.html", function() {
 		cargaCatalogos(-1);
@@ -163,3 +164,5 @@ $(document).ready(function() {
 	
 	});
 });
+
+*/
