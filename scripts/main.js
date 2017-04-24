@@ -22,14 +22,23 @@ $(document).ready(function(){
       		}
       	});
 	}
+$(document).ready(function() {
 
+	var urlvars = getUrlVars();
+	if (urlvars["accion"] != undefined) {
 
+		$(".mainBody").load("views/interna2.html?id=" + urlvars["id"], function() {
+		});
+	} else {
 
-  });
+		CargaContenidoMain();
+	}
 
-function CargaContenidoMain(){
+});
 
-	cargaHTML(".mainBody", "views/main.html","", function() {
+function CargaContenidoMain() {
+
+	cargaHTML(".mainBody", "views/main.html", "", function() {
 
 		
 			
@@ -63,84 +72,107 @@ function CargaContenidoMain(){
 
 };
 
+		postrequest("subastas/xusuario", {
+			"idusuario" : sessionStorage.claveapi
+		}, function(data) {
 
-function CargaDatosPublico(){
-	postrequest("data/venta-autos.json", '', function(data){
-				
-			$.each(data.vehiculos,function(i,item){
-				
-				
-				// if($("#searchBox").val()== "" || item.marca.toLowerCase().indexOf($("#searchBox").val().toLowerCase())>=0 || item.modelo.toLowerCase().indexOf($("#searchBox").val().toLowerCase())>=0){
-				// 	$("#searchBody").append(regresaRenglonVenta(item))
-				// }
+			alert(data.length);
 
+			// <div id="seccInfoSeguridad" class="divSeccion divSeguridad">
+			// 	<h2>Infografías de Seguridad</h2>
+			// 	<img class="infoSeguridad" src="images/infoSeguridad.png">
+			// 	<img class="banner300x600" src="images/banner300x600.png">
+			// </div>
 
+		});
+	});
 
-			});
+	$("#searchBox").keypress(function(e) {
+		if (e.which == 13) {
+			$("#searchBody").html("");
+			if (sessionStorage.getItem('publico') == 1) {
+				CargaDatosPrivado();
+			} else {
+				CargaDatosPublico();
+			}
+
+		}
+	});
+
+	if (sessionStorage.getItem('publico') == 1) {
+		CargaDatosPrivado();
+	} else {
+		CargaDatosPublico();
+	}
+
+}
+
+function CargaDatosPublico() {
+	postrequest("data/venta-autos.json", '', function(data) {
+
+		$.each(data.vehiculos, function(i, item) {
+
+			// if($("#searchBox").val()== "" || item.marca.toLowerCase().indexOf($("#searchBox").val().toLowerCase())>=0 || item.modelo.toLowerCase().indexOf($("#searchBox").val().toLowerCase())>=0){
+			// 	$("#searchBody").append(regresaRenglonVenta(item))
+			// }
+
+		});
 	});
 
 }
 
-function CargaDatosPrivado(){
-	
-	postrequest("data/subastas.json", '', function(data){
-			
-			$.each(data["datos"],function(i,item){
-				
-				
-				if($("#searchBox").val()== "" || item.empresa.toLowerCase().indexOf($("#searchBox").val().toLowerCase())>=0){
-					$("#searchBody").append(regresaRenglonSubasta(item))
-				}
+function CargaDatosPrivado() {
 
+	postrequest("data/subastas.json", '', function(data) {
 
+		$.each(data["datos"], function(i, item) {
 
-			});
+			if ($("#searchBox").val() == "" || item.empresa.toLowerCase().indexOf($("#searchBox").val().toLowerCase()) >= 0) {
+				$("#searchBody").append(regresaRenglonSubasta(item))
+			}
+
+		});
 	});
 
-	
 }
-function VerSubasta(o){
+
+function VerSubasta(o) {
 	CargaSubasta($(o).attr("attr-id"));
 
-
 }
 
-
-function regresaRenglonSubasta(item){
+function regresaRenglonSubasta(item) {
 
 	var renglon = '<div class="searchItem">';
-	renglon += '			<div class="searchItemHead" attr-id="'+item.id+'" onclick="VerSubasta(this);"><h3>'+item.empresa+'</h3></div>';
+	renglon += '			<div class="searchItemHead" attr-id="' + item.id + '" onclick="VerSubasta(this);"><h3>' + item.empresa + '</h3></div>';
 
 	renglon += '		<div class="searchItemBody">';
 	renglon += '			<div>';
 	renglon += '				<h4>Subasta </h4>';
-	renglon += '				<label>['+item.estatus+']</label>';
+	renglon += '				<label>[' + item.estatus + ']</label>';
 	renglon += '				</div>';
 	renglon += '				<div>';
 	renglon += '					<h4>Inicia:</h4>';
-	renglon += '					<label>'+item.fechaInicio+'</label>';
+	renglon += '					<label>' + item.fechaInicio + '</label>';
 	renglon += '				</div>';
 	renglon += '				<div>';
 	renglon += '					<h4>Finaliza:</h4>';
-	renglon += '					<label>'+item.fechaFin+'</label>';
+	renglon += '					<label>' + item.fechaFin + '</label>';
 	renglon += '				</div>';
 	renglon += '				<div>';
 	renglon += '					<h4>Tipo de oferta:</h4>';
-	renglon += '					<label>'+item.tipo+'</label>';
+	renglon += '					<label>' + item.tipo + '</label>';
 	renglon += '				</div>';
 	renglon += '			</div>';
 	renglon += '</div>';
 	return renglon;
 
-
 }
 
-
-
-function CargaSubasta(subasta){
+function CargaSubasta(subasta) {
 
 	$(".mainBody").load("views/settings3.html", function() {
-	
+
 		cargaCatalogosEmpresas(subasta);
 
 		$("#dp1").datepicker({
@@ -166,9 +198,9 @@ function CargaSubasta(subasta){
 	});
 }
 
-function VerDetalleAuto(o)
-{
-	$(".mainBody").load("views/interna2.html", function() {});
+function VerDetalleAuto(o) {
+	$(".mainBody").load("views/interna2.html", function() {
+	});
 }
 
 //***********************
@@ -191,10 +223,10 @@ function cargaCatalogosEmpresas(empresa) {
 				} else {
 					$("#cmbEmpresa").append('<option value="' + item.id + '">' + item.empresa + '</option>');
 				}
-				
+
 				var toogleItem = '<input class="empresaCB" type="checkbox" name="empresa' + i + '" id="empresa' + i + '">';
 				toogleItem += '<label for="empresa' + i + '">' + item.empresa + '</label>';
-				
+
 				$(".toggles").append(toogleItem);
 			});
 		}
@@ -208,11 +240,11 @@ function muestraGaleria(idx) {
 		height : 200,
 		width : 380,
 		modal : true,
-		dialogClass: 'no-titlebar'
+		dialogClass : 'no-titlebar'
 	});
-	
+
 	$("#gallery" + idx).addClass('muestraGaleria');
-	
+
 	dialog.dialog("open");
 }
 
@@ -236,8 +268,8 @@ function cargaVehiculos() {
 
 			$.each(data["vehiculos"], function(i, item) {
 				var renglon = "<div>";
-				renglon += '<div onclick="verDetalle('+item.idVehiculo+');"><input type="checkbox" attr="attr-idx' + item.idVehiculo + '"  /></div>';
-				renglon += '<div><img alt="' + item.vehiculo + '" width="40px" src="' + item.foto + '" onclick="verDetalle('+item.idVehiculo+');"  /></div>';
+				renglon += '<div onclick="verDetalle(' + item.idVehiculo + ');"><input type="checkbox" attr="attr-idx' + item.idVehiculo + '"  /></div>';
+				renglon += '<div><img alt="' + item.vehiculo + '" width="40px" src="' + item.foto + '" onclick="verDetalle(' + item.idVehiculo + ');"  /></div>';
 				renglon += "<div>";
 				renglon += "<div>" + item.vehiculo + "</div>";
 				renglon += "<div>" + item.descripcion + "</div>";
@@ -262,29 +294,29 @@ function cargaVehiculos() {
 	checkCB();
 };
 
-function checkCB(){
-	
+function checkCB() {
+
 	$('#chkMulti').change(function() {
-        if($(this).is(":checked")) {
-        	$('.toggles ').show();
-        }
-    });
-    
-    $('.closeMulti').on('click',function(){
-    	$('.toggles ').hide();
-    });
-    
-    $('.toggles > input[type="checkbox"]:first-of-type').change(function(){
-    	if($(this).is(":checked")) {
-        	$('.toggles').find('input[type="checkbox"]').addClass('cunts');
-        }
-    });
+		if ($(this).is(":checked")) {
+			$('.toggles ').show();
+		}
+	});
+
+	$('.closeMulti').on('click', function() {
+		$('.toggles ').hide();
+	});
+
+	$('.toggles > input[type="checkbox"]:first-of-type').change(function() {
+		if ($(this).is(":checked")) {
+			$('.toggles').find('input[type="checkbox"]').addClass('cunts');
+		}
+	});
 }
 
-function verDetalle(idVehiculo){
-	
+function verDetalle(idVehiculo) {
+
 	$(".mainBody").load("views/interna2.html", function() {
-	
+
 	});
 
 }
