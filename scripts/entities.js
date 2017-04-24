@@ -121,3 +121,18 @@ function Colores(id,descripcion,estatus){
 	this.descripcion = descripcion;
 	this.estatus = estatus;
 }
+
+
+function busquedaAuto(descripcion,estadoId,marcaId,modeloId,anio,precioIni,precioFin,kmIni,kmFin){
+	this.descripcion = descripcion;
+	this.estadoId = estadoId;
+	this.marcaId = marcaId;
+	this.modeloId = modeloId;
+	this.anio = anio;
+	this.precioIni = precioIni;
+	this.precioFin = precioFin;
+	this.kmIni = kmIni;
+	this.kmFin = kmFin;
+
+
+}

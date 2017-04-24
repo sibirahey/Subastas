@@ -239,6 +239,7 @@ function regresaRenglonVenta(item){
 
 }
 
+
 function VerDetalleAuto(o)
 {
   window.location = "?accion=detalleauto&id="+$(o).attr("attr-id");
