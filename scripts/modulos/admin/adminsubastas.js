@@ -30,7 +30,7 @@ function LimpiarSubasta() {
 //Administrador Subastas
 
 function AgregaEmpresa(idEmpresa, nombreEmpresa) {
-
+	
 	$("#lstEmpresa").append("<div attr-idx='" + idEmpresa + "' class='empresasSeleccionadas divRegistro'>" + nombreEmpresa + "</div>")
 }
 
@@ -45,7 +45,7 @@ function CargaFuncionesAdminSubastas() {
 
 	$("#btnNuevaEmpresa").click(function() {
 		$('#labelMsjEmpresa').text('');
-		$('#txtNombreEmpresa').text('');
+		$('#txtNombreEmpresa').val('');
 		$('#btnGuardaEmpresa').attr('idEmpresa', '0');
 		$('#btnEliminaEmpresa').attr('idEmpresa', '0');
 		$('#btnEliminaEmpresa').attr('estatus', '1');
@@ -106,35 +106,8 @@ function CargaFuncionesAdminSubastas() {
 	});
 
 	$("#btnGuardarSubasta").click(function() {
-		debugger;
-		oSubastas = new Subastas();
-		oSubastas.nombreSubasta = $("#txtNombreSubasta").val();
-		oSubastas.IdTipoSubasta = $('input[name=tiposubastas]:checked').val();
-		oSubastas.fechaInicio = (!$("#txtFechaInicio").datepicker('getDate')) ? "" : $("#txtFechaInicio").datepicker('getDate').getFullYear() + "-" + ($("#txtFechaInicio").datepicker('getDate').getMonth() + 1) + "-" + $("#txtFechaInicio").datepicker('getDate').getDate();
-		oSubastas.fechaFin = (!$("#txtFechaFin").datepicker('getDate')) ? "" : $("#txtFechaFin").datepicker('getDate').getFullYear() + "-" + ($("#txtFechaFin").datepicker('getDate').getMonth() + 1) + "-" + $("#txtFechaFin").datepicker('getDate').getDate();
-		oSubastas.empresas = [];
-		oSubastas.incremento = $("#txtIncremento").val();
-		if ($(this).attr("attr-idsubasta") == "0") {
-			oSubastas.idSubasta = 0;
-		} else {
 
-			oSubastas.idSubasta = $(this).attr("attr-idsubasta");
-		}
-		$.each($(".empresasSeleccionadas"), function(key, value) {
-			oSubastas.empresas.push($(value).attr("attr-idx"));
-		});
-
-		//console.log(JSON.stringify(oSubastas));
-		if (ValidaCamposSubasta(oSubastas)) {
-			$(".divHeaderContenido").dialog(close);
-			postrequest("subastas/guardar", oSubastas, function(data) {
-				if (data > 0) {
-					alert("La subasta fue creada con éxito");
-					CargaSubastas(-1, -1);
-
-				}
-			});
-		}
+		guardarSubasta(this);
 
 	});
 	
@@ -158,6 +131,40 @@ function CargaFuncionesAdminSubastas() {
 
 }
 
+function guardarSubasta(obj){
+	debugger;
+		oSubastas = new Subastas();
+		oSubastas.nombreSubasta = $("#txtNombreSubasta").val();
+		oSubastas.IdTipoSubasta = $('input[name=tiposubastas]:checked').val();
+		oSubastas.fechaInicio = (!$("#txtFechaInicio").datepicker('getDate')) ? "" : $("#txtFechaInicio").datepicker('getDate').getFullYear() + "-" + ($("#txtFechaInicio").datepicker('getDate').getMonth() + 1) + "-" + $("#txtFechaInicio").datepicker('getDate').getDate();
+		oSubastas.fechaFin = (!$("#txtFechaFin").datepicker('getDate')) ? "" : $("#txtFechaFin").datepicker('getDate').getFullYear() + "-" + ($("#txtFechaFin").datepicker('getDate').getMonth() + 1) + "-" + $("#txtFechaFin").datepicker('getDate').getDate();
+		oSubastas.empresas = [];
+		oSubastas.incremento = $("#txtIncremento").val();
+
+		if ($("#btnGuardarSubasta").attr("attr-idsubasta") == "0" || $("#btnGuardarSubasta").attr("attr-idsubasta") == undefined) {
+			oSubastas.idSubasta = 0;
+		} else {
+
+			oSubastas.idSubasta = $("#btnGuardarSubasta").attr("attr-idsubasta");
+		}
+		$.each($(".empresasSeleccionadas"), function(key, value) {
+			oSubastas.empresas.push($(value).attr("attr-idx"));
+		});
+
+		//console.log(JSON.stringify(oSubastas));
+		if (ValidaCamposSubasta(oSubastas)) {
+			$(".divHeaderContenido").dialog(close);
+			postrequest("subastas/guardar", oSubastas, function(data) {
+				if (data > 0) {
+					alert("La subasta fue creada con éxito");
+					CargaSubastas(-1, -1);
+
+				}
+			});
+		}
+
+
+}
 function CargaEmpresas(idx) {
 
 	$("#cmbEmpresas").html("");
@@ -197,6 +204,7 @@ function CargaSubastas(estatus, empresa) {
 		"empresa" : empresa,
 		"subastaId" : -1
 	}, function(data) {
+	
 		$("#divListaContenido").html("");
 		for (i in data) {
 
@@ -394,7 +402,8 @@ function CargaSubastas(estatus, empresa) {
 				}
 			}, {
 				text : "Guardar Subasta",
-				"id" : 'btnGuardarSubasta'
+				"id" : 'btnGuardarSubasta',
+				click: function(){guardarSubasta(this);}
 			}],
 			show : {
 				effect : "blind",

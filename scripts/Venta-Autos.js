@@ -1,5 +1,4 @@
 function cargaCatalogos(idDef) {
-	debugger;
 	CargaSelectEstados("#cmbEstados");
 	//CargaSelectMunicipios("#cbCiudadAuto", $("#cbEstadoAuto").val());
 	CargaSelectMarcas("#cmbMarcas", 0,1);
@@ -13,7 +12,7 @@ function cargaCatalogos(idDef) {
 }
 
 function muestraGaleria(idx) {
-	debugger;
+
 	
 	var dialog = $("#gallery" + idx).dialog({
 		autoOpen : false,
@@ -40,7 +39,7 @@ function seleccionaImagen(obj) {
 
 function buscarAutos(){
 
-debugger;
+
 	$(".rows").remove();
 
 	busAutos = new busquedaAuto();
@@ -57,7 +56,7 @@ debugger;
 
 
 	postrequest("autos/busqueda",busAutos,function(data){
-		debugger;
+	
 		var total = 0;
 
 		if (data){
