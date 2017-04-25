@@ -1,89 +1,105 @@
 <div id="divSubastaNombre" style="displa:none"></div>
 
 <div>
-	<div class="divRegistro">
-		<label for="cbMarcaAuto" >Marca:</label>
-		<select id="cbMarcaAuto" name="cbMarcaAuto" ></select> 
-		<div id="btnAddMarca" operacion="marcas" title="Agregar Marca"  desc="Marca:" class="fa fa-plus-square-o"></div>
-	</div>
-	<div class="divRegistro">
-		<label for="cbModeloAuto" >Modelo:</label>
-		<select id="cbModeloAuto" name="cbModeloAuto" >
-			<option value="0">== Seleccione ==</option>
-		</select> 
-		<div id="btnAddModelo" operacion="modelos" title="Agregar Modelo" desc="Modelo:" class="fa fa-plus-square-o"></div>
-	</div>
-	<div class="divRegistro">
-		<label for="cbColorAuto" >Color:</label>
-		<select id="cbColorAuto" name="cbColorAuto" ></select> 
-		<div id="btnAddColor" operacion="colores" title="Agregar Color" desc="Color:" class="fa fa-plus-square-o"></div>
-	</div>
-	<!--
-	<div class="divRegistro">
-		<label for="cbMSubtipoAuto" >Subtipo:</label>
-		<select id="cbMSubtipoAuto" name="cbMSubtipoAuto" ></select> 
-	</div>
-	-->
-	<div class="divRegistro">
-		<label for="cbAnioAuto" >Año:</label>
-		<select id="cbAnioAuto" name="cbAnioAuto" ></select> 
-	</div>
-	<div class="divRegistro">
-		<label for="cbKMAuto" >KM:</label>
-		<input type="text" name="cbKMAuto" id="cbKMAuto" /> 
-	</div>
-	<div class="divRegistro">
-		<label for="precioAuto" >Precio:</label>
-		<input type="text" name="precioAuto" id="precioAuto" /> 
-	</div>
-	<div class="divRegistro">
-		<label for="cbTipoTransmisionAuto" >Transmisión:</label>
-		<select id="cbTipoTransmisionAuto" name="cbTipoTransmisionAuto" ></select> 
-	</div>
-	<div class="divRegistro">
-		<label for="cbEstadoAuto" >Estado:</label>
-		<select id="cbEstadoAuto" name="cbEstadoAuto" ></select> 
-	</div>
-	<div class="divRegistro">
-		<label for="cbCiudadAuto" >Ciudad</label>
-		<select name="cbCiudadAuto" id="cbCiudadAuto">
-			<option value="0">== Seleccione ==</option>
-		</select>  
-	</div>
-	<div class="divRegistro">
-	   	<label for="cbFeaturesAutos" class="chosen-select chosen-rtl" >Características</label>
-        <select id="cbFeaturesAutos" >
-    	</select>
-    	<div id="btnAddFeature" class="fa fa-plus-square-o"></div>
-    	<div id="btnAddCaracteristicas" operacion="features" title="Agregar Caracteristicas" desc="caracteristica:" class="fa fa-plus-square-o">Nueva</div>
-    	<div id="divFeatureContainer"></div>
-	</div>
-	<div class="divRegistro">
-		<label for="txtaDescripcionAuto" >Descripción:</label>
-		<textarea id="txtaDescripcionAuto" maxlength="1000" ></textarea> 
-	</div>
-	<div class="divRegistro">
-		<label for="chkPublicadoAutos" >Publicar:</label>
-		<input type="checkbox" name="chkPublicadoAutos" id="chkPublicadoAutos" checked="checked" /> 
-	</div>
-	<div class="divRegistro">
-		<input id="fotoAuto" type="file" name="sortpic" />
-		<div type="button" id="btnUpload" class="fa fa-upload"   ></div>
-		<div id="fotosSubidas" ></div>
-	</div>
-	<div class="divRegistro">
-		<button id="btnGuardaAuto" attr-subastaid="0">Guardar</button>
-	</div>
-	<div id="dialog" title="Basic dialog">
-  		<div class="divRegistro">
-			<label id="labelTxtDescripcion" for="txtDescripcion" >KM:</label>
-			<input type="text" name="txtDescripcion" id="txtDescripcion" /> 
-			<label id="labelMensaje"></label>
-		</div>
-		<div class="divRegistro">
-			<div id="btnGuardarCatalogo" class="fa fa-floppy-o">Nuevo</div>
-			<div id="btnActualizaCatalogo" >Actualizar</div>
-			<div id="btnEliminaCatalogo" >Eliminar</div>
-		</div>
-	</div>
+    <div class="divRegistro">
+        <label for="cbMarcaAuto" >Marca:</label>
+        <select id="cbMarcaAuto" name="cbMarcaAuto" ></select>
+        <div id="btnAddMarca" operacion="marcas" title="Agregar Marca"  desc="Marca:" class="fa fa-plus-square-o"></div>
+    </div>
+    <div class="divRegistro">
+        <label for="cbModeloAuto" >Modelo:</label>
+        <select id="cbModeloAuto" name="cbModeloAuto" >
+            <option value="0">== Seleccione ==</option>
+        </select>
+        <div id="btnAddModelo" operacion="modelos" title="Agregar Modelo" desc="Modelo:" class="fa fa-plus-square-o"></div>
+    </div>
+    <div class="divRegistro">
+        <label for="cbColorAuto" >Color:</label>
+        <select id="cbColorAuto" name="cbColorAuto" ></select>
+        <div id="btnAddColor" operacion="colores" title="Agregar Color" desc="Color:" class="fa fa-plus-square-o"></div>
+    </div>
+    <!--
+    <div class="divRegistro">
+    <label for="cbMSubtipoAuto" >Subtipo:</label>
+    <select id="cbMSubtipoAuto" name="cbMSubtipoAuto" ></select>
+    </div>
+    -->
+    <div class="divRegistro">
+        <label for="cbAnioAuto" >Año:</label>
+        <select id="cbAnioAuto" name="cbAnioAuto" ></select>
+    </div>
+    <div class="divRegistro">
+        <label for="cbKMAuto" >KM:</label>
+        <input type="text" name="cbKMAuto" id="cbKMAuto" />
+    </div>
+    <div class="divRegistro">
+        <label for="precioAuto" >Precio:</label>
+        <input type="text" name="precioAuto" id="precioAuto" />
+    </div>
+    <div class="divRegistro">
+        <label for="cbTipoTransmisionAuto" >Transmisión:</label>
+        <select id="cbTipoTransmisionAuto" name="cbTipoTransmisionAuto" ></select>
+    </div>
+    <div class="divRegistro">
+        <label for="cbEstadoAuto" >Estado:</label>
+        <select id="cbEstadoAuto" name="cbEstadoAuto" ></select>
+    </div>
+    <div class="divRegistro">
+        <label for="cbCiudadAuto" >Ciudad</label>
+        <select name="cbCiudadAuto" id="cbCiudadAuto">
+            <option value="0">== Seleccione ==</option>
+        </select>
+    </div>
+    <div class="divRegistro">
+        <label for="cbFeaturesAutos" class="chosen-select chosen-rtl" >Características</label>
+        <select id="cbFeaturesAutos" ></select>
+        <div id="btnAddFeature" class="fa fa-plus-square-o"></div>
+        <div id="btnAddCaracteristicas" operacion="features" title="Agregar Caracteristicas" desc="caracteristica:" class="fa fa-plus-square-o">
+            Nueva
+        </div>
+        <div id="divFeatureContainer"></div>
+    </div>
+    <div class="divRegistro">
+        <label for="txtaDescripcionAuto" >Descripción:</label>
+        <textarea id="txtaDescripcionAuto" maxlength="1000" ></textarea>
+    </div>
+    <div class="divRegistro">
+        <!-- label for="chkPublicadoAutos" >Publicar:</label>
+        <input type="checkbox" name="chkPublicadoAutos" id="chkPublicadoAutos" checked="checked" />  -->
+
+        <p>
+            <label for="chkPublicadoAutos">Publicar:</label>
+            <input type="checkbox" name="chkPublicadoAutos" id="chkPublicadoAutos" checked="checked" />
+
+        </p>
+
+    </div>
+    <div class="divRegistro">
+        <input id="fotoAuto" type="file" name="sortpic" />
+        <div type="button" id="btnUpload" class="fa fa-upload"   ></div>
+        <div id="fotosSubidas" ></div>
+    </div>
+    <div class="divRegistro">
+        <button id="btnGuardaAuto" attr-subastaid="0">
+            Guardar
+        </button>
+    </div>
+    <div id="dialog" title="Basic dialog">
+        <div class="divRegistro">
+            <label id="labelTxtDescripcion" for="txtDescripcion" >KM:</label>
+            <input type="text" name="txtDescripcion" id="txtDescripcion" />
+            <label id="labelMensaje"></label>
+        </div>
+        <div class="divRegistro">
+            <div id="btnGuardarCatalogo" class="fa fa-floppy-o">
+                Nuevo
+            </div>
+            <div id="btnActualizaCatalogo" >
+                Actualizar
+            </div>
+            <div id="btnEliminaCatalogo" >
+                Eliminar
+            </div>
+        </div>
+    </div>
 </div>

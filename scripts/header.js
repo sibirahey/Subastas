@@ -24,7 +24,7 @@ $( document ).ready(function() {
 
 
   			$("#divMenuPrincipal").html("");
-  			$("#divMenuPrincipal").append('<li class="menuitemindex" name="dashboard"><label>INICIO</label></li>');
+  			$("#divMenuPrincipal").append('<li class="menuitemindex" name="inicio"><label>INICIO</label></li>');
   			$("#divMenuPrincipal").append('<li class="menuitemindex" name="ventaautos" ><label>VENTA DE AUTOS</label></li>');
 	  		if (esAdmin()){
 				$("#divMenuPrincipal").append('<li class="menuitemindex" name="homeadmin"> <label>ADMININISTRADOR DE HOME</label></li>');
@@ -59,10 +59,10 @@ $( document ).ready(function() {
 	});
 
     function CargaContenidoAdmin(o){
-    	//debugger;
  		fnToLoad = $(o).attr("name");
-     	window.location.href = siteurl+"main.php?accion="+$(o).attr("name");
-     	
+     	cargaHTML(".mainBody","views/main/admin/"+ $(o).attr("name")+".html", $(o).attr("name"),function() {
+      		CargaFunciones();
+      	});
 
 	}
 

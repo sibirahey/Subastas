@@ -1553,33 +1553,56 @@ img[data-u="image"] {
 	background-size: contain;
 }
 .searchItem {
-	height: 360px;
-	width: 260px;
-	margin: 10px;
+	height: 420px;
+	width: 290px;
+	margin: 5px;
 	border: 1px solid #e6e6e6;
 	background-color: #ffffff;
 }
 .searchItem > .searchItemHead {
 	height: 40px;
 	width: 100%;
-	color: #F7E827;
+	color: #FFFFFF;
 	border: none;
-	background: #FD5A54;
-	background: -webkit-linear-gradient(top, #464646, #787878);
-	background: -o-linear-gradient(top, #464646, #787878);
-	background: -moz-linear-gradient(top, #464646, #787878);
-	background: linear-gradient(to top, #464646, #787878);
+	background-color: #468CF0;
 	line-height: 40px;
 	text-indent: 6px;
 	cursor: pointer;
+	
 }
-
-.searchItem > img {
-	width: 260px;
-	height: 140px;
+	.searchItem > .searchItemHead > label {
+		line-height:40px;
+		font-size:1.2em;
+		color:#FFFFFF;
+	}
+	.searchItem > .searchItemHead > i {
+		line-height:40px;
+		width:40px;
+		text-align:center;
+		font-size:1.2em;
+		color:#FFFFFF;
+		float:right;
+		cursor:pointer;
+	}
+		.searchItem > .searchItemHead > i:before:hover {
+			box-shadow: 0 0 3px #000000;
+		}
+.searchItem > .searchItemImg {
+	width: 100%;
+	height: 170px;
 	background-size: cover;
 	background-position: center center;
+	background-repeat:no-repeat;
+	overflow:hidden;
 }
+	.searchItem > .searchItemImg > img{
+		height:98%;
+		width: 98%;
+		margin:1%;
+		background-position:center center;
+		background-size:contain;
+		background-color:#EBE7E3;
+	}
 .searchItem > .searchItemBody {
 	width: 100%;
 	padding: 10px;
@@ -1596,6 +1619,10 @@ img[data-u="image"] {
 }
 .searchItem > .searchItemBody > div > label {
 	width: calc(100% - 120px);
+	color:#5A5A5A;
+}
+div[aria-describedby="divAutos"]{
+	background-color:#E6E6E6;
 }
 #divServicios {
 	border-left: 1px solid #B4B4B4;

@@ -1,7 +1,7 @@
 
 function CargaFunciones(){
 
-	switch(	){
+	switch(fnToLoad){
 		case "subastasadmin":
 			CargaFuncionesAdminSubastas();
 			break;

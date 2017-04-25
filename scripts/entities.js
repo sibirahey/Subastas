@@ -121,23 +121,3 @@ function Colores(id,descripcion,estatus){
 	this.descripcion = descripcion;
 	this.estatus = estatus;
 }
-
-function Home(banner970x90_01, infoSeguridad, banner300x600){
-
-	this.banner970x90_01 = banner970x90_01;
-	this.infoSeguridad = infoSeguridad;
-	this.banner300x600 = banner300x600;
-}
-function busquedaAuto(descripcion,estadoId,marcaId,modeloId,anio,precioIni,precioFin,kmIni,kmFin){
-	this.descripcion = descripcion;
-	this.estadoId = estadoId;
-	this.marcaId = marcaId;
-	this.modeloId = modeloId;
-	this.anio = anio;
-	this.precioIni = precioIni;
-	this.precioFin = precioFin;
-	this.kmIni = kmIni;
-	this.kmFin = kmFin;
-
-
-}

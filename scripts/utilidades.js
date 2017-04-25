@@ -196,7 +196,7 @@ function checkCookie() {
 } 
 
 function cargaAutosPorSubasta(subastaID, controlid ){
-
+debugger;
   $(controlid).html("");
   postrequest("autos/subasta", {"idsubasta" : subastaID  }, function(data) {
     
@@ -211,37 +211,39 @@ function cargaAutosPorSubasta(subastaID, controlid ){
 
 function regresaRenglonVenta(item){
 
-
-  var renglon = '<div class="searchItem">';
-  renglon += '      <div class="searchItemHead" attr-id="'+item.idAuto+'" onclick="VerDetalleAuto(this);"><h3>'+item.marca+'['+item.modelo+']</h3></div>';
-  renglon += '      <div class="searchItemImg"><img attr-id="'+item.idAuto+'" width="100px" onclick="VerDetalleAuto(this);" src="'+ siteurl+ 'uploads/'+item.foto+'"/></div>';
-  renglon += '    <div class="searchItemBody">';
-  renglon += '      <div>';
-  renglon += '        <h4>Año: </h4>';
-  renglon += '        <label>'+item.anio+'</label>';
-  renglon += '        </div>';
-  renglon += '        <div>';
-  renglon += '          <h4>Kilometraje: </h4>';
-  renglon += '          <label>'+item.km+'</label>';
-  renglon += '        </div>';
-  renglon += '        <div>';
-  renglon += '          <h4>Precio: </h4>';
-  renglon += '          <label>'+item.precio+'</label>';
-  renglon += '        </div>';
-  renglon += '        <div>';
-  renglon += '          <h4>Descripción: </h4>';
-  renglon += '          <label>'+item.descripcion+'</label>';
-  renglon += '        </div>';
-  renglon += '      </div>';
-  renglon += '</div>';
-  return renglon;
+var renglon ='<div class="searchItem">';
+renglon +=   '	<div class="searchItemHead">';
+renglon +=   '		<label>'+item.marca+ ' - ' +item.modelo+'</label>';
+renglon +=   '		<i class="fa fa-arrow-circle-right" attr-id="'+item.idAuto+'" onclick="VerDetalleAuto(this);"></i>';
+renglon +=   '	</div>';
+renglon +=   '	<div class="searchItemImg"><img attr-id="'+item.idAuto+'" width="100px" onclick="VerDetalleAuto(this);" src="'+ siteurl+ 'uploads/'+item.foto+'" onerror="imgError(this)"; /></div>';
+renglon +=   '	<div class="searchItemBody">';
+renglon +=   '		<div>';
+renglon +=   '			<label>Año: </label>';
+renglon +=   '			<label>'+item.anio+'</label>';
+renglon +=   '		</div>';
+renglon +=   '		<div>';
+renglon +=   '			<label>Kilometraje: </label>';
+renglon +=   '			<label>'+item.km+'</label>';
+renglon +=   '		</div>';
+renglon +=   '		<div>';
+renglon +=   '			<label>Precio: </label>';
+renglon +=   '			<label>'+item.precio+'</label>';
+renglon +=   '		</div>';
+renglon +=   '		<div>';
+renglon +=   '			<label>Descripción: </label>';
+renglon +=   '			<label>'+item.descripcion+'</label>';
+renglon +=   '		</div>';
+renglon +=   '	</div>';
+renglon +=   '</div>';
+return renglon;
 
 
 }
 
-
 function VerDetalleAuto(o)
 {
+
   window.location = "?accion=detalleauto&id="+$(o).attr("attr-id");
  
 }
