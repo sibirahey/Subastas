@@ -25,7 +25,7 @@ function muestraGaleria(idx) {
 
 	$("#gallery" + idx).addClass('muestraGaleria');
 
-	//dialog.dialog("open");
+	dialog.dialog("open");
 }
 
 function seleccionaImagen(obj) {
@@ -61,17 +61,17 @@ function buscarAutos(){
 
 		if (data){
 			$.each(data, function(i, item) {
-				
+				debugger;
 					var renglon = "<div value class='rows'>";
 					renglon += '<div><img alt="' + item.idAuto + '" src="' + item.foto + '" onerror=\'imgError(this)\'; /></div>';
 					renglon += "<div>" + item.descripcion + "</div>";					renglon += "<div>" + item.estado + "</div>";
 					renglon += "<div>" + item.km + "</div>";
-					//renglon += "<div><button class='btn waves-effect light-blue lighten-1'  onclick='muestraGaleria(" + item.idVehiculo + ");'><i class='material-icons'>photo_camera</i></button></div>";
-					renglon += "<div><button class='btn waves-effect waves-light light-blue lighten-1'  data-target='gallery"+ item.idVehiculo +"'><i class='material-icons'>photo_camera</i></button></div>";
+					renglon += "<div><button class='btn waves-effect light-blue lighten-1'  onclick='muestraGaleria(" + item.idVehiculo + ");'><i class='material-icons'>photo_camera</i></button></div>";
+					
 					renglon += "<div>" + item.precio + "</div>";
 					renglon += "<div class='center-btn'><button class='btn waves-effect waves-light light-blue lighten-1'><i class='material-icons'>add</i></button></div>";
-					//renglon += "<div style='display:none;' id='gallery" + item.idVehiculo + "'>";
-					renglon += "<div id='gallery"+ item.idAuto +"'  class='modal modal-fixed-footer'>";
+					renglon += "<div style='display:none;' id='gallery" + item.idAuto + "'>";
+					renglon += "<div id='gallery"+ item.idVehiculo +"'  class='modal modal-fixed-footer'>";
 				    renglon += "	<div class='modal-content'>";
 			        renglon += "	<h4>Modal Header</h4>";
 			        if(item.fotos != undefined){

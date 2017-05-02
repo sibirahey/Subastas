@@ -23,13 +23,13 @@ $( document ).ready(function() {
   			$(".menuitemwelcome").show();
 
 
-  			$("#divMenuPrincipal").html("");
-  			$("#divMenuPrincipal").append('<li class="menuitemindex" name="inicio"><label>INICIO</label></li>');
-  			$("#divMenuPrincipal").append('<li class="menuitemindex" name="ventaautos" ><label>VENTA DE AUTOS</label></li>');
+  			$("#divMenuPrincipal > ul").html("");
+  			$("#divMenuPrincipal > ul").append('<li><a class="menuitemindex" name="inicio">INICIO</a></li>');
+  			$("#divMenuPrincipal  > ul").append('<li><a class="menuitemindex" name="ventaautos">VENTA DE AUTOS</a></li>');
 	  		if (esAdmin()){
-				$("#divMenuPrincipal").append('<li class="menuitemindex" name="homeadmin"> <label>ADMININISTRADOR DE HOME</label></li>');
-				$("#divMenuPrincipal").append('<li class="menuitemindex" name="subastasadmin" ><label>ADMININISTRADOR DE SUBASTAS</label></li>');
-				$("#divMenuPrincipal").append('<li class="menuitemindex" name="subastasadmin" ><label>ADMININISTRADOR VENTA DE AUTOS</label></li>');
+				$("#divMenuPrincipal  > ul").append('<li><a class="menuitemindex" name="homeadmin">ADMININISTRADOR DE HOME</a></li>');
+				$("#divMenuPrincipal  > ul").append('<li><a class="menuitemindex" name="subastasadmin">ADMININISTRADOR DE SUBASTAS</a></li>');
+				$("#divMenuPrincipal > ul").append('<li><a class="menuitemindex" name="ventassadmin">ADMININISTRADOR VENTA DE AUTOS</a></li>');
 			}
 
 

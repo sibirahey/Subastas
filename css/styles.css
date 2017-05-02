@@ -1,9 +1,4 @@
 *:not(thead):not(tbody):not(td):not(tr) {
-	float: left;
-	position: relative;
-	display: block;
-	margin: 0;
-	padding: 0;
 	box-sizing: border-box;
 	font-family: 'Open Sans', sans-serif;
 	font-weight: 300;
@@ -31,8 +26,10 @@ textarea {
 .mainContainer {
 	height: 100%;
 	width: 100%;
+	float:left;
 }
 .logoHeader {
+	float:left;
 	width: calc(100% - 400px);
 	height: 60px;
 	background-image: url(../images/logoHeader.svg);
@@ -40,6 +37,7 @@ textarea {
 	background-position: 60px center;
 }
 .menuitem {
+	float:left;
 	color: #EBC01C;
 	height: 40px;
 	width: 80px;
@@ -55,7 +53,7 @@ textarea {
 .menuitemlogin[name="registro"] {
 	margin-right:10px;
 }
-.menuitemindex {
+/*.menuitemindex {
 	color: #EBC01C;
 	height: 40px;
 	text-align: center;
@@ -69,17 +67,23 @@ textarea {
 }
 .menuitemindex > label:hover {
 	opacity: 1;
+}*/
+
+.menuitemindex[name="twitter"]{
+	background-image:url('images/logoTwitter.svg');
+}
+.menuitemindex[name="facebook"]{
+	background-image:url('images/logoFacebook.svg');	
 }
 .menuitemwelcome {
 	width: 400px;
 }
-.menuitem:first-of-type, .menuitemindex:first-of-type {
-	margin-right: 1px solid #EBC01C;
-}
+
 .menuitem:hover, .menuitemindex:hover {
 	opacity: 1;
 }
 .mainHeader {
+	float:left;
 	width: inherit;
 	background-color: rgb(30,35,40);
 	box-shadow: 0 3px 6px rgb(0,0,0);
@@ -153,7 +157,7 @@ textarea {
 .mainHeader > ul > li > label:hover {
 	cursor: pointer;
 }
-.menuPrincipal {
+/*.menuPrincipal {
 	width: auto;
 	float: right;
 	margin-right: 20px;
@@ -174,12 +178,14 @@ textarea {
 .menuPrincipal > div:hover, 
 .menuPrincipal > img:hover {
 	opacity: 1;
-}
+}*/
 .mainMinusHeader {
+	float:left;
 	height: 100%;
 	width: 100%;
 }
 .mainBody {
+	float:left;
 	height: 100%;
 	width: 100%;
 }
@@ -476,7 +482,9 @@ textarea {
 .divBotonera > label {
 	line-height: 32px;
 }
-.divRegistro, .divLogin {
+.divRegistro, 
+.divLogin {
+	float:left;
 	width: 100%;
 }
 .divHeaderContenido > .divRegistro{
@@ -975,7 +983,11 @@ label[for="registroEULA"] {
 .cnfgSubastaContainer > label:first-of-type {
 	width: 100%;
 }*/
+#grdVehiculos div{
+	float:left;
+}
 #grdVehiculos:not(.grdVehiculos2){
+	float:left;
 	background-color:#F0F0F0;
 	border:1px solid #C8C8C8;
 	clear:both;
@@ -983,7 +995,7 @@ label[for="registroEULA"] {
 	width: 1024px;
 	margin:30px calc(50% - 512px) 0;
 	font-size: 0.8em;
-	}
+}
 #grdVehiculos:not(.grdVehiculos2) > div:first-child {
 	color: #ffffff;
 	height: 40px;
@@ -1000,6 +1012,7 @@ label[for="registroEULA"] {
 	width: 100px;
 }
 #grdVehiculos:not(.grdVehiculos2) > div:first-child > div {
+	float:left;
 	height: 40px;
 	width: calc((100% - 240px) / 5);
 	text-align: center;
@@ -1405,6 +1418,10 @@ html .ui-button.ui-state-disabled:active {
 }
 /*---------- ENDS SETTINGS ----------*/
 /*--------- LOGIN ---------*/
+#loginMail,
+#loginPassword{
+	color:#ffffff;	
+}
 .divLogin {
 	background-image: url('../img/background011.jpg');
 	background-position: center center;
@@ -1419,12 +1436,9 @@ html .ui-button.ui-state-disabled:active {
 	margin-top: 160px;
 	margin-left: calc(50% - 200px);
 	margin-right: calc(50% - 200px);
-	padding: 160px 0 30px 0;
+	padding: 0 0 30px 0;
 	box-shadow: 0 0 6px #000000;
 	border-radius: 6px;
-}
-.floatingWindow > div:not(.logoCar):not(.logoLogin) {
-	width: 100%;
 }
 .floatingWindow > input, .floatingWindow > button, .floatingWindow > a {
 	height: 40px;
@@ -1453,24 +1467,22 @@ html .ui-button.ui-state-disabled:active {
 .logoLogin {
 	background-image: url('../images/logoSlogan.svg');
 	height: 100px;
-	width: 350px;
-	top: 40px;
-	margin-left: calc(50% - 175px);
 }
 
 .logoCar {
 	background-image: url('../images/logoCar.svg');
 	height: 100px;
-	top: -60px;
-	width: 270px;
-	margin-left: calc(50% - 135px);
 }
-.logoLogin, .logoCar {
+.logoLogin, 
+.logoCar {
+	float:left;		
+	width:420px;
 	background-position: center center;
 	background-repeat: no-repeat;
-	position: absolute;
+	position: relative;
 	text-shadow: 0 0 2px #000000;
     filter: drop-shadow(0 0 4px rgba(0,0,0,0.75));
+	top:-75px;
 }
 .divRegistro label {
 	color: #3C4146;
@@ -1997,12 +2009,15 @@ a[data-u="any"] {
 }
 /*---------- INFOGRAFIAS ---------*/
 .divSeccion {
+	float:left;
 	max-width: 1024px;
 	margin: 0 calc(50% - 512px);
 	width: 100%;
 }
 
 .divSeccion > h2 {
+	float:left;
+	position:relative;
 	height: 60px;
 	line-height: 60px;
 	font-family: "Dosis";
@@ -2037,14 +2052,14 @@ a[data-u="any"] {
 	background-image: url('../images/icoContacto.svg');
 }
 
-.divVideoTips {
+.divVideoTips .vidContainer{
+	height: 600px;
 	width: 100%;
 }
 .divVideoTips > .vidContainer, .divVideoTips > .vidContainer > video, .divVideoTips > .vidContainer > iframe {
 	width: 100%;
 }
-.divVideoTips > .vidContainer > video {
-	background-image: url('http://localhost/Subastas-master/images/videoPoster.png');
+.divVideoTips .vidContainer > iframe {
 	background-position: center center;
 	background-repeat: no-repeat;
 	background-size: cover;
@@ -2052,22 +2067,26 @@ a[data-u="any"] {
 	width: 100%;
 }
 .infoSeguridad {
+	float:left;
 	width: calc(100% - 320px);
 	margin-right: 20px;
 }
 /*---------- ENDS INFOGRAFIAS ---------*/
 /*---------- CALENDARIO VERIFICACION ---------*/
 .calendarioVerificacion {
+	float:left;
 	display: table;
 	width: 100%;
 	text-align: center;
 	box-shadow: 0 0 10px -2px #000000;
 }
 .calendarioVerificacion > div {
+	float:left;
 	display: table-column;
 	width: 33.3%;
 }
 .calendarioVerificacion > div > div {
+	float:left;
 	display: table-cell;
 	height: 40px;
 	width: 100%;
@@ -2080,6 +2099,7 @@ a[data-u="any"] {
 	background-color: #DBDBDB;
 }
 .calendarioVerificacion > div > div:nth-child(1) {
+	float:left;
 	background-color: #5A5F64;
 	color: #ffffff;
 }
@@ -2094,20 +2114,22 @@ a[data-u="any"] {
 	width: 100%;
 }
 .localizaGasolineras iframe {
+	float:left;
 	width: calc(100% - 320px);
 	margin-right: 20px;
 }
 /*---------- END LOCALIZAODR DE GASOLINERAS ---------*/
 /*---------- CONTACTANOS ---------*/
 .contactForm {
+	float:left;
 	padding: 20px;
 	width: 100%;
 	border: 1px solid #B3B3B3;
 }
 .contactForm > div, .contactForm > textarea {
+	float:left;
 	width: 50%;
 }
-
 .contactForm > div > input, .contactForm > div > textarea {
 	height: 40px;
 	text-align: left;
@@ -2146,14 +2168,19 @@ button[name="contactoEnviar"] {
 .banner970x90 {
 	float: none;
 	margin: 20px auto;
+	display:block;
 }
 .banner300x600 {
+	float:left;
 	height: 600px;
-	width: 300px
+	width: 300px;
+	display:block;
 }
 .banner300x250 {
+	float:left;
 	height: 250px;
-	width: 300px
+	width: 300px;
+	display:block;
 }
 /*---------- ENDS BANNERS ---------*/
 /*---------- ADMINISTRADOR DE SUBASTAS---------*/
@@ -2408,4 +2435,9 @@ input:checked + .slider:before {
 	
 }
 
-/*--------- ENDS VENTA AUTOS ---------*/
+/*--------- ENDS VENTA AUTOS --------*/
+/*---------MIS SUBASTAS --------*/
+.divMisSubastas{
+	
+}
+/*--------- ENDS MIS SUBASTAS --------*/

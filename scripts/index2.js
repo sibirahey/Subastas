@@ -16,8 +16,13 @@ $(document).ready(function() {
 	});
 
 	cargaHTML(".mainHeader", "views/header.html", "", function() {
+		debugger;
+		
 		asignaFunciones();
 		jssor_1_slider_init();
+		
+		$(".button-collapse").sideNav();
+		
 		$('.jssorContainer').find('video').get(0).play();
 		$('.jssorContainer').find('video').get(1).play();
 		$(".logoHeader").click(function() {
@@ -35,7 +40,7 @@ $(document).ready(function() {
 				cargaHTMLLogin(urlvars["s"]);
 		}
 
-
+		
 
 	});
 
