@@ -9,6 +9,19 @@
 // 	}
 // }
 
+function CargaFunciones(){
+
+	switch(fnToLoad){
+		case "subastasadmin":
+			CargaFuncionesAdminSubastas();
+			break;
+		case "homeadmin":
+			CargaFuncionesAdminHome();
+			break;
+	}
+
+}
+
 //Administrador Subastas
 function CargaFuncionesAdminSubastas(){
 
