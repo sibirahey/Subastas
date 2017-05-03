@@ -1,16 +1,13 @@
-
-function CargaFunciones(){
-
-	switch(	){
-		case "subastasadmin":
-			CargaFuncionesAdminSubastas();
-			break;
-		case "homeadmin":
-			CargaFuncionesAdminHome();
-			break;
-	}
-
-}
+// function CargaFunciones(accion){
+// 	switch(accion){
+// 		case "subastasadmin":
+// 			CargaFuncionesAdminSubastas();
+// 			break;
+// 		case "homeadmin":
+// 			CargaFuncionesAdminHome();
+// 			break;
+// 	}
+// }
 
 //Administrador Subastas
 function CargaFuncionesAdminSubastas(){
@@ -146,9 +143,4 @@ function CargaSubastas(estatus, empresa){
 }
 
 
-//Home
-function CargaFuncionesAdminHome(){
 
-	
-	
-}

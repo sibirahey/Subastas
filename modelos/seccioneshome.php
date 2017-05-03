@@ -29,8 +29,8 @@ class seccioneshome
     {
      
       
-        if ($peticion[0] == 'guardar') {
-            return self::registrarOut();
+        if ($peticion[0] == 'update') {
+            return self::update();
         }else if ($peticion[0] == 'listar') {
             return self::listar();
         }
@@ -45,7 +45,7 @@ class seccioneshome
         $esheader = $_POST["esheader"];
         
 
-        $comando ="SELECT id, descripcion, tag, ancho, alto, url, esheader, esimg, estatus FROM cat_seccioneshome WHERE esheader = ".$_POST["esheader"]; 
+        $comando ="SELECT id, descripcion, tag, ancho, alto, url, esheader, esimg, eslink, link, estatus FROM cat_seccioneshome WHERE esheader = ".$_POST["esheader"]; 
             
         $sentencia =ConexionBD::obtenerInstancia()->obtenerBD()->prepare($comando);
 
@@ -59,9 +59,38 @@ class seccioneshome
             
     }
 
-    
+    private function update(){
 
+        try{
+     
 
-    
-    
+            $comando ="SELECT id, descripcion, tag, ancho, alto, url, esheader, esimg, eslink, link, estatus FROM cat_seccioneshome "; 
+                
+            $sentencia =ConexionBD::obtenerInstancia()->obtenerBD()->prepare($comando);
+
+            $json = "";
+            if ($sentencia->execute())
+            {
+            
+                $json =  $sentencia->fetchall(PDO::FETCH_ASSOC);
+            
+            }else
+            {
+                $json = "";
+            }
+
+            $json = json_encode($json, JSON_PRETTY_PRINT);
+
+            $myfile = fopen( "data/home.json", "w") or die("Unable to open file!");
+            fwrite($myfile, $json);
+            fclose($myfile);
+
+            echo "OK";
+         }
+        catch(Exception $ex){
+
+            echo "ERROR";
+        }
+
+    }
 }

@@ -1,14 +1,24 @@
 
+<div id="divBotoneraAdminHome">
+    <div id="bntActualizar">Actualizar Home</div>
+</div>
+
 <div id="divAdminSubastas">
     <div class="divHeaderContenidoMain">
         <div class="divRegistro">
-            <label for="cmbSeccion" >Sección:</label>
-            <select id="cmbSeccion" name="cmbSeccion" ></select>
-            
+            <label for="cmbSeccionesHome" >Sección:</label>
+            <select id="cmbSeccionesHome" name="cmbSeccionesHome" ></select>
         </div>
-        <div class="divRegistro">
-            <label for="txtAnchoAlto" >Lote</label>
-            <input type="text" id="txtAnchoAlto" name="txtAnchoAlto" disabled/>
+          <div class="divRegistro">
+            <label for="txtTag" >Tag:</label>
+            <input id="txtTag" name="txtTag" disabled/>
+        </div>
+         <div class="divRegistro">
+            <label class="switch">
+              <input type="checkbox" name="chkestatus" id="chkestatus"/>
+              <div class="slider round"></div>
+            </label>
+            <label for="chkestatus">Activo:</label>
         </div>
         <div class="divRegistro">
             <label for="cmbTipoContenido" >Tipo de contenido:</label>
@@ -18,6 +28,16 @@
             </select>
             
         </div>
+
+         <div class="divRegistro divTxtUrl">
+            <label for="txtUrl" >Url:</label>
+            <input id="txtUrl" name="txtUrl" />
+        </div>
+        <div class="divRegistro divUploadFile">
+            <input id="uploadFile" type="file" name="uploadFile" />
+            <input type="hidden" id="uploadedFile" />
+            <div type="button" id="btnUploadHome" class="fa fa-upload"></div>
+        </div>
         <div class="divRegistro">
             <label for="cmbUbicacion" >Ubicación:</label>
             <select id="cmbUbicacion" name="cmbUbicacion" >
@@ -25,15 +45,28 @@
                 <option value="1">Header</option>
             </select>
         </div>
-        
-        <div class="divRegistro divTxtUrl">
-            <label for="txtUrl" >Lote</label>
-            <input type="text" id="txtUrl" name="txtUrl" />
+        <div class="divRegistro">
+            <label for="txtAncho" >Ancho:</label>
+            <input id="txtAncho" name="txtAncho" disabled/>
         </div>
-        <div class="divRegistro divUploadFile">
-            <input id="uploadFile" type="file" name="uploadFile" />
-            <input type="hidden" id="uploadedFile" />
-            <div type="button" id="btnUploadFile" class="fa fa-upload"></div>
+        <div class="divRegistro">
+            <label for="txtAlto" >Alto:</label>
+            <input id="txtAlto" name="txtAlto" disabled/>
+        </div>
+        <div class="divRegistro">
+            <label class="switch">
+              <input type="checkbox" name="chkeslink" id="chkeslink"/>
+              <div class="slider round"></div>
+            </label>
+            <label for="chkeslink">Es Link</label>
+        </div>
+        <div class="divRegistro" id="divLink">
+            <label for="txtlink" >Link:</label>
+            <input id="txtlink" name="txtlink" />
+        </div>
+
+        <div id="btnGuardar">
+            Guardar
         </div>
 
     </div>
