@@ -1,8 +1,6 @@
 var typingTimer;
 var doneTypingIntervalo = 1000;
 
-<<<<<<< HEAD
-=======
 function CargaFunciones() {
 
 	switch(fnToLoad) {
@@ -16,8 +14,8 @@ function CargaFunciones() {
 		cargaVehiculos();
 		break;
 	}
->>>>>>> 8661e41b6a113d183e87e2ddee475f2612f85a13
 
+}
 
 function LimpiarSubasta() {
 

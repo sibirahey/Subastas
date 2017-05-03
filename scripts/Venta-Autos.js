@@ -63,7 +63,7 @@ function buscarAutos(){
 			$.each(data, function(i, item) {
 				debugger;
 					var renglon = "<div value class='rows'>";
-					renglon += '<div><img alt="' + item.idAuto + '" src="' + item.foto + '" onerror=\'imgError(this)\'; /></div>';
+					renglon += '<div><img alt="' + item.idAuto + '" src="fotos/' + item.foto + '" onerror=\'imgError(this)\'; /></div>';
 					renglon += "<div>" + item.descripcion + "</div>";					renglon += "<div>" + item.estado + "</div>";
 					renglon += "<div>" + item.km + "</div>";
 					renglon += "<div><button class='btn waves-effect light-blue lighten-1'  onclick='muestraGaleria(" + item.idVehiculo + ");'><i class='material-icons'>photo_camera</i></button></div>";
@@ -75,7 +75,7 @@ function buscarAutos(){
 				    renglon += "	<div class='modal-content'>";
 			        renglon += "	<h4>Modal Header</h4>";
 			        if(item.fotos != undefined){
-						$.each(item.fotos.split("|"), function(j, item2) {
+						$.each(item.fotos.split(","), function(j, item2) {
 							renglon += "<div class='galleryunselected'><img src='fotos/" + item2 + "' onclick='seleccionaImagen(this);' onerror='imgError(this)';/></div>"
 						});
 
