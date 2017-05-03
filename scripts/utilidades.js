@@ -42,7 +42,8 @@ function CargaSelectEstados(control){
       }
 
     });
-
+    
+	
  } 
  function CargaSelectMunicipios(control, id_estado){
 

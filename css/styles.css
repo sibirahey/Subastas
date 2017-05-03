@@ -1368,11 +1368,11 @@ label[for="registroEULA"] {
 .ui-widget-header, .ui-dialog-buttonpane {
 	width: 100%;
 }
-.no-titlebar .ui-dialog-titlebar {
+/*.no-titlebar .ui-dialog-titlebar {
 	padding: 0 !important;
 	height: 0px !important;
 	border: none !important;
-}
+}*/
 .no-titlebar button[title="Close"] {
 	background-color: #3C3C3C;
 	cursor: pointer;
@@ -1484,12 +1484,14 @@ html .ui-button.ui-state-disabled:active {
     filter: drop-shadow(0 0 4px rgba(0,0,0,0.75));
 	top:-75px;
 }
-.divRegistro label {
+
+/*.divRegistro label {
 	color: #3C4146;
 	opacity: 0.6;
 	font-size: 1.2em;
 	font-weight: 300;
-}
+}*/
+
 /*--------- ENDS LOGIN ---------*/
 /*---------- MAIN--------*/
 .menuLeftMain {
@@ -1643,7 +1645,9 @@ div[aria-describedby="divAutos"]{
 	width: 40%;
 	overflow: auto;
 }
-#divServicios #divOfertas, #divServicios #divForInfo, #divServicios #divOffers {
+#divServicios #divOfertas, 
+#divServicios #divForInfo, 
+#divServicios #divOffers {
 	height: 190px;
 	width: 90%;
 	margin: 10px 5%;
@@ -1673,7 +1677,9 @@ div[aria-describedby="divAutos"]{
 /*---------- FIN MAIN--------*/
 /*---------- REGISTRO ---------*/
 .registroLeft {
+	float:left;
 	width: 300px;
+	margin-left:calc(50% - 512px);
 }
 .registroLeftMenu {
 	height: auto;
@@ -1689,7 +1695,8 @@ div[aria-describedby="divAutos"]{
 	font-family: "Dosis";
 	width: 100%;
 }
-.registroLeftMenu > div:nth-child(1) > a, .registroLeftMenu > div:nth-child(1) > div {
+.registroLeftMenu > div:nth-child(1) > a, 
+.registroLeftMenu > div:nth-child(1) > div {
 	text-decoration: none;
 	font-family: "Dosis";
 	font-weight: 400;
@@ -1697,6 +1704,7 @@ div[aria-describedby="divAutos"]{
 	width: 100%;
 	line-height: 34px;
 	color: #A0A0A0;
+	float: right;
 }
 .registroLeftMenu > div:nth-child(1) > div:nth-child(1) {
 	margin-bottom: 20px;
@@ -1712,7 +1720,8 @@ div[aria-describedby="divAutos"]{
 .registroLeftMenu > div:nth-child(1) > a:nth-child(4) {
 	line-height: 50px;
 }
-.registroLeftMenu > div:nth-child(1) > a > i, .registroLeftMenu > div:nth-child(1) > div > i {
+.registroLeftMenu > div:nth-child(1) > a > i, 
+.registroLeftMenu > div:nth-child(1) > div > i {
 	font-size: 20px;
 	float: right;
 	height: 40px;
@@ -1724,13 +1733,15 @@ div[aria-describedby="divAutos"]{
 	height: 40px;
 	width: 30px;
 }
-.registroLeftMenu > div:nth-child(1) > div:nth-child(1), .registroLeftMenu > div:nth-child(1) > div:nth-child(1) > i {
+.registroLeftMenu > div:nth-child(1) > div:nth-child(1), 
+.registroLeftMenu > div:nth-child(1) > div:nth-child(1) > i {
 	color: #464B50;
 }
 .registroLeftMenu > div:nth-child(2) {
 	margin-top: 40px;
 }
-.registroLeftMenu > div:nth-child(2) > a, .registroLeftMenu > div:nth-child(2) > div {
+.registroLeftMenu > div:nth-child(2) > a, 
+.registroLeftMenu > div:nth-child(2) > div {
 	text-decoration: none;
 	font-family: "Dosis";
 	font-weight: 400;
@@ -1747,7 +1758,8 @@ div[aria-describedby="divAutos"]{
 	padding: 6px;
 }
 .registroMain {
-	width: 600px;
+	float:left;
+	width: 714px;
 	padding: 10px;
 }
 .loginMain > h2, .registroMain > h2 {
@@ -2056,7 +2068,9 @@ a[data-u="any"] {
 	height: 600px;
 	width: 100%;
 }
-.divVideoTips > .vidContainer, .divVideoTips > .vidContainer > video, .divVideoTips > .vidContainer > iframe {
+.divVideoTips > .vidContainer, 
+.divVideoTips > .vidContainer > video, 
+.divVideoTips > .vidContainer > iframe {
 	width: 100%;
 }
 .divVideoTips .vidContainer > iframe {
@@ -2196,6 +2210,7 @@ button[name="contactoEnviar"] {
 	max-width: 1024px;
 }
 .divBotonera {
+	float:left;
 	margin: 20px 0 0 calc(50% - 512px);
 	width:180px;
 }
@@ -2209,6 +2224,7 @@ button[name="contactoEnviar"] {
 	width: 100%;
 }
 #divListaBotonera {
+	float:left;
 	width: 824px;
 	margin: 20px 0 0 10px;
 }
@@ -2371,7 +2387,9 @@ input:checked + .slider:before {
 	color:#3281B3;
 }
 /*--------- ENDS NUEVA SUBASTA ---------*/
+
 /*--------- AGREGA EMPRESA ---------*/
+
 #modalEmpresa,
 #modalEmpresa > div{
 	width:100% !important;
@@ -2401,11 +2419,10 @@ input:checked + .slider:before {
     line-height: 40px;
 }
 /*--------- ENDS AGREGA EMPRESA ---------*/
-/*--------- VENTA AUTOS---------*/
-/*--------- ENDS VENTA AUTOS ---------*/
+
 /*--------- VENTA AUTOS---------*/
 #divRegistroAutos .divRegistro{
-	height:60px;
+
 	padding: 10px 0;
 }
 #divRegistroAutos .divRegistro > label{
@@ -2436,8 +2453,15 @@ input:checked + .slider:before {
 }
 
 /*--------- ENDS VENTA AUTOS --------*/
+
 /*---------MIS SUBASTAS --------*/
 .divMisSubastas{
 	
+}
+.marginTop20{
+	margin-top:20px;
+}
+.marginLeft35{
+	margin-left:35px;
 }
 /*--------- ENDS MIS SUBASTAS --------*/

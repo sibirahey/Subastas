@@ -7,7 +7,7 @@ $( document ).ready(function() {
 
 	cargaHTML(".mainHeader", "views/header.html", "header", function() {
 
-    	//debugger;
+    	
     	
   		
   		if(sessionStorage["nombre"] != undefined){
@@ -29,7 +29,7 @@ $( document ).ready(function() {
 	  		if (esAdmin()){
 				$("#divMenuPrincipal  > ul").append('<li><a class="menuitemindex" name="homeadmin">ADMININISTRADOR DE HOME</a></li>');
 				$("#divMenuPrincipal  > ul").append('<li><a class="menuitemindex" name="subastasadmin">ADMININISTRADOR DE SUBASTAS</a></li>');
-				$("#divMenuPrincipal > ul").append('<li><a class="menuitemindex" name="ventassadmin">ADMININISTRADOR VENTA DE AUTOS</a></li>');
+				$("#divMenuPrincipal > ul").append('<li><a class="menuitemindex" name="subastasadmin">ADMININISTRADOR VENTA DE AUTOS</a></li>');
 			}
 
 
@@ -48,7 +48,7 @@ $( document ).ready(function() {
 		
 
 		$(".menuitemindex").click(function(){
-			
+			debugger;
 			CargaContenidoAdmin(this);
 	      
 	  	});

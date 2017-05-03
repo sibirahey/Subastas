@@ -17,7 +17,6 @@ $(document).ready(function(){
       		}
       	});
 	}
-$(document).ready(function() {
 
 
 
@@ -75,9 +74,6 @@ function CargaContenidoMain() {
 
 };
 
-		postrequest("subastas/xusuario", {
-			"idusuario" : sessionStorage.claveapi
-		}, function(data) {
 
 function CargaDatosPublico(){
 	postrequest("data/venta-autos.json", '', function(data){

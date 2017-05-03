@@ -1,6 +1,7 @@
 var typingTimer;
 var doneTypingIntervalo = 1000;
 
+
 function CargaFuncionesRegistroAuto(idSubasta){
 	$("#dialog").hide();
 	$('#btnActualizaCatalogo').hide();
@@ -27,6 +28,8 @@ function CargaFuncionesRegistroAuto(idSubasta){
 	CargaSelectTipoTransmision("#cbTipoTransmisionAuto", 0, 1);
  	CargaSelectFeatures("#cbFeaturesAutos","",1);
 	
+	
+	
 	$("#cbCiudadAuto").append("<opcion value='0'>== Seleccione == </option>");
 	$("#cbEstadoAuto").change(function() {
 		CargaSelectMunicipios("#cbCiudadAuto", $("#cbEstadoAuto").val());
@@ -44,7 +47,8 @@ function CargaFuncionesRegistroAuto(idSubasta){
 		$("#btnAddMarca").attr('Nombre',$(this).val());
 		CargaSelectModelos("#cbModeloAuto", "#cbMarcaAuto", 0, 1);
 	});
-
+	$('select').material_select();
+	
 	 $("#btnUpload").click(function() {
 		    
 		    var file_data = $('#fotoAuto').prop('files')[0];   
@@ -228,7 +232,7 @@ function CargaFuncionesRegistroAuto(idSubasta){
    		});
 
    });
-
+	
 	eventoFinalizaEscritura('#txtDescripcion',buscaexistente,typingTimer,doneTypingIntervalo);
 
 

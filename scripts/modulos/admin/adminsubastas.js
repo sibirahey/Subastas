@@ -128,7 +128,9 @@ function CargaFuncionesAdminSubastas() {
 	SoloNumericos("#txtIncremento");
 
 	eventoFinalizaEscritura('#txtNombreEmpresa', buscaEmpresa, typingTimer, doneTypingIntervalo);
-
+	
+  	$('select').material_select();
+  
 }
 
 function guardarSubasta(obj){
@@ -166,8 +168,9 @@ function guardarSubasta(obj){
 
 }
 function CargaEmpresas(idx) {
-
 	$("#cmbEmpresas").html("");
+	$("#cmbEmpresasFiltro").html("");
+	
 	$("#cmbEmpresas").append('<option value="-1"> == Seleccione ==</div>');
 	$("#cmbEmpresasFiltro").append('<option value="-1"> == TODAS ==</div>');
 
@@ -180,10 +183,11 @@ function CargaEmpresas(idx) {
 			$("#cmbEmpresas").append('<option value="' + data[i].idEmpresa + '" ' + selected + '>' + data[i].nombreEmpresa + "</option>");
 			$("#cmbEmpresasFiltro").append('<option value="' + data[i].idEmpresa + '">' + data[i].nombreEmpresa + ' </option>');
 		}
+		debugger;
 
 	});
 
-	$("#cmbEmpresas").val(idx);
+	//$("#cmbEmpresas").val(idx);
 }
 
 function CargaTipoSubastas(estatus) {

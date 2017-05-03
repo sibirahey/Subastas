@@ -1,4 +1,20 @@
+$(document).ready(function() {
+	$(".mainBody").load("views/main/admin/ventaautos.html", function() {
+		cargaCatalogos(-1);
+	
+		$(".toggles").controlgroup({
+			direction : "vertical"
+		});
+		//cargaVehiculos();
+		
+		$('.dateTimeHeader').hide();
+		$('select').material_select();
+		
+	});
+	
+});
 function cargaCatalogos(idDef) {
+	 
 	CargaSelectEstados("#cmbEstados");
 	//CargaSelectMunicipios("#cbCiudadAuto", $("#cbEstadoAuto").val());
 	CargaSelectMarcas("#cmbMarcas", 0,1);
@@ -6,9 +22,12 @@ function cargaCatalogos(idDef) {
 	//CargaSelectTipoTransmision("#cbTipoTransmisionAuto", 0, 1);
  	//CargaSelectFeatures("#cbFeaturesAutos","",1);
  	$("#cmbAnio").html(CargaAnioAutos(0));
+	
 	$("#cmbMarcas").change(function(){
 		CargaSelectModelos("#cmbModelos", "#cmbMarcas", 0, 1);
+		
 	});
+	
 }
 
 function muestraGaleria(idx) {
@@ -61,10 +80,11 @@ function buscarAutos(){
 
 		if (data){
 			$.each(data, function(i, item) {
-				debugger;
+					
 					var renglon = "<div value class='rows'>";
 					renglon += '<div><img alt="' + item.idAuto + '" src="fotos/' + item.foto + '" onerror=\'imgError(this)\'; /></div>';
-					renglon += "<div>" + item.descripcion + "</div>";					renglon += "<div>" + item.estado + "</div>";
+					renglon += "<div>" + item.descripcion + "</div>";					
+					renglon += "<div>" + item.estado + "</div>";
 					renglon += "<div>" + item.km + "</div>";
 					renglon += "<div><button class='btn waves-effect light-blue lighten-1'  onclick='muestraGaleria(" + item.idVehiculo + ");'><i class='material-icons'>photo_camera</i></button></div>";
 					
@@ -185,23 +205,9 @@ function FiltrarAutos(item) {
 			return false;
 		}
 	}
+	
 	return valida;
 
 }
 	
-$(document).ready(function() {
-	$(".mainBody").load("views/main/admin/ventaautos.html", function() {
-		cargaCatalogos(-1);
-		
-		
 
-		$(".toggles").controlgroup({
-			direction : "vertical"
-		});
-		//cargaVehiculos();
-		
-		$('.dateTimeHeader').hide();
-	
-	});
-	
-});
