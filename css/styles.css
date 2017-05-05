@@ -2465,3 +2465,14 @@ input:checked + .slider:before {
 	margin-left:35px;
 }
 /*--------- ENDS MIS SUBASTAS --------*/
+#divBotoneraAdminHome{
+	clear: both;
+    margin: 20px calc(50% - 512px);
+    max-width: 1024px;
+}
+#divAdminSubastas{
+	
+}
+#divAdminHomeContenido{
+	
+}

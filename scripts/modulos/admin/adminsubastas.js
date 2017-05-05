@@ -129,7 +129,7 @@ function CargaFuncionesAdminSubastas() {
 
 	eventoFinalizaEscritura('#txtNombreEmpresa', buscaEmpresa, typingTimer, doneTypingIntervalo);
 	
-  	$('select').material_select();
+  	
   
 }
 
@@ -183,10 +183,9 @@ function CargaEmpresas(idx) {
 			$("#cmbEmpresas").append('<option value="' + data[i].idEmpresa + '" ' + selected + '>' + data[i].nombreEmpresa + "</option>");
 			$("#cmbEmpresasFiltro").append('<option value="' + data[i].idEmpresa + '">' + data[i].nombreEmpresa + ' </option>');
 		}
-		debugger;
-
+		
 	});
-
+	$('select').material_select();
 	//$("#cmbEmpresas").val(idx);
 }
 
