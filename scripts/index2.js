@@ -35,7 +35,7 @@ $(document).ready(function() {
 				cargaHTMLLogin(urlvars["s"]);
 		}
 
-
+		
 
 	});
 
@@ -101,14 +101,17 @@ $(document).ready(function() {
 			// Maximum age
 			maximumAge : 100 // OPTIONS
 		});
-
+		
+		$('select').material_select();
+		
 		postrequest("categorias/listar", {
 			"estatus" : "1"
 		}, function(data) {
 
 			for (cat in data) {
 
-				$("#divPreferencias").append('<div class="divRegistro"><input type="checkbox" attr-data="' + data[cat].id + '" class="chkPref" />' + data[cat].descripcion + "</div>");
+				// $("#divPreferencias").append('<div class="divRegistro"><input type="checkbox" attr-data="' + data[cat].id + '" class="chkPref" />' + data[cat].descripcion + "</div>");
+				$("#divPreferencias").append('<p><input type="checkbox" id="' + data[cat].id + '" attr-data="' + data[cat].id + '" class="chkPref" /><label for="' + data[cat].id + '">' + data[cat].descripcion + '</label></p>')
 			}
 
 		});

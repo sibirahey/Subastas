@@ -1,9 +1,4 @@
 *:not(thead):not(tbody):not(td):not(tr) {
-	float: left;
-	position: relative;
-	display: block;
-	margin: 0;
-	padding: 0;
 	box-sizing: border-box;
 	font-family: 'Open Sans', sans-serif;
 	font-weight: 300;
@@ -31,8 +26,10 @@ textarea {
 .mainContainer {
 	height: 100%;
 	width: 100%;
+	float:left;
 }
 .logoHeader {
+	float:left;
 	width: calc(100% - 400px);
 	height: 60px;
 	background-image: url(../images/logoHeader.svg);
@@ -40,6 +37,7 @@ textarea {
 	background-position: 60px center;
 }
 .menuitem {
+	float:left;
 	color: #EBC01C;
 	height: 40px;
 	width: 80px;
@@ -55,7 +53,7 @@ textarea {
 .menuitemlogin[name="registro"] {
 	margin-right:10px;
 }
-.menuitemindex {
+/*.menuitemindex {
 	color: #EBC01C;
 	height: 40px;
 	text-align: center;
@@ -69,17 +67,23 @@ textarea {
 }
 .menuitemindex > label:hover {
 	opacity: 1;
+}*/
+
+.menuitemindex[name="twitter"]{
+	background-image:url('images/logoTwitter.svg');
+}
+.menuitemindex[name="facebook"]{
+	background-image:url('images/logoFacebook.svg');	
 }
 .menuitemwelcome {
 	width: 400px;
 }
-.menuitem:first-of-type, .menuitemindex:first-of-type {
-	margin-right: 1px solid #EBC01C;
-}
+
 .menuitem:hover, .menuitemindex:hover {
 	opacity: 1;
 }
 .mainHeader {
+	float:left;
 	width: inherit;
 	background-color: rgb(30,35,40);
 	box-shadow: 0 3px 6px rgb(0,0,0);
@@ -153,7 +157,7 @@ textarea {
 .mainHeader > ul > li > label:hover {
 	cursor: pointer;
 }
-.menuPrincipal {
+/*.menuPrincipal {
 	width: auto;
 	float: right;
 	margin-right: 20px;
@@ -174,12 +178,14 @@ textarea {
 .menuPrincipal > div:hover, 
 .menuPrincipal > img:hover {
 	opacity: 1;
-}
+}*/
 .mainMinusHeader {
+	float:left;
 	height: 100%;
 	width: 100%;
 }
 .mainBody {
+	float:left;
 	height: 100%;
 	width: 100%;
 }
@@ -476,7 +482,9 @@ textarea {
 .divBotonera > label {
 	line-height: 32px;
 }
-.divRegistro, .divLogin {
+.divRegistro, 
+.divLogin {
+	float:left;
 	width: 100%;
 }
 .divHeaderContenido > .divRegistro{
@@ -975,7 +983,11 @@ label[for="registroEULA"] {
 .cnfgSubastaContainer > label:first-of-type {
 	width: 100%;
 }*/
+#grdVehiculos div{
+	float:left;
+}
 #grdVehiculos:not(.grdVehiculos2){
+	float:left;
 	background-color:#F0F0F0;
 	border:1px solid #C8C8C8;
 	clear:both;
@@ -983,7 +995,7 @@ label[for="registroEULA"] {
 	width: 1024px;
 	margin:30px calc(50% - 512px) 0;
 	font-size: 0.8em;
-	}
+}
 #grdVehiculos:not(.grdVehiculos2) > div:first-child {
 	color: #ffffff;
 	height: 40px;
@@ -1000,6 +1012,7 @@ label[for="registroEULA"] {
 	width: 100px;
 }
 #grdVehiculos:not(.grdVehiculos2) > div:first-child > div {
+	float:left;
 	height: 40px;
 	width: calc((100% - 240px) / 5);
 	text-align: center;
@@ -1020,9 +1033,7 @@ label[for="registroEULA"] {
 	float: none;
 	margin: 0 auto;
 }
-#grdVehiculos:not(.grdVehiculos2) > div:not(:first-child) > div:nth-child(5) {
-	width: 100px;
-}
+
 #grdVehiculos:not(.grdVehiculos2) > div:not(:first-child) > div:nth-child(5) > img {
 	width: 40px;
 	height: auto;
@@ -1041,8 +1052,11 @@ label[for="registroEULA"] {
 	margin: 0 auto;
 	border:none;
 }*/
-#grdVehiculos:not(.grdVehiculos2) > div:not(:first-child) > div {
+#grdVehiculos:not(.grdVehiculos2) > div:not(:first-child) > div:not(.modal) {
 	width: calc((100% - 240px) / 5);
+}
+#grdVehiculos:not(.grdVehiculos2) > div:not(:first-child) .center-btn > button{
+	margin: 0 calc(50% - 40px);
 }
 /*#grdVehiculos:not(.grdVehiculos2) > div:not(:first-child) > div > img {
 	float: none;
@@ -1056,19 +1070,38 @@ label[for="registroEULA"] {
 #grdVehiculos:not(.grdVehiculos2) > div:not(:first-child):nth-child(even) {
 	background-color: #ffffff;
 }
+#grdVehiculos:not(.grdVehiculos2) > div:not(:first-child) > div:nth-child(5) {
+	width: 100px;
+}
 #grdVehiculos:not(.grdVehiculos2) > div:not(:first-child) > div:first-child{
 	margin-top:10px;
 	overflow: hidden;
-	height:100px;
+	height:65px;
+	width:100px;
 }
 #grdVehiculos:not(.grdVehiculos2) > div:not(:first-child) > div > img{
 	width: 90%;
 	margin: 0 5%;
 	background-size:cover;
 	background-repeat:no-repeat;
-	background-position: center;
+	background-position: 50% 50%;
 }
-
+#grdVehiculos:not(.grdVehiculos2) .modal{
+	height:460px !important;
+}
+#grdVehiculos:not(.grdVehiculos2) .modal > .modal-content > h4{
+	height:40px;
+	width:100%; 
+}
+#grdVehiculos:not(.grdVehiculos2) .modal > .modal-content > div:not(h4){
+	height:150px;
+	width:30%;
+	margin: 10px 1.65%; 
+}
+	#grdVehiculos:not(.grdVehiculos2) .modal > .modal-content > div:not(h4) > img{
+		height:100%;
+		width:100%;
+	}
 
 .btnGuardar, 
 .btnPublicar, 
@@ -1335,11 +1368,11 @@ label[for="registroEULA"] {
 .ui-widget-header, .ui-dialog-buttonpane {
 	width: 100%;
 }
-.no-titlebar .ui-dialog-titlebar {
+/*.no-titlebar .ui-dialog-titlebar {
 	padding: 0 !important;
 	height: 0px !important;
 	border: none !important;
-}
+}*/
 .no-titlebar button[title="Close"] {
 	background-color: #3C3C3C;
 	cursor: pointer;
@@ -1385,6 +1418,10 @@ html .ui-button.ui-state-disabled:active {
 }
 /*---------- ENDS SETTINGS ----------*/
 /*--------- LOGIN ---------*/
+#loginMail,
+#loginPassword{
+	color:#ffffff;	
+}
 .divLogin {
 	background-image: url('../img/background011.jpg');
 	background-position: center center;
@@ -1399,12 +1436,9 @@ html .ui-button.ui-state-disabled:active {
 	margin-top: 160px;
 	margin-left: calc(50% - 200px);
 	margin-right: calc(50% - 200px);
-	padding: 160px 0 30px 0;
+	padding: 0 0 30px 0;
 	box-shadow: 0 0 6px #000000;
 	border-radius: 6px;
-}
-.floatingWindow > div:not(.logoCar):not(.logoLogin) {
-	width: 100%;
 }
 .floatingWindow > input, .floatingWindow > button, .floatingWindow > a {
 	height: 40px;
@@ -1433,31 +1467,31 @@ html .ui-button.ui-state-disabled:active {
 .logoLogin {
 	background-image: url('../images/logoSlogan.svg');
 	height: 100px;
-	width: 350px;
-	top: 40px;
-	margin-left: calc(50% - 175px);
 }
 
 .logoCar {
 	background-image: url('../images/logoCar.svg');
 	height: 100px;
-	top: -60px;
-	width: 270px;
-	margin-left: calc(50% - 135px);
 }
-.logoLogin, .logoCar {
+.logoLogin, 
+.logoCar {
+	float:left;		
+	width:420px;
 	background-position: center center;
 	background-repeat: no-repeat;
-	position: absolute;
+	position: relative;
 	text-shadow: 0 0 2px #000000;
     filter: drop-shadow(0 0 4px rgba(0,0,0,0.75));
+	top:-75px;
 }
-.divRegistro label {
+
+/*.divRegistro label {
 	color: #3C4146;
 	opacity: 0.6;
 	font-size: 1.2em;
 	font-weight: 300;
-}
+}*/
+
 /*--------- ENDS LOGIN ---------*/
 /*---------- MAIN--------*/
 .menuLeftMain {
@@ -1533,33 +1567,56 @@ img[data-u="image"] {
 	background-size: contain;
 }
 .searchItem {
-	height: 360px;
-	width: 260px;
-	margin: 10px;
+	height: 420px;
+	width: 290px;
+	margin: 5px;
 	border: 1px solid #e6e6e6;
 	background-color: #ffffff;
 }
 .searchItem > .searchItemHead {
 	height: 40px;
 	width: 100%;
-	color: #F7E827;
+	color: #FFFFFF;
 	border: none;
-	background: #FD5A54;
-	background: -webkit-linear-gradient(top, #464646, #787878);
-	background: -o-linear-gradient(top, #464646, #787878);
-	background: -moz-linear-gradient(top, #464646, #787878);
-	background: linear-gradient(to top, #464646, #787878);
+	background-color: #468CF0;
 	line-height: 40px;
 	text-indent: 6px;
 	cursor: pointer;
+	
 }
-
-.searchItem > img {
-	width: 260px;
-	height: 140px;
+	.searchItem > .searchItemHead > label {
+		line-height:40px;
+		font-size:1.2em;
+		color:#FFFFFF;
+	}
+	.searchItem > .searchItemHead > i {
+		line-height:40px;
+		width:40px;
+		text-align:center;
+		font-size:1.2em;
+		color:#FFFFFF;
+		float:right;
+		cursor:pointer;
+	}
+		.searchItem > .searchItemHead > i:before:hover {
+			box-shadow: 0 0 3px #000000;
+		}
+.searchItem > .searchItemImg {
+	width: 100%;
+	height: 170px;
 	background-size: cover;
 	background-position: center center;
+	background-repeat:no-repeat;
+	overflow:hidden;
 }
+	.searchItem > .searchItemImg > img{
+		height:98%;
+		width: 98%;
+		margin:1%;
+		background-position:center center;
+		background-size:contain;
+		background-color:#EBE7E3;
+	}
 .searchItem > .searchItemBody {
 	width: 100%;
 	padding: 10px;
@@ -1576,6 +1633,10 @@ img[data-u="image"] {
 }
 .searchItem > .searchItemBody > div > label {
 	width: calc(100% - 120px);
+	color:#5A5A5A;
+}
+div[aria-describedby="divAutos"]{
+	background-color:#E6E6E6;
 }
 #divServicios {
 	border-left: 1px solid #B4B4B4;
@@ -1584,7 +1645,9 @@ img[data-u="image"] {
 	width: 40%;
 	overflow: auto;
 }
-#divServicios #divOfertas, #divServicios #divForInfo, #divServicios #divOffers {
+#divServicios #divOfertas, 
+#divServicios #divForInfo, 
+#divServicios #divOffers {
 	height: 190px;
 	width: 90%;
 	margin: 10px 5%;
@@ -1614,7 +1677,9 @@ img[data-u="image"] {
 /*---------- FIN MAIN--------*/
 /*---------- REGISTRO ---------*/
 .registroLeft {
+	float:left;
 	width: 300px;
+	margin-left:calc(50% - 512px);
 }
 .registroLeftMenu {
 	height: auto;
@@ -1630,7 +1695,8 @@ img[data-u="image"] {
 	font-family: "Dosis";
 	width: 100%;
 }
-.registroLeftMenu > div:nth-child(1) > a, .registroLeftMenu > div:nth-child(1) > div {
+.registroLeftMenu > div:nth-child(1) > a, 
+.registroLeftMenu > div:nth-child(1) > div {
 	text-decoration: none;
 	font-family: "Dosis";
 	font-weight: 400;
@@ -1638,6 +1704,7 @@ img[data-u="image"] {
 	width: 100%;
 	line-height: 34px;
 	color: #A0A0A0;
+	float: right;
 }
 .registroLeftMenu > div:nth-child(1) > div:nth-child(1) {
 	margin-bottom: 20px;
@@ -1653,7 +1720,8 @@ img[data-u="image"] {
 .registroLeftMenu > div:nth-child(1) > a:nth-child(4) {
 	line-height: 50px;
 }
-.registroLeftMenu > div:nth-child(1) > a > i, .registroLeftMenu > div:nth-child(1) > div > i {
+.registroLeftMenu > div:nth-child(1) > a > i, 
+.registroLeftMenu > div:nth-child(1) > div > i {
 	font-size: 20px;
 	float: right;
 	height: 40px;
@@ -1665,13 +1733,15 @@ img[data-u="image"] {
 	height: 40px;
 	width: 30px;
 }
-.registroLeftMenu > div:nth-child(1) > div:nth-child(1), .registroLeftMenu > div:nth-child(1) > div:nth-child(1) > i {
+.registroLeftMenu > div:nth-child(1) > div:nth-child(1), 
+.registroLeftMenu > div:nth-child(1) > div:nth-child(1) > i {
 	color: #464B50;
 }
 .registroLeftMenu > div:nth-child(2) {
 	margin-top: 40px;
 }
-.registroLeftMenu > div:nth-child(2) > a, .registroLeftMenu > div:nth-child(2) > div {
+.registroLeftMenu > div:nth-child(2) > a, 
+.registroLeftMenu > div:nth-child(2) > div {
 	text-decoration: none;
 	font-family: "Dosis";
 	font-weight: 400;
@@ -1688,7 +1758,8 @@ img[data-u="image"] {
 	padding: 6px;
 }
 .registroMain {
-	width: 600px;
+	float:left;
+	width: 714px;
 	padding: 10px;
 }
 .loginMain > h2, .registroMain > h2 {
@@ -1698,7 +1769,7 @@ img[data-u="image"] {
 	font-size: 1.5em;
 	font-weight: 400;
 }
-#btnGuardar, #btnGuardarSubasta {
+#btnGuardar {
 	height: 80px;
 	line-height: 80px;
 	width: 90%;
@@ -1711,7 +1782,7 @@ img[data-u="image"] {
 	cursor: pointer;
 	opacity: 0.6;
 }
-#btnGuardar:hover, #btnGuardarSubasta:hover {
+#btnGuardar:hover {
 	opacity: 1;
 }
 button[title="Close"] {
@@ -1950,12 +2021,15 @@ a[data-u="any"] {
 }
 /*---------- INFOGRAFIAS ---------*/
 .divSeccion {
+	float:left;
 	max-width: 1024px;
 	margin: 0 calc(50% - 512px);
 	width: 100%;
 }
 
 .divSeccion > h2 {
+	float:left;
+	position:relative;
 	height: 60px;
 	line-height: 60px;
 	font-family: "Dosis";
@@ -1990,14 +2064,16 @@ a[data-u="any"] {
 	background-image: url('../images/icoContacto.svg');
 }
 
-.divVideoTips {
+.divVideoTips .vidContainer{
+	height: 600px;
 	width: 100%;
 }
-.divVideoTips > .vidContainer, .divVideoTips > .vidContainer > video, .divVideoTips > .vidContainer > iframe {
+.divVideoTips > .vidContainer, 
+.divVideoTips > .vidContainer > video, 
+.divVideoTips > .vidContainer > iframe {
 	width: 100%;
 }
-.divVideoTips > .vidContainer > video {
-	background-image: url('http://localhost/Subastas-master/images/videoPoster.png');
+.divVideoTips .vidContainer > iframe {
 	background-position: center center;
 	background-repeat: no-repeat;
 	background-size: cover;
@@ -2005,22 +2081,26 @@ a[data-u="any"] {
 	width: 100%;
 }
 .infoSeguridad {
+	float:left;
 	width: calc(100% - 320px);
 	margin-right: 20px;
 }
 /*---------- ENDS INFOGRAFIAS ---------*/
 /*---------- CALENDARIO VERIFICACION ---------*/
 .calendarioVerificacion {
+	float:left;
 	display: table;
 	width: 100%;
 	text-align: center;
 	box-shadow: 0 0 10px -2px #000000;
 }
 .calendarioVerificacion > div {
+	float:left;
 	display: table-column;
 	width: 33.3%;
 }
 .calendarioVerificacion > div > div {
+	float:left;
 	display: table-cell;
 	height: 40px;
 	width: 100%;
@@ -2033,6 +2113,7 @@ a[data-u="any"] {
 	background-color: #DBDBDB;
 }
 .calendarioVerificacion > div > div:nth-child(1) {
+	float:left;
 	background-color: #5A5F64;
 	color: #ffffff;
 }
@@ -2047,20 +2128,22 @@ a[data-u="any"] {
 	width: 100%;
 }
 .localizaGasolineras iframe {
+	float:left;
 	width: calc(100% - 320px);
 	margin-right: 20px;
 }
 /*---------- END LOCALIZAODR DE GASOLINERAS ---------*/
 /*---------- CONTACTANOS ---------*/
 .contactForm {
+	float:left;
 	padding: 20px;
 	width: 100%;
 	border: 1px solid #B3B3B3;
 }
 .contactForm > div, .contactForm > textarea {
+	float:left;
 	width: 50%;
 }
-
 .contactForm > div > input, .contactForm > div > textarea {
 	height: 40px;
 	text-align: left;
@@ -2099,14 +2182,19 @@ button[name="contactoEnviar"] {
 .banner970x90 {
 	float: none;
 	margin: 20px auto;
+	display:block;
 }
 .banner300x600 {
+	float:left;
 	height: 600px;
-	width: 300px
+	width: 300px;
+	display:block;
 }
 .banner300x250 {
+	float:left;
 	height: 250px;
-	width: 300px
+	width: 300px;
+	display:block;
 }
 /*---------- ENDS BANNERS ---------*/
 /*---------- ADMINISTRADOR DE SUBASTAS---------*/
@@ -2122,6 +2210,7 @@ button[name="contactoEnviar"] {
 	max-width: 1024px;
 }
 .divBotonera {
+	float:left;
 	margin: 20px 0 0 calc(50% - 512px);
 	width:180px;
 }
@@ -2135,6 +2224,7 @@ button[name="contactoEnviar"] {
 	width: 100%;
 }
 #divListaBotonera {
+	float:left;
 	width: 824px;
 	margin: 20px 0 0 10px;
 }
@@ -2297,7 +2387,9 @@ input:checked + .slider:before {
 	color:#3281B3;
 }
 /*--------- ENDS NUEVA SUBASTA ---------*/
+
 /*--------- AGREGA EMPRESA ---------*/
+
 #modalEmpresa,
 #modalEmpresa > div{
 	width:100% !important;
@@ -2327,12 +2419,60 @@ input:checked + .slider:before {
     line-height: 40px;
 }
 /*--------- ENDS AGREGA EMPRESA ---------*/
+
 /*--------- VENTA AUTOS---------*/
-/*--------- ENDS VENTA AUTOS ---------*/
-/*--------- VENTA AUTOS---------*/
+#divRegistroAutos .divRegistro{
+
+	padding: 10px 0;
+}
 #divRegistroAutos .divRegistro > label{
+	
+	line-height:40px;
 	width: 150px;
 	text-align:right;
 	padding-right:8px;
 }
-/*--------- ENDS VENTA AUTOS ---------*/
+#divRegistroAutos .divRegistro > select,
+#divRegistroAutos .divRegistro > input[type="text"],
+#divRegistroAutos .divRegistro > textarea{
+	height:40px;
+	width: calc(100% - 200px);
+	text-align:right;
+}
+#btnAddMarca{
+	height:40px;
+	width:40px;
+	margin-left:10px;
+}
+#divSubastaNombre{
+	width: 100%;
+}
+
+#divRegistroAutos > div:not(#divSubastaNombre) > div > .divRegistro > {
+	
+}
+
+/*--------- ENDS VENTA AUTOS --------*/
+
+/*---------MIS SUBASTAS --------*/
+.divMisSubastas{
+	
+}
+.marginTop20{
+	margin-top:20px;
+}
+.marginLeft35{
+	margin-left:35px;
+}
+/*--------- ENDS MIS SUBASTAS --------*/
+#divBotoneraAdminHome{
+	clear: both;
+    margin: 20px calc(50% - 512px);
+    max-width: 1024px;
+}
+#divAdminSubastas{
+	
+}
+#divAdminHomeContenido{
+	
+}

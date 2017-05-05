@@ -1,5 +1,20 @@
+$(document).ready(function() {
+	$(".mainBody").load("views/main/admin/ventaautos.html", function() {
+		cargaCatalogos(-1);
+	
+		$(".toggles").controlgroup({
+			direction : "vertical"
+		});
+		//cargaVehiculos();
+		
+		$('.dateTimeHeader').hide();
+		$('select').material_select();
+		
+	});
+	
+});
 function cargaCatalogos(idDef) {
-	debugger;
+	 
 	CargaSelectEstados("#cmbEstados");
 	//CargaSelectMunicipios("#cbCiudadAuto", $("#cbEstadoAuto").val());
 	CargaSelectMarcas("#cmbMarcas", 0,1);
@@ -7,13 +22,16 @@ function cargaCatalogos(idDef) {
 	//CargaSelectTipoTransmision("#cbTipoTransmisionAuto", 0, 1);
  	//CargaSelectFeatures("#cbFeaturesAutos","",1);
  	$("#cmbAnio").html(CargaAnioAutos(0));
+	
 	$("#cmbMarcas").change(function(){
 		CargaSelectModelos("#cmbModelos", "#cmbMarcas", 0, 1);
+		
 	});
+	
 }
 
 function muestraGaleria(idx) {
-	debugger;
+
 	
 	var dialog = $("#gallery" + idx).dialog({
 		autoOpen : false,
@@ -26,7 +44,7 @@ function muestraGaleria(idx) {
 
 	$("#gallery" + idx).addClass('muestraGaleria');
 
-	//dialog.dialog("open");
+	dialog.dialog("open");
 }
 
 function seleccionaImagen(obj) {
@@ -40,7 +58,7 @@ function seleccionaImagen(obj) {
 
 function buscarAutos(){
 
-debugger;
+
 	$(".rows").remove();
 
 	busAutos = new busquedaAuto();
@@ -57,26 +75,27 @@ debugger;
 
 
 	postrequest("autos/busqueda",busAutos,function(data){
-		debugger;
+	
 		var total = 0;
 
 		if (data){
 			$.each(data, function(i, item) {
-				
+					
 					var renglon = "<div value class='rows'>";
-					renglon += '<div><img alt="' + item.idAuto + '" src="' + item.foto + '" onerror=\'imgError(this)\'; /></div>';
-					renglon += "<div>" + item.descripcion + "</div>";					renglon += "<div>" + item.estado + "</div>";
+					renglon += '<div><img alt="' + item.idAuto + '" src="fotos/' + item.foto + '" onerror=\'imgError(this)\'; /></div>';
+					renglon += "<div>" + item.descripcion + "</div>";					
+					renglon += "<div>" + item.estado + "</div>";
 					renglon += "<div>" + item.km + "</div>";
-					//renglon += "<div><button class='btn waves-effect light-blue lighten-1'  onclick='muestraGaleria(" + item.idVehiculo + ");'><i class='material-icons'>photo_camera</i></button></div>";
-					renglon += "<div><button class='btn waves-effect waves-light light-blue lighten-1'  data-target='gallery"+ item.idVehiculo +"'><i class='material-icons'>photo_camera</i></button></div>";
+					renglon += "<div><button class='btn waves-effect light-blue lighten-1'  onclick='muestraGaleria(" + item.idVehiculo + ");'><i class='material-icons'>photo_camera</i></button></div>";
+					
 					renglon += "<div>" + item.precio + "</div>";
 					renglon += "<div class='center-btn'><button class='btn waves-effect waves-light light-blue lighten-1'><i class='material-icons'>add</i></button></div>";
-					//renglon += "<div style='display:none;' id='gallery" + item.idVehiculo + "'>";
-					renglon += "<div id='gallery"+ item.idAuto +"'  class='modal modal-fixed-footer'>";
+					renglon += "<div style='display:none;' id='gallery" + item.idAuto + "'>";
+					renglon += "<div id='gallery"+ item.idVehiculo +"'  class='modal modal-fixed-footer'>";
 				    renglon += "	<div class='modal-content'>";
 			        renglon += "	<h4>Modal Header</h4>";
 			        if(item.fotos != undefined){
-						$.each(item.fotos.split("|"), function(j, item2) {
+						$.each(item.fotos.split(","), function(j, item2) {
 							renglon += "<div class='galleryunselected'><img src='fotos/" + item2 + "' onclick='seleccionaImagen(this);' onerror='imgError(this)';/></div>"
 						});
 
@@ -186,26 +205,9 @@ function FiltrarAutos(item) {
 			return false;
 		}
 	}
+	
 	return valida;
 
 }
-
-/*	
-$(document).ready(function() {
-	$(".mainBody").load("views/main/admin/ventaautos.html", function() {
-		cargaCatalogos(-1);
-		
-		
-
-		$(".toggles").controlgroup({
-			direction : "vertical"
-		});
-		//cargaVehiculos();
-		
-		$('.dateTimeHeader').hide();
 	
-	});
-	
-});
 
-*/

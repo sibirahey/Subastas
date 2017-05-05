@@ -40,7 +40,8 @@ function cargaServiciosCotizar(O) {
 
 					Renglon+='<div id="uploadFile'+idNombre+'" style="display:none;" >';
 					Renglon+='<div id="divFile'+idNombre+'" style="display:none;" >Archivo</div>';
-					Renglon+='<button id="btnSubir"'+ids+ ' onClick="SubirArchivo(this);">Subir Archivo</button>';
+					Renglon+='<input id="selectFile'+idNombre+'"'+ids+ ' type ="file" "/>';
+					//Renglon+='<button id="btnSubir"'+ids+ ' onClick="SubirArchivo(this);">Subir Archivo</button>';
 					Renglon+='</div>'
 				}
 
