@@ -1,40 +1,54 @@
 $(document).ready(function(){
 	
-  
+  	debugger;
 	var urlvars = getUrlVars();
 	
 	if(urlvars["accion"] == undefined || urlvars["accion"] == "dashboard"){
 		
-		$(".mainBody").load("views/main/dashboard.html", function() {});
+		$(".mainBody").load("views/main/dashboard.html", function() {
+			CargaFunciones("dashboard");
+
+		});
 	}else{
  		
- 		fnToLoad = urlvars["accion"];
-  		
-  		cargaHTML(".mainBody","views/main/admin/"+ urlvars["accion"] +".html", urlvars["accion"],function() {
+ 		cargaHTML(".mainBody","views/main/admin/"+ urlvars["accion"] +".html", urlvars["accion"],function() {
      		
-			if(urlvars["accion"] == "homeadmin")
-			{
-
-				CargaFuncionesAdminHome();
-			}else{
-
-      			CargaFunciones();
-      		}
+			// if(urlvars["accion"] == "homeadmin")
+			// {
+			
+      			
+   //    		}
+   			CargaFunciones(urlvars["accion"]);
       	});
 	}
-$(document).ready(function() {
 
-	var urlvars = getUrlVars();
-	if (urlvars["accion"] != undefined) {
 
-		$(".mainBody").load("views/interna2.html?id=" + urlvars["id"], function() {
-		});
-	} else {
 
-		CargaContenidoMain();
+  });
+
+function CargaFunciones(o){
+	
+	switch(o){
+		case "subastasadmin":
+			CargaFuncionesAdminSubastas();
+			break;
+		case "homeadmin":
+			CargaFuncionesAdminHome();
+			break;
+		case "ventaautos":
+			cargaVehiculos();
+			break;
+		case "dashboard":
+			
+			CargaSeccionesHome();
+			break;
+		default:
+			CargaSeccionesHome();
+			break;
+
 	}
 
-});
+}
 
 function CargaContenidoMain() {
 
@@ -72,100 +86,75 @@ function CargaContenidoMain() {
 
 };
 
-		postrequest("subastas/xusuario", {
-			"idusuario" : sessionStorage.claveapi
-		}, function(data) {
 
-			alert(data.length);
+function CargaDatosPublico(){
+	postrequest("data/venta-autos.json", '', function(data){
+				
+			$.each(data.vehiculos,function(i,item){
+				
+				
+				// if($("#searchBox").val()== "" || item.marca.toLowerCase().indexOf($("#searchBox").val().toLowerCase())>=0 || item.modelo.toLowerCase().indexOf($("#searchBox").val().toLowerCase())>=0){
+				// 	$("#searchBody").append(regresaRenglonVenta(item))
+				// }
 
-			// <div id="seccInfoSeguridad" class="divSeccion divSeguridad">
-			// 	<h2>Infografías de Seguridad</h2>
-			// 	<img class="infoSeguridad" src="images/infoSeguridad.png">
-			// 	<img class="banner300x600" src="images/banner300x600.png">
-			// </div>
 
-		});
-	});
 
-	$("#searchBox").keypress(function(e) {
-		if (e.which == 13) {
-			$("#searchBody").html("");
-			if (sessionStorage.getItem('publico') == 1) {
-				CargaDatosPrivado();
-			} else {
-				CargaDatosPublico();
-			}
-
-		}
-	});
-
-	if (sessionStorage.getItem('publico') == 1) {
-		CargaDatosPrivado();
-	} else {
-		CargaDatosPublico();
-	}
-
-}
-
-function CargaDatosPublico() {
-	postrequest("data/venta-autos.json", '', function(data) {
-
-		$.each(data.vehiculos, function(i, item) {
-
-			// if($("#searchBox").val()== "" || item.marca.toLowerCase().indexOf($("#searchBox").val().toLowerCase())>=0 || item.modelo.toLowerCase().indexOf($("#searchBox").val().toLowerCase())>=0){
-			// 	$("#searchBody").append(regresaRenglonVenta(item))
-			// }
-
-		});
+			});
 	});
 
 }
 
-function CargaDatosPrivado() {
+function CargaDatosPrivado(){
+	
+	postrequest("data/subastas.json", '', function(data){
+			
+			$.each(data["datos"],function(i,item){
+				
+				
+				if($("#searchBox").val()== "" || item.empresa.toLowerCase().indexOf($("#searchBox").val().toLowerCase())>=0){
+					$("#searchBody").append(regresaRenglonSubasta(item))
+				}
 
-	postrequest("data/subastas.json", '', function(data) {
 
-		$.each(data["datos"], function(i, item) {
 
-			if ($("#searchBox").val() == "" || item.empresa.toLowerCase().indexOf($("#searchBox").val().toLowerCase()) >= 0) {
-				$("#searchBody").append(regresaRenglonSubasta(item))
-			}
-
-		});
+			});
 	});
 
+	
 }
-
-function VerSubasta(o) {
+function VerSubasta(o){
 	CargaSubasta($(o).attr("attr-id"));
 
+
 }
 
-function regresaRenglonSubasta(item) {
+
+function regresaRenglonSubasta(item){
 
 	var renglon = '<div class="searchItem">';
-	renglon += '			<div class="searchItemHead" attr-id="' + item.id + '" onclick="VerSubasta(this);"><h3>' + item.empresa + '</h3></div>';
+	renglon += '			<div class="searchItemHead" attr-id="'+item.id+'" onclick="VerSubasta(this);"><h3>'+item.empresa+'</h3></div>';
 
 	renglon += '		<div class="searchItemBody">';
 	renglon += '			<div>';
 	renglon += '				<h4>Subasta </h4>';
-	renglon += '				<label>[' + item.estatus + ']</label>';
+	renglon += '				<label>['+item.estatus+']</label>';
 	renglon += '				</div>';
 	renglon += '				<div>';
 	renglon += '					<h4>Inicia:</h4>';
-	renglon += '					<label>' + item.fechaInicio + '</label>';
+	renglon += '					<label>'+item.fechaInicio+'</label>';
 	renglon += '				</div>';
 	renglon += '				<div>';
 	renglon += '					<h4>Finaliza:</h4>';
-	renglon += '					<label>' + item.fechaFin + '</label>';
+	renglon += '					<label>'+item.fechaFin+'</label>';
 	renglon += '				</div>';
 	renglon += '				<div>';
 	renglon += '					<h4>Tipo de oferta:</h4>';
-	renglon += '					<label>' + item.tipo + '</label>';
+	renglon += '					<label>'+item.tipo+'</label>';
 	renglon += '				</div>';
 	renglon += '			</div>';
 	renglon += '</div>';
 	return renglon;
+
 
 }
 

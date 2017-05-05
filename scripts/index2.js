@@ -10,8 +10,8 @@ $(document).ready(function() {
 
 
 	cargaHTML(".mainBody", "views/index.html", "", function() {
-		console.log("Cargo index.html del archivo de index2.js");
-		//asigna función click a cada elemento del menú
+		
+		CargaSeccionesHome();
 
 	});
 
@@ -311,6 +311,8 @@ $(document).ready(function() {
 					alert("Error de usuario o contraseña");
 				}
 
+			}, function(data){
+				alert("Ocurrió un error al realizar la petición");
 			});
 		}
 		

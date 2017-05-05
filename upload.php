@@ -23,6 +23,7 @@ require_once("modelos/autos.php");
 require_once("modelos/autos-features.php");
 require_once("modelos/autos-fotos.php");
 require_once("modelos/subasta-autos.php");
+require_once("modelos/seccioneshome.php");
 require_once('utilidades/ConexionBD.php');
 require_once('utilidades/ExcepcionApi.php');
 require_once('utilidades/Utilerias.php');
@@ -94,7 +95,24 @@ require_once('utilidades/Utilerias.php');
                 fclose($gestor);
             }
 
-        }else{
+        }else if($_POST["accion"] == "home"){
+            try{
+                move_uploaded_file($_FILES['file']['tmp_name'], 'images/home/' . $guid.".".$ext);
+                $pdo = ConexionBD::obtenerInstancia()->obtenerBD();
+                $comando = "update cat_seccioneshome set url = '"."images/home/" . $guid.".".$ext."' where id = ".$_POST["id"];
+                echo $comando;
+                $sentencia = $pdo->prepare($comando);
+
+                $sentencia->execute();
+                echo $guid.".".$ext;
+            }
+            catch(Exception $ex){
+
+                echo "ERROR".$ex;
+            }
+
+        }
+        else{
           
           
             move_uploaded_file($_FILES['file']['tmp_name'], 'uploads/' . $guid.".".$ext);

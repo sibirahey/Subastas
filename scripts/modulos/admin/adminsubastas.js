@@ -1,21 +1,7 @@
 var typingTimer;
 var doneTypingIntervalo = 1000;
 
-function CargaFunciones(){
 
-	switch(fnToLoad){
-		case "subastasadmin":
-			CargaFuncionesAdminSubastas();
-			break;
-		case "homeadmin":
-			CargaFuncionesAdminHome();
-			break;
-		case "ventaautos":
-			cargaVehiculos();
-			break;
-	}
-
-}
 
 function LimpiarSubasta(){
 

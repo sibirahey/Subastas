@@ -302,3 +302,38 @@ function SoloNumericos(inputItem){
 }
 
 
+function CargaSeccionesHome(){
+
+  postrequest("data/home.json", {}, 
+      function(data) {
+        for(obj in data){
+          var secc = data[parseInt(obj)];
+
+          if(secc.estatus == 0){
+            $("#"+secc.tag).hide();
+
+          }else{
+            $("#"+secc.tag).show();           
+          }
+
+          if(secc.esimg == 1){
+            $("#"+secc.tag).attr("src",secc.url);
+          }else{
+            $("#"+secc.tag).attr("src",secc.url);
+          }
+          if(secc.eslink == 1){
+            console.log("es 1");
+            $("#"+secc.tag).attr("attr-link",secc.link);
+            $("#"+secc.tag).click(function(){
+              var o = this;
+              window.open($(o).attr("attr-link"));
+              
+            }); 
+
+          }
+          
+        }
+
+    });
+}
+

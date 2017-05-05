@@ -132,20 +132,19 @@ class autos
 
            $paramNum = 1;
 
-            if ($precioIni >0 && $precioFin >0){
+            if ($precioIni >0 && $precioFin >0)
+            {
                 $sentencia->bindParam($paramNum, $precioIni);
                 $paramNum++;
                 $sentencia->bindParam($paramNum, $precioFin);
                 $paramNum++;
 
             }
-            if($anio <= 0) {
             if ($anio >0) {
 
                 $sentencia->bindParam($paramNum, $anio);
                 $paramNum++;
             } 
-            if($kmIni <=0 && $kmFin<=0){
             if ($kmIni >0 && $kmFin>0){
 
                 $sentencia->bindParam($paramNum, $kmIni);
@@ -154,46 +153,33 @@ class autos
                 $paramNum++;
             }  
             if($marcaid <=0) {
-=======
-            if ($marcaId >0) {
->>>>>>> 93516d93948fb79a1716974f6b20f9d5ee560cc6
 
                 $sentencia->bindParam($paramNum,$marcaId);
                 $paramNum++;
             }
-<<<<<<< HEAD
+
             if($estadoId<=0) {
-=======
-            if ($estadoId>0) {
->>>>>>> 93516d93948fb79a1716974f6b20f9d5ee560cc6
 
                 $sentencia->bindParam($paramNum,$estadoId);
                 $paramNum++;
             }
-<<<<<<< HEAD
-            if($descripcion =="") {
-=======
             if ($descripcion !="") {
->>>>>>> 93516d93948fb79a1716974f6b20f9d5ee560cc6
-
                 $sentencia->bindParam($paramNum,$descripcion);
                 $paramNum++;
                 
             }
             if ($modeloId >0) {
-
                 $sentencia->bindParam($paramNum,$modeloId);
-                
             }
            
             if ($sentencia->execute()){
                 return $sentencia->fetchall(PDO::FETCH_ASSOC);
-            }else
+            }
+            else
             {
                 return null;
             }
 
-            
     }
 
 
