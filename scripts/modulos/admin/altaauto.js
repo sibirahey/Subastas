@@ -47,7 +47,7 @@ function CargaFuncionesRegistroAuto(idSubasta){
 		$("#btnAddMarca").attr('Nombre',$(this).val());
 		CargaSelectModelos("#cbModeloAuto", "#cbMarcaAuto", 0, 1);
 	});
-	$('select').material_select();
+	
 	
 	 $("#btnUpload").click(function() {
 		    
@@ -221,11 +221,14 @@ function CargaFuncionesRegistroAuto(idSubasta){
 					CargaSelectColores("#cbColorAuto", 0, 1);
 				}
 				if($( "#dialog" ).attr("operacion") == "features"){
+					$('#cbFeaturesAutos').material_select("destroy");
 					$("#cbFeaturesAutos").html("");
 					CargaSelectFeatures("#cbFeaturesAutos","",1);
+					$('#cbFeaturesAutos').material_select();
+					$('#cbFeaturesAutos').val();
 				}
 
-				$("#dialog").dialog('close');
+				
 
 			}
 

@@ -34,6 +34,7 @@
 		<script type="text/javascript" src="scripts/modulos/admin/adminsubastas.js<?php echo "?" . rand(0, 9999999); ?>"></script>
 		<script type="text/javascript" src="scripts/modulos/admin/altaauto.js<?php echo "?" . rand(0, 9999999); ?>"></script>
 		<script type="text/javascript" src="scripts/Venta-Autos.js<?php echo "?" . rand(0, 9999999); ?>"></script>
+		<script type="text/javascript" src="scripts/adminhome.js<?php echo "?" . rand(0, 9999999); ?>"></script>
 		
 	</head>
 	<body>
@@ -53,28 +54,7 @@
 				</div>
 				<!-- menú principal; botones de redes sociales -->
 				<ul>
-					<li class="menuitem" name="quienes">
-						<label>¿Quienes somos?</label>
-					</li>
-					<li class="menuitem"  name="mision">
-						<label>Misi&oacute;n<label>
-					</li>
-					<li class="menuitem"  name="vision">
-						<label>Visi&oacute;n</label>
-					</li>
-					<li class="menuitem"  name="objetivos">
-						<label>Objetivos</label>
-					</li>
-					<li class="menuitem"  name="servicios">
-						<label>Servicios ofertados</label>
-					</li>
-
-					<li>
-						<button class="btnTwitter" title="twitter"></button>
-					</li>
-					<li>
-						<button class="btnFacebook" title="facebook"></button>
-					</li>
+					
 				</ul>
 				<!-- apartado de fecha y hora -->
 				<!-- <div><label>JUEVES, 19 DE ENERO DE 2017</label><label> 11:28:17</label></div>-->

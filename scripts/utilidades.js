@@ -25,7 +25,7 @@ function CargaAnioAutos(anio) {
 		options += '<option value="' + i + '" ' + ((i == anio) ? 'selected="selected"' : '' ) + ' >' + i + '</option>';
 
 	}
-	$('select').material_select();
+
 	return options;
 
 }
@@ -41,13 +41,14 @@ function CargaSelectEstados(control) {
 
 			$(control).append('<option value="' + data[i].id + '">' + data[i].nombre + '</option>');
 		}
-		$('select').material_select();
+		
 	});
 
 }
 
 function CargaSelectMunicipios(control, id_estado) {
 
+	$("#cbCiudadAuto").material_select("destroy");
 	postrequest("municipios/listar?rand=" + Math.random(), {
 		"estatus" : "1",
 		"id_estado" : id_estado
@@ -61,7 +62,8 @@ function CargaSelectMunicipios(control, id_estado) {
 
 			$(control).append('<option value="' + data[i].id + '">' + data[i].nombre + '</option>');
 		}
-		$('select').material_select();
+		$("#cbCiudadAuto").material_select();
+		
 	});
 
 }
@@ -76,7 +78,7 @@ function CargaSelectMarcas(control, id_marca, estatus) {
 		for (i in data) {
 
 			$(control).append('<option value="' + data[i].id + '" ' + ((data[i].id == id_marca) ? 'selected="selected"' : '' ) + ' >' + data[i].descripcion + '</option>');
-			$('select').material_select();
+			
 		}
 
 	});
@@ -85,6 +87,8 @@ function CargaSelectMarcas(control, id_marca, estatus) {
 
 function CargaSelectModelos(control, control_marca, id_modelo, estatus) {
 
+	$('#cmbModelos').material_select("destroy");
+	$('#cbModeloAuto').material_select("destroy");
 	postrequest("modelos/listar?rand=" + Math.random(), {
 		"estatus" : estatus,
 		"id_marca" : $(control_marca).val()
@@ -98,8 +102,11 @@ function CargaSelectModelos(control, control_marca, id_modelo, estatus) {
 				$(control).append('<option value="' + data[i].id + '" ' + ((data[i].id == id_modelo) ? 'selected="selected"' : '' ) + ' >' + data[i].descripcion + '</option>');
 			}
 		}
-		$('select').material_select();
+		
+		$('#cmbModelos').material_select();
+		$('#cbModeloAuto').material_select();
 	});
+
 
 }
 
@@ -317,38 +324,4 @@ function SoloNumericos(inputItem) {
 	});
 }
 
-function CargaSeccionesHome(){
-
-  postrequest("data/home.json", {}, 
-      function(data) {
-        for(obj in data){
-          var secc = data[parseInt(obj)];
-
-          if(secc.estatus == 0){
-            $("#"+secc.tag).hide();
-
-          }else{
-            $("#"+secc.tag).show();           
-          }
-
-          if(secc.esimg == 1){
-            $("#"+secc.tag).attr("src",secc.url);
-          }else{
-            $("#"+secc.tag).attr("src",secc.url);
-          }
-          if(secc.eslink == 1){
-            console.log("es 1");
-            $("#"+secc.tag).attr("attr-link",secc.link);
-            $("#"+secc.tag).click(function(){
-              var o = this;
-              window.open($(o).attr("attr-link"));
-              
-            }); 
-
-          }
-          
-        }
-
-    });
-}
 

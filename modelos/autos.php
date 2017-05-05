@@ -132,17 +132,16 @@ class autos
 
            $paramNum = 1;
 
-            if ($precioIni >0 && $precioFin >0)
-            {
+            if ($precioIni >0 && $precioFin >0){
                 $sentencia->bindParam($paramNum, $precioIni);
                 $paramNum++;
-                $sentencia->bindParam($paramNum, $precioFin);
+                $sentencia->bindParam($paramNum,$precioFin);
                 $paramNum++;
 
             }
             if ($anio >0) {
 
-                $sentencia->bindParam($paramNum, $anio);
+                $sentencia->bindParam($paramNum,$anio);
                 $paramNum++;
             } 
             if ($kmIni >0 && $kmFin>0){
@@ -152,34 +151,36 @@ class autos
                 $sentencia->bindParam($paramNum,$kmFin);
                 $paramNum++;
             }  
-            if($marcaid <=0) {
+            if ($marcaId >0) {
 
                 $sentencia->bindParam($paramNum,$marcaId);
                 $paramNum++;
             }
-
-            if($estadoId<=0) {
+            if ($estadoId>0) {
 
                 $sentencia->bindParam($paramNum,$estadoId);
                 $paramNum++;
             }
             if ($descripcion !="") {
+
                 $sentencia->bindParam($paramNum,$descripcion);
                 $paramNum++;
                 
             }
             if ($modeloId >0) {
+
                 $sentencia->bindParam($paramNum,$modeloId);
+                
             }
            
             if ($sentencia->execute()){
                 return $sentencia->fetchall(PDO::FETCH_ASSOC);
-            }
-            else
+            }else
             {
                 return null;
             }
 
+            
     }
 
 

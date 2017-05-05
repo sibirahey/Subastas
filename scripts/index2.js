@@ -11,13 +11,56 @@ $(document).ready(function() {
 
 	cargaHTML(".mainBody", "views/index.html", "", function() {
 		
-		CargaSeccionesHome();
+		postrequest("data/home.json", {}, 
+			function(data) {
+				for(obj in data){
+					var secc = data[parseInt(obj)];
+
+					if(secc.estatus == 0){
+						$("#"+secc.tag).hide();
+
+					}else{
+						$("#"+secc.tag).show();						
+					}
+
+					if(secc.esimg == 1){
+						$("#"+secc.tag).attr("src",secc.url);
+					}else{
+
+					}
+					if(secc.eslink == 1){
+						console.log("es 1");
+						$("#"+secc.tag).attr("attr-link",secc.link);
+						$("#"+secc.tag).click(function(){
+							var o = this;
+							window.open($(o).attr("attr-link"));
+							
+						});	
+
+					}
+					
+				}
+				// debugger;
+				// for (secc = 0; data.length < 5; secc++) {
+				// 	alert(secc);
+				 // 	if(data[secc].esimg == 1){
+					// 	$("#".data[i]).attr("src",data[secc].url);
+					// }else{
+
+					// }
+				// }
+		});
 
 	});
 
 	cargaHTML(".mainHeader", "views/header.html", "", function() {
+		debugger;
+		
 		asignaFunciones();
 		jssor_1_slider_init();
+		
+		$(".button-collapse").sideNav();
+		
 		$('.jssorContainer').find('video').get(0).play();
 		$('.jssorContainer').find('video').get(1).play();
 		$(".logoHeader").click(function() {
@@ -314,8 +357,6 @@ $(document).ready(function() {
 					alert("Error de usuario o contraseña");
 				}
 
-			}, function(data){
-				alert("Ocurrió un error al realizar la petición");
 			});
 		}
 		

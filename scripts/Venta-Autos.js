@@ -1,18 +1,7 @@
-$(document).ready(function() {
-	$(".mainBody").load("views/main/admin/ventaautos.html", function() {
-		cargaCatalogos(-1);
-	
-		$(".toggles").controlgroup({
-			direction : "vertical"
-		});
-		//cargaVehiculos();
-		
-		$('.dateTimeHeader').hide();
-		$('select').material_select();
-		
-	});
-	
-});
+
+function InicializaVentaAutos(){
+	cargaCatalogos(-1);
+}
 function cargaCatalogos(idDef) {
 	 
 	CargaSelectEstados("#cmbEstados");

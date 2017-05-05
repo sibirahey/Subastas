@@ -24,14 +24,13 @@ $( document ).ready(function() {
 
 
   			$("#divMenuPrincipal > ul").html("");
-  			$("#divMenuPrincipal > ul").append('<li><a class="menuitemindex" name="inicio">INICIO</a></li>');
+  			$("#divMenuPrincipal > ul").append('<li><a class="menuitemindex" name="dashboard">INICIO</a></li>');
   			$("#divMenuPrincipal  > ul").append('<li><a class="menuitemindex" name="ventaautos">VENTA DE AUTOS</a></li>');
 	  		if (esAdmin()){
 				$("#divMenuPrincipal  > ul").append('<li><a class="menuitemindex" name="homeadmin">ADMININISTRADOR DE HOME</a></li>');
 				$("#divMenuPrincipal  > ul").append('<li><a class="menuitemindex" name="subastasadmin">ADMININISTRADOR DE SUBASTAS</a></li>');
-				$("#divMenuPrincipal > ul").append('<li><a class="menuitemindex" name="subastasadmin">ADMININISTRADOR VENTA DE AUTOS</a></li>');
-			}
-
+				$("#divMenuPrincipal > ul").append('<li><a class="menuitemindex" name="altaautos">ADMININISTRADOR VENTA DE AUTOS</a></li>');
+			} 
 
   		}else{
 
@@ -58,11 +57,12 @@ $( document ).ready(function() {
 
 	});
 
+ 
     function CargaContenidoAdmin(o){
+    	
  		fnToLoad = $(o).attr("name");
-     	cargaHTML(".mainBody","views/main/admin/"+ $(o).attr("name")+".html", $(o).attr("name"),function() {
-      		CargaFunciones();
-      	});
+     	window.location.href = siteurl+"main.php?accion="+$(o).attr("name");
+     	
 
 	}
 

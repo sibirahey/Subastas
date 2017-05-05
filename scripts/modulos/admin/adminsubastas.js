@@ -1,21 +1,6 @@
 var typingTimer;
 var doneTypingIntervalo = 1000;
 
-function CargaFunciones() {
-
-	switch(fnToLoad) {
-	case "subastasadmin":
-		CargaFuncionesAdminSubastas();
-		break;
-	case "homeadmin":
-		CargaFuncionesAdminHome();
-		break;
-	case "ventaautos":
-		cargaVehiculos();
-		break;
-	}
-
-
 function LimpiarSubasta() {
 
 	$("#txtNombreSubasta").val("");
@@ -39,7 +24,7 @@ function CargaFuncionesAdminSubastas() {
 	$(".divHeaderContenido").hide();
 	$("#txtFechaInicio").datepicker();
 	$("#txtFechaFin").datepicker();
-	//$("#divRegistroAutos").hide();
+	
 	$("#divAdministraUsuarios").hide();
 
 	$("#btnNuevaEmpresa").click(function() {
@@ -120,7 +105,7 @@ function CargaFuncionesAdminSubastas() {
 	$("#btnAgregaAuto").click(function() {
 		//$("#divRegistroAutos").dialog("open");
 	});
-
+	debugger;
 	CargaEmpresas(0);
 	CargaTipoSubastas();
 	CargaSubastas(-1, -1);
@@ -167,6 +152,7 @@ function guardarSubasta(obj){
 
 }
 function CargaEmpresas(idx) {
+	debugger;
 	$("#cmbEmpresas").html("");
 	$("#cmbEmpresasFiltro").html("");
 	
@@ -184,9 +170,9 @@ function CargaEmpresas(idx) {
 		}
 		
 	});
-	$('select').material_select();
-	//$("#cmbEmpresas").val(idx);
+
 }
+
 
 function CargaTipoSubastas(estatus) {
 	postrequest("tiposubastas/listar", {

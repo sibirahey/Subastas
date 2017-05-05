@@ -1,17 +1,7 @@
-// function CargaFunciones(accion){
-// 	switch(accion){
-// 		case "subastasadmin":
-// 			CargaFuncionesAdminSubastas();
-// 			break;
-// 		case "homeadmin":
-// 			CargaFuncionesAdminHome();
-// 			break;
-// 	}
-// }
-
 //Administrador Subastas
 function CargaFuncionesAdminSubastas(){
 
+	
 	$("#modalEmpresa").hide();		
 	$( "#txtFechaInicio" ).datepicker({ minDate: 0});
 	$( "#txtFechaFin" ).datepicker(	{ minDate: +1});
@@ -94,24 +84,26 @@ function CargaFuncionesAdminSubastas(){
 
 
 
-function CargaEmpresas(idx){
+// function CargaEmpresas(idx){
 	
-	$("#cmbEmpresas").html("");
-	$("#cmbEmpresas").append('<option value="-1"> == Seleccione ==</div>' );
-	$("#cmbEmpresasFiltro").append('<option value="-1"> == TODAS ==</div>' );
+// 	$("#cmbEmpresas").html("");
+// 	$("#cmbEmpresas").append('<option value="-1"> == Seleccione ==</div>' );
+// 	$("#cmbEmpresasFiltro").append('<option value="-1"> == TODAS ==</div>' );
 	
-	postrequest("empresas/listar", {"estatus":"1"}, function(data){
-        var selected = "";
-      for (i in data){
-      	selected = (data[i].idEmpresa == idx) ? 'selected="selected"' : "";
-        $("#cmbEmpresas").append('<option value="'+data[i].idEmpresa+'" '+selected+ '>'+data[i].nombreEmpresa +"</option>" );
-        $("#cmbEmpresasFiltro").append('<option value="'+data[i].idEmpresa+'">' + data[i].nombreEmpresa + ' </option>' );
-      }
+// 	postrequest("empresas/listar", {"estatus":"1"}, function(data){
+//         var selected = "";
+//       for (i in data){
+//       	selected = (data[i].idEmpresa == idx) ? 'selected="selected"' : "";
+//         $("#cmbEmpresas").append('<option value="'+data[i].idEmpresa+'" '+selected+ '>'+data[i].nombreEmpresa +"</option>" );
+//         $("#cmbEmpresasFiltro").append('<option value="'+data[i].idEmpresa+'">' + data[i].nombreEmpresa + ' </option>' );
+//       }
 
-    });
+//     });
 
-	$("#cmbEmpresas").val(idx);
-}
+// 	$("#cmbEmpresas").val(idx);
+// }
+
+
 function CargaTipoSubastas(estatus){
 	postrequest("tiposubastas/listar", {"estatus":"1"}, function(data){
 		for (i in data){
