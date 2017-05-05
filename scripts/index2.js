@@ -54,7 +54,7 @@ $(document).ready(function() {
 	});
 
 	cargaHTML(".mainHeader", "views/header.html", "", function() {
-		debugger;
+		//debugger;
 		
 		asignaFunciones();
 		jssor_1_slider_init();
@@ -211,7 +211,7 @@ $(document).ready(function() {
 			}
 
 			postrequest("usuarios/registro", oUsuario, function(data) {
-				debugger;
+				//debugger;
 				if (data == "OK") {
 					window.location.href = "main.php";
 
@@ -340,7 +340,7 @@ $(document).ready(function() {
 
 				if (data.valido) {
 
-					debugger;
+					//debugger;
 					sessionStorage.setItem('nombre', data["nombre"] + " " + data["appaterno"] + " " + data["apmaterno"]);
 					sessionStorage.setItem('correo', data["correo"]);
 					sessionStorage.setItem('publico', data["publico"]);

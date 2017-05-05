@@ -181,12 +181,12 @@ textarea {
 }*/
 .mainMinusHeader {
 	float:left;
-	height: 100%;
+	/*height: 100%;*/
 	width: 100%;
 }
 .mainBody {
 	float:left;
-	height: 100%;
+	/*height: 100%;*/
 	width: 100%;
 }
 .mainBody > .mbLeft {
@@ -461,6 +461,7 @@ textarea {
 	font-weight: bold;
 }
 .divLogin {
+	position:absolute;
 	height: 100%;
 	width: 100%;
 }
@@ -540,9 +541,9 @@ textarea {
     line-height: 40px;
     margin-left: 20px;
 }
-#divAdministraUsuarios{
+/*#divAdministraUsuarios{
 	width: 100% !important;
-}
+}*/
 #divAdministraUsuarios > .divRegistro{
 	width:100%;
 }
@@ -1638,13 +1639,7 @@ img[data-u="image"] {
 div[aria-describedby="divAutos"]{
 	background-color:#E6E6E6;
 }
-#divServicios {
-	border-left: 1px solid #B4B4B4;
-	min-height: 200px;
-	height: 100%;
-	width: 40%;
-	overflow: auto;
-}
+
 #divServicios #divOfertas, 
 #divServicios #divForInfo, 
 #divServicios #divOffers {
@@ -1751,7 +1746,6 @@ div[aria-describedby="divAutos"]{
 	color: #1E2328;
 }
 .divHeaderContenido {
-	width: 100%;
 	background-color: #ffffff;
 	border-radius: 4px;
 	border: 1px solid #D2D2D2;
@@ -1936,13 +1930,13 @@ a[data-u="any"] {
 /*---------- ENDS CAROUSEL --------*/
 
 .CotizacionServicios {
-	clear: both;
-	height: 80%;
+	float:left;
+	margin:0 calc(50% - 512px);
 	width: 100%;
-	font-size: 0.8em;
+	max-width:1024px;
 }
 .CotizacionServicios > div#divServicios {
-	height: 100%;
+	float:left;
 	width: 25%;
 }
 .CotizacionServicios > div#divServicios > div#divLstServicios {
@@ -1956,47 +1950,51 @@ a[data-u="any"] {
 	height: 30px;
 	width: 100%;
 }
+.CotizacionServicios > div#divServicios > div#divLstServicios > div:hover {
+	background-color:rgb(190,190,190);
+}
 .CotizacionServicios > div#divServicios > div#divLstServicios > div > div {
-
+	cursor:pointer;
 	height: 30px;
 	width: 100%;
 }
 
 .CotizacionServicios > div#divDetalleServicios {
-	height: 100%;
+	padding-top:50px;
+	float:left;
 	width: 45%;
 }
 
 .CotizacionServicios > div#divDetalleServicios > div {
-
-	height: 45px;
 	width: 100%;
+	padding:10px 0;
 }
 
 .CotizacionServicios > div#divDetalleServicios > div > div {
 
-	height: 15px;
+
 	width: 70%;
 }
 
 .CotizacionServicios > div#divDetalleServicios > div > input {
 
-	height: 15px;
+	
 	width: 70%;
 }
 .CotizacionServicios > div#divDetalleServicios > div > button {
-	height: 15px;
+	
 	width: 15%;
 }
 
 .CotizacionServicios > div#divCotizacion {
-
+	float:left;
 	height: 100%;
 	width: 30%;
+	padding-top:50px;
 	display: none;
 }
 .CotizacionServicios > div#divCotizacion > div {
-	height: 40px;
+
 	width: 100%;
 }
 
@@ -2018,6 +2016,9 @@ a[data-u="any"] {
 	width: 100%;
 	margin-left: auto;
 	margin-right: auto;
+}
+div#divCotizacion > #divListaCS button {
+	width:100%;
 }
 /*---------- INFOGRAFIAS ---------*/
 .divSeccion {
@@ -2205,7 +2206,8 @@ button[name="contactoEnviar"] {
 	opacity:0.6;
 }
 #divAdminSubastas {
-	clear: both;
+	float:left;
+	width:100%;
 	margin: 20px calc(50% - 512px);
 	max-width: 1024px;
 }
@@ -2231,10 +2233,17 @@ button[name="contactoEnviar"] {
 #divListaContenido {
 	float: left;
 }
+#divListaContenido .card-image > span{
+    width: 100%;
+    float: left;
+    line-height: 50px;
+    height: 50px;
+	
+}
 .divRenglonTabla {
 	float: left;
 	width: 236px;
-	height: 450px;
+	/*height: 450px;*/
 	margin: 10px;
 	background-color: #ffffff;
 	color: #3C4650;

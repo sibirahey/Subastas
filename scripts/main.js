@@ -1,10 +1,5 @@
 $(document).ready(function(){
-	
 
-
-
-
-  	debugger;
 	var urlvars = getUrlVars();
 	
 	if(urlvars["accion"] == undefined || urlvars["accion"] == "dashboard"){
@@ -241,17 +236,29 @@ function cargaCatalogosEmpresas(empresa) {
 
 function muestraGaleria(idx) {
 
-	var dialog = $("#gallery" + idx).dialog({
-		autoOpen : false,
-		height : 200,
-		width : 380,
-		modal : true,
-		dialogClass : 'no-titlebar'
-	});
-
+	// var dialog = $("#gallery" + idx).dialog({
+		// autoOpen : false,
+		// height : 200,
+		// width : 380,
+		// modal : true,
+		// dialogClass : 'no-titlebar'
+	// });
+// 
+	// $("#gallery" + idx).addClass('muestraGaleria');
+// 
+	// dialog.dialog("open");
+	
+	var dialog = $("#gallery" + idx).modal({
+		dismissible : true, // Modal can be dismissed by clicking outside of the modal
+		opacity : .5, // Opacity of modal background
+		inDuration : 300, // Transition in duration
+		outDuration : 200, // Transition out duration
+	}); 
+	
 	$("#gallery" + idx).addClass('muestraGaleria');
+	
+	dialog.modal("open");
 
-	dialog.dialog("open");
 }
 
 function seleccionaImagen(obj) {

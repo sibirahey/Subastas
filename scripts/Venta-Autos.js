@@ -66,23 +66,23 @@ function buscarAutos(){
 	postrequest("autos/busqueda",busAutos,function(data){
 	
 		var total = 0;
-
-		if (data){
+		
+			if (data){
 			$.each(data, function(i, item) {
 					
-					var renglon = "<div value class='rows'>";
+				var renglon = "<div value class='rows'>";
 					renglon += '<div><img alt="' + item.idAuto + '" src="fotos/' + item.foto + '" onerror=\'imgError(this)\'; /></div>';
 					renglon += "<div>" + item.descripcion + "</div>";					
 					renglon += "<div>" + item.estado + "</div>";
 					renglon += "<div>" + item.km + "</div>";
-					renglon += "<div><button class='btn waves-effect light-blue lighten-1'  onclick='muestraGaleria(" + item.idVehiculo + ");'><i class='material-icons'>photo_camera</i></button></div>";
+					renglon += "<div><button class='btn waves-effect light-blue lighten-1'  onclick='muestraGaleria(" + item.idAuto + ");'><i class='material-icons'>photo_camera</i></button></div>";
 					
-					renglon += "<div>" + item.precio + "</div>";
-					renglon += "<div class='center-btn'><button class='btn waves-effect waves-light light-blue lighten-1'><i class='material-icons'>add</i></button></div>";
-					renglon += "<div style='display:none;' id='gallery" + item.idAuto + "'>";
-					renglon += "<div id='gallery"+ item.idVehiculo +"'  class='modal modal-fixed-footer'>";
+					renglon += "<div><b>$</b>" + item.precio + "</div>";
+					renglon += "<div class='center-btn'><button class='btn waves-effect waves-light light-blue disabled'><i class='material-icons'>add</i></button></div>";
+					//renglon += "<div style='display:none;' id='gallery" + item.idAuto + "'>";
+					renglon += "<div id='gallery"+ item.idAuto +"'  class='modal modal-fixed-footer'>";
 				    renglon += "	<div class='modal-content'>";
-			        renglon += "	<h4>Modal Header</h4>";
+			        renglon += "	<h4>Subasta:"+ item.idAuto +"</h4>";
 			        if(item.fotos != undefined){
 						$.each(item.fotos.split(","), function(j, item2) {
 							renglon += "<div class='galleryunselected'><img src='fotos/" + item2 + "' onclick='seleccionaImagen(this);' onerror='imgError(this)';/></div>"

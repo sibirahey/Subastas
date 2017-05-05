@@ -40,7 +40,8 @@
 </div>
 
 <div id="divAdminSubastas">
-	<div class="divHeaderContenido">
+	
+	<!-- <div class="divHeaderContenido">
 		<div class="divRegistro">
 			<label for="txtNombreSubasta" >Lote</label>
 			<input type="text" id="txtNombreSubasta" name="txtNombreSubasta" />
@@ -73,7 +74,52 @@
 		</div>
 		<div class="divRegistro" id="lstEmpresa"></div>
 
+	</div> -->
+	<!-- Modal Structure -->
+  <div class="modal modal-fixed-footer divHeaderContenido">
+		<div class="modal-content">
+			<div class="divRegistro">
+				<label for="txtNombreSubasta" >Lote</label>
+				<input type="text" id="txtNombreSubasta" name="txtNombreSubasta" />
+			</div>
+			<div class="divRegistro">
+				<label for="txtFechaInicio" >Fecha inicio:</label>
+				<input type="text" id="txtFechaInicio" name="txtFechaInicio" />
+			</div>
+			<div class="divRegistro">
+				<label for="txtFechaFin" >Fecha final:</label>
+				<input type="text" id="txtFechaFin" name="txtFechaFin" />
+			</div>
+			<div class="divRegistro" id="divTipoSubastas">
+				<label>Tipo de Subasta:</label>
+
+			</div>
+			<div class="divRegistro">
+				<label for="txtIncremento" >Incremento:</label>
+				<input type="text" id="txtIncremento" name="txtIncremento" />
+			</div>
+			<div class="divRegistro">
+				<label for="cmbEmpresas" >Empresas</label>
+				<select id="cmbEmpresas" name="cmbEmpresas" ></select>
+				<div id="btnNuevaEmpresa">
+					<i class="fa fa-plus-circle fa-2x"></i>
+				</div>
+				<div id="btnAgregaEmpresa">
+					<i class="fa fa-check-circle fa-2x"></i>
+				</div>
+			</div>
+			<div class="divRegistro" id="lstEmpresa"></div>
+		</div>
+		<div class="modal-footer">
+			<a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat ">Agree</a>
+		</div>
 	</div>
+	
+	
+	
+	
+	
+	
 	<div id="divListaSubastas">
 		<!-- <div id="divListaBotonera">
 		<div class="divItemBotonera">
@@ -96,13 +142,23 @@
 		<div id="divListaContenido"></div>
 	</div>
 
-	<div id="divAdministraUsuarios">
+	<!-- <div id="divAdministraUsuarios">
 		<div class="divRegistro">
 			<input id="listausuarios" type="file" name="listausuarios" />
 			<div type="button" id="btnUploadUserList" class="fa fa-upload"   ></div>
 			<div id="listaUsuariosSubidos" ></div>
 		</div>
 
+	</div> -->
+	<div id="divAdministraUsuarios" class="modal modal-fixed-footer">
+		<div class="modal-content divRegistro">
+			<input id="listausuarios" type="file" name="listausuarios" />
+			<div type="button" id="btnUploadUserList" class="fa fa-upload"   ></div>
+			<div id="listaUsuariosSubidos" ></div>
+		</div>
+		<div class="modal-footer">
+			<a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat ">Agree</a>
+		</div>
 	</div>
 
 	<div id="modalEmpresa">
@@ -122,14 +178,74 @@
 
 </div>
 
-<div class="divContenido modal" id="divAutos">
+<div id="divRegistroAutos" class="divContenido modal" id="divAutos">
 
-	<div id="divRegistroAutos" class="modal-content">
+	<div  class="modal-content">
 		Registro Autos
+		<div id="divListaAutos"></div>
 	</div>
-	<div id="btnCerrarListaAuto" class="modal-footer">
-		Cerar
+	<div class="modal-footer">
+		<a href="#!" id="btnCerrarListaAuto" class="modal-action modal-close waves-effect waves-green btn-flat ">Agree</a>
 	</div>
-	<div id="divListaAutos"></div>
+	
 </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- <div class="divRenglonTabla">
+	<div>
+		<label>Subasta: </label><label>' + data[i].nombreSubasta + "</label>
+	</div>
+	<div>
+		<div attr-id="' + data[i].idSubasta + '" type="button" class="fa fa-pencil-square-o button btnEditarSubasta" alt="editar" title="Editar Subasta" ></div>
+		<div attr-id="' + data[i].idSubasta + '" attr-nombresubasta="' + data[i].nombreSubasta + '" class="btnAdministraAutos fa fa-plus-circle button" title="Administrar Autos"></div>
+		<div attr-id="' + data[i].idSubasta + '" attr-nombresubasta="' + data[i].nombreSubasta + '" class="btnVerAutos fa fa-car button" title="Ver Autos"></div>
+		<div attr-id="' + data[i].idSubasta + '" attr-nombresubasta="' + data[i].nombreSubasta + '" class="btnAgregarUsuariosAutos fa fa-user-plus button" title="Agregar Usuarios"></div>
+	</div>
+	<div>
+		<label>Tipo de subasta: </label>' + data[i].tipoSubasta + '
+	</div>
+	<div>
+		<label>Vigencia: </label>' + data[i].fechaInicio + ' - ' + data[i].fechaFin + '
+	</div>
+	<div>
+		<label>Estatus: </label>' + data[i].estatus + '
+	</div>
+	<div>
+		<label>Empresas:</label>' + data[i].empresas + '
+	</div>
+	<div>
+		<label>Publicada:</label><label>' + data[i].publicada + '</label>
+	</div>
+	
+	<div>
+		<label class="switch">
+			<input type="checkbox" attr-id="' + data[i].idSubasta + '" class="btnPublicar" ' + ((data[i].visible == 0) ? "" : "checked" ) + ' />
+			<div class="slider round"></div></label>
+	</div>
+</div> -->
+
+
+
+
+
+
+
 

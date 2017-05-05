@@ -175,8 +175,8 @@ function cargaLista(){
 	$.each(serviciosCotizar,function(index,value){
 		debugger;
 		 var r = '<div class="scRow" >';
-		  r += '<label>'+ value.nombreSubServicio +'</label>';
 		  r += '<button idSubServicio="' + value.idSubServicios + '" idServicio="' + value.idServicio+'" onClick="AgregarServicio(this);">Quitar</button>';
+		  r += '<label>'+ value.nombreSubServicio +'</label>';
 		  r+= '</div>';
 
 		  $('#divListaCS').append(r);
