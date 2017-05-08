@@ -26,6 +26,7 @@ require_once("modelos/seccioneshome.php");
 require_once('utilidades/ConexionBD.php');
 require_once('utilidades/ExcepcionApi.php');
 require_once('utilidades/Utilerias.php');
+require_once('modelos/usuario-automovil.php');
 
 
 //print ConexionBD::obtenerInstancia()->obtenerBD()->errorCode();
@@ -144,6 +145,9 @@ function ejecutaModeloPost($vista, $mod, $arr)
             break;
         case 'seccioneshome':
             $vista->imprimir(seccioneshome::post($arr));
+            break;
+        case 'usuarioautomovil':
+            $vista->imprimir(usuarioautomovil::post($arr));
             break;
         default:
     		# code...

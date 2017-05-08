@@ -15,7 +15,12 @@ class cotizacion
     const MODELO = "Modelo";
     const TIPO = "Tipo";
     const ESTATUS = "Estatus";
-
+    const SIN_RESULTADOS = "No se encontraron resultados";
+    const LISTO = "OK";
+    const ESTADO_CREACION_EXITOSA = "OK";
+    const ESTADO_ACTUALIZACION_EXITOSA = "ACTUALIZADO";
+    const ESTADO_ELIMINACION_EXITOSA = "BORRADO";
+    const ESTADO_CREACION_FALLIDA = "ERROR";
 
 
     public static function post($peticion)
@@ -24,6 +29,9 @@ class cotizacion
         
         if ($peticion[0] == 'registro') {
             return self::registrar();
+        } if ($peticion[0] == 'listar') {
+
+            return self::listar();
         } else {
             throw new ExcepcionApi(self::ESTADO_URL_INCORRECTA, "Url mal formada", 400);
         }
@@ -106,6 +114,53 @@ class cotizacion
 
 
     }
+
+    private function listar(){
+        $resultado = self::listaCotizaciones($_POST);
+
+        switch (sizeof($resultado)) {
+            case '0':
+                http_response_code(200);
+                throw new ExcepcionApi(self::SIN_RESULTADOS,"OK",200,null);
+                
+                break;
+            
+            default:
+                http_response_code(200);
+                return $resultado;
+                break;
+        }
+    }
+
+    private function listaCotizaciones($correoUsua){
+
+        $pdo = ConexionBD::obtenerInstancia()->obtenerBD();
+        $comando = "SELECT " . self::IDCOTIZACION .  "," .
+                self::NOMBRE . "," .
+                    self::CORREO . "," .
+                    self::TELEFONO . "," . 
+                    self::MARCA . "," .
+                    self::MODELO . "," .
+                    self::TIPO . 
+                    " FROM " . self::NOMBRE_TABLA . 
+                    " WHERE " . self::CORREO . " = ? ";
+
+        $sentencia = $pdo->prepare($comando);
+        $sentencia->bindParam(1,$correoUsua["correoUsua"]);
+
+         if ($sentencia->execute()) {
+             $resultado = $sentencia->fetchall(PDO::FETCH_ASSOC);
+
+        
+             return $resultado;
+         }else{
+            return null;
+         }
+
+    }
+
+
+
 
   
     

@@ -139,3 +139,13 @@ function busquedaAuto(descripcion,estadoId,marcaId,modeloId,anio,precioIni,preci
 	this.kmIni = kmIni;
 	this.kmFin = kmFin;
 }
+
+function miAuto (correoUsua,idMarca,idModelo,numPlaca,estatus){
+
+	this.correoUsua = correoUsua;
+	this.idMarca = idMarca;
+	this.idModelo = idModelo;
+	this.numPlaca = numPlaca;
+	this.estatus = estatus;
+
+}
