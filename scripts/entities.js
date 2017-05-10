@@ -128,7 +128,7 @@ function Home(banner970x90_01, infoSeguridad, banner300x600){
 	this.infoSeguridad = infoSeguridad;
 	this.banner300x600 = banner300x600;
 }
-function busquedaAuto(descripcion,estadoId,marcaId,modeloId,anio,precioIni,precioFin,kmIni,kmFin){
+function busquedaAuto(descripcion,estadoId,marcaId,modeloId,anio,precioIni,precioFin,kmIni,kmFin,fechaIni,fechaFin,correoUsua, esAdmin){
 	this.descripcion = descripcion;
 	this.estadoId = estadoId;
 	this.marcaId = marcaId;
@@ -138,6 +138,11 @@ function busquedaAuto(descripcion,estadoId,marcaId,modeloId,anio,precioIni,preci
 	this.precioFin = precioFin;
 	this.kmIni = kmIni;
 	this.kmFin = kmFin;
+	this.kmIni = kmIni;
+	this.fechaIni = fechaIni;
+	this.fechaFin = fechaFin;
+	this.correoUsua = correoUsua;
+	this.esAdmin = esAdmin;
 }
 
 function miAuto (correoUsua,idMarca,idModelo,numPlaca,estatus){

@@ -34,7 +34,15 @@ function cargaMisCotizaciones(obj){
 
 
 	$(".rows").remove();
-		postrequest("cotizacion/listar",{"correoUsua":obj},function(data){
+	
+	var bAutoCotiza = new busquedaAuto();
+	bAutoCotiza.descripcion = $("#txtFiltro").val();
+	bAutoCotiza.fechaIni = $("#txtFechaInicio").val();
+	bAutoCotiza.fechaFin= $("#txtFechaFin").val();
+	bAutoCotiza.correoUsua = obj;
+
+
+		postrequest("cotizacion/listar",bAutoCotiza,function(data){
 
 			if (data) {
 
