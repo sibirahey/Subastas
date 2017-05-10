@@ -10,6 +10,8 @@ $(document).ready(function () {
 function cargaFuncionesMisCotizaciones(){
 
 		$("#detalleCotizaciones").hide();
+		$("#txtFechaInicio").datepicker();
+		$("#txtFechaFin").datepicker();
 		if(sessionStorage.getItem('correo') != undefined){
 			$("#nolog").hide();
 			cargaMisCotizaciones(sessionStorage.getItem('correo'));
