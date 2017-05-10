@@ -1,4 +1,5 @@
 $(document).ready(function () {
+	debugger;
 	$(".mainBody").load("views/MisCotizaciones.html", function() {
 		cargaFuncionesMisCotizaciones();	
 		
