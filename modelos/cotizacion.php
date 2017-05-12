@@ -15,6 +15,7 @@ class cotizacion
     const MODELO = "Modelo";
     const TIPO = "Tipo";
     const ESTATUS = "Estatus";
+    const FECHACRACION = "fechaCreacion";
     const SIN_RESULTADOS = "No se encontraron resultados";
     const LISTO = "OK";
     const ESTADO_CREACION_EXITOSA = "OK";
@@ -135,6 +136,19 @@ class cotizacion
     private function listaCotizaciones($correoUsua){
 
         $pdo = ConexionBD::obtenerInstancia()->obtenerBD();
+
+        $correo = $correoUsua["correoUsua"];
+        $texto = $correoUsua["descripcion"];
+        $fechaIni = $correoUsua["fechaIni"];
+        $fechaFin = $correoUsua["fechaFin"];
+        $esAdmin = $correoUsua["esAdmin"];
+
+       $fechasValidas = False;
+           if($fechaIni != null && $fechaFin != null){
+                $fechasValidas = True;
+           }
+  
+
         $comando = "SELECT " . self::IDCOTIZACION .  "," .
                 self::NOMBRE . "," .
                     self::CORREO . "," .
@@ -143,10 +157,13 @@ class cotizacion
                     self::MODELO . "," .
                     self::TIPO . 
                     " FROM " . self::NOMBRE_TABLA . 
-                    " WHERE " . self::CORREO . " = ? ";
+                    " WHERE " . (($texto =="") ? ( self::NOMBRE . " like  '%'") : ( self::NOMBRE . " like '%" . $texto . "%'") ) .
+                    (($esAdmin != 1) ? (" AND " . self::CORREO . " =  '" . $correo ."'") :(" ") ).
+                    (($fechasValidas) ? (" AND " . self::FECHACRACION ." BETWEEN STR_TO_DATE('" . $fechaIni . "', '%m/%d/%Y') AND STR_TO_DATE('". $fechaFin . "', '%m/%d/%Y') " ) : (" ") );
 
+
+        
         $sentencia = $pdo->prepare($comando);
-        $sentencia->bindParam(1,$correoUsua["correoUsua"]);
 
          if ($sentencia->execute()) {
              $resultado = $sentencia->fetchall(PDO::FETCH_ASSOC);
