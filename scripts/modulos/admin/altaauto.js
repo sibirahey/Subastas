@@ -7,6 +7,7 @@ function CargaFuncionesRegistroAuto(idSubasta){
 	$('#btnActualizaCatalogo').hide();
 	$('#btnEliminaCatalogo').hide();
 	$("#cbAnioAuto").html(CargaAnioAutos(0));
+	$("#cbAnioAuto").material_select();
 	$("#btnAddModelo").hide();
 	$("#btnAddFeature").click(function(){
 		

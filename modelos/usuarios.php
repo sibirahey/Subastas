@@ -112,7 +112,7 @@ class usuarios
 
 
 
-                envia_mail($usuario["email"], self::MAIL_BIENVENIDO, "<html><body>Bienvenido a escudería, para terminar su registro por favor confirme su mail: <a href=\"msusano.com/Subastas/usuarios/confirmar/". $claveApi."\">Confirmar mail</a></body></html>", "yo@msusano.com" );
+                envia_mail($usuario["email"], self::MAIL_BIENVENIDO, "<p>Bienvenido a escudería</p><p>Para terminar su registro por favor confirme su mail: </p><p><a href=\"msusano.com/Subastas/usuarios/confirmar/". $claveApi."\">Confirmar mail</a></p>");
                 return self::ESTADO_CREACION_EXITOSA;
             } else {
                 return self::ESTADO_CREACION_FALLIDA;

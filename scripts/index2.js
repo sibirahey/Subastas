@@ -11,45 +11,7 @@ $(document).ready(function() {
 
 	cargaHTML(".mainBody", "views/index.html", "", function() {
 		
-		postrequest("data/home.json", {}, 
-			function(data) {
-				for(obj in data){
-					var secc = data[parseInt(obj)];
-
-					if(secc.estatus == 0){
-						$("#"+secc.tag).hide();
-
-					}else{
-						$("#"+secc.tag).show();						
-					}
-
-					if(secc.esimg == 1){
-						$("#"+secc.tag).attr("src",secc.url);
-					}else{
-
-					}
-					if(secc.eslink == 1){
-						console.log("es 1");
-						$("#"+secc.tag).attr("attr-link",secc.link);
-						$("#"+secc.tag).click(function(){
-							var o = this;
-							window.open($(o).attr("attr-link"));
-							
-						});	
-
-					}
-					
-				}
-				// debugger;
-				// for (secc = 0; data.length < 5; secc++) {
-				// 	alert(secc);
-				 // 	if(data[secc].esimg == 1){
-					// 	$("#".data[i]).attr("src",data[secc].url);
-					// }else{
-
-					// }
-				// }
-		});
+		CargaJsonHome();
 
 	});
 

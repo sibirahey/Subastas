@@ -1,9 +1,21 @@
+Number.prototype.formatMoney = function(c, d, t){
+var n = this, 
+    c = isNaN(c = Math.abs(c)) ? 2 : c, 
+    d = d == undefined ? "." : d, 
+    t = t == undefined ? "," : t, 
+    s = n < 0 ? "-" : "", 
+    i = String(parseInt(n = Math.abs(Number(n) || 0).toFixed(c))), 
+    j = (j = i.length) > 3 ? j % 3 : 0;
+   return s + (j ? i.substr(0, j) + t : "") + i.substr(j).replace(/(\d{3})(?=\d)/g, "$1" + t) + (c ? d + Math.abs(n - i).toFixed(c).slice(2) : "");
+ };
+
 function cargaHTML(contendor, url, name, callback) {
 
 	var rand = Math.floor((Math.random() * 10000000) + 1);
 	$(contendor).attr("name", name);
 	$(contendor).load(url + "?rand=" + rand, callback);
 }
+
 
 function esAdmin() {
 	if (sessionStorage.getItem("es_admin") == 1) {
@@ -41,6 +53,7 @@ function CargaSelectEstados(control) {
 
 			$(control).append('<option value="' + data[i].id + '">' + data[i].nombre + '</option>');
 		}
+		$(control).material_select();
 		
 	});
 
@@ -82,6 +95,7 @@ function CargaSelectMarcas(control, id_marca, estatus) {
 		}
 
 	});
+	$(control).material_select();
 
 }
 
@@ -119,6 +133,7 @@ function CargaSelectTipoTransmision(control, id_transmision, estatus) {
 
 			$(control).append('<option value="' + data[i].id + '" ' + ((data[i].id == id_transmision) ? 'selected="selected"' : '' ) + ' >' + data[i].descripcion + '</option>');
 		}
+		$(control).material_select();
 
 	});
 
@@ -137,6 +152,7 @@ function CargaSelectFeatures(control, features, estatus) {
 			$(control).append('<option value="' + data[i].id + '" >' + data[i].descripcion + '</option>');
 
 		}
+		$(control).material_select();
 	});
 
 }
@@ -152,6 +168,7 @@ function CargaSelectColores(control, id_color, estatus) {
 
 			$(control).append('<option value="' + data[i].id + '" ' + ((data[i].id == id_color) ? 'selected="selected"' : '' ) + ' >' + data[i].descripcion + '</option>');
 		}
+		$(control).material_select();
 
 	});
 
@@ -247,16 +264,23 @@ function regresaRenglonVenta(item) {
 	renglon += '			<label>' + item.anio + '</label>';
 	renglon += '		</div>';
 	renglon += '		<div>';
+	renglon += '			<label>Color: </label>';
+	renglon += '			<label>' + item.color + '</label>';
+	renglon += '		</div>';
+	renglon += '		<div>';
 	renglon += '			<label>Kilometraje: </label>';
-	renglon += '			<label>' + item.km + '</label>';
+	renglon += '			<label>' + Number(item.km).formatMoney(2, '.', ',') + '</label>';
 	renglon += '		</div>';
 	renglon += '		<div>';
 	renglon += '			<label>Precio: </label>';
-	renglon += '			<label>' + item.precio + '</label>';
+	renglon += '			<label>' +"$" +Number(item.precio).formatMoney(2, '.', ',') + '</label>';
 	renglon += '		</div>';
 	renglon += '		<div>';
 	renglon += '			<label>Descripción: </label>';
 	renglon += '			<label>' + item.descripcion + '</label>';
+	renglon += '		</div>';
+	renglon += '		<div class="divBtnPujar" style="display:none">';
+	renglon += '			<div id="btnPujar" class="btnPujar">Ofertar</label>';
 	renglon += '		</div>';
 	renglon += '	</div>';
 	renglon += '</div>';
@@ -324,4 +348,69 @@ function SoloNumericos(inputItem) {
 	});
 }
 
+function CargaJsonHome(){
+		postrequest("data/home.json", {}, 
+			function(data) {
+				for(obj in data){
+					var secc = data[parseInt(obj)];
 
+					if(secc.estatus == 0){
+						$("#"+secc.tag).hide();
+
+					}else{
+						$("#"+secc.tag).show();						
+					}
+
+					if(secc.esimg == 1){
+						$("#"+secc.tag).attr("src",secc.url);
+					}else{
+
+					}
+					if(secc.eslink == 1){
+						console.log("es 1");
+						$("#"+secc.tag).attr("attr-link",secc.link);
+						$("#"+secc.tag).click(function(){
+							var o = this;
+							window.open($(o).attr("attr-link"));
+							
+						});	
+
+					}
+					
+				}
+				// debugger;
+				// for (secc = 0; data.length < 5; secc++) {
+				// 	alert(secc);
+				 // 	if(data[secc].esimg == 1){
+					// 	$("#".data[i]).attr("src",data[secc].url);
+					// }else{
+
+					// }
+				// }
+		});
+
+}
+
+function CargaInfoSubasta(){
+	debugger;
+	cargaHTML(".mainBody", siteurl+"views/main/subastas.html","subasta", function(){
+		vars = getUrlVars();
+
+		postrequest("subastas/info", {
+			"id" : vars["id"]
+		}, function(data) {
+			
+			$("#divTtlSubasta").html(data[0].nombreSubasta);
+			$("#divTipoSubasta").html(data[0].tipoSubasta);
+			cargaAutosPorSubasta(vars["id"], "#divContenidoSubasta");
+			$(".divBtnPujar").show();
+
+			});
+
+	});
+
+
+	
+}
+
+	

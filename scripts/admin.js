@@ -1,4 +1,5 @@
 //Administrador Subastas
+/*
 function CargaFuncionesAdminSubastas(){
 
 	
@@ -82,7 +83,7 @@ function CargaFuncionesAdminSubastas(){
 	
 }
 
-
+*/
 
 // function CargaEmpresas(idx){
 	

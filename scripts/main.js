@@ -37,11 +37,14 @@ function CargaFunciones(o){
 			InicializaVentaAutos();
 			cargaVehiculos();
 			break;
+		case "subasta":
+			
+			CargaInfoSubasta();
+			break;			
 		case "dashboard":
-			CargaSeccionesHome();
-			break;
 		default:
-			CargaSeccionesHome();
+			CargaJsonHome();
+			CargaContenidoMain();
 			break;
 
 	}
@@ -64,36 +67,41 @@ function CargaMaterial (){
 
 function CargaContenidoMain() {
 
-	cargaHTML(".mainBody", "views/main.html", "", function() {
+	
+//	$(".divMisSubastas").hide();
+
+
+
+	$.get("views/main/missubastas.html?rand="+Math.floor((Math.random() * 10000000) + 1), function(data){
+	
+			var misubastahtml = data;
+			postrequest("subastas/xusuario", {"idusuario":sessionStorage.claveapi },function(response){
+
+				if(data.length > 0 )
+					 $(".divMisSubastas").hide().show();
+
+				for(var o in response){
+
+					if(response[o].visible == 1){
+						subasta = misubastahtml;
+						
+						subasta = subasta.replace("#NOMBRESUBASTA#", response[o].nombreSubasta); 
+						subasta = subasta.replace("#OFERTAMINIMA#", Number(response[o].incremento).formatMoney()); 
+						subasta = subasta.replace("#TIPOSUBASTAS#", response[o].tipoSubasta); 
+						subasta = subasta.replace("#ESTATUSSUBASTA#", response[o].estatus); 
+						subasta = subasta.replace("#SUBASTAID#", response[o].idSubasta); 
+						$("#ulMisSubastas").append(subasta);		
+					}
+				}
+
+				
+
+			});
 
 		
-			
-		postrequest("subastas/xusuario", {"idusuario":sessionStorage.claveApi },function(data){
-
-			alert(data.length);
-
-		});
-  	});
-
-
-	$("#searchBox").keypress(function(e) {
-	    if(e.which == 13) {
-	        $("#searchBody").html("");
-	  		if(sessionStorage.getItem('publico') == 1){
-	  			CargaDatosPrivado();
-	  		}else{
-	  			CargaDatosPublico();
-	  		}
-
-	    }
 	});
-	console.log("key:"+sessionStorage.getItem('publico'));
+	
 
-	if(sessionStorage.getItem('publico') == 1){
-		CargaDatosPrivado();
-	}else{
-		CargaDatosPublico();
-	}
 
 
 };

@@ -1763,7 +1763,7 @@ div[aria-describedby="divAutos"]{
 	font-size: 1.5em;
 	font-weight: 400;
 }
-#btnGuardar {
+#btnGuardar, .btn {
 	height: 80px;
 	line-height: 80px;
 	width: 90%;

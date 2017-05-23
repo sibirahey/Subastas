@@ -33,6 +33,8 @@ class seccioneshome
             return self::update();
         }else if ($peticion[0] == 'listar') {
             return self::listar();
+        }else if($peticion[0] == 'updatejson'){
+            return self::updatejson();
         }
         else {
             throw new ExcepcionApi(self::ESTADO_URL_INCORRECTA, "Url mal formada", 400);
@@ -63,6 +65,49 @@ class seccioneshome
 
         try{
      
+            $paramNum = 4;
+            $comando ="update cat_seccioneshome set ubicacion = ?, eslink = ?, link = ? ";
+            if($_POST['esimg'] == 0){
+                $comando .= $comando . ", url = ?";
+                $paramNum = 5;
+            } 
+            $comando .=  "WHERE id = ?";
+
+            
+            $sentencia =ConexionBD::obtenerInstancia()->obtenerBD()->prepare($comando);
+            $sentencia->bindParam(1, $_POST['ubicacion']);
+            $sentencia->bindParam(2, $_POST['eslink']);
+            $sentencia->bindParam(3, $_POST['link']);
+             if($_POST['esimg'] == 0){
+                $sentencia->bindParam(4, $_POST['url']);
+                
+            } 
+
+            $sentencia->bindParam($paramNum, $_POST['id']);
+
+
+            
+            if ($sentencia->execute())
+            {
+            
+                return "OK";    
+            }else{
+                return "ERROR";    
+            }
+
+            
+         }
+        catch(Exception $ex){
+
+            return "ERROR";
+        }
+
+    }
+
+     private function updatejson(){
+
+        try{
+     
 
             $comando ="SELECT id, descripcion, tag, ancho, alto, url, ubicacion, esimg, eslink, link, estatus FROM cat_seccioneshome "; 
                 
@@ -85,12 +130,12 @@ class seccioneshome
             fwrite($myfile, $json);
             fclose($myfile);
 
-            echo "OK";
+            return  "OK";
          }
         catch(Exception $ex){
 
-            echo "ERROR";
+            return "ERROR";
         }
 
-    }
+   }
 }

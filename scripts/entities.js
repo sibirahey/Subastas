@@ -154,3 +154,16 @@ function miAuto (correoUsua,idMarca,idModelo,numPlaca,estatus){
 	this.estatus = estatus;
 
 }
+function AdminHome(id, esimg, ubicacion, ancho, alto, tag, url, eslink, link){
+
+	this.id = id;
+	this.esimg = esimg;
+	this.ubicacion = ubicacion;
+	this.ancho = ancho;
+	this.alto = alto;
+	this.tag = tag;
+	this.url = url;
+	this.eslink = eslink;
+	this.link = link;
+
+}

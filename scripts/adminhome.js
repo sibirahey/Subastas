@@ -3,34 +3,40 @@ function CargaFuncionesAdminHome(){
     $(".divTxtUrl").hide();
     $("#divLink").hide();
     $("#cmbTipoContenido").prop( "disabled", true );
+    CargaSeccionesHome();
     
-    postrequest("seccioneshome/listar?rand="+Math.random(), {"esheader":0}, function(data){
-      $("#cmbSeccionesHome").html("");
-      $("#cmbSeccionesHome").append("<option value='0' selected='selected'>== Seleccione ==</option>");
-      $("#divAdminHomeContenido").html("");  
-      var html = "";
-      for (i in data){
-            html = "";
-            html = "<div class=\"divRegistro\">";
-            html += "       <label>"+data[i].descripcion+"</label>";            
-            if(data[i].esimg == 1){ 
-        
+
+    function CargaSeccionesHome()
+    {
+
+        postrequest("seccioneshome/listar?rand="+Math.random(), {"esheader":0}, function(data){
+            $("#cmbSeccionesHome").material_select("destroy");
+            $("#cmbSeccionesHome").html("");
+            $("#cmbSeccionesHome").append("<option value='0' selected='selected'>== Seleccione ==</option>");
+            $("#divAdminHomeContenido").html("");  
+            var html = "";
+            for (i in data){
+                html = "";
+                html = "<div class=\"divRegistro\">";
+                html += "       <label>"+data[i].descripcion+"</label>";            
+                if(data[i].esimg == 1)
+                { 
+                    html += "<img style=\"width:300px;\" src=\""+data[i].url+ "\" />";
                 
-                html += "<img style=\"width:300px;\" src=\""+data[i].url+ "\" />";
-            
+                }else{
 
-            }else{
-
-                html += "<iframe id=\"videoTips\" width=\"300px\"  src=\"" +data[i].url+"\" frameborder=\"0\" allowfullscreen style=\"overflow: hidden; \" height=\"100%\" width=\"100%\"></iframe>";
+                    html += "<iframe id=\"videoTips\" width=\"300px\"  src=\"" +data[i].url+"\" frameborder=\"0\" allowfullscreen style=\"overflow: hidden; \" height=\"100%\" width=\"100%\"></iframe>";
+                }
+                html += "<div class=\"fa fa-wrench fa-2 btnEditarSeccionHome\" attr-id=\"" + data[i].id+ "\" attr-esimg=\""+data[i].esimg +"\" attr-ubicacion=\""+data[i].ubicacion +"\" attr-ancho=\""+data[i].ancho +"\" attr-alto=\""+data[i].alto +"\" attr-tag=\""+data[i].tag +"\" attr-url=\""+data[i].url+"\" attr-eslink=\""+ data[i].eslink +"\" attr-link=\""+ data[i].link +"\" aria-hidden=\"true\"></div>";
+                html += "</div>";
+                $("#cmbSeccionesHome").append("<option value=\"" +data[i].id+ "\" attr-id=\"" + data[i].id+ "\" attr-esimg=\""+data[i].esimg +"\" attr-ubicacion=\""+data[i].ubicacion +"\" attr-ancho=\""+data[i].ancho +"\" attr-alto=\""+data[i].alto +"\" attr-tag=\""+data[i].tag +"\" attr-url=\""+data[i].url+"\" attr-eslink=\""+ data[i].eslink +"\" attr-link=\""+ data[i].link +"\">" + data[i].descripcion + "</option>");
+                $("#divAdminHomeContenido").append(html);
             }
-            html += "<div class=\"fa fa-wrench fa-2 btnEditarSeccionHome\" attr-id=\"" + data[i].id+ "\" attr-esimg=\""+data[i].esimg +"\" attr-ubicacion=\""+data[i].ubicacion +"\" attr-ancho=\""+data[i].ancho +"\" attr-alto=\""+data[i].alto +"\" attr-tag=\""+data[i].tag +"\" attr-url=\""+data[i].url+"\" attr-eslink=\""+ data[i].eslink +"\" attr-link=\""+ data[i].link +"\" aria-hidden=\"true\"></div>";
-            html += "</div>";
-            $("#cmbSeccionesHome").append("<option value=\"" +data[i].id+ "\" attr-id=\"" + data[i].id+ "\" attr-esimg=\""+data[i].esimg +"\" attr-ubicacion=\""+data[i].ubicacion +"\" attr-ancho=\""+data[i].ancho +"\" attr-alto=\""+data[i].alto +"\" attr-tag=\""+data[i].tag +"\" attr-url=\""+data[i].url+"\" attr-eslink=\""+ data[i].eslink +"\" attr-link=\""+ data[i].link +"\">" + data[i].descripcion + "</option>");
-            $("#divAdminHomeContenido").append(html);
-      }
+            $("#cmbSeccionesHome").material_select();
 
 
-    });
+        });
+    }
 
     $("#cmbSeccionesHome").change(function(){ 
         
@@ -63,11 +69,20 @@ function CargaFuncionesAdminHome(){
         $("#txtTag").val($(o).attr("attr-tag"));
         $("#txtUrl").val($(o).attr("attr-url"));
         $("#btnUploadHome").attr("attr-id", $(o).attr("attr-id"));
-        HabilitaControles($(o).attr("attr-esimg"));
+        
+        $("#cmbUbicacion").material_select("destroy");
         $("#cmbUbicacion").val($(o).attr("attr-ubicacion"));
+        $("#cmbUbicacion").material_select();
+
         $("#txtAncho").val($(o).attr("attr-ancho"));
         $("#txtAlto").val($(o).attr("attr-alto"));
-        if($(o).attr("attr-eslink") == 1){
+
+        HabilitaLink($(o).attr("attr-eslink"), o);
+        HabilitaControles($(o).attr("attr-esimg"));
+    }
+
+    function HabilitaLink(esLink, o){
+        if(esLink == 1){
             $('#chkeslink').prop('checked', true);
             $("#divLink").show();
             $("#txtlink").val($(o).attr("attr-link"));
@@ -80,13 +95,25 @@ function CargaFuncionesAdminHome(){
     }
 
     function HabilitaControles(tipoContenido){
+        debugger;
+
+        
+        $("#cmbTipoContenido").material_select("destroy");
+        $("#cmbTipoContenido").val(tipoContenido);
+        $("#cmbTipoContenido").material_select();
+        $("#cmbTipoContenido").prop( "disabled", true );
+
         if(tipoContenido == 0){
             $(".divTxtUrl").show();
             $(".divUploadFile").hide();
+             $("#divLink").hide();
+             $("#chkeslink").prop( "disabled", true );
 
         }else{
             $(".divTxtUrl").hide();
             $(".divUploadFile").show();
+             $("#divLink").show();
+             $("#chkeslink").prop( "disabled", false );
         }
 
     }
@@ -102,8 +129,9 @@ function CargaFuncionesAdminHome(){
      });
 
     $("#bntActualizar").click(function(){
-        postrequest("seccioneshome/update?rand="+Math.random(), {}, function(data){
-            if(data.startsWith == "OK"){
+        
+         postrequest("seccioneshome/updatejson?rand="+Math.random(), {}, function(data){
+            if(data == "OK"){
                 alert("Se actualizó la información del home");
             }else{
                 alert("Error al actualizar la información del home");
@@ -111,6 +139,7 @@ function CargaFuncionesAdminHome(){
         });
 
     });
+    
 
     $("#btnUploadHome").click(function() {
             
@@ -144,5 +173,33 @@ function CargaFuncionesAdminHome(){
              });
             
         });
+
+    $("#btnGuardar").click(function(){
+        GuardarSeccion();
+      
+    });
+
+    function GuardarSeccion(){
+          var o = new AdminHome();
+            o.id = $("#cmbSeccionesHome option:selected").attr("attr-id");
+            o.esimg = $("#cmbSeccionesHome option:selected").attr("attr-esimg");
+            o.ubicacion = $("#cmbUbicacion").val();
+            o.ancho = $("#txtAncho").val();;
+            o.alto = $("#txtAlto").val();;;
+            o.tag = $("#cmbSeccionesHome option:selected").attr("attr-tag");
+            o.url = $("#txtUrl").val();
+            o.eslink = $("#chkeslink").is(':checked');
+            o.link = $("#txtlink").val();
+
+            postrequest("seccioneshome/update?rand="+Math.random(), o, function(data){
+                if(data == "OK"){
+                    alert("La información se actualizó correctamente");
+                    CargaSeccionesHome();
+
+                }else{
+                    alert("Ocurrió un error al actualizar la información");
+                }
+            });
+    }
 }
 

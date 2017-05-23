@@ -180,7 +180,7 @@ function CargaEmpresas(idx) {
 		}
 		
 	});
-
+	$("#cmbEmpresas").material_select();
 }
 
 
@@ -282,7 +282,7 @@ function CargaSubastas(estatus, empresa) {
 			var nombreSubasta = $(this).attr("attr-nombresubasta");
 			var idSubasta = $(this).attr("attr-id");
 			cargaAutosPorSubasta(idSubasta, "#divListaAutos");
-			$('#divAutos').modal('open');
+			$('#divListaAutos').modal('open');
 		});
 
 		$("#btnCerrarListaAuto").click(function() {

@@ -62,10 +62,10 @@ class autos
         
         $idsubasta = $_POST['idsubasta'];
         
-        $comando =  " SELECT au.idAuto, au.enVenta, au.precio, au.marca as marcaid, marca.descripcion as marca, au.modelo as modeloid, modelo.descripcion as modelo, ".
-                    " au.color as colorid, au.descripcion as color, au.anio, au.km, au.km, au.transmision as transmisionid, trans.descripcion as transmision, ".
-                    " au.estado as estadoid, est.nombre as estado, au.ciudad as ciudadid, mun.nombre as ciudad, au.descripcion, au.estatus, ".
-                    " au.publicado, au.fechaCreacion, aus.subastaId, ".
+        $comando =  " SELECT au.idAuto, au.enVenta, au.precio, au.marca as marcaid, marca.descripcion as marca, au.modelo as modeloid, ".
+                    " modelo.descripcion as modelo, au.color as colorid, color.descripcion as color, au.anio, au.km, au.km, au.transmision as transmisionid, ".
+                    " trans.descripcion as transmision, au.estado as estadoid, est.nombre as estado, au.ciudad as ciudadid, mun.nombre as ciudad,  ".
+                    " au.descripcion, au.estatus, au.publicado, au.fechaCreacion, aus.subastaId, ".
                     " (select idFoto from auto_fotos where idAuto = au.idAuto limit 1) as foto, ".
                     " (select GROUP_CONCAT(idFoto) from auto_fotos where idAuto = au.idAuto) AS fotos ".
                     " FROM subastas_autos as aus, autos as au, cat_marca as marca, cat_modelo as modelo, cat_colores as color, cat_transmision as trans, estados as est, municipios as mun ".

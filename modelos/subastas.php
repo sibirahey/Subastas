@@ -36,7 +36,10 @@ class subastas
             return self::registrarOut();
         }else if ($peticion[0] == 'publicar'){
             return self::publicaOut();
-        }else if ($peticion[0] == 'xusuario'){
+        }else if($peticion[0] == 'info'){
+              return self::infoSubasta($_POST['id']);
+        }
+        else if ($peticion[0] == 'xusuario'){
             return self::xusuario();
         }
         else {
@@ -99,6 +102,27 @@ class subastas
             $sentencia->bindParam(1, $estatus);
         }
 */
+        if ($sentencia->execute())
+            return $sentencia->fetchall(PDO::FETCH_ASSOC);
+        else
+            return null;
+        
+    }
+
+    private function infoSubasta($id)
+    {
+        
+        
+      
+        
+        $comando = "select s.idSubasta, nombreSubasta, idTipoSubasta, tipo.tipoSubasta, fechaInicio, fechaFin, CASE WHEN curdate() BETWEEN fechaInicio and fechaFin then 'ACTIVA' WHEN curdate() < fechaInicio then 'AGENDADA' else 'TERMINADA' end as estatus, visible, case visible when 0 then 'NO PUBLICADA' else 'PUBLICADA' end as publicada,(select GROUP_CONCAT(emp.nombreEmpresa) from subastaempresa se, empresas emp where s.idSubasta = se.idSubasta and se.idEmpresa = emp.idEmpresa) as empresas, (select GROUP_CONCAT(emp.idEmpresa) from subastaempresa se, empresas emp where s.idSubasta = se.idSubasta and se.idEmpresa = emp.idEmpresa) as empresasId,incremento from subastas s, tiposubastas tipo 
+         where s.idTipoSubasta = tipo.idTipo and s.idSubasta = ?"; 
+
+        
+        $sentencia = ConexionBD::obtenerInstancia()->obtenerBD()->prepare($comando);
+        $sentencia->bindParam(1, $id);
+
+
         if ($sentencia->execute())
             return $sentencia->fetchall(PDO::FETCH_ASSOC);
         else
