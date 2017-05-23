@@ -19,7 +19,7 @@ function AgregaEmpresa(idEmpresa, nombreEmpresa) {
 }
 
 function CargaFuncionesAdminSubastas() {
-
+debugger	;
 	$("#modalEmpresa").hide();
 	$('.divHeaderContenido').hide();
 	$("#txtFechaInicio").datepicker();
@@ -53,9 +53,10 @@ function CargaFuncionesAdminSubastas() {
 			outDuration : 200, // Transition out duration
 			startingTop : '4%', // Starting top style attribute
 		});
+		$("#modalEmpresa").modal("open");
 
 	});
-	$("#btnAgregaEmpresa").click(function() {
+	$("#btnAgregaEmpresa").on('click',function() {
 		if ($("#cmbEmpresas option:selected").val() > 0)
 			AgregaEmpresa($("#cmbEmpresas option:selected").val(), $("#cmbEmpresas option:selected").text());
 
@@ -113,7 +114,7 @@ function CargaFuncionesAdminSubastas() {
 	});
 
 	$("#btnAgregaAuto").click(function() {
-		//$("#divRegistroAutos").dialog("open");
+		//$("#divRegistroAutos").modal("open");
 	});
 	//debugger;
 	CargaEmpresas(0);
@@ -178,9 +179,9 @@ function CargaEmpresas(idx) {
 			$("#cmbEmpresas").append('<option value="' + data[i].idEmpresa + '" ' + selected + '>' + data[i].nombreEmpresa + "</option>");
 			$("#cmbEmpresasFiltro").append('<option value="' + data[i].idEmpresa + '">' + data[i].nombreEmpresa + ' </option>');
 		}
-		
+		$("#cmbEmpresas").material_select();
 	});
-	$("#cmbEmpresas").material_select();
+	
 }
 
 
@@ -207,33 +208,14 @@ function CargaSubastas(estatus, empresa) {
 		for (i in data) {
 
 			var div = '';
-			// div += '<div class="divRenglonTabla">';
-			// div += '	<div>';
-			// div += '		<label>Subasta: </label><label>' + data[i].nombreSubasta + "</label>";
-			// div += '	</div>';
-			// div += '	<div>';
-			// div += '		<div attr-id="' + data[i].idSubasta + '" type="button" class="fa fa-pencil-square-o button btnEditarSubasta" alt="editar" title="Editar Subasta" ></div>';
-			// div += '		<div attr-id="' + data[i].idSubasta + '" attr-nombresubasta="' + data[i].nombreSubasta + '" class="btnAdministraAutos fa fa-plus-circle button" title="Administrar Autos"></div>';
-			// div += '		<div attr-id="' + data[i].idSubasta + '" attr-nombresubasta="' + data[i].nombreSubasta + '" class="btnVerAutos fa fa-car button" title="Ver Autos"></div>';
-			// div += '		<div attr-id="' + data[i].idSubasta + '" attr-nombresubasta="' + data[i].nombreSubasta + '" class="btnAgregarUsuariosAutos fa fa-user-plus button" title="Agregar Usuarios"></div>';
-			// div += '	</div>';
-			// div += '	<div><label>Tipo de subasta: </label>' + data[i].tipoSubasta + '</div>';
-			// div += '	<div><label>Vigencia: </label>' + data[i].fechaInicio + ' - ' + data[i].fechaFin + '</div>';
-			// div += '	<div><label>Estatus: </label>' + data[i].estatus + '</div>';
-			// div += '	<div><label>Empresas:</label>' + data[i].empresas + '</div>';
-			// div += '    <div><label>Publicada:</label><label>' + data[i].publicada + '</label></div>';
-			// div += '	<div><label class="switch"><input type="checkbox" attr-id="' + data[i].idSubasta + '" class="btnPublicar" ' + ((data[i].visible == 0) ? "" : "checked" ) + ' /><div class="slider round"></div></label></div>';
-			// div += '	<div></div>';
-			// div += '</div>';
-			
-			div += '<div class="row divRenglonTabla">';
-			div += '	<div class="col s12">';
+			div += '	<div class="divRenglonTabla col s12 m4 l3">';
 			div += '		<div class="card">';
-			div += '            <div class="card-image">';
-			div += '            	<span>' + data[i].nombreSubasta + '</span>';
+			div += '            <span class="card-title">' + data[i].nombreSubasta + '</span>';
+			div += '            <div class="divider"></div>';
+			div += '            <div class="card-image">';			
 			div += '                <a class="btn-floating waves-effect waves-light ligh-blue btnEditarSubasta" attr-id="' + data[i].idSubasta + '" title="Editar Subasta"><i class="material-icons">create</i></a>';
 			div += '                <a class="btn-floating waves-effect waves-light ligh-blue btnAdministraAutos" attr-id="' + data[i].idSubasta + '" attr-nombresubasta="' + data[i].nombreSubasta + '" title="Administrar Autos"><i class="material-icons">add</i></a>';
-			div += '                <a class="btn-floating waves-effect waves-light ligh-blue btnVerAutos" attr-id="' + data[i].idSubasta + '" attr-nombresubasta="' + data[i].nombreSubasta + '" title="Ver Autos"><i class="material-icons">directions car</i></a>';
+			div += '                <a class="btn-floating waves-effect waves-light ligh-blue btnVerAutos" attr-id="' + data[i].idSubasta + '" attr-nombresubasta="' + data[i].nombreSubasta + '" title="Ver Autos"><i class="material-icons">photo library</i></a>';
 			div += '                <a class="btn-floating waves-effect waves-light ligh-blue btnAgregarUsuariosAutos" attr-id="' + data[i].idSubasta + '" attr-nombresubasta="' + data[i].nombreSubasta + '" title="Agregar Usuarios"><i class="material-icons">person</i></a>';
 			div += '            </div>';			
 			div += '			<div class="card-content">';
@@ -247,7 +229,7 @@ function CargaSubastas(estatus, empresa) {
 			div += '			</div>';
 			div += '		</div>';
 			div += '	</div>';
-			div += '</div>';
+			
 			
 			
 			
@@ -256,7 +238,6 @@ function CargaSubastas(estatus, empresa) {
 		}
 
 		$(".btnAdministraAutos").click(function() {
-			debugger;
 			var nombreSubasta = $(this).attr("attr-nombresubasta");
 			var idSubasta = $(this).attr("attr-id");
 			
@@ -278,7 +259,7 @@ function CargaSubastas(estatus, empresa) {
 		});
 
 		$(".btnVerAutos").click(function() {
-			
+			debugger;
 			var nombreSubasta = $(this).attr("attr-nombresubasta");
 			var idSubasta = $(this).attr("attr-id");
 			cargaAutosPorSubasta(idSubasta, "#divListaAutos");

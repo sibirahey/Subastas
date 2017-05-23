@@ -1,24 +1,91 @@
-@media (max-width: 970px) {
-	.banner970x90{
-		height:auto;
-		width: 100%;	
-	}
-	.divSeguridad,
-	.divVideoTips{
-		width: 100%;
-		margin:0;
-	}
-	.divSeccion {
+@media only screen and (max-width: 1024px) {
+	#divListaContenido {
+	    float: left;
+	    max-width: 1024px;
 	    margin: 0;
 	}
-	.banner300x250,
-	.banner300x600{
-		display:none;
+	.divBotonera {
+	    margin: 20px 0 0 0;
+	}
+@media only screen and (max-width: 970px) {
+	.banner970x90 {
+		height: auto;
+		width: 100%;
+	}
+	.divSeguridad, .divVideoTips {
+		width: 100%;
+		margin: 0;
+	}
+	.divSeccion {
+		margin: 0 5%;
+    	width: 90%;
+	}
+	.banner300x250, .banner300x600 {
+		display: none;
 	}
 	.infoSeguridad {
-	    width: 100%;
+		width: 100%;
 	}
 	.localizaGasolineras iframe {
-	    width: 100%;
-    }
+		width: 100%;
+	}
+}
+
+@media only screen and (max-width: 768px) {
+	.divSeccion > h2 {
+		font-size: 1.6rem;
+		height: 25px;
+		line-height: 25px;
+		text-indent: 30px;
+		margin: 20px 0;
+	}
+	.divSeccion > h2:before {
+		height: 25px;
+		width: 25px;
+		margin-top: 0;
+	}
+	.logoFooter, .logoHeader {
+		width: calc(100% - 180px);
+		background-image: url(../images/logoCar.svg);
+		background-size: contain;
+		background-position: center left;
+		padding-left: 20px;
+		height: 40px;
+		margin-top: 10px;
+	}
+	.calendarioVerificacion > div > div {
+		font-size: 12px;
+	}
+	.contactForm > .row {
+		width: 100%;
+	}
+	.divVideoTips .vidContainer{
+		height: auto;
+	}
+
+	/* --------- LOGIN ---------- */
+	.floatingWindow {
+		float: left;
+		height: 100%;
+		width: 100%;
+		margin: 0;
+	}
+	.logoLogin, 
+	.logoCar {
+		height:60px;
+		width: 100%;
+		background-size:contain;
+		top:30px;
+	}
+	.floatingWindow > .divRegistro{
+		height:100px;
+		position:relative;
+		top:50px;
+	}
+	.floatingWindow > .switch {
+		top:50px;
+	}
+}
+@media only screen and (max-width: 468px) {
+	
 }

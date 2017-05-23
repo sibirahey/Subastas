@@ -93,9 +93,10 @@ function CargaSelectMarcas(control, id_marca, estatus) {
 			$(control).append('<option value="' + data[i].id + '" ' + ((data[i].id == id_marca) ? 'selected="selected"' : '' ) + ' >' + data[i].descripcion + '</option>');
 			
 		}
+		$(control).material_select();
 
 	});
-	$(control).material_select();
+	
 
 }
 
