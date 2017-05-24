@@ -1,5 +1,4 @@
-*:not(thead):not(tbody):not(td):not(tr) {
-	/*box-sizing: border-box;*/
+*:not(thead):not(tbody):not(td):not(tr):not(i) {
 	font-family: 'Open Sans', sans-serif;
 	font-weight: 300;
 	font-style: normal;
@@ -432,15 +431,6 @@ body {
 	border-left: 1px solid #cccccc;
 	border-right: 1px solid #cccccc;
 	padding: 10px;
-}
-.divBotonera, #divListaBotonera {
-	background-color: #ffffff;
-	border-radius: 4px;
-	border: 1px solid #D2D2D2;
-	padding: 6px;
-}
-.divBotonera > label {
-	line-height: 32px;
 }
 .divRegistro, .divLogin {
 	float: left;
@@ -2139,6 +2129,8 @@ button[name="contactoEnviar"] {
 	margin: 0 calc(50% - 512px);
 }
 #btnAgregarSubasta {
+	width:36px;
+	text-align:center;
 	cursor: pointer;	
 }
 .divBotonera {
@@ -2147,12 +2139,17 @@ button[name="contactoEnviar"] {
 	max-width:200px;
 	height: 95px;
 }
-#divListaSubastas {
-	width: 100%;
-}
 #divListaBotonera {
+	background-color: #ffffff;
+	border-radius: 4px;
+	border: 1px solid #D2D2D2;
+	padding: 6px;
+	width: 100%;
 	float: right;
 	margin: 20px 0 0 0;
+}
+.divBotonera > label {
+	line-height: 32px;
 }
 #divListaContenido {
 	float: left;
