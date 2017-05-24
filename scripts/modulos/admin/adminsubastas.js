@@ -14,17 +14,17 @@ function LimpiarSubasta() {
 //Administrador Subastas
 
 function AgregaEmpresa(idEmpresa, nombreEmpresa) {
-	
+
 	$("#lstEmpresa").append("<div attr-idx='" + idEmpresa + "' class='empresasSeleccionadas divRegistro'>" + nombreEmpresa + "</div>")
 }
 
 function CargaFuncionesAdminSubastas() {
-
+	//debugger;
 	$("#modalEmpresa").hide();
 	$('.divHeaderContenido').hide();
 	$("#txtFechaInicio").datepicker();
 	$("#txtFechaFin").datepicker();
-	
+
 	$("#divAdministraUsuarios").hide();
 
 	$("#btnNuevaEmpresa").click(function() {
@@ -34,18 +34,8 @@ function CargaFuncionesAdminSubastas() {
 		$('#btnEliminaEmpresa').attr('idEmpresa', '0');
 		$('#btnEliminaEmpresa').attr('estatus', '1');
 		$('#btnEliminaEmpresa').hide();
-		
-		// $("#modalEmpresa").dialog({
-			// width : 500,
-			// modal : true,
-			// title : "Agrega empresa",
-			// buttons : {
-				// Cerrar : function() {
-					// $(this).dialog("close");
-				// },
-			// }
-		// });
-		
+
+
 		$("#modalEmpresa").modal({
 			dismissible : true, // Modal can be dismissed by clicking outside of the modal
 			opacity : .5, // Opacity of modal background
@@ -54,8 +44,10 @@ function CargaFuncionesAdminSubastas() {
 			startingTop : '4%', // Starting top style attribute
 		});
 
+		$("#modalEmpresa").modal("open");
+
 	});
-	$("#btnAgregaEmpresa").click(function() {
+	$("#btnAgregaEmpresa").on('click', function() {
 		if ($("#cmbEmpresas option:selected").val() > 0)
 			AgregaEmpresa($("#cmbEmpresas option:selected").val(), $("#cmbEmpresas option:selected").text());
 
@@ -92,7 +84,6 @@ function CargaFuncionesAdminSubastas() {
 		});
 
 	});
-	
 
 	$("#btnFiltrar").click(function() {
 		CargaSubastas($("#cmbPublicada option:selected").val(), $("#cmbEmpresasFiltro option:selected").val());
@@ -103,7 +94,7 @@ function CargaFuncionesAdminSubastas() {
 		guardarSubasta(this);
 
 	});
-	
+
 	$("#btnAgregarSubasta").click(function() {
 		debugger;
 		$('#txtNombreSubasta').val('');
@@ -113,7 +104,7 @@ function CargaFuncionesAdminSubastas() {
 	});
 
 	$("#btnAgregaAuto").click(function() {
-		//$("#divRegistroAutos").dialog("open");
+		//$("#divRegistroAutos").modal("open");
 	});
 	//debugger;
 	CargaEmpresas(0);
@@ -122,52 +113,52 @@ function CargaFuncionesAdminSubastas() {
 	SoloNumericos("#txtIncremento");
 
 	eventoFinalizaEscritura('#txtNombreEmpresa', buscaEmpresa, typingTimer, doneTypingIntervalo);
-	
-  	
-  
+
 }
 
-function guardarSubasta(obj){
-	
-		oSubastas = new Subastas();
-		oSubastas.nombreSubasta = $("#txtNombreSubasta").val();
-		oSubastas.IdTipoSubasta = $('input[name=tiposubastas]:checked').val();
-		oSubastas.fechaInicio = (!$("#txtFechaInicio").datepicker('getDate')) ? "" : $("#txtFechaInicio").datepicker('getDate').getFullYear() + "-" + ($("#txtFechaInicio").datepicker('getDate').getMonth() + 1) + "-" + $("#txtFechaInicio").datepicker('getDate').getDate();
-		oSubastas.fechaFin = (!$("#txtFechaFin").datepicker('getDate')) ? "" : $("#txtFechaFin").datepicker('getDate').getFullYear() + "-" + ($("#txtFechaFin").datepicker('getDate').getMonth() + 1) + "-" + $("#txtFechaFin").datepicker('getDate').getDate();
-		oSubastas.empresas = [];
-		oSubastas.incremento = $("#txtIncremento").val();
+function guardarSubasta(obj) {
 
-		if ($("#btnGuardarSubasta").attr("attr-idsubasta") == "0" || $("#btnGuardarSubasta").attr("attr-idsubasta") == undefined) {
-			oSubastas.idSubasta = 0;
-		} else {
+	oSubastas = new Subastas();
+	oSubastas.nombreSubasta = $("#txtNombreSubasta").val();
+	oSubastas.IdTipoSubasta = $('input[name=tiposubastas]:checked').val();
+	oSubastas.fechaInicio = (!$("#txtFechaInicio").datepicker('getDate')) ? "" : $("#txtFechaInicio").datepicker('getDate').getFullYear() + "-" + ($("#txtFechaInicio").datepicker('getDate').getMonth() + 1) + "-" + $("#txtFechaInicio").datepicker('getDate').getDate();
+	oSubastas.fechaFin = (!$("#txtFechaFin").datepicker('getDate')) ? "" : $("#txtFechaFin").datepicker('getDate').getFullYear() + "-" + ($("#txtFechaFin").datepicker('getDate').getMonth() + 1) + "-" + $("#txtFechaFin").datepicker('getDate').getDate();
+	oSubastas.empresas = [];
+	oSubastas.incremento = $("#txtIncremento").val();
 
-			oSubastas.idSubasta = $("#btnGuardarSubasta").attr("attr-idsubasta");
-		}
-		$.each($(".empresasSeleccionadas"), function(key, value) {
-			oSubastas.empresas.push($(value).attr("attr-idx"));
+	if ($("#btnGuardarSubasta").attr("attr-idsubasta") == "0" || $("#btnGuardarSubasta").attr("attr-idsubasta") == undefined) {
+		oSubastas.idSubasta = 0;
+	} else {
+
+		oSubastas.idSubasta = $("#btnGuardarSubasta").attr("attr-idsubasta");
+	}
+	$.each($(".empresasSeleccionadas"), function(key, value) {
+		oSubastas.empresas.push($(value).attr("attr-idx"));
+	});
+
+	//console.log(JSON.stringify(oSubastas));
+	if (ValidaCamposSubasta(oSubastas)) {
+		$(".divHeaderContenido").modal(close);
+		postrequest("subastas/guardar", oSubastas, function(data) {
+			if (data > 0) {
+				alert("La subasta fue creada con éxito");
+				CargaSubastas(-1, -1);
+
+			}
 		});
-
-		//console.log(JSON.stringify(oSubastas));
-		if (ValidaCamposSubasta(oSubastas)) {
-			$(".divHeaderContenido").modal(close);
-			postrequest("subastas/guardar", oSubastas, function(data) {
-				if (data > 0) {
-					alert("La subasta fue creada con éxito");
-					CargaSubastas(-1, -1);
-
-				}
-			});
-		}
-
+	}
 
 }
+
 function CargaEmpresas(idx) {
 	//debugger;
 	$("#cmbEmpresas").html("");
 	$("#cmbEmpresasFiltro").html("");
-	
+
 	$("#cmbEmpresas").append('<option value="-1"> == Seleccione ==</div>');
 	$("#cmbEmpresasFiltro").append('<option value="-1"> == TODAS ==</div>');
+
+	
 
 	postrequest("empresas/listar", {
 		"estatus" : "1"
@@ -178,11 +169,11 @@ function CargaEmpresas(idx) {
 			$("#cmbEmpresas").append('<option value="' + data[i].idEmpresa + '" ' + selected + '>' + data[i].nombreEmpresa + "</option>");
 			$("#cmbEmpresasFiltro").append('<option value="' + data[i].idEmpresa + '">' + data[i].nombreEmpresa + ' </option>');
 		}
-		
+		$("#cmbEmpresas").material_select();
+		$("#cmbEmpresasFiltro").material_select();
 	});
-	$("#cmbEmpresas").material_select();
-}
 
+}
 
 function CargaTipoSubastas(estatus) {
 	postrequest("tiposubastas/listar", {
@@ -202,40 +193,22 @@ function CargaSubastas(estatus, empresa) {
 		"empresa" : empresa,
 		"subastaId" : -1
 	}, function(data) {
-	
+
 		$("#divListaContenido").html("");
 		for (i in data) {
 
 			var div = '';
-			// div += '<div class="divRenglonTabla">';
-			// div += '	<div>';
-			// div += '		<label>Subasta: </label><label>' + data[i].nombreSubasta + "</label>";
-			// div += '	</div>';
-			// div += '	<div>';
-			// div += '		<div attr-id="' + data[i].idSubasta + '" type="button" class="fa fa-pencil-square-o button btnEditarSubasta" alt="editar" title="Editar Subasta" ></div>';
-			// div += '		<div attr-id="' + data[i].idSubasta + '" attr-nombresubasta="' + data[i].nombreSubasta + '" class="btnAdministraAutos fa fa-plus-circle button" title="Administrar Autos"></div>';
-			// div += '		<div attr-id="' + data[i].idSubasta + '" attr-nombresubasta="' + data[i].nombreSubasta + '" class="btnVerAutos fa fa-car button" title="Ver Autos"></div>';
-			// div += '		<div attr-id="' + data[i].idSubasta + '" attr-nombresubasta="' + data[i].nombreSubasta + '" class="btnAgregarUsuariosAutos fa fa-user-plus button" title="Agregar Usuarios"></div>';
-			// div += '	</div>';
-			// div += '	<div><label>Tipo de subasta: </label>' + data[i].tipoSubasta + '</div>';
-			// div += '	<div><label>Vigencia: </label>' + data[i].fechaInicio + ' - ' + data[i].fechaFin + '</div>';
-			// div += '	<div><label>Estatus: </label>' + data[i].estatus + '</div>';
-			// div += '	<div><label>Empresas:</label>' + data[i].empresas + '</div>';
-			// div += '    <div><label>Publicada:</label><label>' + data[i].publicada + '</label></div>';
-			// div += '	<div><label class="switch"><input type="checkbox" attr-id="' + data[i].idSubasta + '" class="btnPublicar" ' + ((data[i].visible == 0) ? "" : "checked" ) + ' /><div class="slider round"></div></label></div>';
-			// div += '	<div></div>';
-			// div += '</div>';
-			
-			div += '<div class="row divRenglonTabla">';
-			div += '	<div class="col s12">';
+			div += '	<div class="divRenglonTabla col s12 m4 l3">';
 			div += '		<div class="card">';
+			div += '            <span class="card-title">' + data[i].nombreSubasta + '</span>';
+			div += '            <div class="divider"></div>';
 			div += '            <div class="card-image">';
-			div += '            	<span>' + data[i].nombreSubasta + '</span>';
-			div += '                <a class="btn-floating waves-effect waves-light ligh-blue btnEditarSubasta" attr-id="' + data[i].idSubasta + '" title="Editar Subasta"><i class="material-icons">create</i></a>';
-			div += '                <a class="btn-floating waves-effect waves-light ligh-blue btnAdministraAutos" attr-id="' + data[i].idSubasta + '" attr-nombresubasta="' + data[i].nombreSubasta + '" title="Administrar Autos"><i class="material-icons">add</i></a>';
-			div += '                <a class="btn-floating waves-effect waves-light ligh-blue btnVerAutos" attr-id="' + data[i].idSubasta + '" attr-nombresubasta="' + data[i].nombreSubasta + '" title="Ver Autos"><i class="material-icons">directions car</i></a>';
-			div += '                <a class="btn-floating waves-effect waves-light ligh-blue btnAgregarUsuariosAutos" attr-id="' + data[i].idSubasta + '" attr-nombresubasta="' + data[i].nombreSubasta + '" title="Agregar Usuarios"><i class="material-icons">person</i></a>';
-			div += '            </div>';			
+			div += '                <a class="waves-effect btnEditarSubasta" attr-id="' + data[i].idSubasta + '" title="Editar Subasta"><i class="small material-icons">create</i></a>';
+			div += '                <a class="waves-effect btnAdministraAutos" attr-id="' + data[i].idSubasta + '" attr-nombresubasta="' + data[i].nombreSubasta + '" title="Administrar Autos"><i class="small material-icons">add</i></a>';
+			div += '                <a class="waves-effect btnAgregarUsuariosAutos" attr-id="' + data[i].idSubasta + '" attr-nombresubasta="' + data[i].nombreSubasta + '" title="Agregar Usuarios"><i class="small material-icons">group_add</i></a>';
+			div += '                <a class="waves-effect btnListaUsuarios" attr-id="' + data[i].idSubasta + '" attr-nombresubasta="' + data[i].nombreSubasta + '" title="Ver Usuarios"><i class="small material-icons">group</i></a>';
+			div += '                <a class="waves-effect btnVerAutos" attr-id="' + data[i].idSubasta + '" attr-nombresubasta="' + data[i].nombreSubasta + '" title="Ver Autos"><i class="small material-icons">drive_eta</i></a>';
+			div += '            </div>';
 			div += '			<div class="card-content">';
 			div += '				<div><label>Tipo de subasta: </label>' + data[i].tipoSubasta + '</div>';
 			div += '				<div><label>Vigencia: </label>' + data[i].fechaInicio + ' - ' + data[i].fechaFin + '</div>';
@@ -247,19 +220,14 @@ function CargaSubastas(estatus, empresa) {
 			div += '			</div>';
 			div += '		</div>';
 			div += '	</div>';
-			div += '</div>';
-			
-			
-			
 
 			$("#divListaContenido").append(div);
 		}
 
 		$(".btnAdministraAutos").click(function() {
-			debugger;
 			var nombreSubasta = $(this).attr("attr-nombresubasta");
 			var idSubasta = $(this).attr("attr-id");
-			
+
 			if (idSubasta > 0) {
 				$("#divRegistroAutos").load("views/main/admin/altaautos.html?rand=" + Math.random(), function() {
 
@@ -278,7 +246,7 @@ function CargaSubastas(estatus, empresa) {
 		});
 
 		$(".btnVerAutos").click(function() {
-			
+			debugger;
 			var nombreSubasta = $(this).attr("attr-nombresubasta");
 			var idSubasta = $(this).attr("attr-id");
 			cargaAutosPorSubasta(idSubasta, "#divListaAutos");
@@ -384,67 +352,65 @@ function CargaSubastas(estatus, empresa) {
 
 	});
 	//end postrequest
-	$(function(){
+	$(function() {
 		// $('#divAutos').dialog({
-			// autoOpen : false,
-			// modal : true,
-			// height: 520,
-			// width : 640,
-			// resizable : false,
-			// dialogClass: 'noTitleStuff',
-			// buttons : [{
-				// text : "Cancelar",
-				// click : function() {
-					// $(this).dialog("close");
-				// }
-			// }],
-			// show : {
-				// effect : "blind",
-				// duration : 500
-			// },
-			// hide : {
-				// effect : "blind",
-				// duration : 500
-			// }
+		// autoOpen : false,
+		// modal : true,
+		// height: 520,
+		// width : 640,
+		// resizable : false,
+		// dialogClass: 'noTitleStuff',
+		// buttons : [{
+		// text : "Cancelar",
+		// click : function() {
+		// $(this).dialog("close");
+		// }
+		// }],
+		// show : {
+		// effect : "blind",
+		// duration : 500
+		// },
+		// hide : {
+		// effect : "blind",
+		// duration : 500
+		// }
 		// })
-		
+
 		$('#divAutos').modal({
 			dismissible : true, // Modal can be dismissed by clicking outside of the modal
 			opacity : .5, // Opacity of modal background
 			inDuration : 300, // Transition in duration
 			outDuration : 200, // Transition out duration
-		}); 
+		});
 
-		
 	});
-	
-	
+
 	$(function() {
 		// $(".divHeaderContenido").dialog({
-			// //title: "Nueva Subasta",
-			// autoOpen : false,
-			// modal : true,
-			// width : 500,
-			// resizable : false,
-			// dialogClass: 'noTitleStuff',
-			// buttons : [{
-				// text : "Cancelar",
-				// click : function() {
-					// $(this).dialog("close");
-				// }
-			// }, {
-				// text : "Guardar Subasta",
-				// "id" : 'btnGuardarSubasta',
-				// click: function(){guardarSubasta(this);}
-			// }],
-			// show : {
-				// effect : "blind",
-				// duration : 500
-			// },
-			// hide : {
-				// effect : "blind",
-				// duration : 500
-			// }
+		// //title: "Nueva Subasta",
+		// autoOpen : false,
+		// modal : true,
+		// width : 500,
+		// resizable : false,
+		// dialogClass: 'noTitleStuff',
+		// buttons : [{
+		// text : "Cancelar",
+		// click : function() {
+		// $(this).dialog("close");
+		// }
+		// }, {
+		// text : "Guardar Subasta",
+		// "id" : 'btnGuardarSubasta',
+		// click: function(){guardarSubasta(this);}
+		// }],
+		// show : {
+		// effect : "blind",
+		// duration : 500
+		// },
+		// hide : {
+		// effect : "blind",
+		// duration : 500
+		// }
 		// });
 		// $(".ui-dialog-titlebar").hide();
 		$(".divHeaderContenido").modal();
@@ -452,20 +418,20 @@ function CargaSubastas(estatus, empresa) {
 
 	$(function() {
 		// $("#divRegistroAutos").dialog({
-			// autoOpen : false,
-			// modal : true,
-			// maxHeight : 500,
-			// width : 500,
-			// resizable : false,
-			// dialogClass: 'noTitleStuff',
-			// show : {
-				// effect : "blind",
-				// duration : 500
-			// },
-			// hide : {
-				// effect : "blind",
-				// duration : 500
-			// }
+		// autoOpen : false,
+		// modal : true,
+		// maxHeight : 500,
+		// width : 500,
+		// resizable : false,
+		// dialogClass: 'noTitleStuff',
+		// show : {
+		// effect : "blind",
+		// duration : 500
+		// },
+		// hide : {
+		// effect : "blind",
+		// duration : 500
+		// }
 		// });
 		$("#divRegistroAutos").modal({
 			dismissible : true, // Modal can be dismissed by clicking outside of the modal
@@ -478,19 +444,19 @@ function CargaSubastas(estatus, empresa) {
 
 	$(function() {
 		// $("#divAdministraUsuarios").dialog({
-			// title : "Invitar usuarios",
-			// autoOpen : false,
-			// modal : true,
-			// width : 500,
-			// resizable : false,
-			// show : {
-				// effect : "blind",
-				// duration : 500
-			// },
-			// hide : {
-				// effect : "blind",
-				// duration : 500
-			// }
+		// title : "Invitar usuarios",
+		// autoOpen : false,
+		// modal : true,
+		// width : 500,
+		// resizable : false,
+		// show : {
+		// effect : "blind",
+		// duration : 500
+		// },
+		// hide : {
+		// effect : "blind",
+		// duration : 500
+		// }
 		// });
 		$("#divAdministraUsuarios").modal({
 			dismissible : true, // Modal can be dismissed by clicking outside of the modal

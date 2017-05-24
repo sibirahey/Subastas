@@ -1,155 +1,97 @@
-<div class="divBotonera">
-	<label>Nueva Subasta</lable><div id="btnAgregarSubasta" class="fa fa-plus-circle fa-2x"></div>
-</div>
+<div id="botoneraContainer" class="row">
 
-<div id="divListaBotonera">
-	<div class="divItemBotonera">
+	<div id="divListaBotonera" class="valign-wrapper">
+		<div class="divItemBotonera col s2">
+			<a id="btnAgregarSubasta" class="btn waves-effect waves-light cyan white-text" titlee="Agregar Subasta"><i class="material-icons">add</i></a>
+		</div>
+		<div class="divItemBotonera col s4">
 
-		<div class="input-field col s3">
-			<select id="cmbEmpresasFiltro" name="cmbEmpresasFiltro"></select>
+			<div class="input-field col s12">
+				<select id="cmbEmpresasFiltro" name="cmbEmpresasFiltro"></select>
+				<label for="cmbEmpresasFiltro" >Empresas</label>
+			</div>
+
+		</div>
+		<div class="divItemBotonera col s4">
+			<div class="input-field col s12">
+				<select>
+					<option value="-1" disabled selected> == Todas ==</option>
+					<option value="-1"> == Todas ==</option>
+					<option value="0">No publicadas</option>
+					<option value="1">Publicadas</option>
+				</select>
+				<label>Estatus de publicación:</label>
+			</div>
+
+		</div>
+		<div class="divItemBotonera col s2">
+
+			<a id="btnFiltrar" class="waves-effect waves-light btn"><i class="material-icons left">search</i>Filtrar</a>
 		</div>
 
-		<!-- <label for="cmbEmpresasFiltro" >Empresas</label>
-		<select id="cmbEmpresasFiltro" name="cmbEmpresasFiltro" ></select> -->
-	</div>
-	<div class="divItemBotonera">
-		<div class="input-field col s12">
-	    <select>
-	      <option value="-1" disabled selected> == Todas ==</option>
-			<option value="0">No publicadas</option>
-			<option value="1">Publicadas</option>
-	    </select>
-	    <label>Estatus de publicación:</label>
-	  </div>
-		
-			
-		
-		<!-- <label for="cmbPublicada" >Estatus de publicación: </label>
-		<select id="cmbPublicada" name="cmbPublicada" >
-			<option value="-1"> == Todas ==</option>
-			<option value="0">No publicadas</option>
-			<option value="1">Publicadas</option>
-		</select> -->
-	</div>
-	<div class="divItemBotonera">
-		<div id="btnFiltrar">
-			FILTRAR
-		</div>
 	</div>
 
 </div>
+<div id="divAdminSubastas" class="row">
 
-<div id="divAdminSubastas">
-	
-	<!-- <div class="divHeaderContenido">
-		<div class="divRegistro">
-			<label for="txtNombreSubasta" >Lote</label>
-			<input type="text" id="txtNombreSubasta" name="txtNombreSubasta" />
-		</div>
-		<div class="divRegistro">
-			<label for="txtFechaInicio" >Fecha inicio:</label>
-			<input type="text" id="txtFechaInicio" name="txtFechaInicio" />
-		</div>
-		<div class="divRegistro">
-			<label for="txtFechaFin" >Fecha final:</label>
-			<input type="text" id="txtFechaFin" name="txtFechaFin" />
-		</div>
-		<div class="divRegistro" id="divTipoSubastas">
-			<label>Tipo de Subasta:</label>
-
-		</div>
-		<div class="divRegistro">
-			<label for="txtIncremento" >Incremento:</label>
-			<input type="text" id="txtIncremento" name="txtIncremento" />
-		</div>
-		<div class="divRegistro">
-			<label for="cmbEmpresas" >Empresas</label>
-			<select id="cmbEmpresas" name="cmbEmpresas" ></select>
-			<div id="btnNuevaEmpresa">
-				<i class="fa fa-plus-circle fa-2x"></i>
-			</div>
-			<div id="btnAgregaEmpresa">
-				<i class="fa fa-check-circle fa-2x"></i>
-			</div>
-		</div>
-		<div class="divRegistro" id="lstEmpresa"></div>
-
-	</div> -->
 	<!-- Modal Structure -->
-  <div class="modal modal-fixed-footer divHeaderContenido">
+	<div class="modal modal-fixed-footer divHeaderContenido">
 		<div class="modal-content">
-			<div class="divRegistro">
-				<label for="txtNombreSubasta" >Lote</label>
-				<input type="text" id="txtNombreSubasta" name="txtNombreSubasta" />
-			</div>
-			<div class="divRegistro">
-				<label for="txtFechaInicio" >Fecha inicio:</label>
-				<input type="text" id="txtFechaInicio" name="txtFechaInicio" />
-			</div>
-			<div class="divRegistro">
-				<label for="txtFechaFin" >Fecha final:</label>
-				<input type="text" id="txtFechaFin" name="txtFechaFin" />
-			</div>
-			<div class="divRegistro" id="divTipoSubastas">
-				<label>Tipo de Subasta:</label>
 
-			</div>
-			<div class="divRegistro">
-				<label for="txtIncremento" >Incremento:</label>
-				<input type="text" id="txtIncremento" name="txtIncremento" />
-			</div>
-			<div class="divRegistro">
-				<label for="cmbEmpresas" >Empresas</label>
-				<select id="cmbEmpresas" name="cmbEmpresas" ></select>
-				<div id="btnNuevaEmpresa">
-					<i class="fa fa-plus-circle fa-2x"></i>
+			<div class="row">
+				<div class="col s12">
+					Lote:
+					<div class="input-field inline">
+						<input id="lote" type="text" class="validate">
+						<label for="lote" data-error="wrong" data-success="right">#Lote</label>
+					</div>
 				</div>
-				<div id="btnAgregaEmpresa">
-					<i class="fa fa-check-circle fa-2x"></i>
+				<div class="col s12">
+					Fecha Inicio:
+					<div class="input-field inline">
+						<input type="text" id="txtFechaInicio" name="txtFechaInicio" />
+						<label for="txtFechaInicio" >Fecha inicio:</label>
+					</div>
+				</div>
+				<div class="col s12">
+					Fecha Fin:
+					<div class="input-field inline">
+						<input type="text" id="txtFechaFin" name="txtFechaFin" />
+						<label for="txtFechaInicio" >Fecha inicio:</label>
+					</div>
+				</div>
+				<div id="divTipoSubastas" class="col s12">
+					<label>Tipo de Subasta:</label>
+				</div>
+				<div class="col s12">
+					Incremento: <b>$</b>
+					<div class="input-field inline">
+						<input type="number" id="txtIncremento" name="txtIncremento" />
+					</div>
+				</div>
+				<div class="col s12">
+					Empresas:
+					<div class="input-field inline">
+						<select id="cmbEmpresas" name="cmbEmpresas" ></select>
+					</div>
+					<a id="btnNuevaEmpresa" class="btn-floating btn-large waves-effect waves-light blue"><i class="material-icons">add</i></a>
+					<a id="btnAgregaEmpresa" class="btn-floating btn-large waves-effect waves-light teal"><i class="material-icons">done</i></a>
+				</div>
+				<div class="col s12">
+					<div class="divRegistro" id="lstEmpresa"></div>
 				</div>
 			</div>
-			<div class="divRegistro" id="lstEmpresa"></div>
+
 		</div>
 		<div class="modal-footer">
-			<a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat ">Agree</a>
+			<a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat ">Cancelar</a>
 		</div>
 	</div>
-	
-	
-	
-	
-	
-	
+
 	<div id="divListaSubastas">
-		<!-- <div id="divListaBotonera">
-		<div class="divItemBotonera">
-		<label for="cmbEmpresasFiltro" >Empresas</label>
-		<select id="cmbEmpresasFiltro" name="cmbEmpresasFiltro" ></select>
-		</div>
-		<div class="divItemBotonera">
-		<label for="cmbPublicada" >Estatus de publicación: </label>
-		<select id="cmbPublicada" name="cmbPublicada" >
-		<option value="-1"> == Todas ==</option>
-		<option value="0">No publicadas</option>
-		<option value="1">Publicadas</option>
-		</select>
-		</div>
-		<div class="divItemBotonera">
-		<div id="btnFiltrar">FILTRAR</div>
-		</div>
 
-		</div> -->
-		<div id="divListaContenido"></div>
 	</div>
-
-	<!-- <div id="divAdministraUsuarios">
-		<div class="divRegistro">
-			<input id="listausuarios" type="file" name="listausuarios" />
-			<div type="button" id="btnUploadUserList" class="fa fa-upload"   ></div>
-			<div id="listaUsuariosSubidos" ></div>
-		</div>
-
-	</div> -->
+	<div id="divListaContenido"class="row"></div>
 	<div id="divAdministraUsuarios" class="modal modal-fixed-footer">
 		<div class="modal-content divRegistro">
 			<input id="listausuarios" type="file" name="listausuarios" />
@@ -157,95 +99,36 @@
 			<div id="listaUsuariosSubidos" ></div>
 		</div>
 		<div class="modal-footer">
-			<a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat ">Agree</a>
+			<a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat ">Cancelar</a>
 		</div>
 	</div>
 
-	<div id="modalEmpresa">
-		<div >
+	<div id="modalEmpresa" class="modal">
+		<div class="modal-content">
 			<label for="txtNombreEmpresa" >Empresa:</label>
 			<input type="text" id="txtNombreEmpresa" name="txtNombreEmpresa" />
 			<label id="labelMsjEmpresa"></label>
-			<div id="btnGuardaEmpresa">
-				<i class="fa fa-save fa-2x"></i>
-			</div>
-			<div id="btnEliminaEmpresa" style="display: none;">
-				<i class="fa fa-save fa-2x"></i>
-			</div>
+		</div>
+		<div class="modal-footer">
+			<a id="btnGuardaEmpresa" href="#!" class="modal-action modal-close waves-effect waves-green btn-flat"><i class="material-icons">add</i></a>
+			<a id="btnEliminaEmpresa" href="#!" class="modal-action modal-close waves-effect waves-green btn-flat"><i class="material-icons">clear</i></a>
 
 		</div>
 	</div>
 
 </div>
 
-<div id="divRegistroAutos" class="divContenido modal" id="divAutos">
+<div id="divRegistroAutos" class="divContenido modal">
 
 	<div  class="modal-content">
 		Registro Autos
-		<div id="divListaAutos"></div>
+		<div id="divListaAutos">
+
+		</div>
 	</div>
 	<div class="modal-footer">
 		<a href="#!" id="btnCerrarListaAuto" class="modal-action modal-close waves-effect waves-green btn-flat ">Agree</a>
 	</div>
-	
+
 </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<!-- <div class="divRenglonTabla">
-	<div>
-		<label>Subasta: </label><label>' + data[i].nombreSubasta + "</label>
-	</div>
-	<div>
-		<div attr-id="' + data[i].idSubasta + '" type="button" class="fa fa-pencil-square-o button btnEditarSubasta" alt="editar" title="Editar Subasta" ></div>
-		<div attr-id="' + data[i].idSubasta + '" attr-nombresubasta="' + data[i].nombreSubasta + '" class="btnAdministraAutos fa fa-plus-circle button" title="Administrar Autos"></div>
-		<div attr-id="' + data[i].idSubasta + '" attr-nombresubasta="' + data[i].nombreSubasta + '" class="btnVerAutos fa fa-car button" title="Ver Autos"></div>
-		<div attr-id="' + data[i].idSubasta + '" attr-nombresubasta="' + data[i].nombreSubasta + '" class="btnAgregarUsuariosAutos fa fa-user-plus button" title="Agregar Usuarios"></div>
-	</div>
-	<div>
-		<label>Tipo de subasta: </label>' + data[i].tipoSubasta + '
-	</div>
-	<div>
-		<label>Vigencia: </label>' + data[i].fechaInicio + ' - ' + data[i].fechaFin + '
-	</div>
-	<div>
-		<label>Estatus: </label>' + data[i].estatus + '
-	</div>
-	<div>
-		<label>Empresas:</label>' + data[i].empresas + '
-	</div>
-	<div>
-		<label>Publicada:</label><label>' + data[i].publicada + '</label>
-	</div>
-	
-	<div>
-		<label class="switch">
-			<input type="checkbox" attr-id="' + data[i].idSubasta + '" class="btnPublicar" ' + ((data[i].visible == 0) ? "" : "checked" ) + ' />
-			<div class="slider round"></div></label>
-	</div>
-</div> -->
-
-
-
-
-
-
-
 
