@@ -40,6 +40,10 @@ function CargaFunciones(o){
 		case "subasta":
 			
 			CargaInfoSubasta();
+			break;
+		case "MisAutos":
+			
+			cargaFuncionesMisAutos();
 			break;			
 		case "dashboard":
 		default:

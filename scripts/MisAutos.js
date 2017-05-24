@@ -1,10 +1,10 @@
-$(document).ready(function () {
+/*$(document).ready(function () {
 	$(".mainBody").load("views/MisAutos.html", function() {
 		cargaFuncionesMisAutos();	
 		
 		
 	});
-});
+});*/
 
 function cargaFuncionesMisAutos(){
 		$("#altaMisAutos").hide();

@@ -258,6 +258,10 @@ function enviarCotizacion(){
 		objcotizacion.estatus=1;
 		objcotizacion.subServicios = JSON.parse( sessionStorage.getItem("serviciosCotizar"));
 		 postrequest("cotizacion/registro", objcotizacion, function(data){
+		 	if (data){
+		 		alert ("Se guardo Correctamente su solicitud");
+
+		 	}
     });
 
 	}else{

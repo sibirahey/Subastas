@@ -158,7 +158,7 @@ function CargaFuncionesRegistroAuto(idSubasta){
 		$( "#dialog" ).attr("title", $(this).attr("title"));
 		$( "#dialog" ).attr("operacion", $(this).attr("operacion") );
    		$("#labelTxtDescripcion").html($(this).attr("desc"));
-   		$( "#dialog" ).dialog();
+   		$( "#dialog" ).dialog({ modal:true});
    });
 
 
@@ -166,25 +166,25 @@ function CargaFuncionesRegistroAuto(idSubasta){
    		
    		oObj = null;
    		var operacion = $( "#dialog" ).attr("operacion");
-   		
+   		alert(operacion);
    		switch(operacion){
    			case "marcas":
-   			oObj = new Marca();
-			break;
+   				oObj = new Marca();
+				break;
 			case "modelos":
-			oObj = new Modelo();
-			oObj.idMarca = $("#cbMarcaAuto").val();
-			if ($("#cbMarcaAuto").val() == 0 ){
-				alert("Seleccione una marca para poder agregar el modelo.");
-				return;
-			}
+				oObj = new Modelo();
+				oObj.idMarca = $("#cbMarcaAuto").val();
+				if ($("#cbMarcaAuto").val() == 0 ){
+					alert("Seleccione una marca para poder agregar el modelo.");
+					return;
+				}
    			break;
    			case "colores":
-   			oObj = new Colores();
-   			break;
+   				oObj = new Colores();
+   				break;
    			case "features":
-   			oObj = new Caracteristicas();
-   			break;
+   				oObj = new Caracteristicas();
+   				break;
    			default:
    			 alert("Operación no valida");
    			 break;

@@ -17,6 +17,7 @@ class usuarios
         $this->publico = $publico;
         $this->esadmin= $esadmin;
         $this->claveApi = $claveApi;
+        $this->idUsuario = 0;
    
     }
 
@@ -256,9 +257,9 @@ class usuarios
         }
     }
 
-    private function rememberme(){
+    public function rememberme(){
         $claveapi = $_POST["claveapi"];
-        $comando = "SELECT nombre, appaterno, apmaterno, correo, verificado, contrasena, publico, es_admin, claveApi from usuario where ".self::CLAVE_API." = '".$claveapi."' and curdate() < vigencia ";
+        $comando = "SELECT idUsuario, nombre, appaterno, apmaterno, correo, verificado, contrasena, publico, es_admin, claveApi from usuario where ".self::CLAVE_API." = '".$claveapi."' and curdate() < vigencia ";
         $sentencia = ConexionBD::obtenerInstancia()->obtenerBD()->prepare($comando);
         $sentencia->bindParam(1, $claveapi);
 
@@ -268,7 +269,7 @@ class usuarios
             $usuario = new usuarios();
             if($fetch["contrasena"] != null){
            
-                
+                $usuario->idUsuario = $fetch["idUsuario"];
                 $usuario->nombre = $fetch["nombre"];
                 $usuario->appaterno = $fetch["appaterno"];
                 $usuario->apmaterno = $fetch["apmaterno"];

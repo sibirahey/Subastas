@@ -21,6 +21,7 @@ require_once("modelos/transmisiones.php");
 require_once("modelos/autos.php");
 require_once("modelos/autos-features.php");
 require_once("modelos/autos-fotos.php");
+require_once("modelos/autos-puja.php");
 require_once("modelos/subasta-autos.php");
 require_once("modelos/seccioneshome.php");
 require_once('utilidades/ConexionBD.php');
@@ -148,6 +149,9 @@ function ejecutaModeloPost($vista, $mod, $arr)
             break;
         case 'usuarioautomovil':
             $vista->imprimir(usuarioautomovil::post($arr));
+            break;
+        case 'pujas':
+            $vista->imprimir(autospuja::post($arr));
             break;
         default:
     		# code...
