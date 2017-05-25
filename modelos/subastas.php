@@ -41,6 +41,8 @@ class subastas
         }
         else if ($peticion[0] == 'xusuario'){
             return self::xusuario();
+        }else if($peticion[0] == 'participantes'){
+            return self::participantes($_POST);
         }
         else {
             throw new ExcepcionApi(self::ESTADO_URL_INCORRECTA, "Url mal formada", 400);
@@ -115,7 +117,7 @@ class subastas
         
       
         
-        $comando = "select s.idSubasta, nombreSubasta, idTipoSubasta, tipo.tipoSubasta, fechaInicio, fechaFin, CASE WHEN curdate() BETWEEN fechaInicio and fechaFin then 'ACTIVA' WHEN curdate() < fechaInicio then 'AGENDADA' else 'TERMINADA' end as estatus, visible, case visible when 0 then 'NO PUBLICADA' else 'PUBLICADA' end as publicada,(select GROUP_CONCAT(emp.nombreEmpresa) from subastaempresa se, empresas emp where s.idSubasta = se.idSubasta and se.idEmpresa = emp.idEmpresa) as empresas, (select GROUP_CONCAT(emp.idEmpresa) from subastaempresa se, empresas emp where s.idSubasta = se.idSubasta and se.idEmpresa = emp.idEmpresa) as empresasId,incremento from subastas s, tiposubastas tipo 
+        $comando = "select s.idSubasta, nombreSubasta, idTipoSubasta, tipo.tipoSubasta, fechaInicio, fechaFin, CASE WHEN curdate() BETWEEN fechaInicio and fechaFin then 'ACTIVA' WHEN curdate() < fechaInicio then 'AGENDADA' else 'TERMINADA' end as estatus, visible, case visible when 0 then 'NO PUBLICADA' else 'PUBLICADA' end as publicada,(select GROUP_CONCAT(emp.nombreEmpresa) from subastaempresa se, empresas emp where s.idSubasta = se.idSubasta and se.idEmpresa = emp.idEmpresa) as empresas, (select GROUP_CONCAT(emp.idEmpresa) from subastaempresa se, empresas emp where s.idSubasta = se.idSubasta and se.idEmpresa = emp.idEmpresa) as empresasId, incremento from subastas s, tiposubastas tipo 
          where s.idTipoSubasta = tipo.idTipo and s.idSubasta = ?"; 
 
         
@@ -321,13 +323,34 @@ and u.claveApi = ?)";
             }
         } catch (PDOException $e) {
 
-            print_r($e);
+            //print_r($e);
             throw new ExcepcionApi(self::ESTADO_URL_INCORRECTA, $e->getMessage(), 400);
             
         }
 
     }
 
-    
-    
+    private function participantes($params){
+
+
+        try{
+            $comando = "SELECT u.idUsuario, u.nombre, u.appaterno, u.apmaterno, u.correo, u.vigencia, u.verificado FROM subasta_usuario su, usuario u WHERE su.idUsuario = u.idUsuario and su.idSubasta = ?" ; 
+
+            $sentencia = ConexionBD::obtenerInstancia()->obtenerBD()->prepare($comando);
+            
+            $sentencia->bindParam(1, $params["id_subasta"]);
+            
+
+            if ($sentencia->execute())
+                return $sentencia->fetchall(PDO::FETCH_ASSOC);
+            else
+                return new ExcepcionApi("error", "Ocurrió un error al obtener los participantes", 400);
+        }catch(Exception $e){
+
+            return new ExcepcionApi("error", $e->getMessage(), 400);
+        }
+            
+
+    }
+        
 }

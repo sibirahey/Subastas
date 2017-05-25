@@ -1,25 +1,22 @@
- <li class="col s4">
-        <div class="col s12">
-            <div class="card horizontal">
-                <div class="card-stacked">
-                    <div class="card-content">
-                        <p style="width: 100%; text-align: center;">
-                           #NOMBRESUBASTA# (#ESTATUSSUBASTA#)
-                        </p>
-                        <p>
-                        &nbsp;
-                        </p>
-                        <p>
-                           Tipo de subasta: #TIPOSUBASTAS# 
-                        </p>
-                        <p>
-                           Oferta mínima: $#OFERTAMINIMA#
-                        </p>
-                    </div>
-                    <div class="card-action" style="width: 100%; text-align: center;">
-                        <a href="main.php?accion=subasta&id=#SUBASTAID#">VER SUBASTA</a>
-                    </div>
+<li class="col s12 m12 l4">
+    <div class="col s12">
+        <div class="card horizontal">
+            <div class="card-stacked">
+                <div class="card-content">
+                    <p>
+                        <h6>#NOMBRESUBASTA# (#ESTATUSSUBASTA#)</h6>
+                        <h6><b>Fin de la subasta:</b></h6>
+                        <h5><b>#FECHA_SUBASTA#</b></h5>
+                        <h6>Oferta mínima</h6>
+                        <h6 style="color:blue;margin-top:15px;"><b>$</b>#OFERTAMINIMA#</h6>
+                        <h6>Total de ofertas</h6>
+                        <h6 style="color:blue;margin-top:15px;">#TOTAL_OFERTAS#</h6>
+                    </p>
+                </div>
+                <div class="card-action">
+                    <a href="main.php?accion=subasta&id=#SUBASTAID#">VER SUBASTA</a>
                 </div>
             </div>
         </div>
-    </li>
+    </div>
+</li>

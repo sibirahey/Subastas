@@ -93,6 +93,7 @@
 	</div>
 	<div id="divListaContenido"class="row"></div>
 	<div id="divAdministraUsuarios" class="modal modal-fixed-footer">
+
 		<div class="modal-content divRegistro">
 			<input id="listausuarios" type="file" name="listausuarios" />
 			<div type="button" id="btnUploadUserList" class="fa fa-upload"   ></div>
@@ -101,6 +102,11 @@
 		<div class="modal-footer">
 			<a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat ">Cancelar</a>
 		</div>
+	</div>
+	
+	<div id="divListaUsuariosModal" class="modal modal-fixed-footer">
+		<div id="divListaUsuariosTtl"></div>
+		<div id="divListaUsuariosTbl"></div>
 	</div>
 
 	<div id="modalEmpresa" class="modal">
@@ -118,17 +124,17 @@
 
 </div>
 
-<div id="divRegistroAutos" class="divContenido modal">
-
+<div id="divRegistroAutos" class="divContenido modal modal-fixed-footer">
+	<div class="modal-header">
+		<a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat right"><i class="material-icons">close</i></a>
+	</div>
 	<div  class="modal-content">
 		Registro Autos
 		<div id="divListaAutos">
 
 		</div>
 	</div>
-	<div class="modal-footer">
-		<a href="#!" id="btnCerrarListaAuto" class="modal-action modal-close waves-effect waves-green btn-flat ">Agree</a>
-	</div>
+	
 
 </div>
 

@@ -63,7 +63,7 @@ class autospuja
                     " VALUES(?,?,?,?)";
 
                 $u = new usuarios();
-                print_r($_POST);
+                
                 $u = $u->rememberme();
                 
 

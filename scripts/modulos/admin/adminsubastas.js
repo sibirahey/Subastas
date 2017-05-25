@@ -103,9 +103,9 @@ function CargaFuncionesAdminSubastas() {
 		$('.divHeaderContenido').modal("open");
 	});
 
-	$("#btnAgregaAuto").click(function() {
-		//$("#divRegistroAutos").modal("open");
-	});
+	// $("#btnAgregaAuto").click(function() {
+	// 	$("#divRegistroAutos").modal("open");
+	// });
 	//debugger;
 	CargaEmpresas(0);
 	CargaTipoSubastas();
@@ -227,9 +227,9 @@ function CargaSubastas(estatus, empresa) {
 		$(".btnAdministraAutos").click(function() {
 			var nombreSubasta = $(this).attr("attr-nombresubasta");
 			var idSubasta = $(this).attr("attr-id");
-
+			$("#divListaAutos").html("");
 			if (idSubasta > 0) {
-				$("#divRegistroAutos").load("views/main/admin/altaautos.html?rand=" + Math.random(), function() {
+				$("#divListaAutos").load("views/main/admin/altaautos.html?rand=" + Math.random(), function() {
 
 					$("#divRegistroAutos").show();
 					$("#divSubastaNombre").html(nombreSubasta);
@@ -263,6 +263,33 @@ function CargaSubastas(estatus, empresa) {
 			var idSubasta = $(this).attr("attr-id");
 			$("#btnUploadUserList").attr("idSubasta", idSubasta)
 			$("#divAdministraUsuarios").modal("open");
+		});
+
+		$(".btnListaUsuarios").click(function(){
+			var nombreSubasta = $(this).attr("attr-nombresubasta");
+			var idSubasta = $(this).attr("attr-id");
+			postrequest("subastas/participantes", {"id_subasta":idSubasta}, function(data){
+				$("#divListaUsuariosTbl").html("");
+				$("#divListaUsuariosTtl").html(nombreSubasta);
+				if(data.code){
+					if(data.code == 400){
+						alert("Ocurrió un error al obtener la lista de participantes");
+						console.log(data.message);
+					}
+				}
+				$("#divListaUsuariosTbl").html("");
+				$tabla = "<table><tr><td>Nombre</td><td>Correo</td></tr>"
+				for(var item in data){
+					$tabla += "<tr><td>"+ data[item].nombre + " "+data[item].appaterno+" "+data[item].apmaterno + "</td><td>"+data[item].correo +"</td></tr>";
+				}
+				$tabla += "</table>";
+				
+				$("#divListaUsuariosTbl").html($tabla);
+				$("#divListaUsuariosModal").modal("open");
+				
+			});
+			
+
 		});
 
 		$("#btnUploadUserList").click(function() {
@@ -459,12 +486,25 @@ function CargaSubastas(estatus, empresa) {
 		// }
 		// });
 		$("#divAdministraUsuarios").modal({
-			dismissible : true, // Modal can be dismissed by clicking outside of the modal
+			dismissible : false, // Modal can be dismissed by clicking outside of the modal
 			opacity : .5, // Opacity of modal background
 			inDuration : 300, // Transition in duration
 			outDuration : 200, // Transition out duration
 			startingTop : '4%', // Starting top style attribute
 		});
+		$("#divListaUsuariosModal").modal({
+			dismissible : true, // Modal can be dismissed by clicking outside of the modal
+			opacity : .5, // Opacity of modal background
+			inDuration : 300, // Transition in duration
+			outDuration : 200, // Transition out duration
+			startingTop : '4%', // Starting top style attribute
+			buttons: {
+		        "Close": function () {
+		            $(this). modal("close")
+		        }
+    		}
+		});
+
 
 	});
 }
