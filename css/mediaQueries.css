@@ -45,7 +45,6 @@
 		margin-top: 0;
 	}
 	.logoFooter, .logoHeader {
-		width: calc(100% - 180px);
 		background-image: url(../images/logoCar.svg);
 		background-size: contain;
 		background-position: center left;
