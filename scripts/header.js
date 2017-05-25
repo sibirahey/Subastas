@@ -19,18 +19,18 @@ $( document ).ready(function() {
 			});
 
 
-  			$(".menuitemwelcome").html("Bienvenido: " +sessionStorage["nombre"]);
+  			$(".menuitemwelcome").html("<label>Bienvenido: " +sessionStorage["nombre"]+"</label><i class='material-icons'>assignment_ind</i>");
+  			$(".menuitemwelcome").prepend("<i id='btnClose' class='material-icons'>exit_to_app</i>");
   			$(".menuitemwelcome").show();
 
 
   			$("#divMenuPrincipal > ul").html("");
   			$("#divMenuPrincipal > ul").append('<li><a class="menuitemindex" name="dashboard">INICIO</a></li>');
-  			$("#divMenuPrincipal  > ul").append('<li><a class="menuitemindex" name="ventaautos">VENTA DE AUTOS</a></li>');
-  			$("#divMenuPrincipal  > ul").append('<li><a class="menuitemindex" name="MisAutos">MIS AUTOS</a></li>');
+  			$("#divMenuPrincipal > ul").append('<li><a class="menuitemindex" name="ventaautos">VENTA DE AUTOS</a></li>');
+  			$("#divMenuPrincipal > ul").append('<li><a class="menuitemindex" name="MisAutos">MIS AUTOS</a></li>');
 	  		if (esAdmin()){
-				$("#divMenuPrincipal  > ul").append('<li><a class="menuitemindex" name="homeadmin">ADMININISTRADOR DE HOME</a></li>');
-				$("#divMenuPrincipal  > ul").append('<li><a class="menuitemindex" name="subastasadmin">ADMININISTRADOR DE SUBASTAS</a></li>');
-				$("#divMenuPrincipal > ul").append('<li><a class="menuitemindex" name="altaautos">ADMININISTRADOR VENTA DE AUTOS</a></li>');
+	  			$(".mainHeader").append('');
+				$("#divMenuPrincipal > ul").append('<li><a class="dropdown-button" href="#!" data-activates="dropdownAdmn">Dropdown<i class="material-icons right">arrow_drop_down</i></a></li>');
 			} 
 
   		}else{
@@ -46,6 +46,16 @@ $( document ).ready(function() {
 		$('.jssorContainer').find('video').get(0).play();
 		$('.jssorContainer').find('video').get(1).play();
 		
+		$('.dropdown-button').dropdown({
+			inDuration : 300,
+			outDuration : 225,
+			constrainWidth : false, // Does not change width of dropdown to that of the activator
+			hover : true, // Activate on hover
+			gutter : 0, // Spacing from edge
+			belowOrigin : true, // Displays dropdown below the button
+			alignment : 'right', // Displays dropdown with edge aligned to the left of button
+			stopPropagation : false // Stops event propagation
+		}); 
 
 		$(".menuitemindex").click(function(){
 			debugger;
@@ -69,13 +79,3 @@ $( document ).ready(function() {
 
 	
 });
-
-
-/*
-	<li><label>NOSOTROS</label></li>
-	<li><label>SUBASTAS</label></li>
-	<li><label>TUTORIALES</label></li>
-	<li><label>PREGUNTAS FRECUENTES</label></li>
-	<li><label>CONTACTO</label></li>
-
-	*/

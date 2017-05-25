@@ -42,9 +42,7 @@ body {
 	width: 80px;
 	text-align: center;
 	line-height: 40px;
-	margin-top: 20px;
-	opacity: 0.6;
-	cursor: pointer;
+	margin-top: 20px;	
 }
 .menuitemlogin {
 	float: right;
@@ -61,11 +59,26 @@ body {
 }
 .menuitemwelcome {
 	width: 400px;
+	text-align:right;
+}
+.menuitemwelcome > i,
+.menuitemwelcome > label {
+	height:40px;
+	line-height:40px;
+	float:right;
+	margin: 0 10px;
+}
+#btnClose{
+	height:40px;
+	line-height:40px;
+	float:right;
+	cursor: pointer;
+	opacity:0.6;
+}
+#btnClose:hover{
+	opacity:1;
 }
 
-.menuitem:hover, .menuitemindex:hover {
-	opacity: 1;
-}
 .mainHeader {
 	float: left;
 	width: inherit;
