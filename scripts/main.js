@@ -38,11 +38,9 @@ function CargaFunciones(o){
 			cargaVehiculos();
 			break;
 		case "subasta":
-			
 			CargaInfoSubasta();
 			break;
 		case "MisAutos":
-			
 			cargaFuncionesMisAutos();
 			break;			
 		case "dashboard":
@@ -75,12 +73,12 @@ function CargaContenidoMain() {
 //	$(".divMisSubastas").hide();
 
 
-
+	
 	$.get("views/main/missubastas.html?rand="+Math.floor((Math.random() * 10000000) + 1), function(data){
 	
 			var misubastahtml = data;
 			postrequest("subastas/xusuario", {"idusuario":sessionStorage.claveapi },function(response){
-
+				console.log(JSON.stringify(response));
 				if(data.length > 0 )
 					 $(".divMisSubastas").hide().show();
 
@@ -94,6 +92,7 @@ function CargaContenidoMain() {
 						subasta = subasta.replace("#TIPOSUBASTAS#", response[o].tipoSubasta); 
 						subasta = subasta.replace("#ESTATUSSUBASTA#", response[o].estatus); 
 						subasta = subasta.replace("#SUBASTAID#", response[o].idSubasta); 
+						subasta = subasta.replace("#FECHA_SUBASTA#", new Date(response[o].idSubasta)); 
 						$("#ulMisSubastas").append(subasta);		
 					}
 				}
@@ -101,8 +100,6 @@ function CargaContenidoMain() {
 				
 
 			});
-
-		
 	});
 	
 
