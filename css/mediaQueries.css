@@ -1,4 +1,4 @@
-@media only screen and (max-width: 1024px) {
+@media only screen and (max-width: 1023px) {
 	#divListaContenido {
 	    float: left;
 	    max-width: 1024px;
@@ -13,7 +13,7 @@
 		width: 100%;
 	}
 	.divSeguridad, .divVideoTips {
-		width: 100%;
+		width: 100%;	
 		margin: 0;
 	}
 	.divSeccion {
@@ -29,9 +29,13 @@
 	.localizaGasolineras iframe {
 		width: 100%;
 	}
+	#botoneraContainer {
+	    width: 100%;
+	    margin: 0;
+	}
 }
 
-@media only screen and (max-width: 768px) {
+@media only screen and (max-width: 767px) {
 	.divSeccion > h2 {
 		font-size: 1.6rem;
 		height: 25px;
@@ -44,13 +48,17 @@
 		width: 25px;
 		margin-top: 0;
 	}
-	.logoFooter, .logoHeader {
+	.logoFooter,
+	.logoHeader {
 		background-image: url(../images/logoCar.svg);
 		background-size: contain;
 		background-position: center left;
 		padding-left: 20px;
 		height: 40px;
 		margin-top: 10px;
+	}
+	.logoHeader {
+		width:110px;
 	}
 	.calendarioVerificacion > div > div {
 		font-size: 12px;
@@ -74,6 +82,10 @@
 		height:60px;
 		width: 100%;
 		background-size:contain;
+		margin: 10px 0 20px;
+	}
+	.floatingWindow > div,
+	.floatingWindow > button{
 		top:30px;
 	}
 	.floatingWindow > .divRegistro{
@@ -84,7 +96,11 @@
 	.floatingWindow > .switch {
 		top:50px;
 	}
-}
-@media only screen and (max-width: 468px) {
 	
+}
+@media only screen and (max-width: 600px) {
+	/*---------- ADMINISTRADOR DE SUBASTAS  ---------*/
+	#divAdminSubastas #divListaContenido > .divRenglonTabla > .card > .card-content > label{
+		width:100%;
+	}
 }

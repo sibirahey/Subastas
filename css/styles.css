@@ -27,13 +27,13 @@ body {
 }
 .logoHeader {
 	float: left;
-	width: calc(100% - 400px);
+	width: 280px;
 	height: 60px;
 	cursor: pointer;
 	background-image: url(../images/logoHeader.svg);
 	background-repeat: no-repeat;
 	background-size: contain;
-	background-position: 60px center;
+	background-position: center center;
 }
 .menuitem {
 	float: left;
@@ -46,6 +46,13 @@ body {
 }
 .menuitemlogin {
 	float: right;
+	cursor:pointer;
+	opacity:0.6;
+	-webkit-transition: opacity 0.5s ease-in-out; /* Safari */
+    transition: opacity 0.5s ease-in-out;
+}
+.menuitemlogin:hover {
+	opacity:1;
 }
 .menuitemlogin[name="registro"] {
 	margin-right: 10px;
@@ -58,7 +65,8 @@ body {
 	background-image: url('images/logoFacebook.svg');
 }
 .menuitemwelcome {
-	width: 400px;
+	width: auto;
+	float:right;
 	text-align:right;
 }
 .menuitemwelcome > i,
@@ -463,7 +471,8 @@ body {
 	line-height: 30px;
 	margin-right: 20px;
 }
-#divListaBotonera > .divItemBotonera select, #divListaBotonera > .divItemBotonera input[type="text"] {
+#divListaBotonera > .divItemBotonera select, 
+#divListaBotonera > .divItemBotonera input[type="text"] {
 	border: none;
 	border-bottom: 1px solid #8C8C8C;
 	-webkit-transition: border 500ms ease-out;
@@ -471,7 +480,8 @@ body {
 	-o-transition: border-bottom 500ms ease-out;
 	transition: border-bottom 500ms ease-out;
 }
-#divListaBotonera > .divItemBotonera select:focus, #divListaBotonera > .divItemBotonera input[type="text"]:focus {
+#divListaBotonera > .divItemBotonera select:focus, 
+#divListaBotonera > .divItemBotonera input[type="text"]:focus {
 	border-bottom: 1px solid #468CF0;
 }
 /*#btnFiltrar {
@@ -528,10 +538,11 @@ label[for="placa"] {
 	line-height: 40px;
 }
 .divLogin > .floatingWindow > div > input, .divRegistro > input {
-	height: 40px;
-	text-indent: 10px;
+	/*height: 40px;
+	text-indent: 10px;*/
 	font-size: 1.2em;
 	text-indent: 10px;
+	margin-top:10px;
 }
 #divPreferencias {
 	width: 90%;
@@ -1403,6 +1414,7 @@ div:not(:first-child) > div > img {
 	box-shadow: 0 0 6px #000000;
 	border-radius: 6px;
 }
+
 .floatingWindow > input, .floatingWindow > button, .floatingWindow > a {
 	height: 40px;
 	width: 80%;
@@ -1436,7 +1448,8 @@ div:not(:first-child) > div > img {
 	background-image: url('../images/logoCar.svg');
 	height: 100px;
 }
-.logoLogin, .logoCar {
+.logoLogin,
+.logoCar {
 	float: left;
 	width: 420px;
 	background-position: center center;
@@ -1444,15 +1457,8 @@ div:not(:first-child) > div > img {
 	position: relative;
 	text-shadow: 0 0 2px #000000;
 	filter: drop-shadow(0 0 4px rgba(0,0,0,0.75));
-	top: -75px;
+	top: -50px;
 }
-
-/*.divRegistro label {
- color: #3C4146;
- opacity: 0.6;
- font-size: 1.2em;
- font-weight: 300;
- }*/
 
 /*--------- ENDS LOGIN ---------*/
 /*---------- MAIN--------*/
@@ -2153,13 +2159,13 @@ button[name="contactoEnviar"] {
 	height: 95px;
 }
 #divListaBotonera {
+	float:none;
 	background-color: #ffffff;
 	border-radius: 4px;
 	border: 1px solid #D2D2D2;
 	padding: 6px;
-	width: 100%;
-	float: right;
-	margin: 20px 0 0 0;
+	max-width: 1024px;
+	margin: 20px auto 0;
 }
 .divBotonera > label {
 	line-height: 32px;

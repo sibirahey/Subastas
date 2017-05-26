@@ -1,4 +1,4 @@
-<div id="botoneraContainer" class="row">
+<!-- <div id="botoneraContainer" class="row">
 
 	<div id="divListaBotonera" class="valign-wrapper">
 		<div class="divItemBotonera col s2">
@@ -31,7 +31,38 @@
 
 	</div>
 
+</div> -->
+
+<div id="divListaBotonera" class="row">
+
+	<div class="divItemBotonera col s12 m2">
+		<a id="btnAgregarSubasta" class="btn waves-effect waves-light cyan white-text" titlee="Agregar Subasta"><i class="material-icons">add</i></a>
+	</div>
+
+	<div class="input-field col s12 m4">
+		<select id="cmbEmpresasFiltro" name="cmbEmpresasFiltro"></select>
+		<label for="cmbEmpresasFiltro" >Empresas</label>
+	</div>
+
+	<div class="input-field col s12 m4">
+		<select>
+			<option value="-1" disabled selected> == Todas ==</option>
+			<option value="-1"> == Todas ==</option>
+			<option value="0">No publicadas</option>
+			<option value="1">Publicadas</option>
+		</select>
+		<label>Estatus de publicación:</label>
+	</div>
+
+	<div class="divItemBotonera col s12 m2">
+
+		<a id="btnFiltrar" class="waves-effect waves-light btn"><i class="material-icons left">search</i>Filtrar</a>
+	</div>
+
 </div>
+
+
+
 <div id="divAdminSubastas" class="row">
 
 	<!-- Modal Structure -->
