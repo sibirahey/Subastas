@@ -3,6 +3,7 @@
 	font-weight: 300;
 	font-style: normal;
 	outline: none;
+	
 }
 
 nav div a, ul li {
@@ -453,7 +454,7 @@ body {
 	border-right: 1px solid #cccccc;
 	padding: 10px;
 }
-.divRegistro, .divLogin {
+.divLogin {
 	float: left;
 	width: 100%;
 }
@@ -467,6 +468,16 @@ body {
  #divListaBotonera > .divItemBotonera:nth-child(3) {
  float: right;
  }*/
+.incrementoSymbol:before{
+	content: "$";
+    position: absolute;
+    height: 45px;
+    width: 8.33%;
+    display: block;
+    text-align: center;
+    line-height: 45px;
+    font-weight: bold;
+}
 #divListaBotonera > .divItemBotonera > label {
 	line-height: 30px;
 	margin-right: 20px;
@@ -550,6 +561,7 @@ label[for="placa"] {
 	line-height: 50px;
 }
 #btnLogin {
+	float:left;
 	height: 50px;
 	width: 90%;
 	margin: 20px 5% 0;
@@ -2186,9 +2198,6 @@ button[name="contactoEnviar"] {
 	border-bottom: 1px solid #e0e0e0;
 	margin-bottom: 10px;
 }
-.divRenglonTabla {
-	float: left;
-}
 .divRenglonTabla > div {
 	width: 100%;
 	padding: 6px 0;
@@ -2230,6 +2239,24 @@ button[name="contactoEnviar"] {
 	float: left;
 	text-align: left;
 }
+#divListaContenido .fixed-action-btn{
+	right:5px;
+}
+#divListaContenido .fixed-action-btn.horizontal ul li {
+    display: inline-block;
+    margin: 15px 3px 0 0;
+}
+#divListaContenido .fixed-action-btn.horizontal ul li a{ 
+    width: 25px;
+    height: 25px;
+    line-height: 25px;
+}
+#divListaContenido .fixed-action-btn.horizontal ul li a i{
+    line-height: 25px;
+    font-size: 1rem;
+}
+
+
 /*---------- ENDS ADMINISTRADOR DE SUBASTAS---------*/
 /*---------  SWITCH ---------*/
 
@@ -2404,7 +2431,6 @@ input:checked + .slider:before {
 }
 
 /*--------- ENDS VENTA AUTOS --------*/
-
 /*---------MIS SUBASTAS --------*/
 
 .divMisSubastas .card.horizontal {
@@ -2424,3 +2450,19 @@ input:checked + .slider:before {
 }
 .ui-dialog{
   z-index:1050;}
+/*--------- ALTA AUTOS --------*/
+div[name="altaautos"] > .row{
+	float:none;
+	width:100%;
+	max-width:1024px;
+	margin: 0 auto;
+}
+/*--------- ENDS ALTA AUTOS --------*/
+/*--------- ADM HOME --------*/
+#divAdminHome{
+	float:none;
+	width:100%;
+	max-width:1024px;
+	margin: 0 auto;
+}
+/*--------- ENDS ADM HOME --------*/

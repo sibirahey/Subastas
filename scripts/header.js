@@ -30,7 +30,7 @@ $( document ).ready(function() {
   			$("#divMenuPrincipal > ul").append('<li><a class="menuitemindex" name="MisAutos">MIS AUTOS</a></li>');
 	  		if (esAdmin()){
 	  			$(".mainHeader").append('');
-				$("#divMenuPrincipal > ul").append('<li><a class="dropdown-button" href="#!" data-activates="dropdownAdmn">Dropdown<i class="material-icons right">arrow_drop_down</i></a></li>');
+				$("#divMenuPrincipal > ul").append('<li><a class="dropdown-button" href="#!" data-activates="dropdownAdmn">ADMINISTRAR<i class="material-icons right">arrow_drop_down</i></a></li>');
 			} 
 
   		}else{

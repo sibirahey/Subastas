@@ -56,7 +56,7 @@
 
 	<div class="divItemBotonera col s12 m2">
 
-		<a id="btnFiltrar" class="waves-effect waves-light btn"><i class="material-icons left">search</i>Filtrar</a>
+		<a id="btnFiltrar" class="waves-effect"><i class="material-icons">search</i>Filtrar</a>
 	</div>
 
 </div>
@@ -70,46 +70,39 @@
 		<div class="modal-content">
 
 			<div class="row">
-				<div class="col s12">
-					Lote:
-					<div class="input-field inline">
-						<input id="lote" type="text" class="validate">
-						<label for="lote" data-error="wrong" data-success="right">#Lote</label>
-					</div>
+				<div class="input-field col s12">
+					<!-- <input id="lote" type="text" class="validate"> -->
+					<input id="txtNombreSubasta" type="text" class="validate">
+					<label for="txtNombreSubasta">#Lote</label>
 				</div>
-				<div class="col s12">
-					Fecha Inicio:
-					<div class="input-field inline">
-						<input type="text" id="txtFechaInicio" name="txtFechaInicio" />
-						<label for="txtFechaInicio" >Fecha inicio:</label>
-					</div>
+				<div class="input-field col s12">
+					<input type="text" id="txtFechaInicio" name="txtFechaInicio" />
+					<label for="txtFechaInicio" >Fecha inicio:</label>
 				</div>
-				<div class="col s12">
-					Fecha Fin:
-					<div class="input-field inline">
-						<input type="text" id="txtFechaFin" name="txtFechaFin" />
-						<label for="txtFechaInicio" >Fecha inicio:</label>
-					</div>
+				<div class="input-field col s12">
+					<input type="text" id="txtFechaFin" name="txtFechaFin" />
+					<label for="txtFechaFin" >Fecha Fin:</label>
 				</div>
 				<div id="divTipoSubastas" class="col s12">
 					<label>Tipo de Subasta:</label>
 				</div>
-				<div class="col s12">
-					Incremento: <b>$</b>
-					<div class="input-field inline">
-						<input type="number" id="txtIncremento" name="txtIncremento" />
-					</div>
+				
+				<div class="input-field col s12 incrementoSymbol">
+					<input class="col s6 offset-s1" type="number" id="txtIncremento" name="txtIncremento" min="0.01" step="0.01" />
+					<label for="txtIncremento">Incremento</label>
 				</div>
+				
 				<div class="col s12">
-					Empresas:
-					<div class="input-field inline">
+					<!-- Empresas: -->
+					<div class="input-field col s8">
 						<select id="cmbEmpresas" name="cmbEmpresas" ></select>
+						<label for="cmbEmpresas">Empresas</label>
 					</div>
-					<a id="btnNuevaEmpresa" class="btn-floating btn-large waves-effect waves-light blue"><i class="material-icons">add</i></a>
-					<a id="btnAgregaEmpresa" class="btn-floating btn-large waves-effect waves-light teal"><i class="material-icons">done</i></a>
+					<a id="btnNuevaEmpresa" class="btn waves-effect waves-light blue"><i class="material-icons">add</i></a>
+					<a id="btnAgregaEmpresa" class="btn waves-effect waves-light teal"><i class="material-icons">done</i></a>
 				</div>
 				<div class="col s12">
-					<div class="divRegistro" id="lstEmpresa"></div>
+					<ul id="lstEmpresa"></ul>
 				</div>
 			</div>
 
@@ -155,11 +148,9 @@
 
 </div>
 
-<div id="divRegistroAutos" class="divContenido modal modal-fixed-footer">
-	<div class="modal-header">
-		<a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat right"><i class="material-icons">close</i></a>
-	</div>
+<div id="divRegistroAutos" class="divContenido modal">
 	<div  class="modal-content">
+		<a href="#!" class="btn-flat modal-action modal-close waves-effect waves-green right"><i class="material-icons">close</i></a>
 		Registro Autos
 		<div id="divListaAutos">
 

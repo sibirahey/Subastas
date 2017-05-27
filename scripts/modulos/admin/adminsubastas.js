@@ -15,7 +15,7 @@ function LimpiarSubasta() {
 
 function AgregaEmpresa(idEmpresa, nombreEmpresa) {
 
-	$("#lstEmpresa").append("<div attr-idx='" + idEmpresa + "' class='empresasSeleccionadas divRegistro'>" + nombreEmpresa + "</div>")
+	$("#lstEmpresa").append("<li attr-idx='" + idEmpresa + "' class='empresasSeleccionadas divRegistro'>" + nombreEmpresa + "</li>")
 }
 
 function CargaFuncionesAdminSubastas() {
@@ -180,7 +180,7 @@ function CargaTipoSubastas(estatus) {
 		"estatus" : "1"
 	}, function(data) {
 		for (i in data) {
-			$("#divTipoSubastas").append('<p class="divRegistro"><input name="tiposubastas" type="radio" id="tiposubastas' + data[i].idTipo + '" value="' + data[i].idTipo + '"/><label for="tiposubastas' + data[i].idTipo + '">' + data[i].tipoSubasta + '</label></p>');
+			$("#divTipoSubastas").append('<p><input name="tiposubastas" type="radio" id="tiposubastas' + data[i].idTipo + '" value="' + data[i].idTipo + '"/><label for="tiposubastas' + data[i].idTipo + '">' + data[i].tipoSubasta + '</label></p>');
 
 		}
 	});
@@ -198,17 +198,30 @@ function CargaSubastas(estatus, empresa) {
 		for (i in data) {
 
 			var div = '';
-			div += '	<div class="divRenglonTabla col s12 m4 l3">';
+			div += '	<div class="divRenglonTabla col s12 m6 l3">';
 			div += '		<div class="card">';
 			div += '            <span class="card-title">' + data[i].nombreSubasta + '</span>';
 			div += '            <div class="divider"></div>';
-			div += '            <div class="card-image">';
-			div += '                <a class="waves-effect btnEditarSubasta" attr-id="' + data[i].idSubasta + '" title="Editar Subasta"><i class="small material-icons">create</i></a>';
-			div += '                <a class="waves-effect btnAdministraAutos" attr-id="' + data[i].idSubasta + '" attr-nombresubasta="' + data[i].nombreSubasta + '" title="Administrar Autos"><i class="small material-icons">add</i></a>';
-			div += '                <a class="waves-effect btnAgregarUsuariosAutos" attr-id="' + data[i].idSubasta + '" attr-nombresubasta="' + data[i].nombreSubasta + '" title="Agregar Usuarios"><i class="small material-icons">group_add</i></a>';
-			div += '                <a class="waves-effect btnListaUsuarios" attr-id="' + data[i].idSubasta + '" attr-nombresubasta="' + data[i].nombreSubasta + '" title="Ver Usuarios"><i class="small material-icons">group</i></a>';
-			div += '                <a class="waves-effect btnVerAutos" attr-id="' + data[i].idSubasta + '" attr-nombresubasta="' + data[i].nombreSubasta + '" title="Ver Autos"><i class="small material-icons">drive_eta</i></a>';
-			div += '            </div>';
+			// div += '            <div class="card-image">';
+			// div += '                <a class="waves-effect btnEditarSubasta" attr-id="' + data[i].idSubasta + '" title="Editar Subasta"><i class="small material-icons">create</i></a>';
+			// div += '                <a class="waves-effect btnAdministraAutos" attr-id="' + data[i].idSubasta + '" attr-nombresubasta="' + data[i].nombreSubasta + '" title="Administrar Autos"><i class="small material-icons">add</i></a>';
+			// div += '                <a class="waves-effect btnAgregarUsuariosAutos" attr-id="' + data[i].idSubasta + '" attr-nombresubasta="' + data[i].nombreSubasta + '" title="Agregar Usuarios"><i class="small material-icons">group_add</i></a>';
+			// div += '                <a class="waves-effect btnListaUsuarios" attr-id="' + data[i].idSubasta + '" attr-nombresubasta="' + data[i].nombreSubasta + '" title="Ver Usuarios"><i class="small material-icons">group</i></a>';
+			// div += '                <a class="waves-effect btnVerAutos" attr-id="' + data[i].idSubasta + '" attr-nombresubasta="' + data[i].nombreSubasta + '" title="Ver Autos"><i class="small material-icons">drive_eta</i></a>';
+			// div += '            </div>';
+			//div += '			<div class="fixed-action-btn horizontal" style="position: relative; display: inline-block; float:right;">';
+			div += '			<div class="fixed-action-btn toolbar" style="position: relative; display: inline-block; float:right;">';
+			div += '				<a class="btn-floating">';
+			div += '					<i class="large material-icons">menu</i>';
+			div += '				</a>';
+			div += '				<ul>';
+			div += '					<li><a class="btn-floating btnEditarSubasta" attr-id="' + data[i].idSubasta + '" title="Editar Subasta"><i class="material-icons">create</i></a></li>';
+			div += '					<li><a class="btn-floating btnAdministraAutos" attr-id="' + data[i].idSubasta + '" attr-nombresubasta="' + data[i].nombreSubasta + '" title="Administrar Autos"><i class="material-icons">add</i></a></li>';
+			div += '					<li><a class="btn-floating btnAgregarUsuariosAutos" attr-id="' + data[i].idSubasta + '" attr-nombresubasta="' + data[i].nombreSubasta + '" title="Agregar Usuarios"><i class="material-icons">group_add</i></a></li>';
+			div += '					<li><a class="btn-floating btnListaUsuarios" attr-id="' + data[i].idSubasta + '" attr-nombresubasta="' + data[i].nombreSubasta + '" title="Ver Usuarios"><i class="material-icons">group</i></a></li>';
+			div += '					<li><a class="btn-floating btnVerAutos" attr-id="' + data[i].idSubasta + '" attr-nombresubasta="' + data[i].nombreSubasta + '" title="Ver Autos"><i class="material-icons">drive_eta</i></a></li>';
+			div += '				</ul>';
+			div += '			</div>';
 			div += '			<div class="card-content">';
 			div += '				<div><label>Tipo de subasta: </label>' + data[i].tipoSubasta + '</div>';
 			div += '				<div><label>Vigencia: </label>' + data[i].fechaInicio + ' - ' + data[i].fechaFin + '</div>';
@@ -266,6 +279,7 @@ function CargaSubastas(estatus, empresa) {
 		});
 
 		$(".btnListaUsuarios").click(function(){
+			debugger;
 			var nombreSubasta = $(this).attr("attr-nombresubasta");
 			var idSubasta = $(this).attr("attr-id");
 			postrequest("subastas/participantes", {"id_subasta":idSubasta}, function(data){
@@ -281,10 +295,12 @@ function CargaSubastas(estatus, empresa) {
 				$tabla = "<table><tr><td>Nombre</td><td>Correo</td></tr>"
 				for(var item in data){
 					$tabla += "<tr><td>"+ data[item].nombre + " "+data[item].appaterno+" "+data[item].apmaterno + "</td><td>"+data[item].correo +"</td></tr>";
+					console.log(data);
 				}
 				$tabla += "</table>";
 				
 				$("#divListaUsuariosTbl").html($tabla);
+				
 				$("#divListaUsuariosModal").modal("open");
 				
 			});
@@ -336,7 +352,6 @@ function CargaSubastas(estatus, empresa) {
 				"empresa" : -1,
 				"subastaId" : idSubasta
 			}, function(data) {
-
 				$("#txtNombreSubasta").val(data[0].nombreSubasta);
 				var parts = data[0].fechaInicio.split('-');
 				var parts2 = data[0].fechaFin.split('-');
@@ -353,6 +368,7 @@ function CargaSubastas(estatus, empresa) {
 					AgregaEmpresa(empresasIds[i], empresas[i]);
 
 				}
+				Materialize.updateTextFields();
 			});
 
 			$(".divHeaderContenido").modal("open");
