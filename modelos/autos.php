@@ -43,10 +43,14 @@ class autos
       
         if ($peticion[0] == 'guardar') {
             return self::registrarOut();
-        }
+        }else if($peticion[0] == 'info')
+            return self::info($_POST['autoid']);
         else if($peticion[0] == 'subasta'){
             return self::listarPorSubastas();
-        }else if($peticion[0] == 'busqueda'){
+        }else if($peticion[0] == 'actualiza') {
+            return self::actualiza($_POST);
+        }
+        else if($peticion[0] == 'busqueda'){
 
             return self::busqueda();
         }
@@ -55,7 +59,6 @@ class autos
         }
     }   
 
-    
 
     private function listarPorSubastas()
     {
@@ -89,6 +92,43 @@ class autos
             return null;
         
    }
+
+   private function info($idauto){
+
+    try{
+
+          $comando =  " SELECT au.idAuto, au.enVenta, au.precio, au.marca as marcaid, marca.descripcion as marca, au.modelo as modeloid,  ".
+                " modelo.descripcion as modelo, au.color as colorid, color.descripcion as color, au.anio, au.km, au.km, au.transmision as transmisionid,  ".
+                " trans.descripcion as transmision, au.estado as estadoid, est.nombre as estado, au.ciudad as ciudadid, mun.nombre as ciudad,   ".
+                " au.descripcion, au.estatus, au.publicado, au.fechaCreacion,  ".
+                " (select idFoto from auto_fotos where idAuto = au.idAuto limit 1) as foto,  ".
+                "  (select GROUP_CONCAT(idFoto) from auto_fotos where idAuto = au.idAuto) AS fotos,  ".
+                "  (select GROUP_CONCAT(idFeature) from autos_catacteristicas where idAuto = au.idAuto) AS caracteristicasids,  ".
+                "  (select GROUP_CONCAT(feat.descripcion) from autos_catacteristicas ac, cat_features feat where  ac.idFeature = feat.id and ac.idAuto = 20 ) as caracteristicas ".
+                " FROM autos as au, cat_marca as marca, cat_modelo as modelo, cat_colores as color, cat_transmision as trans, estados as est, municipios as mun  ".
+                " WHERE au.marca = marca.id   ".
+                " and au.modelo = modelo.id   ".
+                " and au.color = color.id   ".
+                " and au.transmision = trans.id   ".
+                " and au.estado = est.id  ".
+                " and au.ciudad = mun.id  ".
+                " and au.idAuto =   ".$idauto;
+
+
+
+        $sentencia = ConexionBD::obtenerInstancia()->obtenerBD()->prepare($comando);
+
+        if ($sentencia->execute())
+            return $sentencia->fetch(PDO::FETCH_ASSOC);
+        else
+            return null;
+    }catch(Excepcion $ex){
+        return null;
+    }
+  
+        
+                                   
+}
 
     private function busqueda(){
         
@@ -243,7 +283,7 @@ class autos
             $sentencia->bindParam(8, $auto["transmision"]);                          
             $sentencia->bindParam(9, $auto["estado"]);                          
             $sentencia->bindParam(10, $auto["ciudad"]);                          
-            $sentencia->bindParam(11, $auto["descripcion"]);     
+            $sentencia->bindParam(11, json_decode($auto["descripcion"]));     
             $sentencia->bindParam(12, $auto["estatus"]);                          
             $sentencia->bindParam(13, $auto["publicado"]);                          
 
@@ -276,6 +316,77 @@ class autos
         } catch (PDOException $e) {
 
             print_r($e);
+            throw new ExcepcionApi(self::ESTADO_URL_INCORRECTA, $e->getMessage(), 400);
+            
+        }
+
+    }
+
+     private function actualiza($auto){
+        try {
+
+            $pdo = ConexionBD::obtenerInstancia()->obtenerBD();
+
+            // Sentencia INSERT
+            $comando = "UPDATE " . self::NOMBRE_TABLA . " SET " .
+                self::ENVENTA . " = ?," .
+                self::PRECIO ." = ?," .
+                self::MARCA . " = ?," .
+                self::MODELO . " = ?,".
+                self::COLOR . " = ?,".
+                self::ANIO . " = ?,".
+                self::KM . "= ?,".
+                self::TRANSMISION . " = ?,".
+                self::ESTADO . " = ?,".
+                self::CIUDAD . " = ?,".
+                self::DESCRIPCION . " = ?,".
+                self::ESTATUS . " = ?,".
+                self::PUBLICADO ." = ? " .
+                " WHERE idAuto = ? ";
+            
+            
+            $desc = json_decode($auto["descripcion"]);
+                    
+          
+            $query = $pdo->prepare($comando);
+            $query->bindParam(1, $auto["enVenta"]);
+            $query->bindParam(2, $auto["precio"]);
+            $query->bindParam(3, $auto["marca"]);
+            $query->bindParam(4, $auto["modelo"]);
+            $query->bindParam(5, $auto["color"]);
+            $query->bindParam(6, $auto["anio"]);
+            $query->bindParam(7, $auto["km"]);                          
+            $query->bindParam(8, $auto["transmision"]);                          
+            $query->bindParam(9, $auto["estado"]);                          
+            $query->bindParam(10, $auto["ciudad"]);                          
+            $query->bindParam(11, $desc);     
+            $query->bindParam(12, $auto["estatus"]);                          
+            $query->bindParam(13, $auto["publicado"]);    
+            $query->bindParam(14, $auto["idAuto"]);                          
+
+          
+            if ($query->execute()) {
+                $idAuto = $auto["idAuto"];
+
+                if(count($auto["features"]) > 0){
+                    autosfeatures::elimina($idAuto);
+                    autosfeatures::registrar($auto["features"], $idAuto);    
+                } 
+
+                if(count($auto["fotos"]) > 0){
+                    autosfotos::elemina($idAuto);
+                    autosfotos::registrar($auto["fotos"], $idAuto);
+                }
+                return true; 
+                
+
+            } else {
+                return false;
+            }
+            
+        } catch (PDOException $e) {
+
+            
             throw new ExcepcionApi(self::ESTADO_URL_INCORRECTA, $e->getMessage(), 400);
             
         }

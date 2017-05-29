@@ -3,6 +3,7 @@
 <html lang="en">
 	<head>
 		<meta charset="utf-8">
+		<title>::Escudería::</title>
 		<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 		<link href="https://fonts.googleapis.com/css?family=Oswald:300,400,700&amp;subset=latin-ext" rel="stylesheet"/>
         <link href="https://fonts.googleapis.com/css?family=Open+Sans+Condensed:300,700" rel="stylesheet"/>
@@ -36,6 +37,7 @@
 		<script type="text/javascript" src="scripts/Venta-Autos.js<?php echo "?" . rand(0, 9999999); ?>"></script>
 		<script type="text/javascript" src="scripts/adminhome.js<?php echo "?" . rand(0, 9999999); ?>"></script>
 		<script type="text/javascript" src="scripts/MisAutos.js<?php echo "?" . rand(0, 9999999); ?>"></script>
+		<script type="text/javascript" src="scripts/resultadossubastas.js<?php echo "?" . rand(0, 9999999); ?>"></script>
 		
 	</head>
 	<body>

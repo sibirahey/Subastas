@@ -259,7 +259,7 @@ class usuarios
 
     public function rememberme(){
         $claveapi = $_POST["claveapi"];
-        $comando = "SELECT idUsuario, nombre, appaterno, apmaterno, correo, verificado, contrasena, publico, es_admin, claveApi from usuario where ".self::CLAVE_API." = '".$claveapi."' and curdate() < vigencia ";
+        $comando = "SELECT idUsuario, nombre, appaterno, apmaterno, correo, verificado, contrasena, publico, es_admin, claveApi from usuario where ".self::CLAVE_API." = '".$claveapi."' and curdate() < vigencia+1 ";
         $sentencia = ConexionBD::obtenerInstancia()->obtenerBD()->prepare($comando);
         $sentencia->bindParam(1, $claveapi);
 
@@ -309,7 +309,7 @@ class usuarios
             
             if($valido == 1){
                 $claveApi = self::generarClaveApi();
-                $comando = "update ".self::NOMBRE_TABLA." set claveApi = '".$claveApi."' where correo = '".  $mail."'";
+                $comando = "update ".self::NOMBRE_TABLA." set claveApi = '".$claveApi."', vigencia = DATE_ADD(NOW(), INTERVAL 8 HOUR) where correo = '".  $mail."'";
                 $sentencia = $pdo->prepare($comando);
                 $sentencia->execute();
 

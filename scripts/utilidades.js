@@ -14,6 +14,13 @@ var n = this,
 
  }
 
+function ValidaSession(){
+	
+	if(getCookie("escuderia-rememberme") == "" && sessionStorage.claveapi == undefined){
+		window.location = siteurl;
+	}
+}
+
 function cargaHTML(contendor, url, name, callback) {
 
 	var rand = Math.floor((Math.random() * 10000000) + 1);
@@ -248,7 +255,7 @@ function cargaAutosPorSubasta(subastaID, controlid, tiposubasta) {
 	postrequest("autos/subasta", {
 		"idsubasta" : subastaID
 	}, function(data) {
-
+		$("#divDetalleAuto").hide();
 		for (var val in data) {
 			$(controlid).append(regresaRenglonVenta(data[val], subastaID));
 		}
@@ -268,7 +275,10 @@ function regresaRenglonVenta(item, subastaID) {
 	var renglon = '<div class="searchItem">';
 	renglon += '	<div class="searchItemHead">';
 	renglon += '		<label>' + item.marca + ' - ' + item.modelo + '</label>';
-	renglon += '		<i class="fa fa-arrow-circle-right" attr-id="' + item.idAuto + '" onclick="VerDetalleAuto(this);"></i>';
+		renglon += '		<div class="waves-effect waves-light"><i class="material-icons" attr-id="' + item.idAuto + '" onclick="VerDetalleAuto(this);">feedback</i></div>';
+	if(sessionStorage["es_admin"] == 1){
+		renglon += '		<div class="waves-effect waves-light"><i class="material-icons" attr-id="' + item.idAuto + '" attr-subastaid="'+subastaID+'" onclick="EditarAuto(this);">mode_edit</i></div>';
+	}
 	renglon += '	</div>';
 	renglon += '	<div class="searchItemImg"><img attr-id="' + item.idAuto + '" width="100px" onclick="VerDetalleAuto(this);" src="' + siteurl + 'uploads/' + item.foto + '" onerror="imgError(this)"; /></div>';
 	renglon += '	<div class="searchItemBody">';
@@ -307,10 +317,207 @@ function regresaRenglonVenta(item, subastaID) {
 
 }
 
+function EditarAuto(o){
+
+	 var subastaid = $(o).attr("attr-subastaid");
+	 var autoid = $(o).attr("attr-id");
+
+	 $("#divListaAutos").load("views/main/admin/altaautos.html?rand=" + Math.random(), function() {
+
+	 	$("#btnGuardaAuto").hide();
+	 	$("#bntActualizaAuto").show();
+	 	debugger;
+		$("#divRegistroAutos").show();
+		$("#divSubastaNombre").html("");
+		$("#divSubastaNombre").show();
+		$("#divSubastaNombre").css("display", "");
+		$("#btnGuardaAuto").attr("attr-nombresubasta", "");
+		$("#btnGuardaAuto").attr("attr-subastaid", subastaid);
+		$("#btnGuardaAuto").attr("attr-autoid", autoid);
+		CargaFuncionesRegistroAuto();
+
+		postrequest("autos/info",{ "autoid":autoid}, function(data){
+			$("#cbMarcaAuto").material_select("destroy");
+			$("#cbMarcaAuto").val(data.marcaid);
+			$("#cbMarcaAuto").material_select();
+			$("#cbMarcaAuto").change();
+			
+
+			$("#cbColorAuto").material_select("destroy");
+			$("#cbColorAuto").val(data.colorid);
+			$("#cbColorAuto").material_select();
+
+			$("#cbAnioAuto").material_select("destroy");
+			$("#cbAnioAuto").val(data.anio);
+			$("#cbAnioAuto").material_select();
+
+			
+			$("#cbKMAuto").val(data.km);
+			$("#precioAuto").val(data.precio);
+
+			$("#cbTipoTransmisionAuto").material_select("destroy");
+			$("#cbTipoTransmisionAuto").val(data.transmisionid);
+			$("#cbTipoTransmisionAuto").material_select();
+
+			$("#cbEstadoAuto").material_select("destroy");
+			$("#cbEstadoAuto").val(data.estadoid);
+			$("#cbEstadoAuto").material_select();
+			$("#cbEstadoAuto").change();
+
+		
+
+			var features = data.caracteristicasids.split(",");
+			for(var f in features){
+
+				$("#cbFeaturesAutos").material_select("destroy");
+				$("#cbFeaturesAutos").val(features[f]);
+				$("#cbFeaturesAutos").material_select();
+				$("#btnAddFeature").click();
+					
+			}
+
+			$("#txtaDescripcionAuto").val(data.descripcion);
+
+			$("#btnGuardaAuto").attr("attr-id", autoid);
+			$("#btnGuardaAuto").attr("attr-subastaid",subastaid);
+
+			$("#btnGuardaAuto").click = null;
+
+			$("#bntActualizaAuto").click(function (){
+		
+				GuardaDetalleAuto("actualiza");
+			});
+
+
+			$("#cbModeloAuto").material_select("destroy");
+			$("#cbModeloAuto").val(data.modeloid);
+			$("#cbModeloAuto").material_select();
+
+			$("#cbCiudadAuto").material_select("destroy");
+			$("#cbCiudadAuto").val(data.ciudadid);
+			$("#cbCiudadAuto").material_select();
+
+
+		});
+
+
+	});
+}
+
+
+function GuardaDetalleAuto(opc){
+
+	debugger;
+		oAuto = new Autos();
+		oAuto.idAuto = $("#btnGuardaAuto").attr("attr-idsubasta");
+		if(parseInt($("#btnGuardaAuto").attr("attr-subastaid")) > 0){
+			oAuto.enVenta  = 0;
+			oAuto.idSubasta = $("#btnGuardaAuto").attr("attr-subastaid");
+		}else{
+			oAuto.enVenta = 1;
+			oAuto.idSubasta = 0;
+
+		}
+		oAuto.precio = $("#precioAuto").val();
+		oAuto.marca = $("#cbMarcaAuto").val();
+		oAuto.modelo = $("#cbModeloAuto").val();
+		oAuto.color = $("#cbColorAuto").val();
+		oAuto.anio = $("#cbAnioAuto").val();
+		oAuto.km = $("#cbKMAuto").val();
+		oAuto.transmision = $("#cbTipoTransmisionAuto").val();
+		oAuto.estado = $("#cbEstadoAuto").val();
+		oAuto.ciudad = $("#cbCiudadAuto").val();
+		oAuto.descripcion = JSON.stringify($("#txtaDescripcionAuto").val());
+		oAuto.estatus = 1;
+		oAuto.publicado = 1;
+		oAuto.features = [];
+		oAuto.fotos = [];
+
+		if(opc =="actualiza"){
+
+			oAuto.idAuto = Number($("#btnGuardaAuto").attr("attr-autoid"));
+		}
+		
+
+		$.each( $(".feature"), function( key, value ) {
+			  oAuto.features.push( $(value).attr("attr-featureid"));
+		});
+
+		$.each( $(".fotosAuto"), function( key, value ) {
+			  oAuto.fotos.push( $(value).attr("attr-id"));
+		});
+		
+		
+		if (validaCamposAltaAutos(oAuto)){
+			
+			postrequest("autos/"+opc, oAuto, function(data){
+
+				
+				if(data > 0){
+					alert("Los datos se guardaron correctamente");
+					//$("#divRegistroAutos").dialog("close"); 
+					
+				}else{
+					alert("Ocurrió un error al guardar");
+
+				}
+			}, function(data){
+
+				alert("Ocurrió un error al guardar los datos")
+			});
+
+		}
+
+}
+
 function VerDetalleAuto(o) {
+	var subastaid = $(o).attr("attr-subastaid");
+	var autoid = $(o).attr("attr-id");
 
-	window.location = "?accion=detalleauto&id=" + $(o).attr("attr-id");
+	postrequest("autos/info",{ "autoid":autoid}, function(data){
 
+		var infoAuto = data;
+		cargaHTML("#divDetalleAuto", "views/interna2.html", "Detalle Auto",function(){
+			debugger;
+			$("#divDetalleAuto").show();
+			$("#divListaAutos").hide();
+
+			$("#imgPrincipal").attr("src", siteurl+"uploads/"+infoAuto.foto);
+			var fotos = infoAuto.fotos.split(",");
+			for(i in fotos){
+
+				$("#imgSnapshots").append('<div><img alt="Imagen no disponible" attr-idx="1" src="'+ siteurl+"uploads/"+fotos[i]+ '" onclick="CambiaFotoPrincipal(this);"/></div>');
+			}
+			$("#detalleTitulo").html(infoAuto.modelo +" " + infoAuto.anio);
+			$("#detalleIdAuto").html(infoAuto.idAuto);
+			$("#detalleMarca").html(infoAuto.marca);
+			$("#detalleModelo").html(infoAuto.modelo);
+			$("#detalleKM").html(Number(infoAuto.km).formatMoney());
+			$("#detalleAnio").html(infoAuto.anio);
+			$("#detalleColor").html(infoAuto.color);
+			$("#detallePrecio").html("$"+Number(infoAuto.precio).formatMoney());
+			$("#detalleTransmision").html(infoAuto.transmision);
+			$("#detalleDescripcion").html(infoAuto.descripcion);
+			$("#detalleCaracteristicas").html(infoAuto.caracteristicas);
+			$("#detalleUbicacion").html(infoAuto.estado + " - " + infoAuto.ciudad);
+		
+		});
+	});
+	
+	
+
+}
+
+function CambiaFotoPrincipal(img){
+	
+	$("#imgPrincipal").attr("src", $(img).attr("src"));
+
+}
+function CierraDetalle(){
+
+
+				$("#divDetalleAuto").hide();				
+				$("#divListaAutos").show();
 }
 
 function ObtieneSubastasPorUsuario() {
@@ -440,19 +647,40 @@ function CargaInfoSubasta(){
 				$("#divTipoSubasta").html(data[0].tipoSubasta);
 				$("#divIncremento").attr("attr-incremento", data[0].incremento); 
 				$("#divIncremento").html($("#divIncremento").html().replace("#INCREMENTO#", Number(data[0].incremento).formatMoney()));
+				$("#divOfertasXUsuario").html($("#divOfertasXUsuario").html().replace("#TOTALOFERTAS#", Number(data[0].ofertas_x_usuarios)));
+				$("#divGanadores").html($("#divGanadores").html().replace("#AUTOSXUSUARIO#", Number(data[0].autos_x_usuario)));
+				
+				ConsultaOfertasXUsuarioSubasta(data[0].idSubasta);
+				
 				cargaAutosPorSubasta(vars["id"], "#divContenidoSubasta", data[0].idTipoSubasta);
-				// 	$();
-				// $(".divBtnPujar").show();
-				// if(data[0].idTipoSubasta == 1){
-				// 	$(".divVerOfertas").show()
-				//}
+				debugger;
+				var fechaFin = new Date(data[0].fechaFin);
+				fechaFin.setHours(42);
+				fechaFin.setMinutes(59);
+				fechaFin.setSeconds(59);
+
+				if(new Date() > fechaFin){
+					$("#btnPujar").hide();
+				}else{
+					$("#btnPujar").show();
+				}
+				
 
 			});
 
 	});
 
+}
 
-	
+function ConsultaOfertasXUsuarioSubasta(idSubasta){
+	var total = -1;
+	postrequest("pujas/ofertasxusuario", { "id_subasta" : idSubasta, "claveapi": sessionStorage.claveapi }, function(data) {
+		debugger;
+			total = data;
+			$("#numOfertasXusuario").html(total);
+			
+		});
+
 }
 
 function PujarAuto(idAuto, idSubasta, precio){
@@ -487,12 +715,10 @@ function GuardarOferta(o){
 		postrequest("pujas/ofertar", 
 			{"id_subasta" : $(o).attr("attr-subastaid") , "id_auto": $(o).attr("attr-idauto"), "claveapi":sessionStorage["claveapi"], "oferta":$("#txtOferta").val() }, 
 			function(data) {
-				if(data){
-					alert("Su oferta fue registrada con éxito");
-
-				}else{
-					alert("Ocurrió un error al registrar su oferta");
-				}
+				alert(data);
+				ConsultaOfertasXUsuarioSubasta($(o).attr("attr-subastaid") );
+			},function(){
+				alert("Ocurrió un error al registrar su oferta");
 			});
 	}else{
 

@@ -61,7 +61,28 @@ class autosfotos
 
     }    
 
-    
+    public static function elemina($idAuto){
+
+         try {
+
+            $pdo = ConexionBD::obtenerInstancia()->obtenerBD();
+            $comando = "delete from ". self::NOMBRE_TABLA . " WHERE ".self::ID_AUTO ." = ?";
+            $sentencia = $pdo->prepare($comando);
+            $sentencia->bindParam(1, $idAuto);
+            
+            if($sentencia->execute()){
+                return true;
+            }else{
+                return false;
+
+            }
+        }
+        catch(Exception $e){
+
+            print_r($e);
+            return false;
+        }
+    } 
 
     public static function registrar($fotos, $idAuto)
     {

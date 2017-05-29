@@ -64,14 +64,16 @@ function CargaFuncionesRegistroAuto(idSubasta){
 		                data: form_data,                         
 		                type: 'post',
 		                success: function(php_script_response){
+
+		                
 		                	if(php_script_response.substring(0, 2) == "ERR"){
 								alert(php_script_response);
 								
 
 		                	}else{
-
-		                		var filename = $('input[type=file]').val().replace(/C:\\fakepath\\/i, '');
-								$("#fotosSubidas").append("<div class='fotosAuto' attr-id='"+php_script_response+"'><span>"+filename+"</span><img width='100px' src='" + siteurl +  "uploads/" + php_script_response + "' /></div>");
+		                		debugger;
+		                		var filename = $("#fotoAuto").val().replace(/C:\\fakepath\\/i, '');
+								$("#fotosSubidas").append("<div class='fotosAuto' attr-id='"+php_script_response.trim()+"'><span>"+filename+"</span><img width='100px' src='" + siteurl +  "uploads/" + php_script_response.trim() + "' /></div>");
 								clearFileInput('fotoAuto');
 		                		
 		                	}
@@ -88,66 +90,10 @@ function CargaFuncionesRegistroAuto(idSubasta){
 
 	$("#btnGuardaAuto").click(function (){
 		
-		debugger;
-		oAuto = new Autos();
-		oAuto.idAuto = $("#btnGuardaAuto").attr("attr-idsubasta");
-		if(parseInt($("#btnGuardaAuto").attr("attr-subastaid")) > 0){
-			oAuto.enVenta  = 0;
-			oAuto.idSubasta = $("#btnGuardaAuto").attr("attr-subastaid");
-		}else{
-			oAuto.enVenta = 1;
-			oAuto.idSubasta = 0;
-
-		}
-		oAuto.precio = $("#precioAuto").val();
-		oAuto.marca = $("#cbMarcaAuto").val();
-		oAuto.modelo = $("#cbModeloAuto").val();
-		oAuto.color = $("#cbColorAuto").val();
-		oAuto.anio = $("#cbAnioAuto").val();
-		oAuto.km = $("#cbKMAuto").val();
-		oAuto.transmision = $("#cbTipoTransmisionAuto").val();
-		oAuto.estado = $("#cbEstadoAuto").val();
-		oAuto.ciudad = $("#cbCiudadAuto").val();
-		oAuto.descripcion = JSON.stringify($("#txtaDescripcionAuto").val());
-		oAuto.estatus = 1;
-		oAuto.publicado = 1;
-		oAuto.features = [];
-		oAuto.fotos = [];
-
-
-		
-
-		$.each( $(".feature"), function( key, value ) {
-			  oAuto.features.push( $(value).attr("attr-featureid"));
-		});
-
-		$.each( $(".fotosAuto"), function( key, value ) {
-			  oAuto.fotos.push( $(value).attr("attr-id"));
-		});
-		
-
-		if (validaCamposAltaAutos(oAuto)){
-			debugger;
-		postrequest("autos/guardar", oAuto, function(data){
-
-			
-			if(data > 0){
-					alert("Los datos se guardaron correctamente");
-					$("#divRegistroAutos").dialog("close"); 
-					//CargaSubastas(-1,-1);
-				}else{
-					alert("Ocurrió un error al guardar");
-
-				}
-			});
-
-		}
-
-
-
-
+		GuardaDetalleAuto("guardar");
 	});
-		CargaSelectColores("#cbColorAuto", 0, 1);
+	
+	CargaSelectColores("#cbColorAuto", 0, 1);
 	
 	
    	$("#btnAddMarca").add("#btnAddModelo").add("#btnAddColor").add("#btnAddCaracteristicas").click(function(){

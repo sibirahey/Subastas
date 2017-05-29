@@ -5,8 +5,8 @@ class subastas
     
     public function __construct($idSubasta =0, $idTipoSubasta = 0)
     {
-        $this->idSubasta = $idEmpresa;
-        $this->idTipoSubasta = $nombreEmpresa;
+        $this->idSubasta = $idSubasta;
+        $this->idTipoSubasta = $idTipoSubasta;
         $this->fechaIni = date("Y-m-d");
         $this->fechaFin = date("Y-m-d");
        
@@ -21,6 +21,8 @@ class subastas
     const FECHA_FIN = "fechaFin";
     const INCREMENTO = "incremento";
     const VISIBLE = "visible";
+    const OFERTAS = "ofertas_x_usuarios";
+    const AUTOSXUSUARIO = "autos_x_usuario";
     const SIN_RESULTADOS = "No se encontraron resultados";
     const LISTO = "OK";
     const ESTADO_CREACION_EXITOSA = "OK";
@@ -31,9 +33,9 @@ class subastas
      
 	 	
         if ($peticion[0] == 'listar') {
-            return self::listarSubastas();
+            return self::listar($_POST);
         }else if ($peticion[0] == 'guardar') {
-            return self::registrarOut();
+            return self::registrar($_POST);
         }else if ($peticion[0] == 'publicar'){
             return self::publicaOut();
         }else if($peticion[0] == 'info'){
@@ -50,36 +52,15 @@ class subastas
     }   
 
     
-    private function listarSubastas()
-    {   
-        $cuerpo = file_get_contents('php://input');
-        $subastas = json_decode($cuerpo);
-        
-        $resultado = self::listar($subastas);
-       
-        switch (sizeof($resultado)) {
-            case 0:
-               http_response_code(200);
-               throw new ExcepcionApi(self::SIN_RESULTADOS, "OK",200, null);
-               break;
-            
-            default:
-                http_response_code(200);
-                return $resultado;
-        }
-        
-    }
+    
     private function listar($datosListar)
     {
-        
-		
-		
-        $estatus = $_POST['estatus'];
+        $estatus = $datosListar['estatus'];
         $estatusWhere = "";
-        $empresa = $_POST['empresa'];
+        $empresa = $datosListar['empresa'];
         $empresaFrom = "";
         $empresaWhere = "";
-        $subastaId = $_POST['subastaId'];
+        $subastaId = $datosListar['subastaId'];
         $subastaIdWhere = "";
 
         if($estatus > -1){
@@ -94,7 +75,7 @@ class subastas
 
         }
         
-        $comando = "select s.idSubasta, nombreSubasta, idTipoSubasta, tipo.tipoSubasta, fechaInicio, fechaFin, CASE WHEN curdate() BETWEEN fechaInicio and fechaFin then 'ACTIVA' WHEN curdate() < fechaInicio then 'AGENDADA' else 'TERMINADA' end as estatus, visible, case visible when 0 then 'NO PUBLICADA' else 'PUBLICADA' end as publicada,(select GROUP_CONCAT(emp.nombreEmpresa) from subastaempresa se, empresas emp where s.idSubasta = se.idSubasta and se.idEmpresa = emp.idEmpresa) as empresas, (select GROUP_CONCAT(emp.idEmpresa) from subastaempresa se, empresas emp where s.idSubasta = se.idSubasta and se.idEmpresa = emp.idEmpresa) as empresasId,incremento from subastas s, tiposubastas tipo " . $empresaFrom." where s.idTipoSubasta = tipo.idTipo  " . $empresaWhere . $estatusWhere . $subastaIdWhere ; 
+        $comando = "select s.idSubasta, nombreSubasta, idTipoSubasta, tipo.tipoSubasta, fechaInicio, fechaFin, CASE WHEN curdate() BETWEEN fechaInicio and fechaFin then 'ACTIVA' WHEN curdate() < fechaInicio then 'AGENDADA' else 'TERMINADA' end as estatus, visible, case visible when 0 then 'NO PUBLICADA' else 'PUBLICADA' end as publicada,(select GROUP_CONCAT(emp.nombreEmpresa) from subastaempresa se, empresas emp where s.idSubasta = se.idSubasta and se.idEmpresa = emp.idEmpresa) as empresas, (select GROUP_CONCAT(emp.idEmpresa) from subastaempresa se, empresas emp where s.idSubasta = se.idSubasta and se.idEmpresa = emp.idEmpresa) as empresasId,incremento, ofertas_x_usuarios, autos_x_usuario from subastas s, tiposubastas tipo " . $empresaFrom." where s.idTipoSubasta = tipo.idTipo  " . $empresaWhere . $estatusWhere . $subastaIdWhere ; 
 
         
         $sentencia = ConexionBD::obtenerInstancia()->obtenerBD()->prepare($comando);
@@ -111,13 +92,13 @@ class subastas
         
     }
 
-    private function infoSubasta($id)
+    public function infoSubasta($id)
     {
         
         
       
         
-        $comando = "select s.idSubasta, nombreSubasta, idTipoSubasta, tipo.tipoSubasta, fechaInicio, fechaFin, CASE WHEN curdate() BETWEEN fechaInicio and fechaFin then 'ACTIVA' WHEN curdate() < fechaInicio then 'AGENDADA' else 'TERMINADA' end as estatus, visible, case visible when 0 then 'NO PUBLICADA' else 'PUBLICADA' end as publicada,(select GROUP_CONCAT(emp.nombreEmpresa) from subastaempresa se, empresas emp where s.idSubasta = se.idSubasta and se.idEmpresa = emp.idEmpresa) as empresas, (select GROUP_CONCAT(emp.idEmpresa) from subastaempresa se, empresas emp where s.idSubasta = se.idSubasta and se.idEmpresa = emp.idEmpresa) as empresasId, incremento from subastas s, tiposubastas tipo 
+        $comando = "select s.idSubasta, nombreSubasta, idTipoSubasta, tipo.tipoSubasta, fechaInicio, fechaFin, CASE WHEN curdate() BETWEEN fechaInicio and fechaFin then 'ACTIVA' WHEN curdate() < fechaInicio then 'AGENDADA' else 'TERMINADA' end as estatus, visible, case visible when 0 then 'NO PUBLICADA' else 'PUBLICADA' end as publicada,(select GROUP_CONCAT(emp.nombreEmpresa) from subastaempresa se, empresas emp where s.idSubasta = se.idSubasta and se.idEmpresa = emp.idEmpresa) as empresas, (select GROUP_CONCAT(emp.idEmpresa) from subastaempresa se, empresas emp where s.idSubasta = se.idSubasta and se.idEmpresa = emp.idEmpresa) as empresasId, incremento, ofertas_x_usuarios, autos_x_usuario  from subastas s, tiposubastas tipo 
          where s.idTipoSubasta = tipo.idTipo and s.idSubasta = ?"; 
 
         
@@ -139,8 +120,7 @@ class subastas
 (CASE WHEN curdate() BETWEEN fechaInicio and fechaFin then 'ACTIVA' WHEN curdate() < fechaInicio then 'AGENDADA' else 'TERMINADA' end )as estatus, visible, 
 (case visible when 0 then 'NO PUBLICADA' else 'PUBLICADA' end) as publicada,
 (select GROUP_CONCAT(emp.nombreEmpresa) from subastaempresa se, empresas emp where s.idSubasta = se.idSubasta and se.idEmpresa = emp.idEmpresa) as empresas, (select GROUP_CONCAT(emp.idEmpresa) from subastaempresa se, empresas emp where s.idSubasta = se.idSubasta and se.idEmpresa = emp.idEmpresa) as empresasId,incremento from subastas s, tiposubastas tipo  where s.idTipoSubasta = tipo.idTipo 
-and s.idSubasta in (select su.idSubasta from subasta_usuario su, usuario u where su.idUsuario = u.idUsuario
-and u.claveApi = ?)";
+and s.idSubasta in (select su.idSubasta from subasta_usuario su, usuario u, subastas sub where su.idUsuario = u.idUsuario and sub.idSubasta = su.idSubasta and sub.visible = 1 and u.claveApi = ? )";
 
         //print_r($comando);
 
@@ -158,6 +138,7 @@ and u.claveApi = ?)";
         
     }
 
+    /*
     private function registrarOut()
     {
         $cuerpo = file_get_contents('php://input');
@@ -179,6 +160,7 @@ and u.claveApi = ?)";
                 return $resultado;
         }
     }
+    */
 
     private function publicaOut(){
 
@@ -218,8 +200,10 @@ and u.claveApi = ?)";
                     self::ID_TIPOSUBASTA . "," .
                     self::FECHA_INICIO . "," .
                     self::FECHA_FIN . ",".
-                    self::INCREMENTO.")" .
-                    " VALUES(?,?,?,?,?)";
+                    self::INCREMENTO.",".
+                    self::OFERTAS.",".
+                    self::AUTOSXUSUARIO.")" .
+                    " VALUES(?,?,?,?,?,?,?)";
      
                 
 
@@ -230,6 +214,8 @@ and u.claveApi = ?)";
                 $sentencia->bindParam(3, $subastas["fechaInicio"]);
                 $sentencia->bindParam(4, $subastas["fechaFin"]);
                 $sentencia->bindParam(5, $subastas["incremento"]);
+                $sentencia->bindParam(6, $subastas["ofertas_x_usuarios"]);
+                $sentencia->bindParam(7, $subastas["autos_x_usuario"]);
                        
 
 
@@ -254,6 +240,8 @@ and u.claveApi = ?)";
                 self::FECHA_INICIO . "= ?, ".
                 self::FECHA_FIN . " = ?, ".
                 self::INCREMENTO." = ?" .
+                self::OFERTAS." = ?" .
+                self::AUTOSXUSUARIO." = ?" .
                 " WHERE ".self::ID_SUBASTA." = ?";
 
                 $sentencia = $pdo->prepare($comando);
@@ -262,7 +250,9 @@ and u.claveApi = ?)";
                 $sentencia->bindParam(3, $subastas["fechaInicio"]);
                 $sentencia->bindParam(4, $subastas["fechaFin"]);
                 $sentencia->bindParam(5, $subastas["incremento"]);
-                $sentencia->bindParam(6, $subastas["idSubasta"]);
+                $sentencia->bindParam(6, $subastas["ofertas_x_usuarios"]);
+                $sentencia->bindParam(7, $subastas["autos_x_usuario"]);
+                $sentencia->bindParam(8, $subastas["idSubasta"]);
                 $resultado = $sentencia->execute();
 
               
@@ -271,7 +261,7 @@ and u.claveApi = ?)";
                     subastasempresa::registrar($subastas["empresas"], $subastas["idSubasta"]);
                     return  $subastas["idSubasta"];
                 } else {
-                    return -1;
+                    return ExcepcionApi(0, "No se insertó el registro", 500);
                 }    
 
             }
@@ -279,8 +269,7 @@ and u.claveApi = ?)";
             
         } catch (PDOException $e) {
 
-            print_r($e);
-            throw new ExcepcionApi(self::ESTADO_URL_INCORRECTA, $e->getMessage(), 400);
+            return ExcepcionApi(0, $e->getMessage(), 500);
             
         }
 

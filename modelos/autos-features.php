@@ -75,6 +75,29 @@ class autosfeatures
 
     }    
 
+    public static function elimina($idAuto){
+        try {
+
+            $pdo = ConexionBD::obtenerInstancia()->obtenerBD();
+            $comando = "delete from ". self::NOMBRE_TABLA . " WHERE ".self::ID_AUTO ." = ?";
+            $sentencia = $pdo->prepare($comando);
+            $sentencia->bindParam(1, $idAuto);
+            
+            if($sentencia->execute()){
+                return true;
+            }else{
+                return false;
+
+            }
+        }
+        catch(Exception $e){
+
+            print_r($e);
+            return false;
+        }
+
+    }
+
     public static function registrar($features, $idAuto)
     {
         
@@ -114,8 +137,8 @@ class autosfeatures
             
         } catch (PDOException $e) {
             
-            print_r($e);
-            throw new ExcepcionApi(self::ESTADO_URL_INCORRECTA, $e->getMessage(), 400);
+            //print_r($e);
+            return  new ExcepcionApi(self::ESTADO_URL_INCORRECTA, $e->getMessage(), 400);
             
         }
 

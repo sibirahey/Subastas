@@ -25,11 +25,14 @@ class autospuja
 
     public static function post($peticion)
     {
-     
       
         if ($peticion[0] == 'ofertar') {
             return self::insertaOferta();
-        } else if($peticion[0] == 'listar') {
+        }else if ($peticion[0] == 'ofertasxusuario'){
+
+            return self::totalpujaxusuario($_POST);
+        } 
+        else if($peticion[0] == 'listar') {
 
             return self::listar();
         } 
@@ -47,12 +50,23 @@ class autospuja
     public static function insertaOferta()
     {
         
-        $resultado = false;
+        
         try {
 
             
             
                 $pdo = ConexionBD::obtenerInstancia()->obtenerBD();
+
+
+                $comando = "select case when curdate() < fechaFin+1 then true else false END as valida  from subastas where idSubasta = ? ";
+                $sentencia = $pdo->prepare($comando);
+                $sentencia->bindParam(1, $_POST["id_subasta"]);
+                $resultado = $sentencia->execute();
+                $fetch =  $sentencia->fetch(PDO::FETCH_ASSOC);
+                
+                if($fetch["valida"] == 0){
+                    return "Imposible ofertar, la substasta ha terminado";
+                }
 
                 // Sentencia INSERT
                 $comando = "INSERT INTO " . self::NOMBRE_TABLA . " ( " .
@@ -66,26 +80,65 @@ class autospuja
                 
                 $u = $u->rememberme();
                 
+                
+                
 
-                $sentencia = $pdo->prepare($comando);
-                $sentencia->bindParam(1, $_POST["id_auto"]);
-                $sentencia->bindParam(2, $_POST["id_subasta"]);
-                $sentencia->bindParam(3, $u->idUsuario);
-                $sentencia->bindParam(4, $_POST["oferta"]);
-                $resultado = $sentencia->execute();
-               
-             if ($resultado) {
-                return true;
-            } else {
-                return false;
-            }
+                
+
+                $s = new subastas();
+
+                $s = $s->infoSubasta($_POST["id_subasta"]);
+                
+
+                $totalxusuario = self::totalpujaxusuario();
+                
+               if($totalxusuario < $s[0]["ofertas_x_usuarios"]){
+                    $sentencia = $pdo->prepare($comando);
+                        $sentencia->bindParam(1, $_POST["id_auto"]);
+                        $sentencia->bindParam(2, $_POST["id_subasta"]);
+                        $sentencia->bindParam(3, $u->idUsuario);
+                        $sentencia->bindParam(4, $_POST["oferta"]);
+                        $resultado = $sentencia->execute();
+                       
+                     if ($resultado) {
+                        return "Su oferta fue registrada";
+
+                    } else {
+                        return "Ocurrió un error al registrar su oferta";
+                    }
+                }else{
+                    return "Imposible ofertar, usted acumula ". $totalxusuario. " de ".$s[0]["ofertas_x_usuarios"]. " posibles";
+                } 
+                
+
+
             
         } catch (Excepcion $e) {
             
-            print_r($e);
-            //throw new ExcepcionApi(self::ESTADO_URL_INCORRECTA, $e->getMessage(), 400);
-            return false;
+            return "Ocurrió un error al registrar su oferta";
+        }
+
+    }
+
+    public static function totalpujaxusuario(){
+        try{
+            $comando = "SELECT count(*) as total_ofertas FROM autos_puja ap, usuario u WHERE ap.idUsuario = u.idUsuario and ap.idSubasta = ? and u.claveApi = ?";
             
+            $pdo = ConexionBD::obtenerInstancia()->obtenerBD();
+            $sentencia = $pdo->prepare($comando);
+            
+            $sentencia->bindParam(1, $_POST["id_subasta"]);
+            $sentencia->bindParam(2, $_POST["claveapi"]);
+
+            $resultado = $sentencia->execute();
+
+            $fetch =  $sentencia->fetch(PDO::FETCH_ASSOC);
+
+            return $fetch["total_ofertas"]; 
+
+        }catch(Excepcion $e){
+            print_r($e);
+            return -1;
         }
 
     }

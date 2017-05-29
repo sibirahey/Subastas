@@ -302,7 +302,7 @@ $(document).ready(function() {
 
 				if (data.valido) {
 
-					//debugger;
+					debugger;
 					sessionStorage.setItem('nombre', data["nombre"] + " " + data["appaterno"] + " " + data["apmaterno"]);
 					sessionStorage.setItem('correo', data["correo"]);
 					sessionStorage.setItem('publico', data["publico"]);

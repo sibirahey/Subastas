@@ -1,8 +1,16 @@
 $(document).ready(function(){
 
+	
+	ValidaSession();
 	var urlvars = getUrlVars();
 	
-	if(urlvars["accion"] == undefined || urlvars["accion"] == "dashboard"){
+	var accion = "";
+	if(urlvars["accion"]){
+		accion = urlvars["accion"].replace("#!","");
+	}
+	
+
+	if(accion == undefined || accion == "dashboard" || accion == ""){
 		
 		$(".mainBody").load("views/main/dashboard.html", function() {
 			CargaFunciones("dashboard");
@@ -10,10 +18,9 @@ $(document).ready(function(){
 		});
 	}else{
  		
- 		cargaHTML(".mainBody","views/main/admin/"+ urlvars["accion"] +".html", urlvars["accion"],function() {
+ 		cargaHTML(".mainBody","views/main/admin/"+ accion +".html", accion,function() {
 			
-   			
-   				CargaFunciones(urlvars["accion"]);
+   				CargaFunciones(accion);
    			
       	});
 	}
@@ -42,7 +49,10 @@ function CargaFunciones(o){
 			break;
 		case "MisAutos":
 			cargaFuncionesMisAutos();
-			break;			
+			break;	
+		case "resultados":
+			cargaResultados();
+			break;
 		case "dashboard":
 		default:
 			CargaJsonHome();
@@ -78,21 +88,25 @@ function CargaContenidoMain() {
 	
 			var misubastahtml = data;
 			postrequest("subastas/xusuario", {"idusuario":sessionStorage.claveapi },function(response){
-				console.log(JSON.stringify(response));
+				//console.log(JSON.stringify(response));
+				//console.log(JSON.stringify(data.length));
 				if(data.length > 0 )
 					 $(".divMisSubastas").hide().show();
 
 				for(var o in response){
 
+					
 					if(response[o].visible == 1){
 						subasta = misubastahtml;
-						
+						console.log(subasta);	
 						subasta = subasta.replace("#NOMBRESUBASTA#", response[o].nombreSubasta); 
 						subasta = subasta.replace("#OFERTAMINIMA#", Number(response[o].incremento).formatMoney()); 
 						subasta = subasta.replace("#TIPOSUBASTAS#", response[o].tipoSubasta); 
 						subasta = subasta.replace("#ESTATUSSUBASTA#", response[o].estatus); 
 						subasta = subasta.replace("#SUBASTAID#", response[o].idSubasta); 
-						subasta = subasta.replace("#FECHA_SUBASTA#", new Date(response[o].idSubasta)); 
+						subasta = subasta.replace("#FECHA_SUBASTA#", new Date(response[o].fechaFin).toLocaleDateString());
+
+						subasta = subasta.replace("#TIPOSUBASTA#", response[o].tipoSubasta);  
 						$("#ulMisSubastas").append(subasta);		
 					}
 				}

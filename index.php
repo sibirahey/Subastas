@@ -108,8 +108,9 @@ function ejecutaModeloPost($vista, $mod, $arr)
         case 'tiposubastas':
             $vista->imprimir(tiposubastas::post($arr));
             break;
-        case 'subastas':			
-            $vista->imprimir(subastas::post($arr));
+        case 'subastas':	
+            $salida = subastas::post($arr);
+            $vista->imprimir($salida);
             break;
         case 'cotizacion':
             $vista->imprimir(cotizacion::post($arr));

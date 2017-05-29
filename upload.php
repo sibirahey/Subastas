@@ -28,97 +28,101 @@ require_once('utilidades/ConexionBD.php');
 require_once('utilidades/ExcepcionApi.php');
 require_once('utilidades/Utilerias.php');
 
-    if ( 0 < $_FILES['file']['error'] ) {
-        echo 'ERROR: ' . $_FILES['file']['error'] . '<br>';
+if ( 0 < $_FILES['file']['error'] ) {
+    echo 'ERROR: ' . $_FILES['file']['error'] . '<br>';
+}
+else {
+    
+    $ext = pathinfo($_FILES['file']['name'], PATHINFO_EXTENSION);
+    $guid = guidv4();
+
+    if(!isset($_POST["accion"])){
+        $_POST["accion"] = "";
     }
-    else {
+
+    if($_POST["accion"] == "listausuarios"){
+
+
+
+
+
+        move_uploaded_file($_FILES['file']['tmp_name'], 'userlist/' . $guid.".".$ext);
+        echo $guid.".".$ext;
+
         
-        $ext = pathinfo($_FILES['file']['name'], PATHINFO_EXTENSION);
-        $guid = guidv4();
+        $pdo = ConexionBD::obtenerInstancia()->obtenerBD();
+        
+        $comando = "delete from subasta_usuario where idSubasta = ".$_POST["idsubasta"];
 
-        if($_POST["accion"] == "listausuarios"){
+        $sentencia = $pdo->prepare($comando);
 
+        $sentencia->execute();
 
-
-
-
-            move_uploaded_file($_FILES['file']['tmp_name'], 'userlist/' . $guid.".".$ext);
-            echo $guid.".".$ext;
-
-            
-            $pdo = ConexionBD::obtenerInstancia()->obtenerBD();
-            
-            $comando = "delete from subasta_usuario where idSubasta = ".$_POST["idsubasta"];
-
-            $sentencia = $pdo->prepare($comando);
-
-            $sentencia->execute();
-
-            
+        
 
 
-            $fila = 1;
-            if (($gestor = fopen('userlist/' . $guid.".".$ext, "r")) !== FALSE) {
-                while (($datos = fgetcsv($gestor, 1000, ",")) !== FALSE) {
+        $fila = 1;
+        if (($gestor = fopen('userlist/' . $guid.".".$ext, "r")) !== FALSE) {
+            while (($datos = fgetcsv($gestor, 1000, ",")) !== FALSE) {
 
-                    $numero = count($datos);
-                    $fila++;
-                    for ($c=0; $c < $numero; $c++) {
-                        //echo $datos[$c] . "<br />\n";
-                        if($c%4 == 0 && $c > 0){
-                            
-                            try{
-                                if (!empty($datos[$c])) {
-                                    
-                                    
-                                    $usuario = new usuarios();
-                                    $usuario->nombre = $datos[$c];
-                                    $usuario->appaterno = $datos[$c+1];
-                                    $usuario->apmaterno = $datos[$c+2];
-                                    $usuario->correo = $datos[$c+3];
-                                    $usuario->verificado = 0;
-                                    $usuario->contrasena = "INVITADO";
-                                    $usuario->valido = 0;
-                                    $usuario->publico = 0;
-                                    $usuario->esadmin = 0;
-                                    
-                                    usuarios::invitarUsuario($usuario, $_POST["idsubasta"]);
+                $numero = count($datos);
+                $fila++;
+                for ($c=0; $c < $numero; $c++) {
+                    //echo $datos[$c] . "<br />\n";
+                    if($c%4 == 0 && $c > 0){
+                        
+                        try{
+                            if (!empty($datos[$c])) {
+                                
+                                
+                                $usuario = new usuarios();
+                                $usuario->nombre = $datos[$c];
+                                $usuario->appaterno = $datos[$c+1];
+                                $usuario->apmaterno = $datos[$c+2];
+                                $usuario->correo = $datos[$c+3];
+                                $usuario->verificado = 0;
+                                $usuario->contrasena = "INVITADO";
+                                $usuario->valido = 0;
+                                $usuario->publico = 0;
+                                $usuario->esadmin = 0;
+                                
+                                usuarios::invitarUsuario($usuario, $_POST["idsubasta"]);
 
-
-                                }
-                            }catch(Exception $er){
 
                             }
+                        }catch(Exception $er){
+
                         }
                     }
                 }
-                fclose($gestor);
             }
-
-        }else if($_POST["accion"] == "home"){
-            try{
-                move_uploaded_file($_FILES['file']['tmp_name'], 'images/home/' . $guid.".".$ext);
-                $pdo = ConexionBD::obtenerInstancia()->obtenerBD();
-                $comando = "update cat_seccioneshome set url = '"."images/home/" . $guid.".".$ext."' where id = ".$_POST["id"];
-                echo $comando;
-                $sentencia = $pdo->prepare($comando);
-
-                $sentencia->execute();
-                echo $guid.".".$ext;
-            }
-            catch(Exception $ex){
-
-                echo "ERROR".$ex;
-            }
-
+            fclose($gestor);
         }
-        else{
-          
-          
-            move_uploaded_file($_FILES['file']['tmp_name'], 'uploads/' . $guid.".".$ext);
+
+    }else if($_POST["accion"] == "home"){
+        try{
+            move_uploaded_file($_FILES['file']['tmp_name'], 'images/home/' . $guid.".".$ext);
+            $pdo = ConexionBD::obtenerInstancia()->obtenerBD();
+            $comando = "update cat_seccioneshome set url = '"."images/home/" . $guid.".".$ext."' where id = ".$_POST["id"];
+            echo $comando;
+            $sentencia = $pdo->prepare($comando);
+
+            $sentencia->execute();
             echo $guid.".".$ext;
         }
+        catch(Exception $ex){
+
+            echo "ERROR".$ex;
+        }
+
     }
+    else{
+      
+      
+        move_uploaded_file($_FILES['file']['tmp_name'], 'uploads/' . $guid.".".$ext);
+        echo $guid.".".$ext;
+    }
+}
 
 
 function guidv4()

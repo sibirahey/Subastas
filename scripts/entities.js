@@ -36,7 +36,7 @@ function Empresa(id,nombre,estatus){
 	this.id = id;
 	this.nombre= nombre;
 }
-function Subastas(idSubasta, nombreSubasta, IdTipoSubasta, fechaInicio, fechaFin, empresas, visible){
+function Subastas(idSubasta, nombreSubasta, IdTipoSubasta, fechaInicio, fechaFin, empresas, visible, ofertas_x_usuarios, autos_x_usuario){
 	this.idSubasta = idSubasta;
 	this.nombreSubasta = nombreSubasta;
 	this.IdTipoSubasta = IdTipoSubasta;
@@ -44,6 +44,9 @@ function Subastas(idSubasta, nombreSubasta, IdTipoSubasta, fechaInicio, fechaFin
 	this.fechaFin = fechaFin;
 	this.empresas = empresas;
 	this.visible = 1;
+	this.ofertas_x_usuarios = ofertas_x_usuarios;
+	this.autos_x_usuario = autos_x_usuario;
+
 }	
 
 function Cotizacion(idUsuario,nombre,correo,telefono,marca,modelo,tipo,estatus,subServicios){

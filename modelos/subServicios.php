@@ -97,20 +97,17 @@ class subservicio
 
     private function listarSubservicio(){
 
-        $cuerpo = file_get_contents('php://input');
-        $subServicios = json_decode($cuerpo);
-        $resultado = self::listar($subServicios);
+        try{
+            $cuerpo = file_get_contents('php://input');
+            $subServicios = json_decode($cuerpo);
+            $resultado = self::listar($subServicios);
 
-        switch (sizeof($resultado))  {
-            case 0 :
-                http_response_code(200);
-                throw new ExcepcionApi(self::SINRESULTADOS,"OK",200,null);
-                break;
+            http_response_code(200);
+            return $resultado;
+                    
             
-            default:
-                http_response_code(200);
-                return $resultado;
-                break;
+        }catch(Exception $e){
+            return new ExcepcionApi(self::SINRESULTADOS,"OK",200,null);
         }
 
     }
