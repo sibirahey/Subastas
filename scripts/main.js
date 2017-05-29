@@ -51,7 +51,7 @@ function CargaFunciones(o){
 			cargaFuncionesMisAutos();
 			break;	
 		case "resultados":
-			cargaResultados();
+			cargaResultadosSubastas();
 			break;
 		case "dashboard":
 		default:

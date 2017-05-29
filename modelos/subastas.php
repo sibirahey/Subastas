@@ -55,40 +55,41 @@ class subastas
     
     private function listar($datosListar)
     {
-        $estatus = $datosListar['estatus'];
-        $estatusWhere = "";
-        $empresa = $datosListar['empresa'];
-        $empresaFrom = "";
-        $empresaWhere = "";
-        $subastaId = $datosListar['subastaId'];
-        $subastaIdWhere = "";
+        try{
+            $estatus = $datosListar['estatus'];
+            $estatusWhere = "";
+            $empresa = $datosListar['empresa'];
+            $empresaFrom = "";
+            $empresaWhere = "";
+            $subastaId = $datosListar['subastaId'];
+            $subastaIdWhere = "";
 
-        if($estatus > -1){
-            $estatusWhere = " and visible = " .$estatus;
-        }
-        if($empresa > -1){
-            $empresaFrom = ", subastaempresa sube, empresas e "; 
-            $empresaWhere = " and s.idSubasta = sube.idSubasta and e.idEmpresa = sube.idEmpresa and e.idEmpresa = " . $empresa;
-        }
-        if($subastaId > -1){
-            $subastaIdWhere = " and idSubasta = ".$subastaId;
+            if($estatus > -1){
+                $estatusWhere = " and visible = " .$estatus;
+            }
+            if($empresa > -1){
+                $empresaFrom = ", subastaempresa sube, empresas e "; 
+                $empresaWhere = " and s.idSubasta = sube.idSubasta and e.idEmpresa = sube.idEmpresa and e.idEmpresa = " . $empresa;
+            }
+            if($subastaId > -1){
+                $subastaIdWhere = " and idSubasta = ".$subastaId;
 
-        }
-        
-        $comando = "select s.idSubasta, nombreSubasta, idTipoSubasta, tipo.tipoSubasta, fechaInicio, fechaFin, CASE WHEN curdate() BETWEEN fechaInicio and fechaFin then 'ACTIVA' WHEN curdate() < fechaInicio then 'AGENDADA' else 'TERMINADA' end as estatus, visible, case visible when 0 then 'NO PUBLICADA' else 'PUBLICADA' end as publicada,(select GROUP_CONCAT(emp.nombreEmpresa) from subastaempresa se, empresas emp where s.idSubasta = se.idSubasta and se.idEmpresa = emp.idEmpresa) as empresas, (select GROUP_CONCAT(emp.idEmpresa) from subastaempresa se, empresas emp where s.idSubasta = se.idSubasta and se.idEmpresa = emp.idEmpresa) as empresasId,incremento, ofertas_x_usuarios, autos_x_usuario from subastas s, tiposubastas tipo " . $empresaFrom." where s.idTipoSubasta = tipo.idTipo  " . $empresaWhere . $estatusWhere . $subastaIdWhere ; 
+            }
+            
+            $comando = "select s.idSubasta, nombreSubasta, idTipoSubasta, tipo.tipoSubasta, fechaInicio, fechaFin, CASE WHEN curdate() BETWEEN fechaInicio and fechaFin then 'ACTIVA' WHEN curdate() < fechaInicio then 'AGENDADA' else 'TERMINADA' end as estatus, visible, case visible when 0 then 'NO PUBLICADA' else 'PUBLICADA' end as publicada,(select GROUP_CONCAT(emp.nombreEmpresa) from subastaempresa se, empresas emp where s.idSubasta = se.idSubasta and se.idEmpresa = emp.idEmpresa) as empresas, (select GROUP_CONCAT(emp.idEmpresa) from subastaempresa se, empresas emp where s.idSubasta = se.idSubasta and se.idEmpresa = emp.idEmpresa) as empresasId,incremento, ofertas_x_usuarios, autos_x_usuario, (select count(*) from subastas_autos suba where suba.subastaId = s.idSubasta ) as total_autos, (select count(*) from subasta_usuario subu where subu.idSubasta = s.idSubasta) as total_participantes, (select count(*) from autos_puja aupu  where aupu.idSubasta = s.idSubasta) as total_ofertas  from subastas s, tiposubastas tipo " . $empresaFrom." where s.idTipoSubasta = tipo.idTipo  " . $empresaWhere . $estatusWhere . $subastaIdWhere . "order by fechaFin desc" ; 
 
-        
-        $sentencia = ConexionBD::obtenerInstancia()->obtenerBD()->prepare($comando);
-        
-        /*
-        if($estatus >= 0){
-            $sentencia->bindParam(1, $estatus);
-        }
-*/
-        if ($sentencia->execute())
-            return $sentencia->fetchall(PDO::FETCH_ASSOC);
-        else
+            
+            $sentencia = ConexionBD::obtenerInstancia()->obtenerBD()->prepare($comando);
+            
+
+            if ($sentencia->execute())
+                return $sentencia->fetchall(PDO::FETCH_ASSOC);
+            else
+                return null;
+        }catch(Exception $e){
+            print_r($e);
             return null;
+        }
         
     }
 
