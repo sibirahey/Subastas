@@ -159,7 +159,7 @@ function CargaSelectFeatures(control, features, estatus) {
 		"estatus" : estatus
 	}, function(data) {
 
-		$(control).append('<option value="0" disabled selected>SELECIONA</option>');
+		$(control).append('<option value="0" disabled selected>SELECCIONA</option>');
 
 		for (i in data) {
 
@@ -172,8 +172,8 @@ function CargaSelectFeatures(control, features, estatus) {
 }
 
 function CargaSelectColores(control, id_color, estatus) {
-
-	$(control).append('<option value="0" disabled selected></option>');
+debugger;
+	$(control).append('<option value="0" disabled selected>SELECCIONA</option>');
 	postrequest("colores/listar?rand=" + Math.random(), {
 		"estatus" : estatus
 	}, function(data) {

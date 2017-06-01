@@ -1,5 +1,5 @@
 *:not(thead):not(tbody):not(td):not(tr):not(i) {
-	font-family: 'Open Sans', sans-serif;
+	font-family: 'Roboto', sans-serif;
 	font-weight: 300;
 	font-style: normal;
 	outline: none;
@@ -2203,22 +2203,29 @@ button[name="contactoEnviar"] {
 	margin-bottom: 10px;
 }
 .divRenglonTabla > .card {
+	height:340px;
 	width: 100%;
 	padding: 6px 0;
 }
 
-.divRenglonTabla > .card > .card-content > div > label:not(.switch){
-	width:100%;
+.divRenglonTabla > .card > .card-content > label:not(.switch){
 	display:block;
-	text-align:center;
 	font-size:1rem;
+	float: left;
 }
-.divRenglonTabla > .card > .card-content > div > label:not(.switch):nth-child(odd){
+.divRenglonTabla > .card > .card-content > label:not(.switch):nth-child(odd){
 	font-weight:500;
+	width:110px;
+	text-align:right;
+}	
+.divRenglonTabla > .card > .card-content > label:not(.switch):nth-child(even){
+    width: calc(100% - 155px);
+    text-align: left;
+    text-indent: 10px;
 }
 
 .divRenglonTabla .switch {
-	margin-left: calc(50% - 30px);
+	margin: 20px 0 0 calc(50% - 30px);
 }
 
 #divListaContenido .fixed-action-btn{
@@ -2502,6 +2509,9 @@ input:checked + .slider:before {
 	float:left;
 	width: 100%;
 }
+#dialog > .modal-footer > div{
+	margin: 6px;
+}
 #divFeatureContainer{
 	float: left;
 	max-height:200px;
@@ -2511,16 +2521,30 @@ input:checked + .slider:before {
     overflow:auto;
 }
 #divFeatureContainer > .feature {
+	position:relative;
 	height: 40px;
 	line-height:40px;
-	width:33.33%;
 	float:left;
+	margin: 12px;
 }
 #divFeatureContainer > .feature > i,
 #divFeatureContainer > .feature > span {
 	float:left;
 	height: 40px;
 	line-height:40px;
+}
+#divFeatureContainer > .feature > i{
+    position: absolute;
+    top: -20px;
+    right: -20px;
+    background-color: transparent;
+    font-size: 30px;
+    color:red;
+    transition: font-size 0.5s ease;
+    text-shadow:0 0 6px rgba(0,0,0,0.7);
+}
+#divFeatureContainer > .feature > i:hover{
+	font-size:32px;
 }
 #labelMensaje{
 	float: left;

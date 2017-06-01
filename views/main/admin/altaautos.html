@@ -1,4 +1,4 @@
-<div class="altaAutosContainer">
+<div class="altaAutosContainer row">
 	<h4 class="altaAutosTitle">Administrador Venta de Autos</h4>
 	<div class="divider"></div>
 	<h5 id="divSubastaNombre"></h5>
@@ -62,16 +62,13 @@
 			<div id="btnAddCaracteristicas" class="waves-effect waves-light btn-floating amber darken-2" operacion="features" title="Agregar Caracteristicas" desc="caracteristica:" href="#dialog"><i class="material-icons">playlist_add</i></div>
 			<div id="divFeatureContainer"></div>
 		</div>
-
+        <div class="divider"></div>
+        
 		<div class="input-field txtaDescripcionAuto">
-			<!-- <textarea id="txtaDescripcionAuto" maxlength="1000" ></textarea> -->
-			<div class="row">
-				<div class="input-field col s12">
-					<textarea id="textarea1" class="materialize-textarea" id="txtaDescripcionAuto" maxlength="1000"></textarea>
-					<label for="textarea1">Descripci&oacute;n</label>
-				</div>
-			</div>
-		</div>
+            <!-- <textarea id="txtaDescripcionAuto" maxlength="1000" ></textarea> -->
+            <textarea id="textarea1" class="materialize-textarea" id="txtaDescripcionAuto" maxlength="1000"></textarea>
+            <label for="textarea1">Descripci&oacute;n</label>
+        </div>
 
 		<p class="chkPublicadoAutos">
 			<input type="checkbox" name="chkPublicadoAutos" id="chkPublicadoAutos" checked="checked" />
@@ -85,7 +82,7 @@
 
 			<div class="file-field input-field ">
 				<div class="btn">
-					<span>File</span>
+					<i class="material-icons">attach_file</i>
 					<input id="fotoAuto" type="file" >
 				</div>
 				<div class="file-path-wrapper">
@@ -100,7 +97,7 @@
 		</div>
 
 		<div class="input-field btnsAuto">
-			<div class="btn waves-effect waves-light" id="btnGuardaAuto" attr-subastaid="0">
+			<div class="btn-large waves-effect waves-light teal accent-3" id="btnGuardaAuto" attr-subastaid="0">
 				<i class="material-icons">save</i>
 			</div>
 			<div class="btn waves-effect waves-light" id="bntActualizaAuto" attr-subastaid="0" style="display:none;">
@@ -109,26 +106,26 @@
 		</div>
 
 		<div id="dialog" class="modal">
-			<div class="modal-content">
-				<label id="labelMensaje" ><i class="material-icons">warning</i></label>
-				<div class="input-field col s12">
-					<input type="text" name="txtDescripcion" id="txtDescripcion" class="validate"/>
-					<label id="labelTxtDescripcion" for="txtDescripcion" >Descripción:</label>										
-				</div>
-				<div id="btnGuardarCatalogo" class="waves-effect waves-light btn green">
-						<i class="material-icons"></i>Guardar
-					</div>
-					<div id="btnActualizaCatalogo" class="waves-effect waves-light btn light-blue">
-						Actualizar
-					</div>
-					<div id="btnEliminaCatalogo" class="waves-effect waves-light btn red">
-						Eliminar
-					</div>
-			</div>
-			<div class="modal-footer">
-				<a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat">Cancelar</a>
-			</div>
-		</div>
+            <div class="modal-content">
+                <label id="labelMensaje" ><i class="material-icons">warning</i></label>
+                <div class="input-field col s12">
+                    <input type="text" name="txtDescripcion" id="txtDescripcion" class="validate"/>
+                    <label id="labelTxtDescripcion" for="txtDescripcion" >Descripción del vehiculo:</label>
+                </div>
+
+            </div>
+            <div class="modal-footer">
+                <div id="btnGuardarCatalogo" class="waves-effect waves-light btn green">
+                    <i class="material-icons"></i>Guardar
+                </div>
+                <div id="btnActualizaCatalogo" class="waves-effect waves-light btn light-blue">
+                    Actualizar
+                </div>
+                <div id="btnEliminaCatalogo" class="waves-effect waves-light btn red">
+                    Eliminar
+                </div>
+            </div>
+        </div>
 
 	</form>
 </div>

@@ -206,7 +206,7 @@ function CargaSubastas(estatus, empresa) {
 		for (i in data) {
 
 			var div = '';
-			div += '	<div class="divRenglonTabla col s12 m6 l3">';
+			div += '	<div class="divRenglonTabla col s12 m6 l4">';
 			div += '		<div class="card">';
 			div += '            <span class="card-title">' + data[i].nombreSubasta + '</span>';
 			div += '            <div class="divider"></div>';
@@ -231,13 +231,12 @@ function CargaSubastas(estatus, empresa) {
 			div += '				</ul>';
 			div += '			</div>';
 			div += '			<div class="card-content">';
-			div += '				<div><label>Tipo de subasta: </label><label>' + data[i].tipoSubasta + '</label></div>';
-			div += '				<div><label>Vigencia: </label><label>' + data[i].fechaInicio + ' - ' + data[i].fechaFin + '</label></div>';
-			div += '				<div><label>Estatus: </label><label>' + data[i].estatus + '</label></div>';
-			div += '				<div><label>Empresas:</label><label>' + data[i].empresas + '</label></div>';
-			div += '				<div><label>Publicada:</label><label>' + data[i].publicada + '</label></div>';
-			div += '				<div><label class="switch"><input type="checkbox" attr-id="' + data[i].idSubasta + '" class="btnPublicar" ' + ((data[i].visible == 0) ? "" : "checked" ) + ' /><div class="slider round"></div></label>';
-			div += '				</div>';
+			div += '				<label>Tipo de subasta: </label><label>' + data[i].tipoSubasta + '</label>';
+			div += '				<label>Vigencia: </label><label>' + data[i].fechaInicio + ' - ' + data[i].fechaFin + '</label>';
+			div += '				<label>Estatus: </label><label>' + data[i].estatus + '</label>';
+			div += '				<label>Empresas:</label><label>' + data[i].empresas + '</label>';
+			div += '				<label>Publicada:</label><label>' + data[i].publicada + '</label>';
+			div += '				<label class="switch"><input type="checkbox" attr-id="' + data[i].idSubasta + '" class="btnPublicar" ' + ((data[i].visible == 0) ? "" : "checked" ) + ' /><div class="slider round"></div></label>';
 			div += '			</div>';
 			div += '		</div>';
 			div += '	</div>';
