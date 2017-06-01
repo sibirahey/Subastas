@@ -1,5 +1,5 @@
 *:not(thead):not(tbody):not(td):not(tr):not(i) {
-	font-family: 'Open Sans', sans-serif;
+	font-family: 'Roboto', sans-serif;
 	font-weight: 300;
 	font-style: normal;
 	outline: none;
@@ -90,6 +90,7 @@ body {
 
 .mainHeader {
 	float: left;
+	position:relative;
 	width: inherit;
 	background-color: rgb(30,35,40);
 	box-shadow: 0 3px 6px rgb(0,0,0);
@@ -1103,7 +1104,7 @@ div:not(:first-child) > div > img {
 	width: 100%;
 }
 
-.btnGuardar, .btnPublicar, #btnGuardaAuto {
+.btnGuardar, .btnPublicar {
 	float: right !important;
 	cursor: pointer;
 	border: none;
@@ -1993,7 +1994,7 @@ div#divCotizacion > #divListaCS button {
 .divSeccion {
 	float: left;
 	max-width: 1024px;
-	margin: 0 calc(50% - 512px);
+	margin: 20px calc(50% - 512px);
 	width: 100%;
 }
 
@@ -2187,8 +2188,11 @@ button[name="contactoEnviar"] {
 	max-width: 1024px;
 	margin: 0 calc(50% - 512px);
 }
-#divListaContenido .card {
-	/*height:380px;*/
+#divListaContenido .card .card-title{
+    height: 60px;
+    display: block;
+    padding: 10px;
+    text-transform: capitalize;
 }
 #divListaContenido .card-image > span {
 	width: 100%;
@@ -2198,47 +2202,32 @@ button[name="contactoEnviar"] {
 	border-bottom: 1px solid #e0e0e0;
 	margin-bottom: 10px;
 }
-.divRenglonTabla > div {
+.divRenglonTabla > .card {
+	height:340px;
 	width: 100%;
 	padding: 6px 0;
 }
-.divRenglonTabla > div:nth-child(1) > label {
-	width: 100%;
-	text-align: center;
+
+.divRenglonTabla > .card > .card-content > label:not(.switch){
+	display:block;
+	font-size:1rem;
+	float: left;
 }
-.divRenglonTabla > div:nth-child(1) > label:nth-child(1) {
-	font-weight: bold;
+.divRenglonTabla > .card > .card-content > label:not(.switch):nth-child(odd){
+	font-weight:500;
+	width:110px;
+	text-align:right;
+}	
+.divRenglonTabla > .card > .card-content > label:not(.switch):nth-child(even){
+    width: calc(100% - 155px);
+    text-align: left;
+    text-indent: 10px;
 }
 
-.divRenglonTabla > div:nth-child(2) > div {
-	float: right;
-	width: 30px;
-	text-align: center;
-	cursor: pointer;
-	color: #3281B3;
-	opacity: 0.6;
-}
-.divRenglonTabla > div:nth-child(2) > div:hover {
-	opacity: 1;
-}
-.divRenglonTabla > div {
-	text-align: center;
-}
-.divRenglonTabla .card-image {
-	margin: 10px 0 4px;
-}
-.divRenglonTabla > div > label:not(.switch) {
-	width: 100%;
-	text-align: center;
-}
 .divRenglonTabla .switch {
-	margin-left: calc(50% - 30px);
+	margin: 20px 0 0 calc(50% - 30px);
 }
-.divrenglontabla .card-content label:not(.switch) {
-	width: 100%;
-	float: left;
-	text-align: left;
-}
+
 #divListaContenido .fixed-action-btn{
 	right:5px;
 }
@@ -2370,6 +2359,7 @@ input:checked + .slider:before {
 	width: 70px;
 	margin: 0 15px;
 }
+
 	/*--------- ENDS NUEVA SUBASTA ---------*/
 
 	/*--------- AGREGA EMPRESA ---------*/
@@ -2405,36 +2395,226 @@ input:checked + .slider:before {
 /*--------- ENDS AGREGA EMPRESA ---------*/
 
 /*--------- VENTA AUTOS---------*/
+.altaAutosContainer{
+	float:left;
+	width:1024px;
+	margin: 0 calc(50% - 524px) 0;
+	padding:20px;
+	background-color:rgb(240,240,240);
+}
+#divRegistroAutos .altaAutosContainer{
+	width: 100%;
+	margin:0;
+	background-color:rgb(255,255,255);
+}
+#divRegistroAutos > .modal-close{
+	height:40px;
+	position:absolute;
+	top:0;
+	right:0;
+	z-index:2;
+}
+#divRegistroAutos > .modal-content{
+	padding:0;
+	height:100%;
+}
+.altaAutosContainer > h4{
+	margin:30px 0;
+}
+.altaAutosContainer > .divider{
+	margin:0 0 30px 0;
+}
+.altaAutosContainer > form {
+	float:left;
+	width: 100%;
+}
+.altaAutosContainer > form > div:not(.modal) {
+	margin: 20px 0 0;
+}
+.altaAutosContainer > form > .cbMarcaAuto,
+.altaAutosContainer > form > .cbModeloAuto,
+.altaAutosContainer > form > .cbColorAuto,
+.altaAutosContainer > form > .anioAuto,
+.altaAutosContainer > form > .cbKMAuto,
+.altaAutosContainer > form > .precioAuto,
+.altaAutosContainer > form > .cbTipoTransmisionAuto,
+.altaAutosContainer > form > .cbEstadoAuto,
+.altaAutosContainer > form > .cbCiudadAuto,
+.altaAutosContainer > form > .cbFeaturesAutos,
+.altaAutosContainer > form > .txtaDescripcionAuto,
+.altaAutosContainer > form > .txtaDescripcionAuto,
+.altaAutosContainer > form > .chkPublicadoAutos,
+.altaAutosContainer > form > .fotoAuto,
+.altaAutosContainer > form > .btnsAuto {
+	float:left;
+	width: 33.33%
+}
+
+.altaAutosContainer > form > .chkPublicadoAutos,
+.altaAutosContainer > form > .cbFeaturesAutos,
+.altaAutosContainer > form > .txtaDescripcionAuto,
+.altaAutosContainer > form > .fotoAuto,
+.altaAutosContainer > form > .btnsAuto {
+	width: 100%;
+}
+.altaAutosContainer > form > .input-field > .select-wrapper,
+.altaAutosContainer > form > .input-field > input[type="text"]{
+	width:calc(100% - 60px);
+	float:left;
+}
+.altaAutosContainer > form > .fotoAuto > .input-field{
+	width:calc(100% - 80px);
+	float:left;
+}
+.altaAutosContainer > form > .cbFeaturesAutos > .select-wrapper{
+	width: calc(100% - 120px);
+}
+.altaAutosContainer > form > .btnsAuto {
+	text-align:right;
+}
 #divRegistroAutos .divRegistro {
 
 	padding: 10px 0;
 }
 #divRegistroAutos .divRegistro > label {
-
 	line-height: 40px;
 	width: 150px;
 	text-align: right;
 	padding-right: 8px;
 }
-#divRegistroAutos .divRegistro > select, #divRegistroAutos .divRegistro > input[type="text"] {
+#divRegistroAutos .divRegistro > select, 
+#divRegistroAutos .divRegistro > input[type="text"],
+#divRegistroAutos .divRegistro > textarea {
 	height: 40px;
 	width: calc(100% - 200px);
 	text-align: right;
 }
-#btnAddMarca {
+#btnAddMarca,
+#btnAddModelo,
+#btnAddColor,
+#btnAddFeature,
+#btnAddCaracteristicas {
+	float:left;
 	height: 40px;
-	width: 40px;
-	margin-left: 10px;
+	margin:0 10px 0;
 }
-#divSubastaNombre {
+#btnUpload{
+	float:left;
+    margin-top: 1rem;
+}
+#divSubastaNombre {<i class="material-icons">
 	width: 100%;
+}
+#dialog .modal-content > .input-field{
+	float:left;
+	width: 100%;
+}
+#dialog > .modal-footer > div{
+	margin: 6px;
+}
+#divFeatureContainer{
+	float: left;
+	max-height:200px;
+    width: 100%;
+    padding: 20px;
+    background-color: rgb(225,225,225);
+    overflow:auto;
+}
+#divFeatureContainer > .feature {
+	position:relative;
+	height: 40px;
+	line-height:40px;
+	float:left;
+	margin: 12px;
+}
+#divFeatureContainer > .feature > i,
+#divFeatureContainer > .feature > span {
+	float:left;
+	height: 40px;
+	line-height:40px;
+}
+#divFeatureContainer > .feature > i{
+    position: absolute;
+    top: -20px;
+    right: -20px;
+    background-color: transparent;
+    font-size: 30px;
+    color:red;
+    transition: font-size 0.5s ease;
+    text-shadow:0 0 6px rgba(0,0,0,0.7);
+}
+#divFeatureContainer > .feature > i:hover{
+	font-size:32px;
+}
+#labelMensaje{
+	float: left;
+	width:100%;
+	height:60px;
+	margin: 0 0 20px 0;
+	background-color:rgb(240,240,240);
+    line-height: 60px;
+    font-size: 1.2rem;
+}
+#labelMensaje > i{
+	float:left;
+	height: 60px;
+	width:60px;
+	line-height:60px;
+	text-align:center;
+	float: left;
+    font-size: 36px;
+}
+#fotosSubidas{
+	float: left;
+    width: 100%;
+}
+#fotosSubidas > .fotosAuto{
+	float: left;
+    width: 33.33%;
+    overflow:hidden;
 }
 
 /*--------- ENDS VENTA AUTOS --------*/
 /*---------MIS SUBASTAS --------*/
 
-.divMisSubastas .card.horizontal {
-	height: 260px;
+.divMisSubastas {
+	float:left;
+	width:100%;
+}
+
+#ulMisSubastas {
+	white-space: nowrap;
+	overflow-x: auto;
+	overflow-y:hidden;
+	width: 100%;
+}
+#ulMisSubastas > li {
+	display: inline-block;
+	white-space: normal;
+	vertical-align: top;
+	float: none;
+	width: 360px;
+}
+
+#ulMisSubastas > li .card-title {
+	font-size: 24px;
+	font-weight: 300;
+	padding: 5px;
+	text-transform: capitalize;
+}
+#ulMisSubastas > li .card-content > h6{
+	width: 50%;
+	float:left;
+}
+#ulMisSubastas > li .card-content > h6:nth-child(odd){
+	text-align: right;
+	font-weight:500;
+}
+#ulMisSubastas > li .card-content > h6:nth-child(even){
+	text-indent:10px;
+}
+#ulMisSubastas > li .card-action{
+	text-align:center;
 }
 .marginTop20 {
 	margin-top: 20px;
@@ -2466,3 +2646,10 @@ div[name="altaautos"] > .row{
 	margin: 0 auto;
 }
 /*--------- ENDS ADM HOME --------*/
+/*--------- RESULTADOS POR SUBASTA --------*/
+#tblResultadosSubastas{
+	width:1024px;
+	float:none;
+	margin: 0 auto;
+}
+/*--------- ENDS RESULTADOS POR SUBASTA --------*/

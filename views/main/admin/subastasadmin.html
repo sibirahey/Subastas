@@ -111,14 +111,15 @@
 				<div class="col s12">
 					<ul id="lstEmpresa"></ul>
 				</div>
-				<div id="divTipoSubastas" class="col s12">
+				<!-- <div id="divTipoSubastas" class="col s12">
 					<div id="btnGuardarSubasta" class="btn waves-effect waves-light teal"><i class="material-icons">done</i></div>
-				</div>
+				</div> -->
 			</div>
 
 		</div>
 		<div class="modal-footer">
-			<div class="modal-action modal-close waves-effect waves-green btn-flat ">Cancelar</div>
+		    <div id="btnGuardarSubasta" class=" waves-effect waves-light teal btn"><i class="material-icons">done</i></div>
+			<div class="modal-action modal-close waves-effect waves-green btn ">Cancelar</div>
 		</div>
 	</div>
 
@@ -139,8 +140,13 @@
 	</div>
 	
 	<div id="divListaUsuariosModal" class="modal modal-fixed-footer">
-		<div id="divListaUsuariosTtl"></div>
-		<div id="divListaUsuariosTbl"></div>
+		<div class="modal_content">
+			<div id="divListaUsuariosTtl"></div>
+			<div id="divListaUsuariosTbl"></div>
+		</div>
+		<div class="modal-footer">
+			<a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat ">Cerrar</a>
+		</div>
 	</div>
 
 	<div id="modalEmpresa" class="modal">
@@ -158,17 +164,12 @@
 
 </div>
 
-<div id="divRegistroAutos" class="divContenido modal">
-	<div  class="modal-content">
-		<a href="#!" class="btn-flat modal-action modal-close waves-effect waves-green right"><i class="material-icons">close</i></a>
-		Registro Autos
-		<div id="divListaAutos">
-
-		</div>
-		<div id="divDetalleAuto">
-		</div>
+<div id="divRegistroAutos" class="divContenido modal modal-fixed-footer">
+	<div href="#!" class="btn modal-action modal-close waves-effect red"><i class="material-icons">close</i></div>
+	<div class="modal-content">
+		<div id="divListaAutos"></div>
+		<div id="divDetalleAuto"></div>
 	</div>
-	
 
 </div>
 
