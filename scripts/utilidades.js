@@ -276,8 +276,8 @@ function regresaRenglonVenta(item, subastaID) {
 	renglon += '	<div class="searchItemHead">';
 	renglon += '		<label>' + item.marca + ' - ' + item.modelo + '</label>';
 		renglon += '		<div class="waves-effect waves-light"><i class="material-icons" attr-id="' + item.idAuto + '" onclick="VerDetalleAuto(this);">feedback</i></div>';
-	if(sessionStorage["es_admin"] == 1){
-		renglon += '		<div class="waves-effect waves-light"><i class="material-icons" attr-id="' + item.idAuto + '" attr-subastaid="'+subastaID+'" onclick="EditarAuto(this);">mode_edit</i></div>';
+	if(sessionStorage["es_admin"] == 1 && getUrlVars()["accion"] != "subasta"){
+		renglon += '		<div class="waves-effect waves-light editauto"><i class="material-icons" attr-id="' + item.idAuto + '" attr-subastaid="'+subastaID+'" onclick="EditarAuto(this);">mode_edit</i></div>';
 	}
 	renglon += '	</div>';
 	renglon += '	<div class="searchItemImg"><img attr-id="' + item.idAuto + '" width="100px" onclick="VerDetalleAuto(this);" src="' + siteurl + 'uploads/' + item.foto + '" onerror="imgError(this)"; /></div>';
@@ -474,12 +474,30 @@ function VerDetalleAuto(o) {
 	var subastaid = $(o).attr("attr-subastaid");
 	var autoid = $(o).attr("attr-id");
 
+	if(getUrlVars()["accion"] == "subasta"){
+			$('#divDetalleAuto').modal({
+			dismissible : true, // Modal can be dismissed by clicking outside of the modal
+			opacity : .5, // Opacity of modal background
+			inDuration : 300, // Transition in duration
+			outDuration : 200, // Transition out duration
+		});
+		$('#divDetalleAuto').modal("open");
+		
+
+		
+	}
+
+
+	
+
 	postrequest("autos/info",{ "autoid":autoid}, function(data){
 
-		var infoAuto = data;
-		cargaHTML("#divDetalleAuto", "views/interna2.html", "Detalle Auto",function(){
+			var infoAuto = data;
+			cargaHTML("#divDetalleAuto", "views/interna2.html", "Detalle Auto",function(){
+			
+
 			debugger;
-			$("#divDetalleAuto").show();
+			//$("#divDetalleAuto").show();
 			$("#divListaAutos").hide();
 
 			$("#imgPrincipal").attr("src", siteurl+"uploads/"+infoAuto.foto);
@@ -494,12 +512,17 @@ function VerDetalleAuto(o) {
 			$("#detalleModelo").html(infoAuto.modelo);
 			$("#detalleKM").html(Number(infoAuto.km).formatMoney());
 			$("#detalleAnio").html(infoAuto.anio);
+
 			$("#detalleColor").html(infoAuto.color);
 			$("#detallePrecio").html("$"+Number(infoAuto.precio).formatMoney());
 			$("#detalleTransmision").html(infoAuto.transmision);
 			$("#detalleDescripcion").html(infoAuto.descripcion);
 			$("#detalleCaracteristicas").html(infoAuto.caracteristicas);
 			$("#detalleUbicacion").html(infoAuto.estado + " - " + infoAuto.ciudad);
+			if(getUrlVars["accion"] == "subasta"){
+
+
+			}
 		
 		});
 	});

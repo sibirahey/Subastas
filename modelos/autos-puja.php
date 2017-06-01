@@ -35,7 +35,9 @@ class autospuja
         else if($peticion[0] == 'listar') {
 
             return self::listar();
-        } 
+        } else if($peticion[0] == 'ganadores'){
+
+        }
         else {
             throw new ExcepcionApi(self::ESTADO_URL_INCORRECTA, "Url mal formada", 400);
         }
@@ -165,6 +167,12 @@ class autospuja
             print_r($e);
             return null;
         }
+    }
+
+    public static function ganadores($idsubasta){
+        $comando = "SELECT ap.idAuto, ap.idPuja, ap.oferta, ap.idUsuario, ap.hora_puja, ap.idSubasta, concat(u.nombre, ' ', u.appaterno, ' ', u.apmaterno) as nombre_usuario FROM autos_puja ap, usuario u, subastas s WHERE ap.idUsuario = u.idUsuario and ap.idSubasta = ?   and s.idSubasta = ap.idSubasta and ap.hora_puja < s.fechaFin +1 ";
+
+
     }
 
     

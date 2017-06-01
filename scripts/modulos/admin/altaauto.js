@@ -112,7 +112,7 @@ function CargaFuncionesRegistroAuto(idSubasta){
    		
    		oObj = null;
    		var operacion = $( "#dialog" ).attr("operacion");
-   		alert(operacion);
+   		
    		switch(operacion){
    			case "marcas":
    				oObj = new Marca();

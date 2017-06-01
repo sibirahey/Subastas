@@ -271,7 +271,7 @@ class autos
                 self::PUBLICADO .")" .
                 " VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?)";
             
-                
+            $desc = json_decode($auto["descripcion"]);
             $sentencia = $pdo->prepare($comando);
             $sentencia->bindParam(1, $auto["enVenta"]);
             $sentencia->bindParam(2, $auto["precio"]);
@@ -283,7 +283,7 @@ class autos
             $sentencia->bindParam(8, $auto["transmision"]);                          
             $sentencia->bindParam(9, $auto["estado"]);                          
             $sentencia->bindParam(10, $auto["ciudad"]);                          
-            $sentencia->bindParam(11, json_decode($auto["descripcion"]));     
+            $sentencia->bindParam(11, $desc);     
             $sentencia->bindParam(12, $auto["estatus"]);                          
             $sentencia->bindParam(13, $auto["publicado"]);                          
 

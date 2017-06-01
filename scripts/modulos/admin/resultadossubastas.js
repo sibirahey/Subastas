@@ -21,12 +21,12 @@ function cargaResultadosSubastas(){
 				 }, 
 				 function (){
 					alert("Ocurrió un error al realizar la consulta");
-					});
+				});
 	
 
 
 
 }
 function verResultadoSubasta(o){
-	alert($(o).attr("attr-id"));
+	
 }
