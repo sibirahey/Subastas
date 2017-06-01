@@ -3,9 +3,10 @@ var doneTypingIntervalo = 1000;
 
 
 function CargaFuncionesRegistroAuto(idSubasta){
-	$("#dialog").hide();
+	$("#dialog").modal();
 	$('#btnActualizaCatalogo').hide();
 	$('#btnEliminaCatalogo').hide();
+	$('#labelMensaje').hide();
 	$("#cbAnioAuto").html(CargaAnioAutos(0));
 	$("#cbAnioAuto").material_select();
 	$("#btnAddModelo").hide();
@@ -13,12 +14,15 @@ function CargaFuncionesRegistroAuto(idSubasta){
 		
 		$("#divFeatureContainer").append(
 			"<div class='feature' attr-featureid='" + $("#cbFeaturesAutos").val() + "' attr-id='feature-"+$("#cbFeaturesAutos").val()+"'>"+
-			"<span onclick='removeFeature(this);' class='fa fa-times' attr-id='" +$("#cbFeaturesAutos").val()+ "' attr-text='"+ $("#cbFeaturesAutos option[value='"+$("#cbFeaturesAutos").val()+"']").text()+"'>"+ 
+			"<i class='material-icons' onclick='removeFeature(this);' attr-id='" +$("#cbFeaturesAutos").val()+ "' attr-text='"+ $("#cbFeaturesAutos option[value='"+$("#cbFeaturesAutos").val()+"']").text()+"'>delete_forever</i>"+
+			"<span onclick='removeFeature(this);' attr-id='" +$("#cbFeaturesAutos").val()+ "' attr-text='"+ $("#cbFeaturesAutos option[value='"+$("#cbFeaturesAutos").val()+"']").text()+"'>"+ 
 			$("#cbFeaturesAutos option[value='"+$("#cbFeaturesAutos").val()+"']").text() + 
 			"</span></div>"
-		);
+		);	
+		
 		$("#cbFeaturesAutos option[value='"+$("#cbFeaturesAutos").val()+"']").remove();
-
+		$('.cbFeaturesAutos').find('.select-dropdown').val('');
+		$('select').material_select();
 	});
 
 	
@@ -35,7 +39,12 @@ function CargaFuncionesRegistroAuto(idSubasta){
 	$("#cbEstadoAuto").change(function() {
 		CargaSelectMunicipios("#cbCiudadAuto", $("#cbEstadoAuto").val());
 	});
-
+	$("#cbFeaturesAutos").change(function(){
+		if($(this).val() > 0){
+			$("#btnAddFeature").removeClass('disabled');
+			
+		}
+	});
 	$("#cbMarcaAuto").change(function(){
 		if($(this).val() >0){
 			$("#btnAddModelo").show();
@@ -48,9 +57,9 @@ function CargaFuncionesRegistroAuto(idSubasta){
 		$("#btnAddMarca").attr('Nombre',$(this).val());
 		CargaSelectModelos("#cbModeloAuto", "#cbMarcaAuto", 0, 1);
 	});
+		
 	
-	
-	 $("#btnUpload").click(function() {
+	$("#btnUpload").click(function() {
 		    
 		    var file_data = $('#fotoAuto').prop('files')[0];   
 		    var form_data = new FormData();                  
@@ -97,6 +106,7 @@ function CargaFuncionesRegistroAuto(idSubasta){
 	
 	
    	$("#btnAddMarca").add("#btnAddModelo").add("#btnAddColor").add("#btnAddCaracteristicas").click(function(){
+   		debugger;
    		$("#txtDescripcion").val("");
    		$("#labelMensaje").text("");
    		$('#btnActualizaCatalogo').hide();
@@ -104,7 +114,7 @@ function CargaFuncionesRegistroAuto(idSubasta){
 		$( "#dialog" ).attr("title", $(this).attr("title"));
 		$( "#dialog" ).attr("operacion", $(this).attr("operacion") );
    		$("#labelTxtDescripcion").html($(this).attr("desc"));
-   		$( "#dialog" ).dialog({ modal:true});
+   		$( "#dialog" ).modal("open");
    });
 
 
@@ -215,8 +225,8 @@ function buscaexistente(){
 	}
 
 	if (elemento.text().toUpperCase() == txtDesc ){
-		$('#labelMensaje').text('Ya existe '+tipomsj+' con este nombre');
-		
+		$('#labelMensaje').append('<i class="material-icons red-text">warning</i><span>Ya existe '+tipomsj+' con este nombre</span>');
+		$('#labelMensaje').show();
 		$('#btnActualizaCatalogo').attr('idMarca',elemento.val());
 		$("#btnActualizaCatalogo").show();
 		
@@ -242,9 +252,9 @@ function buscaexistente(){
 }
 
 function removeFeature(o){
-
-		$("#cbFeaturesAutos").append('<option value="'+$(o).attr("attr-id")+'" >' + $(o).attr("attr-text") + '</option>' );
-		$(o).parent().remove();
+	$("#cbFeaturesAutos").append('<option value="'+$(o).attr("attr-id")+'" >' + $(o).attr("attr-text") + '</option>' );
+	$(o).parent().remove();
+	$('select').material_select();	
 }
 function clearFileInput(id) 
 { 

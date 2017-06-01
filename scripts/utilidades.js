@@ -159,7 +159,7 @@ function CargaSelectFeatures(control, features, estatus) {
 		"estatus" : estatus
 	}, function(data) {
 
-		$(control).append('<option value="0" disabled selected></option>');
+		$(control).append('<option value="0" disabled selected>SELECIONA</option>');
 
 		for (i in data) {
 

@@ -231,10 +231,10 @@ function CargaSubastas(estatus, empresa) {
 			div += '				</ul>';
 			div += '			</div>';
 			div += '			<div class="card-content">';
-			div += '				<div><label>Tipo de subasta: </label>' + data[i].tipoSubasta + '</div>';
-			div += '				<div><label>Vigencia: </label>' + data[i].fechaInicio + ' - ' + data[i].fechaFin + '</div>';
-			div += '				<div><label>Estatus: </label>' + data[i].estatus + '</div>';
-			div += '				<div><label>Empresas:</label>' + data[i].empresas + '</div>';
+			div += '				<div><label>Tipo de subasta: </label><label>' + data[i].tipoSubasta + '</label></div>';
+			div += '				<div><label>Vigencia: </label><label>' + data[i].fechaInicio + ' - ' + data[i].fechaFin + '</label></div>';
+			div += '				<div><label>Estatus: </label><label>' + data[i].estatus + '</label></div>';
+			div += '				<div><label>Empresas:</label><label>' + data[i].empresas + '</label></div>';
 			div += '				<div><label>Publicada:</label><label>' + data[i].publicada + '</label></div>';
 			div += '				<div><label class="switch"><input type="checkbox" attr-id="' + data[i].idSubasta + '" class="btnPublicar" ' + ((data[i].visible == 0) ? "" : "checked" ) + ' /><div class="slider round"></div></label>';
 			div += '				</div>';
@@ -246,6 +246,7 @@ function CargaSubastas(estatus, empresa) {
 		}
 
 		$(".btnAdministraAutos").click(function() {
+			debugger;
 			var nombreSubasta = $(this).attr("attr-nombresubasta");
 			var idSubasta = $(this).attr("attr-id");
 			$("#divListaAutos").html("");
@@ -254,6 +255,7 @@ function CargaSubastas(estatus, empresa) {
 
 					$("#btnGuardaAuto").show();
 	 				$("#bntActualizaAuto").hide();
+	 				$('.altaAutosTitle').hide();
 					$("#divRegistroAutos").show();
 					$("#divSubastaNombre").html(nombreSubasta);
 					$("#divSubastaNombre").show();
