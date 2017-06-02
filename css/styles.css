@@ -469,7 +469,7 @@ body {
  #divListaBotonera > .divItemBotonera:nth-child(3) {
  float: right;
  }*/
-.incrementoSymbol:before{
+/*.incrementoSymbol:before{
 	content: "$";
     position: absolute;
     height: 45px;
@@ -478,7 +478,7 @@ body {
     text-align: center;
     line-height: 45px;
     font-weight: bold;
-}
+}*/
 #divListaBotonera > .divItemBotonera > label {
 	line-height: 30px;
 	margin-right: 20px;
@@ -495,6 +495,9 @@ body {
 #divListaBotonera > .divItemBotonera select:focus, 
 #divListaBotonera > .divItemBotonera input[type="text"]:focus {
 	border-bottom: 1px solid #468CF0;
+}
+.divItemBotonera #btnFiltrar{
+	float: right;
 }
 /*#btnFiltrar {
  height: 30px;
@@ -824,8 +827,9 @@ label[for="registroEULA"] {
 /*---------- SETTINGS ----------*/
 .mainBody > h2 {
 	width: 1024px;
-	margin: 10px calc(50% - 512px);
-	font-weight: 500;
+    margin: 60px calc(50% - 512px) 40px;
+    font-weight: 100;
+    border-bottom: 1px solid rgb(180,180,180);
 }
 .cnfgSubastaContainer {
 	clear: both;
@@ -2161,7 +2165,6 @@ button[name="contactoEnviar"] {
 	margin: 0 calc(50% - 512px);
 }
 #btnAgregarSubasta {
-	width:36px;
 	text-align:center;
 	cursor: pointer;	
 }
@@ -2173,9 +2176,7 @@ button[name="contactoEnviar"] {
 }
 #divListaBotonera {
 	float:none;
-	background-color: #ffffff;
-	border-radius: 4px;
-	border: 1px solid #D2D2D2;
+	background-color: transparent;
 	padding: 6px;
 	max-width: 1024px;
 	margin: 20px auto 0;
@@ -2203,31 +2204,46 @@ button[name="contactoEnviar"] {
 	margin-bottom: 10px;
 }
 .divRenglonTabla > .card {
-	height:340px;
+	min-height:460px;
 	width: 100%;
 	padding: 6px 0;
 }
-
+.divRenglonTabla > .card > .card-content,
+.divRenglonTabla > .card > .card-action{
+	float:left;
+	position: relative;
+	display:block;
+	width: 100%;
+}
+.divRenglonTabla > .card > .card-content{
+	text-align:center;
+	top:-56px;
+	overflow:auto		
+}
+.divRenglonTabla > .card > .card-action{
+	position: absolute;
+	bottom:0;
+}
 .divRenglonTabla > .card > .card-content > label:not(.switch){
 	display:block;
 	font-size:1rem;
 	float: left;
+	width:100%;
 }
 .divRenglonTabla > .card > .card-content > label:not(.switch):nth-child(odd){
-	font-weight:500;
-	width:110px;
-	text-align:right;
-}	
+	font-weight: 500;
+	text-align:left;
+}
 .divRenglonTabla > .card > .card-content > label:not(.switch):nth-child(even){
-    width: calc(100% - 155px);
+    float: right;
     text-align: left;
+    width: 100%;
+    margin-bottom: 10px;
     text-indent: 10px;
 }
-
 .divRenglonTabla .switch {
 	margin: 20px 0 0 calc(50% - 30px);
 }
-
 #divListaContenido .fixed-action-btn{
 	right:5px;
 }
@@ -2358,6 +2374,9 @@ input:checked + .slider:before {
 #divRegistroAutos > .divegistro > #btnAddMarca {
 	width: 70px;
 	margin: 0 15px;
+}
+.divHeaderContenido > .modal-footer > .btn{
+    margin: 6px 10px;
 }
 
 	/*--------- ENDS NUEVA SUBASTA ---------*/
@@ -2518,6 +2537,7 @@ input:checked + .slider:before {
     width: 100%;
     padding: 20px;
     background-color: rgb(225,225,225);
+    border-radius:10px;
     overflow:auto;
 }
 #divFeatureContainer > .feature {
@@ -2565,12 +2585,15 @@ input:checked + .slider:before {
     font-size: 36px;
 }
 #fotosSubidas{
-	float: left;
+ 	float: left;
     width: 100%;
+    background-color: rgb(225,225,225);
+    border-radius: 10px;
+    padding: 20px;
+
 }
 #fotosSubidas > .fotosAuto{
 	float: left;
-    width: 33.33%;
     overflow:hidden;
 }
 
@@ -2597,8 +2620,8 @@ input:checked + .slider:before {
 }
 
 #ulMisSubastas > li .card-title {
-	font-size: 24px;
-	font-weight: 300;
+	font-size: 16px;
+	font-weight: 400;
 	padding: 5px;
 	text-transform: capitalize;
 }
@@ -2651,5 +2674,8 @@ div[name="altaautos"] > .row{
 	width:1024px;
 	float:none;
 	margin: 0 auto;
+}
+#tblResultadosSubastas{
+	
 }
 /*--------- ENDS RESULTADOS POR SUBASTA --------*/

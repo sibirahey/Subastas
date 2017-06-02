@@ -27,6 +27,7 @@
 		
 		<script type="text/javascript" src="scripts/main.js<?php echo "?" . rand(0, 9999999); ?>"></script>
 		<script type="text/javascript" src="scripts/header.js<?php echo "?" . rand(0, 9999999); ?>"></script>
+		<script type="text/javascript" src="scripts/footer.js<?php echo "?" . rand(0, 9999999); ?>"></script>
 		<script type="text/javascript" src="scripts/admin.js<?php echo "?" . rand(0, 9999999); ?>"></script>
 		<script type="text/javascript" src="scripts/utilidades.js<?php echo "?" . rand(0, 9999999); ?>"></script>
 		<script type="text/javascript" src="scripts/request.js<?php echo "?" . rand(0, 9999999); ?>"></script>
@@ -67,7 +68,7 @@
 			<div class="mainMinusHeader">
 				<!-- <div id="btnClose">[X]</div> -->
 				<div class="mainBody"></div>
-				<!-- <div class="mainFooter"></div> -->
+				<div class="mainFooter"></div>
 			</div>
 		</div>
 

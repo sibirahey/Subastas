@@ -1,42 +1,8 @@
-<!-- <div id="botoneraContainer" class="row">
-
-	<div id="divListaBotonera" class="valign-wrapper">
-		<div class="divItemBotonera col s2">
-			<a id="btnAgregarSubasta" class="btn waves-effect waves-light cyan white-text" titlee="Agregar Subasta"><i class="material-icons">add</i></a>
-		</div>
-		<div class="divItemBotonera col s4">
-
-			<div class="input-field col s12">
-				<select id="cmbEmpresasFiltro" name="cmbEmpresasFiltro"></select>
-				<label for="cmbEmpresasFiltro" >Empresas</label>
-			</div>
-
-		</div>
-		<div class="divItemBotonera col s4">
-			<div class="input-field col s12">
-				<select>
-					<option value="-1" disabled selected> == Todas ==</option>
-					<option value="-1"> == Todas ==</option>
-					<option value="0">No publicadas</option>
-					<option value="1">Publicadas</option>
-				</select>
-				<label>Estatus de publicación:</label>
-			</div>
-
-		</div>
-		<div class="divItemBotonera col s2">
-
-			<a id="btnFiltrar" class="waves-effect waves-light btn"><i class="material-icons left">search</i>Filtrar</a>
-		</div>
-
-	</div>
-
-</div> -->
-
+<h2 class="adminSubastasTitle">Administrador de Subastas</h2>
 <div id="divListaBotonera" class="row">
 
 	<div class="divItemBotonera col s12 m2">
-		<a id="btnAgregarSubasta" class="btn waves-effect waves-light cyan white-text" titlee="Agregar Subasta"><i class="material-icons">add</i></a>
+		<a id="btnAgregarSubasta" class="btn-floating btn-large waves-effect waves-light blue lighten-2 tooltipped" data-position="top" data-delay="50" data-tooltip="Agregar Subasta"><i class="material-icons">add</i></a>
 	</div>
 
 	<div class="input-field col s12 m4">
@@ -56,7 +22,7 @@
 
 	<div class="divItemBotonera col s12 m2">
 
-		<a id="btnFiltrar" class="waves-effect"><i class="material-icons">search</i>Filtrar</a>
+		<div id="btnFiltrar" class="btn btn-large waves-effect waves-light blue lighten-2"><i class="material-icons">search</i></div>
 	</div>
 
 </div>
@@ -66,60 +32,61 @@
 <div id="divAdminSubastas" class="row">
 
 	<!-- Modal Structure -->
-	<div class="modal modal-fixed-footer divHeaderContenido">
+	<div class="modal divHeaderContenido modal-fixed-footer">
 		<div class="modal-content">
-
 			<div class="row">
 				<div class="input-field col s12">
-					<!-- <input id="lote" type="text" class="validate"> -->
 					<input id="txtNombreSubasta" type="text" class="validate">
 					<label for="txtNombreSubasta">#Lote:</label>
 				</div>
-				<div class="input-field col s12">
+				
+				<div class="input-field col s6">
 					<input type="text" id="txtFechaInicio" name="txtFechaInicio" />
 					<label for="txtFechaInicio" >Fecha inicio:</label>
 				</div>
-				<div class="input-field col s12">
+				
+				<div class="input-field col s6">
 					<input type="text" id="txtFechaFin" name="txtFechaFin" />
 					<label for="txtFechaFin" >Fecha Fin:</label>
 				</div>
+				
 				<div id="divTipoSubastas" class="col s12">
 					<label>Tipo de Subasta:</label>
 				</div>
 				
-				<div class="input-field col s12 incrementoSymbol">
+				<div class="input-field col s12">
 					<input class="col s6 offset-s1" type="number" id="txtIncremento" name="txtIncremento" min="1" step="10" />
 					<label for="txtIncremento">Incremento:</label>
 				</div>
-				<div class="input-field col s12 incrementoSymbol">
+				
+				<div class="input-field col s12">
 					<input class="col s6 offset-s1" type="number" id="txtNumPujas" name="txtNumPujas" min="1" step="1" />
 					<label for="txtNumPujas">Ofertas por usuarios:</label>
 				</div>
-				<div class="input-field col s12 incrementoSymbol">
+				
+				<div class="input-field col s12">
 					<input class="col s6 offset-s1" type="number" id="txtAutosGanados" name="txtAutosGanados" min="1" step="1" />
 					<label for="txtAutosGanados">Autos ganados por usuarios:</label>
 				</div>
+				
 				<div class="col s12">
-					<!-- Empresas: -->
 					<div class="input-field col s8">
 						<select id="cmbEmpresas" name="cmbEmpresas" ></select>
 						<label for="cmbEmpresas">Empresas</label>
 					</div>
-					<div id="btnAgregaEmpresa" class="btn waves-effect waves-light blue"><i class="material-icons">add</i></div>
-					<div id="btnNuevaEmpresa" class="btn waves-effect waves-light blue"><i class="material-icons">library_add</i></div>
+					<div id="btnAgregaEmpresa" class="waves-effect waves-light btn-floating"><i class="material-icons">add</i></div>
+					<div id="btnNuevaEmpresa" class="waves-effect waves-light btn-floating"><i class="material-icons">library_add</i></div>
 				</div>
+				
 				<div class="col s12">
 					<ul id="lstEmpresa"></ul>
 				</div>
-				<!-- <div id="divTipoSubastas" class="col s12">
-					<div id="btnGuardarSubasta" class="btn waves-effect waves-light teal"><i class="material-icons">done</i></div>
-				</div> -->
 			</div>
 
 		</div>
 		<div class="modal-footer">
-		    <div id="btnGuardarSubasta" class=" waves-effect waves-light teal btn"><i class="material-icons">done</i></div>
-			<div class="modal-action modal-close waves-effect waves-green btn ">Cancelar</div>
+		    <div id="btnGuardarSubasta" class=" waves-effect waves-light teal btn">GUARDAR</div>
+			<div class="modal-action modal-close waves-effect waves-light teal btn ">CANCELAR</div>
 		</div>
 	</div>
 

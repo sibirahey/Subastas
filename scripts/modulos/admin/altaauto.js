@@ -57,7 +57,10 @@ function CargaFuncionesRegistroAuto(idSubasta){
 		$("#btnAddMarca").attr('Nombre',$(this).val());
 		CargaSelectModelos("#cbModeloAuto", "#cbMarcaAuto", 0, 1);
 	});
-		
+	
+	$('.fotoAuto').find('.file-path').change(function(){
+		$("#btnUpload").addClass('pulse');
+	});
 	
 	$("#btnUpload").click(function() {
 		    
@@ -82,16 +85,18 @@ function CargaFuncionesRegistroAuto(idSubasta){
 		                	}else{
 		                		debugger;
 		                		var filename = $("#fotoAuto").val().replace(/C:\\fakepath\\/i, '');
-								$("#fotosSubidas").append("<div class='fotosAuto' attr-id='"+php_script_response.trim()+"'><span>"+filename+"</span><img width='100px' src='" + siteurl +  "uploads/" + php_script_response.trim() + "' /></div>");
+								$("#fotosSubidas").append("<div class='fotosAuto' attr-id='"+php_script_response.trim()+"'><img  class='materialboxed' data-caption='"+filename+"' width='100px' src='" + siteurl +  "uploads/" + php_script_response.trim() + "' /><span>"+filename+"</span></div>");
 								clearFileInput('fotoAuto');
-		                		
+		                		$('.materialboxed').materialbox();
 		                	}
 		                    
 		                }
 		     });
+		     $("#btnUpload").removeClass('pulse');
+      $('.fotoAuto').find('.file-path').val('');
 		    
 		});
-
+	    
 	 
 	  SoloNumericos("#precioAuto");
 	  SoloNumericos("#cbKMAuto");
