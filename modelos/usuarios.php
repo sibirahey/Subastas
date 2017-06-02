@@ -43,7 +43,7 @@ class usuarios
     public static function post($peticion)
     {
         if ($peticion[0] == 'registro') {
-            return self::registrar();
+            return self::crear($_POST);
         } else if ($peticion[0] == 'login') {
             return self::login();
         }else if ($peticion[0] == 'rememberme'){
@@ -106,17 +106,14 @@ class usuarios
 
  
             $resultado = $sentencia->execute();
+            $usuarioid = $pdo->lastInsertId();
            
             if ($resultado) {
 
-
-
-
-
-                envia_mail($usuario["email"], self::MAIL_BIENVENIDO, "<p>Bienvenido a escudería</p><p>Para terminar su registro por favor confirme su mail: </p><p><a href=\"msusano.com/Subastas/usuarios/confirmar/". $claveApi."\">Confirmar mail</a></p>");
-                return self::ESTADO_CREACION_EXITOSA;
+                envia_mail($usuario["email"], self::MAIL_BIENVENIDO, "<p>Bienvenido a escudería</p><p>Para terminar su registro por favor confirme su mail: </p><p><a href=\"msusano.com/Subastas/usuarios/confirmar/". $claveApi."&u=".$usuarioid.\">Confirmar mail</a></p>");
+                return 1;
             } else {
-                return self::ESTADO_CREACION_FALLIDA;
+                return 0;
             }
         } catch (PDOException $e) {
 
@@ -236,26 +233,26 @@ class usuarios
     {
         return md5(microtime().rand());
     }
-    private function registrar()
-    {
-        $cuerpo = file_get_contents('php://input');
-        $usuario = json_decode($cuerpo);
+    // private function registrar()
+    // {
+    //     $cuerpo = file_get_contents('php://input');
+    //     $usuario = json_decode($cuerpo);
 
-        $resultado = self::crear($_POST);
+    //     $resultado = self::crear($_POST);
 
-        switch ($resultado) {
-            case self::ESTADO_CREACION_EXITOSA:
-               http_response_code(200);
-               return "OK";
+    //     switch ($resultado) {
+    //         case self::ESTADO_CREACION_EXITOSA:
+    //            http_response_code(200);
+    //            return "OK";
                
-                break;
-            case self::ESTADO_CREACION_FALLIDA:
-                throw new ExcepcionApi(self::ESTADO_CREACION_FALLIDA, "Ha ocurrido un error");
-                break;
-            default:
-                throw new ExcepcionApi(self::ESTADO_FALLA_DESCONOCIDA, "Falla desconocida", 400);
-        }
-    }
+    //             break;
+    //         case self::ESTADO_CREACION_FALLIDA:
+    //             throw new ExcepcionApi(self::ESTADO_CREACION_FALLIDA, "Ha ocurrido un error");
+    //             break;
+    //         default:
+    //             throw new ExcepcionApi(self::ESTADO_FALLA_DESCONOCIDA, "Falla desconocida", 400);
+    //     }
+    // }
 
     public function rememberme(){
         $claveapi = $_POST["claveapi"];

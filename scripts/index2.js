@@ -98,9 +98,9 @@ $(document).ready(function() {
 			monthSelector : '#dobmonth',
 			yearSelector : '#dobyear',
 			// Default option values
-			dayDefault : 'Day',
-			monthDefault : 'Month',
-			yearDefault : 'Year',
+			dayDefault : 'Día',
+			monthDefault : 'Mes',
+			yearDefault : 'Año',
 			// Minimum age
 			minimumAge : 12,
 			// Maximum age
@@ -174,14 +174,22 @@ $(document).ready(function() {
 
 			postrequest("usuarios/registro", oUsuario, function(data) {
 				//debugger;
-				if (data == "OK") {
-					window.location.href = "main.php";
+				if (data == 1) {
+					window.location.href = "home.php";
 
 					sessionStorage.setItem('nombre', $("#registroNombre").val() + " " + $("#registroApPaterno").val() + " " + $("#registroApMaterno").val());
 					sessionStorage.setItem('correo', $("#registroMail").val());
 					sessionStorage.setItem('publico', 0);
-				};
+					sessionStorage.setItem('es_admin',0);
+					sessionStorage.setItem('claveapi', data["claveApi"]);
 
+
+				}else{
+					alert("Ocurrió un error al realizar el registro");
+				}
+
+			},function(data){
+				alert("Ocurrió un error al guardar el registro");
 			});
 
 		});
@@ -214,6 +222,10 @@ $(document).ready(function() {
 			if (oUsuario.email.trim() == "") {
 				i++;
 				msj += "Correo electrónico, ";
+			}else{
+				if(!ValidaEmail(oUsuario.email.trim())){
+					msj += "Proporcione un correo elecrónico válido, ";
+				}
 			}
 			if (oUsuario.password.trim() == "") {
 				i++;
