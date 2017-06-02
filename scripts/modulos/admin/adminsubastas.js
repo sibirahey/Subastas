@@ -210,14 +210,6 @@ function CargaSubastas(estatus, empresa) {
 			div += '		<div class="card">';
 			div += '            <span class="card-title">' + data[i].nombreSubasta + '</span>';
 			div += '            <div class="divider"></div>';
-			// div += '            <div class="card-image">';
-			// div += '                <a class="waves-effect btnEditarSubasta" attr-id="' + data[i].idSubasta + '" title="Editar Subasta"><i class="small material-icons">create</i></a>';
-			// div += '                <a class="waves-effect btnAdministraAutos" attr-id="' + data[i].idSubasta + '" attr-nombresubasta="' + data[i].nombreSubasta + '" title="Administrar Autos"><i class="small material-icons">add</i></a>';
-			// div += '                <a class="waves-effect btnAgregarUsuariosAutos" attr-id="' + data[i].idSubasta + '" attr-nombresubasta="' + data[i].nombreSubasta + '" title="Agregar Usuarios"><i class="small material-icons">group_add</i></a>';
-			// div += '                <a class="waves-effect btnListaUsuarios" attr-id="' + data[i].idSubasta + '" attr-nombresubasta="' + data[i].nombreSubasta + '" title="Ver Usuarios"><i class="small material-icons">group</i></a>';
-			// div += '                <a class="waves-effect btnVerAutos" attr-id="' + data[i].idSubasta + '" attr-nombresubasta="' + data[i].nombreSubasta + '" title="Ver Autos"><i class="small material-icons">drive_eta</i></a>';
-			// div += '            </div>';
-			//div += '			<div class="fixed-action-btn horizontal" style="position: relative; display: inline-block; float:right;">';
 			div += '			<div class="fixed-action-btn toolbar" style="position: relative; display: inline-block; float:right;">';
 			div += '				<a class="btn-floating">';
 			div += '					<i class="large material-icons">menu</i>';
@@ -236,6 +228,8 @@ function CargaSubastas(estatus, empresa) {
 			div += '				<label>Estatus: </label><label>' + data[i].estatus + '</label>';
 			div += '				<label>Empresas:</label><label>' + data[i].empresas + '</label>';
 			div += '				<label>Publicada:</label><label>' + data[i].publicada + '</label>';
+			div += '			</div>';
+			div += '			<div class="card-action">';
 			div += '				<label class="switch"><input type="checkbox" attr-id="' + data[i].idSubasta + '" class="btnPublicar" ' + ((data[i].visible == 0) ? "" : "checked" ) + ' /><div class="slider round"></div></label>';
 			div += '			</div>';
 			div += '		</div>';
@@ -542,6 +536,8 @@ function CargaSubastas(estatus, empresa) {
 
 
 	});
+	
+	$('.tooltipped').tooltip({delay: 50});
 }
 
 //Home

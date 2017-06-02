@@ -44,9 +44,9 @@ $(document).ready(function() {
 
 	});
 
-	//cargaHTML(".mainFooter", "views/footer.html", "", function() {
-	//	console.log("Cargo footer");
-	//});
+	cargaHTML(".mainFooter", "views/footer.html", "", function() {
+		console.log("Cargo footer");
+	});
 
 	function cargaHTMLLogin(seccion){
 		//obtiene la propiedad name del elemento del menu y busca la vista con el mismo nombre y lo carga con ajax
@@ -221,19 +221,19 @@ $(document).ready(function() {
 			}
 			if (oUsuario.password.trim() == "") {
 				i++;
-				msj += "Repetir password,";
+				msj += "Repetir password, ";
 			}
 			if (oUsuario.dd.trim() == "") {
 				i++;
-				msj += "Día de nacimiento,";
+				msj += "Día de nacimiento, ";
 			}
 			if (oUsuario.mm.trim() == "") {
 				i++;
-				msj += "Mes de nacimiento,";
+				msj += "Mes de nacimiento, ";
 			}
 			if (oUsuario.yyyy.trim() == "") {
 				i++;
-				msj += "Año de nacimiento,";
+				msj += "Año de nacimiento, ";
 			}
 			var j = 0;
 			$(".chkPref:checked").each(function() {
@@ -241,16 +241,17 @@ $(document).ready(function() {
 			});
 			if (j == 0) {
 				i++;
-				msj += "Temas de interés,";
+				msj += "Temas de interés, ";
 			}
 			if (!$('#registroEULA')[0].checked) {
 				i++;
-				msj += "Aceptar términos y condiciones,";
+				msj += "Aceptar términos y condiciones";
 			}
 
 			if (i > 0) {
-				$(".divError").show();
-				$(".divError").text("Algunos de los campos están vacíos: " + msj);
+				//$(".divError").show();
+				//$(".divError").text("Algunos de los campos están vacíos: " + msj);
+				Materialize.toast('Algunos de los campos están vacíos:'+ msj , 4000);
 				return false;
 
 			} else {
