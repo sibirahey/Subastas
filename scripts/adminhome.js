@@ -1,5 +1,5 @@
 function CargaFuncionesAdminHome(){
-
+	debugger;
     $(".divTxtUrl").hide();
     $("#divLink").hide();
     $("#cmbTipoContenido").prop( "disabled", true );
@@ -79,6 +79,8 @@ function CargaFuncionesAdminHome(){
 
         HabilitaLink($(o).attr("attr-eslink"), o);
         HabilitaControles($(o).attr("attr-esimg"));
+        
+        Materialize.updateTextFields();
     }
 
     function HabilitaLink(esLink, o){
@@ -95,9 +97,7 @@ function CargaFuncionesAdminHome(){
     }
 
     function HabilitaControles(tipoContenido){
-        debugger;
-
-        
+                
         $("#cmbTipoContenido").material_select("destroy");
         $("#cmbTipoContenido").val(tipoContenido);
         $("#cmbTipoContenido").material_select();
@@ -115,7 +115,8 @@ function CargaFuncionesAdminHome(){
              $("#divLink").show();
              $("#chkeslink").prop( "disabled", false );
         }
-
+		$('select').material_select();
+		Materialize.updateTextFields();
     }
 
      $('#chkeslink').click(function(){
@@ -129,7 +130,7 @@ function CargaFuncionesAdminHome(){
      });
 
     $("#bntActualizar").click(function(){
-        
+        debugger;
          postrequest("seccioneshome/updatejson?rand="+Math.random(), {}, function(data){
             if(data == "OK"){
                 alert("Se actualizó la información del home");
@@ -200,6 +201,8 @@ function CargaFuncionesAdminHome(){
                     alert("Ocurrió un error al actualizar la información");
                 }
             });
+            $('select').material_select();
+            Materialize.updateTextFields();
     }
 }
 

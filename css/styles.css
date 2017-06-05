@@ -2266,12 +2266,12 @@ button[name="contactoEnviar"] {
 /*---------  SWITCH ---------*/
 
 /* The switch - the box around the slider */
-.switch {
+/*.switch {
 	position: relative;
 	display: inline-block;
 	width: 60px;
 	height: 34px;
-}
+}*/
 
 /* Hide default HTML checkbox */
 .switch input {
@@ -2537,7 +2537,7 @@ input:checked + .slider:before {
     width: 100%;
     padding: 20px;
     background-color: rgb(225,225,225);
-    border-radius:10px;
+    border-radius:3px;
     overflow:auto;
 }
 #divFeatureContainer > .feature {
@@ -2588,7 +2588,7 @@ input:checked + .slider:before {
  	float: left;
     width: 100%;
     background-color: rgb(225,225,225);
-    border-radius: 10px;
+    border-radius: 3px;
     padding: 20px;
 
 }
