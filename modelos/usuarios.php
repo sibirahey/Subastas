@@ -109,8 +109,8 @@ class usuarios
             $usuarioid = $pdo->lastInsertId();
            
             if ($resultado) {
-
-                envia_mail($usuario["email"], self::MAIL_BIENVENIDO, "<p>Bienvenido a escudería</p><p>Para terminar su registro por favor confirme su mail: </p><p><a href=\"msusano.com/Subastas/usuarios/confirmar/". $claveApi."&u=".$usuarioid.\">Confirmar mail</a></p>");
+				envia_mail($usuario["email"], self::MAIL_BIENVENIDO, "<p>Bienvenido a escudería</p><p>Para terminar su registro por favor confirme su mail: </p><p><a href=\"msusano.com/Subastas/usuarios/confirmar/". $claveApi."\">Confirmar mail</a></p>");
+                //envia_mail($usuario["email"], self::MAIL_BIENVENIDO, "<p>Bienvenido a escudería</p><p>Para terminar su registro por favor confirme su mail: </p><p><a href=\"msusano.com/Subastas/usuarios/confirmar/". $claveApi."&u=".$usuarioid.\">Confirmar mail</a></p>");
                 return 1;
             } else {
                 return 0;

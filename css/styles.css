@@ -19,10 +19,15 @@ body {
 	float: none;
 	margin: 0 auto;
 	background-color: #EAEAEA;
+	display: flex;
+    min-height: 100vh;
+    flex-direction: column;
+}
+main {
+	flex: 1 0 auto;
 }
 /*----------------- --------------*/
 .mainContainer {
-	height: 100%;
 	width: 100%;
 	float: left;
 }
@@ -216,14 +221,10 @@ body {
 /*--------- FOOTER ---------*/
 .mainFooter {
 	float: left;
-	height: 140px;
 	width: 100%;
 	margin-top: 20px;
-	padding: 10px 20px;
 	position: relative;
 	bottom: 0;
-	border-top: 1px solid #BCBCBC;
-	background-color: #505A64;
 }
 .logoFooter {
 	float: left;
@@ -232,6 +233,8 @@ body {
 	background-image: url(../images/logoHeader.svg);
 	background-repeat: no-repeat;
 	background-position: center center;
+}
+.page-footer {
 }
 /*--------- ENDS FOOTER ---------*/
 /*---------- INDEX.HTML ---------*/
@@ -2109,7 +2112,8 @@ div#divCotizacion > #divListaCS button {
 .contactForm {
 	float: left;
 	padding: 20px;
-	width: 100%;
+	margin-right:20px;
+	width: calc(100% - 320px); 
 	border: 1px solid #B3B3B3;
 }
 .contactForm > div > input {
@@ -2132,7 +2136,7 @@ button[name="contactoEnviar"] {
 	text-align: center;
 	width: 90%;
 	margin: 0 5% 10px;
-	background-color: #5BAB71;
+	background-color: #26A69A;
 	color: #ffffff;
 	border: none;
 	font-size: 20px;
@@ -2188,6 +2192,7 @@ button[name="contactoEnviar"] {
 	float: left;
 	max-width: 1024px;
 	margin: 0 calc(50% - 512px);
+	overflow-x:hidden;
 }
 #divListaContenido .card .card-title{
     height: 60px;
@@ -2242,7 +2247,7 @@ button[name="contactoEnviar"] {
     text-indent: 10px;
 }
 .divRenglonTabla .switch {
-	margin: 20px 0 0 calc(50% - 30px);
+	margin: 20px 0 0 calc(50% - 94px);
 }
 #divListaContenido .fixed-action-btn{
 	right:5px;
@@ -2260,7 +2265,17 @@ button[name="contactoEnviar"] {
     line-height: 25px;
     font-size: 1rem;
 }
-
+#divListaUsuariosTtl{
+	height: 60px;
+    line-height: 60px;
+    font-size: 1.6rem;
+    text-indent: 20px;
+    font-weight: 500;
+}
+#divListaUsuariosTbl th{
+	font-weight:500;
+	text-align:center;
+}
 
 /*---------- ENDS ADMINISTRADOR DE SUBASTAS---------*/
 /*---------  SWITCH ---------*/
@@ -2435,7 +2450,8 @@ input:checked + .slider:before {
 }
 #divRegistroAutos > .modal-content{
 	padding:0;
-	height:100%;
+	height:calc(100% - 50px);
+	top:50px;
 }
 .altaAutosContainer > h4{
 	margin:30px 0;

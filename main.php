@@ -44,7 +44,7 @@
 	</head>
 	<body>
 		<!-- contenedor "absoluto"" del sitio -->
-		<div class="mainContainer">
+		<main class="mainContainer">
 			<!-- contenedor del encabezado del sitio -->
 			<div class="mainHeader">
 				<!-- En ésta parte esta: el titulo de la pagina y los botones principales para registrarse o entrar -->
@@ -68,10 +68,10 @@
 			<div class="mainMinusHeader">
 				<!-- <div id="btnClose">[X]</div> -->
 				<div class="mainBody"></div>
-				<div class="mainFooter"></div>
+				
 			</div>
-		</div>
-
+		</main>
+		<footer class="mainFooter"></footer>
 		<div class="modalWindow"></div>
 
 	</body>

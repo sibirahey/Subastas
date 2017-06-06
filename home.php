@@ -41,5 +41,6 @@
                 <div class="mainBody"></div>
             </div>
         </div>
+        <footer class="mainFooter"></footer>
 
     </body>

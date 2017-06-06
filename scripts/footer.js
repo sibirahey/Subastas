@@ -1,7 +1,6 @@
 
 $( document ).ready(function() {
-	debugger;
-    $( ".mainFooter" ).load( "footer.html", function() {
+    $( ".mainFooter" ).load( "views/footer.html", function() {
   		console.log( "Load was performed for footer." );
 	});
 });

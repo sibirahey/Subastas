@@ -63,32 +63,36 @@
     <h2>Contactanos</h2>
     <form class="contactForm col s12">
         <div class="row">
-            <div class="input-field col s12 l6">
+            <div class="input-field col s12">
+            	<i class="material-icons prefix">account_circle</i>
                 <input type="text" name="contactoNombre" required="required"/>
                 <label for="first_name">Nombre Completo</label>
             </div>
             
-            <div class="input-field col s12 l6">
+            <div class="input-field col s12">
+            	<i class="material-icons prefix">phone</i>
                 <input type="tel" name="contactoTelefono" required="required"/>
                 <label for="last_name">Telefono de Contacto</label>
             </div>
             
-            <div class="input-field col s12 l6">
+            <div class="input-field col s12">
+            	<i class="material-icons prefix">email</i>
                 <input type="email" name="contactoEmail"  required="required"/>
                 <label for="last_name">Correo Electronico</label>
             </div>
 
             <div class="input-field col s12">
-                <textarea id="textarea1" class="materialize-textarea"></textarea>
+            	<i class="material-icons prefix">message</i>
+                <textarea id="textarea1" class="materialize-textarea" required="required"></textarea>
                 <label for="textarea1">Escribe un mensaje</label>
             </div>
             
             <div class="input-field col s12">
-                <button type="submit" name="contactoEnviar" placeholder="Enviar">
+                <button type="submit" name="contactoEnviar">
                     Enviar
                 </button>
             </div>
         </div>
     </form>
-
+	<img class="banner300x250" src="images/banner300x250.png">
 </div>

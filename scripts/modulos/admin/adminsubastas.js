@@ -230,7 +230,8 @@ function CargaSubastas(estatus, empresa) {
 			div += '				<label>Publicada:</label><label>' + data[i].publicada + '</label>';
 			div += '			</div>';
 			div += '			<div class="card-action">';
-			div += '				<label class="switch"><input type="checkbox" attr-id="' + data[i].idSubasta + '" class="btnPublicar" ' + ((data[i].visible == 0) ? "" : "checked" ) + ' /><div class="slider round"></div></label>';
+			div += '				<div class="switch"><label>No Publicar<input type="checkbox" attr-id="' + data[i].idSubasta + '" class="btnPublicar" ' + ((data[i].visible == 0) ? "" : "checked" ) + '/><span class="lever"></span>Publicar</label></div>';
+			//div += '				<label class="switch"><input type="checkbox" attr-id="' + data[i].idSubasta + '" class="btnPublicar" ' + ((data[i].visible == 0) ? "" : "checked" ) + ' /><div class="slider round"></div></label>';
 			div += '			</div>';
 			div += '		</div>';
 			div += '	</div>';
@@ -289,7 +290,7 @@ function CargaSubastas(estatus, empresa) {
 			var idSubasta = $(this).attr("attr-id");
 			postrequest("subastas/participantes", {"id_subasta":idSubasta}, function(data){
 				$("#divListaUsuariosTbl").html("");
-				$("#divListaUsuariosTtl").html(nombreSubasta);
+				$("#divListaUsuariosTtl").html("Subasta: " + nombreSubasta);
 				if(data.code){
 					if(data.code == 400){
 						alert("Ocurrió un error al obtener la lista de participantes");
@@ -297,7 +298,7 @@ function CargaSubastas(estatus, empresa) {
 					}
 				}
 				$("#divListaUsuariosTbl").html("");
-				$tabla = "<table><tr><td>Nombre</td><td>Correo</td></tr>"
+				$tabla = "<table class='responsive-table striped centered'><tr><th>Nombre</th><th>Correo</th></tr>"
 				for(var item in data){
 					$tabla += "<tr><td>"+ data[item].nombre + " "+data[item].appaterno+" "+data[item].apmaterno + "</td><td>"+data[item].correo +"</td></tr>";
 					console.log(data);
@@ -514,12 +515,19 @@ function CargaSubastas(estatus, empresa) {
 		// duration : 500
 		// }
 		// });
+		
 		$("#divAdministraUsuarios").modal({
 			dismissible : false, // Modal can be dismissed by clicking outside of the modal
 			opacity : .5, // Opacity of modal background
 			inDuration : 300, // Transition in duration
 			outDuration : 200, // Transition out duration
 			startingTop : '4%', // Starting top style attribute
+			buttons: {
+		        "Close": function () {
+		            $(this). modal("close")
+		        }
+	    	},
+	      complete: function() { $(this).replaceWith(input.val('').clone(true)); } // Callback for Modal close
 		});
 		$("#divListaUsuariosModal").modal({
 			dismissible : false, // Modal can be dismissed by clicking outside of the modal
