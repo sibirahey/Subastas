@@ -158,7 +158,9 @@ $(document).ready(function() {
 			oUsuario.yyyy = $("#dobyear").val();
 			oUsuario.placa = $("#registroPlaca").val();
 			oUsuario.categorias = [];
+			console.log(JSON.stringify(oUsuario));
 			var categorias = [];
+
 			$(".chkPref:checked").each(function() {
 
 				var foo = new UsuarioCategorias(-1, $(this).attr("attr-data"));
@@ -234,6 +236,10 @@ $(document).ready(function() {
 			if (oUsuario.password.trim() == "") {
 				i++;
 				msj += "Repetir password, ";
+			}
+			if(!StrongPassWord(oUsuario.password)){
+				msj+="El password debe contener al menos una letra mayúscula, al menos una letra minúscula, al menos un número, al menos un caracter especial ([! @ # $ % ^ & *), y una longitud mínima de 8 caracteres ";
+
 			}
 			if (oUsuario.dd.trim() == "") {
 				i++;
