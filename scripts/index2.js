@@ -63,8 +63,19 @@ $(document).ready(function() {
 				$('.mainHeader').hide();
 				$('.mainFooter').hide();
 				$('#loginMail').focus();
+			}else if (seccion == "valida"){
+				$('.mainHeader').hide();
+				$('.mainFooter').hide();
+				CargaFuncionesValidaUsuario();
+
 			}else if (seccion == "servicios"){
 				initCargaServicios();
+			}else if(seccion == "recuperar"){
+				$('.mainHeader').hide();
+				$('.mainFooter').hide();
+				CargaFuncionesRecuperar();
+			}else if(seccion == "nuevacontrasena"){
+				CargaFuncionesNuevaContrasena();
 			}
 			
 		});
@@ -146,6 +157,7 @@ $(document).ready(function() {
 		 */
 		$("#btnGuardar").click(function() {
 
+			debugger;
 			var oUsuario = new Usuario();
 			oUsuario.nombre = $("#registroNombre").val();
 			oUsuario.appaterno = $("#registroApPaterno").val();
@@ -158,7 +170,7 @@ $(document).ready(function() {
 			oUsuario.yyyy = $("#dobyear").val();
 			oUsuario.placa = $("#registroPlaca").val();
 			oUsuario.categorias = [];
-			console.log(JSON.stringify(oUsuario));
+			console.log(JSON.stringify(oUsuario))	;
 			var categorias = [];
 
 			$(".chkPref:checked").each(function() {
@@ -176,16 +188,15 @@ $(document).ready(function() {
 
 			postrequest("usuarios/registro", oUsuario, function(data) {
 				//debugger;
-				if (data == 1) {
-					window.location.href = "home.php";
+				if (data > 1) {
+					
 
+					
 					sessionStorage.setItem('nombre', $("#registroNombre").val() + " " + $("#registroApPaterno").val() + " " + $("#registroApMaterno").val());
 					sessionStorage.setItem('correo', $("#registroMail").val());
-					sessionStorage.setItem('publico', 0);
-					sessionStorage.setItem('es_admin',0);
-					sessionStorage.setItem('claveapi', data["claveApi"]);
-
-
+					sessionStorage.setItem('idUsuario', data);
+					window.location.href = "home.php?s=valida";
+	
 				}else{
 					alert("Ocurrió un error al realizar el registro");
 				}
@@ -281,6 +292,8 @@ $(document).ready(function() {
 
 	};
 
+
+
 	/*
 	 *
 	 *Login
@@ -320,19 +333,26 @@ $(document).ready(function() {
 			postrequest("usuarios/login", oLogin, function(data) {
 
 				if (data.valido) {
-
-					debugger;
 					sessionStorage.setItem('nombre', data["nombre"] + " " + data["appaterno"] + " " + data["apmaterno"]);
 					sessionStorage.setItem('correo', data["correo"]);
 					sessionStorage.setItem('publico', data["publico"]);
 					sessionStorage.setItem('es_admin', data["esadmin"]);
 					sessionStorage.setItem('claveapi', data["claveApi"]);
-					
-					if($("#rememberme").is(':checked')){
+					sessionStorage.setItem('idUsuario', data["idUsuario"]);
+					sessionStorage.setItem('valido', data.valido);
+
+					if(data.verificado != Number(1)){
+						window.location.href = "home.php?s=valida";
+
+					}else{
+
 						
-						setCookie("escuderia-rememberme", data["claveApi"], true);
+						if($("#rememberme").is(':checked')){
+							
+							setCookie("escuderia-rememberme", data["claveApi"], true);
+						}
+						window.location.href = "main.php";
 					}
-					window.location.href = "main.php";
 
 				} else {
 					alert("Error de usuario o contraseña");
@@ -341,6 +361,144 @@ $(document).ready(function() {
 			});
 		}
 		
+	}
+
+
+	/********* Valida usuario **********/
+	function CargaFuncionesValidaUsuario(){
+
+			debugger;
+			vars = getUrlVars();
+			if(vars["claveapi"] != undefined && vars["idusuario"] != undefined && vars["correo"] != undefined){
+				postrequest("usuarios/validarcorreo", {"correo":getUrlVars()["correo"], "idusuario":getUrlVars()["idusuario"], "apikey":getUrlVars()["claveapi"]}, 
+					function(data) {
+						
+						if(Number(data["idUsuario"]) > 0)
+						{
+							sessionStorage.setItem('valido', 1);
+							sessionStorage.setItem('nombre', data["nombre"] + " " + data["appaterno"] + " " + data["apmaterno"]);
+							sessionStorage.setItem('correo', data["correo"]);
+							sessionStorage.setItem('publico', data["publico"]);
+							sessionStorage.setItem('es_admin', data["esadmin"]);
+							sessionStorage.setItem('claveapi', data["claveApi"]);
+							sessionStorage.setItem('idUsuario', data["idUsuario"]);
+							sessionStorage.setItem('valido', data.valido);
+							window.location.href = "main.php";
+						}
+
+					}, function(data){
+						alert("Ocurrió un error al validar el correo")
+
+					});
+
+			}else{
+
+				
+				debugger;
+
+				$("#lblNombre").val(sessionStorage.getItem("nombre"));
+				$("#lblCorreo").val(sessionStorage.getItem("correo"));
+
+				$("#lblNombre").focus();
+				$("#lblCorreo").focus();
+				$("#lblClaveApi").focus();
+				$("#lblNombre").attr("disabled", "disabled");
+				$("#lblCorreo").attr("disabled", "disabled");
+				$("#lblCorreo").attr("style", "color:white");
+				$("#lblNombre").attr("style", "color:white");
+			}
+
+			$("#reenviarCorreo").click(function(){
+				
+
+				postrequest("usuarios/reenviarcorreo", {"correo":sessionStorage.getItem("correo"), "idusuario":sessionStorage.getItem("idUsuario")}, function(data) {
+					if(data == 0){
+						alert("Los datos no corresponden");
+					}else if(data == 1){
+						alert("El correo de verificación fue enviado correctamente");
+					}else
+					{
+						alert("Ocurrió un error al enviar el correo");
+					}
+
+				},function(data){
+					alert("Ocurrió un error al enviar el correo");
+					console.log(data);
+				});
+
+			});
+			$("#btnValidaCorreo").click(function(){
+
+
+				postrequest("usuarios/validarcorreo", {"correo":sessionStorage.getItem("correo"), "idusuario":sessionStorage.getItem("idUsuario"), "apikey":$("#lblClaveApi").val()}, 
+					function(data) {
+						console.log(JSON.stringify(data));
+						if(Number(data["idUsuario"]) > 0)
+						{
+							sessionStorage.setItem('valido', 1);
+							sessionStorage.setItem('claveApi', data["claveApi"]);
+
+							window.location.href = "main.php";
+						}
+						else{
+
+							alert("Error al validar el correo");
+						}
+
+					}, function(data){
+						alert("Ocurrió un error al validar el correo ");
+					}
+				);
+
+			})
+			
+	}
+
+	function CargaFuncionesRecuperar(){
+
+		$("#btnRecuperar").click(function(){
+			;
+			postrequest("usuarios/recuperar",{"mail":$("#mail").val()}, function(data){
+				if(data == -1){
+					alert("No se encontro ninguna cuenta con estos datos");
+				}else{
+					alert("Le envíamos un correo, por favor revise su bandeja de entrada. Recuerde que el correo podría llegar a la bandeja de spam o correo no deseado");
+					window.location.href="?s=nuevacontrasena&correo="+$("#mail").val();
+				}
+			},
+			function(data){
+				alert("Ocurrió un error al recuperar la contraseña");
+			} );
+		});
+	}
+
+	function CargaFuncionesNuevaContrasena(){
+
+		$("#rowContrasena").hide();
+		$("#rowRepetirContrasena").hide();
+		$("#divValidaRepetirPassword").hide();
+		vars = getUrlVars();
+		$("#registroMail").val("");
+		$("#claveApi").val("");
+		$("#registroMail").val(vars["correo"]);
+		if(vars["claveapi"] != undefined){
+			$("#claveApi").val(vars["claveapi"]);
+			validaCodigoVericacion("#claveApi");
+		}
+		$("#btnNuevaContrasena").click(function(){
+			postrequest("usuarios/cambiarcontasena",{"mail": $("#registroMail").val() ,"claveapi":$("#claveApi").val(),"password":$("#registroPassword").val()},
+				function(data){
+					if(data == 0){
+						alert("Ocurrió un error al guardar la contraseña");
+					}else{
+						window.location.href = "?s=login";
+					}
+				},
+				function(data){
+					alert("Ocurrió un error al guardar la contraseña");
+				}
+			);
+		});
 	}
 
 });

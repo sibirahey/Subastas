@@ -48,8 +48,21 @@ class usuarios
             return self::login();
         }else if ($peticion[0] == 'rememberme'){
             return self::rememberme();
-        } 
-        else {
+        }else if($peticion[0] == 'reenviarcorreo'){
+            return self::reenviarcorreo();
+        }else if($peticion[0] == 'validarcorreo'){
+            return self::validarcorreo();
+        }else if($peticion[0] == 'logout'){
+            return self::logout();
+        }else if($peticion[0] == 'correoexiste'){
+            return self::correoexiste();
+        }else if($peticion[0] == 'recuperar') {
+            return self::recuperar();
+        }else if($peticion[0] == 'validacodigoverificacion'){
+            return self::validacodigoverificacion();
+        }else if($peticion[0] == 'cambiarcontasena'){
+            return self::cambiarcontasena();
+        }else {
             throw new ExcepcionApi(self::ESTADO_URL_INCORRECTA, "Url mal formada", 400);
         }
     }   
@@ -109,9 +122,9 @@ class usuarios
             $usuarioid = $pdo->lastInsertId();
            
             if ($resultado) {
-				envia_mail($usuario["email"], self::MAIL_BIENVENIDO, "<p>Bienvenido a escudería</p><p>Para terminar su registro por favor confirme su mail: </p><p><a href=\"msusano.com/Subastas/usuarios/confirmar/". $claveApi."\">Confirmar mail</a></p>");
+				envia_mail($usuario["email"], self::MAIL_BIENVENIDO, envia_mensaje_verificacion($claveApi, $usuarioid  ,$usuario["email"] ));
                 //envia_mail($usuario["email"], self::MAIL_BIENVENIDO, "<p>Bienvenido a escudería</p><p>Para terminar su registro por favor confirme su mail: </p><p><a href=\"msusano.com/Subastas/usuarios/confirmar/". $claveApi."&u=".$usuarioid.\">Confirmar mail</a></p>");
-                return 1;
+                return $usuarioid;
             } else {
                 return 0;
             }
@@ -209,7 +222,7 @@ class usuarios
 
                 $sentencia->execute();
 
-                envia_mail($usuario->correo, self::MAIL_BIENVENIDO, "<html><body>Bienvenido a escudería, para terminar su registro por favor confirme su mail: <a href=\"msusano.com/Subastas/usuarios/confirmar/". $claveApi."\">Confirmar mail</a></body></html>", "yo@msusano.com" );
+                envia_mail($usuario->correo, self::MAIL_BIENVENIDO, envia_mensaje_verificacion($claveApi , $usuarioid), "yo@msusano.com" );
                 return self::ESTADO_CREACION_EXITOSA;
             } else {
                 return self::ESTADO_CREACION_FALLIDA;
@@ -254,6 +267,90 @@ class usuarios
     //     }
     // }
 
+    public function validarcorreo(){
+
+        $correo = $_POST["correo"];
+        $idusuario = $_POST["idusuario"];
+        $apikey = $_POST["apikey"];
+
+        $comando = "SELECT nombre, appaterno, apmaterno, correo, verificado, publico, es_admin, claveApi, idUsuario from usuario where correo =? and idUsuario = ? and claveApi = ?";
+
+        $sentencia = ConexionBD::obtenerInstancia()->obtenerBD()->prepare($comando);
+        $sentencia->bindParam(1, $correo);
+        $sentencia->bindParam(2, $idusuario);
+        $sentencia->bindParam(3, $apikey);
+        if ($sentencia->execute())
+        {
+            $fetch = $sentencia->fetchAll(PDO::FETCH_ASSOC);
+            if(sizeof($fetch) > 0 ){
+
+                $usuario = new usuarios();
+                $usuario->idUsuario = $fetch[0]["idUsuario"];
+                $usuario->nombre = $fetch[0]["nombre"];
+                $usuario->appaterno = $fetch[0]["appaterno"];
+                $usuario->apmaterno = $fetch[0]["apmaterno"];
+                $usuario->correo = $fetch[0]["correo"];
+                $usuario->verificado = $fetch[0]["verificado"];
+                $usuario->valido = 1;
+                $usuario->publico = $fetch[0]["publico"];
+                $usuario->esadmin = $fetch[0]["es_admin"];
+                $usuario->claveApi = $fetch[0]["claveApi"];
+
+                $comando = "update usuario set verificado = 1 where correo =? and idUsuario = ?  ";
+                $sentencia = ConexionBD::obtenerInstancia()->obtenerBD()->prepare($comando);
+                $sentencia->bindParam(1, $correo);
+                $sentencia->bindParam(2, $idusuario);
+                if ($sentencia->execute())
+                {
+                    return $usuario;
+                }else{
+                    
+                    $usuario = new usuarios();
+                    $usuario->idUsuario = 0;
+                    return $usuario;
+                }
+                
+            
+            }else{
+                throw new ExcepcionApi(0, "Los datos no son correctos", 500);
+            }
+        }else{
+            throw new ExcepcionApi(0, "Error al validar el correo", 500);
+        }
+
+    }
+    public function reenviarcorreo(){
+
+        
+        $correo = $_POST["correo"];
+        $idusuario = $_POST["idusuario"];
+        $comando = "SELECT nombre, appaterno, apmaterno, correo, verificado, contrasena, publico, es_admin from usuario where correo =? and idUsuario = ? and verificado = 0";
+        $sentencia = ConexionBD::obtenerInstancia()->obtenerBD()->prepare($comando);
+        $sentencia->bindParam(1, $correo);
+        $sentencia->bindParam(2, $idusuario);
+        
+        if ($sentencia->execute())
+        {
+            $fetch = $sentencia->fetch(PDO::FETCH_ASSOC);
+            if($fetch["correo"] == $correo){
+                $claveApi = self::generarClaveApi();
+                $comando = "update ".self::NOMBRE_TABLA." set claveApi = '".$claveApi."', vigencia = DATE_ADD(NOW(), INTERVAL 8 HOUR) where correo = '".  $correo."'";
+                $sentencia = $sentencia = ConexionBD::obtenerInstancia()->obtenerBD()->prepare($comando);
+                if($sentencia->execute()){
+
+                     envia_mail($correo, self::MAIL_BIENVENIDO, envia_mensaje_verificacion($claveApi, $idusuario, $correo), "yo@msusano.com" );
+                     return 1;  
+                }
+            }else{
+                return 0;
+            }
+
+        }else{
+            return -1;
+        }
+
+    }
+
     public function rememberme(){
         $claveapi = $_POST["claveapi"];
         $comando = "SELECT idUsuario, nombre, appaterno, apmaterno, correo, verificado, contrasena, publico, es_admin, claveApi from usuario where ".self::CLAVE_API." = '".$claveapi."' and curdate() < vigencia+1 ";
@@ -292,7 +389,7 @@ class usuarios
         $password = $_POST["password"];
        
             // Sentencia INSERT
-        $comando = "SELECT nombre, appaterno, apmaterno, correo, verificado, contrasena, publico, es_admin from usuario where correo =? ";
+        $comando = "SELECT nombre, appaterno, apmaterno, correo, verificado, contrasena, publico, es_admin, idUsuario from usuario where correo =? ";
         
         
          $pdo = ConexionBD::obtenerInstancia()->obtenerBD();
@@ -321,11 +418,8 @@ class usuarios
             $usuario->valido = $valido;
             $usuario->publico = $fetch["publico"];
             $usuario->esadmin = $fetch["es_admin"];
+            $usuario->idUsuario = $fetch["idUsuario"];
             $usuario->claveApi =  $claveApi;
-
-
-         
-
 
 
             return $usuario;
@@ -339,6 +433,21 @@ class usuarios
     
     }
 
+    private function logout(){
+        $comando = "update ".self::NOMBRE_TABLA." set claveApi = '' where claveApi = ?";
+        $pdo = ConexionBD::obtenerInstancia()->obtenerBD();
+        $sentencia = $pdo->prepare($comando);
+        $sentencia->bindParam(1, $_POST["claveapi"]);
+        if ($sentencia->execute())
+        {
+            return 1;
+        }
+        else{
+            return 0;
+        }
+
+
+    }
 
     private function obtenerUsuarioPorCorreo($correo)
     {
@@ -358,6 +467,87 @@ class usuarios
             return $sentencia->fetch(PDO::FETCH_ASSOC);
         else
             return null;
+    }
+    private function correoexiste(){
+            $comando = "SELECT count(*) as VALIDA from " . self::NOMBRE_TABLA ." WHERE " . self::CORREO . "= ? ";
+            $sentencia = ConexionBD::obtenerInstancia()->obtenerBD()->prepare($comando);
+            $sentencia->bindParam(1, $_POST["correo"]);
+             if ($sentencia->execute())
+                return $sentencia->fetch(PDO::FETCH_ASSOC)["VALIDA"];
+            else
+                return -1;
+
+    }
+
+    private function recuperar(){
+
+        $mail = $_POST["mail"];
+        $comando = "SELECT count(*) as VALIDA from " . self::NOMBRE_TABLA ." WHERE " . self::CORREO . "= ? ";
+        $sentencia = ConexionBD::obtenerInstancia()->obtenerBD()->prepare($comando);
+        $sentencia->bindParam(1, $mail);
+        
+
+        if ($sentencia->execute())
+        {
+            if($sentencia->fetch(PDO::FETCH_ASSOC)["VALIDA"] > 0)
+            {
+
+                $claveApi = self::generarClaveApi();
+                $comando = "update ".self::NOMBRE_TABLA." set claveApi = ? where correo = ?";
+                $pdo = ConexionBD::obtenerInstancia()->obtenerBD();
+                $sentencia = $pdo->prepare($comando);
+                $sentencia->bindParam(1, $claveApi);
+                $sentencia->bindParam(2, $mail);
+                if ($sentencia->execute())
+                {
+                    envia_mail($_POST["mail"], "Escudería - recuperar contraseña", envia_mensaje_recuperarcontrasena($claveApi, $mail));
+                    return 1;
+                }
+                else{
+                    return -1;
+                }
+
+            }else{
+                return -1;
+            }
+        }else
+            return -1;
+
+       
+    }
+    private function validacodigoverificacion(){
+
+        $mail = $_POST["mail"];
+        $claveapi = $_POST["claveapi"];
+        $comando = "SELECT count(*) as VALIDA from usuario where correo = ? AND claveApi = ?";
+        $sentencia = ConexionBD::obtenerInstancia()->obtenerBD()->prepare($comando);
+        $sentencia->bindParam(1, $mail);
+        $sentencia->bindParam(2, $claveapi);
+        if ($sentencia->execute())
+        {
+            return $sentencia->fetch(PDO::FETCH_ASSOC)["VALIDA"];
+        }else{
+            return -1;
+        }
+    }
+
+    private function cambiarcontasena(){
+        $mail = $_POST["mail"];
+        $claveapi = $_POST["claveapi"];
+        $password = self::encriptarContrasena( $_POST["password"]);
+        $comando = "update usuario  set contrasena = ? where correo = ? and claveApi = ?";
+        $pdo = ConexionBD::obtenerInstancia()->obtenerBD();
+        $sentencia = $pdo->prepare($comando);
+        $sentencia->bindParam(1, $password);
+        $sentencia->bindParam(2, $mail);
+        $sentencia->bindParam(3, $claveapi);
+        if ($sentencia->execute())
+        {
+            return 1;
+        }else{
+            return 0;
+        }
+        
     }
     
 }

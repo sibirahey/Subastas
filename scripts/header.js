@@ -63,7 +63,20 @@ $( document ).ready(function() {
 	      
 	  	});
 	  	$("#btnClose").click(function(){
-	  		CargaContenidoMain();
+	  		postrequest("usuarios/logout",{"claveapi":sessionStorage["claveApi"]}, 
+	  			function(data){
+	  				if(Number(data) == 0){
+	  					alert("Ocurrió un error al cerrar la sesión");
+	  				}
+	  				sessionStorage = null;
+	  				sessionStorage.clear();
+	  				window.location.href = "home.php";
+	  				CargaContenidoMain();
+		  		},
+		  		function(data){
+		  			alert("Ocurrió un error al cerrar la sesión");
+		  		});
+	  		
 	  	});
 
 	});

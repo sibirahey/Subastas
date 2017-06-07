@@ -12,5 +12,10 @@ $headers = implode( "\r\n" , $headers );
 
 echo $headers;
 
-echo envia_mail("miguel.susano@gmail.com", "Bienvenido a Escudería", "<p>Bienvenido a escudería</p><p>Para terminar su registro por favor confirme su mail: </p><p><a href=\"msusano.com/Subastas/usuarios/confirmar/aaaaaaaa\">Confirmar mail</a></p>");
+envia_mail("miguel.susano@gmail.com", "Bienvenido a Escudería", envia_mensaje_verificacion("apikey", 1));
+envia_mail("miguel.susano@gmail.com", "Bienvenido a Escudería", envia_mensaje_invitacion("apikey", 1));
+
+echo envia_mensaje_verificacion("apikey", 1);
+
+echo envia_mensaje_invitacion("apikey", 1);
 ?>

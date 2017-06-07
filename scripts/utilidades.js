@@ -780,4 +780,67 @@ function StrongPassWord(password){
 	return re.test(password);
 }
 
+function validamail(o){
+	mail = $(o).val();
+	if(ValidaEmail(mail)){
+		postrequest("usuarios/correoexiste",{"correo":mail}, function(data){
+			if(data == -1){
+				console.log("Ocurrió un error al validar si el correo existe");
+			}else if(data > 0){
+				$("#divValidaCorreo").html("El correo ya esta registrado, por favor intente <a href='home.php?s=login'>iniciar sesión </a>");
+				$("#divValidaCorreo").show();
+				$("#btnGuardar").attr("disabled",true);
+			}else{
+				$("#divValidaCorreo").hide();
+				$("#btnGuardar").attr("disabled",false);
+			}
+		});
+
+	}else{
+		$("#divValidaCorreo").html("Ingrese un correo valido");
+		$("#divValidaCorreo").show();
+		$("#btnGuardar").attr("disabled",true);
+	}
+
+
+}
+
+function validaStrongPassword(o){
+
+	var pass = $(o).val();
+	if(StrongPassWord(pass)){
+		$("#divValidaPassword").hide();
+		$("#btnGuardar").attr("disabled",false);
+	}else{
+		$("#divValidaPassword").show();
+		$("#btnGuardar").attr("disabled",true);
+	}
+}
+
+function validaRepetirPassword(o){
+	var passv = $(o).val();
+	var pass = $("#registroPassword").val();
+	if(pass != passv){
+		$("#divValidaRepetirPassword").show();
+		$("#btnGuardar").attr("disabled",true);
+	}else{
+		$("#divValidaRepetirPassword").hide();
+		$("#btnGuardar").attr("disabled",false);
+	}
+}
+
+function validaCodigoVericacion(o){
+	postrequest("usuarios/validacodigoverificacion",{"mail":$("#registroMail").val() , "claveapi": $(o).val()}, function(data){
+		if(data > 0){
+			$("#rowContrasena").show();
+			$("#rowRepetirContrasena").show();
+		}else{
+			$("#divError").html("Los datos son incorrectos");
+		}
+	}, function(data){
+		alert("Ocurrió un error al validar el codigo de verificación");
+	});
+
+}
+
 	
