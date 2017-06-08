@@ -3,7 +3,6 @@
 	font-weight: 300;
 	font-style: normal;
 	outline: none;
-	
 }
 
 nav div a, ul li {
@@ -18,7 +17,7 @@ body {
 	width: 100%;
 	float: none;
 	margin: 0 auto;
-	background-color: #EAEAEA;
+	background-color: #f0f0f0;
 	display: flex;
     min-height: 100vh;
     flex-direction: column;
@@ -1744,7 +1743,7 @@ div[aria-describedby="divAutos"] {
 	font-size: 1.5em;
 	font-weight: 400;
 }
-#btnGuardar {
+/*#btnGuardar {
 	height: 80px;
 	line-height: 80px;
 	width: 90%;
@@ -1759,7 +1758,7 @@ div[aria-describedby="divAutos"] {
 }
 #btnGuardar:hover {
 	opacity: 1;
-}
+}*/
 button[title="Close"] {
 	display: none;
 }
@@ -2276,7 +2275,19 @@ button[name="contactoEnviar"] {
 	font-weight:500;
 	text-align:center;
 }
-
+#modalEmpresa > .modal-content > #txtNombreEmpresa{
+	width:calc(100% - 70px);
+	float: left;
+}
+#modalEmpresa > .modal-content > #btnEliminaEmpresa{
+	float:left;
+}
+#modalEmpresa > .modal-content > label{
+	float: left;
+}
+#modalEmpresa > .modal-footer > a{
+	margin: 6px;
+}
 /*---------- ENDS ADMINISTRADOR DE SUBASTAS---------*/
 /*---------  SWITCH ---------*/
 
@@ -2410,22 +2421,18 @@ input:checked + .slider:before {
 	height: 40px;
 	width: calc(100% - 150px);
 }*/
-#btnGuardaEmpresa {
+/*#btnGuardaEmpresa {
 	color: #3281B3;
 	height: 40px;
-	width: 40px;
-	cursor: pointer;
-	opacity: 0.75;
+	cursor: pointer;	
 }
-#btnGuardaEmpresa:hover {
-	opacity: 1;
-}
+
 #btnGuardaEmpresa > i {
 	height: 100%;
 	width: 100%;
 	text-align: center;
 	line-height: 40px;
-}
+}*/
 /*--------- ENDS AGREGA EMPRESA ---------*/
 
 /*--------- VENTA AUTOS---------*/
@@ -2678,14 +2685,117 @@ div[name="altaautos"] > .row{
 	margin: 0 auto;
 }
 /*--------- ENDS ALTA AUTOS --------*/
-/*--------- ADM HOME --------*/
+/*--------- ADMIN HOME --------*/
 #divAdminHome{
-	float:none;
-	width:100%;
-	max-width:1024px;
-	margin: 0 auto;
+	float:left;
+	width:1024px;
+	margin: 0 calc(50% - 512px);
 }
-/*--------- ENDS ADM HOME --------*/
+#divAdminHome > .divSeccionesHome,
+#divAdminHome > .divTxtTag,
+#divAdminHome > .divChkestatus,
+#divAdminHome > .divTipoContenido,
+#divAdminHome > .divTxtUrl,
+#divAdminHome > .fotoAuto,
+#divAdminHome > .divUbicacion,
+#divAdminHome > .divTxtAncho,
+#divAdminHome > .divTxtAlto,
+#divAdminHome > .divChkeslink,
+#divAdminHome > .divLink,
+#divAdminHome > .bntGuardar,
+#divAdminHome > .bntActualizar {
+	float: left;	
+	width:31.33%;
+	margin:0 1% 20px;
+	position:relative;
+	display: block;
+}
+#divAdminHome > .divTipoContenido,
+#divAdminHome > .divTxtUrl {
+	width:48%;
+}
+#divAdminHome > .fotoAuto{
+	width: 98%;
+	clear:none;
+}
+	#divAdminHome > .fotoAuto > .input-field{
+	    width: calc(100% - 100px);
+    	float: left;
+	}
+#btnUploadHome{
+	margin:1rem 0 0 20px;
+}
+
+#divAdminHome > .divLink{
+	width:64.67%;	
+}
+#divAdminHome > .adminHomeButtons {
+	float:left;
+	width: 100%;
+	margin: 20px;
+	
+}
+#divAdminHome > .btnGuardarAdminHome,
+#divAdminHome > .bntActualizarAdminHome {
+	height: 80px;
+	line-height: 80px;
+	width: 40%;
+	margin: 10px 5%;
+	color: #FFFFFF;
+	font-family: "Dosis";
+	font-size: 22px;
+	background-color: #3281B3;	
+	border: none;
+	cursor: pointer;
+	opacity: 0.6;
+}
+#divAdminHome > .btnGuardarAdminHome:hover,
+#divAdminHome > .bntActualizarAdminHome:hover {
+	opacity: 1;
+}
+#divAdminHome > .divChkeslink > label > .material-icons{
+    position: absolute;
+    margin-left: 16px;
+}
+#divAdminHomeContenido{
+	float: left;
+    width: 1024px;
+    margin: 0 calc(50% - 512px);
+    overflow-x: scroll;
+    overflow-y: hidden;
+    display: inline-block;
+    white-space: nowrap;
+    background-color: rgba(255,255,255,0.8);
+    padding: 10px;
+    border: 1px solid rgb(190,190,190);
+}
+#divAdminHomeContenido > div{
+	width:300px;
+	margin: 20px;
+	border:1px solid rgb(180,180,180);
+	display: inline-block;
+    position: relative;
+    vertical-align: top;
+}
+#divAdminHomeContenido > div > label,
+#divAdminHomeContenido > div > img,
+#divAdminHomeContenido > div > .btnEditarSeccionHome,
+#divAdminHomeContenido > div > iframe{
+	float:left;
+	width: 100%;
+	text-align:center;
+}
+#divAdminHomeContenido > div > label{
+	line-height:1.2rem;
+	font-size:1.2rem;
+}
+#divAdminHomeContenido > div > img{
+	
+}
+#divAdminHomeContenido > div > .btnEditarSeccionHome{
+	
+}
+/*--------- ENDS ADMIN HOME --------*/
 /*--------- RESULTADOS POR SUBASTA --------*/
 #tblResultadosSubastas{
 	width:1024px;

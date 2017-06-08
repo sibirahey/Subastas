@@ -70,15 +70,15 @@ function buscarAutos(){
 			if (data){
 			$.each(data, function(i, item) {
 					
-				var renglon = "<div value class='rows'>";
-					renglon += '<div><img alt="' + item.idAuto + '" src="fotos/' + item.foto + '" onerror=\'imgError(this)\'; /></div>';
-					renglon += "<div>" + item.descripcion + "</div>";					
-					renglon += "<div>" + item.estado + "</div>";
-					renglon += "<div>" + item.km + "</div>";
-					renglon += "<div><button class='btn waves-effect light-blue lighten-1'  onclick='muestraGaleria(" + item.idAuto + ");'><i class='material-icons'>photo_camera</i></button></div>";
+				var renglon = "<tr>";
+					renglon += '<td><img alt="' + item.idAuto + '" src="fotos/' + item.foto + '" onerror=\'imgError(this)\'; /></td>';
+					renglon += "<td>" + item.descripcion + "</td>";					
+					renglon += "<td>" + item.estado + "</td>";
+					renglon += "<td>" + item.km + "</td>";
+					renglon += "<td><div class='btn waves-effect light-blue lighten-1'  onclick='muestraGaleria(" + item.idAuto + ");'><i class='material-icons'>photo_camera</i></div></td>";
 					
-					renglon += "<div><b>$</b>" + item.precio + "</div>";
-					renglon += "<div class='center-btn'><button class='btn waves-effect waves-light light-blue disabled'><i class='material-icons'>add</i></button></div>";
+					renglon += "<td><b>$</b>" + item.precio + "</td>";
+					renglon += "<td class='center-btn'><div class='btn waves-effect waves-light light-blue disabled'><i class='material-icons'>add</i></div></td>";
 					//renglon += "<div style='display:none;' id='gallery" + item.idAuto + "'>";
 					renglon += "<div id='gallery"+ item.idAuto +"'  class='modal modal-fixed-footer'>";
 				    renglon += "	<div class='modal-content'>";
@@ -92,7 +92,7 @@ function buscarAutos(){
 					renglon += "	</div>";
 					renglon += " </div>";
 					renglon += "</div>";
-					renglon += "</div>";
+					renglon += "</tr>";
 					
 					$("#grdVehiculos").append(renglon);
 					$('.modal').modal();
