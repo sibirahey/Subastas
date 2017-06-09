@@ -13,7 +13,6 @@ html {
 	width: 100%;
 }
 body {
-	height: 100%;
 	width: 100%;
 	float: none;
 	margin: 0 auto;
@@ -157,28 +156,6 @@ main {
 .mainHeader > ul > li > label:hover {
 	cursor: pointer;
 }
-/*.menuPrincipal {
- width: auto;
- float: right;
- margin-right: 20px;
- }
- .menuPrincipal > div {
- height: 40px;
- line-height: 40px;
- color: #ffffff;
- padding: 0 20px;
- cursor: pointer;
- opacity: 0.8;
- }
- .menuPrincipal > img {
- cursor: pointer;
- height: 40px;
- opacity: 0.8;
- }
- .menuPrincipal > div:hover,
- .menuPrincipal > img:hover {
- opacity: 1;
- }*/
 .mainMinusHeader {
 	float: left;
 	width: 100%;
@@ -191,13 +168,6 @@ main {
 	height: 100%;
 	width: 100%;
 }
-/*.mainBody > div{
-	width: 100%;
-	max-width:1024px;
-	margin:0 auto;
-	position:relative;
-	display:block;
-}*/
 .mainBody > .mbLeft {
 	height: 100%;
 	width: 400px;
@@ -457,6 +427,10 @@ main {
 	position: absolute;
 	height: 100%;
 	width: 100%;
+	top:0;
+	bottom:0;
+	left:0;
+	right:0;	
 }
 .loginMain {
 	float: none;
@@ -467,30 +441,9 @@ main {
 	border-right: 1px solid #cccccc;
 	padding: 10px;
 }
-.divLogin {
-	float: left;
-	width: 100%;
-}
 .divHeaderContenido > .divRegistro {
 	margin: 0 0 10px;
 }
-/*#divListaBotonera > .divItemBotonera {
- float: left;
- margin: 0 10px;
- }
- #divListaBotonera > .divItemBotonera:nth-child(3) {
- float: right;
- }*/
-/*.incrementoSymbol:before{
-	content: "$";
-    position: absolute;
-    height: 45px;
-    width: 8.33%;
-    display: block;
-    text-align: center;
-    line-height: 45px;
-    font-weight: bold;
-}*/
 #divListaBotonera > .divItemBotonera > label {
 	line-height: 30px;
 	margin-right: 20px;
@@ -511,17 +464,6 @@ main {
 .divItemBotonera #btnFiltrar{
 	float: right;
 }
-/*#btnFiltrar {
- height: 30px;
- padding: 0 20px;
- border-radius: 3px;
- background-color: #3281B3;
- cursor: pointer;
- color: #ffffff;
- line-height: 30px;
- font-size: 0.8em;
- opacity:0.75;
- }*/
 #btnFiltrar:hover {
 	opacity: 1;
 }
@@ -848,133 +790,6 @@ label[for="registroEULA"] {
 	background-color: #FFFFFF;
 	font-size: 0.8em;
 }
-/*.cnfgSubastaContainer > div{
- height:50px;
- }
- .cnfgSubastaContainer > div:nth-child(1){
- width: 100%;
- }
- .cnfgSubastaContainer > div:nth-child(2),
- .cnfgSubastaContainer > div:nth-child(3),
- .cnfgSubastaContainer > div:nth-child(4){
- width: 33.3%;
- }
- .cnfgSubastaContainer > div:nth-child(5),
- .cnfgSubastaContainer > div:nth-child(6),
- .cnfgSubastaContainer > div:nth-child(7){
- width: calc((100% - 130px) / 3);
- }
- .cnfgSubastaContainer > div > label,
- .cnfgSubastaContainer > div > div > label{
- width:110px;
- text-align:right;
- line-height:40px;
- margin-right:10px;
- }
- .cnfgSubastaContainer > div > label.A{
- width:20px;
- text-align:right;
- line-height:40px;
- margin-right:10px;
- }
- .cnfgSubastaContainer > div > select,
- .cnfgSubastaContainer > div > div > select{
- width:calc(100% - 120px);
- height:40px;
- border-radius: 0;
- }
- .cnfgSubastaContainer > div > input{
- width:calc(100% - 120px);
- height:40px;
- }
- .cnfgSubastaContainer > div.rango > input{
- width:calc(100% - 240px);
- height:40px;
- }
- .cnfgSubastaContainer > div.btnContainer{
- width:120px;
- margin: 0 0 0 10px;
- }
- .cnfgSubastaContainer > .btnContainer > .btnBuscar{
- cursor:pointer;
- background-color:transparent;
- border: none;
- opacity:0.75;
- height:30px;
- width:90%;
- margin: 0 5%;
- color:#ffffff;
- fill:#ff0000;
- background-color:#1D93D0;
- cursor:pointer;
- }
- .cnfgSubastaContainer > .btnContainer > .btnBuscar:hover{
- opacity:1;
- }
- .cnfgSubastaContainer > .btnContainer > .btnBuscar > i{
- height:40px;
- text-align:left;
- line-height:40px;
- font-size:1.6em;
- }
- .cnfgSubastaContainer > .btnContainer > .btnBuscar{
- height:40px;
- line-height:40px;
- }
- .cnfgSubastaContainer > .btnContainer > .btnBuscar > label{
- line-height: 40px;
- padding: 0 8px;
- font-size: 1.2em;
- }
- .cnfgSubastaContainer input[type="text"],
- .cnfgSubastaContainer select{
- border:none;
- border-bottom:1px solid #8C8C8C;
- -webkit-transition : border 500ms ease-out;
- -moz-transition : border-bottom 500ms ease-out;
- -o-transition : border-bottom 500ms ease-out;
- transition : border-bottom 500ms ease-out;
- }
- .cnfgSubastaContainer input[type="text"]:focus,
- .cnfgSubastaContainer select:focus{
- border-bottom:1px solid #F5F5F5;
- }*/
-
-/*
- .cnfgSubastaContainer > div:nth-child(1) > #cmbEmpresa {
- width: 90%;
- }
-
- .cnfgSubastaContainer > div:nth-child(2) {
- width: 60%;
- }
- .cnfgSubastaContainer > div:nth-child(2) > div > .ui-datepicker-trigger {
- height: 30px;
- width: 30px;
- border: none;
- background-color: transparent;
- cursor: pointer;
- }
- .cnfgSubastaContainer > div:nth-child(2) > div > .ui-datepicker-trigger > img {
- margin: 0 15%;
- width: 70%;
- }
- .cnfgSubastaContainer > div:nth-child(3) > div:first-of-type {
- margin-left: 40px;
- }
- .cnfgSubastaContainer > div:nth-child(3) > div {
- width: 120px;
- }
- .cnfgSubastaContainer > div:nth-child(4) > div:nth-child(1) {
- width: 180px;
- }
- .cnfgSubastaContainer > div:nth-child(4) > div:nth-child(2) {
- width: 180px;
- left: 110px;
- }
- .cnfgSubastaContainer > label:first-of-type {
- width: 100%;
- }*/
 #grdVehiculos div {
 	float: left;
 }
@@ -1566,7 +1381,6 @@ img[data-u="image"] {
 }
 .searchItem {
 	float: left;
-	height: 420px;
 	width: 290px;
 	margin: 5px;
 	border: 1px solid #e6e6e6;
@@ -2302,14 +2116,6 @@ button[name="contactoEnviar"] {
 /*---------- ENDS ADMINISTRADOR DE SUBASTAS---------*/
 /*---------  SWITCH ---------*/
 
-/* The switch - the box around the slider */
-/*.switch {
-	position: relative;
-	display: inline-block;
-	width: 60px;
-	height: 34px;
-}*/
-
 /* Hide default HTML checkbox */
 .switch input {
 	display: none;
@@ -2555,7 +2361,7 @@ input:checked + .slider:before {
 	float:left;
     margin-top: 1rem;
 }
-#divSubastaNombre {<i class="material-icons">
+#divSubastaNombre {
 	width: 100%;
 }
 #dialog .modal-content > .input-field{
@@ -2837,8 +2643,14 @@ div[name="altaautos"] > .row{
 	float:none;
 	margin: 0 auto;
 }
-#divInfoSubasta > div{
-	float:left;
-	width:100%;
+#divContenidoSubasta{
+	display: flex;
+    flex-direction: row;	
+    justify-content: flex-start;
 }
+.searchItem > .card > .card-image{
+	overflow:hidden;
+	height:200px;
+}
+
 /*--------- ENDS DETALLE SUBASTA --------*/

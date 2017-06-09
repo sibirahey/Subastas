@@ -271,48 +271,50 @@ function cargaAutosPorSubasta(subastaID, controlid, tiposubasta) {
 }
 
 function regresaRenglonVenta(item, subastaID) {
-
-	var renglon = '<div class="searchItem">';
-	renglon += '	<div class="searchItemHead">';
-	renglon += '		<label>' + item.marca + ' - ' + item.modelo + '</label>';
-		renglon += '		<div class="waves-effect waves-light"><i class="material-icons" attr-id="' + item.idAuto + '" onclick="VerDetalleAuto(this);">feedback</i></div>';
-	if(sessionStorage["es_admin"] == 1 && getUrlVars()["accion"] != "subasta"){
-		renglon += '		<div class="waves-effect waves-light editauto"><i class="material-icons" attr-id="' + item.idAuto + '" attr-subastaid="'+subastaID+'" onclick="EditarAuto(this);">mode_edit</i></div>';
-	}
-	renglon += '	</div>';
-	renglon += '	<div class="searchItemImg"><img attr-id="' + item.idAuto + '" width="100px" onclick="VerDetalleAuto(this);" src="' + siteurl + 'uploads/' + item.foto + '" onerror="imgError(this)"; /></div>';
-	renglon += '	<div class="searchItemBody">';
-	renglon += '		<div>';
-	renglon += '			<label>Año: </label>';
-	renglon += '			<label>' + item.anio + '</label>';
-	renglon += '		</div>';
-	renglon += '		<div>';
-	renglon += '			<label>Color: </label>';
-	renglon += '			<label>' + item.color + '</label>';
-	renglon += '		</div>';
-	renglon += '		<div>';
-	renglon += '			<label>Kilometraje: </label>';
-	renglon += '			<label>' + Number(item.km).formatMoney(2, '.', ',') + '</label>';
-	renglon += '		</div>';
-	renglon += '		<div>';
-	renglon += '			<label>Precio: </label>';
-	renglon += '			<label>' +"$" +Number(item.precio).formatMoney(2, '.', ',') + '</label>';
-	renglon += '		</div>';
-	renglon += '		<div>';
-	renglon += '			<label>Descripción: </label>';
-	renglon += '			<label>' + item.descripcion + '</label>';
-	renglon += '		</div>';
-	if(subastaID > 0){
-		renglon += '		<div class="divBtnPujar" style="display:none">';
-		renglon += '			<div id="btnPujar" class="btnPujar waves-effect waves-light btn" onclick=PujarAuto('+item.idAuto+','+subastaID+','+Number(item.precio)+');>Ofertar</label>';
-		renglon += '		</div>';
-		renglon += '		<div class="divVerOfertas" style="display:none">';
-		renglon += '			<div id="btnVerOfertas" class="btnPujar waves-effect waves-light btn" onclick=VerOfertas('+item.idAuto+','+subastaID+');>Ver Ofertas</label>';
-		renglon += '		</div>';
-	}
-
-	renglon += '	</div>';
-	renglon += '</div>';
+	 
+	var	renglon = '    <div class="searchItem col s12 m6">';
+		renglon += '      <div class="card">';
+		renglon += '        <div class="card-image">';
+		renglon += '          <img attr-id="' + item.idAuto + '" width="100px" onclick="VerDetalleAuto(this);" src="' + siteurl + 'uploads/' + item.foto + '" onerror="imgError(this)"; />';
+		renglon += '          <span class="card-title">' + item.marca + ' - ' + item.modelo + '</span>';
+		      if(sessionStorage["es_admin"] == 1 && getUrlVars()["accion"] != "subasta"){
+		      renglon += '    <a class="btn-floating halfway-fab waves-effect waves-light red"><i class="material-icons">add</i></a>';
+		      }
+		renglon += '        </div>';
+		renglon += '      <div class="card-content">';
+		// renglon += '        <label>' + item.marca + ' - ' + item.modelo + '</label>';
+		renglon += '    <div>';
+		renglon += '      <label>Modelo: </label>';
+		renglon += '      <label>' + item.anio + '</label>';
+		renglon += '    </div>';
+		renglon += '    <div>';
+		renglon += '      <label>Color: </label>';
+		renglon += '      <label>' + item.color + '</label>';
+		renglon += '    </div>';
+		renglon += '    <div>';
+		renglon += '      <label>Kilometraje: </label>';
+		renglon += '      <label>' + Number(item.km).formatMoney(2, '.', ',') + '</label>';
+		renglon += '    </div>';
+		renglon += '    <div>';
+		renglon += '      <label>Precio: </label>';
+		renglon += '      <label>' +"$" +Number(item.precio).formatMoney(2, '.', ',') + '</label>';
+		renglon += '    </div>';
+		renglon += '    <div>';
+		renglon += '      <label>Descripción: </label>';
+		renglon += '      <label>' + item.descripcion + '</label>';
+		renglon += '    </div>';
+		  if(subastaID > 0){
+		renglon += '    <div class="divBtnPujar" style="display:none">';
+		renglon += '      <div id="btnPujar" class="btnPujar waves-effect waves-light btn" onclick=PujarAuto('+item.idAuto+','+subastaID+','+Number(item.precio)+');>Ofertar</label>';
+		renglon += '    </div>';
+		renglon += '    <div class="divVerOfertas" style="display:none">';
+		renglon += '      <div id="btnVerOfertas" class="btnPujar waves-effect waves-light btn" onclick=VerOfertas('+item.idAuto+','+subastaID+');>Ver Ofertas</label>';
+		renglon += '    </div>';
+		      }
+		renglon += '    </div>';
+		renglon += '    </div>';
+		renglon += '  </div>';
+		renglon += '</div>';
 	return renglon;
 
 }
@@ -665,7 +667,7 @@ function CargaInfoSubasta(){
 		}, function(data) {
 				console.log(JSON.stringify(data));
 				$("#divTtlSubasta").html(data[0].nombreSubasta);
-				$("#divTipoSubasta").html(data[0].tipoSubasta);
+				$("#divTipoSubasta").append(data[0].tipoSubasta);
 				$("#divIncremento").attr("attr-incremento", data[0].incremento); 
 				$("#divIncremento").html($("#divIncremento").html().replace("#INCREMENTO#", Number(data[0].incremento).formatMoney()));
 				$("#divOfertasXUsuario").html($("#divOfertasXUsuario").html().replace("#TOTALOFERTAS#", Number(data[0].ofertas_x_usuarios)));
