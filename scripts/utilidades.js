@@ -304,10 +304,10 @@ function regresaRenglonVenta(item, subastaID) {
 	renglon += '		</div>';
 	if(subastaID > 0){
 		renglon += '		<div class="divBtnPujar" style="display:none">';
-		renglon += '			<div id="btnPujar" class="btnPujar" onclick=PujarAuto('+item.idAuto+','+subastaID+','+Number(item.precio)+');>Ofertar</label>';
+		renglon += '			<div id="btnPujar" class="btnPujar waves-effect waves-light btn" onclick=PujarAuto('+item.idAuto+','+subastaID+','+Number(item.precio)+');>Ofertar</label>';
 		renglon += '		</div>';
 		renglon += '		<div class="divVerOfertas" style="display:none">';
-		renglon += '			<div id="btnVerOfertas" class="btnPujar" onclick=VerOfertas('+item.idAuto+','+subastaID+');>Ver Ofertas</label>';
+		renglon += '			<div id="btnVerOfertas" class="btnPujar waves-effect waves-light btn" onclick=VerOfertas('+item.idAuto+','+subastaID+');>Ver Ofertas</label>';
 		renglon += '		</div>';
 	}
 
@@ -536,12 +536,12 @@ function CambiaFotoPrincipal(img){
 	$("#imgPrincipal").attr("src", $(img).attr("src"));
 
 }
-function CierraDetalle(){
-
-
-				$("#divDetalleAuto").hide();				
-				$("#divListaAutos").show();
-}
+// function CierraDetalle(){
+// 
+// 
+				// $("#divDetalleAuto").hide();				
+				// $("#divListaAutos").show();
+// }
 
 function ObtieneSubastasPorUsuario() {
 	postrequest("subastas/xusuario", {
@@ -645,7 +645,6 @@ function CargaInfoSubasta(){
 	cargaHTML(".mainBody", siteurl+"views/main/subastas.html","subasta", function(){
 		vars = getUrlVars();
 		$('#modalPuja').modal({
-			dismissible : true, // Modal can be dismissed by clicking outside of the modal
 			opacity : .5, // Opacity of modal background
 			inDuration : 300, // Transition in duration
 			outDuration : 200, // Transition out duration
@@ -653,7 +652,6 @@ function CargaInfoSubasta(){
 		});
 
 		$('#modalOfertas').modal({
-			dismissible : true, // Modal can be dismissed by clicking outside of the modal
 			opacity : .5, // Opacity of modal background
 			inDuration : 300, // Transition in duration
 			outDuration : 200, // Transition out duration
