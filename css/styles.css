@@ -1383,8 +1383,6 @@ img[data-u="image"] {
 	float: left;
 	width: 290px;
 	margin: 5px;
-	border: 1px solid #e6e6e6;
-	background-color: #ffffff;
 }
 .searchItem > .searchItemHead {
 	height: 40px;
@@ -2615,9 +2613,10 @@ div[name="altaautos"] > .row{
 /*--------- ENDS ADMIN HOME --------*/
 /*--------- RESULTADOS POR SUBASTA --------*/
 #tblResultadosSubastas{
-	width:1024px;
-	float:none;
-	margin: 0 auto;
+	width:100%;
+	max-width:1024px;
+	float:left;
+	margin: 0 calc(50% - 512px);
 }
 #tblResultadosSubastas{
 	
@@ -2639,9 +2638,10 @@ div[name="altaautos"] > .row{
 /*--------- DETALLE SUBASTA--------*/
 #divInfoSubasta,
 #divDetalleAuto{
-	width:1024px;
-	float:none;
-	margin: 0 auto;
+	width:100%;
+	max-width:1024px;
+	float:left;
+	margin: 0 calc(50% - 512px);
 }
 #divContenidoSubasta{
 	display: flex;
@@ -2652,5 +2652,19 @@ div[name="altaautos"] > .row{
 	overflow:hidden;
 	height:200px;
 }
+.searchItem .card-title{
+	width: 100%;
+    background-color: rgba(0,0,0,0.3);
+}
+.searchItem > .card > .card-content > div >label:nth-child(odd){
+	
+}
+.searchItem > .card > .card-content > div >label:nth-child(even){
+	
+}
+.card .card-image img{
+	height: 100%;
+}
+
 
 /*--------- ENDS DETALLE SUBASTA --------*/

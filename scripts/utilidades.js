@@ -272,7 +272,7 @@ function cargaAutosPorSubasta(subastaID, controlid, tiposubasta) {
 
 function regresaRenglonVenta(item, subastaID) {
 	 
-	var	renglon = '    <div class="searchItem col s12 m6">';
+	var	renglon = '    <div class="searchItem">';
 		renglon += '      <div class="card">';
 		renglon += '        <div class="card-image">';
 		renglon += '          <img attr-id="' + item.idAuto + '" width="100px" onclick="VerDetalleAuto(this);" src="' + siteurl + 'uploads/' + item.foto + '" onerror="imgError(this)"; />';
@@ -305,16 +305,13 @@ function regresaRenglonVenta(item, subastaID) {
 		renglon += '    </div>';
 		  if(subastaID > 0){
 		renglon += '    <div class="divBtnPujar" style="display:none">';
-		renglon += '      <div id="btnPujar" class="btnPujar waves-effect waves-light btn" onclick=PujarAuto('+item.idAuto+','+subastaID+','+Number(item.precio)+');>Ofertar</label>';
+		renglon += '      <div id="btnPujar" class="btnPujar waves-effect waves-light btn" onclick=PujarAuto('+item.idAuto+','+subastaID+','+Number(item.precio)+');>Ofertar</label></div>';
 		renglon += '    </div>';
 		renglon += '    <div class="divVerOfertas" style="display:none">';
-		renglon += '      <div id="btnVerOfertas" class="btnPujar waves-effect waves-light btn" onclick=VerOfertas('+item.idAuto+','+subastaID+');>Ver Ofertas</label>';
+		renglon += '      <div id="btnVerOfertas" class="btnPujar waves-effect waves-light btn" onclick=VerOfertas('+item.idAuto+','+subastaID+');>Ver Ofertas</label></div>';
 		renglon += '    </div>';
-		      }
-		renglon += '    </div>';
-		renglon += '    </div>';
+			      }
 		renglon += '  </div>';
-		renglon += '</div>';
 	return renglon;
 
 }
