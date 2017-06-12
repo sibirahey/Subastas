@@ -266,12 +266,24 @@ function cargaAutosPorSubasta(subastaID, controlid, tiposubasta) {
 			}
 		}
 
+
+		
+
 	});
 
 }
 
 function regresaRenglonVenta(item, subastaID) {
 
+
+	/*
+	var carousel = '<div class="jcarousel" data-jcarousel="true"> <ul style="left: 0px; top: 0px;">';
+	var imagenes = item.fotos.split(",");
+	for(i in imagenes){
+		carousel += '<li><img attr-id="' + item.idAuto + '" onclick="VerDetalleAuto(this);" src="' + siteurl + 'uploads/' + imagenes[i] + '" alt=""  width="270px"></li>';
+	}
+	carousel += '</ul></div><p class="jcarousel-pagination" data-jcarouselpagination="true"><a href="#1" class="active">1</a><a href="#2">2</a><a href="#3">3</a><a href="#4">4</a><a href="#5">5</a><a href="#6">6</a></p>';
+	*/
 	var renglon = '<div class="searchItem">';
 	renglon += '	<div class="searchItemHead">';
 	renglon += '		<label>' + item.marca + ' - ' + item.modelo + '</label>';
@@ -280,7 +292,8 @@ function regresaRenglonVenta(item, subastaID) {
 		renglon += '		<div class="waves-effect waves-light editauto"><i class="material-icons" attr-id="' + item.idAuto + '" attr-subastaid="'+subastaID+'" onclick="EditarAuto(this);">mode_edit</i></div>';
 	}
 	renglon += '	</div>';
-	renglon += '	<div class="searchItemImg"><img attr-id="' + item.idAuto + '" width="100px" onclick="VerDetalleAuto(this);" src="' + siteurl + 'uploads/' + item.foto + '" onerror="imgError(this)"; /></div>';
+	renglon += '	<div class="searchItemImg"><img attr-id="' + item.idAuto + '"  onclick="VerDetalleAuto(this);" src="' + siteurl + 'uploads/' + item.foto + '" onerror="imgError(this)"; /></div>';
+	//renglon += '	<div class="searchItemImg">'+ carousel+'</div>';
 	renglon += '	<div class="searchItemBody">';
 	renglon += '		<div>';
 	renglon += '			<label>Año: </label>';

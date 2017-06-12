@@ -1,4 +1,5 @@
 <?php
+session_start();
 require_once("views/VistaApi.php");
 require_once("views/VistaJson.php");
 require_once("modelos/usuarios.php");

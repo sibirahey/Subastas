@@ -302,6 +302,9 @@ class usuarios
                 $sentencia->bindParam(2, $idusuario);
                 if ($sentencia->execute())
                 {
+                    $_SESSION['claveapi']  = $claveApi;
+                    $_SESSION['idusuario']  = $fetch["idUsuario"];
+                    $_SESSION['correo']  = $fetch["correo"];
                     return $usuario;
                 }else{
                     
@@ -420,6 +423,12 @@ class usuarios
             $usuario->esadmin = $fetch["es_admin"];
             $usuario->idUsuario = $fetch["idUsuario"];
             $usuario->claveApi =  $claveApi;
+
+            if($valido == 1){
+                $_SESSION['claveapi']  = $claveApi;
+                $_SESSION['idusuario']  = $fetch["idUsuario"];
+                $_SESSION['correo']  = $fetch["correo"];
+            }
 
 
             return $usuario;

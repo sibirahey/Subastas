@@ -16,6 +16,7 @@
         <link href="css/font-awesome.css" rel="stylesheet"/>
         <link href="css/styles.css" rel="stylesheet"/>
         <link href="css/mediaQueries.css" rel="stylesheet"/>
+        <link href="css/jcarousel.basic.css" rel="stylesheet"/>
 		
 		<script type="text/javascript" src="scripts/jquery-1.12.4.js"></script>
 		<script type="text/javascript" src="scripts/jquery-ui.js"></script>
@@ -40,6 +41,7 @@
 		<script type="text/javascript" src="scripts/adminhome.js<?php echo "?" . rand(0, 9999999); ?>"></script>
 		<script type="text/javascript" src="scripts/MisAutos.js<?php echo "?" . rand(0, 9999999); ?>"></script>
 		<script type="text/javascript" src="scripts/modulos/admin/resultadossubastas.js<?php echo "?" . rand(0, 9999999); ?>"></script>
+		<script type="text/javascript" src="scripts/jcarousel.js<?php echo "?" . rand(0, 9999999); ?>"></script>
 		
 	</head>
 	<body>
