@@ -296,15 +296,15 @@ class usuarios
                 $usuario->esadmin = $fetch[0]["es_admin"];
                 $usuario->claveApi = $fetch[0]["claveApi"];
 
-                $comando = "update usuario set verificado = 1 where correo =? and idUsuario = ?  ";
+                $comando = "update usuario set verificado = 1, vigencia = curdate() where correo =? and idUsuario = ?  ";
                 $sentencia = ConexionBD::obtenerInstancia()->obtenerBD()->prepare($comando);
                 $sentencia->bindParam(1, $correo);
                 $sentencia->bindParam(2, $idusuario);
                 if ($sentencia->execute())
                 {
-                    $_SESSION['claveapi']  = $claveApi;
-                    $_SESSION['idusuario']  = $fetch["idUsuario"];
-                    $_SESSION['correo']  = $fetch["correo"];
+                    $_SESSION['claveapi']  = $apikey;
+                    $_SESSION['idusuario']  = $idusuario;
+                    $_SESSION['correo']  = $correo;
                     return $usuario;
                 }else{
                     
@@ -410,6 +410,8 @@ class usuarios
                 $sentencia = $pdo->prepare($comando);
                 $sentencia->execute();
 
+            }else{
+                $claveApi = "";   
             }
             $usuario = new usuarios();
             $usuario->nombre = $fetch["nombre"];

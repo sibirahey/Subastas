@@ -25,6 +25,7 @@ require_once("modelos/autos-fotos.php");
 require_once("modelos/autos-puja.php");
 require_once("modelos/subasta-autos.php");
 require_once("modelos/seccioneshome.php");
+require_once("modelos/resultados.php");
 require_once('utilidades/ConexionBD.php');
 require_once('utilidades/ExcepcionApi.php');
 require_once('utilidades/Utilerias.php');

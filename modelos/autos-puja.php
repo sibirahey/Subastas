@@ -6,7 +6,7 @@ class autospuja
     public function __construct($idAuto =0, $idSubasta = 0)
     {
         $this->idAuto = $idAuto;
-        $this->idFoto = $idFoto;
+        $this->idSubasta = $idSubasta;
  
        
     }
@@ -159,6 +159,33 @@ class autospuja
             
             $sentencia->bindParam(1, $_POST["id_subasta"]);
             $sentencia->bindParam(2, $_POST["id_auto"]);
+
+            $resultado = $sentencia->execute();
+            return $sentencia->fetchall(PDO::FETCH_ASSOC);
+
+        }catch(Excepcion $e){
+            print_r($e);
+            return null;
+        }
+    }
+     public static function xsubasta($idsubasta){
+
+        try{
+        $comando = "SELECT ap.idAuto, ap.idPuja, ap.oferta, ap.idUsuario, ap.hora_puja, ap.idSubasta, concat(u.nombre, ' ', u.appaterno, ' ', u.apmaterno) as nombre_usuario, ap.hora_puja, s.fechaFin, case when ap.hora_puja < s.fechaFin+1 then 1 else 0 end as puja_valida, marca.descripcion as marca, modelo.descripcion as modelo, au.precio, au.anio
+            FROM autos_puja ap, usuario u, subastas s, autos au, cat_marca marca, cat_modelo modelo  WHERE 
+            ap.idUsuario = u.idUsuario
+            and ap.idSubasta = s.idSubasta
+            and ap.idSubasta = ? 
+            and ap.idAuto = au.idAuto
+            and au.marca = marca.id
+            and au.modelo = modelo.id
+            order by 
+            ap.hora_puja asc ";
+              $pdo = ConexionBD::obtenerInstancia()->obtenerBD();
+            $sentencia = $pdo->prepare($comando);
+            
+            $sentencia->bindParam(1, $idsubasta);
+            
 
             $resultado = $sentencia->execute();
             return $sentencia->fetchall(PDO::FETCH_ASSOC);

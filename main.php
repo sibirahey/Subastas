@@ -53,7 +53,7 @@
 				<div>
 					<h1>ESCUDERIA</h1>
 					<div class="menuitem" name="registro">
-						Registrate
+						Regístrate
 					</div>
 					<div class="menuitem" name="login">
 						Entrar
