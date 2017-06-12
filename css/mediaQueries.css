@@ -1,8 +1,27 @@
 @media only screen and (max-width: 1023px) {
-	#divListaContenido {
+	#divListaContenido,
+	#divAdminHome,
+	#divAdminHomeContenido {
 	    float: left;
 	    width: 100%;
 	    margin: 0;
+	}
+	#divAdminHome > .divSeccionesHome,
+	#divAdminHome > .divTxtTag,
+	#divAdminHome > .divChkestatus,
+	#divAdminHome > .divTipoContenido,
+	#divAdminHome > .divTxtUrl,
+	#divAdminHome > .fotoAuto,
+	#divAdminHome > .divUbicacion,
+	#divAdminHome > .divTxtAncho,
+	#divAdminHome > .divTxtAlto,
+	#divAdminHome > .divChkeslink,
+	#divAdminHome > .divLink,
+	#divAdminHome > .bntGuardar,
+	#divAdminHome > .bntActualizar{
+		float: left;
+	    width: 100%;
+	    margin: 0 0 20px;
 	}
 	#tblResultadosSubastas,
 	.mainBody > h2 {

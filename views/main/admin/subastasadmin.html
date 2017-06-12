@@ -94,22 +94,23 @@
 
 	</div>
 	<div id="divListaContenido"class="row"></div>
+	
 	<div id="divAdministraUsuarios" class="modal modal-bottom-sheet">
 
 		<div class="modal-content divRegistro">
 			
-			<!-- <input id="listausuarios" type="file" name="listausuarios" />
-			<div type="button" id="btnUploadUserList" class="fa fa-upload"   ></div> -->
+			<input id="listausuarios" type="file" name="listausuarios" />
+			<div type="button" id="btnUploadUserList" class="fa fa-upload"   ></div>
 			
-			<div class="file-field input-field">
+			<!-- <div class="file-field input-field">
 				<div class="btn"> 
 					<span>File</span>
 					<input type="file" id="listausuarios" name="listausuarios">
 				</div>
 				<div class="file-path-wrapper">
-					<input class="file-path validate" type="text">
+					<input class="file-path" type="text">
 				</div>
-			</div>
+			</div> -->
 			
 			
 			<div id="listaUsuariosSubidos" ></div>
@@ -125,19 +126,24 @@
 			<div id="divListaUsuariosTbl"></div>
 		</div>
 		<div class="modal-footer">
-			<a href="#!" class="modal-action modal-close waves-effect waves-green btn ">Cerrar</a>
+			<d href="#!" class="modal-action modal-close waves-effect waves-green btn ">Cerrar</a>
 		</div>
 	</div>
 
 	<div id="modalEmpresa" class="modal">
 		<div class="modal-content">
-			<label for="txtNombreEmpresa" >Empresa:</label>
-			<input type="text" id="txtNombreEmpresa" name="txtNombreEmpresa" />
-			<label id="labelMsjEmpresa"></label>
+			<!-- <label for="txtNombreEmpresa" >Empresa:</label>
+			<input type="text" id="txtNombreEmpresa" name="txtNombreEmpresa" /> -->
+			<div class="input-field col s12">
+	          <input id="txtNombreEmpresa" name="txtNombreEmpresa" type="text">
+	          <label for="txtNombreEmpresa">Empresa:</label>
+	        </div>
+			<label id="labelMsjEmpresa" class="col s12"></label>
+			
 		</div>
 		<div class="modal-footer">
-			<a id="btnGuardaEmpresa" href="#!" class="modal-action modal-close waves-effect waves-green btn-flat"><i class="material-icons">add</i></a>
-			<a id="btnEliminaEmpresa" href="#!" class="modal-action modal-close waves-effect waves-green btn-flat"><i class="material-icons">clear</i></a>
+			<a id="btnGuardaEmpresa" href="#!" class="modal-action modal-close waves-effect waves-green btn tooltipped" data-position="top" data-delay="50" data-tooltip="Agrega empresa a la lista"><i class="material-icons">add</i></a>
+			<a id="btnEliminaEmpresa" href="#!" class="modal-action modal-close waves-effect waves-green btn red tooltipped" data-position="top" data-delay="50" data-tooltip="Elimina empresa de la lista"><i class="material-icons">clear</i></a>
 
 		</div>
 	</div>

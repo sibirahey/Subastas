@@ -12,7 +12,7 @@
     </div>
 
     
-    <div class="switch divChkestatus">
+    <div class="switch divChkestatus center">
         <label>
           Inactivo
           <input type="checkbox" name="chkestatus" id="chkestatus">
@@ -35,12 +35,6 @@
         <label for="txtUrl" >Url:</label>
     </div>
 
-    <!-- <div class="input-field divUploadFile">
-        <input id="uploadFile" type="file" name="uploadFile" />
-        <input type="hidden" id="uploadedFile" />
-        <div type="button" id="btnUploadHome" class="fa fa-upload"></div>
-    </div> -->
-    
     <div class="input-field fotoAuto">
 
         <div class="file-field input-field ">
@@ -57,9 +51,6 @@
         </div>
 
     </div>
-    
-    
-    
     
     <div class="input-field divUbicacion">
         <select id="cmbUbicacion" name="cmbUbicacion" >
@@ -80,36 +71,27 @@
         <label for="txtAlto" >Alto:</label>
     </div>
     
-    <!-- <div class="input-field divChkeslink">
-        <label class="switch">
-            <input type="checkbox" name="chkeslink" id="chkeslink"/>
-            <div class="slider round"></div> 
-        </label>
-        <label for="chkeslink">Es Link</label>
-    </div> -->
-    
-    
-    
-    <div class="switch divChkeslink">
-        <label> 
-            Off
-            <input type="checkbox" name="chkeslink" id="chkeslink">
+    <div class="switch divChkeslink center">
+        <label>
+        	<input type="checkbox" name="chkeslink" id="chkeslink">
             <span class="lever"></span> 
-            On 
+            Es link
+            <i class="material-icons">link</i> 
             </label>
     </div>
     
-    <div class="input-field" id="divLink">
+    <div class="input-field divLink" id="divLink">
         <label for="txtlink" >Link:</label>
         <input id="txtlink" name="txtlink" type="text"/>
     </div>
-
-    <div id="btnGuardar" class="waves-effect waves-light btn" >
-        Guardar
-    </div>
-    <div id="bntActualizar" class="waves-effect waves-light btn">
-        Actualizar home
-    </div>
-
+    <div class="adminHomeButtons center">
+		<div id="btnGuardar" class="waves-effect waves-light btn btnGuardarAdminHome" >
+	        Guardar
+	    </div>
+	    <div id="bntActualizar" class="waves-effect waves-light btn bntActualizarAdminHome">
+	        Actualizar home
+	    </div>
+	</div>
 </div>
+
 <div id="divAdminHomeContenido"></div>

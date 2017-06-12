@@ -1,14 +1,16 @@
-<div id="divInfoSubasta">
-    <div id="divHeadSubasta">
-    	<div id="divTtlSubasta"></div>
-    	<div id="divTipoSubasta"></div>
-    	<div id="divIncremento">Incremento Mínimo #INCREMENTO#</div>
-        <div id="divOfertasXUsuario">Ofertas: <span id="numOfertasXusuario">#OFERTASXUSUARIO#</span>  de #TOTALOFERTAS# </div>
-        <div id="divGanadores">Máximo #AUTOSXUSUARIO# autos por usuario</div>
+<h2>Detalle de Subasta</h2>
+<div id="divInfoSubasta" class="row">
+    
+    <div id="divHeadSubasta" class="col s12 m4 l3">
+    	<div id="divTtlSubasta" class="chip right"></div>
+    	<div id="divTipoSubasta" class="chip right">Tipo de Subasta:</div>
+    	<div id="divIncremento" class="chip right">Incremento Mínimo: #INCREMENTO#</div>
+        <div id="divOfertasXUsuario" class="chip right">Ofertas: <span id="numOfertasXusuario">#OFERTASXUSUARIO#</span>  de #TOTALOFERTAS# </div>
+        <div id="divGanadores" class="chip right">Máximo #AUTOSXUSUARIO# autos por usuario</div>
     </div>
-    <div id="divContenidoSubasta"></div>
+    <div id="divContenidoSubasta" class="col s12 m8 l9"></div>
+    
     <div id="modalPuja" class="modal">
-
     	<div class="divRegistro">
             <label for="txtOferta" >Oferta:</label>
             <input type="text" name="txtOferta" id="txtOferta" />
@@ -19,9 +21,23 @@
             </button>
         </div>
     </div>
-    <div id="modalOfertas" class="modal">
+    
+    <!-- <div id="modalOfertas" class="modal">
     	<div id="divOfertas"></div>
-    </div>
+    </div> -->
+    
+    <div id="modalOfertas" class="modal">
+		<div class="modal-content">
+			<div id="divOfertas"></div>
+		</div>
+		<div class="modal-footer">
+			<a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat">Agree</a>
+		</div>
+	</div>
+    
+    
+    
 </div>
-<div id="divDetalleAuto" class="modal">
+
+<div id="divDetalleAuto" class="modal ">
 </div>

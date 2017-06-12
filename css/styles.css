@@ -3,7 +3,6 @@
 	font-weight: 300;
 	font-style: normal;
 	outline: none;
-	
 }
 
 nav div a, ul li {
@@ -14,11 +13,10 @@ html {
 	width: 100%;
 }
 body {
-	height: 100%;
 	width: 100%;
 	float: none;
 	margin: 0 auto;
-	background-color: #EAEAEA;
+	background-color: #f0f0f0;
 	display: flex;
     min-height: 100vh;
     flex-direction: column;
@@ -158,34 +156,15 @@ main {
 .mainHeader > ul > li > label:hover {
 	cursor: pointer;
 }
-/*.menuPrincipal {
- width: auto;
- float: right;
- margin-right: 20px;
- }
- .menuPrincipal > div {
- height: 40px;
- line-height: 40px;
- color: #ffffff;
- padding: 0 20px;
- cursor: pointer;
- opacity: 0.8;
- }
- .menuPrincipal > img {
- cursor: pointer;
- height: 40px;
- opacity: 0.8;
- }
- .menuPrincipal > div:hover,
- .menuPrincipal > img:hover {
- opacity: 1;
- }*/
 .mainMinusHeader {
 	float: left;
 	width: 100%;
 }
 .mainBody {
-	float: left;
+	display:flex;
+	flex-direction:column;
+	flex-wrap: nowrap;
+	justify-content:center;
 	height: 100%;
 	width: 100%;
 }
@@ -448,6 +427,10 @@ main {
 	position: absolute;
 	height: 100%;
 	width: 100%;
+	top:0;
+	bottom:0;
+	left:0;
+	right:0;	
 }
 .loginMain {
 	float: none;
@@ -458,30 +441,9 @@ main {
 	border-right: 1px solid #cccccc;
 	padding: 10px;
 }
-.divLogin {
-	float: left;
-	width: 100%;
-}
 .divHeaderContenido > .divRegistro {
 	margin: 0 0 10px;
 }
-/*#divListaBotonera > .divItemBotonera {
- float: left;
- margin: 0 10px;
- }
- #divListaBotonera > .divItemBotonera:nth-child(3) {
- float: right;
- }*/
-/*.incrementoSymbol:before{
-	content: "$";
-    position: absolute;
-    height: 45px;
-    width: 8.33%;
-    display: block;
-    text-align: center;
-    line-height: 45px;
-    font-weight: bold;
-}*/
 #divListaBotonera > .divItemBotonera > label {
 	line-height: 30px;
 	margin-right: 20px;
@@ -502,17 +464,6 @@ main {
 .divItemBotonera #btnFiltrar{
 	float: right;
 }
-/*#btnFiltrar {
- height: 30px;
- padding: 0 20px;
- border-radius: 3px;
- background-color: #3281B3;
- cursor: pointer;
- color: #ffffff;
- line-height: 30px;
- font-size: 0.8em;
- opacity:0.75;
- }*/
 #btnFiltrar:hover {
 	opacity: 1;
 }
@@ -558,6 +509,7 @@ label[for="placa"] {
 .divLogin > .floatingWindow > div > input, .divRegistro > input {
 	/*height: 40px;
 	text-indent: 10px;*/
+	color:#ffffff;
 	font-size: 1.2em;
 	text-indent: 10px;
 	margin-top:10px;
@@ -702,11 +654,6 @@ label[for="registroEULA"] {
 	height: 35px;
 	width: calc(50% - 20px);
 	border: none;
-	background: #FD5A54;
-	background: -webkit-linear-gradient(top, #464646, #787878);
-	background: -o-linear-gradient(top, #464646, #787878);
-	background: -moz-linear-gradient(top, #464646, #787878);
-	background: linear-gradient(to top, #464646, #787878);
 	cursor: pointer;
 }
 .infoSubasta {
@@ -843,133 +790,6 @@ label[for="registroEULA"] {
 	background-color: #FFFFFF;
 	font-size: 0.8em;
 }
-/*.cnfgSubastaContainer > div{
- height:50px;
- }
- .cnfgSubastaContainer > div:nth-child(1){
- width: 100%;
- }
- .cnfgSubastaContainer > div:nth-child(2),
- .cnfgSubastaContainer > div:nth-child(3),
- .cnfgSubastaContainer > div:nth-child(4){
- width: 33.3%;
- }
- .cnfgSubastaContainer > div:nth-child(5),
- .cnfgSubastaContainer > div:nth-child(6),
- .cnfgSubastaContainer > div:nth-child(7){
- width: calc((100% - 130px) / 3);
- }
- .cnfgSubastaContainer > div > label,
- .cnfgSubastaContainer > div > div > label{
- width:110px;
- text-align:right;
- line-height:40px;
- margin-right:10px;
- }
- .cnfgSubastaContainer > div > label.A{
- width:20px;
- text-align:right;
- line-height:40px;
- margin-right:10px;
- }
- .cnfgSubastaContainer > div > select,
- .cnfgSubastaContainer > div > div > select{
- width:calc(100% - 120px);
- height:40px;
- border-radius: 0;
- }
- .cnfgSubastaContainer > div > input{
- width:calc(100% - 120px);
- height:40px;
- }
- .cnfgSubastaContainer > div.rango > input{
- width:calc(100% - 240px);
- height:40px;
- }
- .cnfgSubastaContainer > div.btnContainer{
- width:120px;
- margin: 0 0 0 10px;
- }
- .cnfgSubastaContainer > .btnContainer > .btnBuscar{
- cursor:pointer;
- background-color:transparent;
- border: none;
- opacity:0.75;
- height:30px;
- width:90%;
- margin: 0 5%;
- color:#ffffff;
- fill:#ff0000;
- background-color:#1D93D0;
- cursor:pointer;
- }
- .cnfgSubastaContainer > .btnContainer > .btnBuscar:hover{
- opacity:1;
- }
- .cnfgSubastaContainer > .btnContainer > .btnBuscar > i{
- height:40px;
- text-align:left;
- line-height:40px;
- font-size:1.6em;
- }
- .cnfgSubastaContainer > .btnContainer > .btnBuscar{
- height:40px;
- line-height:40px;
- }
- .cnfgSubastaContainer > .btnContainer > .btnBuscar > label{
- line-height: 40px;
- padding: 0 8px;
- font-size: 1.2em;
- }
- .cnfgSubastaContainer input[type="text"],
- .cnfgSubastaContainer select{
- border:none;
- border-bottom:1px solid #8C8C8C;
- -webkit-transition : border 500ms ease-out;
- -moz-transition : border-bottom 500ms ease-out;
- -o-transition : border-bottom 500ms ease-out;
- transition : border-bottom 500ms ease-out;
- }
- .cnfgSubastaContainer input[type="text"]:focus,
- .cnfgSubastaContainer select:focus{
- border-bottom:1px solid #F5F5F5;
- }*/
-
-/*
- .cnfgSubastaContainer > div:nth-child(1) > #cmbEmpresa {
- width: 90%;
- }
-
- .cnfgSubastaContainer > div:nth-child(2) {
- width: 60%;
- }
- .cnfgSubastaContainer > div:nth-child(2) > div > .ui-datepicker-trigger {
- height: 30px;
- width: 30px;
- border: none;
- background-color: transparent;
- cursor: pointer;
- }
- .cnfgSubastaContainer > div:nth-child(2) > div > .ui-datepicker-trigger > img {
- margin: 0 15%;
- width: 70%;
- }
- .cnfgSubastaContainer > div:nth-child(3) > div:first-of-type {
- margin-left: 40px;
- }
- .cnfgSubastaContainer > div:nth-child(3) > div {
- width: 120px;
- }
- .cnfgSubastaContainer > div:nth-child(4) > div:nth-child(1) {
- width: 180px;
- }
- .cnfgSubastaContainer > div:nth-child(4) > div:nth-child(2) {
- width: 180px;
- left: 110px;
- }
- .cnfgSubastaContainer > label:first-of-type {
- width: 100%;
- }*/
 #grdVehiculos div {
 	float: left;
 }
@@ -1433,6 +1253,8 @@ div:not(:first-child) > div > img {
 	padding: 0 0 30px 0;
 	box-shadow: 0 0 6px #000000;
 	border-radius: 6px;
+	display: flex;
+	flex-direction:column;
 }
 
 .floatingWindow > input, .floatingWindow > button, .floatingWindow > a {
@@ -1470,7 +1292,7 @@ div:not(:first-child) > div > img {
 }
 .logoLogin,
 .logoCar {
-	float: left;
+	/*float: left;*/
 	width: 420px;
 	background-position: center center;
 	background-repeat: no-repeat;
@@ -1479,6 +1301,9 @@ div:not(:first-child) > div > img {
 	filter: drop-shadow(0 0 4px rgba(0,0,0,0.75));
 	top: -50px;
 }
+/*.floatingWindow > div{
+	float: left;
+}*/
 
 /*--------- ENDS LOGIN ---------*/
 /*---------- MAIN--------*/
@@ -1556,11 +1381,8 @@ img[data-u="image"] {
 }
 .searchItem {
 	float: left;
-	height: 420px;
 	width: 290px;
 	margin: 5px;
-	border: 1px solid #e6e6e6;
-	background-color: #ffffff;
 }
 .searchItem > .searchItemHead {
 	height: 40px;
@@ -1744,7 +1566,7 @@ div[aria-describedby="divAutos"] {
 	font-size: 1.5em;
 	font-weight: 400;
 }
-#btnGuardar {
+/*#btnGuardar {
 	height: 80px;
 	line-height: 80px;
 	width: 90%;
@@ -1759,7 +1581,7 @@ div[aria-describedby="divAutos"] {
 }
 #btnGuardar:hover {
 	opacity: 1;
-}
+}*/
 button[title="Close"] {
 	display: none;
 }
@@ -2179,11 +2001,11 @@ button[name="contactoEnviar"] {
 	height: 95px;
 }
 #divListaBotonera {
-	float:none;
 	background-color: transparent;
 	padding: 6px;
+	width:100%;
 	max-width: 1024px;
-	margin: 20px auto 0;
+	margin: 20px auto 0;		
 }
 .divBotonera > label {
 	line-height: 32px;
@@ -2276,17 +2098,21 @@ button[name="contactoEnviar"] {
 	font-weight:500;
 	text-align:center;
 }
-
+#modalEmpresa > .modal-content > #txtNombreEmpresa{
+	width:calc(100% - 70px);
+	float: left;
+}
+#modalEmpresa > .modal-content > #btnEliminaEmpresa{
+	float:left;
+}
+#modalEmpresa > .modal-content > label{
+	float: left;
+}
+#modalEmpresa > .modal-footer > a{
+	margin: 6px;
+}
 /*---------- ENDS ADMINISTRADOR DE SUBASTAS---------*/
 /*---------  SWITCH ---------*/
-
-/* The switch - the box around the slider */
-/*.switch {
-	position: relative;
-	display: inline-block;
-	width: 60px;
-	height: 34px;
-}*/
 
 /* Hide default HTML checkbox */
 .switch input {
@@ -2410,22 +2236,18 @@ input:checked + .slider:before {
 	height: 40px;
 	width: calc(100% - 150px);
 }*/
-#btnGuardaEmpresa {
+/*#btnGuardaEmpresa {
 	color: #3281B3;
 	height: 40px;
-	width: 40px;
-	cursor: pointer;
-	opacity: 0.75;
+	cursor: pointer;	
 }
-#btnGuardaEmpresa:hover {
-	opacity: 1;
-}
+
 #btnGuardaEmpresa > i {
 	height: 100%;
 	width: 100%;
 	text-align: center;
 	line-height: 40px;
-}
+}*/
 /*--------- ENDS AGREGA EMPRESA ---------*/
 
 /*--------- VENTA AUTOS---------*/
@@ -2537,7 +2359,7 @@ input:checked + .slider:before {
 	float:left;
     margin-top: 1rem;
 }
-#divSubastaNombre {<i class="material-icons">
+#divSubastaNombre {
 	width: 100%;
 }
 #dialog .modal-content > .input-field{
@@ -2678,19 +2500,123 @@ div[name="altaautos"] > .row{
 	margin: 0 auto;
 }
 /*--------- ENDS ALTA AUTOS --------*/
-/*--------- ADM HOME --------*/
+/*--------- ADMIN HOME --------*/
 #divAdminHome{
-	float:none;
-	width:100%;
-	max-width:1024px;
-	margin: 0 auto;
+	float:left;
+	width:1024px;
+	margin: 0 calc(50% - 512px);
 }
-/*--------- ENDS ADM HOME --------*/
+#divAdminHome > .divSeccionesHome,
+#divAdminHome > .divTxtTag,
+#divAdminHome > .divChkestatus,
+#divAdminHome > .divTipoContenido,
+#divAdminHome > .divTxtUrl,
+#divAdminHome > .fotoAuto,
+#divAdminHome > .divUbicacion,
+#divAdminHome > .divTxtAncho,
+#divAdminHome > .divTxtAlto,
+#divAdminHome > .divChkeslink,
+#divAdminHome > .divLink,
+#divAdminHome > .bntGuardar,
+#divAdminHome > .bntActualizar {
+	float: left;	
+	width:31.33%;
+	margin:0 1% 20px;
+	position:relative;
+	display: block;
+}
+#divAdminHome > .divTipoContenido,
+#divAdminHome > .divTxtUrl {
+	width:48%;
+}
+#divAdminHome > .fotoAuto{
+	width: 98%;
+	clear:none;
+}
+	#divAdminHome > .fotoAuto > .input-field{
+	    width: calc(100% - 100px);
+    	float: left;
+	}
+#btnUploadHome{
+	margin:1rem 0 0 20px;
+}
+
+#divAdminHome > .divLink{
+	width:64.67%;	
+}
+#divAdminHome > .adminHomeButtons {
+	float:left;
+	width: 100%;
+	margin: 20px;
+	
+}
+#divAdminHome > .btnGuardarAdminHome,
+#divAdminHome > .bntActualizarAdminHome {
+	height: 80px;
+	line-height: 80px;
+	width: 40%;
+	margin: 10px 5%;
+	color: #FFFFFF;
+	font-family: "Dosis";
+	font-size: 22px;
+	background-color: #3281B3;	
+	border: none;
+	cursor: pointer;
+	opacity: 0.6;
+}
+#divAdminHome > .btnGuardarAdminHome:hover,
+#divAdminHome > .bntActualizarAdminHome:hover {
+	opacity: 1;
+}
+#divAdminHome > .divChkeslink > label > .material-icons{
+    position: absolute;
+    margin-left: 16px;
+}
+#divAdminHomeContenido{
+	float: left;
+    width: 1024px;
+    margin: 0 calc(50% - 512px);
+    overflow-x: scroll;
+    overflow-y: hidden;
+    display: inline-block;
+    white-space: nowrap;
+    background-color: rgba(255,255,255,0.8);
+    padding: 10px;
+    border: 1px solid rgb(190,190,190);
+}
+#divAdminHomeContenido > div{
+	width:300px;
+	margin: 20px;
+	border:1px solid rgb(180,180,180);
+	display: inline-block;
+    position: relative;
+    vertical-align: top;
+}
+#divAdminHomeContenido > div > label,
+#divAdminHomeContenido > div > img,
+#divAdminHomeContenido > div > .btnEditarSeccionHome,
+#divAdminHomeContenido > div > iframe{
+	float:left;
+	width: 100%;
+	text-align:center;
+}
+#divAdminHomeContenido > div > label{
+	line-height:1.2rem;
+	font-size:1.2rem;
+}
+#divAdminHomeContenido > div > img{
+	
+}
+#divAdminHomeContenido > div > .btnEditarSeccionHome{
+	
+}
+/*--------- ENDS ADMIN HOME --------*/
 /*--------- RESULTADOS POR SUBASTA --------*/
 #tblResultadosSubastas{
-	width:1024px;
-	float:none;
-	margin: 0 auto;
+	width:100%;
+	max-width:1024px;
+	float:left;
+	margin: 0 calc(50% - 512px);
 }
 #tblResultadosSubastas{
 	
@@ -2706,7 +2632,39 @@ div[name="altaautos"] > .row{
 	font-family: "Roboto", sans-serif;
 	font-weight: normal;
 	color: white;
-
-
+}
 
 /*--------- ENDS RESULTADOS POR SUBASTA --------*/
+/*--------- DETALLE SUBASTA--------*/
+#divInfoSubasta,
+#divDetalleAuto{
+	width:100%;
+	max-width:1024px;
+	float:left;
+	margin: 0 calc(50% - 512px);
+}
+#divContenidoSubasta{
+	display: flex;
+    flex-direction: row;	
+    justify-content: flex-start;
+}
+.searchItem > .card > .card-image{
+	overflow:hidden;
+	height:200px;
+}
+.searchItem .card-title{
+	width: 100%;
+    background-color: rgba(0,0,0,0.3);
+}
+.searchItem > .card > .card-content > div >label:nth-child(odd){
+	
+}
+.searchItem > .card > .card-content > div >label:nth-child(even){
+	
+}
+.card .card-image img{
+	height: 100%;
+}
+
+
+/*--------- ENDS DETALLE SUBASTA --------*/

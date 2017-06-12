@@ -85,14 +85,14 @@ function CargaContenidoMain() {
 
 	
 	$.get("views/main/missubastas.html?rand="+Math.floor((Math.random() * 10000000) + 1), function(data){
-	
+	debugger;
 			var misubastahtml = data;
 			postrequest("subastas/xusuario", {"idusuario":sessionStorage.claveapi },function(response){
 				//console.log(JSON.stringify(response));
 				//console.log(JSON.stringify(data.length));
 				if(data.length > 0 )
 					 $(".divMisSubastas").hide().show();
-
+		
 				for(var o in response){
 
 					

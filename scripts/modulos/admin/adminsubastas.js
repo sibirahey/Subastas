@@ -278,6 +278,7 @@ function CargaSubastas(estatus, empresa) {
 		});
 
 		$(".btnAgregarUsuariosAutos").click(function() {
+			debugger;
 			var nombreSubasta = $(this).attr("attr-nombresubasta");
 			var idSubasta = $(this).attr("attr-id");
 			$("#btnUploadUserList").attr("idSubasta", idSubasta)
@@ -526,8 +527,8 @@ function CargaSubastas(estatus, empresa) {
 		        "Close": function () {
 		            $(this). modal("close")
 		        }
-	    	},
-	      complete: function() { $(this).replaceWith(input.val('').clone(true)); } // Callback for Modal close
+	    	}
+	      
 		});
 		$("#divListaUsuariosModal").modal({
 			dismissible : false, // Modal can be dismissed by clicking outside of the modal

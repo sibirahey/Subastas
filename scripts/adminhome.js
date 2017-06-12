@@ -17,7 +17,7 @@ function CargaFuncionesAdminHome(){
             var html = "";
             for (i in data){
                 html = "";
-                html = "<div class=\"divRegistro\">";
+                html = "<div>";
                 html += "       <label>"+data[i].descripcion+"</label>";            
                 if(data[i].esimg == 1)
                 { 
@@ -27,7 +27,7 @@ function CargaFuncionesAdminHome(){
 
                     html += "<iframe id=\"videoTips\" width=\"300px\"  src=\"" +data[i].url+"\" frameborder=\"0\" allowfullscreen style=\"overflow: hidden; \" height=\"100%\" width=\"100%\"></iframe>";
                 }
-                html += "<div class=\"fa fa-wrench fa-2 btnEditarSeccionHome\" attr-id=\"" + data[i].id+ "\" attr-esimg=\""+data[i].esimg +"\" attr-ubicacion=\""+data[i].ubicacion +"\" attr-ancho=\""+data[i].ancho +"\" attr-alto=\""+data[i].alto +"\" attr-tag=\""+data[i].tag +"\" attr-url=\""+data[i].url+"\" attr-eslink=\""+ data[i].eslink +"\" attr-link=\""+ data[i].link +"\" aria-hidden=\"true\"></div>";
+                html += "<div class=\"waves-effect waves-light btn btnEditarSeccionHome\" attr-id=\"" + data[i].id+ "\" attr-esimg=\""+data[i].esimg +"\" attr-ubicacion=\""+data[i].ubicacion +"\" attr-ancho=\""+data[i].ancho +"\" attr-alto=\""+data[i].alto +"\" attr-tag=\""+data[i].tag +"\" attr-url=\""+data[i].url+"\" attr-eslink=\""+ data[i].eslink +"\" attr-link=\""+ data[i].link +"\" aria-hidden=\"true\"><i class='material-icons'>edit</i></div>";
                 html += "</div>";
                 $("#cmbSeccionesHome").append("<option value=\"" +data[i].id+ "\" attr-id=\"" + data[i].id+ "\" attr-esimg=\""+data[i].esimg +"\" attr-ubicacion=\""+data[i].ubicacion +"\" attr-ancho=\""+data[i].ancho +"\" attr-alto=\""+data[i].alto +"\" attr-tag=\""+data[i].tag +"\" attr-url=\""+data[i].url+"\" attr-eslink=\""+ data[i].eslink +"\" attr-link=\""+ data[i].link +"\">" + data[i].descripcion + "</option>");
                 $("#divAdminHomeContenido").append(html);
@@ -50,7 +50,7 @@ function CargaFuncionesAdminHome(){
     });
 
     $(".btnEditarSeccionHome").click(function(){
-
+		debugger;
         fncEditaControles($(this));
         
     });
