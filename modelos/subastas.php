@@ -406,8 +406,6 @@ and s.idSubasta in (select su.idSubasta from subasta_usuario su, usuario u, suba
                 array_push($resultado->ofertas, $oferta);
             }
         }
-        //print_r($ganadores);
-        //print_r($resultados); 
             
         return $resultados;
 
