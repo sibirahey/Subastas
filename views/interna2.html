@@ -1,92 +1,80 @@
-	<!-- <div class="btn-flat modal-action modal-close waves-effect waves-green right" onclick="CierraDetalle();"><i class="material-icons">close</i></div> -->
-	<div class="btn modal-action modal-close waves-effect waves-green right" onclick="$('#divDetalleAuto').modal('close');"><i class="material-icons">close</i></div>
-	<div class="mbLeft">
-	<!-- contenedor de la imagen principal de la galeria de imagenes -->
-	
-	<div><img id="imgPrincipal" alt="Imagen no disponible" attr-idx="1" /></div>
-	<div id="imgSnapshots">
-
-	</div>
-	
+<div class="btn modal-action modal-close waves-effect waves-green right" onclick="$('#divDetalleAuto').modal('close');">
+    <i class="material-icons">close</i>
 </div>
-<!-- contenedor de todos los elementos "principales" de ésta pagina -->
-<div class="mbRight">
-	<!-- contenedor del encabezado del anuncio -->
-	<div class="mbRightMainT">
-		<h1 id="detalleTitulo"></h1>
-		<div class="numRef">
-			<label>NUM DE REFERENCIA</label>
-			<label id="detalleIdAuto"></label>
-		</div>
-	</div>
-	<!-- contenedor de los datos generales del anuncio -->
-	<div class="mbRightMainB">
-		<!-- contenedor de datos generales del anuncio IZQ -->
-		<div class="adInfo">
-			<div>
-				<label>MARCA:</label>
-				<label id="detalleMarca"></label>
-			</div>
-			<div>
-				<label>MODELO:</label>
-				<label id="detalleModelo"></label>
-			</div>
-			
-			<div>
-				<label>KIL&Oacute;METROS:</label>
-				<label id="detalleKM"></label>
-			</div>
-			<div>
-				<label>AÑO:</label>
-				<label id="detalleAnio">/label>
-			</div>
-			<div>
-				<label>COLOR:</label>
-				<label id="detalleColor">/label>
-			</div>
-			<div>
-				<label>TRANSMISIÓN:</label>
-				<label id="detalleTransmision"></label>
-			</div>
-			
-			<div>
-				<label>UBICACIÓN:</label>
-				<label id="detalleUbicacion"></label>
-			</div>				
-		</div>
-		<!-- contenedor de botón de "PUJAR AHORA"; contenedor de información de la subasta -->
-		<div>
-			<!-- <button type="button" class="btnPujar">PUJAR AHORA</button> -->
-			<div class="infoSubasta">
-				<!-- <div>
-					<label>SUBASTA:</label>
-					<label><span>Finaliza en</span> <span> 3d 17h 33m 4s</span></label>
-				</div> -->
-				<div>
-					<label>Precio de Salida:</label>
-					<label id="detallePrecio"></label>
-				</div>	
-			</div>
-		</div>
-	</div>
-	<!-- contenedor de "2. EQUIPAMIENTO DEL VEHICULO" -->
-	<div>
-		<h3>EQUIPAMIENTO DEL VEH&Iacute;CULO</h3>
-		<H4>EQUIPAMIENTO ADICIONAL:</H4>
-		<label id="detalleCaracteristicas"></label>
-	</div>
+<div class="divDetalleAuto">
+    <div class="mbLeft">
+        <!-- contenedor de la imagen principal de la galeria de imagenes -->
 
-	<!-- contenedor de "4. DESCRIPCIÓN DEL VEHICULO" -->
-	<div>
-		<h3>OBSERVACIONES:</h5>
-		<Label id="detalleDescripcion"></Label>
-	</div>
+        <div><img id="imgPrincipal" alt="Imagen no disponible" attr-idx="1" />
+        </div>
+        <div id="imgSnapshots">
+
+        </div>
+
+    </div>
+    <!-- contenedor de todos los elementos "principales" de ésta pagina -->
+    <div class="mbRight">
+        <!-- contenedor del encabezado del anuncio -->
+        <div class="mbRightMainT">
+            <label id="detalleTitulo"></label>
+            <div class="numRef">
+                <label>NUM DE REFERENCIA</label>
+                <label id="detalleIdAuto"></label>
+            </div>
+        </div>
+        <!-- contenedor de los datos generales del anuncio -->
+        <div class="mbRightMainB">
+            <!-- contenedor de datos generales del anuncio IZQ -->
+            <div class="adInfo">
+                <div>
+                    <label>MARCA:</label>
+                    <label id="detalleMarca"></label>
+                </div>
+                <div>
+                    <label>MODELO:</label>
+                    <label id="detalleModelo"></label>
+                </div>
+
+                <div>
+                    <label>KIL&Oacute;METROS:</label>
+                    <label id="detalleKM"></label>
+                </div>
+                <div>
+                    <label>AÑO:</label>
+                    <label id="detalleAnio">/label>
+                </div>
+                <div>
+                    <label>COLOR:</label>
+                    <label id="detalleColor">/label>
+                </div>
+                <div>
+                    <label>TRANSMISIÓN:</label>
+                    <label id="detalleTransmision"></label>
+                </div>
+
+                <div>
+                    <label>UBICACIÓN:</label>
+                    <label id="detalleUbicacion"></label>
+                </div>
+            </div>
+            <!-- contenedor de botón de "PUJAR AHORA"; contenedor de información de la subasta -->
+            <div>
+                <div class="infoSubasta">
+                    <label>Precio de Salida:</label>
+                    <label id="detallePrecio"></label>
+                </div>
+            </div>
+        </div>
+        <!-- contenedor de "2. EQUIPAMIENTO DEL VEHICULO" -->
+        <div>
+            <label>EQUIPAMIENTO DEL VEH&Iacute;CULO</label>
+            <label>EQUIPAMIENTO ADICIONAL:</label>
+            <label id="detalleCaracteristicas"></label>
+        </div>
+
+        <!-- contenedor de "4. DESCRIPCIÓN DEL VEHICULO" -->
+        <div>
+            <label>OBSERVACIONES:</label><Label id="detalleDescripcion"></Label>
+        </div>
+    </div>
 </div>
-
-		
-
-
-
-
-
-

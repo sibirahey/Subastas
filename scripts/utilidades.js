@@ -735,8 +735,9 @@ function VerOfertas(idAuto, idSubasta){
 		{ "id_auto" : idAuto, "id_subasta": idSubasta }, 
 		function (data){
 			console.log(JSON.stringify(data));
+			$("#divOfertas").append("<thead><tr><th>USUARIO</th><th>PUJA</th><th>FECHA</th></tr></thead>");
 			for( var val in data){
-				$("#divOfertas").append("<div><div>"+ data[val].nombre_usuario+"</div><div>" + Number(data[val].oferta).formatMoney()+"</div><div>" + data[val].hora_puja +"</div></div>");
+				$("#divOfertas").append("<tr><td>"+ data[val].nombre_usuario+"</td><td>" + Number(data[val].oferta).formatMoney()+"</td><td>" + data[val].hora_puja +"</td></tr>");
 			}
 			
 

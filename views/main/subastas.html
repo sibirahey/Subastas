@@ -1,43 +1,51 @@
 <h2>Detalle de Subasta</h2>
 <div id="divInfoSubasta" class="row">
-    
-    <div id="divHeadSubasta" class="col s12 m4 l3">
-    	<div id="divTtlSubasta" class="chip right"></div>
-    	<div id="divTipoSubasta" class="chip right">Tipo de Subasta:</div>
-    	<div id="divIncremento" class="chip right">Incremento Mínimo: #INCREMENTO#</div>
-        <div id="divOfertasXUsuario" class="chip right">Ofertas: <span id="numOfertasXusuario">#OFERTASXUSUARIO#</span>  de #TOTALOFERTAS# </div>
-        <div id="divGanadores" class="chip right">Máximo #AUTOSXUSUARIO# autos por usuario</div>
+
+    <div id="divHeadSubasta" class="col s12">
+        <div id="divTtlSubasta" class="chip right"></div>
+        <div id="divTipoSubasta" class="chip right">
+            Tipo de Subasta:
+        </div>
+        <div id="divIncremento" class="chip right">
+            Incremento Mínimo: #INCREMENTO#
+        </div>
+        <div id="divOfertasXUsuario" class="chip right">
+            Ofertas: <span id="numOfertasXusuario">#OFERTASXUSUARIO#</span> de #TOTALOFERTAS#
+        </div>
+        <div id="divGanadores" class="chip right">
+            Máximo #AUTOSXUSUARIO# autos por usuario
+        </div>
     </div>
-    <div id="divContenidoSubasta" class="col s12 m8 l9"></div>
     
+    <div id="divContenidoSubasta" class="col s12"></div>
+
     <div id="modalPuja" class="modal">
-    	<div class="divRegistro">
+        <!-- <div class="divRegistro">
             <label for="txtOferta" >Oferta:</label>
             <input type="text" name="txtOferta" id="txtOferta" />
-        </div>
-        <div class="divRegistro">
-            <button id="btnGuardarOferta" attr-subastaid="0" attr-idauto="0" onclick="GuardarOferta(this);">
+        </div> -->
+        <div class="modal-content">
+          <div class="input-field col s12">
+              <input name="txtOferta" id="txtOferta" type="text" class="validate">
+              <label for="last_name">Oferta:</label>
+            </div>
+        </div>  
+        <div class="modal-footer">
+            <a id="btnGuardarOferta" class="waves-effect waves-light btn" attr-subastaid="0" attr-idauto="0" onclick="GuardarOferta(this);">
                 Guardar
-            </button>
+            </a>
         </div>
     </div>
-    
-    <!-- <div id="modalOfertas" class="modal">
-    	<div id="divOfertas"></div>
-    </div> -->
-    
-    <div id="modalOfertas" class="modal">
-		<div class="modal-content">
-			<div id="divOfertas"></div>
-		</div>
-		<div class="modal-footer">
-			<a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat">Agree</a>
-		</div>
-	</div>
-    
-    
-    
+
+    <div id="modalOfertas" class="modal bottom-sheet modal-fixed-footer">
+        <div class="modal-content">
+            <table id="divOfertas" class="striped responsive-table centered"></table>
+        </div>
+        <div class="modal-footer">
+            <a href="#!" class="modal-action modal-close waves-effect waves-green btn">Cerrar</a>
+        </div>
+    </div>
+
 </div>
 
-<div id="divDetalleAuto" class="modal ">
-</div>
+<div id="divDetalleAuto" class="modal bottom-sheet modal-fixed-footer"></div>

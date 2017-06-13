@@ -17,12 +17,7 @@ body {
 	float: none;
 	margin: 0 auto;
 	background-color: #f0f0f0;
-	display: flex;
-    min-height: 100vh;
     flex-direction: column;
-}
-main {
-	flex: 1 0 auto;
 }
 /*----------------- --------------*/
 .mainContainer {
@@ -545,6 +540,8 @@ label[for="placa"] {
 #registroPlaca {
 	width: 80px;
 	margin: 0;
+	text-align: center;
+    font-size: 2rem;
 }
 #registroEULA {
 	margin-left: 5%;
@@ -588,20 +585,7 @@ label[for="registroEULA"] {
 .mainBody > .mbLeft > div > img:first-of-type {
 	cursor: zoom-in;
 }
-#imgSnapshots > div {
-	width: calc((100% - 12px) /3 );
-	margin: 2px;
-	overflow: hidden;
-	height: 50px;
-	border: 1px solid #000000;
-}
-#imgSnapshots {
-	width: 90%;
-	margin: 20px 5% 0;
-}
-#imgSnapshots > div > img {
-	width: 100%;
-}
+
 .mainBody > .mbRight > div {
 	width: 100%;
 	margin: 0 0 20px 0;
@@ -617,20 +601,10 @@ label[for="registroEULA"] {
 	clear: both;
 	color: #787878;
 }
-.mbRightMainT > h1 {
-	width: calc(100% - 300px);
-}
 .numRef {
-	border: 1px dotted #E2E2E2;
-	text-align: center;
 	line-height: 30px;
 	height: 30px;
-	width: 300px !important;
 }
-.mbRightMainB {
-	/*height: 100%;*/
-}
-
 .mainBody > .mbRight > div > div {
 	width: 100%;
 	font-size: 0.8em;
@@ -645,29 +619,23 @@ label[for="registroEULA"] {
 	font-weight: 500;
 }
 .mainBody > .mbRight > div > div > div > label:nth-child(even) {
-
 	float: right;
 }
 .btnPujar {
 	color: #F7E827;
-	margin: 10px;
 	height: 35px;
-	width: calc(50% - 20px);
+	width:90%;
+	margin:0 5%;
 	border: none;
 	cursor: pointer;
 }
 .infoSubasta {
-	background-color: #FAFAFA;
-	margin: 10px;
-	border: 1px solid #DCDCDC;
-	width: calc(50% - 20px);
-	padding: 20px 10px;
+	
 }
 .infoSubasta > div {
 	width: 100%;
 	text-align: right;
 	margin-bottom: 10px;
-	border-bottom: 1px dotted #c3c3c3;
 }
 .infoSubasta > div > label:nth-child(1) {
 	width: 38%;
@@ -1381,8 +1349,15 @@ img[data-u="image"] {
 }
 .searchItem {
 	float: left;
-	width: 290px;
-	margin: 5px;
+	width: 30%;
+	margin: 10px 1.65%;
+}
+.searchItem > .card{
+	float:left;
+	margin: 0;
+}
+.searchItem > .card > div{
+	float:left;
 }
 .searchItem > .searchItemHead {
 	height: 40px;
@@ -1476,6 +1451,11 @@ div[aria-describedby="divAutos"] {
 	border-radius: 3px;
 	background-color: #ffdf01;
 }
+.divBtnPujar,
+.divVerOfertas{
+	float:left;
+	width: 50%;
+}
 /*---------- FIN MAIN--------*/
 /*---------- REGISTRO ---------*/
 .registroLeft {
@@ -1556,7 +1536,9 @@ div[aria-describedby="divAutos"] {
 }
 .registroMain {
 	float: left;
-	width: 714px;
+	margin:auto;
+	width: 100%;
+	max-width:1024px;
 	padding: 10px;
 }
 .loginMain > h2, .registroMain > h2 {
@@ -1565,6 +1547,11 @@ div[aria-describedby="divAutos"] {
 	left: -10px;
 	font-size: 1.5em;
 	font-weight: 400;
+}
+.registroMain > form{
+	float:left;
+	width: 664px;
+	margin:0 20px;
 }
 /*#btnGuardar {
 	height: 80px;
@@ -2625,7 +2612,7 @@ div[name="altaautos"] > .row{
 	line-height: 1.5;
 	font-family: "Roboto", sans-serif;
 	font-weight: normal;
-	color: rgba(191, 24, 24, 0.9);
+	color: rgba(191, 24, 24, 0.9);  
 }
 .labelHome{
 	line-height: 1.5;
@@ -2636,8 +2623,7 @@ div[name="altaautos"] > .row{
 
 /*--------- ENDS RESULTADOS POR SUBASTA --------*/
 /*--------- DETALLE SUBASTA--------*/
-#divInfoSubasta,
-#divDetalleAuto{
+#divInfoSubasta{
 	width:100%;
 	max-width:1024px;
 	float:left;
@@ -2645,16 +2631,21 @@ div[name="altaautos"] > .row{
 }
 #divContenidoSubasta{
 	display: flex;
-    flex-direction: row;	
-    justify-content: flex-start;
+    flex-wrap: wrap;
 }
 .searchItem > .card > .card-image{
 	overflow:hidden;
 	height:200px;
+	width: 100%;
+	cursor: pointer;
+}
+.searchItem > .card > .card-content{
+	width: 100%;
 }
 .searchItem .card-title{
 	width: 100%;
     background-color: rgba(0,0,0,0.3);
+    font-size:1rem;
 }
 .searchItem > .card > .card-content > div >label:nth-child(odd){
 	
@@ -2665,6 +2656,62 @@ div[name="altaautos"] > .row{
 .card .card-image img{
 	height: 100%;
 }
-
-
+.divDetalleAuto.modal.bottom-sheet{
+	max-height:75% !important;
+}
+.divDetalleAuto {
+	max-width:1024px;
+	width: 100%;
+	margin:0 auto;
+}
+.divDetalleAuto > .mbLeft{
+	margin:10px 2% 0;
+	float:left;
+	width: 21%;
+}
+.divDetalleAuto > .mbRight{
+	margin:10px 2% 0;
+	float:left;
+	width:71%;
+}
+.divDetalleAuto > .mbLeft > div:first-child{
+	float:left;
+	height:auto;
+	width: 92%;
+	margin:4%;
+	border:1px solid rgb(180,180,180);
+}
+.divDetalleAuto > .mbLeft > div > img{
+	float:left;
+	height:auto;
+	width: 100%;
+}
+.divDetalleAuto > .mbRight > div{
+	margin: 0 0 10px 0;
+	float:left;
+	width:100%;
+}
+#divDetalleAuto > .btn{
+	
+}
+#imgSnapshots{
+	float: left;
+	width:100%;
+}
+#imgSnapshots > div{
+	float: left;
+	width:50%;
+}
+#imgSnapshots > div > img{
+	float: left;
+	width:90%;
+	margin:5%;
+	background-image:cover;
+	border:1px solid rgb(180,180,180);
+}
+#divDetalleAuto > .modal .modal-close {
+    cursor: pointer;
+    position: absolute;
+    right: 0;
+}
 /*--------- ENDS DETALLE SUBASTA --------*/
