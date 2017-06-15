@@ -54,7 +54,7 @@ $(document).ready(function() {
 				$("#modalSnapshots").html("");
 			}
 		});
-
+		
 		console.log("Load was performed.");
 
 		$("#imgPrincipal").click(function() {
@@ -73,6 +73,7 @@ $(document).ready(function() {
 			});
 
 			dialog.dialog("open");
+			
 
 		});
 

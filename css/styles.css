@@ -624,11 +624,6 @@ label[for="registroEULA"] {
 }
 .btnPujar {
 	color: #F7E827;
-	height: 35px;
-	width:90%;
-	margin:0 5%;
-	border: none;
-	cursor: pointer;
 }
 .infoSubasta {
 	
@@ -1352,11 +1347,12 @@ img[data-u="image"] {
 	margin: 10px 1.65%;
 }
 .searchItem > .card{
-	float:left;
+	/*float:left;*/
 	margin: 0;
+	height:467px;
 }
 .searchItem > .card > div{
-	float:left;
+	/*float:left;*/
 }
 .searchItem > .searchItemHead {
 	height: 40px;
@@ -2645,7 +2641,8 @@ div[name="altaautos"] > .row{
 	cursor: pointer;
 }
 .searchItem > .card > .card-content{
-	width: 100%;
+	/*width: 100%;*/
+	height:200px;
 }
 .searchItem .card-title{
 	width: 100%;
@@ -2695,6 +2692,10 @@ div[name="altaautos"] > .row{
 	margin: 0 0 10px 0;
 	float:left;
 	width:100%;
+}
+#imgPrincipal{
+	float: left;
+	width: 100%;
 }
 #divDetalleAuto > .btn{
 	

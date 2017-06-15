@@ -18,30 +18,7 @@
         <link href="css/mediaQueries.css" rel="stylesheet"/>
         <link href="css/jcarousel.basic.css" rel="stylesheet"/>
 		
-		<script type="text/javascript" src="scripts/jquery-1.12.4.js"></script>
-		<script type="text/javascript" src="scripts/jquery-ui.js"></script>
-		<script type="text/javascript" src="scripts/jssor.slider-22.2.8.debug.js" ></script>
-		<script type="text/javascript" src="scripts/dobPicker.min.js"></script>
-		<script type="text/javascript" src="scripts/jquery.colorbox.js"></script>
-		<script type="text/javascript" src="scripts/materialize.js"></script>
-
 		
-		<script type="text/javascript" src="scripts/main.js<?php echo "?" . rand(0, 9999999); ?>"></script>
-		<script type="text/javascript" src="scripts/header.js<?php echo "?" . rand(0, 9999999); ?>"></script>
-		<script type="text/javascript" src="scripts/footer.js<?php echo "?" . rand(0, 9999999); ?>"></script>
-		<script type="text/javascript" src="scripts/admin.js<?php echo "?" . rand(0, 9999999); ?>"></script>
-		<script type="text/javascript" src="scripts/utilidades.js<?php echo "?" . rand(0, 9999999); ?>"></script>
-		<script type="text/javascript" src="scripts/request.js<?php echo "?" . rand(0, 9999999); ?>"></script>
-		<script type="text/javascript" src="scripts/imgSlider.js<?php echo "?" . rand(0, 9999999); ?>"></script>
-		<script type="text/javascript" src="scripts/uisearch.js<?php echo "?" . rand(0, 9999999); ?>"></script>
-		<script type="text/javascript" src="scripts/entities.js<?php echo "?" . rand(0, 9999999); ?>"></script>
-		<script type="text/javascript" src="scripts/modulos/admin/adminsubastas.js<?php echo "?" . rand(0, 9999999); ?>"></script>
-		<script type="text/javascript" src="scripts/modulos/admin/altaauto.js<?php echo "?" . rand(0, 9999999); ?>"></script>
-		<script type="text/javascript" src="scripts/Venta-Autos.js<?php echo "?" . rand(0, 9999999); ?>"></script>
-		<script type="text/javascript" src="scripts/adminhome.js<?php echo "?" . rand(0, 9999999); ?>"></script>
-		<script type="text/javascript" src="scripts/MisAutos.js<?php echo "?" . rand(0, 9999999); ?>"></script>
-		<script type="text/javascript" src="scripts/modulos/admin/resultadossubastas.js<?php echo "?" . rand(0, 9999999); ?>"></script>
-		<script type="text/javascript" src="scripts/jcarousel.js<?php echo "?" . rand(0, 9999999); ?>"></script>
 		
 	</head>
 	<body>
@@ -75,7 +52,31 @@
 		</main>
 		<footer class="mainFooter"></footer>
 		<div class="modalWindow"></div>
+		
+		<script type="text/javascript" src="scripts/jquery-1.12.4.js"></script>
+		<script type="text/javascript" src="scripts/jquery-ui.js"></script>
+		<script type="text/javascript" src="scripts/jssor.slider-22.2.8.debug.js" ></script>
+		<script type="text/javascript" src="scripts/dobPicker.min.js"></script>
+		<script type="text/javascript" src="scripts/jquery.colorbox.js"></script>
+		<script type="text/javascript" src="scripts/materialize.js"></script>
 
+		
+		<script type="text/javascript" src="scripts/main.js<?php echo "?" . rand(0, 9999999); ?>"></script>
+		<script type="text/javascript" src="scripts/header.js<?php echo "?" . rand(0, 9999999); ?>"></script>
+		<script type="text/javascript" src="scripts/footer.js<?php echo "?" . rand(0, 9999999); ?>"></script>
+		<script type="text/javascript" src="scripts/admin.js<?php echo "?" . rand(0, 9999999); ?>"></script>
+		<script type="text/javascript" src="scripts/utilidades.js<?php echo "?" . rand(0, 9999999); ?>"></script>
+		<script type="text/javascript" src="scripts/request.js<?php echo "?" . rand(0, 9999999); ?>"></script>
+		<script type="text/javascript" src="scripts/imgSlider.js<?php echo "?" . rand(0, 9999999); ?>"></script>
+		<script type="text/javascript" src="scripts/uisearch.js<?php echo "?" . rand(0, 9999999); ?>"></script>
+		<script type="text/javascript" src="scripts/entities.js<?php echo "?" . rand(0, 9999999); ?>"></script>
+		<script type="text/javascript" src="scripts/modulos/admin/adminsubastas.js<?php echo "?" . rand(0, 9999999); ?>"></script>
+		<script type="text/javascript" src="scripts/modulos/admin/altaauto.js<?php echo "?" . rand(0, 9999999); ?>"></script>
+		<script type="text/javascript" src="scripts/Venta-Autos.js<?php echo "?" . rand(0, 9999999); ?>"></script>
+		<script type="text/javascript" src="scripts/adminhome.js<?php echo "?" . rand(0, 9999999); ?>"></script>
+		<script type="text/javascript" src="scripts/MisAutos.js<?php echo "?" . rand(0, 9999999); ?>"></script>
+		<script type="text/javascript" src="scripts/modulos/admin/resultadossubastas.js<?php echo "?" . rand(0, 9999999); ?>"></script>
+		<script type="text/javascript" src="scripts/jcarousel.js<?php echo "?" . rand(0, 9999999); ?>"></script>
 	</body>
 	<!-- contenedor del cuerpo principal del sitio -->
 </html>

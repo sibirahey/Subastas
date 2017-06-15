@@ -40,6 +40,7 @@ $( document ).ready(function() {
 			  $(value).show();
 			});
   			$(".menuitemwelcome").hide();
+  			$(".button-collapse").sideNav();
   		}
 		
 		jssor_1_slider_init();

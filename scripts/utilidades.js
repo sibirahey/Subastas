@@ -172,7 +172,7 @@ function CargaSelectFeatures(control, features, estatus) {
 }
 
 function CargaSelectColores(control, id_color, estatus) {
-debugger;
+
 	$(control).append('<option value="0" disabled selected>SELECCIONA</option>');
 	postrequest("colores/listar?rand=" + Math.random(), {
 		"estatus" : estatus
@@ -250,7 +250,7 @@ function checkCookie() {
 }
 
 function cargaAutosPorSubasta(subastaID, controlid, tiposubasta) {
-	debugger;
+	// debugger;
 	$(controlid).html("");
 	postrequest("autos/subasta", {
 		"idsubasta" : subastaID
@@ -321,10 +321,13 @@ function regresaRenglonVenta(item, subastaID) {
 		renglon += '      <label>Última oferta: </label>';
 		renglon += '      <label>' + Number(item.oferta).formatMoney(2, '.', ',') + '</label>';
 		renglon += '    </div>';
-		  if(subastaID > 0){
-		renglon += '    <div class="divBtnPujar" style="display:none">';
-		renglon += '      <div id="btnPujar" class="btnPujar waves-effect waves-light btn" onclick=PujarAuto('+item.idAuto+','+subastaID+','+Number(item.precio)+');>Ofertar</label></div>';
 		renglon += '    </div>';
+		  if(subastaID > 0){
+		renglon += '<div class="card-action">';
+		renglon += '    <div class="divBtnPujar" style="display:none">';
+		renglon += '      <div id="btnPujar" class="btnPujar waves-effect waves-light btn" onclick=PujarAuto('+item.idAuto+','+subastaID+','+Number(item.precio)+');>Ofertar</div>';
+		renglon += '    </div>';
+		
 			      }
 		renglon += '  </div>';
 	return renglon;
@@ -340,7 +343,7 @@ function EditarAuto(o){
 
 	 	$("#btnGuardaAuto").hide();
 	 	$("#bntActualizaAuto").show();
-	 	debugger;
+	 	//debugger;
 		$("#divRegistroAutos").show();
 		$("#divSubastaNombre").html("");
 		$("#divSubastaNombre").show();
@@ -421,7 +424,7 @@ function EditarAuto(o){
 
 function GuardaDetalleAuto(opc){
 
-	debugger;
+	//debugger;
 		oAuto = new Autos();
 		oAuto.idAuto = $("#btnGuardaAuto").attr("attr-idsubasta");
 		if(parseInt($("#btnGuardaAuto").attr("attr-subastaid")) > 0){
@@ -537,7 +540,7 @@ function VerDetalleAuto(o) {
 
 
 			}
-		
+			$('.materialboxed').materialbox();
 		});
 	});
 	
