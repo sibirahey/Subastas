@@ -46,6 +46,9 @@ $(document).ready(function() {
 
 	cargaHTML(".mainFooter", "views/footer.html", "", function() {
 		console.log("Cargo footer");
+		console.log("Load was performed for footer.");
+		var fHeight = $('footer').outerHeight(true);
+		$('.mainContainer').css('margin-bottom', fHeight);
 	});
 
 	function cargaHTMLLogin(seccion){

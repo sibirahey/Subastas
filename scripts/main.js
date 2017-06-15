@@ -24,7 +24,6 @@ $(document).ready(function(){
    			
       	});
 	}
-
 	
   });
 
@@ -62,7 +61,7 @@ function CargaFunciones(o){
 	}
     CargaMaterial ();
 
-
+	
 }
 
 function CargaMaterial (){

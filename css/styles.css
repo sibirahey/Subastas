@@ -17,7 +17,6 @@ body {
 	float: none;
 	margin: 0 auto;
 	background-color: #f0f0f0;
-    flex-direction: column;
 }
 /*----------------- --------------*/
 .mainContainer {
@@ -32,7 +31,7 @@ body {
 	background-image: url(../images/logoHeader.svg);
 	background-repeat: no-repeat;
 	background-size: contain;
-	background-position: center center;
+	background-position: center;
 }
 .menuitem {
 	float: left;
@@ -156,10 +155,6 @@ body {
 	width: 100%;
 }
 .mainBody {
-	display:flex;
-	flex-direction:column;
-	flex-wrap: nowrap;
-	justify-content:center;
 	height: 100%;
 	width: 100%;
 }
@@ -197,8 +192,9 @@ body {
 	float: left;
 	width: 100%;
 	margin-top: 20px;
-	position: relative;
+	position: fixed;
 	bottom: 0;
+	z-index:2;
 }
 .logoFooter {
 	float: left;
@@ -414,6 +410,11 @@ body {
 /*---------- ENDS INDEX.HTML --------*/
 
 /*---------- REGISTRATE / ENTRAR ---------*/
+.registerForm{
+	float: left;
+	width: 704px;
+	margin:0 10px;
+}
 .submenuitem:hover {
 	cursor: pointer;
 	font-weight: bold;
@@ -1217,14 +1218,11 @@ div:not(:first-child) > div > img {
 	background-color: rgba(0,0,0,0.6);
 	margin-top: 60px;
 	margin-left: calc(50% - 200px);
-	margin-right: calc(50% - 200px);
 	padding: 0 0 30px 0;
 	box-shadow: 0 0 6px #000000;
 	border-radius: 6px;
-	display: flex;
-	flex-direction:column;
+	display:inline-block;
 }
-
 .floatingWindow > input, .floatingWindow > button, .floatingWindow > a {
 	height: 40px;
 	width: 80%;
@@ -1232,6 +1230,7 @@ div:not(:first-child) > div > img {
 }
 .floatingWindow > .switch {
 	margin: 20px 0 0 5%;
+	float:left;
 }
 .floatingWindow > label:not(.switch) {
 	line-height: 34px;
@@ -1535,7 +1534,7 @@ div[aria-describedby="divAutos"] {
 	padding: 6px;
 }
 .registroMain {
-	float: left;
+	float: none;
 	margin:auto;
 	width: 100%;
 	max-width:1024px;
@@ -1552,6 +1551,9 @@ div[aria-describedby="divAutos"] {
 	float:left;
 	width: 664px;
 	margin:0 20px;
+}
+#btnGuardar {
+	width: 100%;
 }
 /*#btnGuardar {
 	height: 80px;
@@ -1850,6 +1852,9 @@ div#divCotizacion > #divListaCS button {
 .divContactanos > h2:before {
 	background-image: url('../images/icoContacto.svg');
 }
+.divMisSubastas > h2:before {
+	background-image: url('../images/icoMisSubastas.svg');
+}
 .divVideoTips .vidContainer {
 	height: 600px;
 }
@@ -1921,7 +1926,7 @@ div#divCotizacion > #divListaCS button {
 .contactForm {
 	float: left;
 	padding: 20px;
-	margin-right:20px;
+	margin:10px;
 	width: calc(100% - 320px); 
 	border: 1px solid #B3B3B3;
 }
@@ -2492,6 +2497,7 @@ div[name="altaautos"] > .row{
 	float:left;
 	width:1024px;
 	margin: 0 calc(50% - 512px);
+	padding: 10px;
 }
 #divAdminHome > .divSeccionesHome,
 #divAdminHome > .divTxtTag,
@@ -2630,8 +2636,7 @@ div[name="altaautos"] > .row{
 	margin: 0 calc(50% - 512px);
 }
 #divContenidoSubasta{
-	display: flex;
-    flex-wrap: wrap;
+
 }
 .searchItem > .card > .card-image{
 	overflow:hidden;
