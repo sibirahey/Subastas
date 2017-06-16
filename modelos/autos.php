@@ -164,7 +164,10 @@ class autos
             (($estadoId<=0) ? "" : " and au.estado = ? ")  . 
             (($descripcion =='') ? "" :  " and au.descripcion like '%?%' ") .
             (($modeloId <= 0) ? "" :  " and au.modelo = ? ");
-            
+
+            $comando .= " ORDER BY au.fechaCreacion DESC ";
+
+            //print_r($comando);
 
             
 

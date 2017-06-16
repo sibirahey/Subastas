@@ -71,13 +71,12 @@ function buscarAutos(){
 			$.each(data, function(i, item) {
 					
 				var renglon = "<tr>";
-					renglon += '<td><img alt="' + item.idAuto + '" src="fotos/' + item.foto + '" onerror=\'imgError(this)\'; /></td>';
-					renglon += "<td>" + item.descripcion + "</td>";					
-					renglon += "<td>" + item.estado + "</td>";
+					renglon += '<td><img class="materialboxed" style="width:100px" alt="' + item.idAuto + '" src="'+siteurl +'uploads/' + item.foto + '" onerror=\'imgError(this)\'; /></td>';
+					renglon += "<td>" + item.marca + "</td>";					
+					renglon += "<td>" + item.modelo + "</td>";
 					renglon += "<td>" + item.km + "</td>";
-					renglon += "<td><div class='btn waves-effect light-blue lighten-1'  onclick='muestraGaleria(" + item.idAuto + ");'><i class='material-icons'>photo_camera</i></div></td>";
-					
 					renglon += "<td><b>$</b>" + item.precio + "</td>";
+					renglon += "<td><div class='btn waves-effect light-blue lighten-1'  onclick='muestraGaleria(" + item.idAuto + ");'><i class='material-icons'>photo_camera</i></div></td>";
 					renglon += "<td class='center-btn'><div class='btn waves-effect waves-light light-blue disabled'><i class='material-icons'>add</i></div></td>";
 					//renglon += "<div style='display:none;' id='gallery" + item.idAuto + "'>";
 					renglon += "<div id='gallery"+ item.idAuto +"'  class='modal modal-fixed-footer'>";

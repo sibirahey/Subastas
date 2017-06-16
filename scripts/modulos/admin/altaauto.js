@@ -296,38 +296,74 @@ function validatextoVacio(inputElement,elementobloq){
 function validaCamposAltaAutos(item){
 	debugger;
 	var validado = true;
-		if (item.precio == '' || item.precio == undefined){
+	var msj  = "";
+	var msjSoloNumeros = "Sólo se permiten números en "
+
+	if (item.precio == '' || item.precio == undefined){
+		msj += (msj =="") ? "Precio" : ", Precio";
+		validado = false;
+	}else{
+		if(/\D/.test(item.precio)){
+
+			msj += (msj =="") ? msjSoloNumeros+" el precio" : ", "+msjSoloNumeros+" el precio";
 			validado = false;
 		}
-		if (item.marca == '' || item.marca == undefined || item.marca == '0'){
+	}
+	if (item.marca == '' || item.marca == undefined || item.marca == '0'){
+		msj += (msj =="") ? "Marca" : ", Marca";
+		validado = false;
+	}
+	if (item.modelo == '' || item.modelo == undefined || item.modelo == '0'){
+		msj += (msj =="") ? "Modelo" : ", Modelo";
+		validado = false;
+	}
+	if (item.color == '' || item.color == undefined || item.color == '0'){
+		msj += (msj =="") ? "Color" : ", Color";
+		validado = false;
+	}
+	if (item.anio == '' || item.anio == undefined){
+		msj += (msj =="") ? "Año" : ", Año";
+		validado = false;
+	}else{
+		if(/\D/.test(item.anio)){
+
+			msj += (msj =="") ? msjSoloNumeros+" el año" : ", "+msjSoloNumeros+" el año";
 			validado = false;
 		}
-		if (item.modelo == '' || item.modelo == undefined || item.modelo == '0'){
+	}
+	if (item.km == '' || item.km == undefined){
+		msj += (msj =="") ? "KM" : ", KM";
+		validado = false;
+	}else{
+		if(/\D/.test(item.km)){
+
+			msj += (msj =="") ? msjSoloNumeros+" el kilometraje" : ", "+msjSoloNumeros+" el kilometraje";
 			validado = false;
 		}
-		if (item.color == '' || item.color == undefined || item.color == '0'){
-			validado = false;
-		}
-		if (item.anio == '' || item.anio == undefined){
-			validado = false;
-		}
-		if (item.km == '' || item.km == undefined){
-			validado = false;
-		}
-		if (item.transmision == '' || item.transmision == undefined || item.transmision == '0'){
-			validado = false;
-		}
-		if (item.estado == '' || item.estado == undefined || item.estado == '0'){
-			validado = false;
-		}
-		if (item.ciudad == '' || item.ciudad == undefined || item.ciudad == '0'){
-			validado = false;
-		}
+	}
+	if (item.transmision == '' || item.transmision == undefined || item.transmision == '0'){
+		msj += (msj =="") ? "Transmisión" : ", Transmisión";
+		validado = false;
+	}
+	if (item.estado == '' || item.estado == undefined || item.estado == '0'){
+		msj += (msj =="") ? "Estado" : ", Estado";
+		validado = false;
+	}
+	if (item.ciudad == '' || item.ciudad == undefined || item.ciudad == '0'){
+		msj += (msj =="") ? "Ciudad" : ", Ciudad";
+		validado = false;
+	}
+	if(item.descripcion == '' || item.descripcion == undefined){
+		msj += (msj =="") ? "Descripción" : ", Descripción";
+		validado = false;
+	}
 
 
-		if (!validado){
-			alert("Favor de llenar todos los campos requeridos");
-		}
-		return validado;
+	if (!validado){
+		//alert("Favor de llenar todos los campos requeridos");
+		Materialize.toast('Algunos de los campos están vacíos: ' + msj , 4000);
+
+	}
+	return validado;
 
 }

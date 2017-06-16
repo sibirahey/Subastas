@@ -421,6 +421,26 @@ function EditarAuto(o){
 	});
 }
 
+function LimpiaNuevoAuto(){
+
+		$("#precioAuto").val("");
+		$("#cbMarcaAuto").material_select("destroy");
+		$("#cbMarcaAuto").material_select();
+		$("#cbModeloAuto").material_select("destroy");
+		$("#cbModeloAuto").material_select();
+		$("#cbColorAuto").material_select("destroy");
+		$("#cbColorAuto").material_select();
+		$("#cbAnioAuto").val("");
+		$("#cbKMAuto").val("");
+		$("#cbTipoTransmisionAuto").material_select("destroy");
+		$("#cbTipoTransmisionAuto").material_select();
+		$("#cbEstadoAuto").material_select("destroy");
+		$("#cbEstadoAuto").material_select();
+		$("#cbCiudadAuto").material_select("destroy");
+		$("#cbCiudadAuto").material_select();
+		$("#txtaDescripcionAuto").val("");
+}
+
 
 function GuardaDetalleAuto(opc){
 
@@ -435,12 +455,12 @@ function GuardaDetalleAuto(opc){
 			oAuto.idSubasta = 0;
 
 		}
-		oAuto.precio = $("#precioAuto").val();
+		oAuto.precio = $("#precioAuto").val().trim();
 		oAuto.marca = $("#cbMarcaAuto").val();
 		oAuto.modelo = $("#cbModeloAuto").val();
 		oAuto.color = $("#cbColorAuto").val();
-		oAuto.anio = $("#cbAnioAuto").val();
-		oAuto.km = $("#cbKMAuto").val();
+		oAuto.anio = $("#cbAnioAuto").val().trim();
+		oAuto.km = $("#cbKMAuto").val().trim();
 		oAuto.transmision = $("#cbTipoTransmisionAuto").val();
 		oAuto.estado = $("#cbEstadoAuto").val();
 		oAuto.ciudad = $("#cbCiudadAuto").val();
@@ -471,16 +491,18 @@ function GuardaDetalleAuto(opc){
 
 				
 				if(data > 0){
-					alert("Los datos se guardaron correctamente");
+					
+					Materialize.toast('Los datos se guardaron correctamente' , 4000);
 					//$("#divRegistroAutos").dialog("close"); 
 					
 				}else{
-					alert("Ocurrió un error al guardar");
+					
+						Materialize.toast('Ocurrió un error al guardar' , 4000);
 
 				}
 			}, function(data){
 
-				alert("Ocurrió un error al guardar los datos")
+				Materialize.toast('Ocurrió un error al guardar' , 4000);
 			});
 
 		}
@@ -601,7 +623,7 @@ function SoloNumericos(inputItem) {
 		// Allow: Ctrl+A, Command+A
 		(event.keyCode === 65 && (event.ctrlKey === true || event.metaKey === true)) ||
 		// Allow: home, end, left, right, down, up
-		(event.keyCode >= 35 && event.keyCode <= 40)) {
+		(event.keyCode >= 35 && event.keyCode <= 40) || event.keyCode == 8 || event.keyCode == 9) {
 			// let it happen, don't do anything
 			return;
 		}
