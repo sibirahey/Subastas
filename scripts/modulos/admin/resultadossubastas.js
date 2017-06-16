@@ -1,5 +1,23 @@
 function cargaResultadosSubastas(){
 
+	debugger;
+
+	
+
+	$("#divTotalOfertas").modal({
+			dismissible : true, // Modal can be dismissed by clicking outside of the modal
+			opacity : .5, // Opacity of modal background
+			inDuration : 300, // Transition in duration
+			outDuration : 200, // Transition out duration
+			startingTop : '4%', // Starting top style attribute
+			
+		});
+		
+
+	$("#tblGanadores").hide();
+	//$("#divTotalOfertas").hide();
+	//$("#tblTotalOfertas").hide();
+
 	$("#btnResultados").click(function(){
 		$("#tblResultadosSubastas").show();
 		$("#tblGanadores").hide();
@@ -8,6 +26,8 @@ function cargaResultadosSubastas(){
 	postrequest("subastas/listar?rand="+Math.random() , 
 				{ "estatus" :  -1, "empresa" : -1, "subastaId" : -1 }, 
 				function(data){
+
+					sessionStorage["resultados"] = data;
 					for(i in data){
 						var attrID = data[i].idSubasta;
 						console.log(data[i]);
@@ -48,11 +68,11 @@ function verResultadoSubasta(o){
 	
 	
 	var toastContent = $(o).attr("attr-id");
+	$("#tblOfertas > table > tbody").html("");
 	postrequest("subastas/revisarresultados?r="+Math.random(), {"estatus" :  -1, "empresa" : -1, "subastaId":toastContent, "idsubasta": toastContent } ,  function(data){
 		$("#tblGanadores > tbody").html("");
 		$("#tblResultadosSubastas").hide();
 		$("#tblGanadores").show();
-
 		$("#thNombreSubasta").html("<h3>"+$(o).attr("attr-nombre")+"</h3>");
 		for(i in data){
 			var row = "<tr>";
@@ -63,13 +83,30 @@ function verResultadoSubasta(o){
 			row += "<td class='center-align'>"+Number(data[i].precio).formatMoney(2, '.', ',') +"</td>";
 			row += "<td class='center-align'>"+data[i].usuario+"</td>";
 			row += "<td class='center-align'>"+data[i].oferta+"</td>";
-			row += "<td class='center-align'><div class='waves-effect waves-light btn teal lighten-3 tooltipped' data-delay='50' data-position='top' data-tooltip='Detalle de ofertas' > <i class='material-icons'  data-tooltip='Detalle de ofertas' >assessment</i></div></td>";
-			row += "<tr>";
+			row += "<td class='center-align'><div class='waves-effect waves-light btn teal lighten-3 tooltipped' data-delay='50' data-position='top' data-tooltip='Detalle de ofertas' attr-id='"+data[i].autoid+ "' onclick='verOfertasPorSubasta(this);' > <i class='material-icons'  data-tooltip='Detalle de ofertas'>assessment</i></div></td>";
+			row += "</tr>";
 			$("#tblGanadores > tbody").append(row);
 
+			for(j in data[i].ofertas){
 
+				var row2= "<tr class='detalleOfertas" + data[i].ofertas[j].idAuto+"' >";
+				row2 += "<td class='center-align'  >"+data[i].ofertas[j].nombre_usuario +"</td>";
+				row2 += "<td class='center-align'>"+ data[i].ofertas[j].oferta+"</td>";
+				row2 += "<td class='center-align'>"+ data[i].ofertas[j].hora_puja+"</td>";
+				row2 += "</tr>";
+				$("#tblTotalOfertasBody").append(row2);
+			}
 		}
-
+		
 
 	});
+}
+
+function verOfertasPorSubasta(o){
+		
+		//$("#tblTotalOfertasBody > tr").hide();
+		$(".detalleOfertas"+$(o).attr("attr-id")).show();
+		//$("#tblTotalOfertas").show();
+		$("#divTotalOfertas").modal("open");
+
 }
