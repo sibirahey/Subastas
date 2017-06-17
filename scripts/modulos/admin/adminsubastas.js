@@ -84,6 +84,9 @@ function CargaFuncionesAdminSubastas() {
 			}
 		});
 
+
+
+
 	});
 
 	$("#btnFiltrar").click(function() {
@@ -264,12 +267,21 @@ function CargaSubastas(estatus, empresa) {
 			$("#divRegistroAutos").modal("open");
 		});
 
+		$("#modalListaAutos").click(function(){
+			$("#divDetalleAuto").hide();
+			$("#divListaAutos").show();
+		});
+			
+		
+
 		$(".btnVerAutos").click(function() {
 			debugger;
 			var nombreSubasta = $(this).attr("attr-nombresubasta");
 			var idSubasta = $(this).attr("attr-id");
 			cargaAutosPorSubasta(idSubasta, "#divListaAutos");
 			$('#divListaAutos').modal('open');
+			$("#modalListaAutos").show();
+			$("#modalListaAutos").show();
 		});
 
 		$("#btnCerrarListaAuto").click(function() {

@@ -520,7 +520,9 @@ function VerDetalleAuto(o) {
 			inDuration : 300, // Transition in duration
 			outDuration : 200, // Transition out duration
 		});
+	
 		$('#divDetalleAuto').modal("open");
+
 		
 
 		
@@ -536,7 +538,7 @@ function VerDetalleAuto(o) {
 			
 
 			debugger;
-			//$("#divDetalleAuto").show();
+			$("#divDetalleAuto").show();
 			$("#divListaAutos").hide();
 
 			$("#imgPrincipal").attr("src", siteurl+"uploads/"+infoAuto.foto);
@@ -563,8 +565,22 @@ function VerDetalleAuto(o) {
 
 			}
 			$('.materialboxed').materialbox();
+
+			$("#divDetalleAuto > div").click(function(){
+				
+				
+				$("#divListaAutos").show();
+				$("#modalListaAutos").show();
+				$("#divDetalleAuto > div").hide();
+
+			});
 		});
 	});
+	$("#modalListaAutos").hide();
+
+
+
+	
 	
 	
 

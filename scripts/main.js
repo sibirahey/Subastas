@@ -221,10 +221,11 @@ function CargaSubasta(subasta) {
 	});
 }
 
-function VerDetalleAuto(o) {
-	$(".mainBody").load("views/interna2.html", function() {
-	});
-}
+// function VerDetalleAuto(o) {
+// 	$(".mainBody").load("views/interna2.html", function() {
+// 	});
+	
+// }
 
 //***********************
 //***********************
