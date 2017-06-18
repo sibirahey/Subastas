@@ -288,7 +288,7 @@ function regresaRenglonVenta(item, subastaID) {
 		renglon += '          <img attr-id="' + item.idAuto + '" width="100px" onclick="VerDetalleAuto(this);" src="' + siteurl + 'uploads/' + item.foto + '" onerror="imgError(this)"; />';
 		renglon += '          <span class="card-title">' + item.marca + ' - ' + item.modelo + '</span>';
 		      if(sessionStorage["es_admin"] == 1 && getUrlVars()["accion"] != "subasta"){
-		      renglon += '    <a class="btn-floating halfway-fab waves-effect waves-light red"><i class="material-icons">add</i></a>';
+		      //renglon += '    <a class="btn-floating halfway-fab waves-effect waves-light red"><i class="material-icons">add</i></a>';
 		      }
 		renglon += '        </div>';
 		renglon += '      <div class="card-content">';
@@ -510,6 +510,7 @@ function GuardaDetalleAuto(opc){
 }
 
 function VerDetalleAuto(o) {
+	debugger;
 	var subastaid = $(o).attr("attr-subastaid");
 	var autoid = $(o).attr("attr-id");
 

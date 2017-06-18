@@ -2,10 +2,17 @@
 	#divListaContenido,
 	#divAdminHome,
 	#divAdminHomeContenido,
-	#divInfoSubasta {
+	#divInfoSubasta,
+	.CotizacionServicios,
+	#divServicios {
 	    float: left;
-	    width: 100%;
-	    margin: 0;
+	    width: 100% !important;
+	    margin: 0 !important;
+	}
+	#divCotizacion {
+	    float: left;
+	    width: 90% !important;
+	    margin: 20px 5% !important;
 	}
 	#divAdminHome > .divSeccionesHome,
 	#divAdminHome > .divTxtTag,
