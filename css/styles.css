@@ -770,61 +770,54 @@ width: 1024px;
 margin:30px calc(50% - 512px) 0;
 font-size: 0.8em;
 }
-#grdVehiculos
-:not(.grdVehiculos2) > div:first-child {
+#grdVehiculos:not(.grdVehiculos2) > div:first-child {
 	color: #ffffff;
 	height: 40px;
 	line-height: 40px;
 	width: 100%;
 	background-color: rgb(30,35,40);
 }
-#grdVehiculos:not(.grdVehiculos2) >
-div:first-child > div:nth-child(1) {
+#grdVehiculos:not(.grdVehiculos2) > div:first-child > div:nth-child(1) {
 	height: 40px;
 	width: 100px;
 }
-#grdVehiculos:not(.grdVehiculos2) >
-div:first-child > div:nth-child(5) {
+#grdVehiculos:not(.grdVehiculos2) > div:first-child > div:nth-child(5) {
 	height: 40px;
 	width: 100px;
 }
-#grdVehiculos:not(.grdVehiculos2) >
-div:first-child > div {
+#grdVehiculos:not(.grdVehiculos2) > div:first-child > div {
 	float: left;
 	height: 40px;
 	width: calc((100% - 240px) /5 );
 	text-align: center;
 }
-#grdVehiculos:not(.grdVehiculos2) >
-div:first-child > div:nth-child(6) {
+#grdVehiculos:not(.grdVehiculos2) > div:first-child > div:nth-child(6) {
 	text-align: right;
 	padding-right: 20px;
 }
-#grdVehiculos:not(.grdVehiculos2) >
-div:not(:first-child) {
+#grdVehiculos:not(.grdVehiculos2) > div:not(:first-child) {
 	min-height: 80px;
 	padding: 5px 0;
 	width: 100%;
 }
-#grdVehiculos:not(.grdVehiculos2) >
-div:not(:first-child) > div:nth-child(1) {
+#grdVehiculos:not(.grdVehiculos2) > div:not(:first-child) > div:nth-child(1) {
 	width: 100px;
 }
-#grdVehiculos:not(.grdVehiculos2) >
-div:not(:first-child) > div:nth-child(1) > input[type="checkbox"] {
+#grdVehiculos:not(.grdVehiculos2) > div:not(:first-child) > div:nth-child(1) > input[type="checkbox"] {
 	float: none;
 	margin: 0 auto;
 }
 
-#grdVehiculos:not(.grdVehiculos2) >
-div:not(:first-child) > div:nth-child(5) > img {
+#grdVehiculos:not(.grdVehiculos2) > div:not(:first-child) > div:nth-child(5) > img {
 	width: 40px;
 	height: auto;
 	margin: 0 30px;
 }
-#grdVehiculos:not(.grdVehiculos2) >
-div:not(:first-child) > div:nth-child(6) {
+#grdVehiculos:not(.grdVehiculos2) > div:not(:first-child) > div:nth-child(6) {
 	text-align: right;
+}
+#grdVehiculos > tbody > tr > td > img{
+	max-width:100px;
 }
 /*#grdVehiculos:not(.grdVehiculos2) > div:not(:first-child) > div:nth-child(7) > button{
  height:30px;
@@ -2505,7 +2498,7 @@ div[name="altaautos"] > .row{
 	float:left;
 	width:1024px;
 	margin: 0 calc(50% - 512px);
-	padding: 10px;
+	padding: 20px;
 }
 #divAdminHome > .divSeccionesHome,
 #divAdminHome > .divTxtTag,
