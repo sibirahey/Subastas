@@ -521,11 +521,10 @@ function VerDetalleAuto(o) {
 			inDuration : 300, // Transition in duration
 			outDuration : 200, // Transition out duration
 		});
+
+
 	
 		$('#divDetalleAuto').modal("open");
-
-		
-
 		
 	}
 
@@ -546,7 +545,7 @@ function VerDetalleAuto(o) {
 			var fotos = infoAuto.fotos.split(",");
 			for(i in fotos){
 
-				$("#imgSnapshots").append('<div><img alt="Imagen no disponible" attr-idx="1" src="'+ siteurl+"uploads/"+fotos[i]+ '" onclick="CambiaFotoPrincipal(this);"/></div>');
+				$("#imgSnapshots").append('<div><img alt="Imagen no disponible" attr-idx="1" src="'+ siteurl+"uploads/"+fotos[i]+ '"  onclick="CambiaFotoPrincipal(this);" /></div>');
 			}
 			$("#detalleTitulo").html(infoAuto.modelo +" " + infoAuto.anio);
 			$("#detalleIdAuto").html(infoAuto.idAuto);
@@ -561,11 +560,25 @@ function VerDetalleAuto(o) {
 			$("#detalleDescripcion").html(infoAuto.descripcion);
 			$("#detalleCaracteristicas").html(infoAuto.caracteristicas);
 			$("#detalleUbicacion").html(infoAuto.estado + " - " + infoAuto.ciudad);
-			if(getUrlVars["accion"] == "subasta"){
-
-
-			}
+			
 			$('.materialboxed').materialbox();
+			if(getUrlVars()["accion"] == "subastasadmin"){
+				
+
+				$("#closeDetalleAuto").click(function(){
+						$('#divDetalleAuto').hide();
+						$("#modalListaAutos").show()
+						$("#divListaAutos").show();
+				});
+
+			}else if(getUrlVars()["accion"] == "subasta"){
+				$("#closeDetalleAuto").click(function(){
+						$('#divDetalleAuto').modal("close");
+				});
+			}
+			else{
+				$('#divDetalleAuto').modal("open");
+			}
 
 			// $("#divDetalleAuto > div").click(function(){
 				// vars = getUrlVars();
@@ -595,6 +608,7 @@ function VerDetalleAuto(o) {
 function CambiaFotoPrincipal(img){
 	
 	$("#imgPrincipal").attr("src", $(img).attr("src"));
+	$("#imgPrincipal").click();
 
 }
 // function CierraDetalle(){
