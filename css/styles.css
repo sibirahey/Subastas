@@ -21,6 +21,7 @@ body {
 li{
 	list-style:none;
 }
+
 /*----------------- --------------*/
 .mainContainer {
 	width: 100%;
@@ -39,16 +40,18 @@ li{
 .menuitem {
 	float: left;
 	color: #EBC01C;
-	height: 40px;
+	height: 60px;
+	line-height: 60px;
+	/*
 	width: 80px;
 	text-align: center;
-	line-height: 40px;
-	margin-top: 20px;	
+	
+	*/	
 }
 .menuitemlogin {
 	float: right;
 	cursor:pointer;
-	opacity:0.6;
+	/*opacity:0.6;*/
 	-webkit-transition: opacity 0.5s ease-in-out; /* Safari */
     transition: opacity 0.5s ease-in-out;
 }
@@ -1829,6 +1832,7 @@ div#divCotizacion > #divListaCS{
 	width: 100%;
 	text-indent: 50px;
 	margin: 20px 0;
+	font-size:2.5rem;
 }
 
 .divSeccion > h2:before {
@@ -2731,4 +2735,10 @@ div[name="altaautos"] > .row{
 /*--------- ENDS DETALLE SUBASTA --------*/
 #listausuarios{
 	color: #000 !important;
+}
+
+/*---------- MATERIALIZE MODS ---------*/
+.modal-content input[disabled="disabled"],
+.modal-content textarea[disabled="disabled"]{
+    color: rgba(0, 0, 0, 0.6);
 }

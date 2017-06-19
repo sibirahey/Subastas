@@ -56,36 +56,36 @@
 	<img class="banner300x250" src="images/banner300x250.png">
 </div>
 <div class="divSeccion divContactanos">
-    <h2>Contactanos</h2>
+    <h2>Cont&aacute;ctanos</h2>
     <img class="banner300x600" src="images/banner300x600.png">
     <form class="contactForm col s12">
         <div class="row">
             <div class="input-field col s12">
             	<i class="material-icons prefix">account_circle</i>
-                <input type="text" name="contactoNombre" required="required"/>
-                <label for="first_name">Nombre Completo</label>
+                <input id="contactoNombre" type="text" name="contactoNombre" required="required" class="validate"/>
+                <label for="contactoNombre">Nombre Completo</label>
             </div>
 
             <div class="input-field col s12">
             	<i class="material-icons prefix">phone</i>
-                <input type="tel" name="contactoTelefono" required="required"/>
-                <label for="last_name">Tel&eacute;fono de Contacto</label>
+                <input id="contactoTelefono" type="tel" name="contactoTelefono" required="required" class="validate"/>
+                <label for="contactoTelefono">Tel&eacute;fono de Contacto</label>
             </div>
             <div class="input-field col s12">
             	<i class="material-icons prefix">email</i>
-                <input type="email" name="contactoEmail"  required="required"/>
-                <label for="last_name">Correo Electr&oacute;nico</label>
+                <input id="contactoEmail" type="email" name="contactoEmail"  required="required" class="validate"/>
+                <label for="contactoEmail">Correo Electr&oacute;nico</label>
             </div>
 
             <div class="input-field col s12">
             	<i class="material-icons prefix">message</i>
-                <textarea id="textarea1" class="materialize-textarea" required="required"></textarea>
+                <textarea id="textarea1" class="materialize-textarea" required="required" class="validate"></textarea>
                 <label for="textarea1">Escribe un mensaje</label>
             </div>
             <div class="input-field col s12">
-                <button type="submit" name="contactoEnviar" >
+                <div class="waves-effect waves-light btn col s12" name="contactoEnviar" >
                     Enviar
-                </button>
+                </div>
             </div>
         </div>
     </form>

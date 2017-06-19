@@ -100,6 +100,7 @@ function muestraDetalle(obj){
 	$("#cotizaComentario").val(oCotizacion["comentario"]);
 	$("#cotizacionTelefono").val(oCotizacion["Telefono"])
 	Materialize.updateTextFields();
+  	$('.materialize-textarea').trigger('autoresize');
 	$("#detalleCotizaciones").modal("open");
 	
 
