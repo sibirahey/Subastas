@@ -1,57 +1,65 @@
-
-<div>
-	<div class="divRegistro">
-     <label for="txtFiltro" >Texto:</label>
-        <input type="text" id="txtFiltro" name="txtFiltro">
-        <!-- <button id="btnAgregarCorreo">Agregar</button> -->
+<div class="cnfgSubastaContainer row">
+    <form class="col s12">
+     <div class="input-field col s12">
+        <input type="text" id="txtFiltro" name="txtFiltro" class="validate">
+        <label for="txtFiltro" >Texto:</label>
     </div>
 
-    <div class="divRegistro">
-         <label for="txtFechaInicio" >Fecha inicial:</label>
-        <input type="text" id="txtFechaInicio" name="txtFechaInicio" />
+    <div class="input-field col s12">
+         
+        <input type="text" id="txtFechaInicio" name="txtFechaInicio" class="validate" />
+        <label for="txtFechaInicio" >Fecha inicial:</label>
     </div>
-    <div class="divRegistro">
-         <label for="txtFechaFin" >Fecha final:</label>
-        <input type="text" id="txtFechaFin" name="txtFechaFin" />
+    <div class="input-field col s12">
+         
+        <input type="text" id="txtFechaFin" name="txtFechaFin" class="validate" />
+        <label for="txtFechaFin" >Fecha final:</label>
     </div>
+    <div class="btnContainer input-field col s2">
+            <button type="button" id="btnFiltrar" class="btnBuscar btn waves-effect waves-light right light-blue lighten-1" type="submit" onclick="buscarAutos()">
+                Buscar
+                <i class="material-icons right">search</i>
+            </button>
+        </div>
 
-    <div >
-        <button id="btnFiltrar">Filtrar</button>
-    </div>
-
+    </form>
 </div>
-<div id="grdMisVehiculos">
-    <div>
-        <div>Nombre</div>
-		<div>Correo</div>
-		<div>Marca</div>
-		<div>Modelo</div>
-		<div>Tipo</div>
-		<div>Detalle</div>
-    </div>
-</div>
-
-<div>
+<table id="grdMisCotizaciones" class="responsive-table striped">
+    <tr>
+        <th>Nombre</th>
+		<th>Correo</th>
+		<th>Marca</th>
+		<th>Modelo</th>
+		<th>Tipo</th>
+		<th>Detalle</th>
+    </tr>
+</table>
 
 
-<div id="detalleCotizaciones" title="Agregar Auto">
-    <div class="divRegistro">
-        <label for="cbMarcaAuto" >Marca:</label>
-        <select id="cbMarcaAuto" name="cbMarcaAuto" ></select>
+
+
+<div id="detalleCotizaciones" class="divContenido modal modal-fixed-footer">
+    <div href="#!" class="btn modal-action modal-close waves-effect red" >
+        <i class="material-icons">close</i>
     </div>
-    <div class="divRegistro">
-        <label for="cbModeloAuto" >Modelo:</label>
-        <select id="cbModeloAuto" name="cbModeloAuto" >
-            <option value="0">== Seleccione ==</option>
-        </select>
-    </div>
-    <div class="divRegistro">
-        <label for="numdePlaca" >Placas:</label>
-        <input type="text" name="numdePlaca" id="numdePlaca" />
-    </div>
-    <div class="divRegistro">
-		<div id="btnGuardaAuto" class="fa fa-floppy-o">
-                Nuevo
-            </div>
+    <div class="modal-content">
+         <div class="divRegistro">
+            <label for="cbMarcaAuto" >Marca:</label>
+            <select id="cbMarcaAuto" name="cbMarcaAuto" ></select>
+        </div>
+        <div class="divRegistro">
+            <label for="cbModeloAuto" >Modelo:</label>
+            <select id="cbModeloAuto" name="cbModeloAuto" >
+                <option value="0">== Seleccione ==</option>
+            </select>
+        </div>
+        <div class="divRegistro">
+            <label for="numdePlaca" >Placas:</label>
+            <input type="text" name="numdePlaca" id="numdePlaca" />
+        </div>
+        <div class="divRegistro">
+            <div id="btnGuardaAuto" class="fa fa-floppy-o">Nuevo</div>
         </div>
     </div>
+</div>    
+   

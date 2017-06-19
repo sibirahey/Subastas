@@ -760,7 +760,7 @@ label[for="registroEULA"] {
 #grdVehiculos div {
 	float: left;
 }
-#grdVehiculos:not(.grdVehiculos2){
+#grdVehiculos:not(.grdVehiculos2), #grdMisCotizaciones{
 float:left;
 background-color:#F0F0F0;
 border:1px solid #C8C8C8;
@@ -770,37 +770,37 @@ width: 1024px;
 margin:30px calc(50% - 512px) 0;
 font-size: 0.8em;
 }
-#grdVehiculos:not(.grdVehiculos2) > div:first-child {
+#grdVehiculos:not(.grdVehiculos2) > div:first-child, #grdMisCotizaciones > div:first-child, {
 	color: #ffffff;
 	height: 40px;
 	line-height: 40px;
 	width: 100%;
 	background-color: rgb(30,35,40);
 }
-#grdVehiculos:not(.grdVehiculos2) > div:first-child > div:nth-child(1) {
+#grdVehiculos:not(.grdVehiculos2) > div:first-child > div:nth-child(1), #grdMisCotizaciones > div:first-child > div:nth-child(1) {
 	height: 40px;
 	width: 100px;
 }
-#grdVehiculos:not(.grdVehiculos2) > div:first-child > div:nth-child(5) {
+#grdVehiculos:not(.grdVehiculos2) > div:first-child > div:nth-child(5), #grdMisCotizaciones > div:first-child > div:nth-child(5){
 	height: 40px;
 	width: 100px;
 }
-#grdVehiculos:not(.grdVehiculos2) > div:first-child > div {
+#grdVehiculos:not(.grdVehiculos2) > div:first-child > div, #grdMisCotizaciones > div:first-child > div{
 	float: left;
 	height: 40px;
 	width: calc((100% - 240px) /5 );
 	text-align: center;
 }
-#grdVehiculos:not(.grdVehiculos2) > div:first-child > div:nth-child(6) {
+#grdVehiculos:not(.grdVehiculos2) > div:first-child > div:nth-child(6), #grdMisCotizaciones  > div:first-child > div:nth-child(6)  {
 	text-align: right;
 	padding-right: 20px;
 }
-#grdVehiculos:not(.grdVehiculos2) > div:not(:first-child) {
+#grdVehiculos:not(.grdVehiculos2) > div:not(:first-child), #grdMisCotizaciones > div:not(:first-child) {
 	min-height: 80px;
 	padding: 5px 0;
 	width: 100%;
 }
-#grdVehiculos:not(.grdVehiculos2) > div:not(:first-child) > div:nth-child(1) {
+#grdVehiculos:not(.grdVehiculos2) > div:not(:first-child) > div:nth-child(1), #grdMisCotizaciones > div:not(:first-child) > div:nth-child(1){
 	width: 100px;
 }
 #grdVehiculos:not(.grdVehiculos2) > div:not(:first-child) > div:nth-child(1) > input[type="checkbox"] {

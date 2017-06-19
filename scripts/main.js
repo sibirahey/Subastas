@@ -52,6 +52,8 @@ function CargaFunciones(o){
 		case "resultados":
 			cargaResultadosSubastas();
 			break;
+		case "cotizaciones":
+			cargaFuncionesMisCotizaciones();
 		case "dashboard":
 		default:
 			CargaJsonHome();

@@ -73,7 +73,7 @@ function buscarAutos(){
 					renglon += "<td>" + item.modelo + "</td>";
 					renglon += "<td>" + item.km + "</td>";
 					renglon += "<td><b>$</b>" + item.precio + "</td>";
-					renglon += "<td><div class='btn waves-effect light-blue lighten-1'  onclick='MuestraDetalle(this);' attr-id='"+item.idAuto+"' attr-subastaid='0'><i class='material-icons'>photo_camera</i></div></td>";
+					renglon += "<td><div class='btn waves-effect light-blue lighten-1'  onclick='VerDetalleAuto(this);' attr-id='"+item.idAuto+"' attr-subastaid='0'><i class='material-icons'>photo_camera</i></div></td>";
 					//renglon += "<td class='center-btn'><div class='btn waves-effect waves-light light-blue disabled'><i class='material-icons'>add</i></div></td>";
 					//renglon += "<div style='display:none;' id='gallery" + item.idAuto + "'>";
 					renglon += "<div id='gallery"+ item.idAuto +"'  class='modal modal-fixed-footer'>";

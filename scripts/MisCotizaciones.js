@@ -1,31 +1,34 @@
-$(document).ready(function () {
 
-	$(".mainBody").load("views/MisCotizaciones.html", function() {
-		cargaFuncionesMisCotizaciones();	
-		
-		
-	});
-});
 
 function cargaFuncionesMisCotizaciones(){
 
-		$("#detalleCotizaciones").hide();
-		$("#txtFechaInicio").datepicker();
-		$("#txtFechaFin").datepicker();
-		if(sessionStorage.getItem('correo') != undefined){
-			$("#nolog").hide();
-			cargaMisCotizaciones(sessionStorage.getItem('correo'));
-		}
-
-		$("#btnFiltrar").click(function(){
-			debugger;
-				
-
-				cargaMisCotizaciones(sessionStorage.getItem('correo'));
-
+		$("#miscotizaciones").load("views/MisCotizaciones.html", function() {
 			
+			
+			$("#txtFechaInicio").datepicker();
+			$("#txtFechaFin").datepicker();
+			if(sessionStorage.getItem('correo') != undefined){
+				$("#nolog").hide();
+				cargaMisCotizaciones(sessionStorage.getItem('correo'));
+			}
 
+			$("#btnFiltrar").click(function(){
+				debugger;
+
+					cargaMisCotizaciones(sessionStorage.getItem('correo'));
+
+			});
+
+			$("#detalleCotizaciones").modal({
+				dismissible : true, // Modal can be dismissed by clicking outside of the modal
+				opacity : .5, // Opacity of modal background
+				inDuration : 300, // Transition in duration
+				outDuration : 200, // Transition out duration
+			});
+			
 		});
+
+		
 
 }
 
@@ -47,17 +50,16 @@ function cargaMisCotizaciones(obj){
 
 				$.each(data,function(i,item){
 
-					var renglon = "<div class='rows'>";
-					renglon += "<div>"+ item.Nombre+"</div>";
-					renglon += "<div>"+item.Correo+"</div>";
-					renglon += "<div>"+item.Marca+"</div>";
-					renglon += "<div>"+item.Modelo+"</div>";
-					renglon += "<div>"+item.Tipo+"</div>";
-					renglon += "<div><button cotizacion='"+item.idCotizacion+"' onclick='muestraDetalle(this)'>Ver</bitton></div>";
+					var renglon = "<tr>";
+					renglon += "<td>"+ item.Nombre+"</td>";
+					renglon += "<td>"+item.Correo+"</td>";
+					renglon += "<td>"+item.Marca+"</td>";
+					renglon += "<td>"+item.Modelo+"</td>";
+					renglon += "<td>"+item.Tipo+"</td>";
+					renglon += "<td><div class='btn waves-effect light-blue lighten-1'  cotizacion='"+item.idCotizacion+"' onclick='muestraDetalle(this)'><i class='material-icons'>assignment</i></div></td>";
+					renglon +="</tr>";
 
-					renglon +="</div>";
-
-					$("#grdMisVehiculos").append(renglon);
+					$("#grdMisCotizaciones").append(renglon);
 
 				});
 
@@ -70,6 +72,7 @@ function cargaMisCotizaciones(obj){
 
 
 function muestraDetalle(obj){
+	$("#detalleCotizaciones").modal("open");
 	debugger;
 	var mAuto = new miAuto();
 
@@ -82,12 +85,12 @@ function muestraDetalle(obj){
 	if($(obj).attr("marca") != undefined){
 
 		mAuto.idMarca = $(obj).attr("marca");
-	mAuto.idModelo = $(obj).attr("modelo");
-	mAuto.numPlaca = $(obj).attr("placa");
+		mAuto.idModelo = $(obj).attr("modelo");
+		mAuto.numPlaca = $(obj).attr("placa");
 		mAuto.estatus = 0;
 
 
-	}
+	
 		postrequest("cotizacion/detalle",{},function(data){
 	
 				if (data) {
@@ -101,6 +104,7 @@ function muestraDetalle(obj){
 				}
 
 		});
+	}
 	
 }
 
