@@ -2736,3 +2736,9 @@ div[name="altaautos"] > .row{
 #listausuarios{
 	color: #000 !important;
 }
+
+/*---------- MATERIALIZE MODS ---------*/
+.modal-content input[disabled="disabled"],
+.modal-content textarea[disabled="disabled"]{
+    color: rgba(0, 0, 0, 0.6);
+}
