@@ -249,7 +249,7 @@ function enviarCotizacion(){
 	var modelo =$("input[name=cotizaModelo]").val();
 	var tipo = $("input[name=cotizaTipo]").val();
 	var comentario = $("#cotizaComentario").val();
-	alert("nombre:"+nombre + " correo:"+correo + " telefono:" +telefono + " marca:" +marca+ " modelo:" + modelo+ " tipo:"+tipo);
+	//alert("nombre:"+nombre + " correo:"+correo + " telefono:" +telefono + " marca:" +marca+ " modelo:" + modelo+ " tipo:"+tipo);
 
 	if(nombre != "" && correo != "" && telefono != "" && marca != ""
 		&& modelo != "" && tipo != "" && nombre != undefined && correo != undefined && telefono != undefined && marca != undefined
@@ -267,14 +267,15 @@ function enviarCotizacion(){
 		objcotizacion.comentario = JSON.stringify(comentario);
 		 postrequest("cotizacion/registro", objcotizacion, function(data){
 		 	if (data){
-		 		alert ("Se guardo Correctamente su solicitud");
+		 		
+		 		Materialize.toast("Se guardo Correctamente su solicitud");
 
 		 	}
     });
 
 	} else {
 
-		alert("Debe Llenar todos los campos");
+		Materialize.toast("Debe Llenar todos los campos");
 	}
 
 }

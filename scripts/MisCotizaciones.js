@@ -58,7 +58,7 @@ function cargaMisCotizaciones(obj){
 					renglon += "<td>"+item.Modelo+"</td>";
 					renglon += "<td>"+item.subservicios+"</td>";
 					renglon += "<td>"+item.fecha+"</td>";
-					renglon += "<td>"+ ((item.Estatus == 1) ?"PENDIENTE" : "ATENDIDA") +"</td>";
+					renglon += "<td>"+ ((item.Estatus == 0) ?"PENDIENTE" : "ATENDIDA") +"</td>";
 					renglon += "<td><div class='btn waves-effect light-blue lighten-1'  cotizacion='"+item.idCotizacion+"' onclick='muestraDetalle(this)'><i class='material-icons'>assignment</i></div></td>";
 					renglon +="</tr>";
 

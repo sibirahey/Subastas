@@ -73,7 +73,7 @@ class cotizacion
 
             $sentencia->bindParam(6, $cotiza["tipo"]);
 
-            $Estatus = 8;
+            $Estatus = 0;
             $sentencia->bindParam(7, $Estatus);
 
             $comentario = json_decode ($cotiza["comentario"]);
