@@ -1782,6 +1782,9 @@ a[data-u="any"] {
 	display: none;
 	box-shadow: 0 5px 11px 0 rgba(0, 0, 0, 0.18), 0 4px 15px 0 rgba(0, 0, 0, 0.15);
 }
+.CotizacionServicios > div#divCotizacion > h5{
+	text-indent: 20px;
+}
 /*.CotizacionServicios > div#divCotizacion > div > label {
 	height: 30px;
 	width: 90px;
