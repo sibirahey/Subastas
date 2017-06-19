@@ -1,16 +1,18 @@
 function cargaServicios(idServicio) {
 
-	postrequest("servicios/listar",{"estatus":"1"},function(data){
+	postrequest("servicios/listar", {
+		"estatus" : "1"
+	}, function(data) {
 
-		for(serv in data){
-			$("#divLstServicios").append('<div><div class:"submenuitem" idServicio ="'+data[serv].idServicios+'" onClick="cargaServiciosCotizar(this)">'+data[serv].nombre+'</div></div>');
-			
+		for (serv in data) {
+			$("#divLstServicios").append('<li><div class="collapsible-header" onClick="cargaServiciosCotizar(this)" idServicio ="' + data[serv].idServicios + '">' + data[serv].nombre + '</div><div class="collapsible-body"></div></li>');
+
 		}
 
-		
 	})
-
+	$('.collapsible').collapsible();
 }
+
 
 
 function cargaServiciosCotizar(O) {
@@ -27,11 +29,11 @@ function cargaServiciosCotizar(O) {
 				var idNombre=data[subServ].idServicio+ data[subServ].idSubservicio;
 			
 				Renglon = '<div class="rows" id="1">';
-				Renglon+= '<div class:"servicioeditado" id ="Subservicio' + data[subServ].idSubservicio + '">' + data[subServ].nombre + '</div>';			
+				Renglon+= '<div class="servicioeditado" id ="Subservicio' + data[subServ].idSubservicio + '">' + data[subServ].nombre + '</div>';			
 				if(sessionStorage.getItem('es_admin')==1)
 					Renglon+= '<input type="text" class="editarServicio" name ="servicio" id ="txt' +data[subServ].idServicio+ data[subServ].idSubservicio + '" value = "' + data[subServ].nombre + '" style="display: none;"/>';			
 				
-				Renglon+= '<button id="btnAgregarS" '+ids+ ' onClick="AgregarServicio(this);">Cotizar</button>';
+				Renglon+= '<div class="waves-effect waves-light btn" id="btnAgregarS" '+ids+ ' onClick="AgregarServicio(this);"><i class="material-icons">add</i></div>';
 				
 				if(sessionStorage.getItem('es_admin')==1)
 					Renglon+= '<button id="btnGuardarS"  idSubServicio="' + data[subServ].idSubservicio + '" idServicio="' + data[subServ].idServicio + '" onClick="ActualizarSubServicio(this);">Editar</button>';
@@ -47,8 +49,8 @@ function cargaServiciosCotizar(O) {
 
 				if (idServicio ==3 ){
 
-					Renglon+='<div id="requisitos'+idNombre+'"  >';
-					Renglon+='<a target="_blank" href ="data/CambioPropEdoMex.pdf">Requisitos</a> ';
+					Renglon+='<div class="nmbRequisitos" id="requisitos'+idNombre+'"  >';
+					Renglon+='<a class="lnkRequisitos" target="_blank" href ="data/CambioPropEdoMex.pdf">Requisitos</a> ';
 					Renglon+=  '</div>';
 				}
 				Renglon+='</div>';
@@ -56,8 +58,9 @@ function cargaServiciosCotizar(O) {
 			if(sessionStorage.getItem('es_admin')!=1){
 
 			}
-
-				$("#divDetalleServicios").append(Renglon);
+debugger;
+				//$("#divDetalleServicios").append(Renglon);
+				$(O).parent().find('.collapsible-body').append(Renglon);
 			}
 
 		}
@@ -73,8 +76,9 @@ function cargaServiciosCotizar(O) {
 					Renglon+= agregaControlUpload('idSubServicio="0" idServicio="' + idServicio + '"') + '</div>';
 				}
 				Renglon+='</div>';
-
-				$("#divDetalleServicios").append(Renglon);
+				debugger;
+				$(O).parent().find('.collapsible-body').append(Renglon);
+				//$("#divDetalleServicios").append(Renglon);
 
 		}
 
@@ -167,34 +171,35 @@ function NuevoSubServicio(obj){
 	}
 
 }
-
-function cargaLista(){
+function cargaLista() {
 	$('.scRow').remove();
-	var serviciosCotizar=[];
-	 serviciosCotizar= JSON.parse(sessionStorage.getItem('serviciosCotizar'));
-	$.each(serviciosCotizar,function(index,value){
-		debugger;
-		 var r = '<div class="scRow" >';
-		  r += '<button idSubServicio="' + value.idSubServicios + '" idServicio="' + value.idServicio+'" onClick="AgregarServicio(this);">Quitar</button>';
-		  r += '<label>'+ value.nombreSubServicio +'</label>';
-		  r+= '</div>';
+	var serviciosCotizar = [];
+	serviciosCotizar = JSON.parse(sessionStorage.getItem('serviciosCotizar'));
+	$.each(serviciosCotizar, function(index, value) {
+		//debugger;
+		// var r = '<div class="scRow" >';
+		// r += '<button idSubServicio="' + value.idSubServicios + '" idServicio="' + value.idServicio+'" onClick="AgregarServicio(this);">Quitar</button>';
+		// r += '<label>'+ value.nombreSubServicio +'</label>';
+		// r+= '</div>';
 
-		  $('#divListaCS').append(r);
+		var r = '<div class="chip scRow">' + value.nombreSubServicio + '<i class="close material-icons" idSubServicio="' + value.idSubServicios + '" idServicio="' + value.idServicio + '">close</i>';
+		r += '</div>';
+		$('#divListaCS').append(r);
 
 	});
-	 
-
+	$('i.close').click(function() {
+		AgregarServicio(this);
+	});
 }
 
 function AgregarServicio(obj) {
-
-	
+	// $(obj).attr('Disabled','Disabled');
 	var sc = sessionStorage.getItem('serviciosCotizar');
 	var serviciosCotizar=[];
 	var objServicioCotizar = new CotizacionServicio();
 	objServicioCotizar.idServicio = $(obj).attr('idServicio');
-	objServicioCotizar.idSubServicios= $(obj).attr('idSubServicio');
-	objServicioCotizar.nombreSubServicio =$('#Subservicio' + objServicioCotizar.idSubServicios).text();
+	objServicioCotizar.idSubServicios = $(obj).attr('idSubServicio');
+	objServicioCotizar.nombreSubServicio = $('#Subservicio' + objServicioCotizar.idSubServicios).text();
 	if(sc != undefined){
 	 serviciosCotizar= JSON.parse(sc);
 
@@ -264,7 +269,7 @@ function enviarCotizacion(){
 		 	}
     });
 
-	}else{
+	} else {
 
 		alert("Debe Llenar todos los campos");
 	}
@@ -287,7 +292,7 @@ function muestraGaleria(idx) {
 	$("#gallery" + idx).addClass('muestraGaleria');
 	
 	dialog.dialog("open");
-}
+}	
 
 function seleccionaImagen(obj) {
 	if ($($(obj).parent()).attr("class") == "galleryunselected") {
@@ -324,5 +329,10 @@ function agregaControlUpload(ids){
 	 return uploadControl;
 }
 
+$(document).ready(function(){
+	$('i.close').click(function(){
+		console.log(this);
+	});	
+});
 
 

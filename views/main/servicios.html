@@ -1,51 +1,70 @@
-
 <div class="CotizacionServicios" id="CServicios">
-	
-	
-	<div  id="divServicios">
-		<h4>Servicios</h4>
-		<div Id ="divLstServicios"></div>
-	</div>
-	
-	<div id="divDetalleServicios"></div>
-	
-	<div id="divCotizacion">
-		<div id="divListaCS"></div>
-		<div>
-		<label>Nombre:</label>
-		<input type="text" name="cotizaNombre">
-		</div>
+    <div  id="divServicios">
+        <h4>Servicios</h4>
+        <ul class="collapsible popout" data-collapsible="accordion" id="divLstServicios"></ul>
+    </div>      
 
-		<div>
-		<label>Correo:</label>
-		<input type="text" name="cotizaCorreo">
-		</div>
+    <div id="divCotizacion" class="row">
+        <h5>Solicitud de Cotizaci&oacute;n</h5>
+        <div id="divListaCS"></div>
+        <!-- <div>
+            <label>Nombre:</label>
+            <input type="text" name="cotizaNombre">
+        </div> -->
+        <div class="input-field col s12">
+          <input id="cotizaNombre" type="text" class="validate">
+          <label for="cotizaNombre">Nombre</label>
+        </div>
 
-		<div>
-		<label>Telefono:</label>
-		<input type="text" name="cotizaTelefono">
-		</div>
+        <!-- <div>
+            <label>Correo:</label>
+            <input type="text" name="cotizaCorreo">
+        </div> -->
+        <div class="input-field col s12">
+          <input id="cotizaCorreo" type="text" class="validate">
+          <label for="cotizaCorreo">Correo</label>
+        </div>
 
-		<div>
-		<label>Marca:</label>
-		<input type="text" name="cotizaMarca">
-		</div>
+        <!-- <div>
+            <label>Telefono:</label>
+            <input type="text" name="cotizaTelefono">
+        </div> -->
+        <div class="input-field col s12">
+          <input id="cotizaTelefono" type="text" class="validate">
+          <label for="cotizaTelefono">Tel&eacute;fono</label>
+        </div>
 
-		<div>
-		<label>Modelo:</label>
-		<input type="text" name="cotizaModelo">
-		</div>
+        <!-- <div>
+            <label>Marca:</label>
+            <input type="text" name="cotizaMarca">
+        </div> -->
+        <div class="input-field col s12">
+          <input id="cotizaMarca" type="text" class="validate">
+          <label for="cotizaMarca">Marca</label>
+        </div>
 
+        <!-- <div>
+            <label>Modelo:</label>
+            <input type="text" name="cotizaModelo">
+        </div> -->
+        <div class="input-field col s12">
+          <input id="cotizaModelo" type="text" class="validate">
+          <label for="cotizaModelo">Modelo</label>
+        </div>
 
-		<div>
-		<label>Tipo:</label>
-		<input type="text" name="cotizaTipo">
-		</div>
-		<div>
-		<button type="button" id="SolicitarCotizacion" >Enviar</button>
-		</div>
+        <!-- <div>
+            <label>Tipo:</label>
+            <input type="text" name="cotizaTipo">
+        </div> -->
+        <div class="input-field col s12">
+          <input id="cotizaTipo" type="text" class="validate">
+          <label for="cotizaTipo">Tipo</label>
+        </div>
+        
+        <div type="button" id="SolicitarCotizacion" class="waves-effect waves-light btn">
+            Solicitar Cotizaci&oacute;n
+        </div>
 
-		
-
-	</div>
+    </div>
+    
 </div>

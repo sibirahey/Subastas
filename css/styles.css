@@ -18,6 +18,9 @@ body {
 	margin: 0 auto;
 	background-color: #f0f0f0;
 }
+li{
+	list-style:none;
+}
 /*----------------- --------------*/
 .mainContainer {
 	width: 100%;
@@ -767,61 +770,54 @@ width: 1024px;
 margin:30px calc(50% - 512px) 0;
 font-size: 0.8em;
 }
-#grdVehiculos
-:not(.grdVehiculos2) > div:first-child {
+#grdVehiculos:not(.grdVehiculos2) > div:first-child {
 	color: #ffffff;
 	height: 40px;
 	line-height: 40px;
 	width: 100%;
 	background-color: rgb(30,35,40);
 }
-#grdVehiculos:not(.grdVehiculos2) >
-div:first-child > div:nth-child(1) {
+#grdVehiculos:not(.grdVehiculos2) > div:first-child > div:nth-child(1) {
 	height: 40px;
 	width: 100px;
 }
-#grdVehiculos:not(.grdVehiculos2) >
-div:first-child > div:nth-child(5) {
+#grdVehiculos:not(.grdVehiculos2) > div:first-child > div:nth-child(5) {
 	height: 40px;
 	width: 100px;
 }
-#grdVehiculos:not(.grdVehiculos2) >
-div:first-child > div {
+#grdVehiculos:not(.grdVehiculos2) > div:first-child > div {
 	float: left;
 	height: 40px;
 	width: calc((100% - 240px) /5 );
 	text-align: center;
 }
-#grdVehiculos:not(.grdVehiculos2) >
-div:first-child > div:nth-child(6) {
+#grdVehiculos:not(.grdVehiculos2) > div:first-child > div:nth-child(6) {
 	text-align: right;
 	padding-right: 20px;
 }
-#grdVehiculos:not(.grdVehiculos2) >
-div:not(:first-child) {
+#grdVehiculos:not(.grdVehiculos2) > div:not(:first-child) {
 	min-height: 80px;
 	padding: 5px 0;
 	width: 100%;
 }
-#grdVehiculos:not(.grdVehiculos2) >
-div:not(:first-child) > div:nth-child(1) {
+#grdVehiculos:not(.grdVehiculos2) > div:not(:first-child) > div:nth-child(1) {
 	width: 100px;
 }
-#grdVehiculos:not(.grdVehiculos2) >
-div:not(:first-child) > div:nth-child(1) > input[type="checkbox"] {
+#grdVehiculos:not(.grdVehiculos2) > div:not(:first-child) > div:nth-child(1) > input[type="checkbox"] {
 	float: none;
 	margin: 0 auto;
 }
 
-#grdVehiculos:not(.grdVehiculos2) >
-div:not(:first-child) > div:nth-child(5) > img {
+#grdVehiculos:not(.grdVehiculos2) > div:not(:first-child) > div:nth-child(5) > img {
 	width: 40px;
 	height: auto;
 	margin: 0 30px;
 }
-#grdVehiculos:not(.grdVehiculos2) >
-div:not(:first-child) > div:nth-child(6) {
+#grdVehiculos:not(.grdVehiculos2) > div:not(:first-child) > div:nth-child(6) {
 	text-align: right;
+}
+#grdVehiculos > tbody > tr > td > img{
+	max-width:100px;
 }
 /*#grdVehiculos:not(.grdVehiculos2) > div:not(:first-child) > div:nth-child(7) > button{
  height:30px;
@@ -1548,7 +1544,7 @@ div[aria-describedby="divAutos"] {
 	width: 664px;
 	margin:0 20px;
 }
-#btnGuardar {
+#btnGuardar:not(.btnGuardarAdminHome) {
 	width: 100%;
 }
 /*#btnGuardar {
@@ -1715,16 +1711,23 @@ a[data-u="any"] {
 	overflow: hidden;
 }
 /*---------- ENDS CAROUSEL --------*/
-
+.servicioeditado{
+	float:left;
+	width: calc(100% - 80px);
+}
 .CotizacionServicios {
 	float: left;
 	margin: 0 calc(50% - 512px);
 	width: 100%;
 	max-width: 1024px;
 }
+#divLstServicios > li >.collapsible-body > .rows{
+	height:60px;
+}
 .CotizacionServicios > div#divServicios {
 	float: left;
-	width: 25%;
+	width: 700px;
+	padding: 0 10px;
 }
 .CotizacionServicios > div#divServicios > div#divLstServicios {
 
@@ -1774,16 +1777,12 @@ a[data-u="any"] {
 .CotizacionServicios > div#divCotizacion {
 	float: left;
 	height: 100%;
-	width: 30%;
-	padding-top: 50px;
+	width: 324px;
+	margin-top: 70px;
 	display: none;
+	box-shadow: 0 5px 11px 0 rgba(0, 0, 0, 0.18), 0 4px 15px 0 rgba(0, 0, 0, 0.15);
 }
-.CotizacionServicios > div#divCotizacion > div {
-
-	width: 100%;
-}
-
-.CotizacionServicios > div#divCotizacion > div > label {
+/*.CotizacionServicios > div#divCotizacion > div > label {
 	height: 30px;
 	width: 90px;
 	margin-right: 6px;
@@ -1800,9 +1799,15 @@ a[data-u="any"] {
 	width: 100%;
 	margin-left: auto;
 	margin-right: auto;
+}*/
+div#divCotizacion > #divListaCS{
+	padding: 10px;
+	border-bottom:1px solid rgb(190,190,190);
+	background-color:#ffffff;
 }
-div#divCotizacion > #divListaCS button {
-	width: 100%;
+#SolicitarCotizacion{
+	width:90%;
+	margin: 10px 5%;
 }
 /*---------- INFOGRAFIAS ---------*/
 .divSeccion {
@@ -2493,7 +2498,7 @@ div[name="altaautos"] > .row{
 	float:left;
 	width:1024px;
 	margin: 0 calc(50% - 512px);
-	padding: 10px;
+	padding: 20px;
 }
 #divAdminHome > .divSeccionesHome,
 #divAdminHome > .divTxtTag,

@@ -67,12 +67,12 @@ function CargaFunciones(o){
 function CargaMaterial (){
 
 	$(".toggles").controlgroup({
-			direction : "vertical"
-		});
-		
-		$('.dateTimeHeader').hide();
-		$('select').material_select();
-
+		direction : "vertical"
+	});
+	
+	$('.dateTimeHeader').hide();
+	$('select').material_select();
+	
 }
 
 

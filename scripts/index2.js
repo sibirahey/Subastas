@@ -100,6 +100,7 @@ $(document).ready(function() {
 		});
 
 		$(".menuitemindex").click(function() {
+			debugger;
 			window.location = "?s="+$(this).attr("name");
 		});
 
