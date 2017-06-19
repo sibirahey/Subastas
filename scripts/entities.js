@@ -1,4 +1,4 @@
-function Usuario(nombre, appaterno, apmaterno, password, verificapassword, dd, mm, yyyy, placa, categorias, email){
+function Usuario(nombre, appaterno, apmaterno, password, verificapassword, dd, mm, yyyy, placa, categorias, email, telefono, idUsuario, idSubasta){
 	this.nombre = nombre;
 	this.appaterno = appaterno;
 	this.apmaterno = apmaterno;
@@ -11,6 +11,9 @@ function Usuario(nombre, appaterno, apmaterno, password, verificapassword, dd, m
 	this.categorias = categorias;
 	this.fecha_nacimiento = new Date();
 	this.email = email;
+	this.telefono = telefono;
+	this.idUsuario = idUsuario;
+	this.idSubasta = idSubasta;
 	/*
 	for(var i in categorias){
 		var foo = new UsuarioCategorias();

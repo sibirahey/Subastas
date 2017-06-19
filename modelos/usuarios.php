@@ -5,7 +5,7 @@ class usuarios
 
   
 
-    public function __construct($nombre ="", $appaterno = "", $apmaterno = "", $correo ="", $verificado = 0, $contrasena="", $valido=0, $publico = 1, $esadmin=0, $claveApi = "")
+    public function __construct($nombre ="", $appaterno = "", $apmaterno = "", $correo ="", $verificado = 0, $contrasena="", $valido=0, $publico = 1, $esadmin=0, $claveApi = "", $telefono = 0)
     {
         $this->nombre = $nombre;
         $this->appaterno = $appaterno;
@@ -18,6 +18,7 @@ class usuarios
         $this->esadmin= $esadmin;
         $this->claveApi = $claveApi;
         $this->idUsuario = 0;
+        $this->telefono = $telefono;
    
     }
 
@@ -30,6 +31,7 @@ class usuarios
     const NOMBRE = "nombre";
     const CONTRASENA = "contrasena";
     const CORREO = "correo";
+    const TELEFONO = "telefono";
     const VERIFICADO = "verificado";
     const CLAVE_API = "claveApi";
     const MAIL_BIENVENIDO = "Bienvenido a Escudería";
@@ -62,7 +64,12 @@ class usuarios
             return self::validacodigoverificacion();
         }else if($peticion[0] == 'cambiarcontasena'){
             return self::cambiarcontasena();
-        }else {
+        }else if ($peticion[0] == 'info'){
+                return self::info();
+        }else if($peticion[0] == 'preregistro'){
+            return self::preregistro($_POST);
+        }
+        else{
             throw new ExcepcionApi(self::ESTADO_URL_INCORRECTA, "Url mal formada", 400);
         }
     }   
@@ -90,6 +97,7 @@ class usuarios
                 self::FECHA_NAC . "," .
                 self::CLAVE_API . "," .
                 self::CORREO . "," .
+                self::TELEFONO. "," .
                 self::VERIFICADO . ")" .
                 " VALUES(?,?,?,?,?,?,?,?)";
         
@@ -113,8 +121,10 @@ class usuarios
 
             $sentencia->bindParam(7, $usuario["email"]);
 
+            $sentencia->bindParam(8, $usuario["telefono"]);
+
             $verificado = 0;
-            $sentencia->bindParam(8, $verificado);
+            $sentencia->bindParam(9, $verificado);
             
 
  
@@ -122,8 +132,8 @@ class usuarios
             $usuarioid = $pdo->lastInsertId();
            
             if ($resultado) {
-				envia_mail($usuario["email"], self::MAIL_BIENVENIDO, envia_mensaje_verificacion($claveApi, $usuarioid  ,$usuario["email"] ));
-                //envia_mail($usuario["email"], self::MAIL_BIENVENIDO, "<p>Bienvenido a escudería</p><p>Para terminar su registro por favor confirme su mail: </p><p><a href=\"msusano.com/Subastas/usuarios/confirmar/". $claveApi."&u=".$usuarioid.\">Confirmar mail</a></p>");
+				envia_mail($usuario["email"], self::MAIL_BIENVENIDO, mensaje_correoregistro($claveApi, $usuarioid  ,$usuario["email"] ));
+               
                 return $usuarioid;
             } else {
                 return 0;
@@ -161,11 +171,18 @@ class usuarios
                 $resultado = $sentencia->fetchall(PDO::FETCH_ASSOC);
                 $cuenta = count($resultado);
                 if($cuenta > 0 ){
+                    
                     $usuarioid = $resultado[0][self::ID_USUARIO];
-                }
 
-           
-                
+                    $pdo = ConexionBD::obtenerInstancia()->obtenerBD();
+        
+                    $comando = "delete from subasta_usuario where idSubasta = ".$idSubasta. " and idUsuario = ".$usuarioid ;
+
+                    $sentencia = $pdo->prepare($comando);
+
+                    $sentencia->execute();
+
+                }
             }
             else{
                 $cuenta = 0;
@@ -185,8 +202,9 @@ class usuarios
                     self::APMATERNO . "," .
                     self::CORREO . "," .
                     self::VERIFICADO . "," .
+                    self::TELEFONO . "," .
                     self::CLAVE_API .")" .
-                    " VALUES(?,?,?,?,?,?)";
+                    " VALUES(?,?,?,?,?,?,?)";
             
 
                 $sentencia = $pdo->prepare($comando);
@@ -199,7 +217,8 @@ class usuarios
                 $sentencia->bindParam(3, $usuario->apmaterno);
                 $sentencia->bindParam(4, $usuario->correo);
                 $sentencia->bindParam(5, $usuario->verificado);
-                $sentencia->bindParam(6, $claveApi);
+                $sentencia->bindParam(6, $usuario->telefono);
+                $sentencia->bindParam(7, $claveApi);
                 
                 $resultado = $sentencia->execute();
                 $usuarioid = $pdo->lastInsertId();
@@ -220,17 +239,24 @@ class usuarios
                 $sentencia->bindParam(1, $idSubasta);
                 $sentencia->bindParam(2, $usuarioid);
 
-                $sentencia->execute();
+                if($sentencia->execute()){
+                    $invitacion = new invitacion($usuarioid, $idSubasta);
+                    invitacion::crear($invitacion);
+                    
+                    
 
-                envia_mail($usuario->correo, self::MAIL_BIENVENIDO, envia_mensaje_verificacion($claveApi , $usuarioid), "yo@msusano.com" );
-                return self::ESTADO_CREACION_EXITOSA;
+                    envia_mail($usuario->correo, "Escudería - Ha sido invitado a particiar en una subasta", envia_mensaje_invitacion($claveApi, $usuarioid, $idSubasta));
+                }
+
+                
+                return true;
             } else {
-                return self::ESTADO_CREACION_FALLIDA;
+                return false;
             }
         } catch (PDOException $e) {
 
             print_r($e);
-            throw new ExcepcionApi(self::ESTADO_URL_INCORRECTA, $e->getMessage(), 400);
+            throw new ExcepcionApi("ERROR", $e->getMessage(), 400);
             
         }
 
@@ -341,7 +367,7 @@ class usuarios
                 $sentencia = $sentencia = ConexionBD::obtenerInstancia()->obtenerBD()->prepare($comando);
                 if($sentencia->execute()){
 
-                     envia_mail($correo, self::MAIL_BIENVENIDO, envia_mensaje_verificacion($claveApi, $idusuario, $correo), "yo@msusano.com" );
+                     envia_mail($correo, self::MAIL_BIENVENIDO, mensaje_correoregistro($claveApi, $idusuario, $correo), "yo@msusano.com" );
                      return 1;  
                 }
             }else{
@@ -559,6 +585,102 @@ class usuarios
             return 0;
         }
         
+    }
+
+    public function info(){
+
+        $idusuario = $_POST["idUsuario"];
+        $comando = "SELECT `idUsuario`, `nombre`, `appaterno`, `apmaterno`, `fecha_nacimiento`, `correo`, `telefono`, `verificado`, `claveApi` FROM `usuario` WHERE idUsuario = ? ";
+        $pdo = ConexionBD::obtenerInstancia()->obtenerBD();
+        $sentencia = $pdo->prepare($comando);
+        $sentencia->bindParam(1, $idusuario);
+        if ($sentencia->execute())
+        {  
+            return $sentencia->fetch(PDO::FETCH_ASSOC);
+        }else{
+            return null;
+        }
+
+    }
+     private function preregistro($usuario){
+
+        $contrasenaEncriptada = self::encriptarContrasena( $usuario["password"]);
+
+       
+
+        $claveApi = self::generarClaveApi();
+
+        try {
+
+            $pdo = ConexionBD::obtenerInstancia()->obtenerBD();
+
+            // Sentencia INSERT
+
+            //print_r($usuario);
+            $comando = "UPDATE " . self::NOMBRE_TABLA . " SET  " .
+                self::NOMBRE . " = ?," .
+                self::APPATERNO . " = ?," .
+                self::APMATERNO . " = ?," .
+                self::CONTRASENA . " = ?," .
+                self::FECHA_NAC . " = ?," .
+                self::CLAVE_API . " = ?," .
+                self::TELEFONO. " = ?," .
+                self::VERIFICADO . " = ? " .
+                " WHERE idUsuario = ? and correo = ?";
+        
+
+            $sentencia = $pdo->prepare($comando);
+
+
+            $sentencia->bindParam(1, $usuario["nombre"]);
+                       
+            $sentencia->bindParam(2, $usuario["appaterno"]);
+                       
+            $sentencia->bindParam(3, $usuario["apmaterno"]);
+
+            $sentencia->bindParam(4, $contrasenaEncriptada);
+         
+            $fecha = $usuario["yyyy"]."-".$usuario["mm"]."-".$usuario["dd"];
+            
+            $sentencia->bindParam(5, $fecha);
+            
+            $sentencia->bindParam(6, $claveApi);
+
+            $sentencia->bindParam(7, $usuario["telefono"]);
+
+            $verificado = 1;
+            $sentencia->bindParam(8, $verificado);
+
+            $sentencia->bindParam(9, $usuario["idUsuario"]);
+
+            $sentencia->bindParam(10, $usuario["email"]);
+
+
+ 
+            $resultado = $sentencia->execute();
+           
+            if ($resultado) {
+                
+                $comando = "update invitacion set estatus = 1 where idUsuario = ? and idSubasta = ?";
+
+                $sentencia = $pdo->prepare($comando);
+
+                $sentencia->bindParam(1, $usuario["idUsuario"]);
+                       
+                $sentencia->bindParam(2, $usuario["idSubasta"]);
+
+                $sentencia->execute();
+               
+                return $usuario["idUsuario"];
+            } else {
+                return 0;
+            }
+        } catch (PDOException $e) {
+
+            throw new ExcepcionApi(self::ESTADO_URL_INCORRECTA, $e->getMessage(), 400);
+            
+        }
+
     }
     
 }

@@ -10,12 +10,19 @@ $headers = array(
 );
 $headers = implode( "\r\n" , $headers );
 
-echo $headers;
+//echo $headers;
 
-envia_mail("miguel.susano@gmail.com", "Bienvenido a Escudería", envia_mensaje_verificacion("apikey", 1));
-envia_mail("miguel.susano@gmail.com", "Bienvenido a Escudería", envia_mensaje_invitacion("apikey", 1));
+//envia_mail("miguel.susano@gmail.com", "Bienvenido a Escudería", envia_mensaje_invitacion("apikey", 1));
 
-echo envia_mensaje_verificacion("apikey", 1);
+//$contenido = envia_mensaje_recuperarcontrasena("ABCDEFGH", "miguel.susano@gmail.com");
+$contenido = envia_mensaje_invitacion("7ab0b8aa9c065b79e2273244b2330da0", 80,11);
 
-echo envia_mensaje_invitacion("apikey", 1);
+print_r($contenido);
+//envia_mail("miguel.susano@gmail.com", "Bienvenido a Escudería", $contenido);
+
+
+
+
+
+//echo envia_mensaje_invitacion("apikey", 1);
 ?>

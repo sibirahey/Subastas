@@ -2721,3 +2721,6 @@ div[name="altaautos"] > .row{
     right: 0;
 }
 /*--------- ENDS DETALLE SUBASTA --------*/
+#listausuarios{
+	color: #000 !important;
+}

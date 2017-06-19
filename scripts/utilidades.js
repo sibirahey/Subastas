@@ -897,4 +897,82 @@ function validaCodigoVericacion(o){
 
 }
 
+function ValidaRegistro(oUsuario) {
+
+			var i = 0;
+			var msj = "";
+			if (oUsuario.nombre.trim() == "") {
+				i++;
+				msj += "Nombre, ";
+			}
+			if (oUsuario.appaterno.trim() == "") {
+				i++;
+				msj += "Apellido paterno, ";
+			}
+			if (oUsuario.apmaterno.trim() == "") {
+				i++;
+				msj += "Apellido materno, ";
+			}
+			if (oUsuario.email.trim() == "") {
+				i++;
+				msj += "Correo electrónico, ";
+			}else{
+				if(!ValidaEmail(oUsuario.email.trim())){
+					msj += "Proporcione un correo elecrónico válido, ";
+				}
+			}
+			if (oUsuario.password.trim() == "") {
+				i++;
+				msj += "Password,";
+			}
+			if (oUsuario.password.trim() == "") {
+				i++;
+				msj += "Repetir password, ";
+			}
+			if(!StrongPassWord(oUsuario.password)){
+				msj+="El password debe contener al menos una letra mayúscula, al menos una letra minúscula, al menos un número, al menos un caracter especial ([! @ # $ % ^ & *), y una longitud mínima de 8 caracteres ";
+
+			}
+			if (oUsuario.dd.trim() == "") {
+				i++;
+				msj += "Día de nacimiento, ";
+			}
+			if (oUsuario.mm.trim() == "") {
+				i++;
+				msj += "Mes de nacimiento, ";
+			}
+			if (oUsuario.yyyy.trim() == "") {
+				i++;
+				msj += "Año de nacimiento, ";
+			}
+			if (oUsuario.telefono.trim() == "") {
+				i++;
+				msj += "Teléfono, ";
+			}
+			var j = 0;
+			$(".chkPref:checked").each(function() {
+				j++;
+			});
+			if (j == 0) {
+				i++;
+				msj += "Temas de interés, ";
+			}
+			if (!$('#registroEULA')[0].checked) {
+				i++;
+				msj += "Aceptar términos y condiciones";
+			}
+
+			if (i > 0) {
+				//$(".divError").show();
+				//$(".divError").text("Algunos de los campos están vacíos: " + msj);
+				Materialize.toast('Algunos de los campos están vacíos:'+ msj , 4000);
+				return false;
+
+			} else {
+				$(".divError").hide();
+				return true;
+			}
+
+		}
+
 	

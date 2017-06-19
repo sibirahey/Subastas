@@ -30,6 +30,7 @@ require_once('utilidades/ConexionBD.php');
 require_once('utilidades/ExcepcionApi.php');
 require_once('utilidades/Utilerias.php');
 require_once('modelos/usuario-automovil.php');
+require_once('modelos/invitacion.php');
 
 
 //print ConexionBD::obtenerInstancia()->obtenerBD()->errorCode();

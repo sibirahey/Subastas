@@ -119,6 +119,8 @@ function CargaFuncionesAdminSubastas() {
 
 	eventoFinalizaEscritura('#txtNombreEmpresa', buscaEmpresa, typingTimer, doneTypingIntervalo);
 
+
+
 }
 
 function guardarSubasta(obj) {
@@ -284,6 +286,8 @@ function CargaSubastas(estatus, empresa) {
 			$("#modalListaAutos").show();
 		});
 
+		
+
 		$("#btnCerrarListaAuto").click(function() {
 			$("#divAutos").hide();
 
@@ -348,7 +352,7 @@ function CargaSubastas(estatus, empresa) {
 
 						$("#divAdministraUsuarios").modal("close");
 					} else {
-						alert("La operación se realizó correctamente");
+						Materialize.toast("La operación se realizó correctamente",4000);
 						var filename = $('input[type=file]').val().replace(/C:\\fakepath\\/i, '');
 
 					}

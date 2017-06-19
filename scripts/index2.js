@@ -53,15 +53,17 @@ $(document).ready(function() {
 
 	function cargaHTMLLogin(seccion){
 		//obtiene la propiedad name del elemento del menu y busca la vista con el mismo nombre y lo carga con ajax
+		var s = seccion;
+		if(seccion == "invitacion"){
+			s= "registro";
+		}
 
-		
-
-		cargaHTML(".mainBody", "views/main/" + seccion+ ".html", $(this).attr("name"), function() {
+		cargaHTML(".mainBody", "views/main/" + s+ ".html", $(this).attr("name"), function() {
 
 			if (seccion == "registro") {
+				CargaFuncionesRegistroComun();
 				cargaFuncionesRegistro();
 			} else if (seccion == "login") {
-				
 				cargaFuncionesLogin();
 				$('.mainHeader').hide();
 				$('.mainFooter').hide();
@@ -79,7 +81,12 @@ $(document).ready(function() {
 				CargaFuncionesRecuperar();
 			}else if(seccion == "nuevacontrasena"){
 				CargaFuncionesNuevaContrasena();
+			}else if(seccion == "invitacion"){
+				CargaFuncionesRegistroComun();
+				CargaFuncionesRegistroInvitacion();
+
 			}
+
 			
 		});
 
@@ -102,8 +109,8 @@ $(document).ready(function() {
 	}
 
 	
+	function CargaFuncionesRegistroComun(){
 
-	function cargaFuncionesRegistro() {
 		$(".divError").hide();
 		$(".divErrorPassword").hide();
 		$.dobPicker({
@@ -152,6 +159,20 @@ $(document).ready(function() {
 			});
 
 		});
+		/*
+		$("#registroRepetirPass").focusout(function() {
+			if ($("#registroRepetirPass").val() != $("#registroPassword").val().trim()) {
+
+				$(".divErrorPassword").show();
+			} else {
+				$(".divErrorPassword").hide();
+			}
+		});
+		*/
+
+	}
+
+	function cargaFuncionesRegistro() {
 
 		/*
 		 *
@@ -173,6 +194,8 @@ $(document).ready(function() {
 			oUsuario.yyyy = $("#dobyear").val();
 			oUsuario.placa = $("#registroPlaca").val();
 			oUsuario.categorias = [];
+			oUsuario.telefono = $("#registroTelefono").val();
+
 			console.log(JSON.stringify(oUsuario))	;
 			var categorias = [];
 
@@ -198,102 +221,103 @@ $(document).ready(function() {
 					sessionStorage.setItem('nombre', $("#registroNombre").val() + " " + $("#registroApPaterno").val() + " " + $("#registroApMaterno").val());
 					sessionStorage.setItem('correo', $("#registroMail").val());
 					sessionStorage.setItem('idUsuario', data);
-					window.location.href = "home.php?s=valida";
+					window.location.href = "home.php?s=login";
 	
 				}else{
-					alert("Ocurrió un error al realizar el registro");
+					
+					Materialize.toast("Ocurrió un error al realizar el registro" , 4000);
 				}
 
 			},function(data){
-				alert("Ocurrió un error al guardar el registro");
+				Materialize.toast("Ocurrió un error al realizar el registro" , 4000);
 			});
 
 		});
-
-		$("#registroRepetirPass").focusout(function() {
-			if ($("#registroRepetirPass").val() != $("#registroPassword").val().trim()) {
-
-				$(".divErrorPassword").show();
-			} else {
-				$(".divErrorPassword").hide();
-			}
-		});
-
-		function ValidaRegistro(oUsuario) {
-
-			var i = 0;
-			var msj = "";
-			if (oUsuario.nombre.trim() == "") {
-				i++;
-				msj += "Nombre, ";
-			}
-			if (oUsuario.appaterno.trim() == "") {
-				i++;
-				msj += "Apellido paterno, ";
-			}
-			if (oUsuario.apmaterno.trim() == "") {
-				i++;
-				msj += "Apellido materno, ";
-			}
-			if (oUsuario.email.trim() == "") {
-				i++;
-				msj += "Correo electrónico, ";
-			}else{
-				if(!ValidaEmail(oUsuario.email.trim())){
-					msj += "Proporcione un correo elecrónico válido, ";
-				}
-			}
-			if (oUsuario.password.trim() == "") {
-				i++;
-				msj += "Password,";
-			}
-			if (oUsuario.password.trim() == "") {
-				i++;
-				msj += "Repetir password, ";
-			}
-			if(!StrongPassWord(oUsuario.password)){
-				msj+="El password debe contener al menos una letra mayúscula, al menos una letra minúscula, al menos un número, al menos un caracter especial ([! @ # $ % ^ & *), y una longitud mínima de 8 caracteres ";
-
-			}
-			if (oUsuario.dd.trim() == "") {
-				i++;
-				msj += "Día de nacimiento, ";
-			}
-			if (oUsuario.mm.trim() == "") {
-				i++;
-				msj += "Mes de nacimiento, ";
-			}
-			if (oUsuario.yyyy.trim() == "") {
-				i++;
-				msj += "Año de nacimiento, ";
-			}
-			var j = 0;
-			$(".chkPref:checked").each(function() {
-				j++;
-			});
-			if (j == 0) {
-				i++;
-				msj += "Temas de interés, ";
-			}
-			if (!$('#registroEULA')[0].checked) {
-				i++;
-				msj += "Aceptar términos y condiciones";
-			}
-
-			if (i > 0) {
-				//$(".divError").show();
-				//$(".divError").text("Algunos de los campos están vacíos: " + msj);
-				Materialize.toast('Algunos de los campos están vacíos:'+ msj , 4000);
-				return false;
-
-			} else {
-				$(".divError").hide();
-				return true;
-			}
-
-		}
 
 	};
+
+	function CargaFuncionesRegistroInvitacion(){
+		
+		var vars = getUrlVars();
+		postrequest("usuarios/info", {"idUsuario":vars["idusuario"] }, function(data) {
+			try{
+				
+				if(data["claveApi"] != vars["claveapi"]){
+					alert("La información de la invitación es incorrecta");
+					window.location.href = "home.php";
+				}
+				if(Number(data["verificado"]) == 1){
+					window.location.href = "home.php?s=login";
+				}
+				$("#registroNombre").val(data["nombre"]);
+				$("#registroApPaterno").val(data["appaterno"]);
+				$("#registroApMaterno").val(data["apmaterno"]);
+				$("#registroMail").val(data["correo"]);
+				$("#registroTelefono").val(data["telefono"]);
+				Materialize.updateTextFields();
+				$("#registroPassword").val("");
+				$("#registroRepetirPass").val("");
+
+				$("#btnGuardar").click(function() {
+
+					
+					var oUsuario = new Usuario();
+					oUsuario.idUsuario = vars["idusuario"];
+					oUsuario.nombre = $("#registroNombre").val();
+					oUsuario.appaterno = $("#registroApPaterno").val();
+					oUsuario.apmaterno = $("#registroApMaterno").val();
+					oUsuario.email = $("#registroMail").val();
+					oUsuario.password = $("#registroPassword").val();
+					oUsuario.verificapassword = $("#registroRepetirPass").val();
+					oUsuario.dd = $("#dobday").val();
+					oUsuario.mm = $("#dobmonth").val();
+					oUsuario.yyyy = $("#dobyear").val();
+					oUsuario.placa = $("#registroPlaca").val();
+					oUsuario.categorias = [];
+					oUsuario.telefono = $("#registroTelefono").val();
+					oUsuario.idSubasta = vars["subasta"];
+
+					console.log(JSON.stringify(oUsuario))	;
+					var categorias = [];
+
+					$(".chkPref:checked").each(function() {
+
+						var foo = new UsuarioCategorias(-1, $(this).attr("attr-data"));
+						oUsuario.categorias.push(foo);
+					});
+
+					if (!ValidaRegistro(oUsuario)) {
+						return false;
+					} else {
+						oUsuario.fecha_nacimiento = new Date(oUsuario.yyyy, oUsuario.mm - 1, oUsuario.dd);
+					}
+					postrequest("usuarios/preregistro", oUsuario, 
+						function(data) {
+							//debugger;
+							if (data > 1) {
+
+								window.location.href = "home.php?s=login";
+				
+							}else{
+								
+								Materialize.toast("Ocurrió un error al realizar el registro" , 4000);
+							}
+
+						},
+						function(data){
+							Materialize.toast("Ocurrió un error al realizar el registro" , 4000);
+						});
+
+
+				});
+
+
+			}catch(ex){
+				Materialize.toast("Ocurrió un error al cargar la información del registro" , 10000);
+			}
+		});
+
+	}
 
 
 
@@ -358,7 +382,8 @@ $(document).ready(function() {
 					}
 
 				} else {
-					alert("Error de usuario o contraseña");
+					
+					Materialize.toast("Error de usuario o contraseña" , 4000);
 				}
 
 			});

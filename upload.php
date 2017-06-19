@@ -27,6 +27,7 @@ require_once("modelos/seccioneshome.php");
 require_once('utilidades/ConexionBD.php');
 require_once('utilidades/ExcepcionApi.php');
 require_once('utilidades/Utilerias.php');
+require_once('modelos/invitacion.php');
 
 if ( 0 < $_FILES['file']['error'] ) {
     echo 'ERROR: ' . $_FILES['file']['error'] . '<br>';
@@ -50,41 +51,34 @@ else {
         echo $guid.".".$ext;
 
         
-        $pdo = ConexionBD::obtenerInstancia()->obtenerBD();
-        
-        $comando = "delete from subasta_usuario where idSubasta = ".$_POST["idsubasta"];
-
-        $sentencia = $pdo->prepare($comando);
-
-        $sentencia->execute();
-
-        
-
-
-        $fila = 1;
+        $fila = 0;
+        ini_set('auto_detect_line_endings',true);
         if (($gestor = fopen('userlist/' . $guid.".".$ext, "r")) !== FALSE) {
-            while (($datos = fgetcsv($gestor, 1000, ",")) !== FALSE) {
-
+            
+            while (($datos = fgetcsv($gestor)) !== FALSE) {
+                //print_r($datos); 
                 $numero = count($datos);
+                //echo "cuenta: ".$numero;
                 $fila++;
-                for ($c=0; $c < $numero; $c++) {
-                    //echo $datos[$c] . "<br />\n";
-                    if($c%4 == 0 && $c > 0){
+                //for ($c=4; $c < $numero; $c++) {
+                    
+
+                    //if($c%4 == 0 && $c > 0){
                         
                         try{
-                            if (!empty($datos[$c])) {
-                                
-                                
+                            if ($fila > 1) {
+
                                 $usuario = new usuarios();
-                                $usuario->nombre = $datos[$c];
-                                $usuario->appaterno = $datos[$c+1];
-                                $usuario->apmaterno = $datos[$c+2];
-                                $usuario->correo = $datos[$c+3];
+                                $usuario->nombre = $datos[0];
+                                $usuario->appaterno = $datos[1];
+                                $usuario->apmaterno = $datos[2];
+                                $usuario->correo = $datos[3];
                                 $usuario->verificado = 0;
                                 $usuario->contrasena = "INVITADO";
                                 $usuario->valido = 0;
                                 $usuario->publico = 0;
                                 $usuario->esadmin = 0;
+                                $usuario->telefono = $datos[4];
                                 
                                 usuarios::invitarUsuario($usuario, $_POST["idsubasta"]);
 
@@ -93,11 +87,12 @@ else {
                         }catch(Exception $er){
 
                         }
-                    }
-                }
+                    //}
+                //}
             }
             fclose($gestor);
         }
+        ini_set('auto_detect_line_endings',FALSE);
 
     }else if($_POST["accion"] == "home"){
         try{
