@@ -283,7 +283,6 @@ function CargaSubastas(estatus, empresa) {
 			cargaAutosPorSubasta(idSubasta, "#divListaAutos");
 			$('#divListaAutos').modal('open');
 			$("#modalListaAutos").show();
-			$("#modalListaAutos").show();
 		});
 
 		

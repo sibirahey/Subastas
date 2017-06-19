@@ -287,9 +287,9 @@ function regresaRenglonVenta(item, subastaID) {
 		renglon += '        <div class="card-image">';
 		renglon += '          <img attr-id="' + item.idAuto + '" width="100px" onclick="VerDetalleAuto(this);" src="' + siteurl + 'uploads/' + item.foto + '" onerror="imgError(this)"; />';
 		renglon += '          <span class="card-title">' + item.marca + ' - ' + item.modelo + '</span>';
-		      if(sessionStorage["es_admin"] == 1 && getUrlVars()["accion"] != "subasta"){
-		      //renglon += '    <a class="btn-floating halfway-fab waves-effect waves-light red"><i class="material-icons">add</i></a>';
-		      }
+		      // if(sessionStorage["es_admin"] == 1 && getUrlVars()["accion"] != "subasta"){
+		      // renglon += '    <a class="btn-floating halfway-fab waves-effect waves-light red"><i class="material-icons">add</i></a>';
+		      // }
 		renglon += '        </div>';
 		renglon += '      <div class="card-content">';
 		// renglon += '        <label>' + item.marca + ' - ' + item.modelo + '</label>';
@@ -567,19 +567,19 @@ function VerDetalleAuto(o) {
 			}
 			$('.materialboxed').materialbox();
 
-			$("#divDetalleAuto > div").click(function(){
-				vars = getUrlVars();
-				if(vars["accion"] == "subasta"){
-					$('#divDetalleAuto').modal("close");
-				}else{
-					$("#divListaAutos").show();
-					$("#modalListaAutos").show();
-					$("#divDetalleAuto > div").hide();	
-				}
-				
-				
-
-			});
+			// $("#divDetalleAuto > div").click(function(){
+				// vars = getUrlVars();
+				// if(vars["accion"] == "subasta"){
+					// $('#divDetalleAuto').modal("close");
+				// }else{
+					// $("#divListaAutos").show();
+					// $("#modalListaAutos").show();
+					// $("#divDetalleAuto > div").hide();	
+				// }
+// 				
+// 				
+// 
+			// });
 		});
 	});
 	$("#modalListaAutos").hide();
