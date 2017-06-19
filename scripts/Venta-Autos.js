@@ -68,7 +68,7 @@ function buscarAutos(){
 			$.each(data, function(i, item) {
 					
 				var renglon = "<tr>";
-					renglon += '<td><img alt="' + item.idAuto + '" src="'+siteurl +'uploads/' + item.foto + '" onerror=\'imgError(this)\'; /></td>';
+					renglon += '<td><img width="150px;" alt="' + item.idAuto + '" src="'+siteurl +'uploads/' + item.foto + '" onerror=\'imgError(this)\'; class="materialboxed" /></td>';
 					renglon += "<td>" + item.marca + "</td>";					
 					renglon += "<td>" + item.modelo + "</td>";
 					renglon += "<td>" + item.km + "</td>";
@@ -94,6 +94,7 @@ function buscarAutos(){
 					$('.modal').modal();
 
 			});
+			$('.materialboxed').materialbox();
 
 		}
 
