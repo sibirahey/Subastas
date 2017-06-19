@@ -243,12 +243,13 @@ $(document).ready(function() {
 		postrequest("usuarios/info", {"idUsuario":vars["idusuario"] }, function(data) {
 			try{
 				
+				
+				if(Number(data["verificado"]) == 1){
+					window.location.href = "home.php?s=login";
+				}
 				if(data["claveApi"] != vars["claveapi"]){
 					alert("La información de la invitación es incorrecta");
 					window.location.href = "home.php";
-				}
-				if(Number(data["verificado"]) == 1){
-					window.location.href = "home.php?s=login";
 				}
 				$("#registroNombre").val(data["nombre"]);
 				$("#registroApPaterno").val(data["appaterno"]);

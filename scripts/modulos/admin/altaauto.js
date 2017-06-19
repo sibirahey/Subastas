@@ -357,7 +357,10 @@ function validaCamposAltaAutos(item){
 		msj += (msj =="") ? "Descripción" : ", Descripción";
 		validado = false;
 	}
-
+	if($(".fotosAuto").length == 0){
+		msj += (msj =="") ? "Agregar al menos una foto" : ", Agregar al menos una foto";
+		validado = false;	
+	}
 
 	if (!validado){
 		//alert("Favor de llenar todos los campos requeridos");

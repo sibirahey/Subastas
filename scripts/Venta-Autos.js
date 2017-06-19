@@ -1,6 +1,13 @@
 
 function InicializaVentaAutos(){
 	cargaCatalogos(-1);
+
+	$('#divDetalleAuto').modal({
+			dismissible : true, // Modal can be dismissed by clicking outside of the modal
+			opacity : .5, // Opacity of modal background
+			inDuration : 300, // Transition in duration
+			outDuration : 200, // Transition out duration
+		});
 }
 function cargaCatalogos(idDef) {
 	 
@@ -19,21 +26,11 @@ function cargaCatalogos(idDef) {
 	
 }
 
-function muestraGaleria(idx) {
+function MuestraDetalle(o) {
 
+	VerDetalleAuto(o);
+	$('#divDetalleAuto').modal("open");
 	
-	var dialog = $("#gallery" + idx).dialog({
-		autoOpen : false,
-		height : 400,
-		width : '60%',
-		modal : true,
-		resizable: false,
-		dialogClass : 'no-titlebar'
-	});
-
-	$("#gallery" + idx).addClass('muestraGaleria');
-
-	dialog.dialog("open");
 }
 
 function seleccionaImagen(obj) {
@@ -76,8 +73,8 @@ function buscarAutos(){
 					renglon += "<td>" + item.modelo + "</td>";
 					renglon += "<td>" + item.km + "</td>";
 					renglon += "<td><b>$</b>" + item.precio + "</td>";
-					renglon += "<td><div class='btn waves-effect light-blue lighten-1'  onclick='muestraGaleria(" + item.idAuto + ");'><i class='material-icons'>photo_camera</i></div></td>";
-					renglon += "<td class='center-btn'><div class='btn waves-effect waves-light light-blue disabled'><i class='material-icons'>add</i></div></td>";
+					renglon += "<td><div class='btn waves-effect light-blue lighten-1'  onclick='MuestraDetalle(this);' attr-id='"+item.idAuto+"' attr-subastaid='0'><i class='material-icons'>photo_camera</i></div></td>";
+					//renglon += "<td class='center-btn'><div class='btn waves-effect waves-light light-blue disabled'><i class='material-icons'>add</i></div></td>";
 					//renglon += "<div style='display:none;' id='gallery" + item.idAuto + "'>";
 					renglon += "<div id='gallery"+ item.idAuto +"'  class='modal modal-fixed-footer'>";
 				    renglon += "	<div class='modal-content'>";

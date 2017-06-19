@@ -515,7 +515,7 @@ function VerDetalleAuto(o) {
 	var autoid = $(o).attr("attr-id");
 
 	if(getUrlVars()["accion"] == "subasta"){
-			$('#divDetalleAuto').modal({
+		$('#divDetalleAuto').modal({
 			dismissible : true, // Modal can be dismissed by clicking outside of the modal
 			opacity : .5, // Opacity of modal background
 			inDuration : 300, // Transition in duration
@@ -568,11 +568,16 @@ function VerDetalleAuto(o) {
 			$('.materialboxed').materialbox();
 
 			$("#divDetalleAuto > div").click(function(){
+				vars = getUrlVars();
+				if(vars["accion"] == "subasta"){
+					$('#divDetalleAuto').modal("close");
+				}else{
+					$("#divListaAutos").show();
+					$("#modalListaAutos").show();
+					$("#divDetalleAuto > div").hide();	
+				}
 				
 				
-				$("#divListaAutos").show();
-				$("#modalListaAutos").show();
-				$("#divDetalleAuto > div").hide();
 
 			});
 		});
