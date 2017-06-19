@@ -26,12 +26,14 @@
 </div>
 <table id="grdMisCotizaciones" class="responsive-table striped">
     <tr>
+        <th>#</th>
         <th>Nombre</th>
 		<th>Correo</th>
-		<th>Marca</th>
 		<th>Modelo</th>
-		<th>Tipo</th>
-		<th>Detalle</th>
+        <th>Detalle</th>
+        <th>Fecha</th>
+        <th>Estatus</th>
+        <th>&nbsp;</th>
     </tr>
 </table>
 
@@ -43,23 +45,41 @@
         <i class="material-icons">close</i>
     </div>
     <div class="modal-content">
-         <div class="divRegistro">
-            <label for="cbMarcaAuto" >Marca:</label>
-            <select id="cbMarcaAuto" name="cbMarcaAuto" ></select>
-        </div>
-        <div class="divRegistro">
-            <label for="cbModeloAuto" >Modelo:</label>
-            <select id="cbModeloAuto" name="cbModeloAuto" >
-                <option value="0">== Seleccione ==</option>
-            </select>
-        </div>
-        <div class="divRegistro">
-            <label for="numdePlaca" >Placas:</label>
-            <input type="text" name="numdePlaca" id="numdePlaca" />
-        </div>
-        <div class="divRegistro">
-            <div id="btnGuardaAuto" class="fa fa-floppy-o">Nuevo</div>
-        </div>
+        <form class="col s12">
+            <div class="input-field col s12" id="fechaCotizacion"></div>
+            <div class="input-field col s12">
+                <label for="idCotizacion" >Folio</label>
+                <input type="text" name="idCotizacion" id="idCotizacion" disabled="disabled" />
+            </div>
+            <div class="input-field col s12">
+                <label for="cotizacionNombre" >Nombre</label>
+                <input type="text" name="cotizacionNombre" id="cotizacionNombre" disabled="disabled" />
+            </div>
+            <div class="input-field col s12">
+                <label for="cotizacionTelefono" >Teléfono</label>
+                <input type="text" name="cotizacionTelefono" id="cotizacionTelefono" disabled="disabled" />
+            </div>
+            <div class="input-field col s12">
+                <label for="cotizacionCorreo" >Correo</label>
+                <input type="text" name="cotizacionCorreo" id="cotizacionCorreo" disabled="disabled" />
+            </div>
+            <div class="input-field col s12">
+                <label for="marcaModeloTipo" >Vehículo</label>
+                <input type="text" name="marcaModeloTipo" id="marcaModeloTipo" disabled="disabled" />
+            </div>
+            <div class="input-field col s12">
+              <textarea id="cotizaDetalle" name="cotizaDetalle"  type="text" class="validate" disabled="disabled" ></textarea> 
+              <label for="cotizaDetalle">Detalle</label>
+            </div>
+            <div class="input-field col s12">
+              <textarea id="cotizaComentario" name="cotizaComentario"  type="text" class="validate"  disabled="disabled"></textarea> 
+              <label for="cotizaComentario">Comentario</label>
+            </div>
+           
+        </form>
     </div>
+    <div class="modal-footer">
+            <a id="btnGuardaAuto" href="#!" class="waves-effect waves-green btn tooltipped" data-position="top" data-delay="50" data-tooltip="Agrega empresa a la lista"><i class="material-icons">assignment_turned_in</i></a>
+        </div>
 </div>    
    

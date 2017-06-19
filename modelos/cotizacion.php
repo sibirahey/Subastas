@@ -15,6 +15,8 @@ class cotizacion
     const MODELO = "Modelo";
     const TIPO = "Tipo";
     const ESTATUS = "Estatus";
+    const FECHA = "fecha";
+    const COMENTARIO = "comentario";
     const FECHACRACION = "fechaCreacion";
     const SIN_RESULTADOS = "No se encontraron resultados";
     const LISTO = "OK";
@@ -53,8 +55,9 @@ class cotizacion
                 self::MARCA . "," .
                 self::MODELO . "," .
                 self::TIPO . "," .
-                self::ESTATUS . ")" .
-                " VALUES(?,?,?,?,?,?,?)";
+                self::ESTATUS . ",".
+                self::COMENTARIO . ")" .
+                " VALUES(?,?,?,?,?,?,?,?)";
                 
             $sentencia = $pdo->prepare($comando);
 
@@ -70,8 +73,11 @@ class cotizacion
 
             $sentencia->bindParam(6, $cotiza["tipo"]);
 
-            $Estatus = 1;
+            $Estatus = 8;
             $sentencia->bindParam(7, $Estatus);
+
+            $comentario = json_decode ($cotiza["comentario"]);
+            $sentencia->bindParam(8, $comentario);
  
             $resultado = $sentencia->execute();
            
@@ -149,17 +155,14 @@ class cotizacion
            }
   
 
-        $comando = "SELECT " . self::IDCOTIZACION .  "," .
-                self::NOMBRE . "," .
-                    self::CORREO . "," .
-                    self::TELEFONO . "," . 
-                    self::MARCA . "," .
-                    self::MODELO . "," .
-                    self::TIPO . 
-                    " FROM " . self::NOMBRE_TABLA . 
+        $comando = "SELECT idCotizacion, Nombre, Correo, Telefono, Marca, Modelo, Tipo, Estatus, fecha, comentario,
+(select GROUP_CONCAT(sub.nombre) from Cotizacion_Servicios cs, subservicios sub where cs.idCotizacion = cot.idCotizacion and cs.idSubServicio = sub.idSubservicio) as subservicios
+FROM cotizacion cot ". 
                     " WHERE " . (($texto =="") ? ( self::NOMBRE . " like  '%'") : ( self::NOMBRE . " like '%" . $texto . "%'") ) .
                     (($esAdmin != 1) ? (" AND " . self::CORREO . " =  '" . $correo ."'") :(" ") ).
-                    (($fechasValidas) ? (" AND " . self::FECHACRACION ." BETWEEN STR_TO_DATE('" . $fechaIni . "', '%m/%d/%Y') AND STR_TO_DATE('". $fechaFin . "', '%m/%d/%Y') " ) : (" ") );
+                    (($fechasValidas) ? (" AND " . self::FECHACRACION ." BETWEEN STR_TO_DATE('" . $fechaIni . "', '%m/%d/%Y') AND STR_TO_DATE('". $fechaFin . "', '%m/%d/%Y') " ) : (" ") ). " order by fecha desc ";
+
+                    
 
 
         

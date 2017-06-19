@@ -58,7 +58,7 @@ function cargaServiciosCotizar(O) {
 			if(sessionStorage.getItem('es_admin')!=1){
 
 			}
-debugger;
+
 				//$("#divDetalleServicios").append(Renglon);
 				$(O).parent().find('.collapsible-body').append(Renglon);
 			}
@@ -76,7 +76,7 @@ debugger;
 					Renglon+= agregaControlUpload('idSubServicio="0" idServicio="' + idServicio + '"') + '</div>';
 				}
 				Renglon+='</div>';
-				debugger;
+				
 				$(O).parent().find('.collapsible-body').append(Renglon);
 				//$("#divDetalleServicios").append(Renglon);
 
@@ -119,7 +119,7 @@ function ActualizarSubServicio(obj){
 
 			postrequest('subservicio/registro',objSubServicio,function(data){
 				cargaServiciosCotizar(obj);
-				debugger;
+				
 			});
 
 		}	
@@ -159,7 +159,7 @@ function NuevoSubServicio(obj){
 				$(obj).text('Nuevo');
 				$("#txtNuevoServicio").hide();
 				cargaServiciosCotizar(obj);
-				debugger;
+				
 			});
 
 		
@@ -176,7 +176,7 @@ function cargaLista() {
 	var serviciosCotizar = [];
 	serviciosCotizar = JSON.parse(sessionStorage.getItem('serviciosCotizar'));
 	$.each(serviciosCotizar, function(index, value) {
-		//debugger;
+		
 		// var r = '<div class="scRow" >';
 		// r += '<button idSubServicio="' + value.idSubServicios + '" idServicio="' + value.idServicio+'" onClick="AgregarServicio(this);">Quitar</button>';
 		// r += '<label>'+ value.nombreSubServicio +'</label>';
@@ -248,6 +248,8 @@ function enviarCotizacion(){
 	var marca = $("input[name=cotizaMarca]").val();
 	var modelo =$("input[name=cotizaModelo]").val();
 	var tipo = $("input[name=cotizaTipo]").val();
+	var comentario = $("#cotizaComentario").val();
+	alert("nombre:"+nombre + " correo:"+correo + " telefono:" +telefono + " marca:" +marca+ " modelo:" + modelo+ " tipo:"+tipo);
 
 	if(nombre != "" && correo != "" && telefono != "" && marca != ""
 		&& modelo != "" && tipo != "" && nombre != undefined && correo != undefined && telefono != undefined && marca != undefined
@@ -260,8 +262,9 @@ function enviarCotizacion(){
 		objcotizacion.marca = marca;
 		objcotizacion.modelo = modelo;
 		objcotizacion.tipo = tipo;
-		objcotizacion.estatus=1;
+		objcotizacion.estatus=0;
 		objcotizacion.subServicios = JSON.parse( sessionStorage.getItem("serviciosCotizar"));
+		objcotizacion.comentario = JSON.stringify(comentario);
 		 postrequest("cotizacion/registro", objcotizacion, function(data){
 		 	if (data){
 		 		alert ("Se guardo Correctamente su solicitud");
