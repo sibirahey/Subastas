@@ -71,13 +71,13 @@
             
             <div class="input-field col s12">
             	<i class="material-icons prefix">phone</i>
-                <input type="tel" name="contactoTelefono" required="required"/>
+                <input name="contactoTelefono" type="text" required="required" pattern="[1-9][0-9]*"/ class="numbersOnly" maxlength="10">
                 <label for="last_name">Tel&eacute;fono de Contacto</label>
             </div>
             
             <div class="input-field col s12">
             	<i class="material-icons prefix">email</i>
-                <input type="email" name="contactoEmail"  required="required"/>
+                <input type="text" name="contactoEmail"  required="required" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$"/>
                 <label for="contactoEmail">Correo Electr&oacute;nico</label>
             </div>
 

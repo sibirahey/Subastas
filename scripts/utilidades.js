@@ -673,6 +673,7 @@ function SoloNumericos(inputItem) {
 }
 
 function CargaJsonHome(){
+	debugger;
 		postrequest("data/home.json?rand"+Math.random(), {}, 
 			function(data) {
 				for(obj in data){
@@ -702,16 +703,15 @@ function CargaJsonHome(){
 					}
 					
 				}
-				// debugger;
-				// for (secc = 0; data.length < 5; secc++) {
-				// 	alert(secc);
-				 // 	if(data[secc].esimg == 1){
-					// 	$("#".data[i]).attr("src",data[secc].url);
-					// }else{
 
-					// }
-				// }
+			debugger;
+			$('.numbersOnly').keyup(function() {
+				if (this.value != this.value.replace(/[^0-9\.]/g, '')) {
+					this.value = this.value.replace(/[^0-9\.]/g, '');
+				}
+			});
 		});
+
 
 }
 
