@@ -174,3 +174,13 @@ function AdminHome(id, esimg, ubicacion, ancho, alto, tag, url, eslink, link){
 	this.link = link;
 
 }
+
+function contactanos(id, fechaInicio, fechaFin, estatus, pagina){
+	this.id = id;
+	this.fechaInicio = fechaInicio;
+	this.fechaFin = fechaFin;
+	this.estatus = estatus;
+	this.pagina = pagina;
+
+
+}

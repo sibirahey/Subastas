@@ -31,12 +31,16 @@ require_once('utilidades/ExcepcionApi.php');
 require_once('utilidades/Utilerias.php');
 require_once('modelos/usuario-automovil.php');
 require_once('modelos/invitacion.php');
+require_once('modelos/contactanos.php');
 
 
 //print ConexionBD::obtenerInstancia()->obtenerBD()->errorCode();
 //print_r(array_shift($_GET['PATH_INFO']));
 
+
+const PERPAGE  = 10;
 $vista = new VistaJson();
+
 
 set_exception_handler(function ($exception) use ($vista) {
 	    $cuerpo = array(
@@ -156,6 +160,9 @@ function ejecutaModeloPost($vista, $mod, $arr)
             break;
         case 'pujas':
             $vista->imprimir(autospuja::post($arr));
+            break;
+        case 'contactanos':
+            $vista->imprimir(contactanos::post($arr));
             break;
         default:
     		# code...

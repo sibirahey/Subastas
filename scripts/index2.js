@@ -2,6 +2,8 @@ var calendars = {};
 $(document).ready(function() {
 	//carga el contenido del index
 
+	
+
 	checkCookie();
 	$(".logoHeader").click(function(){
 
@@ -12,6 +14,9 @@ $(document).ready(function() {
 	cargaHTML(".mainBody", "views/index.html", "", function() {
 		
 		CargaJsonHome();
+		$("#contactoEnviar").click(function(){
+			Contactanos();
+		});
 
 	});
 
@@ -222,7 +227,7 @@ $(document).ready(function() {
 					sessionStorage.setItem('nombre', $("#registroNombre").val() + " " + $("#registroApPaterno").val() + " " + $("#registroApMaterno").val());
 					sessionStorage.setItem('correo', $("#registroMail").val());
 					sessionStorage.setItem('idUsuario', data);
-					window.location.href = "home.php?s=login";
+					window.location.href = "home.php?s=valida";
 	
 				}else{
 					

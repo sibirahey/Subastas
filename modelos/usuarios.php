@@ -99,7 +99,7 @@ class usuarios
                 self::CORREO . "," .
                 self::TELEFONO. "," .
                 self::VERIFICADO . ")" .
-                " VALUES(?,?,?,?,?,?,?,?)";
+                " VALUES(?,?,?,?,?,?,?,?,?)";
         
 
             $sentencia = $pdo->prepare($comando);

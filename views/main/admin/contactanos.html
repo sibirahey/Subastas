@@ -1,0 +1,78 @@
+  <h3>Contáctanos</h3>
+	<!-- contenedor "absoluto"" del sitio -->
+	<div class="mainContainer">
+		<!-- contenedor del encabezado del sitio --> 
+		<div class="mainHeader">
+			<div class="cnfgSubastaContainer row">
+			    <form class="col s12">
+				     <div class="input-field col 3">
+				        <input type="text" id="txtFolio" name="txtFolio" class="validate">
+				        <label for="txtFolio" >Folio:</label>
+				    </div>
+
+				    <div class="input-field col 3">
+				         
+				        <input type="text" id="txtFechaInicio" name="txtFechaInicio" class="validate" />
+				        <label for="txtFechaInicio" >Fecha inicial:</label>
+				    </div>
+				    <div class="input-field col 3">
+				         
+				        <input type="text" id="txtFechaFin" name="txtFechaFin" class="validate" />
+				        <label for="txtFechaFin" >Fecha final:</label>
+				    </div>
+				    <div class="input-field col 3">
+						<select id="cbEstatus" name="cbEstatus" >
+							<option value="-1">Todas</option>
+							<option value="1">Atendidas</option>
+							<option value="0">Nuevas</option>
+						</select>
+						<label for="cbEstatus" >Estatus</label>
+					</div>
+				    <div class="btnContainer input-field col s2">
+			            <button type="button" id="btnFiltrar" class="btnBuscar btn waves-effect waves-light right light-blue lighten-1" type="submit" onclick="buscarAutos()">
+			                Buscar
+			                <i class="material-icons right">search</i>
+			            </button>
+			        </div>
+
+			    </form>
+			</div>
+		</div>	
+		<!-- contenedor del cuerpo principal del sitio -->
+		<div id="miscontactos" >
+			<table id="grdContactanos" class="responsive-table striped">
+			    <thead>
+			    <tr>
+			        <th>#</th>
+			        <th>Nombre</th>
+					<th>Correo</th>
+					<th>Teléfono</th>
+			        <th>Mensaje</th>
+			        <th>Fecha</th>
+			        <th>Estatus</th>
+			        <th>&nbsp;</th>
+			    </tr>
+			    </thead>
+			    <tbody id="tblcontenido">
+			    	
+			    </tbody>
+			    <tfoot id="tblfoot">
+				    <tr>
+				      <td colspan="2">&nbsp;</td>
+				      <td colspan="3" id="tblpaginador">&nbsp;</td>
+				      <td colspan="2">&nbsp;</td>
+				    </tr>
+			  </tfoot>
+			</table>
+			
+		</div>
+
+		
+	</div>
+	
+	<div class="modalWindow">
+	</div>
+
+
+
+

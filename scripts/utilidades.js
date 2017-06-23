@@ -995,4 +995,32 @@ function ValidaRegistro(oUsuario) {
 
 		}
 
+function Contactanos(){
+	var nombre = String($("#contactoNombre").val()).trim();
+	var telefono = String($("#contactoTelefono").val()).trim();
+	var correo = String($("#contactoEmail").val()).trim();
+	var mensaje = String($("#contactoMensaje").val()).trim();
+
+	if(nombre == "" || telefono == "" || correo == "" || mensaje == ""){
+		Materialize.toast("Por favor llene todos los campos.",4000);
+		return false;
+	}
+
+	postrequest("contactanos/crear", {"nombre": nombre, "telefono": telefono, "correo": correo, "mensaje":mensaje },  function(data){
+			if(data > 0){
+				Materialize.toast("Hemos recibido su información en breve nos pondremos en contacto con usted", 5000);
+				$("#contactoNombre").val("");
+				$("#contactoTelefono").val("");
+				$("#contactoEmail").val("");
+				$("#contactoMensaje").val("");
+				Materialize.updateTextFields();
+
+			}else{
+				Materialize.toast("Ocurrió un error al procesar la solicitud",4000);
+
+			}
+		});
+
+}
+
 	
