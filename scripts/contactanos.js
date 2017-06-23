@@ -9,7 +9,7 @@ function cargaFuncionesMisContactos(){
 		$("#txtFechaFin").datepicker();
 
 		$("#btnFiltrar").click(function(){
-			cargaContactanos();
+			cargaContactanos(1);
 
 		});
 		cargaContactanos(1);
@@ -24,7 +24,7 @@ function cargaContactanos(pagina){
 	$(".rows").remove();
 	
 	var oContactanos = new contactanos();
-	oContactanos.id = $("#txtFiltro").val();
+	oContactanos.id = $("#txtFolio").val();
 	oContactanos.fechaInicio = $("#txtFechaInicio").val();
 	oContactanos.fechaFin= $("#txtFechaFin").val();
 	oContactanos.estatus = $("#cbEstatus").val();
@@ -35,6 +35,7 @@ function cargaContactanos(pagina){
 		postrequest("contactanos/listar", oContactanos,function(data){
 
 			$("#tblcontenido").html("");
+			$("#tblpaginador").html("");
 
 			if (data.totalresultados > -1) {
 				$.each(data.resultados, function(i,item){
@@ -45,8 +46,8 @@ function cargaContactanos(pagina){
 					renglon += "<td>"+item.telefono+"</td>";
 					renglon += "<td>"+item.mensaje+"</td>";
 					renglon += "<td>"+item.fecha+"</td>";
-					renglon += "<td>"+ ((item.estatus== 0)?"NUEVO":"ATENDIDA") +"</td>";
-					renglon += "<td><div class='btn waves-effect light-blue lighten-1'  attr-id='"+item.id+"' onclick='marcarLeido("+item.id+","+item.estatus+")'><i class='material-icons'>done</i></div></td>";
+					renglon += "<td id='estatus"+item.id+"'>"+ ((item.estatus== 0)?"NUEVA ":"ATENDIDA") +"</td>";
+					renglon += "<td><div class='btn waves-effect light-blue lighten-1'   onclick='marcarLeido("+item.id+","+item.estatus+", this)'><i class='material-icons'>"+ ((item.estatus == 0) ? "done": "done_all")+"</i></div></td>";
 					renglon +="</tr>";
 					$("#tblcontenido").append(renglon);
 				});
@@ -69,69 +70,24 @@ function cargaContactanos(pagina){
 }
 
 
-function muestraDetalle(obj){
+function marcarLeido(id, estatus){
 	
- 	var idCotizacion = $(obj).attr("cotizacion");
- 	var oCotizacion = 1;
-	for(i in cotizacionesTemp){
-		debugger;
-		if(cotizacionesTemp[i].idCotizacion ==idCotizacion){
+ 
+		postrequest("contactanos/leido", {"id":id, "estatus":estatus},function(data){
+			if(data){
+				
+				if(estatus == 0){
+					$(this).html("<i class='material-icons'>done_all</i></div>");
+					$("#estatus"+id).html("ATENDIDA");
 
-			oCotizacion = cotizacionesTemp[i];
-			break;
-		}
-
-	}
-
-
-	$("#idCotizacion").val(idCotizacion );
-
-	$("#marcaModeloTipo").val(oCotizacion["Marca"] + " "+ oCotizacion["Modelo"] + " - " + oCotizacion["Tipo"]);
-
-	$("#fechaCotizacion").html(oCotizacion["fecha"] + " ["+ ((oCotizacion["Estatus"] == 1)? "PENDIENTE" : "ATENDIDA" ) +"] ");
-	$("#cotizacionNombre").val(oCotizacion["Nombre"]);
-	$("#cotizacionCorreo").val(oCotizacion["Correo"]);
-	$("#cotizaDetalle").val(oCotizacion["subservicios"]);
-	$("#cotizaComentario").val(oCotizacion["comentario"]);
-	$("#cotizacionTelefono").val(oCotizacion["Telefono"])
-	Materialize.updateTextFields();
-  	$('.materialize-textarea').trigger('autoresize');
-	$("#detalleCotizaciones").modal("open");
-	
-
-
-	// debugger;
-	// var mAuto = new miAuto();
-
-	// mAuto.correoUsua = sessionStorage.getItem('correo');
-	
-	// mAuto.idMarca = $("#cbMarcaAuto").val();
-	// mAuto.idModelo = $("#cbModeloAuto").val();
-	// mAuto.numPlaca = $("#numdePlaca").val();
-	// mAuto.estatus = 1;
-	// if($(obj).attr("marca") != undefined){
-
-	// 	mAuto.idMarca = $(obj).attr("marca");
-	// 	mAuto.idModelo = $(obj).attr("modelo");
-	// 	mAuto.numPlaca = $(obj).attr("placa");
-	// 	mAuto.estatus = 0;
-
-
-	
-	// 	postrequest("cotizacion/detalle",{},function(data){
-	
-	// 			if (data) {
-	// 				alert(data);
-	// 					if (data.indexOf("eliminado") ==-1)
-	// 						$("#altaMisAutos").dialog("close");
-			
-
-	// 				cargaMisVehiculos();
-
-	// 			}
-
-	// 	});
-	// }
+				}else{
+					$(this).html("<i class='material-icons'>done</i></div>");
+					$("#estatus"+id).html("NUEVA");
+				}
+			}else{
+				Materialize.toast("Ocurrió un error al procesar la solicitud", 5000);
+			}
+		});
 	
 }
 

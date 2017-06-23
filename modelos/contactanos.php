@@ -32,10 +32,14 @@ class contactanos
         
         if ($peticion[0] == 'crear') {
             return self::crear();
-        } if ($peticion[0] == 'listar') {
+        }else if ($peticion[0] == 'listar') {
 
             return self::listar();
-        } else {
+        }else if ($peticion[0] == 'leido') {
+
+            return self::leido();
+        }
+         else {
             throw new ExcepcionApi(self::ESTADO_URL_INCORRECTA, "Url mal formada", 400);
         }
     }   
@@ -77,6 +81,21 @@ class contactanos
         }
 
     }
+    private function leido(){
+
+        $id = $_POST["id"];
+        $estatus = $_POST["estatus"];
+
+        $pdo = ConexionBD::obtenerInstancia()->obtenerBD();
+        $comando = "update ". self::NOMBRE_TABLA. " set estatus = ". (($estatus == 0) ? 1: 0) ." where id = ".$id;
+        $sentencia = $pdo->prepare($comando);
+        if($sentencia->execute())
+        {
+            return true;
+        }else{
+            return false;
+        }
+    }
 
     private function listar(){
 
@@ -99,7 +118,7 @@ class contactanos
 
              }
              if($estatus > -1){
-                $estatuswhere = " estatus = ". estatus; 
+                $estatuswhere = " estatus = ". $estatus; 
             }
 
 
@@ -127,7 +146,7 @@ class contactanos
             if($sentencia->execute())
             {
                 $contactanos->totalresultados = $sentencia->fetch()["num_rows"];
-                $contactanos->paginas = round($contactanos->totalresultados/PERPAGE);
+                $contactanos->paginas = floor($contactanos->totalresultados/PERPAGE);
                 if($contactanos->totalresultados%PERPAGE > 0){
                     $contactanos->paginas += 1; 
                 }
