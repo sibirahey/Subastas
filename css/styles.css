@@ -2007,6 +2007,13 @@ button[name="contactoEnviar"] {
 	max-width: 1024px;
 	margin: 20px auto 0;		
 }
+.divListaBotonera {
+	background-color: transparent;
+	padding: 6px;
+	width:100%;
+	max-width: 1024px;
+	margin: 20px auto 0;		
+}
 .divBotonera > label {
 	line-height: 32px;
 }
@@ -2736,7 +2743,14 @@ div[name="altaautos"] > .row{
 #listausuarios{
 	color: #000 !important;
 }
-
+/**/
+#miscontactos{
+	float: left;
+	width:100%;
+    max-width: 1024px;
+    margin: 0 calc(50% - 512px);
+}
+/**/
 /*---------- MATERIALIZE MODS ---------*/
 .modal-content input[disabled="disabled"],
 .modal-content textarea[disabled="disabled"]{

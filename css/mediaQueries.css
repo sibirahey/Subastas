@@ -6,7 +6,8 @@
 	.CotizacionServicios,
 	#divServicios,
 	.cnfgSubastaContainer,
-	#grdVehiculos:not(.grdVehiculos2) {
+	#grdVehiculos:not(.grdVehiculos2),
+	#miscontactos {
 	    float: left;
 	    width: 94% !important;
 	    margin: 20px 3% !important;
