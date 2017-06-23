@@ -68,12 +68,12 @@
 
             <div class="input-field col s12">
             	<i class="material-icons prefix">phone</i>
-                <input id="contactoTelefono" type="tel" name="contactoTelefono" required="required" class="validate"/>
+                <input id="contactoTelefono" type="tel" name="contactoTelefono" required="required" class="numbersOnly" pattern="^[0-9]*$" class="numbersOnly" maxlength="10"/>
                 <label for="contactoTelefono">Tel&eacute;fono de Contacto</label>
             </div>
             <div class="input-field col s12">
             	<i class="material-icons prefix">email</i>
-                <input id="contactoEmail" type="email" name="contactoEmail"  required="required" class="validate"/>
+                <input id="contactoEmail" type="text" name="contactoEmail"  required="required" class="validate" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$"/>
                 <label for="contactoEmail">Correo Electr&oacute;nico</label>
             </div>
 
