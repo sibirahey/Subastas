@@ -120,7 +120,7 @@ class subservicio
             self::IDSUBSERVICIO . "," . 
             self::IDSERVICIO . "," .
             self::NOMBRE . "," . 
-            self::REQUISITOS . ",".
+            self::REQUISITOS . ", descripcion, ".
             self::ESTATUS . 
             " FROM " . self::NOMBRE_TABLA;
             $condicion="";

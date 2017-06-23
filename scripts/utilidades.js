@@ -325,10 +325,13 @@ function regresaRenglonVenta(item, subastaID) {
 		renglon += '    </div>';
 		renglon += '    </div>';
 		 if(subastaID > 0){
-			renglon += '<div class="card-action">';
-			renglon += '    <div class="divBtnPujar" style="display:none">';
-			renglon += '      <div id="btnPujar" class="btnPujar waves-effect waves-light btn" onclick="PujarAuto('+item.idAuto+','+subastaID+','+Number(item.precio)+','+ item.oferta+' );"">Ofertar</div>';
-			renglon += '    </div>';
+		 	if(item.estatus_subasta != "TERMINADA"){
+
+				renglon += '<div class="card-action">';
+				renglon += '    <div class="divBtnPujar" style="display:none">';
+				renglon += '      <div id="btnPujar" class="btnPujar waves-effect waves-light btn" onclick="PujarAuto('+item.idAuto+','+subastaID+','+Number(item.precio)+','+ item.oferta+' );"">Ofertar</div>';
+				renglon += '    </div>';
+			}
 		
       	}
 		renglon += '  </div>';
@@ -831,7 +834,7 @@ function GuardarOferta(o){
 			});
 	}else{
 
-		alert("Oferta inválida");
+		Materialize.toast("Oferta inválida");
 	}
 	
 

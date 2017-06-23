@@ -69,7 +69,8 @@ class autos
                     " (select idFoto from auto_fotos where idAuto = au.idAuto limit 1) as foto, ".
                     " (select GROUP_CONCAT(idFoto) from auto_fotos where idAuto = au.idAuto) AS fotos, ".
                     " (select oferta from autos_puja ap where ap.idAuto = aus.autoId and ap.hora_puja < sub.fechaFin+1 order by ap.hora_puja desc limit 1) as oferta, ".
-                    " (select count(*) from autos_puja ap where ap.idAuto = aus.autoId and ap.hora_puja < sub.fechaFin+1) as total_ofertas, sub.idTipoSubasta  ".
+                    " (select count(*) from autos_puja ap where ap.idAuto = aus.autoId and ap.hora_puja < sub.fechaFin+1) as total_ofertas, sub.idTipoSubasta,  ".
+                    " CASE WHEN curdate() BETWEEN sub.fechaInicio and sub.fechaFin then 'ACTIVA' WHEN curdate() < fechaInicio then 'AGENDADA' else 'TERMINADA' end as estatus_subasta ".
                     " FROM subastas_autos as aus, autos as au, cat_marca as marca, cat_modelo as modelo, cat_colores as color, cat_transmision as trans, estados as est, municipios as mun, subastas sub ".
                     " WHERE aus.subastaId = ?  ".
                     " and aus.autoId = au.idAuto  ".

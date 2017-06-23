@@ -49,10 +49,13 @@ function cargaServiciosCotizar(O) {
 
 				if (idServicio ==3 ){
 
-					Renglon+='<div class="nmbRequisitos" id="requisitos'+idNombre+'"  >';
+					Renglon+='<div style="padding-left: 20px;" class="nmbRequisitos" id="requisitos'+idNombre+'"  >';
 					Renglon+='<a class="lnkRequisitos" target="_blank" href ="data/CambioPropEdoMex.pdf">Requisitos</a> ';
 					Renglon+=  '</div>';
 				}
+				if(data[subServ].descripcion != "" && data[subServ].descripcion != null)
+				Renglon+='<div style="padding-left: 20px;"" class="nmbRequisitos"  >' +data[subServ].descripcion+'</div>';
+
 				Renglon+='</div>';
 
 			if(sessionStorage.getItem('es_admin')!=1){
