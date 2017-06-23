@@ -20,7 +20,7 @@ function cargaFuncionesMisContactos(){
 
 function cargaContactanos(pagina){
 
-
+debugger;
 	$(".rows").remove();
 	
 	var oContactanos = new contactanos();
@@ -51,14 +51,21 @@ function cargaContactanos(pagina){
 					renglon +="</tr>";
 					$("#tblcontenido").append(renglon);
 				});
-				var paginador = "Total de resultados [" + data.totalresultados+ "] &nbsp; &nbsp; Páginas: ";
-				paginador += "<span onclick='cargaContactanos(1);'><i class='material-icons'>skip_previous</i></span>";
+				//var paginador = "<label class='col s2 offset-s2'>Total de resultados</label><label class='col s1'> " + data.totalresultados+ "</label>";
+				var paginador = "<span class='new badge col s2 offset-s2' data-badge-caption='Total de resultados'>(" + data.totalresultados+ ")</span>"
+				//paginador += "<span onclick='cargaContactanos(1);'><i class='material-icons'>skip_previous</i></span>";
+				paginador += "<ul class='pagination col s6'>"
+				paginador += "<li class='disabled'><a href='#!'><i class='material-icons'>chevron_left</i></a></li>";
 
 				for(i = 1; i <= data.paginas; i++){
-					paginador +="<span onmouseover='cursor=pointer' onclick='cargaContactanos(" +i +");'>&nbsp;"+((i==data.pagina) ? "<b>": "") + i+ ((i==data.pagina) ? "</b>": "") +"&nbsp;</span>";
+					
+					//paginador +="<span onmouseover='cursor=pointer' onclick='cargaContactanos(" +i +");'>&nbsp;"+((i==data.pagina) ? "<b>": "") + i+ ((i==data.pagina) ? "</b>": "") +"&nbsp;</span>";
+					paginador += "<li class='waves-effect'><a onclick='cargaContactanos("+ i +");' href='#!'>"+((i==data.pagina) ? "<b>": "") + i+ ((i==data.pagina) ? "</b>": "") +"</a></li>"
 
 				}
-				paginador += "<span onclick='cargaContactanos("+data.paginas+");'><i class='material-icons'>skip_next</i></span>";
+				//paginador += "<span onclick='cargaContactanos("+data.paginas+");'><i class='material-icons'>skip_next</i></span>";
+				paginador += "<li class='waves-effect'><a href='#!' onclick='cargaContactanos("+data.paginas+");'><i class='material-icons'>chevron_right</i></a></li>";
+				paginador += "</ul>"
 				$("#tblpaginador").html(paginador);
 				
 

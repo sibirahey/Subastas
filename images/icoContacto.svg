@@ -1,11 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- Generator: Adobe Illustrator 16.0.0, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
 <!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
-<svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="60px"
-	 height="60px" viewBox="0 0 60 60" enable-background="new 0 0 60 60" xml:space="preserve">
+<svg version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 width="60px" height="60px" viewBox="0 0 60 60" enable-background="new 0 0 60 60" xml:space="preserve">
 <g id="Layer_1">
 	<g>
-		<text transform="matrix(1 0 0 1 10 44.7319)" fill="#506478" font-family="'FontAwesome'" font-size="40"></text>
+		<g enable-background="new    ">
+			<path fill="#506478" d="M50.004,44.017c0,1.965-1.607,3.572-3.572,3.572h-32.86c-1.964,0-3.572-1.607-3.572-3.572V19.729
+				c0-1.965,1.607-3.572,3.572-3.572h32.86c1.965,0,3.572,1.607,3.572,3.572V44.017z M46.432,19.015h-32.86
+				c-0.379,0-0.714,0.335-0.714,0.715c0,2.544,1.272,4.755,3.282,6.34c2.991,2.344,5.982,4.71,8.952,7.076
+				c1.183,0.96,3.326,3.014,4.889,3.014h0.022h0.022c1.563,0,3.706-2.054,4.889-3.014c2.97-2.366,5.96-4.732,8.952-7.076
+				c1.451-1.139,3.281-3.617,3.281-5.515C47.146,19.997,47.28,19.015,46.432,19.015z M47.146,26.872
+				c-0.469,0.536-0.982,1.027-1.541,1.474c-3.191,2.456-6.406,4.956-9.51,7.546c-1.674,1.406-3.75,3.125-6.071,3.125h-0.022h-0.022
+				c-2.321,0-4.397-1.719-6.072-3.125c-3.103-2.59-6.318-5.09-9.51-7.546c-0.558-0.446-1.072-0.938-1.541-1.474v17.145
+				c0,0.38,0.335,0.715,0.714,0.715h32.86c0.38,0,0.715-0.335,0.715-0.715V26.872z"/>
+		</g>
 	</g>
 </g>
 <g id="Layer_2" display="none">

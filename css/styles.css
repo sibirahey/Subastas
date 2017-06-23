@@ -2743,12 +2743,22 @@ div[name="altaautos"] > .row{
 #listausuarios{
 	color: #000 !important;
 }
-/**/
+/*--------- CONTACTANOS ---------*/
 #miscontactos{
 	float: left;
 	width:100%;
     max-width: 1024px;
     margin: 0 calc(50% - 512px);
+}
+.tblpaginador{
+	text-align:center;
+}
+.tblpaginador .badge {
+	font-size:1rem;
+	margin:15px auto;
+}
+.tblpaginador > ul{
+	text-align:left;
 }
 /**/
 /*---------- MATERIALIZE MODS ---------*/
