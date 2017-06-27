@@ -65,6 +65,7 @@ function buscarAutos(){
 		var total = 0;
 		
 			if (data){
+				$("#grdVehiculos").html("");
 			$.each(data, function(i, item) {
 					
 				var renglon = "<tr>";

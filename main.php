@@ -1,3 +1,14 @@
+<?php
+session_start();
+require_once("views/VistaApi.php");
+require_once("views/VistaJson.php");
+require_once("modelos/usuarios.php");
+require_once('utilidades/ConexionBD.php');
+require_once('utilidades/ExcepcionApi.php');
+require_once('utilidades/Utilerias.php');
+unregister_GLOBALS();
+?>
+
 <!doctype html>
 
 <html lang="en">
@@ -78,6 +89,27 @@
 		<script type="text/javascript" src="scripts/modulos/admin/resultadossubastas.js<?php echo "?" . rand(0, 9999999); ?>"></script>
 		<script type="text/javascript" src="scripts/jcarousel.js<?php echo "?" . rand(0, 9999999); ?>"></script>
 		<script type="text/javascript" src="scripts/MisCotizaciones.js<?php echo "?" . rand(0, 9999999); ?>"></script>
+		<?php 
+
+	
+if(isset($_SESSION['claveapi'])){
+	
+    if(!usuarios::ValidaSesion($_SESSION['claveapi'], $_SESSION['idusuario'])){
+        
+    
+       echo "<script> alert('Su sesión ha caducado'); sessionStorage.clear(); window.location.href =  siteurl+'home.php'; </script>";
+
+        
+    }
+}
+
+?>
 	</body>
 	<!-- contenedor del cuerpo principal del sitio -->
+
+
 </html>
+<?php
+exit();
+?>
+

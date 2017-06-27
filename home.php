@@ -1,3 +1,9 @@
+<?php
+session_start();
+require_once('utilidades/Utilerias.php');
+unregister_GLOBALS();
+
+?>
 <!doctype html>
 
 <html lang="en">

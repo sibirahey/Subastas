@@ -31,10 +31,11 @@ require_once('utilidades/ExcepcionApi.php');
 require_once('utilidades/Utilerias.php');
 require_once('modelos/usuario-automovil.php');
 require_once('modelos/invitacion.php');
-
+unregister_GLOBALS();
 
 //print ConexionBD::obtenerInstancia()->obtenerBD()->errorCode();
 //print_r(array_shift($_GET['PATH_INFO']));
+
 
 $vista = new VistaJson();
 
@@ -64,7 +65,6 @@ set_exception_handler(function ($exception) use ($vista) {
 
 
 $metodo = strtolower($_SERVER['REQUEST_METHOD']);
-
 
 $arreglo = explode('/', $_GET['PATH_INFO']);
 $modelo = $arreglo[0];
@@ -162,3 +162,5 @@ function ejecutaModeloPost($vista, $mod, $arr)
     		break;
     }
 }
+
+exit();

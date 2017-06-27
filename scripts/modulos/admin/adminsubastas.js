@@ -152,11 +152,12 @@ function guardarSubasta(obj) {
 			
 			debugger;
 			if (data > 0) {
-				alert("La subasta fue creada con éxito");
+				Materialize.toast("La subasta fue creada con éxito", 5000);
 				CargaSubastas(-1, -1);
+				$('.divHeaderContenido').modal("close");
 
 			}else{
-				alert("Ocurrió un error al crear la subasta");
+				Materialize.toast("Ocurrió un error al crear la subasta");
 			}
 		});
 	}
@@ -351,8 +352,10 @@ function CargaSubastas(estatus, empresa) {
 
 						$("#divAdministraUsuarios").modal("close");
 					} else {
-						Materialize.toast("La operación se realizó correctamente",4000);
+						var respuesta = String(php_script_response).split(".");
+						Materialize.toast("Se agregaron correctamente: "+ respuesta[1] +" de "+ respuesta[0],4000);
 						var filename = $('input[type=file]').val().replace(/C:\\fakepath\\/i, '');
+
 
 					}
 
@@ -411,7 +414,7 @@ function CargaSubastas(estatus, empresa) {
 			postrequest("subastas/publicar", oSubastas, function(data) {
 
 				if (data > 0) {
-					alert("La operación se realizó exitosamente");
+					Materialize.toast("La operación se realizó exitosamente", 5000);
 				}
 			})
 			CargaSubastas($("#cmbPublicada option:selected").val(), $("#cmbEmpresasFiltro option:selected").val());

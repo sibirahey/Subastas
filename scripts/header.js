@@ -86,7 +86,7 @@ $( document ).ready(function() {
     function CargaContenidoAdmin(o){
     	
  		fnToLoad = $(o).attr("name");
-     	window.location.href = siteurl+"main.php?accion="+$(o).attr("name");
+     	window.location.href = "main.php?accion="+$(o).attr("name");
      	
 
 	}

@@ -3,8 +3,6 @@
 class usuarios
 {
 
-  
-
     public function __construct($nombre ="", $appaterno = "", $apmaterno = "", $correo ="", $verificado = 0, $contrasena="", $valido=0, $publico = 1, $esadmin=0, $claveApi = "", $telefono = 0)
     {
         $this->nombre = $nombre;
@@ -73,6 +71,35 @@ class usuarios
             throw new ExcepcionApi(self::ESTADO_URL_INCORRECTA, "Url mal formada", 400);
         }
     }   
+
+    public static function ValidaSesion($apikey, $idusuario)
+    {
+
+       try{
+            $pdo = ConexionBD::obtenerInstancia()->obtenerBD();
+            $comando = "select count(*) as cuenta from usuario where idUsuario = ? and claveApi = ?";
+            $sentencia = $pdo->prepare($comando);
+
+            $sentencia->bindParam(1, $idusuario);
+            $sentencia->bindParam(2, $apikey);
+            if($sentencia->execute()){
+                $resultado = $sentencia->fetch();
+                if($resultado["cuenta"] > 0)
+                    return true;
+                else 
+                    return false;
+
+            }else{
+                return false;
+            }
+       }catch (Exception $e) {
+
+            return false;
+            
+        }
+        
+
+    }
 
     
     private function crear($usuario)
@@ -224,8 +251,6 @@ class usuarios
                 $usuarioid = $pdo->lastInsertId();
 
 
-                
-
             }
 
             
@@ -242,22 +267,22 @@ class usuarios
                 if($sentencia->execute()){
                     $invitacion = new invitacion($usuarioid, $idSubasta);
                     invitacion::crear($invitacion);
-                    
-                    
-
                     envia_mail($usuario->correo, "Escudería - Ha sido invitado a particiar en una subasta", envia_mensaje_invitacion($claveApi, $usuarioid, $idSubasta));
+                    return true;
+                }else{
+                    return false;
                 }
 
                 
-                return true;
+             
             } else {
                 return false;
             }
         } catch (PDOException $e) {
 
-            print_r($e);
-            throw new ExcepcionApi("ERROR", $e->getMessage(), 400);
             
+            throw new ExcepcionApi("ERROR", $e->getMessage(), 400);
+            return false;
         }
 
     }

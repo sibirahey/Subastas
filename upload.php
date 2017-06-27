@@ -45,10 +45,11 @@ else {
 
 
 
-
+        $contador = 0;
+        $total= 0;
 
         move_uploaded_file($_FILES['file']['tmp_name'], 'userlist/' . $guid.".".$ext);
-        echo $guid.".".$ext;
+       
 
         
         $fila = 0;
@@ -57,6 +58,7 @@ else {
             
             while (($datos = fgetcsv($gestor)) !== FALSE) {
                 //print_r($datos); 
+                $total++;
                 $numero = count($datos);
                 //echo "cuenta: ".$numero;
                 $fila++;
@@ -80,7 +82,9 @@ else {
                                 $usuario->esadmin = 0;
                                 $usuario->telefono = $datos[4];
                                 
-                                usuarios::invitarUsuario($usuario, $_POST["idsubasta"]);
+                                if(usuarios::invitarUsuario($usuario, $_POST["idsubasta"])){
+                                     $contador++;
+                                }
 
 
                             }
@@ -93,6 +97,13 @@ else {
             fclose($gestor);
         }
         ini_set('auto_detect_line_endings',FALSE);
+        // echo $guid.".".$ext;
+        if($total > 1)
+        {
+            $total = $total -1;
+        }
+
+         echo $total.".".$contador;
 
     }else if($_POST["accion"] == "home"){
         try{
