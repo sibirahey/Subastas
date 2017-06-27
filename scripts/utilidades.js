@@ -322,17 +322,30 @@ function regresaRenglonVenta(item, subastaID) {
 		renglon += '      <label>' + Number(item.oferta).formatMoney(2, '.', ',') + '</label>';
 		renglon += '    </div>';
 		renglon += '    </div>';
-		  if(subastaID > 0){
-		renglon += '<div class="card-action">';
-		renglon += '    <div class="divBtnPujar" style="display:none">';
-		renglon += '      <div id="btnPujar" class="btnPujar waves-effect waves-light btn" onclick=PujarAuto('+item.idAuto+','+subastaID+','+Number(item.precio)+');>Ofertar</div>';
-		renglon += '    </div>';
-		
-			      }
+	  	if(subastaID > 0){
+		  	if(item.estatus_subasta == "ACTIVA"){
+				renglon += '<div class="card-action">';
+				renglon += '    <div class="divBtnPujar" style="display:none">';
+				renglon += '      <div id="btnPujar" class="btnPujar waves-effect waves-light btn" onclick=PujarAuto('+item.idAuto+','+subastaID+','+Number(item.precio)+');>Ofertar</div>';
+				renglon += '    </div>';
+			}
+      	}
 		renglon += '  </div>';
 	return renglon;
 
 }
+
+function PujarAuto(idAuto, idSubasta, precio){
+	
+	$('#modalPuja').modal("open");
+	$("#btnGuardarOferta").attr("attr-subastaid", idSubasta);
+	$("#btnGuardarOferta").attr("attr-idauto", idAuto);
+	$("#btnGuardarOferta").attr("attr-precio", idAuto);
+	$(".modal-puja-precio").html(Number(precio).formatMoney(2, '.', ','));
+
+	
+}
+
 
 function EditarAuto(o){
 
@@ -779,15 +792,6 @@ function ConsultaOfertasXUsuarioSubasta(idSubasta){
 
 }
 
-function PujarAuto(idAuto, idSubasta, precio){
-	
-	$('#modalPuja').modal("open");
-	$("#btnGuardarOferta").attr("attr-subastaid", idSubasta);
-	$("#btnGuardarOferta").attr("attr-idauto", idAuto);
-	$("#btnGuardarOferta").attr("attr-precio", idAuto);
-
-	
-}
 
 function VerOfertas(idAuto, idSubasta){
 	$("#modalOfertas").modal("open");
