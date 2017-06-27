@@ -57,7 +57,8 @@ function cargaResultadosSubastas(){
 					$('.tooltipped').tooltip({delay: 50});
 				 }, 
 				 function (){
-					alert("Ocurrió un error al realizar la consulta");
+					//alert("Ocurrió un error al realizar la consulta");
+					Materialize.toast('Ocurri&oacute; un error al realizar la consulta.', 4000);
 				});
 	
 

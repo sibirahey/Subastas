@@ -133,9 +133,11 @@ function CargaFuncionesAdminHome(){
         debugger;
          postrequest("seccioneshome/updatejson?rand="+Math.random(), {}, function(data){
             if(data == "OK"){
-                alert("Se actualizó la información del home");
+                //alert("Se actualizó la información del home");
+                
             }else{
-                alert("Error al actualizar la información del home");
+                //alert("Error al actualizar la información del home");
+                Materialize.toast('I am a toast!', 4000);
             }
         });
 
@@ -158,13 +160,16 @@ function CargaFuncionesAdminHome(){
                         data: form_data,                         
                         type: 'post',
                         success: function(php_script_response){
-                            alert("entro"   );
+                            //alert("entro"   );
+                            //Materialize.toast('Entr&oacute;', 4000);
                             if(php_script_response.substring(0, 2) == "ERR"){
-                                alert(php_script_response);
+                                ///alert(php_script_response);
+                                Materialize.toast('php_script_response', 4000);
                                 
                                 
                             }else{
-                                alert("La operación se realizó correctamente");
+                                //alert("La operación se realizó correctamente");
+                                Materialize.toast('La operaci&oacute;n se realiz&oacute; correctamente.', 4000);
                                 var filename = $('input[type=file]').val().replace(/C:\\fakepath\\/i, '');
                                 $("#uploadedFile").val(filename);
                                 
@@ -194,11 +199,13 @@ function CargaFuncionesAdminHome(){
 
             postrequest("seccioneshome/update?rand="+Math.random(), o, function(data){
                 if(data == "OK"){
-                    alert("La información se actualizó correctamente");
+                    //alert("La información se actualizó correctamente");
+                    Materialize.toast('La informaci&oacute;n se actualiz&oacute; correctamente.', 4000);
                     CargaSeccionesHome();
 
                 }else{
-                    alert("Ocurrió un error al actualizar la información");
+                    //alert("Ocurrió un error al actualizar la información");
+                    Materialize.toast('Ocurri&oacute; un error al actualizar la informaci&oacute;n', 4000);
                 }
             });
             $('select').material_select();

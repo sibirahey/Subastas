@@ -80,7 +80,8 @@ function agregarMisAutos(obj){
 		postrequest("usuarioautomovil/guardar",mAuto,function(data){
 	
 				if (data) {
-					alert(data);
+					//alert(data);
+					Materialize.toast(data, 4000);
 						if (data.indexOf("eliminado") ==-1)
 							$("#altaMisAutos").dialog("close");
 			
@@ -91,7 +92,8 @@ function agregarMisAutos(obj){
 
 		});
 	}else{
-		alert("Debe llenar todos los campos.");
+		//alert("Debe llenar todos los campos.");
+		Materialize.toast('Debe llenar todos los campos.', 4000);
 	}
 }
 

@@ -55,7 +55,8 @@ function CargaFuncionesAdminSubastas() {
 	});
 	$("#btnGuardaEmpresa").add("#btnEliminaEmpresa").click(function() {
 		if ($("#txtNombreEmpresa").val().length <= 0) {
-			alert("Se requiere introducir un nombre para poder dar de alta una Empresa.");
+			//alert("Se requiere introducir un nombre para poder dar de alta una Empresa.");
+			Materialize.toast('Se requiere introducir un nombre para poder dar de alta una empresa.', 4000);
 			return;
 		}
 		var vEstatus = 1;
@@ -74,12 +75,14 @@ function CargaFuncionesAdminSubastas() {
 		}, function(data) {
 			//debugger;
 			if (data > 0) {
-				alert("La empresa se agregó correctamente");
+				//alert("La empresa se agregó correctamente");
+				Materialize.toast('La empresa se agreg&oacute; correctamente.', 4000);
 				CargaEmpresas(data);
 				$("#modalEmpresa").modal("close");
 
 			} else {
-				alert("Ocurrió un error al agregar la empresa");
+				//alert("Ocurrió un error al agregar la empresa");
+				Materialize.toast('Ocurri&oacute; un error al agregar la empresa.', 4000);
 
 			}
 		});
@@ -310,8 +313,9 @@ function CargaSubastas(estatus, empresa) {
 				$("#divListaUsuariosTtl").html("Subasta: " + nombreSubasta);
 				if(data.code){
 					if(data.code == 400){
-						alert("Ocurrió un error al obtener la lista de participantes");
-						console.log(data.message);
+						//alert("Ocurrió un error al obtener la lista de participantes");
+						Materialize.toast('Ocurri&oacute; un error al obtener la lista de participantes.', 4000);
+						//console.log(data.message);
 					}
 				}
 				$("#divListaUsuariosTbl").html("");
@@ -348,7 +352,8 @@ function CargaSubastas(estatus, empresa) {
 				type : 'post',
 				success : function(php_script_response) {
 					if (php_script_response.substring(0, 2) == "ERR") {
-						alert(php_script_response);
+						//alert(php_script_response);
+						Materialize.toast(php_script_response, 4000);
 
 						$("#divAdministraUsuarios").modal("close");
 					} else {
@@ -621,7 +626,8 @@ function ValidaCamposSubasta(objItem) {
 
 	if (!validado) {
 
-		alert("Favor de llenar todos los campos requeridos");
+		//alert("Favor de llenar todos los campos requeridos");
+		Materialize.toast('Favor de llenar todos los campos requeridos.', 4000);
 
 	}
 	return validado;

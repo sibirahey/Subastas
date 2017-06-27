@@ -106,11 +106,13 @@ function ActualizarSubServicio(obj){
 					$("#Subservicio" + $(obj).attr("idSubServicio")).show();
 					cargaServiciosCotizar(obj);
 
-					alert("Se actualizo correctamente");
+					//alert("Se actualizo correctamente");
+					Materialize.toast('Se actualizo correctamente.', 4000);
 
 				}else{
 
-					alert("no fue posible actualizar, Intentelo nuevamente");
+					//alert("no fue posible actualizar, Intentelo nuevamente");
+					Materialize.toast('No fue posible actualizar, intentelo nuevamente.', 4000);
 				}
 
 

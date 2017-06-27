@@ -10,7 +10,8 @@ var n = this,
  };
 
  Date.prototype.toMXFormat = function(c){
- 	alert(c);
+ 	//alert(c);
+ 	Materialize.toast(c, 4000);
 
  }
 
@@ -961,8 +962,8 @@ function validaCodigoVericacion(o){
 			$("#divError").html("Los datos son incorrectos");
 		}
 	}, function(data){
-		alert("Ocurrió un error al validar el codigo de verificación");
-	});
+		// alert("Ocurrió un error al validar el codigo de verificación");	}
+		Materialize.toast('Ocurri&oacute; un error al validar el codigo de verificaci&oacute;n', 4000)
 
 }
 

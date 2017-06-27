@@ -248,7 +248,8 @@ $(document).ready(function() {
 					window.location.href = "home.php?s=login";
 				}
 				if(data["claveApi"] != vars["claveapi"]){
-					alert("La información de la invitación es incorrecta");
+					//alert("La información de la invitación es incorrecta");
+					Materialize.toast('La informaci&oacute;n de la invitaci&oacute;n es incorrecta.', 4000);
 					window.location.href = "home.php";
 				}
 				$("#registroNombre").val(data["nombre"]);
@@ -417,7 +418,8 @@ $(document).ready(function() {
 						}
 
 					}, function(data){
-						alert("Ocurrió un error al validar el correo")
+						//alert("Ocurrió un error al validar el correo")
+						Materialize.toast('Ocurri&oacute; un error al validar el correo.', 4000);
 
 					});
 
@@ -443,17 +445,21 @@ $(document).ready(function() {
 
 				postrequest("usuarios/reenviarcorreo", {"correo":sessionStorage.getItem("correo"), "idusuario":sessionStorage.getItem("idUsuario")}, function(data) {
 					if(data == 0){
-						alert("Los datos no corresponden");
+						//alert("Los datos no corresponden");
+						Materialize.toast('Los datos no corresponden.', 4000);
 					}else if(data == 1){
-						alert("El correo de verificación fue enviado correctamente");
+						//alert("El correo de verificación fue enviado correctamente");
+						Materialize.toast('El correo de verificaci&oacute;n fue enviado correctamente.', 4000);
 					}else
 					{
-						alert("Ocurrió un error al enviar el correo");
+						//alert("Ocurrió un error al enviar el correo");
+						Materialize.toast('Ocurri&oacute; un error al enviar el correo.', 4000);
 					}
 
 				},function(data){
-					alert("Ocurrió un error al enviar el correo");
-					console.log(data);
+					//alert("Ocurrió un error al enviar el correo");
+					Materialize.toast('Ocurri&oacute; un error al enviar el correo.', 4000);
+					//console.log(data);
 				});
 
 			});
@@ -472,11 +478,13 @@ $(document).ready(function() {
 						}
 						else{
 
-							alert("Error al validar el correo");
+							//alert("Error al validar el correo");
+							Materialize.toast('Error al validar el correo', 4000);
 						}
 
 					}, function(data){
-						alert("Ocurrió un error al validar el correo ");
+						//alert("Ocurrió un error al validar el correo ");
+						Materialize.toast('Ocurri&oacute; un error al validar el correo.', 4000);
 					}
 				);
 
@@ -487,17 +495,19 @@ $(document).ready(function() {
 	function CargaFuncionesRecuperar(){
 
 		$("#btnRecuperar").click(function(){
-			;
 			postrequest("usuarios/recuperar",{"mail":$("#mail").val()}, function(data){
 				if(data == -1){
-					alert("No se encontro ninguna cuenta con estos datos");
+					//alert("No se encontro ninguna cuenta con estos datos");
+					Materialize.toast('No se encontro ninguna cuenta con estos datos.', 4000);
 				}else{
-					alert("Le envíamos un correo, por favor revise su bandeja de entrada. Recuerde que el correo podría llegar a la bandeja de spam o correo no deseado");
+					//alert("Le envíamos un correo, por favor revise su bandeja de entrada. Recuerde que el correo podría llegar a la bandeja de spam o correo no deseado");
+					Materialize.toast('Le env&iacute;amos un correo, por favor revise su bandeja de entrada. Recuerde que el correo podr&iacute;a llegar a sla bandeja de spam o correo no deseado.', 4000);
 					window.location.href="?s=nuevacontrasena&correo="+$("#mail").val();
 				}
 			},
 			function(data){
-				alert("Ocurrió un error al recuperar la contraseña");
+				//alert("Ocurrió un error al recuperar la contraseña");
+				Materialize.toast('Ocurri&oacute; un error al recuperar la contrase&ntilde;a', 4000);
 			} );
 		});
 	}
@@ -519,13 +529,15 @@ $(document).ready(function() {
 			postrequest("usuarios/cambiarcontasena",{"mail": $("#registroMail").val() ,"claveapi":$("#claveApi").val(),"password":$("#registroPassword").val()},
 				function(data){
 					if(data == 0){
-						alert("Ocurrió un error al guardar la contraseña");
+						//alert("Ocurrió un error al guardar la contraseña");
+						Materialize.toast('Ocurri&oacute; un error al guardar la contrase&ntilde;a', 4000);
 					}else{
 						window.location.href = "?s=login";
 					}
 				},
 				function(data){
-					alert("Ocurrió un error al guardar la contraseña");
+					//alert("Ocurrió un error al guardar la contraseña");
+					Materialize.toast('Ocurri&oacute; un error al guardar la contrase&ntilde;a', 4000);
 				}
 			);
 		});

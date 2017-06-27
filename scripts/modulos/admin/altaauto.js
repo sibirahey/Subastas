@@ -79,11 +79,12 @@ function CargaFuncionesRegistroAuto(idSubasta){
 
 		                
 		                	if(php_script_response.substring(0, 2) == "ERR"){
-								alert(php_script_response);
+								//alert(php_script_response);
+								Materialize.toast(php_script_response), 4000);
 								
 
 		                	}else{
-		                		debugger;
+		                		//debugger;
 		                		var filename = $("#fotoAuto").val().replace(/C:\\fakepath\\/i, '');
 								$("#fotosSubidas").append("<div class='fotosAuto' attr-id='"+php_script_response.trim()+"'><img  class='materialboxed' data-caption='"+filename+"' width='100px' src='" + siteurl +  "uploads/" + php_script_response.trim() + "' /><span>"+filename+"</span></div>");
 								clearFileInput('fotoAuto');
@@ -137,7 +138,8 @@ function CargaFuncionesRegistroAuto(idSubasta){
 				oObj = new Modelo();
 				oObj.idMarca = $("#cbMarcaAuto").val();
 				if ($("#cbMarcaAuto").val() == 0 ){
-					alert("Seleccione una marca para poder agregar el modelo.");
+					//alert("Seleccione una marca para poder agregar el modelo.");
+					Materialize.toast('Seleccione una marca para poder agregar el modelo.', 4000);
 					return;
 				}
    			break;
@@ -148,7 +150,8 @@ function CargaFuncionesRegistroAuto(idSubasta){
    				oObj = new Caracteristicas();
    				break;
    			default:
-   			 alert("Operación no valida");
+   			 //alert("Operación no valida");
+   			 Materialize.toast('Péraci&oacute;n no valida.', 4000);
    			 break;
 
    		}
@@ -170,7 +173,8 @@ function CargaFuncionesRegistroAuto(idSubasta){
 
    		postrequest($( "#dialog" ).attr("operacion")+"/guardar", oObj, function(data){
    			if(data > 0){
-				alert("La operación se realizó con éxito");
+				//alert("La operación se realizó con éxito");
+				Materialize.toast('La operaci&oacute;n se realiz&oacute; con &eacute;xito.', 4000);
 				if($( "#dialog" ).attr("operacion") == "marcas"){
 					$("#cbMarcaAuto").html("");
 					CargaSelectMarcas("#cbMarcaAuto", 0,1);

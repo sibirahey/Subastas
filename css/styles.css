@@ -2658,8 +2658,9 @@ div[name="altaautos"] > .row{
 	cursor: pointer;
 }
 .searchItem > .card > .card-content{
-	/*width: 100%;*/
 	height:200px;
+	overflow:auto;
+	padding: 4px 24px;
 }
 .searchItem .card-title{
 	width: 100%;
