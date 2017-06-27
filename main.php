@@ -8,7 +8,6 @@ require_once('utilidades/ExcepcionApi.php');
 require_once('utilidades/Utilerias.php');
 unregister_GLOBALS();
 ?>
-
 <!doctype html>
 
 <html lang="en">

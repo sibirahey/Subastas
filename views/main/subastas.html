@@ -21,9 +21,20 @@
 
     <div id="modalPuja" class="modal">
         <div class="modal-header">
-            <div class="chip right"></div>
+            <div class="btn modal-action modal-close waves-effect red">
+                <i class="material-icons">close</i>
+            </div>
+        </div>
+        <div>
+            <div class="chip right modal-puja-incremento"></div>
+            <div class="chip right modal-puja-precio"></div>
+            <div class="chip right modal-puja-ultimaoferta"></div>
         </div>
         <div class="modal-content">
+           <div class="input-field col s12">
+              Recuerde que la oferta debe ser superior al precio, mayor que la última oferta y respetar el incremento solicitado por oferta.
+            </div>
+           
           <div class="input-field col s12">
               <input name="txtOferta" id="txtOferta" type="text" class="validate">
               <label for="last_name">Oferta:</label>
