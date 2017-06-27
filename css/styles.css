@@ -200,7 +200,7 @@ li{
 	margin-top: 20px;
 	position: fixed;
 	bottom: 0;
-	z-index:2;
+	z-index:1000;
 }
 .logoFooter {
 	float: left;
@@ -2021,11 +2021,10 @@ button[name="contactoEnviar"] {
     display: block;
     padding: 10px;
     text-transform: capitalize;
-    line-height: 10px;
+    line-height: 24px;
     font-size: 1.5rem;
     text-align: center;
     overflow: hidden;
-}
 }
 #divListaContenido .card-image > span {
 
@@ -2747,4 +2746,7 @@ div[name="altaautos"] > .row{
 .modal-content input[disabled="disabled"],
 .modal-content textarea[disabled="disabled"]{
     color: rgba(0, 0, 0, 0.6);
+}
+.toast {
+    background-color: #26a69a;
 }
