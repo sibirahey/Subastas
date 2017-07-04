@@ -256,6 +256,7 @@ function cargaAutosPorSubasta(subastaID, controlid, tiposubasta) {
 	postrequest("autos/subasta", {
 		"idsubasta" : subastaID
 	}, function(data) {
+		debugger;
 		$("#divDetalleAuto").hide();
 		for (var val in data) {
 			$(controlid).append(regresaRenglonVenta(data[val], subastaID));
@@ -341,34 +342,44 @@ function regresaRenglonVenta(item, subastaID) {
 
 function PujarAuto(idAuto, idSubasta, precio, o){
 	
-	$('#modalPuja').modal("open");
-	$("#btnGuardarOferta").attr("attr-subastaid", idSubasta);
-	$("#btnGuardarOferta").attr("attr-idauto", idAuto);
-	$("#btnGuardarOferta").attr("attr-precio", precio);
-	$("#btnGuardarOferta").attr("attr-tiposubasta", $(o).attr("attr-tiposubasta"));
-	$("#btnGuardarOferta").attr("attr-incremento", $(o).attr("attr-incremento"));
-	if($(o).attr("attr-tiposubasta") == "1"){
-		$("#btnGuardarOferta").attr("attr-ultimaoferta", $(o).attr("attr-ultimaoferta"));
-	}else{
-		$("#btnGuardarOferta").attr("attr-ultimaoferta", "0");
-	}
-	$(".modal-puja-precio").html("Precio inicial: $" +Number(precio).formatMoney(2, '.', ','));
-	$(".modal-puja-incremento").html("Incremento: $" +Number($(o).attr("attr-incremento")).formatMoney(2, '.', ','));
 	
-	if($(o).attr("attr-tiposubasta") == "1")
-	{
-		$(".modal-puja-ultimaoferta").html("Última oferta: $" +Number($(o).attr("attr-ultimaoferta")).formatMoney(2, '.', ','));
-	}else{
-		$(".modal-puja-ultimaoferta").hide();
-	}
+	postrequest("autos/subasta", {
+		"idsubasta" : idSubasta, "autoid": idAuto
+	}, function(data) {
+		debugger;
+	
+	
+		$("#btnGuardarOferta").attr("attr-subastaid", idSubasta);
+		$("#btnGuardarOferta").attr("attr-idauto", idAuto);
+		$("#btnGuardarOferta").attr("attr-precio", precio);
+		$("#btnGuardarOferta").attr("attr-tiposubasta", data[0].idTipoSubasta);
+		$("#btnGuardarOferta").attr("attr-incremento", data[0].incremento);
+		if( data[0].idTipoSubasta == 1){
+			$("#btnGuardarOferta").attr("attr-ultimaoferta", data[0].oferta);
+		}else{
+			$("#btnGuardarOferta").attr("attr-ultimaoferta", "0");
+		}
+		$(".modal-puja-precio").html("Precio inicial: $" +Number(precio).formatMoney(2, '.', ','));
+		$(".modal-puja-incremento").html("Incremento: $" +Number(data[0].incremento).formatMoney(2, '.', ','));
+		
+		if(data[0].idTipoSubasta == "1")
+		{
+			$(".modal-puja-ultimaoferta").html("Última oferta: $" +Number(data[0].oferta).formatMoney(2, '.', ','));
+		}else{
+			$(".modal-puja-ultimaoferta").hide();
+		}
+			$('#modalPuja').modal("open");
 
+	}, function(data){
+		Materialize.toast("Ocurrió un error al cargar la información del auto", 4000);
+	});
+
+	
 	$("#txtOferta").keydown(function(e){
 			
 			if(e.keyCode == 8 || e.keyCode == 46){
 				return true;
-			}
-
-			 if(e.keyCode < 48){
+			}else if(e.keyCode < 48){
 			 	e.preventDefault();
 			 	return false;
 
@@ -391,8 +402,11 @@ function GuardarOferta(o){
 		postrequest("pujas/ofertar", 
 			{"id_subasta" : $(o).attr("attr-subastaid") , "id_auto": $(o).attr("attr-idauto"), "claveapi":sessionStorage["claveapi"], "oferta":$("#txtOferta").val() }, 
 			function(data) {
+				debugger;
 				Materialize.toast(data, 5000);
-				ConsultaOfertasXUsuarioSubasta($(o).attr("attr-subastaid") );
+				ConsultaOfertasXUsuarioSubasta($(o).attr("attr-subastaid"));
+				debugger;
+				cargaAutosPorSubasta($(o).attr("attr-subastaid"), "#divContenidoSubasta", $(o).attr("attr-tiposubasta")); 
 				$('#modalPuja').modal("close");
 			},function(){
 				Materialize.toast("Ocurrió un error al registrar su oferta", 5000);
@@ -963,8 +977,8 @@ function validaCodigoVericacion(o){
 		}
 	}, function(data){
 		// alert("Ocurrió un error al validar el codigo de verificación");	}
-		Materialize.toast('Ocurri&oacute; un error al validar el codigo de verificaci&oacute;n', 4000)
-
+		Materialize.toast('Ocurri&oacute; un error al validar el codigo de verificaci&oacute;n', 4000);
+	});
 }
 
 function ValidaRegistro(oUsuario) {

@@ -390,6 +390,8 @@ and s.idSubasta in (select su.idSubasta from subasta_usuario su, usuario u, suba
                     $resultado->usuarioganador =$oferta["idUsuario"];
                     $resultado->usuario = $oferta["nombre_usuario"];
                     $resultado->oferta = $oferta["oferta"];
+                    $resultado->puja = $oferta;
+                    $resultado->hora_puja = $oferta["hora_puja"];
                     if(isset($ganadores[$oferta["idUsuario"]])){
                         $ganadores[$oferta["idUsuario"]] = $ganadores[$oferta["idUsuario"]]+1;
                     }else{
@@ -402,12 +404,25 @@ and s.idSubasta in (select su.idSubasta from subasta_usuario su, usuario u, suba
                 }else{
                     array_push($resultado->ofertas, $oferta); 
                 }
-            }else{
-                array_push($resultado->ofertas, $oferta);
+            }else if($resultado->usuarioganador == $oferta["idUsuario"]) {
+                 $resultado->oferta = $oferta["oferta"];
+                 $resultado->hora_puja = $oferta["hora_puja"];
+                 array_push($resultado->ofertas, $oferta);
             }
+            else{
+                array_push($resultado->ofertas, $oferta);
+            } 
         }
+
+        /*
+        foreach ($resultados as &$ganador) {
+            array_push($resultados[$ganador->autoid]->ofertas, $ganador->puja);
+
+        }
+        */
             
         return $resultados;
+        
 
         
         

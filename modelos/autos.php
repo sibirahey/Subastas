@@ -59,41 +59,53 @@ class autos
 
     public function listarPorSubastas()
     {
-        
-        $idsubasta = $_POST['idsubasta'];
-        
-        $comando =  " SELECT au.idAuto, au.enVenta, au.precio, au.marca as marcaid, marca.descripcion as marca, au.modelo as modeloid, ".
-                    " modelo.descripcion as modelo, au.color as colorid, color.descripcion as color, au.anio, au.km, au.km, au.transmision as transmisionid, ".
-                    " trans.descripcion as transmision, au.estado as estadoid, est.nombre as estado, au.ciudad as ciudadid, mun.nombre as ciudad,  ".
-                    " au.descripcion, au.estatus, au.publicado, au.fechaCreacion, aus.subastaId, ".
-                    " (select idFoto from auto_fotos where idAuto = au.idAuto limit 1) as foto, ".
-                    " (select GROUP_CONCAT(idFoto) from auto_fotos where idAuto = au.idAuto) AS fotos, ".
-                    " (select oferta from autos_puja ap where ap.idAuto = aus.autoId and ap.hora_puja < sub.fechaFin+1 order by ap.hora_puja desc limit 1) as oferta, ".
-                    " (select count(*) from autos_puja ap where ap.idAuto = aus.autoId and ap.hora_puja < sub.fechaFin+1) as total_ofertas, ".
-                    " sub.idTipoSubasta, (CASE WHEN curdate() BETWEEN sub.fechaInicio and sub.fechaFin then 'ACTIVA' WHEN curdate() < sub.fechaInicio then 'AGENDADA' else 'TERMINADA' end) as estatus_subasta, sub.incremento ".
-                    " FROM subastas_autos as aus, autos as au, cat_marca as marca, cat_modelo as modelo, cat_colores as color, cat_transmision as trans, estados as est, municipios as mun, subastas sub ".
-                    " WHERE aus.subastaId = ?  ".
-                    " and aus.autoId = au.idAuto  ".
-                    " and au.marca = marca.id  ".
-                    " and au.modelo = modelo.id  ".
-                    " and au.color = color.id  ".
-                    " and au.transmision = trans.id  ".
-                    " and au.estado = est.id ".
-                    " and au.ciudad = mun.id ".
-                    " and aus.subastaId = sub.idSubasta ";
+        try{
+            $idsubasta = $_POST['idsubasta'];
+            
+            $comando =  " SELECT au.idAuto, au.enVenta, au.precio, au.marca as marcaid, marca.descripcion as marca, au.modelo as modeloid, ".
+                        " modelo.descripcion as modelo, au.color as colorid, color.descripcion as color, au.anio, au.km, au.km, au.transmision as transmisionid, ".
+                        " trans.descripcion as transmision, au.estado as estadoid, est.nombre as estado, au.ciudad as ciudadid, mun.nombre as ciudad,  ".
+                        " au.descripcion, au.estatus, au.publicado, au.fechaCreacion, aus.subastaId, ".
+                        " (select idFoto from auto_fotos where idAuto = au.idAuto limit 1) as foto, ".
+                        " (select GROUP_CONCAT(idFoto) from auto_fotos where idAuto = au.idAuto) AS fotos, ".
+                        " (select oferta from autos_puja ap where ap.idAuto = aus.autoId and ap.hora_puja < DATE_ADD(sub.fechaFin, INTERVAL +1 DAY) order by ap.hora_puja desc limit 1) as oferta, ".
+                        " (select count(*) from autos_puja ap where ap.idAuto = aus.autoId and ap.hora_puja < DATE_ADD(sub.fechaFin, INTERVAL +1 DAY)) as total_ofertas, ".
+                        " sub.idTipoSubasta, (CASE WHEN curdate() BETWEEN sub.fechaInicio and sub.fechaFin then 'ACTIVA' WHEN curdate() < sub.fechaInicio then 'AGENDADA' else 'TERMINADA' end) as estatus_subasta, sub.incremento ".
+                        " FROM subastas_autos as aus, autos as au, cat_marca as marca, cat_modelo as modelo, cat_colores as color, cat_transmision as trans, estados as est, municipios as mun, subastas sub ".
+                        " WHERE aus.subastaId = ?  ".
+                        " and aus.autoId = au.idAuto  ".
+                        " and au.marca = marca.id  ".
+                        " and au.modelo = modelo.id  ".
+                        " and au.color = color.id  ".
+                        " and au.transmision = trans.id  ".
+                        " and au.estado = est.id ".
+                        " and au.ciudad = mun.id ".
+                        " and aus.subastaId = sub.idSubasta ";
+
+                        if(isset($_POST["autoid"])){
+                           $comando .=  " and aus.autoId = ?"; 
+                        }
 
 
-        
-        
-        $sentencia = ConexionBD::obtenerInstancia()->obtenerBD()->prepare($comando);
-        
-        $sentencia->bindParam(1, $idsubasta);
-     
-        if ($sentencia->execute())
-            return $sentencia->fetchall(PDO::FETCH_ASSOC);
-        else
-            return null;
-        
+            
+            
+            $sentencia = ConexionBD::obtenerInstancia()->obtenerBD()->prepare($comando);
+            
+            $sentencia->bindParam(1, $idsubasta);
+            if(isset($_POST["autoid"])){
+                $sentencia->bindParam(2, $_POST["autoid"]);
+            }
+
+         
+            if ($sentencia->execute())
+                return $sentencia->fetchall(PDO::FETCH_ASSOC);
+            else
+                return null;
+        }catch(Excepcion $e){
+
+            print_r($e);
+            throw new ExcepcionApi(self::ESTADO_URL_INCORRECTA, $e->getMessage(), 400);
+        }
    }
 
    private function info($idauto){
@@ -125,8 +137,8 @@ class autos
             return $sentencia->fetch(PDO::FETCH_ASSOC);
         else
             return null;
-    }catch(Excepcion $ex){
-        return null;
+    }catch(Excepcion $e){
+        throw new ExcepcionApi(self::ESTADO_URL_INCORRECTA, $e->getMessage(), 400);
     }
   
         

@@ -32,6 +32,7 @@ require_once('utilidades/Utilerias.php');
 require_once('modelos/usuario-automovil.php');
 require_once('modelos/invitacion.php');
 unregister_GLOBALS();
+ini_set('display_errors', '0'); 
 
 //print ConexionBD::obtenerInstancia()->obtenerBD()->errorCode();
 //print_r(array_shift($_GET['PATH_INFO']));

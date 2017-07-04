@@ -3,7 +3,11 @@ var doneTypingIntervalo = 1000;
 
 
 function CargaFuncionesRegistroAuto(idSubasta){
-	$("#dialog").modal();
+	$("#dialog").modal({		
+		inDuration : 300, // Transition in duration
+		outDuration : 200, // Transition out duration
+		startingTop : '4%', // Starting top style attribute			
+	}); 	
 	$('#btnActualizaCatalogo').hide();
 	$('#btnEliminaCatalogo').hide();
 	$('#labelMensaje').hide();
@@ -80,7 +84,7 @@ function CargaFuncionesRegistroAuto(idSubasta){
 		                
 		                	if(php_script_response.substring(0, 2) == "ERR"){
 								//alert(php_script_response);
-								Materialize.toast(php_script_response), 4000);
+								Materialize.toast(php_script_response, 4000);
 								
 
 		                	}else{
@@ -111,8 +115,8 @@ function CargaFuncionesRegistroAuto(idSubasta){
 	CargaSelectColores("#cbColorAuto", 0, 1);
 	
 	
-   	$("#btnAddMarca").add("#btnAddModelo").add("#btnAddColor").add("#btnAddCaracteristicas").click(function(){
-   		debugger;
+   	$("#btnAddMarca").add("#btnAddModelo").add("#btnAddColor").add("#btnAddCaracteristicas").click(function(){   		
+		
    		$('#labelMensaje').hide();
    		$("#txtDescripcion").val("");
    		$("#labelMensaje").text("");
