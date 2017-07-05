@@ -118,15 +118,22 @@ function CargaFuncionesRegistroAuto(idSubasta){
    	$("#btnAddMarca").add("#btnAddModelo").add("#btnAddColor").add("#btnAddCaracteristicas").click(function(){   		
 		
    		$('#labelMensaje').hide();
-   		$("#txtDescripcion").val("");
-   		$("#labelMensaje").text("");
+   		$('#txtDescripcion').val("");
+   		$('#labelMensaje').text("");
    		$('#btnActualizaCatalogo').hide();
 		$('#btnEliminaCatalogo').hide();
-		$( "#dialog" ).attr("title", $(this).attr("title"));
-		$( "#dialog" ).attr("operacion", $(this).attr("operacion") );
-   		$("#labelTxtDescripcion").html($(this).attr("desc"));
-   		$( "#dialog" ).modal("open");
+		$('#dialog').attr("title", $(this).attr("title"));
+		$('#dialog').attr("operacion", $(this).attr("operacion") );
+   		$('#labelTxtDescripcion').html($(this).attr("desc"));
+   		$('#dialog').modal('open');  
+   		
+   		$(".modal-overlay:last-child").css("z-index", 1000);
+   		 		
+   		
+   		
    });
+   
+   
 
 
     $("#btnGuardarCatalogo").add("#btnActualizaCatalogo").add('#btnEliminaCatalogo').click(function(){
@@ -202,7 +209,7 @@ function CargaFuncionesRegistroAuto(idSubasta){
 				
 
 			}
-			$('#dialog').modal('close');
+			$('#btnCierraCatalogo').click();
    		});
 
    });

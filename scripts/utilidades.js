@@ -327,6 +327,7 @@ function regresaRenglonVenta(item, subastaID) {
 			renglon += '    </div>';
 			renglon += '    </div>';
 		}
+		debugger;
 	  	if(subastaID > 0){
 		  	if(item.estatus_subasta == "ACTIVA"){
 				renglon += '<div class="card-action">';
@@ -421,9 +422,12 @@ function GuardarOferta(o){
 
 function ValidaOferta(o){
 
+	debugger;
 	var precio = Number($(o).attr("attr-precio"));
 	var incremento = Number($(o).attr("attr-incremento"));
 	var ultimaoferta = Number($(o).attr("attr-ultimaoferta"));
+
+
 
 	try{
 		Number($("#txtOferta").val())
@@ -432,6 +436,10 @@ function ValidaOferta(o){
 	}
 	var oferta = Number($("#txtOferta").val());
 	
+	if($(o).attr("attr-ultimaoferta") == undefined){
+		ultimaoferta = oferta -1;
+	}
+
 	if(oferta > precio && oferta%incremento == 0 && oferta > ultimaoferta) {
 		return true;
 	}else{
@@ -1058,5 +1066,3 @@ function ValidaRegistro(oUsuario) {
 			}
 
 		}
-
-	

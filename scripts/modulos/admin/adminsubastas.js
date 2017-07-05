@@ -225,7 +225,7 @@ function CargaSubastas(estatus, empresa) {
 			div += '				</a>';
 			div += '				<ul>';
 			div += '					<li><a class="btn-floating btnEditarSubasta" attr-id="' + data[i].idSubasta + '" title="Editar Subasta"><i class="material-icons">create</i></a></li>';
-			div += '					<li><a class="btn-floating btnAdministraAutos" attr-id="' + data[i].idSubasta + '" attr-nombresubasta="' + data[i].nombreSubasta + '" title="Administrar Autos"><i class="material-icons">add</i></a></li>';
+			div += '					<li><a class="btn-floating btnAdministraAutos" attr-id="' + data[i].idSubasta + '" attr-nombresubasta="' + data[i].nombreSubasta + '" title="Administrar Autos"><i class="material-icons addCar"></i></a></li>';
 			div += '					<li><a class="btn-floating btnAgregarUsuariosAutos" attr-id="' + data[i].idSubasta + '" attr-nombresubasta="' + data[i].nombreSubasta + '" title="Agregar Usuarios"><i class="material-icons">group_add</i></a></li>';
 			div += '					<li><a class="btn-floating btnListaUsuarios" attr-id="' + data[i].idSubasta + '" attr-nombresubasta="' + data[i].nombreSubasta + '" title="Ver Usuarios"><i class="material-icons">group</i></a></li>';
 			div += '					<li><a class="btn-floating btnVerAutos" attr-id="' + data[i].idSubasta + '" attr-nombresubasta="' + data[i].nombreSubasta + '" title="Ver Autos"><i class="material-icons">drive_eta</i></a></li>';
