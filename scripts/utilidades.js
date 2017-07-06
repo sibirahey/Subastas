@@ -1058,5 +1058,3 @@ function ValidaRegistro(oUsuario) {
 			}
 
 		}
-
-	

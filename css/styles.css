@@ -2116,6 +2116,11 @@ button[name="contactoEnviar"] {
 #modalEmpresa > .modal-footer > a{
 	margin: 6px;
 }
+.addCar{
+	background-image: url(../images/icoAltaAuto.svg);
+	height:100%;
+	width: 100%;
+}
 /*---------- ENDS ADMINISTRADOR DE SUBASTAS---------*/
 /*---------  SWITCH ---------*/
 
@@ -2367,9 +2372,14 @@ input:checked + .slider:before {
 #divSubastaNombre {
 	width: 100%;
 }
+#dialog{
+	height:200px;
+	width:500px;
+}
 #dialog .modal-content > .input-field{
 	float:left;
 	width: 100%;
+	
 }
 #dialog > .modal-footer > div{
 	margin: 6px;
