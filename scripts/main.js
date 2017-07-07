@@ -99,18 +99,55 @@ function CargaContenidoMain() {
 					
 					if(response[o].visible == 1){
 						subasta = misubastahtml;
-						console.log(subasta);	
+						
 						subasta = subasta.replace("#NOMBRESUBASTA#", response[o].nombreSubasta); 
 						subasta = subasta.replace("#OFERTAMINIMA#", Number(response[o].incremento).formatMoney()); 
 						subasta = subasta.replace("#TIPOSUBASTAS#", response[o].tipoSubasta); 
 						subasta = subasta.replace("#ESTATUSSUBASTA#", response[o].estatus); 
 						subasta = subasta.replace("#SUBASTAID#", response[o].idSubasta); 
-						subasta = subasta.replace("#FECHA_SUBASTA#", new Date(response[o].fechaFin).toLocaleDateString());
-
+						subasta = subasta.replace("#FECHA_INISUBASTA#", new Date(response[o].fechaInicio).esMXFormatLarge());
+						subasta = subasta.replace("#FECHA_SUBASTA#", new Date(response[o].fechaFin).esMXFormatLarge());
+						subasta = subasta.replace("#ATTRFECHAINI#", response[o].fechaInicio);
+						subasta = subasta.replace("#ATTRFECHA#", response[o].fechaFin);
 						subasta = subasta.replace("#TIPOSUBASTA#", response[o].tipoSubasta);  
-						$("#ulMisSubastas").append(subasta);		
+						subasta = subasta.replace("#SUBASTAID#", response[o].idSubasta);
+						subasta = subasta.replace("#SUBASTAID#", response[o].idSubasta);
+						$("#ulMisSubastas").append(subasta);
+
+						
+
+
 					}
 				}
+
+				 setInterval(function(){
+
+				 	$.each($(".restantePorSubasta"), function(index,value){
+				 			
+				 			var _second = 1000;
+						    var _minute = _second * 60;
+						    var _hour = _minute * 60;
+						    var _day = _hour * 24;
+						    var timer;
+						    var ini = new Date($(value).attr("attr-fechaini"));
+				 			var end = new Date($(value).attr("attr-fecha"));
+				 			var now = new Date();
+					        var distance = end - now;
+					        
+					        var salida = "";
+					        console.log(distance);
+					        if (distance > 0 && now > ini) {
+					        	var days = Math.floor(distance / _day);
+						        var hours = Math.floor((distance % _day) / _hour);
+						        var minutes = Math.floor((distance % _hour) / _minute);
+						        var seconds = Math.floor((distance % _minute) / _second);
+
+						        var salida =  days + ' días ' +  hours + ' hrs '+ minutes + ' mins ' + seconds + ' segs';
+						      	$("#contador"+$(value).attr("attr-id")).html(salida);
+					        }
+					       
+				 	});
+				 }, 1000);
 
 				
 

@@ -2472,6 +2472,7 @@ input:checked + .slider:before {
 	width: 50%;
 	float:left;
 }
+
 #ulMisSubastas > li .card-content > h6:nth-child(odd){
 	text-align: right;
 	font-weight:500;
@@ -2481,6 +2482,11 @@ input:checked + .slider:before {
 }
 #ulMisSubastas > li .card-action{
 	text-align:center;
+}
+#ulMisSubastas > li .card-content > h6:last-child {
+    width: 100%;
+    text-align: center;
+    font-weight: 500;
 }
 .marginTop20 {
 	margin-top: 20px;

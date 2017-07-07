@@ -1,3 +1,7 @@
+String.prototype.replaceAll = function(search, replacement) {
+    var target = this;
+    return target.replace(new RegExp(search, 'g'), replacement);
+};
 Number.prototype.formatMoney = function(c, d, t){
 var n = this, 
     c = isNaN(c = Math.abs(c)) ? 2 : c, 
@@ -9,11 +13,54 @@ var n = this,
    return s + (j ? i.substr(0, j) + t : "") + i.substr(j).replace(/(\d{3})(?=\d)/g, "$1" + t) + (c ? d + Math.abs(n - i).toFixed(c).slice(2) : "");
  };
 
- Date.prototype.toMXFormat = function(c){
- 	//alert(c);
- 	Materialize.toast(c, 4000);
+Date.prototype.defaultView = function () {
+    var dd = this.getDate();
+    if (dd < 10) dd = '0' + dd;
+    var mm = this.getMonth() + 1;
+    if (mm < 10) mm = '0' + mm;
+    var yyyy = this.getFullYear();
+    return String(mm + "\/" + dd + "\/" + yyyy)
+}
 
- }
+Date.prototype.esMXFormat = function () {
+    try{
+        var dd = this.getDate();
+        if (dd < 10) dd = '0' + dd;
+        var mm = this.getMonth() + 1;
+        if (mm < 10) mm = '0' + mm;
+        var yyyy = this.getFullYear();
+        return String(dd + "\/" + mm + "\/" + yyyy)
+    }
+    catch (e) { return ""; }
+}
+
+Date.prototype.esUSFormat = function () {
+    try {
+        var dd = this.getDate();
+        if (dd < 10) dd = '0' + dd;
+        var mm = this.getMonth() + 1;
+        if (mm < 10) mm = '0' + mm;
+        var yyyy = this.getFullYear();
+        return String(yyyy + "-" + mm + "-" + dd)
+    }
+    catch (e) { return ""; }
+}
+
+Date.prototype.esMXFormatLarge = function () {
+    try {
+        var dd = this.getDate();
+        if (dd < 10) dd = '0' + dd;
+        var mm = this.getMonth() + 1;
+        if (mm < 10) mm = '0' + mm;
+        var yyyy = this.getFullYear();
+        var hours = this.getHours();
+        var mins = this.getMinutes();
+        var seconds = this.getSeconds();
+
+        return String(dd + "\/" + mm + "\/" + yyyy + "   " + ((hours > 9) ? hours : "0" + hours) + ":" + ((mins > 9) ? mins : "0" + mins))
+    }
+    catch (e) { return ""; }
+}
 
 function ValidaSession(){
 	
@@ -991,78 +1038,79 @@ function validaCodigoVericacion(o){
 
 function ValidaRegistro(oUsuario) {
 
-			var i = 0;
-			var msj = "";
-			if (oUsuario.nombre.trim() == "") {
-				i++;
-				msj += "Nombre, ";
-			}
-			if (oUsuario.appaterno.trim() == "") {
-				i++;
-				msj += "Apellido paterno, ";
-			}
-			if (oUsuario.apmaterno.trim() == "") {
-				i++;
-				msj += "Apellido materno, ";
-			}
-			if (oUsuario.email.trim() == "") {
-				i++;
-				msj += "Correo electrónico, ";
-			}else{
-				if(!ValidaEmail(oUsuario.email.trim())){
-					msj += "Proporcione un correo elecrónico válido, ";
-				}
-			}
-			if (oUsuario.password.trim() == "") {
-				i++;
-				msj += "Password,";
-			}
-			if (oUsuario.password.trim() == "") {
-				i++;
-				msj += "Repetir password, ";
-			}
-			if(!StrongPassWord(oUsuario.password)){
-				msj+="El password debe contener al menos una letra mayúscula, al menos una letra minúscula, al menos un número, al menos un caracter especial ([! @ # $ % ^ & *), y una longitud mínima de 8 caracteres ";
-
-			}
-			if (oUsuario.dd.trim() == "") {
-				i++;
-				msj += "Día de nacimiento, ";
-			}
-			if (oUsuario.mm.trim() == "") {
-				i++;
-				msj += "Mes de nacimiento, ";
-			}
-			if (oUsuario.yyyy.trim() == "") {
-				i++;
-				msj += "Año de nacimiento, ";
-			}
-			if (oUsuario.telefono.trim() == "") {
-				i++;
-				msj += "Teléfono, ";
-			}
-			var j = 0;
-			$(".chkPref:checked").each(function() {
-				j++;
-			});
-			if (j == 0) {
-				i++;
-				msj += "Temas de interés, ";
-			}
-			if (!$('#registroEULA')[0].checked) {
-				i++;
-				msj += "Aceptar términos y condiciones";
-			}
-
-			if (i > 0) {
-				//$(".divError").show();
-				//$(".divError").text("Algunos de los campos están vacíos: " + msj);
-				Materialize.toast('Algunos de los campos están vacíos:'+ msj , 4000);
-				return false;
-
-			} else {
-				$(".divError").hide();
-				return true;
-			}
-
+	var i = 0;
+	var msj = "";
+	if (oUsuario.nombre.trim() == "") {
+		i++;
+		msj += "Nombre, ";
+	}
+	if (oUsuario.appaterno.trim() == "") {
+		i++;
+		msj += "Apellido paterno, ";
+	}
+	if (oUsuario.apmaterno.trim() == "") {
+		i++;
+		msj += "Apellido materno, ";
+	}
+	if (oUsuario.email.trim() == "") {
+		i++;
+		msj += "Correo electrónico, ";
+	}else{
+		if(!ValidaEmail(oUsuario.email.trim())){
+			msj += "Proporcione un correo elecrónico válido, ";
 		}
+	}
+	if (oUsuario.password.trim() == "") {
+		i++;
+		msj += "Password,";
+	}
+	if (oUsuario.password.trim() == "") {
+		i++;
+		msj += "Repetir password, ";
+	}
+	if(!StrongPassWord(oUsuario.password)){
+		msj+="El password debe contener al menos una letra mayúscula, al menos una letra minúscula, al menos un número, al menos un caracter especial ([! @ # $ % ^ & *), y una longitud mínima de 8 caracteres ";
+
+	}
+	if (oUsuario.dd.trim() == "") {
+		i++;
+		msj += "Día de nacimiento, ";
+	}
+	if (oUsuario.mm.trim() == "") {
+		i++;
+		msj += "Mes de nacimiento, ";
+	}
+	if (oUsuario.yyyy.trim() == "") {
+		i++;
+		msj += "Año de nacimiento, ";
+	}
+	if (oUsuario.telefono.trim() == "") {
+		i++;
+		msj += "Teléfono, ";
+	}
+	var j = 0;
+	$(".chkPref:checked").each(function() {
+		j++;
+	});
+	if (j == 0) {
+		i++;
+		msj += "Temas de interés, ";
+	}
+	if (!$('#registroEULA')[0].checked) {
+		i++;
+		msj += "Aceptar términos y condiciones";
+	}
+
+	if (i > 0) {
+		//$(".divError").show();
+		//$(".divError").text("Algunos de los campos están vacíos: " + msj);
+		Materialize.toast('Algunos de los campos están vacíos:'+ msj , 4000);
+		return false;
+
+	} else {
+		$(".divError").hide();
+		return true;
+	}
+
+}
+

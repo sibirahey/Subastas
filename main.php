@@ -27,9 +27,7 @@ unregister_GLOBALS();
         <link href="css/styles.css" rel="stylesheet"/>
         <link href="css/mediaQueries.css" rel="stylesheet"/>
         <link href="css/jcarousel.basic.css" rel="stylesheet"/>
-		
-		
-		
+        
 	</head>
 	<body>
 		<!-- contenedor "absoluto"" del sitio -->
