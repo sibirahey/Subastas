@@ -682,6 +682,9 @@ function VerDetalleAuto(o) {
 			opacity : .5, // Opacity of modal background
 			inDuration : 300, // Transition in duration
 			outDuration : 200, // Transition out duration
+			ready: function(modal, trigger) { // Callback for Modal open. Modal and trigger parameters available.
+		    	$('.carousel').carousel();
+	      	}
 		});
 
 
@@ -703,11 +706,12 @@ function VerDetalleAuto(o) {
 			$("#divDetalleAuto").show();
 			$("#divListaAutos").hide();
 
-			$("#imgPrincipal").attr("src", siteurl+"uploads/"+infoAuto.foto);
+			//$("#imgPrincipal").attr("src", siteurl+"uploads/"+infoAuto.foto);
 			var fotos = infoAuto.fotos.split(",");
 			for(i in fotos){
 
-				$("#imgSnapshots").append('<div><img alt="Imagen no disponible" attr-idx="1" src="'+ siteurl+"uploads/"+fotos[i]+ '"  onclick="CambiaFotoPrincipal(this);" /></div>');
+				//$("#imgSnapshots").append('<div><img alt="Imagen no disponible" attr-idx="1" src="'+ siteurl+"uploads/"+fotos[i]+ '"  onclick="CambiaFotoPrincipal(this);" /></div>');
+				$("#imgSnapshots").append('<a class="carousel-item"><img class="materialboxed" alt="Imagen no disponible" attr-idx="1" src="'+ siteurl+"uploads/"+fotos[i]+ '" width="200" height="160" /></div>');
 			}
 			$("#detalleTitulo").html(infoAuto.modelo +" " + infoAuto.anio);
 			$("#detalleIdAuto").html(infoAuto.idAuto);
@@ -731,6 +735,10 @@ function VerDetalleAuto(o) {
 						$('#divDetalleAuto').hide();
 						$("#modalListaAutos").show()
 						$("#divListaAutos").show();
+						$('.carousel').carousel({
+							indicators: true,
+							noWrap: true
+						});
 				});
 
 			}else if(getUrlVars()["accion"] == "subasta"){
@@ -740,8 +748,9 @@ function VerDetalleAuto(o) {
 			}
 			else{
 				$('#divDetalleAuto').modal("open");
+				
 			}
-
+			
 			// $("#divDetalleAuto > div").click(function(){
 				// vars = getUrlVars();
 				// if(vars["accion"] == "subasta"){

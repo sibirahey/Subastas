@@ -2698,25 +2698,29 @@ div[name="altaautos"] > .row{
 }
 .divDetalleAuto {
 	max-width:1024px;
+	height:calc(100% - 40px);
 	width: 100%;
-	margin:0 auto;
+	margin:0 auto 0;
 }
 .divDetalleAuto > .mbLeft{
 	margin:10px 2% 0;
 	float:left;
-	width: 21%;
+	height:100%;
+	/*width: 21%;*/
+	width:36%;
 }
 .divDetalleAuto > .mbRight{
 	margin:10px 2% 0;
 	float:left;
-	width:71%;
+	/*width:71%;*/
+	width: 56%;
 }
 .divDetalleAuto > .mbLeft > div:first-child{
 	float:left;
 	height:auto;
 	width: 92%;
 	margin:4%;
-	border:1px solid rgb(180,180,180);
+	/*border:1px solid rgb(180,180,180);*/
 }
 .divDetalleAuto > .mbLeft > div > img{
 	float:left;
@@ -2738,6 +2742,7 @@ div[name="altaautos"] > .row{
 #imgSnapshots{
 	float: left;
 	width:100%;
+	height:100%;
 }
 #imgSnapshots > div{
 	float: left;
