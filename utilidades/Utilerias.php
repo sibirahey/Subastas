@@ -104,4 +104,20 @@ function mensaje_correoregistro($claveApi, $idusuario, $correo){
 	return $contenido;
  }
 
+ function mensaje_cancela_subasta($motivo, $subastanombre){
+ 	$myfile = fopen("utilidades/subastacancelada.txt", "r") or die("Unable to open file!");
+	
+	$contenido = "";
+	while(!feof($myfile)) {
+  		$contenido .= fgets($myfile);
+		
+	}
+
+	$contenido = str_replace("##nombre_subasta##", $subastanombre, $contenido);
+	$contenido = str_replace("##motivo##", $motivo, $contenido);
+	
+	fclose($myfile);
+	return $contenido;
+ }
+
 ?>

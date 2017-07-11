@@ -1114,3 +1114,12 @@ function ValidaRegistro(oUsuario) {
 
 }
 
+function CargaSelectTP(){
+
+	var opt = "";
+	for(var i = 0; i < 24; i++){
+		opt += "<option value='"+((String(i).length < 2) ? "0"+i: i) +":00:00'>"+((String(i).length < 2) ? "0"+i: i) +":00</option>";
+		opt += "<option value='"+((String(i).length < 2) ? "0"+i: i) +":30:00'>"+((String(i).length < 2) ? "0"+i: i) +":30</option>";
+	}
+	return opt;
+}

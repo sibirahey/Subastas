@@ -126,7 +126,7 @@ class usuarios
                 self::CORREO . "," .
                 self::TELEFONO. "," .
                 self::VERIFICADO . ")" .
-                " VALUES(?,?,?,?,?,?,?,?)";
+                " VALUES(?,?,?,?,?,?,?,?,?)";
         
 
             $sentencia = $pdo->prepare($comando);
@@ -481,6 +481,7 @@ class usuarios
                 $_SESSION['claveapi']  = $claveApi;
                 $_SESSION['idusuario']  = $fetch["idUsuario"];
                 $_SESSION['correo']  = $fetch["correo"];
+                $_SESSION['es_admin']  = $fetch["es_admin"];
             }
 
 

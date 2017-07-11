@@ -2274,7 +2274,7 @@ input:checked + .slider:before {
 	margin:0;
 	background-color:rgb(255,255,255);
 }
-#divRegistroAutos > .modal-close{
+#divRegistroAutos > .modal-close, #closeAltaSubasta {
 	height:40px;
 	position:absolute;
 	top:0;

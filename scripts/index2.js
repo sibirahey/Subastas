@@ -222,6 +222,7 @@ $(document).ready(function() {
 					sessionStorage.setItem('nombre', $("#registroNombre").val() + " " + $("#registroApPaterno").val() + " " + $("#registroApMaterno").val());
 					sessionStorage.setItem('correo', $("#registroMail").val());
 					sessionStorage.setItem('idUsuario', data);
+					alert("Le hemos enviado un correo de verificación")
 					window.location.href = "home.php?s=login";
 	
 				}else{

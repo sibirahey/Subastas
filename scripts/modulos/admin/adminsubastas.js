@@ -25,6 +25,11 @@ function CargaFuncionesAdminSubastas() {
 	$('.divHeaderContenido').hide();
 	$("#txtFechaInicio").datepicker();
 	$("#txtFechaFin").datepicker();
+	$("#txtFechaInicio").datepicker("option", "dateFormat", "dd/mm/yy" );
+	$("#txtFechaFin").datepicker("option", "dateFormat", "dd/mm/yy" );
+
+	$("#dpFechaInicio").html(CargaSelectTP());
+	$("#dpFechaFin").html(CargaSelectTP());
 
 	$("#divAdministraUsuarios").hide();
 
@@ -131,8 +136,8 @@ function guardarSubasta(obj) {
 	oSubastas = new Subastas();
 	oSubastas.nombreSubasta = $("#txtNombreSubasta").val();
 	oSubastas.IdTipoSubasta = $('input[name=tiposubastas]:checked').val();
-	oSubastas.fechaInicio = (!$("#txtFechaInicio").datepicker('getDate')) ? "" : $("#txtFechaInicio").datepicker('getDate').getFullYear() + "-" + ($("#txtFechaInicio").datepicker('getDate').getMonth() + 1) + "-" + $("#txtFechaInicio").datepicker('getDate').getDate();
-	oSubastas.fechaFin = (!$("#txtFechaFin").datepicker('getDate')) ? "" : $("#txtFechaFin").datepicker('getDate').getFullYear() + "-" + ($("#txtFechaFin").datepicker('getDate').getMonth() + 1) + "-" + $("#txtFechaFin").datepicker('getDate').getDate();
+	oSubastas.fechaInicio = (!$("#txtFechaInicio").datepicker('getDate')) ? "" : $("#txtFechaInicio").datepicker('getDate').getFullYear() + "-" + ($("#txtFechaInicio").datepicker('getDate').getMonth() + 1) + "-" + $("#txtFechaInicio").datepicker('getDate').getDate()+ " "+$("#dpFechaFin").val();
+	oSubastas.fechaFin = (!$("#txtFechaFin").datepicker('getDate')) ? "" : $("#txtFechaFin").datepicker('getDate').getFullYear() + "-" + ($("#txtFechaFin").datepicker('getDate').getMonth() + 1) + "-" + $("#txtFechaFin").datepicker('getDate').getDate()+ " "+$("#dpFechaFin").val();
 	oSubastas.empresas = [];
 	oSubastas.incremento = $("#txtIncremento").val();
 	oSubastas.ofertas_x_usuarios = $("#txtNumPujas").val();
@@ -382,13 +387,28 @@ function CargaSubastas(estatus, empresa) {
 				"empresa" : -1,
 				"subastaId" : idSubasta
 			}, function(data) {
+
 				$("#txtNombreSubasta").val(data[0].nombreSubasta);
-				var parts = data[0].fechaInicio.split('-');
-				var parts2 = data[0].fechaFin.split('-');
+				var f1 = data[0].fechaInicio.split(' ');
+				var ffecha1 = f1[0].split('-');
+				
+				var f2 = data[0].fechaFin.split(' ');
+				var ffecha2 = f2[0].split('-');
+				
+				debugger;
+				$("#txtFechaInicio").datepicker("option", "dateFormat", "dd/mm/yy" );
+				$("#txtFechaFin").datepicker("option", "dateFormat", "dd/mm/yy" );
 
 				$("input[name=tiposubastas][value=" + data[0].idTipoSubasta + "]").attr('checked', 'checked');
-				$('#txtFechaInicio').datepicker("setDate", parts[1] + "/" + parts[2] + "/" + parts[0]);
-				$('#txtFechaFin').datepicker("setDate", parts2[1] + "/" + parts2[2] + "/" + parts2[0]);
+				
+				$('#txtFechaInicio').datepicker("setDate", ffecha1[2] + "/" + ffecha1[1] + "/" + ffecha1[0]);
+				$('#txtFechaFin').datepicker("setDate", ffecha2[2] + "/" + ffecha2[1] + "/" + ffecha2[0]);
+				$('#dpFechaInicio').material_select("destroy");
+				$('#dpFechaFin').material_select("destroy");
+				$('#dpFechaInicio').val(f1[1]);
+				$('#dpFechaFin').val(f2[1]);
+				$('#dpFechaInicio').material_select();
+				$('#dpFechaFin').material_select();
 				$("#txtIncremento").val(data[0].incremento);
 				$("#txtNumPujas").val(data[0].ofertas_x_usuarios);
 				
@@ -401,7 +421,39 @@ function CargaSubastas(estatus, empresa) {
 					AgregaEmpresa(empresasIds[i], empresas[i]);
 
 				}
+				$("#btnCancelaSubasta2").attr("attr-subasta",data[0].idSubasta);
+
+
 				Materialize.updateTextFields();
+				$("#btnCancelaSubasta").show();
+
+				$("#btnCancelaSubasta").click(function(){
+					$("#divEditSubasta").hide();
+					$("#modal-confirm-cancel").show()
+					$("#btnCancelaSubasta").hide();
+					$("#btnGuardarSubasta").hide();
+					$("#closeAltaSubasta").hide();
+					
+					
+				});
+				$("#btnCancelaCancelaSubasta").click(function(){
+					
+					$("#divEditSubasta").show();
+					$("#modal-confirm-cancel").hide()
+					$("#btnCancelaSubasta").show();
+					$("#btnGuardarSubasta").show();
+					$("#closeAltaSubasta").show();
+				});
+				$("#btnCancelaSubasta2").click(function () {
+					postrequest("subastas/cancelar",{"id_subasta":$("#btnCancelaSubasta2").attr("attr-subasta"), "motivo": $("#txtCancelaSubasta").val()}, function(data){
+						CargaSubastas(-1, -1);
+						Materialize.toast("La acción se realizó con éxito",5000);
+						$(".divHeaderContenido").modal("close");
+					},function(e){
+						Materialize.toast(e.message,5000);
+					})
+
+				})
 			});
 
 			$(".divHeaderContenido").modal("open");

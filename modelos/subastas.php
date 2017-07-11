@@ -48,6 +48,9 @@ class subastas
         }else if($peticion[0] == 'revisarresultados'){
             return self::revisarresultados($_POST);
         }
+        else if($peticion[0] == 'cancelar'){
+            return self::cancelar($_POST);
+        }
         else {
             throw new ExcepcionApi(self::ESTADO_URL_INCORRECTA, "Url mal formada", 400);
         }
@@ -78,7 +81,7 @@ class subastas
 
             }
             
-            $comando = "select s.idSubasta, nombreSubasta, idTipoSubasta, tipo.tipoSubasta, fechaInicio, fechaFin, CASE WHEN curdate() BETWEEN fechaInicio and fechaFin then 'ACTIVA' WHEN curdate() < fechaInicio then 'AGENDADA' else 'TERMINADA' end as estatus, visible, case visible when 0 then 'NO PUBLICADA' else 'PUBLICADA' end as publicada,(select GROUP_CONCAT(emp.nombreEmpresa) from subastaempresa se, empresas emp where s.idSubasta = se.idSubasta and se.idEmpresa = emp.idEmpresa) as empresas, (select GROUP_CONCAT(emp.idEmpresa) from subastaempresa se, empresas emp where s.idSubasta = se.idSubasta and se.idEmpresa = emp.idEmpresa) as empresasId,incremento, ofertas_x_usuarios, autos_x_usuario, (select count(*) from subastas_autos suba where suba.subastaId = s.idSubasta ) as total_autos, (select count(*) from subasta_usuario subu where subu.idSubasta = s.idSubasta) as total_participantes, (select count(*) from autos_puja aupu  where aupu.idSubasta = s.idSubasta) as total_ofertas, s.revisada, s.fecha_cierre, s.autos_x_usuario  from subastas s, tiposubastas tipo " . $empresaFrom." where s.idTipoSubasta = tipo.idTipo  " . $empresaWhere . $estatusWhere . $subastaIdWhere . " order by fechaFin desc" ; 
+            $comando = "select s.idSubasta, nombreSubasta, idTipoSubasta, tipo.tipoSubasta, fechaInicio, fechaFin, CASE WHEN visible = -1 then 'CANCELADA' when visible = 0 then 'CERRADA' WHEN  curdate() BETWEEN fechaInicio and fechaFin then 'ACTIVA' WHEN curdate() < fechaInicio then 'AGENDADA' else 'TERMINADA' end as estatus, visible, case visible when 0 then 'NO PUBLICADA' else 'PUBLICADA' end as publicada,(select GROUP_CONCAT(emp.nombreEmpresa) from subastaempresa se, empresas emp where s.idSubasta = se.idSubasta and se.idEmpresa = emp.idEmpresa) as empresas, (select GROUP_CONCAT(emp.idEmpresa) from subastaempresa se, empresas emp where s.idSubasta = se.idSubasta and se.idEmpresa = emp.idEmpresa) as empresasId,incremento, ofertas_x_usuarios, autos_x_usuario, (select count(*) from subastas_autos suba where suba.subastaId = s.idSubasta ) as total_autos, (select count(*) from subasta_usuario subu where subu.idSubasta = s.idSubasta) as total_participantes, (select count(*) from autos_puja aupu  where aupu.idSubasta = s.idSubasta) as total_ofertas, s.revisada, s.fecha_cierre, s.autos_x_usuario  from subastas s, tiposubastas tipo " . $empresaFrom." where s.idTipoSubasta = tipo.idTipo  " . $empresaWhere . $estatusWhere . $subastaIdWhere . " order by fechaFin desc" ; 
 
             
             $sentencia = ConexionBD::obtenerInstancia()->obtenerBD()->prepare($comando);
@@ -423,10 +426,37 @@ and s.idSubasta in (select su.idSubasta from subasta_usuario su, usuario u, suba
             
         return $resultados;
         
-
-        
-        
         
     }
+
+
+    private function cancelar($params){
+
+
+       if($_SESSION['es_admin'] != 1){
+        return new ExcepcionApi("Error", "El usuario no tiene permisos para realizar esta operación", 500);
+       }
+       
+        try{
+            $comando = "update subastas set motivo_cancelacion = ?, visible = -1 WHERE idSubasta = ?" ; 
+
+            $sentencia = ConexionBD::obtenerInstancia()->obtenerBD()->prepare($comando);
+            
+            $sentencia->bindParam(1, $params["motivo"]);
+            $sentencia->bindParam(2, $params["id_subasta"]);
+            
+
+            if ($sentencia->execute())
+                return 1;
+            else
+                return new ExcepcionApi("error", "Ocurrió un error al obtener los participantes", 500);
+        }catch(Exception $e){
+
+            return new ExcepcionApi("error", $e->getMessage(), 500);
+        }
+            
+        
+    }
+
         
 }

@@ -33,8 +33,9 @@
 
 	<!-- Modal Structure -->
 	<div class="modal divHeaderContenido modal-fixed-footer">
+		<div class="btn modal-action modal-close waves-effect red" id="closeAltaSubasta"><i class="material-icons">close</i></div>
 		<div class="modal-content">
-			<div class="row">
+			<div class="row" id="divEditSubasta">
 				<div class="input-field col s12">
 					<input id="txtNombreSubasta" type="text" class="validate">
 					<label for="txtNombreSubasta">#Lote:</label>
@@ -44,10 +45,17 @@
 					<input type="text" id="txtFechaInicio" name="txtFechaInicio" />
 					<label for="txtFechaInicio" >Fecha inicio:</label>
 				</div>
-				
+				<div class="input-field col s6">
+					<select type="text" id="dpFechaInicio" name="dpFechaInicio" ></select>
+					<label for="dpFechaInicio" >Hora inicio:</label>
+				</div>
 				<div class="input-field col s6">
 					<input type="text" id="txtFechaFin" name="txtFechaFin" />
-					<label for="txtFechaFin" >Fecha Fin:</label>
+					<label for="txtFechaFin" >Fecha fin:</label>
+				</div>
+				<div class="input-field col s6">
+					<select type="text" id="dpFechaFin" name="dpFechaFin" ></select>
+					<label for="dpFechaFin" >Hora fin:</label>
 				</div>
 				
 				<div id="divTipoSubastas" class="col s12">
@@ -82,12 +90,25 @@
 					<ul id="lstEmpresa"></ul>
 				</div>
 			</div>
+			<div id="modal-confirm-cancel" class="row" style="display: none;">
+				<div class="col s12">
+					<label for="txtCancelaSubasta">Motivo de cancelación</label>
+					<textarea id="txtCancelaSubasta" name="txtCancelaSubasta" class="materialize-textarea" maxlength="1000"></textarea>
+					
+				</div>
+				<div>
+		    		<div class="waves-effect waves-light teal btn" id="btnCancelaCancelaSubasta"><< CONTINUAR EDICIÓN</div>
+					<div class="waves-effect waves-light red btn" id="btnCancelaSubasta2">CANCELAR SUBASTA</div>
+				</div>
+			</div>
 
 		</div>
+
 		<div class="modal-footer">
 		    <div id="btnGuardarSubasta" class=" waves-effect waves-light teal btn">GUARDAR</div>
-			<div class="modal-action modal-close waves-effect waves-light teal btn ">CERRAR</div>
+			<div class="waves-effect waves-light btn red" style="display:none;" id="btnCancelaSubasta">CANCELAR SUBASTA</div>
 		</div>
+		
 	</div>
 
 	<div id="divListaSubastas">
