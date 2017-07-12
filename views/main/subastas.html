@@ -2,10 +2,12 @@
 <div id="divInfoSubasta" class="row">
 
     <div id="divHeadSubasta" class="col s12">
-        <div id="divTtlSubasta" class="chip right"></div>
-        <div id="divTipoSubasta" class="chip right">
-            Tipo de Subasta:
+        <div id="divEulaSubasta" class="chip right" style="cursor: pointer;">
+            Vser términos y condiciones
         </div>
+        <div id="divTotalAutos" class="chip right">
+            Autos a subastar: #TOTAL_AUTOS#
+        </div>       
         <div id="divIncremento" class="chip right">
             Incremento Mínimo: #INCREMENTO#
         </div>
@@ -15,6 +17,10 @@
         <div id="divGanadores" class="chip right">
             Máximo #AUTOSXUSUARIO# autos por usuario
         </div>
+         <div id="divTipoSubasta" class="chip right">
+            Tipo de Subasta:
+        </div>
+         <!--<div id="divTtlSubasta" class="chip right"></div>-->
     </div>
     
     <div id="divContenidoSubasta" class="col s12"></div>
@@ -59,3 +65,6 @@
 </div>
 
 <div id="divDetalleAuto" class="modal bottom-sheet modal-fixed-footer"></div>
+<div id="dialogEula" style="display:none;">
+    
+</div>

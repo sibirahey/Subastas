@@ -165,8 +165,10 @@ function guardarSubasta(obj) {
 				$('.divHeaderContenido').modal("close");
 
 			}else{
-				Materialize.toast("Ocurrió un error al crear la subasta");
+				Materialize.toast("Ocurrió un error al crear la subasta", 5000);
 			}
+		}, function(data){
+			Materialize.toast("Ocurrió un error al realizar la acción", 5000);
 		});
 	}
 
@@ -217,6 +219,8 @@ function CargaSubastas(estatus, empresa) {
 	}, function(data) {
 
 		$("#divListaContenido").html("");
+		$("#divListaContenido2").html("");
+		$("#divListaContenido3").html("");
 		for (i in data) {
 
 			var div = '';
@@ -249,9 +253,15 @@ function CargaSubastas(estatus, empresa) {
 			div += '			</div>';
 			div += '		</div>';
 			div += '	</div>';
-
-			$("#divListaContenido").append(div);
+			if(data[i].estatus == "TERMINADA" || data[i].estatus == "CERRADA"){
+				$("#divListaContenido2").append(div);
+			}else if(data[i].estatus == "CANCELADA"){
+				$("#divListaContenido3").append(div);
+			}else{
+				$("#divListaContenido").append(div);
+			}
 		}
+		$('ul.tabs').tabs();
 
 		$(".btnAdministraAutos").click(function() {
 			debugger;
@@ -445,7 +455,13 @@ function CargaSubastas(estatus, empresa) {
 					$("#closeAltaSubasta").show();
 				});
 				$("#btnCancelaSubasta2").click(function () {
+					
+					if( String($("#txtCancelaSubasta").val()).trim() == ""){
+						Materialize.toast("Por favor llene el motivo de cancelación", 4000);
+						return false;
+					}
 					postrequest("subastas/cancelar",{"id_subasta":$("#btnCancelaSubasta2").attr("attr-subasta"), "motivo": $("#txtCancelaSubasta").val()}, function(data){
+						$("#btnCancelaCancelaSubasta").click();
 						CargaSubastas(-1, -1);
 						Materialize.toast("La acción se realizó con éxito",5000);
 						$(".divHeaderContenido").modal("close");

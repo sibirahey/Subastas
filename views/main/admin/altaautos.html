@@ -38,14 +38,24 @@
 			<label for="cbKMAuto" >KM:</label>
 		</div>
 
+		<div class="input-field cbTipoTransmisionAuto">
+			<select id="cbTipoTransmisionAuto" name="cbTipoTransmisionAuto" ></select>
+			<label for="cbTipoTransmisionAuto" >Transmisión:</label>
+		</div>
+
 		<div class="input-field precioAuto">
 			<input type="text" name="precioAuto" id="precioAuto" />
 			<label for="precioAuto" >Precio:</label>
 		</div>
 
-		<div class="input-field cbTipoTransmisionAuto">
-			<select id="cbTipoTransmisionAuto" name="cbTipoTransmisionAuto" ></select>
-			<label for="cbTipoTransmisionAuto" >Transmisión:</label>
+		<div class="input-field cbEstadoAuto">
+			<select name="cbMotivoPrecio" id="cbMotivoPrecio">
+				
+			</select>
+			<label for="cbMotivoPrecio" >Precio basado en:</label>
+			<div class="waves-effect waves-light btn-floating amber darken-2" id="btnAddPrecio" operacion="precio" title="Motivo del precio" desc="Motivo del precio:" data-target="dialog">
+				<i class="material-icons">add</i>
+			</div>
 		</div>
 
 		<div class="input-field cbEstadoAuto">

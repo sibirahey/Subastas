@@ -174,3 +174,9 @@ function AdminHome(id, esimg, ubicacion, ancho, alto, tag, url, eslink, link){
 	this.link = link;
 
 }
+
+function Precio(id,descripcion,estatus){
+	this.id = id;
+	this.descripcion = descripcion;
+	this.estatus = estatus;
+}

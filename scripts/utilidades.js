@@ -2,6 +2,17 @@ String.prototype.replaceAll = function(search, replacement) {
     var target = this;
     return target.replace(new RegExp(search, 'g'), replacement);
 };
+String.prototype.fecha = function(){
+	try{
+		var partes = this.split(" ");
+		var fecha = partes[0].split("-");
+		var hora = partes[1].split(":");
+		return new Date(fecha[0], fecha[1]-1, fecha[2], hora[0], hora[1], hora[2], 0);
+	}catch(e){
+		return new Date(0,0,0,0,0,0,0);;
+	}
+}
+
 Number.prototype.formatMoney = function(c, d, t){
 var n = this, 
     c = isNaN(c = Math.abs(c)) ? 2 : c, 
@@ -44,6 +55,24 @@ Date.prototype.esUSFormat = function () {
         return String(yyyy + "-" + mm + "-" + dd)
     }
     catch (e) { return ""; }
+}
+
+Date.prototype.toMysqlDate = function(){
+	try{
+		var dd = this.getDate();
+        if (dd < 10) dd = '0' + dd;
+        var mm = this.getMonth() + 1;
+        if (mm < 10) mm = '0' + mm;
+        var yyyy = this.getFullYear();
+        var hours = this.getHours();
+        var mins = this.getMinutes();
+        var seconds = this.getSeconds();
+
+        return String(yyyy + "-" + mm + "-" + dd + "   " + ((hours > 9) ? hours : "0" + hours) + ":" + ((mins > 9) ? mins : "0" + mins));
+
+	}catch(e){
+		return "0000-00-00 00:00:00";
+	}
 }
 
 Date.prototype.esMXFormatLarge = function () {
@@ -119,6 +148,22 @@ function CargaSelectEstados(control) {
 
 }
 
+function CargaSelectMotivoPrecio(control) {
+
+	postrequest("precio/listar?rand=" + Math.random(), {
+		"estatus" : "1"
+	}, function(data) {
+
+		for (i in data) {
+
+			$(control).append('<option value="' + data[i].id + '">' + data[i].descripcion + '</option>');
+		}
+		$(control).material_select();
+		
+	});
+
+}
+
 function CargaSelectMunicipios(control, id_estado) {
 
 	$("#cbCiudadAuto").material_select("destroy");
@@ -147,7 +192,7 @@ function CargaSelectMarcas(control, id_marca, estatus) {
 		"estatus" : estatus
 	}, function(data) {
 		$(control).html("");
-		$(control).append('<option value="0" disabled selected>Marca</option>');
+		$(control).append('<option value="0" disabled selected>== Seleccione ==</option>');
 		for (i in data) {
 
 			$(control).append('<option value="' + data[i].id + '" ' + ((data[i].id == id_marca) ? 'selected="selected"' : '' ) + ' >' + data[i].descripcion + '</option>');
@@ -207,7 +252,7 @@ function CargaSelectFeatures(control, features, estatus) {
 		"estatus" : estatus
 	}, function(data) {
 
-		$(control).append('<option value="0" disabled selected>SELECCIONA</option>');
+		$(control).append('<option value="0" disabled selected>== Seleccione ==</option>');
 
 		for (i in data) {
 
@@ -221,7 +266,7 @@ function CargaSelectFeatures(control, features, estatus) {
 
 function CargaSelectColores(control, id_color, estatus) {
 
-	$(control).append('<option value="0" disabled selected>SELECCIONA</option>');
+	$(control).append('<option value="0" disabled selected>== Seleccione ==</option>');
 	postrequest("colores/listar?rand=" + Math.random(), {
 		"estatus" : estatus
 	}, function(data) {
@@ -363,10 +408,11 @@ function regresaRenglonVenta(item, subastaID) {
 		renglon += '      <label>' + item.descripcion + '</label>';
 		renglon += '    </div>';
 		renglon += '    <div>';
+		/*
 		renglon += '      <label>Total de ofertas: </label>';
 		renglon += '      <label>' + item.total_ofertas + '</label>';
 		renglon += '    </div>';
-
+	*/
 		if(item.idTipoSubasta == 1){
 			renglon += '    <div class="divUltimaOferta">';
 			renglon += '      <label>Última oferta: </label>';
@@ -910,13 +956,14 @@ function CargaInfoSubasta(){
 			"id" : vars["id"]
 		}, function(data) {
 				console.log(JSON.stringify(data));
-				$("#divTtlSubasta").html(data[0].nombreSubasta);
+				//$("#divTtlSubasta").html(data[0].nombreSubasta);
 				$("#divTipoSubasta").append(data[0].tipoSubasta);
 				$("#divIncremento").attr("attr-incremento", data[0].incremento); 
 				$("#divIncremento").html($("#divIncremento").html().replace("#INCREMENTO#", Number(data[0].incremento).formatMoney()));
 				$("#divOfertasXUsuario").html($("#divOfertasXUsuario").html().replace("#TOTALOFERTAS#", Number(data[0].ofertas_x_usuarios)));
 				$("#divGanadores").html($("#divGanadores").html().replace("#AUTOSXUSUARIO#", Number(data[0].autos_x_usuario)));
-				
+				$("#divTotalAutos").html($("#divTotalAutos").html().replace("#TOTAL_AUTOS#", Number(data[0].total_autos)));
+				$("h2").html(data[0].nombreSubasta)
 				ConsultaOfertasXUsuarioSubasta(data[0].idSubasta);
 				
 				cargaAutosPorSubasta(vars["id"], "#divContenidoSubasta", data[0].idTipoSubasta);
@@ -933,6 +980,23 @@ function CargaInfoSubasta(){
 				}
 				
 
+				cargaHTML("#dialogEula", "views/eula.html", "eula", function(){
+					
+				});
+				
+				$("#divEulaSubasta").click(function(){
+					$("#dialogEula").dialog({
+						height : 400,
+						width : 500,
+						modal : true,
+						title : "Terminos y Condiciones",
+						buttons : {
+							Ok : function() {
+								$(this).dialog("close");
+							}
+						}
+					});
+				});
 			});
 
 	});

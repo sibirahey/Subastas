@@ -4,7 +4,8 @@
 		<div style="width: 80%;margin: 0 auto;float: none;background-size: cover;background-color: rgba(255,255,255,0.6);height: 100%;">
 			<h2 style="background:#1E2328;height:80px;width: 100%;float: left;margin-top:0;color: #ffffff;line-height:80px;"><img src="http://escuderia.jerocani.com/images/logoHeader.png" style="height:80px;width:300px;position: relative;float:left;" />Escuder&iacute;a</h2>
 			<p style="loat: left;">
-				<div style="width: 96%;float: left;margin:10px 2%;font-size:1.4rem;color:rgb(60,65,70);font-family: 'Inconsolata', monospace;text-align: center;">La subasta ##nombre_subasta## fue cancelada debido a ##motivo##.</div>
+				<div style="width: 96%;float: left;margin:10px 2%;font-size:1.4rem;color:rgb(60,65,70);font-family: 'Inconsolata', monospace;text-align: left;">Estimado ##nombre_usuario##:</div>
+				<div style="width: 96%;float: left;margin:10px 2%;font-size:1.4rem;color:rgb(60,65,70);font-family: 'Inconsolata', monospace;text-align: center;">La subasta ##nombre_subasta## en la que se encontraba participando fue cancelada debido a ##motivo##.</div>
 				
 				<div style="width: 96%;float: left;margin:10px 2%;font-size:1.4rem;color:rgb(60,65,70);font-family: 'Inconsolata', monospace;text-align: center;">Las ofertas realizadas para esta subasta no serán tomadas en cuenta.</div>  
 				

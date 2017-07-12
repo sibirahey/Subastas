@@ -15,7 +15,7 @@ $headers = implode( "\r\n" , $headers );
 //envia_mail("miguel.susano@gmail.com", "Bienvenido a Escudería", envia_mensaje_invitacion("apikey", 1));
 
 //$contenido = envia_mensaje_recuperarcontrasena("ABCDEFGH", "miguel.susano@gmail.com");
-$contenido = envia_mensaje_invitacion("7ab0b8aa9c065b79e2273244b2330da0", 80,11);
+$contenido = mensaje_cancela_subasta("moitvo motivo motivo", "subasta de prueba", "miguel");
 
 print_r($contenido);
 //envia_mail("miguel.susano@gmail.com", "Bienvenido a Escudería", $contenido);

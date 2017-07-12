@@ -31,6 +31,7 @@ require_once('utilidades/ExcepcionApi.php');
 require_once('utilidades/Utilerias.php');
 require_once('modelos/usuario-automovil.php');
 require_once('modelos/invitacion.php');
+require_once('modelos/precio.php');
 unregister_GLOBALS();
 ini_set('display_errors', '0'); 
 
@@ -157,6 +158,9 @@ function ejecutaModeloPost($vista, $mod, $arr)
             break;
         case 'pujas':
             $vista->imprimir(autospuja::post($arr));
+            break;
+        case 'precio':
+            $vista->imprimir(precio::post($arr));
             break;
         default:
     		# code...

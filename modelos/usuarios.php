@@ -165,9 +165,9 @@ class usuarios
             } else {
                 return 0;
             }
-        } catch (PDOException $e) {
+        } catch (Exception $e) {
 
-            throw new ExcepcionApi(self::ESTADO_URL_INCORRECTA, $e->getMessage(), 400);
+            return ExcepcionApi("Error al procesar la solicitud", $e->getMessage(), 500);
             
         }
 
@@ -455,7 +455,7 @@ class usuarios
             
             $valido = password_verify($password, $fetch["contrasena"]);
             
-            if($valido == 1){
+            if($valido == 1 &&  $fetch["verificado"] == 1){
                 $claveApi = self::generarClaveApi();
                 $comando = "update ".self::NOMBRE_TABLA." set claveApi = '".$claveApi."', vigencia = DATE_ADD(NOW(), INTERVAL 8 HOUR) where correo = '".  $mail."'";
                 $sentencia = $pdo->prepare($comando);

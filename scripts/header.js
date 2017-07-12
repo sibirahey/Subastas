@@ -25,7 +25,7 @@ $( document ).ready(function() {
 
 
   			$("#divMenuPrincipal > ul").html("");
-  			$("#divMenuPrincipal > ul").append('<li><a class="menuitemindex" name="dashboard">INICIO</a></li>');
+  			$("#divMenuPrincipal > ul").append('<li><a class="menuitemindex" name="dashboard">SUBASTAS</a></li>');
   			$("#divMenuPrincipal > ul").append('<li><a class="menuitemindex" name="ventaautos">VENTA DE AUTOS</a></li>');
   			$("#divMenuPrincipal > ul").append('<li><a class="menuitemindex" name="MisAutos">MIS AUTOS</a></li>');
 	  		if (esAdmin()){

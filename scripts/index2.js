@@ -144,6 +144,12 @@ $(document).ready(function() {
 		});
 
 		$("#btnEula").click(function() {
+			
+			cargaHTML("#dialogEula", "views/eula.html", "eula", function(){
+				console.log("EULA cargado");
+			});
+
+				
 
 			$(function() {
 				$("#dialogEula").dialog({
@@ -231,7 +237,7 @@ $(document).ready(function() {
 				}
 
 			},function(data){
-				Materialize.toast("Ocurrió un error al realizar el registro" , 4000);
+				Materialize.toast("Ocurrió un error en el servidor" , 4000);
 			});
 
 		});

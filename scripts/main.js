@@ -105,8 +105,8 @@ function CargaContenidoMain() {
 						subasta = subasta.replace("#TIPOSUBASTAS#", response[o].tipoSubasta); 
 						subasta = subasta.replace("#ESTATUSSUBASTA#", response[o].estatus); 
 						subasta = subasta.replace("#SUBASTAID#", response[o].idSubasta); 
-						subasta = subasta.replace("#FECHA_INISUBASTA#", new Date(response[o].fechaInicio).esMXFormatLarge());
-						subasta = subasta.replace("#FECHA_SUBASTA#", new Date(response[o].fechaFin).esMXFormatLarge());
+						subasta = subasta.replace("#FECHA_INISUBASTA#", response[o].fechaInicio.fecha().esMXFormatLarge());
+						subasta = subasta.replace("#FECHA_SUBASTA#", response[o].fechaFin.fecha().esMXFormatLarge());
 						subasta = subasta.replace("#ATTRFECHAINI#", response[o].fechaInicio);
 						subasta = subasta.replace("#ATTRFECHA#", response[o].fechaFin);
 						subasta = subasta.replace("#TIPOSUBASTA#", response[o].tipoSubasta);  
@@ -129,13 +129,13 @@ function CargaContenidoMain() {
 						    var _hour = _minute * 60;
 						    var _day = _hour * 24;
 						    var timer;
-						    var ini = new Date($(value).attr("attr-fechaini"));
-				 			var end = new Date($(value).attr("attr-fecha"));
+						    var ini = new $(value).attr("attr-fechaini").fecha();
+				 			var end = new $(value).attr("attr-fecha").fecha();
 				 			var now = new Date();
-					        var distance = end - now;
-					        
+				 			var distance = end - now;
+					       
 					        var salida = "";
-					        console.log(distance);
+					       
 					        if (distance > 0 && now > ini) {
 					        	var days = Math.floor(distance / _day);
 						        var hours = Math.floor((distance % _day) / _hour);
@@ -143,6 +143,7 @@ function CargaContenidoMain() {
 						        var seconds = Math.floor((distance % _minute) / _second);
 
 						        var salida =  days + ' días ' +  hours + ' hrs '+ minutes + ' mins ' + seconds + ' segs';
+						     
 						      	$("#contador"+$(value).attr("attr-id")).html(salida);
 					        }
 					       

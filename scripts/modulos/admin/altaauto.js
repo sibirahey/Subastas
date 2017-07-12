@@ -36,6 +36,8 @@ function CargaFuncionesRegistroAuto(idSubasta){
 	CargaSelectModelos("#cbModeloAuto", "#cbMarcaAuto", 0, 1);
 	CargaSelectTipoTransmision("#cbTipoTransmisionAuto", 0, 1);
  	CargaSelectFeatures("#cbFeaturesAutos","",1);
+ 	CargaSelectMotivoPrecio("#cbMotivoPrecio");
+ 	$("#cbCiudadAuto").material_select();
 	
 	
 	
@@ -115,7 +117,7 @@ function CargaFuncionesRegistroAuto(idSubasta){
 	CargaSelectColores("#cbColorAuto", 0, 1);
 	
 	
-   	$("#btnAddMarca").add("#btnAddModelo").add("#btnAddColor").add("#btnAddCaracteristicas").click(function(){   		
+   	$("#btnAddMarca").add("#btnAddModelo").add("#btnAddColor").add("#btnAddCaracteristicas").add("#btnAddPrecio").click(function(){   		
 		
    		$('#labelMensaje').hide();
    		$('#txtDescripcion').val("");
@@ -160,9 +162,12 @@ function CargaFuncionesRegistroAuto(idSubasta){
    			case "features":
    				oObj = new Caracteristicas();
    				break;
+   			case "precio":
+   				oObj = new Precio();
+   				break;
    			default:
    			 //alert("Operación no valida");
-   			 Materialize.toast('Péraci&oacute;n no valida.', 4000);
+   			 Materialize.toast('Operación inválida.', 4000);
    			 break;
 
    		}
@@ -204,6 +209,10 @@ function CargaFuncionesRegistroAuto(idSubasta){
 					CargaSelectFeatures("#cbFeaturesAutos","",1);
 					$('#cbFeaturesAutos').material_select();
 					$('#cbFeaturesAutos').val();
+				}
+				if($( "#dialog" ).attr("operacion") == "precio"){
+					$("#cbMotivoPrecio").html("");
+					CargaSelectMotivoPrecio("#cbMotivoPrecio");
 				}
 
 				
