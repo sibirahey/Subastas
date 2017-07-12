@@ -25,6 +25,7 @@ class autos
     const DESCRIPCION = "descripcion";
     const ESTATUS = "estatus";
     const PUBLICADO = "publicado";
+    const MOTIVO_PRECIO = "motivo_precio";
     const FECHACREACION = "fechaCreacion";
 
 
@@ -119,7 +120,7 @@ class autos
                 " (select idFoto from auto_fotos where idAuto = au.idAuto limit 1) as foto,  ".
                 "  (select GROUP_CONCAT(idFoto) from auto_fotos where idAuto = au.idAuto) AS fotos,  ".
                 "  (select GROUP_CONCAT(idFeature) from autos_catacteristicas where idAuto = au.idAuto) AS caracteristicasids,  ".
-                "  (select GROUP_CONCAT(feat.descripcion) from autos_catacteristicas ac, cat_features feat where  ac.idFeature = feat.id and ac.idAuto = 20 ) as caracteristicas ".
+                "  (select GROUP_CONCAT(feat.descripcion) from autos_catacteristicas ac, cat_features feat where  ac.idFeature = feat.id and ac.idAuto = 20 ) as caracteristicas, au.motivo_precio ".
                 " FROM autos as au, cat_marca as marca, cat_modelo as modelo, cat_colores as color, cat_transmision as trans, estados as est, municipios as mun  ".
                 " WHERE au.marca = marca.id   ".
                 " and au.modelo = modelo.id   ".
@@ -286,8 +287,9 @@ class autos
                 self::CIUDAD . ",".
                 self::DESCRIPCION . ",".
                 self::ESTATUS . ",".
-                self::PUBLICADO .")" .
-                " VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?)";
+                self::PUBLICADO . ",".
+                self::MOTIVO_PRECIO.")" .
+                " VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
             
             $desc = json_decode($auto["descripcion"]);
             $sentencia = $pdo->prepare($comando);
@@ -303,7 +305,8 @@ class autos
             $sentencia->bindParam(10, $auto["ciudad"]);                          
             $sentencia->bindParam(11, $desc);     
             $sentencia->bindParam(12, $auto["estatus"]);                          
-            $sentencia->bindParam(13, $auto["publicado"]);                          
+            $sentencia->bindParam(13, $auto["publicado"]); 
+            $sentencia->bindParam(14, $auto["motivo_precio"]);                          
 
             //idAuto, enVenta, marca, modelo, color, anio, km, transmision, estado, ciudad, descripcion, estatus, publicado, fechaCreacion
                    

@@ -589,7 +589,10 @@ function EditarAuto(o){
 			$("#cbEstadoAuto").material_select();
 			$("#cbEstadoAuto").change();
 
-		
+			$("#cbMotivoPrecio").material_select("destroy");
+			$("#cbMotivoPrecio").val(data.motivo_precio);
+			$("#cbMotivoPrecio").material_select();
+
 
 			var features = data.caracteristicasids.split(",");
 			for(var f in features){
@@ -677,6 +680,7 @@ function GuardaDetalleAuto(opc){
 		oAuto.publicado = 1;
 		oAuto.features = [];
 		oAuto.fotos = [];
+		oAuto.motivo_precio = $("#cbMotivoPrecio").val();
 
 		if(opc =="actualiza"){
 
