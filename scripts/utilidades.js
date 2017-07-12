@@ -726,7 +726,7 @@ function VerDetalleAuto(o) {
 	var subastaid = $(o).attr("attr-subastaid");
 	var autoid = $(o).attr("attr-id");
 
-	if(getUrlVars()["accion"] == "subasta"){
+	if(getUrlVars()["accion"] == "subasta" ){
 		$('#divDetalleAuto').modal({
 			dismissible : true, // Modal can be dismissed by clicking outside of the modal
 			opacity : .5, // Opacity of modal background
@@ -800,6 +800,7 @@ function VerDetalleAuto(o) {
 				$('#divDetalleAuto').modal("open");
 				
 			}
+			$('.carousel').carousel();
 			
 			// $("#divDetalleAuto > div").click(function(){
 				// vars = getUrlVars();
