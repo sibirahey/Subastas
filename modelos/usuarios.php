@@ -347,7 +347,7 @@ class usuarios
                 $usuario->esadmin = $fetch[0]["es_admin"];
                 $usuario->claveApi = $fetch[0]["claveApi"];
 
-                $comando = "update usuario set verificado = 1, vigencia = curdate() where correo =? and idUsuario = ?  ";
+                $comando = "update usuario set verificado = 1, vigencia = now() where correo =? and idUsuario = ?  ";
                 $sentencia = ConexionBD::obtenerInstancia()->obtenerBD()->prepare($comando);
                 $sentencia->bindParam(1, $correo);
                 $sentencia->bindParam(2, $idusuario);
@@ -407,7 +407,7 @@ class usuarios
 
     public function rememberme(){
         $claveapi = $_POST["claveapi"];
-        $comando = "SELECT idUsuario, nombre, appaterno, apmaterno, correo, verificado, contrasena, publico, es_admin, claveApi from usuario where ".self::CLAVE_API." = '".$claveapi."' and curdate() < vigencia+1 ";
+        $comando = "SELECT idUsuario, nombre, appaterno, apmaterno, correo, verificado, contrasena, publico, es_admin, claveApi from usuario where ".self::CLAVE_API." = '".$claveapi."' and now() < vigencia+1 ";
         $sentencia = ConexionBD::obtenerInstancia()->obtenerBD()->prepare($comando);
         $sentencia->bindParam(1, $claveapi);
 

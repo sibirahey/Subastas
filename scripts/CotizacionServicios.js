@@ -5,12 +5,13 @@ function cargaServicios(idServicio) {
 	}, function(data) {
 
 		for (serv in data) {
-			$("#divLstServicios").append('<li><div class="collapsible-header" onClick="cargaServiciosCotizar(this)" idServicio ="' + data[serv].idServicios + '">' + data[serv].nombre + '</div><div class="collapsible-body"></div></li>');
+			$("#divLstServicios").append('<li><div class="collapsible-header" onClick="cargaServiciosCotizar(this)" idServicio ="' + data[serv].idServicios + '">' + data[serv].nombre + '<i class="material-icons">list</i></div><div class="collapsible-body"></div></li>');
 
 		}
 
 	})
 	$('.collapsible').collapsible();
+	$('#divCotizacion').show();
 }
 
 
@@ -18,6 +19,7 @@ function cargaServicios(idServicio) {
 function cargaServiciosCotizar(O) {
 	$(".rows").remove();
 	var idServicio = $(O).attr('idServicio');
+
 
 	postrequest('subservicio/listar',{"estatus":"0","idServicio":idServicio},function(data){
 		for (subServ in data){
@@ -235,7 +237,7 @@ function AgregarServicio(obj) {
 
 	}else{
 
-		$('#divCotizacion').hide();
+		//$('#divCotizacion').hide();
 	}
 
 	cargaLista();
@@ -270,14 +272,14 @@ function enviarCotizacion(){
 		 postrequest("cotizacion/registro", objcotizacion, function(data){
 		 	if (data){
 		 		
-		 		Materialize.toast("Se guardo Correctamente su solicitud");
+		 		Materialize.toast("Se guardó correctamente su solicitud",4000);
 
 		 	}
     });
 
 	} else {
 
-		Materialize.toast("Debe Llenar todos los campos");
+		Materialize.toast("Debe Llenar todos los campos",4000);
 	}
 
 }
