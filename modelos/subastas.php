@@ -373,9 +373,11 @@ and s.idSubasta in (select su.idSubasta from subasta_usuario su, usuario u, suba
             
             $oresultado = new resultados($auto["idAuto"], $auto["marca"], $auto["modelo"], $auto["anio"], $auto["precio"], $auto["foto"]);
             $resultados[$auto["idAuto"]]  = $oresultado;
+
+
         }
 
-
+        print_r($pujas);
         
         foreach($pujas as &$oferta){
 
@@ -417,7 +419,7 @@ and s.idSubasta in (select su.idSubasta from subasta_usuario su, usuario u, suba
             }else if($resultado->usuarioganador == $oferta["idUsuario"]) {
                  $resultado->oferta = $oferta["oferta"];
                  $resultado->hora_puja = $oferta["hora_puja"];
-                 
+
                  array_push($resultado->ofertas, $oferta);
             }
             else{
