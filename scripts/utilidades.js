@@ -358,7 +358,8 @@ function cargaAutosPorSubasta(subastaID, controlid, tiposubasta) {
 
 		}
 		if(tiposubasta){
-			$(".divBtnPujar").show();
+			$(".divBtnPujar").parent().show();
+			$('.card-content').css('height','200px');
 			if(tiposubasta == 1){
 				$(".divVerOfertas").show()
 			}
@@ -423,14 +424,16 @@ function regresaRenglonVenta(item, subastaID) {
 		debugger;
 	  	if(subastaID > 0){
 		  	if(item.estatus_subasta == "ACTIVA"){
-				renglon += '<div class="card-action">';
-				renglon += '    <div class="divBtnPujar" style="display:none">';
+				renglon += '<div class="card-action" style="display:none">';
+				renglon += '    <div class="divBtnPujar" >';
 				renglon += '      <div id="btnPujar" class="btnPujar waves-effect waves-light btn" attr-incremento="'+item.incremento+'" attr-tiposubasta="'+item.idTipoSubasta+'" attr-ultimaoferta="'+ ((item.idTipoSubasta == "1")? item.oferta : 0 )+'" onclick=PujarAuto('+item.idAuto+','+subastaID+','+Number(item.precio)+',this);>Ofertar</div>';
 				renglon += '    </div>';
 			}
       	}
 		renglon += '  </div>';
+	$('.searchItem > .card > .card-content').css('height','267px');
 	return renglon;
+	
 
 }
 
