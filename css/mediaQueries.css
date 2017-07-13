@@ -160,4 +160,10 @@
 		line-height: 20px;
     	font-size: 0.9rem;
 	}
+	.menutitem.btn-flat{
+	    padding: 0 1rem;
+	}
+	.menuitemlogin[name="registro"] {
+	    margin-right: 0;
+	}
 }

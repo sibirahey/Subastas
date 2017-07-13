@@ -2696,6 +2696,9 @@ div[name="altaautos"] > .row{
 .divDetalleAuto.modal.bottom-sheet{
 	max-height:75% !important;
 }
+#divDetalleAuto {
+	height:100%;	
+}
 .divDetalleAuto {
 	max-width:1024px;
 	height:calc(100% - 40px);
@@ -2706,13 +2709,11 @@ div[name="altaautos"] > .row{
 	margin:10px 2% 0;
 	float:left;
 	height:100%;
-	/*width: 21%;*/
 	width:36%;
 }
 .divDetalleAuto > .mbRight{
 	margin:10px 2% 0;
 	float:left;
-	/*width:71%;*/
 	width: 56%;
 }
 .divDetalleAuto > .mbLeft > div:first-child{
@@ -2720,7 +2721,6 @@ div[name="altaautos"] > .row{
 	height:auto;
 	width: 92%;
 	margin:4%;
-	/*border:1px solid rgb(180,180,180);*/
 }
 .divDetalleAuto > .mbLeft > div > img{
 	float:left;
