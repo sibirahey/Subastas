@@ -76,6 +76,7 @@ function verResultadoSubasta(o){
 		
 		ResultadosSubasta = data;
 		$("#tblGanadores > tbody").html("");
+		$("#tblTotalOfertasBody > tbody").html("");
 		$("#tblResultadosSubastas").hide();
 		$("#tblGanadores").show();
 		$("#thNombreSubasta").html("<h3>"+$(o).attr("attr-nombre")+"</h3>");

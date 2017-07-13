@@ -377,62 +377,75 @@ and s.idSubasta in (select su.idSubasta from subasta_usuario su, usuario u, suba
 
         }
 
-        print_r($pujas);
-        
+       // print_r($pujas);
+        $i = 1;
         foreach($pujas as &$oferta){
 
             $resultado = $resultados[$oferta["idAuto"]];
             
 
-
-            if(!isset($ganadores[$resultado->usuarioganador])  || $ganadores[$resultado->usuarioganador] < $subasta["autos_x_usuario"]){
-
-
                 if($oferta["oferta"] > $resultado->oferta && $oferta["puja_valida"] == 1 ){
 
-                    
-                
-                    if(isset($ganadores[$resultado->usuarioganador])){
-                        if($ganadores[$resultado->usuarioganador] > 0){
-                            $ganadores[$resultado->usuarioganador] = $ganadores[$resultado->usuarioganador]-1;
+                    if(!isset($ganadores[$oferta->usuarioganador])){
+                        
+                        if($resultado->usuarioganador != $oferta["idUsuario"]){
+                            if($ganadores[$resultado->usuarioganador] > 0){
+                                $ganadores[$resultado->usuarioganador] = $ganadores[$resultado->usuarioganador]-1;
+                            }
+                             if(isset($ganadores[$oferta["idUsuario"]])){
+                                $ganadores[$oferta["idUsuario"]] = $ganadores[$oferta["idUsuario"]]+1;
+                            }else{
+                                $ganadores[$oferta["idUsuario"]] = 1;
+                            }
                         }
-                    }
-                    
-                    $resultado->oferta = $oferta["oferta"];
-                    $resultado->usuarioganador =$oferta["idUsuario"];
-                    $resultado->usuario = $oferta["nombre_usuario"];
-                    $resultado->oferta = $oferta["oferta"];
-                    $resultado->puja = $oferta;
-                    $resultado->hora_puja = $oferta["hora_puja"];
-                    if(isset($ganadores[$oferta["idUsuario"]])){
-                        $ganadores[$oferta["idUsuario"]] = $ganadores[$oferta["idUsuario"]]+1;
-                    }else{
-                        $ganadores[$oferta["idUsuario"]] = 1;
-                    }
-                    
-                    array_push($resultado->ofertas, $oferta);
+
+                        $resultado->oferta = $oferta["oferta"];
+                        $resultado->usuarioganador =$oferta["idUsuario"];
+                        $resultado->usuario = $oferta["nombre_usuario"];
+                        $resultado->oferta = $oferta["oferta"];
+                        $resultado->puja = $oferta;
+                        $resultado->hora_puja = $oferta["hora_puja"];
+                       
+                        
+                        array_push($resultado->ofertas, $oferta);
                    
-                
-                }else{
-                    array_push($resultado->ofertas, $oferta); 
                 }
-            }else if($resultado->usuarioganador == $oferta["idUsuario"]) {
-                 $resultado->oferta = $oferta["oferta"];
-                 $resultado->hora_puja = $oferta["hora_puja"];
+                 else if(isset($ganadores[$oferta->usuarioganador]) && $ganadores[$idUsuario->usuarioganador] < $subasta["autos_x_usuario"]) {
+                    if($resultado->usuarioganador != $oferta["idUsuario"]){
+                            if($ganadores[$resultado->usuarioganador] > 0){
+                                $ganadores[$resultado->usuarioganador] = $ganadores[$resultado->usuarioganador]-1;
+                            }
+                             if(isset($ganadores[$oferta["idUsuario"]])){
+                                $ganadores[$oferta["idUsuario"]] = $ganadores[$oferta["idUsuario"]]+1;
+                            }else{
+                                $ganadores[$oferta["idUsuario"]] = 1;
+                            }
+                        }
 
-                 array_push($resultado->ofertas, $oferta);
-            }
-            else{
+                        $resultado->oferta = $oferta["oferta"];
+                        $resultado->usuarioganador =$oferta["idUsuario"];
+                        $resultado->usuario = $oferta["nombre_usuario"];
+                        $resultado->oferta = $oferta["oferta"];
+                        $resultado->puja = $oferta;
+                        $resultado->hora_puja = $oferta["hora_puja"];
+                       
+                        
+                        array_push($resultado->ofertas, $oferta);
+                }
+                else{
+                    array_push($resultado->ofertas, $oferta);
+                } 
+
+                
+            }else{
                 array_push($resultado->ofertas, $oferta);
-            } 
+            }
+
+
+
+           
         }
 
-        /*
-        foreach ($resultados as &$ganador) {
-            array_push($resultados[$ganador->autoid]->ofertas, $ganador->puja);
-
-        }
-        */
             
         return $resultados;
         
