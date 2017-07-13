@@ -60,7 +60,7 @@ class autospuja
                 $pdo = ConexionBD::obtenerInstancia()->obtenerBD();
 
 
-                $comando = "select case when curdate() < DATE_ADD(fechaFin,INTERVAL +1 DAY) then true else false END as valida  from subastas where idSubasta = ? ";
+                $comando = "select case when now() < fechaFin then true else false END as valida  from subastas where idSubasta = ? ";
                 $sentencia = $pdo->prepare($comando);
                 $sentencia->bindParam(1, $_POST["id_subasta"]);
                 $resultado = $sentencia->execute();
@@ -171,7 +171,7 @@ class autospuja
      public static function xsubasta($idsubasta){
 
         try{
-        $comando = "SELECT ap.idAuto, ap.idPuja, ap.oferta, ap.idUsuario, ap.hora_puja, ap.idSubasta, concat(u.nombre, ' ', u.appaterno, ' ', u.apmaterno) as nombre_usuario, ap.hora_puja, s.fechaFin, case when ap.hora_puja < DATE_ADD(s.fechaFin, INTERVAL +1 DAY) then 1 else 0 end as puja_valida, marca.descripcion as marca, modelo.descripcion as modelo, au.precio, au.anio
+        $comando = "SELECT ap.idAuto, ap.idPuja, ap.oferta, ap.idUsuario, ap.hora_puja, ap.idSubasta, concat(u.nombre, ' ', u.appaterno, ' ', u.apmaterno) as nombre_usuario, ap.hora_puja, s.fechaFin, case when ap.hora_puja < s.fechaFin then 1 else 0 end as puja_valida, marca.descripcion as marca, modelo.descripcion as modelo, au.precio, au.anio
             FROM autos_puja ap, usuario u, subastas s, autos au, cat_marca marca, cat_modelo modelo  WHERE 
             ap.idUsuario = u.idUsuario
             and ap.idSubasta = s.idSubasta

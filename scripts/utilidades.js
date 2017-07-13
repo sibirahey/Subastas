@@ -386,50 +386,49 @@ function regresaRenglonVenta(item, subastaID) {
 		      // renglon += '    <a class="btn-floating halfway-fab waves-effect waves-light red"><i class="material-icons">add</i></a>';
 		      // }
 		renglon += '        </div>';
-		renglon += '      <div class="card-content">';
+		renglon += '      	<div class="card-content">';
 		// renglon += '        <label>' + item.marca + ' - ' + item.modelo + '</label>';
-		renglon += '    <div>';
-		renglon += '      <label>Modelo: </label>';
-		renglon += '      <label>' + item.anio + '</label>';
-		renglon += '    </div>';
-		renglon += '    <div>';
-		renglon += '      <label>Color: </label>';
-		renglon += '      <label>' + item.color + '</label>';
-		renglon += '    </div>';
-		renglon += '    <div>';
-		renglon += '      <label>Kilometraje: </label>';
-		renglon += '      <label>' + Number(item.km).formatMoney(0, '.', ',') + '</label>';
-		renglon += '    </div>';
-		renglon += '    <div>';
-		renglon += '      <label>Precio: </label>';
-		renglon += '      <label>' +"$" +Number(item.precio).formatMoney(2, '.', ',') + '</label>';
-		renglon += '    </div>';
-		renglon += '    <div>';
-		renglon += '      <label>Descripción: </label>';
-		renglon += '      <label>' + item.descripcion + '</label>';
-		renglon += '    </div>';
-		renglon += '    <div>';
-		/*
-		renglon += '      <label>Total de ofertas: </label>';
-		renglon += '      <label>' + item.total_ofertas + '</label>';
-		renglon += '    </div>';
-	*/
+		renglon += '    		<div>';
+		renglon += '      			<label>Modelo: </label>';
+		renglon += '      			<label>' + item.anio + '</label>';
+		renglon += '    		</div>';
+		renglon += '    		<div>';
+		renglon += '      			<label>Color: </label>';
+		renglon += '      			<label>' + item.color + '</label>';
+		renglon += '    		</div>';
+		renglon += '    		<div>';
+		renglon += '      			<label>Kilometraje: </label>';
+		renglon += '      			<label>' + Number(item.km).formatMoney(0, '.', ',') + '</label>';
+		renglon += '    		</div>';
+		renglon += '    		<div>';
+		renglon += '      			<label>Precio: </label>';
+		renglon += '      			<label>' +"$" +Number(item.precio).formatMoney(2, '.', ',') + '</label>';
+		renglon += '    		</div>';
+		renglon += '    		<div>';
+		renglon += '      			<label>Descripción: </label>';
+		renglon += '      			<label>' + item.descripcion + '</label>';
+		renglon += '    		</div>';
+		
+		
 		if(item.idTipoSubasta == 1){
-			renglon += '    <div class="divUltimaOferta">';
-			renglon += '      <label>Última oferta: </label>';
-			renglon += '      <label>$' + Number(item.oferta).formatMoney(2, '.', ',') + '</label>';
-			renglon += '    </div>';
-			renglon += '    </div>';
+			renglon += '    	<div class="divUltimaOferta">';
+			renglon += '      		<label>Última oferta: </label>';
+			renglon += '      		<label>$' + Number(item.oferta).formatMoney(2, '.', ',') + '</label>';
+			renglon += '    	</div>';
+			
 		}
+		renglon += '    </div>';
+		renglon += '	<div class="card-action" style="display:none">';
+
 		debugger;
 	  	if(subastaID > 0){
 		  	if(item.estatus_subasta == "ACTIVA"){
-				renglon += '<div class="card-action" style="display:none">';
 				renglon += '    <div class="divBtnPujar" >';
-				renglon += '      <div id="btnPujar" class="btnPujar waves-effect waves-light btn" attr-incremento="'+item.incremento+'" attr-tiposubasta="'+item.idTipoSubasta+'" attr-ultimaoferta="'+ ((item.idTipoSubasta == "1")? item.oferta : 0 )+'" onclick=PujarAuto('+item.idAuto+','+subastaID+','+Number(item.precio)+',this);>Ofertar</div>';
-				renglon += '    </div>';
+				renglon += '    <div id="btnPujar" class="btnPujar waves-effect waves-light btn" attr-incremento="'+item.incremento+'" attr-tiposubasta="'+item.idTipoSubasta+'" attr-ultimaoferta="'+ ((item.idTipoSubasta == "1")? item.oferta : 0 )+'" onclick=PujarAuto('+item.idAuto+','+subastaID+','+Number(item.precio)+',this);>Ofertar</div>';
+				
 			}
       	}
+      	renglon += '    </div>';
 		renglon += '  </div>';
 	$('.searchItem > .card > .card-content').css('height','267px');
 	return renglon;
@@ -766,7 +765,7 @@ function VerDetalleAuto(o) {
 				//$("#imgSnapshots").append('<div><img alt="Imagen no disponible" attr-idx="1" src="'+ siteurl+"uploads/"+fotos[i]+ '"  onclick="CambiaFotoPrincipal(this);" /></div>');
 				$("#imgSnapshots").append('<a class="carousel-item"><img class="materialboxed" alt="Imagen no disponible" attr-idx="1" src="'+ siteurl+"uploads/"+fotos[i]+ '" width="200" height="160" /></div>');
 			}
-			$("#detalleTitulo").html(infoAuto.modelo +" " + infoAuto.anio);
+			$("#detalleTitulo").html(infoAuto.marca + " "+infoAuto.modelo +" " + infoAuto.anio);
 			$("#detalleIdAuto").html(infoAuto.idAuto);
 			$("#detalleMarca").html(infoAuto.marca);
 			$("#detalleModelo").html(infoAuto.modelo);
@@ -781,6 +780,19 @@ function VerDetalleAuto(o) {
 			$("#detalleUbicacion").html(infoAuto.estado + " - " + infoAuto.ciudad);
 			
 			$('.materialboxed').materialbox();
+			
+			$(".materialboxed").resize(function() {
+				alert($("#closeDetalleAuto").css("display"));;
+				if($("#closeDetalleAuto").css("display","hidden")){
+					$("#closeDetalleAuto").show();
+
+				}else{
+					$("#closeDetalleAuto").hide();
+				}
+								
+			});
+			
+
 			if(getUrlVars()["accion"] == "subastasadmin"){
 				
 

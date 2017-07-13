@@ -2290,6 +2290,7 @@ input:checked + .slider:before {
 #divRegistroAutos > .modal-content{
 	padding:0;
 	height:calc(100% - 50px);
+	overflow-x: hidden !important;
 }
 .altaAutosContainer > h4{
 	margin:30px 0;
