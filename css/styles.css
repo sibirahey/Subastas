@@ -2290,7 +2290,6 @@ input:checked + .slider:before {
 #divRegistroAutos > .modal-content{
 	padding:0;
 	height:calc(100% - 50px);
-	top:50px;
 }
 .altaAutosContainer > h4{
 	margin:30px 0;
@@ -2712,15 +2711,16 @@ div[name="altaautos"] > .row{
 	margin:0 auto 0;
 }
 .divDetalleAuto > .mbLeft{
-	/*margin:10px 2% 0;*/
+	margin:10px 2% 0
 	float:left;
-	height:100%;
-	width:36%;
+	height:300px;
+	width:100%;
 }
 .divDetalleAuto > .mbRight{
 	margin:10px 2% 0;
 	float:left;
-	width: 56%;
+	height: calc(100% - 300px);
+	width: 100%;
 }
 .divDetalleAuto > .mbLeft > div:first-child{
 	float:left;
