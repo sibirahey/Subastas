@@ -72,6 +72,7 @@ li{
 	width: auto;
 	float:right;
 	text-align:right;
+	padding-top: 10px;
 }
 .menuitemwelcome > i,
 .menuitemwelcome > label {
@@ -194,6 +195,10 @@ li{
 .btnFacebook {
 	background-image: url("../images/logoFacebook.svg");
 }
+.secondNav{
+	float:left;
+}
+
 /*--------- FOOTER ---------*/
 .mainFooter {
 	float: left;
@@ -751,6 +756,7 @@ label[for="registroEULA"] {
     margin: 60px calc(50% - 512px) 40px;
     font-weight: 100;
     border-bottom: 1px solid rgb(180,180,180);
+    float: left;
 }
 .cnfgSubastaContainer {
 	clear: both;
@@ -2011,13 +2017,13 @@ button[name="contactoEnviar"] {
 .divBotonera > label {
 	line-height: 32px;
 }
-#divListaContenido {
+.divListaContenido {
 	float: left;
 	max-width: 1024px;
 	margin: 0 calc(50% - 512px);
 	overflow-x:hidden;
 }
-#divListaContenido .card .card-title{
+.divListaContenido .card .card-title{
     height: 60px;
     display: block;
     padding: 10px;
@@ -2027,7 +2033,7 @@ button[name="contactoEnviar"] {
     text-align: center;
     overflow: hidden;
 }
-#divListaContenido .card-image > span {
+.divListaContenido .card-image > span {
 
 	width: 100%;
 	float: left;
@@ -2706,7 +2712,7 @@ div[name="altaautos"] > .row{
 	margin:0 auto 0;
 }
 .divDetalleAuto > .mbLeft{
-	margin:10px 2% 0;
+	/*margin:10px 2% 0;*/
 	float:left;
 	height:100%;
 	width:36%;
@@ -2720,7 +2726,7 @@ div[name="altaautos"] > .row{
 	float:left;
 	height:auto;
 	width: 92%;
-	margin:4%;
+	/*margin:4%;*/
 }
 .divDetalleAuto > .mbLeft > div > img{
 	float:left;
