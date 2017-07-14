@@ -1723,7 +1723,7 @@ a[data-u="any"] {
 /*---------- ENDS CAROUSEL --------*/
 .servicioeditado{
 	float:left;
-	width: calc(100% - 80px);
+	width: calc(100% - 160px);
 }
 .CotizacionServicios {
 	float: left;

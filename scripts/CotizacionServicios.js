@@ -38,7 +38,7 @@ function cargaServiciosCotizar(O) {
 				Renglon+= '<div class="waves-effect waves-light btn" id="btnAgregarS" '+ids+ ' onClick="AgregarServicio(this);"><i class="material-icons">add</i></div>';
 				
 				if(sessionStorage.getItem('es_admin')==1)
-					Renglon+= '<button id="btnGuardarS"  idSubServicio="' + data[subServ].idSubservicio + '" idServicio="' + data[subServ].idServicio + '" onClick="ActualizarSubServicio(this);">Editar</button>';
+					Renglon+= '<button id="btnGuardarS" class="waves-effect waves-light btn" idSubServicio="' + data[subServ].idSubservicio + '" idServicio="' + data[subServ].idServicio + '" onClick="ActualizarSubServicio(this);"><i class="material-icons">mode_edit</i></button>';
 				
 				if (idServicio ==3 && sessionStorage.getItem('es_admin') == 1){
 
