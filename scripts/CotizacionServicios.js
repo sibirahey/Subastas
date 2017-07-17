@@ -128,7 +128,10 @@ function ActualizarSubServicio(obj){
 
 		}	
 	} else {
-		$(obj).text('Guardar');
+		//$(obj).text('Guardar');
+		$(obj).empty();
+		$(obj).append('<i class="material-icons">save</i>');
+		
 		$("#txt"+$(obj).attr("idServicio")+$(obj).attr("idSubServicio")).show();
 		$("#Subservicio" + $(obj).attr("idSubServicio")).hide();
 		if($(obj).attr("idServicio") ==3){
@@ -168,7 +171,9 @@ function NuevoSubServicio(obj){
 
 		
 	} else {
-		$(obj).text('Guardar');
+		// $(obj).text('Guardar');
+		$(obj).empty();
+		$(obj).append('<i class="material-icons">save</i>');
 		$("#txtNuevoServicio").show();
 		if(idServicio ==3)
 			$("#uploadnewFile").show();

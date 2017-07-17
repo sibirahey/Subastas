@@ -618,6 +618,9 @@ label[for="registroEULA"] {
 	line-height: 30px;
 	height: 30px;
 }
+.numRef > label{
+	font-size: 1.2rem;
+}
 .mainBody > .mbRight > div > div {
 	width: 100%;
 	font-size: 0.8em;
@@ -637,8 +640,14 @@ label[for="registroEULA"] {
 .btnPujar {
 	color: #F7E827;
 }
-.infoSubasta {
-	
+.infoSubasta > label{
+	font-size:1.8rem;
+}
+.infoSubasta > label:nth-child(odd){
+	font-weight:300;
+}
+.infoSubasta > label:nth-child(even){
+	font-weight:100;
 }
 .infoSubasta > div {
 	width: 100%;
@@ -1723,7 +1732,7 @@ a[data-u="any"] {
 /*---------- ENDS CAROUSEL --------*/
 .servicioeditado{
 	float:left;
-	width: calc(100% - 160px);
+	width: calc(100% - 170px);
 }
 .CotizacionServicios {
 	float: left;
@@ -1794,6 +1803,12 @@ a[data-u="any"] {
 }
 .CotizacionServicios > div#divCotizacion > h5{
 	text-indent: 20px;
+}
+.editarServicio{
+	width:calc(100% - 170px) !Important;
+}
+#btnGuardarS{
+	margin-left:10px;
 }
 /*.CotizacionServicios > div#divCotizacion > div > label {
 	height: 30px;
@@ -2709,23 +2724,23 @@ div[name="altaautos"] > .row{
 	max-width:1024px;
 	height:calc(100% - 40px);
 	width: 100%;
-	margin:0 auto 0;
+	margin:40px auto 0;
 }
 .divDetalleAuto > .mbLeft{
-	margin:10px 2% 0
-	float:left;
-	height:300px;
-	width:100%;
-}
-.divDetalleAuto > .mbRight{
 	margin:10px 2% 0;
 	float:left;
-	height: calc(100% - 300px);
-	width: 100%;
+	height:220px;
+	width:96%;
+}
+.divDetalleAuto > .mbRight,
+.divDetalleAuto > .mbRightMainT{
+	margin:10px 2% 0;
+	float:left;
+	width: 96%;
 }
 .divDetalleAuto > .mbLeft > div:first-child{
 	float:left;
-	height:auto;
+	height:100%;
 	width: 92%;
 	/*margin:4%;*/
 }
@@ -2743,8 +2758,42 @@ div[name="altaautos"] > .row{
 	float: left;
 	width: 100%;
 }
-#divDetalleAuto > .btn{
-	
+.mbRightMainB > div{
+	float: left;
+	width: 100%;
+	margin-bottom:10px;
+}
+.mbRightMainC,
+.mbRightMainD {
+	text-align: center;
+}
+.mbRightMainC > label,
+.mbRightMainD > label{
+	float: left;
+	width: 100%;
+	margin-bottom:10px;
+}
+.mbRightMainC > label:nth-child(1),
+.mbRightMainD > label:nth-child(1){
+	font-size: 1.6rem;
+	font-weight: 300;
+}
+.mbRightMainC > label:nth-child(2),
+.mbRightMainD > label:nth-child(2){
+	font-size: 1.2rem;
+	font-weight: 100;
+}
+.adInfo > div{
+	width: 33%;
+	float: left;
+}
+.adInfo > div > label{
+	width: 100%;
+	float: left;
+	font-size:1rem;
+}
+.adInfo > div > label:nth-child(odd){
+	font-weight: 500;
 }
 #imgSnapshots{
 	float: left;
