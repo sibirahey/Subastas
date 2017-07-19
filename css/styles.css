@@ -2705,6 +2705,12 @@ div[name="altaautos"] > .row{
     background-color: rgba(0,0,0,0.3);
     font-size:1rem;
 }
+.card-title > i{
+	float: right;
+	color: #F7E827;
+}
+
+
 .searchItem > .card > .card-content > div >label:nth-child(odd){
 	
 }
@@ -2714,6 +2720,18 @@ div[name="altaautos"] > .row{
 .card .card-image img{
 	height: 100%;
 }
+
+.contadorAuto{
+    float: left;
+    position: absolute;
+    z-index: 10;
+    color: #F7E827;
+    background-color: #26a69a;
+    padding: 3px 3px 3px 3px;
+    width: 30px;
+    text-align: center;
+}
+
 .divDetalleAuto.modal.bottom-sheet{
 	max-height:75% !important;
 }

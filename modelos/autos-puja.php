@@ -37,6 +37,8 @@ class autospuja
             return self::listar();
         } else if($peticion[0] == 'ganadores'){
 
+        }else if($peticion[0] == 'autosofertados'){
+            return self::autosofertados();
         }
         else {
             throw new ExcepcionApi(self::ESTADO_URL_INCORRECTA, "Url mal formada", 400);
@@ -57,6 +59,7 @@ class autospuja
 
             
             
+ //               print_r($_SESSION);
                 $pdo = ConexionBD::obtenerInstancia()->obtenerBD();
 
 
@@ -80,7 +83,7 @@ class autospuja
 
                 $u = new usuarios();
                 
-                $u = $u->rememberme();
+ 
                 
                 
                 
@@ -91,14 +94,23 @@ class autospuja
 
                 $s = $s->infoSubasta($_POST["id_subasta"]);
                 
+                $autosofertados = self::autosofertados();
+                $totalxusuario = sizeof($autosofertados);
+                //= self::totalpujaxusuario();
+                $ofertavalida = false;
+                for($i = 0; $i < $totalxusuario; $i++){
+                    if($autosofertados[i]["auto"] == $_POST["id_auto"]){
+                        $ofertavalida = true;
+                        break;
+                    }
+                }
 
-                $totalxusuario = self::totalpujaxusuario();
                 
-               if($totalxusuario < $s[0]["ofertas_x_usuarios"]){
+               if($totalxusuario < $s[0]["ofertas_x_usuarios"] || $ofertavalida){
                     $sentencia = $pdo->prepare($comando);
                         $sentencia->bindParam(1, $_POST["id_auto"]);
                         $sentencia->bindParam(2, $_POST["id_subasta"]);
-                        $sentencia->bindParam(3, $u->idUsuario);
+                        $sentencia->bindParam(3, $_SESSION['idusuario']);
                         $sentencia->bindParam(4, $_POST["oferta"]);
                         $resultado = $sentencia->execute();
                        
@@ -109,7 +121,7 @@ class autospuja
                         return "Ocurrió un error al registrar su oferta";
                     }
                 }else{
-                    return "Imposible ofertar, usted acumula ". $totalxusuario. " de ".$s[0]["ofertas_x_usuarios"]. " posibles";
+                    return "Imposible ofertar, solamente se puede participar por ".$s[0]["ofertas_x_usuarios"]. " autos en esta subasta.";
                 } 
                 
 
@@ -124,13 +136,16 @@ class autospuja
 
     public static function totalpujaxusuario(){
         try{
-            $comando = "SELECT count(*) as total_ofertas FROM autos_puja ap, usuario u WHERE ap.idUsuario = u.idUsuario and ap.idSubasta = ? and u.claveApi = ?";
+            //$comando = "SELECT count(*) as total_ofertas FROM autos_puja ap, usuario u WHERE ap.idUsuario = u.idUsuario and ap.idSubasta = ? and u.claveApi = ?";
             
+            $comando = "SELECT count(distinct ap.idAuto) as total_ofertas FROM autos_puja ap, usuario u WHERE ap.idUsuario = u.idUsuario and ap.idSubasta = ? and u.claveApi = ?";
+            //print_r($comando);
+            //print_r($_POST);
             $pdo = ConexionBD::obtenerInstancia()->obtenerBD();
             $sentencia = $pdo->prepare($comando);
             
             $sentencia->bindParam(1, $_POST["id_subasta"]);
-            $sentencia->bindParam(2, $_POST["claveapi"]);
+            $sentencia->bindParam(2, $_SESSION["claveapi"]);
 
             $resultado = $sentencia->execute();
 
@@ -139,7 +154,32 @@ class autospuja
             return $fetch["total_ofertas"]; 
 
         }catch(Excepcion $e){
-            print_r($e);
+          
+            return -1;
+        }
+
+    }
+
+    public static function autosofertados(){
+         try{
+            //$comando = "SELECT count(*) as total_ofertas FROM autos_puja ap, usuario u WHERE ap.idUsuario = u.idUsuario and ap.idSubasta = ? and u.claveApi = ?";
+            
+            $comando = "SELECT distinct ap.idAuto as auto FROM autos_puja ap, usuario u WHERE ap.idUsuario = u.idUsuario and ap.idSubasta = ? and u.claveApi = ?";
+            //print_r($comando);
+            //print_r($_POST);
+            $pdo = ConexionBD::obtenerInstancia()->obtenerBD();
+            $sentencia = $pdo->prepare($comando);
+            
+            $sentencia->bindParam(1, $_POST["id_subasta"]);
+            $sentencia->bindParam(2, $_SESSION["claveapi"]);
+
+            $resultado = $sentencia->execute();
+
+            $fetch =  $sentencia->fetchall(PDO::FETCH_ASSOC);
+
+            return $fetch; 
+
+        }catch(Excepcion $e){
             return -1;
         }
 
@@ -180,7 +220,7 @@ class autospuja
             and au.marca = marca.id
             and au.modelo = modelo.id
             order by 
-            ap.hora_puja asc ";
+            ap.hora_puja desc ";
               $pdo = ConexionBD::obtenerInstancia()->obtenerBD();
             $sentencia = $pdo->prepare($comando);
             
@@ -202,6 +242,14 @@ class autospuja
 
     }
 
-    
+    public static function participantes($idSubasta){
+        $comando = "select distinct idUsuario from autos_puja where idSubasta = ?";
+        $pdo = ConexionBD::obtenerInstancia()->obtenerBD();
+        $sentencia = $pdo->prepare($comando);
+        $sentencia->bindParam(1, $idsubasta);
+        $resultado = $sentencia->execute();
+        return $sentencia->fetchall(PDO::FETCH_ASSOC);
+    }
     
 }
+    

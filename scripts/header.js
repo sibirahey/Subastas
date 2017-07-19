@@ -44,9 +44,13 @@ $( document ).ready(function() {
   		}
 		
 		jssor_1_slider_init();
-		$('.jssorContainer').find('video').get(0).play();
-		$('.jssorContainer').find('video').get(1).play();
-		
+		try{
+			$('.jssorContainer').find('video').get(0).play();
+			$('.jssorContainer').find('video').get(1).play();
+			$('.jssorContainer').find('video').get(1).play();
+		}catch(ex){
+			
+		}
 		$('.dropdown-button').dropdown({
 			inDuration : 300,
 			outDuration : 225,

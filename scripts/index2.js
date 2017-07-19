@@ -23,8 +23,13 @@ $(document).ready(function() {
 		
 		$(".button-collapse").sideNav();
 		
-		$('.jssorContainer').find('video').get(0).play();
-		$('.jssorContainer').find('video').get(1).play();
+		try{
+			$('.jssorContainer').find('video').get(0).play();
+			$('.jssorContainer').find('video').get(1).play();
+			$('.jssorContainer').find('video').get(2).play();
+		}catch(ex){
+
+		}
 		$(".logoHeader").click(function() {
 			cargaHTML(".mainBody", "views/index.html", "", function() {
 				console.log("carga home");
@@ -35,8 +40,10 @@ $(document).ready(function() {
 		
 
 		
+		
 		var urlvars = getUrlVars();
 		if(urlvars["s"] != undefined){
+
 				cargaHTMLLogin(urlvars["s"]);
 		}
 
