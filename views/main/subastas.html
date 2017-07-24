@@ -47,9 +47,14 @@
             </div>
         </div>  
         <div class="modal-footer">
-            <a id="btnGuardarOferta" class="waves-effect waves-light btn" attr-subastaid="0" attr-idauto="0" onclick="GuardarOferta(this);">
-                Guardar
+            <a class="waves-effect waves-light btn" attr-subastaid="0" attr-idauto="0" id="btnConfirmarOferta" onclick="ConfirmarOferta(this);">
+                Ofertar
             </a>
+			<div class="input-field col s12" id="divConfirmarOferta" style="display:none;">
+				<a id="btnGuardarOferta" class="waves-effect waves-light btn" attr-subastaid="0" attr-idauto="0" onclick="GuardarOferta(this);">Confirmar Oferta</a>
+				<a  class="waves-effect waves-light btn red" attr-subastaid="0" attr-idauto="0" onclick="CancelarOferta();">Cancelar</a>
+			</div>
+			
         </div>
     </div>
 
@@ -58,7 +63,7 @@
             <table id="divOfertas" class="striped responsive-table centered"></table>
         </div>
         <div class="modal-footer">
-            <a href="#!" class="modal-action modal-close waves-effect waves-green btn">Cerrar</a>
+            <a href="" class="modal-action modal-close waves-effect waves-green btn">Cerrar</a>
         </div>
     </div>
 

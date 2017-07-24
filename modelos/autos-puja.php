@@ -208,7 +208,7 @@ class autospuja
             return null;
         }
     }
-     public static function xsubasta($idsubasta){
+     public static function xsubasta($idsubasta, $sort){
 
         try{
         $comando = "SELECT ap.idAuto, ap.idPuja, ap.oferta, ap.idUsuario, ap.hora_puja, ap.idSubasta, concat(u.nombre, ' ', u.appaterno, ' ', u.apmaterno) as nombre_usuario, ap.hora_puja, s.fechaFin, case when ap.hora_puja < s.fechaFin then 1 else 0 end as puja_valida, marca.descripcion as marca, modelo.descripcion as modelo, au.precio, au.anio
@@ -220,7 +220,9 @@ class autospuja
             and au.marca = marca.id
             and au.modelo = modelo.id
             order by 
-            ap.hora_puja desc ";
+            ap.hora_puja " .(($sort == 1) ? "desc" : "asc" );
+			
+			
               $pdo = ConexionBD::obtenerInstancia()->obtenerBD();
             $sentencia = $pdo->prepare($comando);
             
@@ -236,6 +238,62 @@ class autospuja
         }
     }
 
+	public static function xsubatasxusuario($idsubasta){
+		 try{
+        $comando = "SELECT
+					  ap.idAuto,
+					  ap.idPuja,
+					  ap.idUsuario,
+					  s.fechaFin,
+					  au.anio,
+					  marca.descripcion as marca,
+					  modelo.descripcion as modelo,  
+					  au.precio,
+					  MAX(ap.oferta) AS oferta,
+					  ap.hora_puja,
+					  CASE 
+						WHEN ap.hora_puja <= s.fechaFin 
+						THEN 1 
+						ELSE 0 
+					  END AS puja_valida,
+					  CONCAT(u.nombre, ' ', u.appaterno, ' ', u.apmaterno) AS nombre_usuario
+					FROM
+					  autos_puja ap, 
+					  usuario u,
+					  subastas s,
+					  autos au,
+					  cat_marca marca, 
+					  cat_modelo modelo  
+					WHERE 
+					  ap.idSubasta = ?
+					  AND ap.idUsuario = u.idUsuario
+					  AND ap.idSubasta = s.idSubasta
+					  AND ap.idAuto    = au.idAuto
+					  AND au.marca     = marca.id
+					  AND au.modelo    = modelo.id
+					GROUP BY
+					  ap.idAuto,
+					  ap.idUsuario
+					ORDER BY
+					  ap.idAuto,
+					  MAX(ap.oferta) DESC";
+					  
+					  
+              $pdo = ConexionBD::obtenerInstancia()->obtenerBD();
+            $sentencia = $pdo->prepare($comando);
+            
+            $sentencia->bindParam(1, $idsubasta);
+            
+
+            $resultado = $sentencia->execute();
+            return $sentencia->fetchall(PDO::FETCH_ASSOC);
+
+        }catch(Excepcion $e){
+            print_r($e);
+            return null;
+        }
+		
+	}
     public static function ganadores($idsubasta){
         $comando = "SELECT ap.idAuto, ap.idPuja, ap.oferta, ap.idUsuario, ap.hora_puja, ap.idSubasta, concat(u.nombre, ' ', u.appaterno, ' ', u.apmaterno) as nombre_usuario FROM autos_puja ap, usuario u, subastas s WHERE ap.idUsuario = u.idUsuario and ap.idSubasta = ?   and s.idSubasta = ap.idSubasta and ap.hora_puja < s.fechaFin +1 ";
 

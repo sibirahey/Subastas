@@ -47,7 +47,9 @@ class subastas
             return self::participantes($_POST);
         }else if($peticion[0] == 'revisarresultados'){
             return self::revisarresultados($_POST);
-        }
+		}else if($peticion[0] == 'revisarresultadosmax'){
+			return self::revisarresultadosmax($_POST);
+		}
         else if($peticion[0] == 'cancelar'){
             return self::cancelar($_POST);
         }
@@ -83,7 +85,7 @@ class subastas
             
             $comando = "select s.idSubasta, nombreSubasta, idTipoSubasta, tipo.tipoSubasta, fechaInicio, fechaFin, CASE WHEN visible = -1 then 'CANCELADA' when visible = 0 then 'CERRADA' WHEN  now() BETWEEN fechaInicio and fechaFin then 'ACTIVA' WHEN now() < fechaInicio then 'AGENDADA' else 'TERMINADA' end as estatus, visible, case visible when 0 then 'NO PUBLICADA' else 'PUBLICADA' end as publicada,(select GROUP_CONCAT(emp.nombreEmpresa) from subastaempresa se, empresas emp where s.idSubasta = se.idSubasta and se.idEmpresa = emp.idEmpresa) as empresas, (select GROUP_CONCAT(emp.idEmpresa) from subastaempresa se, empresas emp where s.idSubasta = se.idSubasta and se.idEmpresa = emp.idEmpresa) as empresasId,incremento, ofertas_x_usuarios, autos_x_usuario, (select count(*) from subastas_autos suba where suba.subastaId = s.idSubasta ) as total_autos, (select count(*) from subasta_usuario subu where subu.idSubasta = s.idSubasta) as total_participantes, (select count(*) from autos_puja aupu  where aupu.idSubasta = s.idSubasta) as total_ofertas, s.revisada, s.fecha_cierre, s.autos_x_usuario,  (select count(*) from subastas_autos suba where suba.subastaId = s.idSubasta ) as total_autos from subastas s, tiposubastas tipo " . $empresaFrom." where s.idTipoSubasta = tipo.idTipo  " . $empresaWhere . $estatusWhere . $subastaIdWhere . " order by fechaFin desc" ; 
 
-            
+           
             $sentencia = ConexionBD::obtenerInstancia()->obtenerBD()->prepare($comando);
             
 
@@ -359,8 +361,81 @@ and s.idSubasta in (select su.idSubasta from subasta_usuario su, usuario u, suba
         $subasta = self::listar($datos)[0];
         $oAutospuja = new autospuja(0,0);
         $resultadosxauto = array();
+       
+        $pujas = $oAutospuja::xsubasta($subasta['idSubasta'], $datos['sort']);
         
-        $pujas = $oAutospuja::xsubasta($subasta['idSubasta']);
+       
+        $oAutos = new autos();
+        $autos = $oAutos::listarPorSubastas();
+        $participantes = $oAutospuja::participantes($subasta['idSubasta']);
+        $resultados = array();
+        $ganadores = array();
+        foreach ($autos as &$auto) {
+            //print_r($auto);
+            
+            $oresultado = new resultados($auto["idAuto"], $auto["marca"], $auto["modelo"], $auto["anio"], $auto["precio"], $auto["foto"]);
+            $resultados[$auto["idAuto"]]  = $oresultado;
+
+
+        }
+        foreach ($participantes as &$p) {
+            $ganadores[$p["idUsuario"]] =0;
+        }
+
+       // print_r($pujas);
+        $i = 1;
+        foreach($pujas as &$oferta){
+
+            $resultado = $resultados[$oferta["idAuto"]];
+            
+
+            if($oferta["oferta"] > $resultado->oferta && $oferta["puja_valida"] == 1 ){
+
+                if($ganadores[$oferta["idUsuario"]] < $subasta["autos_x_usuario"]) {
+                        if($resultado->usuarioganador != $oferta["idUsuario"]){
+                            if($ganadores[$resultado->usuarioganador] > 0){
+                                $ganadores[$resultado->usuarioganador] = $ganadores[$resultado->usuarioganador]-1;
+                            }
+                            
+                        }
+                        $ganadores[$oferta["idUsuario"]] = $ganadores[$oferta["idUsuario"]]+1;
+                        $resultado->oferta = $oferta["oferta"];
+                        $resultado->usuarioganador =$oferta["idUsuario"];
+                        $resultado->usuario = $oferta["nombre_usuario"];
+                    
+                        $resultado->puja = $oferta;
+                        $resultado->hora_puja = $oferta["hora_puja"];
+                       
+                        
+                        array_push($resultado->ofertas, $oferta);
+                }
+                else{
+                    array_push($resultado->ofertas, $oferta);
+                }
+
+                
+            }
+            else{
+                array_push($resultado->ofertas, $oferta);
+            }
+
+
+           
+        }
+
+            
+        return $resultados;
+        
+        
+    }
+
+	private function revisarresultadosmax($datos){
+
+        $subasta = self::listar($datos)[0];
+        $oAutospuja = new autospuja(0,0);
+        $resultadosxauto = array();
+        
+        $pujas = $oAutospuja::xsubatasxusuario($subasta['idSubasta']);
         
        
         $oAutos = new autos();

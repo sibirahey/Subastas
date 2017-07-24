@@ -136,7 +136,7 @@ function guardarSubasta(obj) {
 	oSubastas = new Subastas();
 	oSubastas.nombreSubasta = $("#txtNombreSubasta").val();
 	oSubastas.IdTipoSubasta = $('input[name=tiposubastas]:checked').val();
-	oSubastas.fechaInicio = (!$("#txtFechaInicio").datepicker('getDate')) ? "" : $("#txtFechaInicio").datepicker('getDate').getFullYear() + "-" + ($("#txtFechaInicio").datepicker('getDate').getMonth() + 1) + "-" + $("#txtFechaInicio").datepicker('getDate').getDate()+ " "+$("#dpFechaFin").val();
+	oSubastas.fechaInicio = (!$("#txtFechaInicio").datepicker('getDate')) ? "" : $("#txtFechaInicio").datepicker('getDate').getFullYear() + "-" + ($("#txtFechaInicio").datepicker('getDate').getMonth() + 1) + "-" + $("#txtFechaInicio").datepicker('getDate').getDate()+ " "+$("#dpFechaInicio").val();
 	oSubastas.fechaFin = (!$("#txtFechaFin").datepicker('getDate')) ? "" : $("#txtFechaFin").datepicker('getDate').getFullYear() + "-" + ($("#txtFechaFin").datepicker('getDate').getMonth() + 1) + "-" + $("#txtFechaFin").datepicker('getDate').getDate()+ " "+$("#dpFechaFin").val();
 	oSubastas.empresas = [];
 	oSubastas.incremento = $("#txtIncremento").val();

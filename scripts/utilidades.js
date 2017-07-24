@@ -510,6 +510,16 @@ function PujarAuto(idAuto, idSubasta, precio, o){
 	
 }
 
+function ConfirmarOferta(){
+	$("#btnConfirmarOferta").hide();
+	$("#divConfirmarOferta").show();
+	
+}
+function CancelarOferta(){
+	$("#btnConfirmarOferta").show();
+	$("#divConfirmarOferta").hide();
+}
+
 function GuardarOferta(o){
 
 	if(ValidaOferta(o)){
@@ -530,6 +540,8 @@ function GuardarOferta(o){
 
 		Materialize.toast("Oferta inválida"+MensajeOfertaInvalida(o), 5000);
 	}
+	$("#btnConfirmarOferta").show();
+	$("#divConfirmarOferta").hide();
 	
 
 }
