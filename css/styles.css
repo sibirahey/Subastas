@@ -81,6 +81,9 @@ li{
 	float:right;
 	margin: 0 10px;
 }
+.menuitemwelcome > label {
+	color:#ffffff;
+}
 #btnClose{
 	height:40px;
 	line-height:40px;
@@ -2846,4 +2849,8 @@ div[name="altaautos"] > .row{
 }
 .toast {
     background-color: #26a69a;
+}
+label,
+.input-field label{
+	color:#505050;
 }
