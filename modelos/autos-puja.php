@@ -82,13 +82,6 @@ class autospuja
                     " VALUES(?,?,?,?)";
 
                 $u = new usuarios();
-                
- 
-                
-                
-                
-
-                
 
                 $s = new subastas();
 
@@ -96,10 +89,12 @@ class autospuja
                 
                 $autosofertados = self::autosofertados();
                 $totalxusuario = sizeof($autosofertados);
-                //= self::totalpujaxusuario();
                 $ofertavalida = false;
-                for($i = 0; $i < $totalxusuario; $i++){
-                    if($autosofertados[i]["auto"] == $_POST["id_auto"]){
+                                
+                foreach($autosofertados as $auto){
+                    
+                    
+                    if(intval($auto["auto"]) == intval($_POST["id_auto"])){
                         $ofertavalida = true;
                         break;
                     }

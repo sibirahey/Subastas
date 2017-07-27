@@ -62,28 +62,28 @@
         <div class="row">
             <div class="input-field col s12">
             	<i class="material-icons prefix">account_circle</i>
-                <input id="contactoNombre" type="text" name="contactoNombre" required="required" class="validate"/>
+                <input id="contactoNombre" type="text" name="contactoNombre"  required="required" class="validate"/>
                 <label for="contactoNombre">Nombre Completo</label>
             </div>
 
             <div class="input-field col s12">
             	<i class="material-icons prefix">phone</i>
-                <input id="contactoTelefono" type="tel" name="contactoTelefono" required="required" class="validate"/>
+                <input id="contactoTelefono" type="number" name="contactoTelefono" required="required" class="validate"/>
                 <label for="contactoTelefono">Tel&eacute;fono de Contacto</label>
             </div>
             <div class="input-field col s12">
             	<i class="material-icons prefix">email</i>
-                <input id="contactoEmail" type="email" name="contactoEmail"  required="required" class="validate"/>
+                <input id="contactoEmail" type="email" name="contactoEmail" required="required" class="validate"/>
                 <label for="contactoEmail">Correo Electr&oacute;nico</label>
             </div>
 
             <div class="input-field col s12">
             	<i class="material-icons prefix">message</i>
-                <textarea id="textarea1" class="materialize-textarea" required="required" class="validate"></textarea>
+                <textarea id="contactoMensaje" name="contactoMensaje"class="materialize-textarea" required="required" class="validate"></textarea>
                 <label for="textarea1">Escribe un mensaje</label>
             </div>
             <div class="input-field col s12">
-                <div class="waves-effect waves-light btn col s12" name="contactoEnviar" >
+                <div class="waves-effect waves-light btn col s12"  id="btnContactanos" >
                     Enviar
                 </div>
             </div>

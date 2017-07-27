@@ -181,3 +181,10 @@ function Precio(id,descripcion,estatus){
 	this.descripcion = descripcion;
 	this.estatus = estatus;
 }
+
+function Contactanos(nombre,mail, telefono, mensaje){
+	this.nombre = nombre;
+	this.mail  = mail;
+	this.telefono = telefono;
+	this.mensaje = mensaje;
+}

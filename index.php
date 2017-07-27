@@ -32,6 +32,7 @@ require_once('utilidades/Utilerias.php');
 require_once('modelos/usuario-automovil.php');
 require_once('modelos/invitacion.php');
 require_once('modelos/precio.php');
+require_once('modelos/contactanos.php');
 unregister_GLOBALS();
 ini_set('display_errors', '0'); 
 
@@ -161,6 +162,9 @@ function ejecutaModeloPost($vista, $mod, $arr)
             break;
         case 'precio':
             $vista->imprimir(precio::post($arr));
+            break;
+        case 'contactanos':
+            $vista->imprimir(contactanos::post($arr));
             break;
         default:
     		# code...

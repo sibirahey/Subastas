@@ -487,26 +487,7 @@ function PujarAuto(idAuto, idSubasta, precio, o){
 		Materialize.toast("Ocurrió un error al cargar la información del auto", 4000);
 	});
 
-	/*
-	$("#txtOferta").keydown(function(e){
-			
-			if(e.keyCode == 8 || e.keyCode == 46){
-				return true;
-			}else if(e.keyCode < 48){
-			 	e.preventDefault();
-			 	return false;
-
-			 }
-			 else if(e.keyCode > 58 && e.keyCode < 96){
-			 	e.preventDefault();
-			 	return false;
-			 }
-			 else if (e.keyCode > 105){
-            	e.preventDefault();
-            	return false;
-            }
-	});
-	*/
+	
 	
 }
 
@@ -1288,4 +1269,59 @@ function CargaSelectTP(){
 		opt += "<option value='"+((String(i).length < 2) ? "0"+i: i) +":30:00'>"+((String(i).length < 2) ? "0"+i: i) +":30</option>";
 	}
 	return opt;
+}
+
+function CargaFuncionesContactanos(){
+	$("#btnContactanos").click(function(){
+
+
+		var oContactanos = new Contactanos();
+		oContactanos.nombre = $("#contactoNombre").val();
+		oContactanos.mail = $("#contactoEmail").val();
+		oContactanos.telefono = $("#contactoTelefono").val();
+		oContactanos.mensaje = $("#contactoMensaje").val();
+		if(ValidaCamposContacto(oContactanos)){
+			postrequest("contactanos/guardar", oContactanos, 
+				function(data){
+					if(data > -1){
+						Materialize.toast("Su información ha sido enviada, nos pondremos en contacto contigo a la brevedad.", 5000);
+						$("#contactoNombre").val("");
+						$("#contactoEmail").val("");
+						$("#contactoTelefono").val("");
+						$("#contactoMensaje").val("");
+
+					}else{
+						Materialize.toast("Error al guardar la información.", 5000);
+					}
+				}, 
+				function (error){
+					Materialize.toast("Error ", 5000);
+				});
+		}
+	});
+
+	function ValidaCamposContacto(o){
+		var mensaje = "";
+		
+
+		if(isNaN(o.telefono)){
+			mensaje += "El campo teléfono debe contener solo números. <br />"
+		
+		}else if(o.teléfono == ""){
+			mensaje += "El teléfono no puede estár vacío. <br />"
+		}
+		if(o.nombre.trim() == ""){
+			mensaje += "El nombre no puede estár vacío. <br />"
+		}
+		if(o.mail.trim() == ""){
+			mensaje += "El mail no puede estár vacío. <br />"	
+		}
+		if(mensaje != ""){
+			Materialize.toast(mensaje, 5000);
+			return false;
+		}else{
+			return true;
+		}
+	}
+
 }

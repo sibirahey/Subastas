@@ -54,6 +54,10 @@ function CargaFunciones(o){
 			break;
 		case "cotizaciones":
 			cargaFuncionesMisCotizaciones();
+			break;
+		case "contactanos":
+			cargaFuncionesContactanos();
+			break;
 		case "dashboard":
 		default:
 			CargaJsonHome();
