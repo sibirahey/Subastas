@@ -251,7 +251,14 @@ class usuarios
                 $usuarioid = $pdo->lastInsertId();
 
 
-            }
+            }else{
+				
+				$comando = "update " . self::NOMBRE_TABLA . " set claveApi = ? where correo = ?";
+                $sentencia = $pdo->prepare($comando);
+                $sentencia->bindParam(1, $claveApi);
+				$sentencia->bindParam(2, $usuario->correo);
+				$resultado = $sentencia->execute();
+			}
 
             
             if ($usuarioid > 0) {
