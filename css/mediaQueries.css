@@ -37,8 +37,8 @@
 	#tblResultadosSubastas,
 	.mainBody > h2 {
 		width:96%;
-		margin: 60px 3% 40px;
-		font-size:2rem;
+		margin: 20px 3% 10px;
+		font-size:1.8rem;
 	}
 	.divBotonera {
 	    margin: 20px 0 0 0;
@@ -50,10 +50,6 @@
 	.divDetalleAuto > .mbLeft,
 	.divDetalleAuto > .mbRight{
 		width: 96%;
-	}
-	.mainBody > h2 {
-	    width: 100%;
-	    margin: 20px auto 20px;
 	}
 	.mainHeader > .btn-flat,
 	.menuitemindex,
@@ -184,13 +180,20 @@
 	.registroMain > form{
 		width: 100%;
 		margin:0;
-	}
-	.menuitemwelcome > i:not(#btnClose){
-		display:none;
-	}
 	
-	
+	}
+	.menuitemwelcome > i:not(#btnClose) {
+		display: none;
+	}
+	.modal {
+		width: 100%;
+	}
+	#divDetalleAuto {
+		top:5% !important;
+		max-height: 90%;
+	}	
 }
+
 @media only screen and (max-width: 600px) {
 	/*---------- ADMINISTRADOR DE SUBASTAS  ---------*/
 	#divAdminSubastas .divListaContenido > .divRenglonTabla > .card > .card-content > label{
@@ -226,3 +229,4 @@
 		display: none;
 	}
 }
+

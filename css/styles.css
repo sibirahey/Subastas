@@ -2775,6 +2775,9 @@ div[name="altaautos"] > .row{
 	float:left;
 	width:100%;
 }
+#closeDetalleAuto{
+	z-index: 0;
+}
 #imgPrincipal{
 	float: left;
 	width: 100%;
