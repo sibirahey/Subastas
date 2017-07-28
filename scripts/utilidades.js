@@ -851,17 +851,17 @@ function VerDetalleAuto(o) {
 			// });
 			
 			$('.carousel-item > img').on('touchstart', function(){
-					console.log('touchstar');
-					$(this).click();	
-					$(this).siblings().css('pointer-events','none');
+					// console.log('touchstar');
+					// $(this).click();	
+					// $(this).siblings().css('pointer-events','none');
 			});			
 			
 			$('.carousel-item.active').on('touchmove',function(){
-				console.log('touchmove');				
+				// console.log('touchmove');				
 				
 			});
 			$('#materialbox-overlay').on('touchstart', function(){
-				console.log('touchmove overlay');	
+				// console.log('touchmove overlay');	
 							
 				
 			});
