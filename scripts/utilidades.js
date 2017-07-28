@@ -792,8 +792,8 @@ function VerDetalleAuto(o) {
 			inDuration : 300, // Transition in duration
 			outDuration : 200, // Transition out duration
 			ready: function(modal, trigger) { // Callback for Modal open. Modal and trigger parameters available.
+		    	$('.materialboxed').materialbox();
 		    	$('.carousel').carousel();
-		    	
 	      	}
 		});
 
@@ -822,6 +822,7 @@ function VerDetalleAuto(o) {
 				
 				// $("#imgSnapshots").append('<a class="carousel-item"><img class="materialboxed" alt="Imagen no disponible" attr-idx="1" src="'+ siteurl+"uploads/"+fotos[i]+ '" width="200" height="160" /></div>');
 				$("#imgSnapshots").append('<a class="carousel-item"><img class="materialboxed" alt="Imagen no disponible" src="'+ siteurl+"uploads/"+fotos[i]+ '" width="200" height="160" /></div>');
+				// $("#imgSnapshots").append('<a class="carousel-item"><img class="" alt="Imagen no disponible" src="'+ siteurl+"uploads/"+fotos[i]+ '" width="200" height="160" /></div>');
 			}
 			$("#detalleTitulo").html(infoAuto.marca + " "+infoAuto.modelo +" " + infoAuto.anio);
 			$("#detalleIdAuto").html(infoAuto.idAuto);
@@ -837,24 +838,32 @@ function VerDetalleAuto(o) {
 			$("#detalleCaracteristicas").html(infoAuto.caracteristicas);
 			$("#detalleUbicacion").html(infoAuto.estado + " - " + infoAuto.ciudad);
 			
-			$('.materialboxed').materialbox();
 			
-			$(".materialboxed").resize(function() {
+			
+			// $(".materialboxed").resize(function() {
+				// if($("#closeDetalleAuto").css("display","hidden")){
+					// $("#closeDetalleAuto").show();
+// 
+				// }else{
+					// $("#closeDetalleAuto").hide();
+				// }
+// 								
+			// });
+			
+			$('.carousel-item > img').on('touchstart', function(){
+					console.log('touchstar');
+					$(this).click();	
+					$(this).siblings().css('pointer-events','none');
+			});			
+			
+			$('.carousel-item.active').on('touchmove',function(){
+				console.log('touchmove');				
 				
-				if($("#closeDetalleAuto").css("display","hidden")){
-					$("#closeDetalleAuto").show();
-
-				}else{
-					$("#closeDetalleAuto").hide();
-				}
-								
 			});
-			var flag = false;
-			$('.material-placeholder > img').on('touchstart', function(){
-				if($('.carousel-item').on('dragstart', function(){
-					$(this).click();
-				}))
-				$(this).click();				
+			$('#materialbox-overlay').on('touchstart', function(){
+				console.log('touchmove overlay');	
+							
+				
 			});
 			
 			
@@ -880,7 +889,6 @@ function VerDetalleAuto(o) {
 				$('#divDetalleAuto').modal("open");
 				
 			}
-			$('.carousel').carousel();
 			
 		});
 	});
