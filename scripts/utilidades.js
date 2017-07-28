@@ -806,7 +806,8 @@ function VerDetalleAuto(o) {
 			for(i in fotos){
 
 				
-				$("#imgSnapshots").append('<a class="carousel-item"><img class="materialboxed" alt="Imagen no disponible" attr-idx="1" src="'+ siteurl+"uploads/"+fotos[i]+ '" width="200" height="160" /></div>');
+				// $("#imgSnapshots").append('<a class="carousel-item"><img class="materialboxed" alt="Imagen no disponible" attr-idx="1" src="'+ siteurl+"uploads/"+fotos[i]+ '" width="200" height="160" /></div>');
+				$("#imgSnapshots").append('<a class="carousel-item"><img class="materialboxed" alt="Imagen no disponible" src="'+ siteurl+"uploads/"+fotos[i]+ '" width="200" height="160" /></div>');
 			}
 			$("#detalleTitulo").html(infoAuto.marca + " "+infoAuto.modelo +" " + infoAuto.anio);
 			$("#detalleIdAuto").html(infoAuto.idAuto);
@@ -835,7 +836,11 @@ function VerDetalleAuto(o) {
 								
 			});
 			
-
+			$('.material-placeholder > img').on('touchstart', function(){
+				$(this).click();
+			});
+			
+			
 			if(getUrlVars()["accion"] == "subastasadmin"){
 				
 
