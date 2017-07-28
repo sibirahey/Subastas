@@ -532,7 +532,7 @@ function GuardarOferta(o){
 			});
 	}else{
 
-		Materialize.toast("Oferta inválida"+MensajeOfertaInvalida(o), 5000);
+		Materialize.toast("Oferta inválida: "+MensajeOfertaInvalida(o), 5000);
 		CancelarOferta();
 	}
 	$("#btnConfirmarOferta").show();
@@ -542,6 +542,7 @@ function GuardarOferta(o){
 }
 function MensajeOfertaInvalida(o){
 	
+	debugger;
 	var precio = Number($(o).attr("attr-precio"));
 	var incremento = Number($(o).attr("attr-incremento"));
 	var ultimaoferta = Number($(o).attr("attr-ultimaoferta"));
@@ -563,7 +564,7 @@ function MensajeOfertaInvalida(o){
 
 	if(oferta <= precio)
 		return ": La oferta es menor que el precio de salida";
-	else if((oferta-precio) >= incremento){
+	else if((oferta-ultimaoferta) < incremento){
 		return ": Su oferta no cumple con las reglas de incremento de la subasta";
 	}else if(oferta <= ultimaoferta) {
 		return ": Su oferta es igual o inferior a la oferta previa";
@@ -593,7 +594,7 @@ function ValidaOferta(o){
 		ultimaoferta = oferta -1;
 	}
 
-	if(oferta > precio && (oferta-precio) >= incremento && oferta > ultimaoferta) {
+	if(oferta > precio && (oferta-ultimaoferta) >= incremento && oferta > ultimaoferta) {
 		return true;
 	}else{
 		return false;
