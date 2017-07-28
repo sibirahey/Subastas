@@ -838,6 +838,7 @@ function VerDetalleAuto(o) {
 			
 			$('.material-placeholder > img').on('touchstart', function(){
 				$(this).click();
+				event.stopPropagation();
 			});
 			
 			
