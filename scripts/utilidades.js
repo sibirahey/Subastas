@@ -835,8 +835,11 @@ function VerDetalleAuto(o) {
 				}
 								
 			});
-			
+			var flag = false;
 			$('.material-placeholder > img').on('touchstart', function(){
+				if($('.carousel-item').on('dragstart', function(){
+					$(this).click();
+				}))
 				$(this).click();				
 			});
 			
