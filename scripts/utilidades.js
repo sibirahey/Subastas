@@ -494,11 +494,21 @@ function PujarAuto(idAuto, idSubasta, precio, o){
 function ConfirmarOferta(){
 	$("#btnConfirmarOferta").hide();
 	$("#divConfirmarOferta").show();
+	$("#divAlertaConfirmarOferta").html("<h5>¿Está seguro de ofertar $" +  Number($("#txtOferta").val()).formatMoney(2, '.', ',')+" por este vehículo?</h5>" );
+
+	$("#divAlertaConfirmarOferta").show();
+	
+	$("#divInputOfertas").hide();
 	
 }
 function CancelarOferta(){
 	$("#btnConfirmarOferta").show();
 	$("#divConfirmarOferta").hide();
+	$("#divAlertaConfirmarOferta").html("");
+
+	$("#divAlertaConfirmarOferta").hide();
+	
+	$("#divInputOfertas").show();
 }
 
 function GuardarOferta(o){
@@ -513,6 +523,9 @@ function GuardarOferta(o){
 				debugger;
 				cargaAutosPorSubasta($(o).attr("attr-subastaid"), "#divContenidoSubasta", $(o).attr("attr-tiposubasta")); 
 				$("#txtOferta").val("");
+				$("#divAlertaConfirmarOferta").html("");
+				$("#divAlertaConfirmarOferta").hide();
+				$("#divInputOfertas").show();
 				$('#modalPuja').modal("close");
 			},function(){
 				Materialize.toast("Ocurrió un error al registrar su oferta", 5000);
@@ -520,6 +533,7 @@ function GuardarOferta(o){
 	}else{
 
 		Materialize.toast("Oferta inválida"+MensajeOfertaInvalida(o), 5000);
+		CancelarOferta();
 	}
 	$("#btnConfirmarOferta").show();
 	$("#divConfirmarOferta").hide();

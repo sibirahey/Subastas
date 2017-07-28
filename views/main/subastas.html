@@ -40,8 +40,11 @@
            <div class="input-field col s12">
               Recuerde que la oferta debe ser superior al precio, mayor que la última oferta y respetar el incremento solicitado por oferta.
             </div>
+            <div class="input-field col s12" id="divAlertaConfirmarOferta" style="display:none">
+              ##CONFIRMAR_OFERTA##
+            </div>
            
-          <div class="input-field col s12">
+            <div class="input-field col s12" id="divInputOfertas">
               <input name="txtOferta" id="txtOferta" type="text" class="validate" type="number" >
               <label for="last_name">Oferta:</label>
             </div>
@@ -51,7 +54,7 @@
                 Ofertar
             </a>
 			<div class="input-field col s12" id="divConfirmarOferta" style="display:none;">
-				<a id="btnGuardarOferta" class="waves-effect waves-light btn" attr-subastaid="0" attr-idauto="0" onclick="GuardarOferta(this);">Confirmar Oferta</a>
+				<a id="btnGuardarOferta" class="waves-effect waves-light btn" attr-subastaid="0F" attr-idauto="0" onclick="GuardarOferta(this);">Confirmar Oferta</a>
 				<a  class="waves-effect waves-light btn red" attr-subastaid="0" attr-idauto="0" onclick="CancelarOferta();">Cancelar</a>
 			</div>
 			

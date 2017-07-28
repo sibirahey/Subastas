@@ -73,6 +73,19 @@ class autospuja
                     return "Imposible ofertar, la substasta ha terminado";
                 }
 
+
+                $comando = "SELECT max(oferta) as maxoferta FROM autos_puja ap, subastas s WHERE idAuto=? and ap.idSubasta = ? and hora_puja < s.fechaFin";
+                $sentencia = $pdo->prepare($comando);
+                $sentencia->bindParam(1, $_POST["id_auto"]);
+                $sentencia->bindParam(2, $_POST["id_subasta"]);
+                $resultado = $sentencia->execute();
+                $fetch =  $sentencia->fetch(PDO::FETCH_ASSOC);
+                
+                if(intval($fetch["maxoferta"]) >= $_POST["oferta"]){
+                    return "Su oferta no fue registrada debido a que existe una oferta igual o superior a la tuya";
+                }
+
+
                 // Sentencia INSERT
                 $comando = "INSERT INTO " . self::NOMBRE_TABLA . " ( " .
                     self::ID_AUTO . "," .
