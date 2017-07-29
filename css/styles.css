@@ -2840,7 +2840,23 @@ div[name="altaautos"] > .row{
     position: absolute;
     right: 0;
 }
+.fullScreenContainer{
+	position: fixed;
+	height:100%;
+	width: 100%;
+	top:0;
+	left:0;
+	right:0;
+	bottom:0;
+	background-color:#000000;
+	z-index:1009;
+}
+.fullScreenImg{
+	width:100%;
+	height:auto;
+}
 /*--------- ENDS DETALLE SUBASTA --------*/
+
 #listausuarios{
 	color: #000 !important;
 }
