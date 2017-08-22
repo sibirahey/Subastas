@@ -377,6 +377,14 @@ function validaCamposAltaAutos(item){
 		msj += (msj =="") ? "Ciudad" : ", Ciudad";
 		validado = false;
 	}
+	if (item.placa == '' ){
+		msj += (msj =="") ? "Placa" : ", Placa";
+		validado = false;
+	}
+	if (item.ciudad == '' || item.ciudad == undefined || item.ciudad == '0'){
+		msj += (msj =="") ? "Ciudad" : ", Ciudad";
+		validado = false;
+	}
 	if(item.descripcion == '' || item.descripcion == undefined){
 		msj += (msj =="") ? "Descripción" : ", Descripción";
 		validado = false;

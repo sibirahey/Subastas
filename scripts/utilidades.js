@@ -742,6 +742,8 @@ function GuardaDetalleAuto(opc){
 		oAuto.features = [];
 		oAuto.fotos = [];
 		oAuto.motivo_precio = $("#cbMotivoPrecio").val();
+		oAuto.placa = String($("#txtPlaca").val()).toUpperCase();
+		oAuto.serie = $("#txtNoSerie").val();
 
 		if(opc =="actualiza"){
 

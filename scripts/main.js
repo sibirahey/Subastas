@@ -116,6 +116,11 @@ function CargaContenidoMain() {
 						subasta = subasta.replace("#TIPOSUBASTA#", response[o].tipoSubasta);  
 						subasta = subasta.replace("#SUBASTAID#", response[o].idSubasta);
 						subasta = subasta.replace("#SUBASTAID#", response[o].idSubasta);
+						if(response[o].estatus == "TERMINADA"){
+							subasta = subasta.replace("##CLASS##", "");
+						} else{
+							subasta = subasta.replace("##CLASS##", "display:none; ");
+						}
 						$("#ulMisSubastas").append(subasta);
 
 						

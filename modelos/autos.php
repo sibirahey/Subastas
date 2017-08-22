@@ -23,6 +23,8 @@ class autos
     const ESTADO = "estado";
     const CIUDAD = "ciudad";
     const DESCRIPCION = "descripcion";
+    const PLACA = "placa";
+    const SERIE = "serie";
     const ESTATUS = "estatus";
     const PUBLICADO = "publicado";
     const MOTIVO_PRECIO = "motivo_precio";
@@ -286,10 +288,12 @@ class autos
                 self::ESTADO . ",".
                 self::CIUDAD . ",".
                 self::DESCRIPCION . ",".
+                self::PLACA . ",".
+                self::SERIE . ",".
                 self::ESTATUS . ",".
                 self::PUBLICADO . ",".
                 self::MOTIVO_PRECIO.")" .
-                " VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+                " VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
             
             $desc = json_decode($auto["descripcion"]);
             $sentencia = $pdo->prepare($comando);
@@ -303,10 +307,12 @@ class autos
             $sentencia->bindParam(8, $auto["transmision"]);                          
             $sentencia->bindParam(9, $auto["estado"]);                          
             $sentencia->bindParam(10, $auto["ciudad"]);                          
-            $sentencia->bindParam(11, $desc);     
-            $sentencia->bindParam(12, $auto["estatus"]);                          
-            $sentencia->bindParam(13, $auto["publicado"]); 
-            $sentencia->bindParam(14, $auto["motivo_precio"]);                          
+            $sentencia->bindParam(11, $desc); 
+            $sentencia->bindParam(12, $auto["placa"]); 
+            $sentencia->bindParam(13, $auto["serie"]);
+            $sentencia->bindParam(14, $auto["estatus"]);                          
+            $sentencia->bindParam(15, $auto["publicado"]); 
+            $sentencia->bindParam(16, $auto["motivo_precio"]);                          
 
             //idAuto, enVenta, marca, modelo, color, anio, km, transmision, estado, ciudad, descripcion, estatus, publicado, fechaCreacion
                    

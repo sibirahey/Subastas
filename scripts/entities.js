@@ -80,7 +80,7 @@ function SubServicios (idSubServicio,idServicio,nombre,requisitos,estatus){
 	this.requisitos = requisitos;
 	this.estatus = estatus;
 }
-function Autos(idAuto, enVenta, precio, marca, modelo, color, anio, km, transmision, estado, ciudad, descripcion, estatus, publicado, fechaCreacion, features, fotos, idSubasta, motivo_precio){
+function Autos(idAuto, enVenta, precio, marca, modelo, color, anio, km, transmision, estado, ciudad, descripcion, estatus, publicado, fechaCreacion, features, fotos, idSubasta, motivo_precio, placa, serie){
  	
     this.idAuto = idAuto;
     this.enVenta = enVenta;
@@ -101,6 +101,8 @@ function Autos(idAuto, enVenta, precio, marca, modelo, color, anio, km, transmis
     this.fotos = fotos;
     this.idSubasta = idSubasta;
     this.motivo_precio = motivo_precio;
+	this.placa = placa;
+	this.serie = serie;
 }
 function Marca(id, descripcion, estatus){
 	this.id = id;
