@@ -719,34 +719,8 @@ function GuardaDetalleAuto(opc) {
 	} else {
 		oAuto.enVenta = 1;
 		oAuto.idSubasta = 0;
-
-<<<<<<< HEAD
-		}
-		oAuto.precio = $("#precioAuto").val().trim();
-		oAuto.marca = $("#cbMarcaAuto").val();
-		oAuto.modelo = $("#cbModeloAuto").val();
-		oAuto.color = $("#cbColorAuto").val();
-		oAuto.anio = $("#cbAnioAuto").val().trim();
-		oAuto.km = $("#cbKMAuto").val().trim();
-		oAuto.transmision = $("#cbTipoTransmisionAuto").val();
-		oAuto.estado = $("#cbEstadoAuto").val();
-		oAuto.ciudad = $("#cbCiudadAuto").val();
-		oAuto.descripcion = JSON.stringify($("#txtaDescripcionAuto").val());
-		oAuto.estatus = 1;
-		oAuto.publicado = 1;
-		oAuto.features = [];
-		oAuto.fotos = [];
-		oAuto.motivo_precio = $("#cbMotivoPrecio").val();
-		oAuto.placa = String($("#txtPlaca").val()).toUpperCase();
-		oAuto.serie = $("#txtNoSerie").val();
-
-		if(opc =="actualiza"){
-
-			oAuto.idAuto = Number($("#btnGuardaAuto").attr("attr-autoid"));
-		}
-		
-=======
 	}
+	
 	oAuto.precio = $("#precioAuto").val().trim();
 	oAuto.marca = $("#cbMarcaAuto").val();
 	oAuto.modelo = $("#cbModeloAuto").val();
@@ -767,7 +741,7 @@ function GuardaDetalleAuto(opc) {
 
 		oAuto.idAuto = Number($("#btnGuardaAuto").attr("attr-autoid"));
 	}
->>>>>>> 281f45d859af0ff8e3f61c9aa335c5a56d730d45
+
 
 	$.each($(".feature"), function(key, value) {
 		oAuto.features.push($(value).attr("attr-featureid"));
@@ -892,15 +866,19 @@ function VerDetalleAuto(o) {
 
 			if (getUrlVars()["accion"] == "subastasadmin") {
 
+				
 				$("#closeDetalleAuto").click(function() {
 					$('#divDetalleAuto').hide();
-					$("#modalListaAutos").show()
+				
 					$("#divListaAutos").show();
-					$('.carousel').carousel({
+					
+				});
+				
+			
+				$('.carousel').carousel({
 						indicators : true,
 						noWrap : true
 					});
-				});
 
 			} else if (getUrlVars()["accion"] == "subasta") {
 				$("#closeDetalleAuto").click(function() {

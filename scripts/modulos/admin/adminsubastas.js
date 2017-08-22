@@ -27,6 +27,7 @@ function CargaFuncionesAdminSubastas() {
 	$("#txtFechaFin").datepicker();
 	$("#txtFechaInicio").datepicker("option", "dateFormat", "dd/mm/yy" );
 	$("#txtFechaFin").datepicker("option", "dateFormat", "dd/mm/yy" );
+	$("#divRegistroAutos").hide();
 
 	$("#dpFechaInicio").html(CargaSelectTP());
 	$("#dpFechaFin").html(CargaSelectTP());
@@ -288,9 +289,9 @@ function CargaSubastas(estatus, empresa) {
 			$("#divRegistroAutos").modal("open");
 		});
 
-		$("#modalListaAutos").click(function(){
-			$("#divDetalleAuto").hide();
-			$("#divListaAutos").show();
+		$("#btnListaAutos").click(function(){
+			$("#divAdminSubastas").show();
+			$("#divRegistroAutos").hide();
 		});
 			
 		
@@ -298,10 +299,14 @@ function CargaSubastas(estatus, empresa) {
 		$(".btnVerAutos").click(function() {
 			debugger;
 			var nombreSubasta = $(this).attr("attr-nombresubasta");
+			$("#divListaAutosTitulo").html(nombreSubasta);
 			var idSubasta = $(this).attr("attr-id");
 			cargaAutosPorSubasta(idSubasta, "#divListaAutos");
-			$('#divListaAutos').modal('open');
-			$("#modalListaAutos").show();
+			$("#divAdminSubastas").hide();
+			//$('#divListaAutos').show();
+			//$('#divListaAutos').modal('open');
+			//$("#modalListaAutos").show();
+			$("#divRegistroAutos").show();
 		});
 
 		
