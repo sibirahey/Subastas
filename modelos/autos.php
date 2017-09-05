@@ -73,7 +73,7 @@ class autos
                         " (select GROUP_CONCAT(idFoto) from auto_fotos where idAuto = au.idAuto) AS fotos, ".
                         "   IFNULL((select oferta  from autos_puja ap where ap.idAuto = aus.autoId and ap.hora_puja < sub.fechaFin order by ap.hora_puja desc limit 1), au.precio) as oferta, ".
                         " (select count(*) from autos_puja ap where ap.idAuto = aus.autoId and ap.hora_puja < sub.fechaFin) as total_ofertas, ".
-                        " sub.idTipoSubasta, (CASE WHEN now() BETWEEN sub.fechaInicio and sub.fechaFin then 'ACTIVA' WHEN now() < sub.fechaInicio then 'AGENDADA' else 'TERMINADA' end) as estatus_subasta, sub.incremento ".
+                        " sub.idTipoSubasta, (CASE WHEN now() BETWEEN sub.fechaInicio and sub.fechaFin then 'ACTIVA' WHEN now() < sub.fechaInicio then 'AGENDADA' else 'TERMINADA' end) as estatus_subasta, sub.incremento, aus.estatus, aus.motivo ".
                         " FROM subastas_autos as aus, autos as au, cat_marca as marca, cat_modelo as modelo, cat_colores as color, cat_transmision as trans, estados as est, municipios as mun, subastas sub ".
                         " WHERE aus.subastaId = ?  ".
                         " and aus.autoId = au.idAuto  ".
@@ -122,7 +122,7 @@ class autos
                 " (select idFoto from auto_fotos where idAuto = au.idAuto limit 1) as foto,  ".
                 "  (select GROUP_CONCAT(idFoto) from auto_fotos where idAuto = au.idAuto) AS fotos,  ".
                 "  (select GROUP_CONCAT(idFeature) from autos_catacteristicas where idAuto = au.idAuto) AS caracteristicasids,  ".
-                "  (select GROUP_CONCAT(feat.descripcion) from autos_catacteristicas ac, cat_features feat where  ac.idFeature = feat.id and ac.idAuto = 20 ) as caracteristicas, au.motivo_precio ".
+                "  (select GROUP_CONCAT(feat.descripcion) from autos_catacteristicas ac, cat_features feat where  ac.idFeature = feat.id and ac.idAuto = 20 ) as caracteristicas, au.motivo_precio, au.placa, au.serie ".
                 " FROM autos as au, cat_marca as marca, cat_modelo as modelo, cat_colores as color, cat_transmision as trans, estados as est, municipios as mun  ".
                 " WHERE au.marca = marca.id   ".
                 " and au.modelo = modelo.id   ".
@@ -131,6 +131,7 @@ class autos
                 " and au.estado = est.id  ".
                 " and au.ciudad = mun.id  ".
                 " and au.idAuto =   ".$idauto;
+
 
 
 

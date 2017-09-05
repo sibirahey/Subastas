@@ -166,6 +166,9 @@ function ejecutaModeloPost($vista, $mod, $arr)
         case 'contactanos':
             $vista->imprimir(contactanos::post($arr));
             break;
+        case 'subastautos':
+            $vista->imprimir(subastasautos::post($arr));
+            break;
         default:
     		# code...
     		break;

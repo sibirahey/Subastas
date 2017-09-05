@@ -351,12 +351,12 @@ function checkCookie() {
 }
 
 function cargaAutosPorSubasta(subastaID, controlid, tiposubasta) {
-	// debugger;
+	
 	$(controlid).html("");
 	postrequest("autos/subasta", {
 		"idsubasta" : subastaID
 	}, function(data) {
-		debugger;
+		
 		$("#divDetalleAuto").hide();
 		for (var val in data) {
 
@@ -368,12 +368,25 @@ function cargaAutosPorSubasta(subastaID, controlid, tiposubasta) {
 			}
 
 		}
-		if (tiposubasta) {
-			$(".divBtnPujar").parent().show();
+
+		debugger;
+		if (tiposubasta  && getUrlVars()["accion"] =="subasta") {
+			$(".divBtnPujar").show();
 			$('.card-content').css('height', '200px');
-			if (tiposubasta == 1) {
-				$(".divVerOfertas").show()
+			if (tiposubasta == 1 && getUrlVars()["accion"] =="subasta") {
+				$(".divVerOfertas").show();
+			}else{
+				$(".divVerOfertas").hide();
 			}
+		}else{
+			$(".divBtnPujar").hide();
+		}
+		if(sessionStorage["es_admin"] == "1" && getUrlVars()["accion"] !="subasta"){
+			$(".divBtnEditar").show();
+			$(".divBtnCancelarAuto").show();
+		}else{
+			$(".divBtnEditar").hide();
+			$(".divBtnCancelarAuto").hide();
 		}
 
 	});
@@ -387,14 +400,15 @@ function regresaRenglonVenta(item, subastaID) {
 	var renglon = '    <div class="searchItem">';
 	renglon += '      <div class="card">';
 	renglon += '        <div class="card-image">';
-	renglon += ' 		  <span class="contadorAuto">##num_auto##</span>	';
-	renglon += '          <img attr-id="' + item.idAuto + '" width="100px" onclick="VerDetalleAuto(this);" src="' + siteurl + 'uploads/' + item.foto + '" onerror="imgError(this)"; />';
-	renglon += '          <span class="card-title">' + item.marca + ' - ' + item.modelo;
+	renglon += '		  	<img id="divContentAutoImgCancel' + item.idAuto+ '" class="imgAutoCancelado" style="'+((item.estatus == "-1") ? "": "display:none;") +'"/>	';		
+	renglon += ' 		  	<span class="contadorAuto">##num_auto##</span>	';
+	renglon += '          	<img attr-id="' + item.idAuto + '" width="100px" onclick="VerDetalleAuto(this);" src="' + siteurl + 'uploads/' + item.foto + '" onerror="imgError(this)"; />';
+	renglon += '          	<span class="card-title">' + item.marca + ' - ' + item.modelo;
 
 	autos = eval(sessionStorage["autos_ofertados"]);
 	var auto_ofertado = false;
 	for (var i in autos) {
-		if (autos[i].auto == item.idAuto) {
+		if (autos[i].auto == item.idAuto && getUrlVars()["accion"] == "subasta") {
 			renglon += ' 		<i class="material-icons" style="float:right">grade</i>';
 			auto_ofertado = true;
 			break;
@@ -404,6 +418,12 @@ function regresaRenglonVenta(item, subastaID) {
 	renglon += ' 		  </span>';
 	renglon += '        </div>';
 	renglon += '      	<div class="card-content">';
+	renglon += '    		<div id="divContentAutoMotivo' + item.idAuto+ '" style="'+ ((item.estatus == "-1") ? "": "display:none;") + '">';
+	renglon += '      			<label>Movito de cancelación: </label>';
+	//renglon += '      			<label>' + item.motivo + '</label>';
+	renglon += '      			<label>Retirado de la subasta</label>';
+	renglon += '    		</div>';
+	
 	renglon += '    		<div>';
 	renglon += '      			<label>Modelo: </label>';
 	renglon += '      			<label>' + item.anio + '</label>';
@@ -425,6 +445,7 @@ function regresaRenglonVenta(item, subastaID) {
 	renglon += '      			<label>' + item.descripcion + '</label>';
 	renglon += '    		</div>';
 
+
 	if (item.idTipoSubasta == 1) {
 		renglon += '    	<div class="divUltimaOferta">';
 		renglon += '      		<label>Última oferta: </label>';
@@ -433,19 +454,36 @@ function regresaRenglonVenta(item, subastaID) {
 
 	}
 	renglon += '    </div>';
-	renglon += '	<div class="card-action" style="display:none">';
+	renglon += '	<div class="card-action>';
 
+	debugger;
 	if (subastaID > 0) {
+
 		if (item.estatus_subasta == "ACTIVA") {
 
-			if (eval(sessionStorage["autos_ofertados"]).length < Number($("#numOfertasPosibles").html()) || auto_ofertado) {
+			if ((getUrlVars()["accion"] == "subasta" && ((sessionStorage["autos_ofertados"])? true : false) && eval(sessionStorage["autos_ofertados"]).length < Number($("#numOfertasPosibles").html()) && item.estatus != "-1") || (auto_ofertado && item.estatus != "-1")) {
 
 				renglon += '    <div class="divBtnPujar" >';
-				renglon += '    <div id="btnPujar" class="btnPujar waves-effect waves-light btn" attr-incremento="' + item.incremento + '" attr-tiposubasta="' + item.idTipoSubasta + '" attr-ultimaoferta="' + ((item.idTipoSubasta == "1") ? item.oferta : 0 ) + '" onclick=PujarAuto(' + item.idAuto + ',' + subastaID + ',' + Number(item.precio) + ',this);>Ofertar</div>';
+				renglon += '    	<div id="btnPujar" class="btnPujar waves-effect waves-light btn" attr-incremento="' + item.incremento + '" attr-tiposubasta="' + item.idTipoSubasta + '" attr-ultimaoferta="' + ((item.idTipoSubasta == "1") ? item.oferta : 0 ) + '" onclick=PujarAuto(' + item.idAuto + ',' + subastaID + ',' + Number(item.precio) + ',this);>Ofertar</div>';
+				renglon += '	</div>'	;
 			}
+			if(sessionStorage["es_admin"] == "1"  && getUrlVars()["accion"] == "subastasadmin"){
+
+				renglon += '    <div class="divBtnEditar" >';
+				renglon += '    	<div id="btnPujar" class="btnPujar waves-effect waves-light btn" attr-incremento="' + item.incremento + '" attr-tiposubasta="' + item.idTipoSubasta + '" attr-ultimaoferta="' + ((item.idTipoSubasta == "1") ? item.oferta : 0 ) + '" attr-idauto="'+item.idAuto+'" attr-idsubasta="'+subastaID+'" onclick=EditarAuto(this);>Editar</div>';
+				renglon += '	</div>';
+			}
+			if(sessionStorage["es_admin"] == "1"  && getUrlVars()["accion"] == "subastasadmin" ){
+
+				renglon += '    <div class="divBtnCancelarAuto" >';
+				renglon += '    	<div id="btnCancelarAuto" class="btnPujar waves-effect waves-light btn" attr-incremento="' + item.incremento + '" attr-tiposubasta="' + item.idTipoSubasta + '" attr-ultimaoferta="' + ((item.idTipoSubasta == "1") ? item.oferta : 0 ) + '" attr-auto="'+item.marca + ' - ' + item.modelo +'('+item.anio +')" attr-idauto="'+item.idAuto+'" attr-idsubasta="'+subastaID+'" onclick=CancelarAuto(this);>Cancelar</div>';
+				renglon += '	</div>';
+			}
+
+
 		}
+		
 	}
-	renglon += '    </div>';
 	renglon += '  </div>';
 	$('.searchItem > .card > .card-content').css('height', '267px');
 	return renglon;
@@ -601,14 +639,73 @@ function ValidaOferta(o) {
 		return false;
 	}
 }
+function CancelarAuto(o){
+	$("#modal-confirm-cancelauto").show();
+	$("#divRegistroAutos").hide();
+	$("#divListaBotonera").hide();
+
+	$("#ttlCancelarAuto").html($(o).attr("attr-auto"));
+	$("#btnCancelarSubastaAuto").attr("attr-idauto", $(o).attr("attr-idauto"));
+	$("#btnCancelarSubastaAuto2").attr("attr-idauto", $(o).attr("attr-idauto"));
+	$("#btnCancelarSubastaAuto2").attr("attr-idsubasta", $(o).attr("attr-idsubasta"));
+
+	$("#btnCancelarSubastaAuto").click(function(){
+		RegresarAListadoAuto();
+	});
+
+	$("#btnCancelarSubastaAuto2").click(function(){
+		
+		if($("#txtCancelaAuto").val() == ""){
+
+			Materialize.toast("El motivo de cancelación es obligatorio", 4000);
+			return false;
+		}
+		
+		postrequest("subastautos/cancelar",{'motivo':$("#txtCancelaAuto").val() , 'idSubasta': $("#btnCancelarSubastaAuto2").attr("attr-idsubasta"), 'idauto': $("#btnCancelarSubastaAuto2").attr("attr-idauto")} , 
+				function(data){ 
+					if(data){
+						Materialize.toast('La operación se realizó de forma exitosa', 4000);
+						
+						$("#divContentAutoImgCancel"+$("#btnCancelarSubastaAuto2").attr("attr-idauto")).show()
+						$("#divContentAutoMotivo"+$("#btnCancelarSubastaAuto2").attr("attr-idauto")).show()
+
+					}else{
+						Materialize.toast('Ocurrió un error al realizar la operación', 4000);
+					}
+					$("#txtCancelaAuto").val("");
+					RegresarAListadoAuto();
+				}, 
+				function(data){
+					Materialize.toast('Ocurrió un error inesperado', 4000);
+					$("#txtCancelaAuto").val();
+					RegresarAListadoAuto()
+				}
+
+		);
+		
+
+	});
+}
+
+
+function RegresarAListadoAuto(){
+
+	$("#modal-confirm-cancelauto").hide();
+	$("#divRegistroAutos").show();
+	$("#divListaBotonera").show();
+
+}
+
+
 
 function EditarAuto(o) {
 
-	var subastaid = $(o).attr("attr-subastaid");
-	var autoid = $(o).attr("attr-id");
+	var subastaid = $(o).attr("attr-idsubasta");
+	var autoid = $(o).attr("attr-idauto");
 
 	$("#divListaAutos").load("views/main/admin/altaautos.html?rand=" + Math.random(), function() {
-
+		debugger;
+		
 		$("#btnGuardaAuto").hide();
 		$("#bntActualizaAuto").show();
 		//debugger;
@@ -682,6 +779,11 @@ function EditarAuto(o) {
 			$("#cbCiudadAuto").material_select("destroy");
 			$("#cbCiudadAuto").val(data.ciudadid);
 			$("#cbCiudadAuto").material_select();
+
+			
+			$("#txtPlaca").val(data.placa);
+			$("#txtNoSerie").val(data.serie);
+			Materialize.updateTextFields();
 
 		});
 

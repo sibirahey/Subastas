@@ -1464,10 +1464,12 @@ div[aria-describedby="divAutos"] {
 	border-radius: 3px;
 	background-color: #ffdf01;
 }
-.divBtnPujar,
-.divVerOfertas{
-	float:left;
+
+
+.divBtnPujar,  .divBtnEditar, .divVerOfertas,.divBtnCancelarAuto {
+	float: left;
 	width: 50%;
+	position: relative;
 }
 /*---------- FIN MAIN--------*/
 /*---------- REGISTRO ---------*/
@@ -2872,4 +2874,15 @@ div[name="altaautos"] > .row{
 label,
 .input-field label{
 	color:#505050;
+}
+.imgAutoCancelado{
+    width: 100% !important;
+    float: left  !important;
+    z-index: 100  !important;
+    position: absolute  !important;
+    left: 0px  !important;
+    top: 0px  !important;
+    text-align: center  !important;
+    content: url("../images/cancel.png")  !important;
+
 }

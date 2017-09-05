@@ -66,8 +66,7 @@ class usuarios
                 return self::info();
         }else if($peticion[0] == 'preregistro'){
             return self::preregistro($_POST);
-        }
-        else{
+        }else{
             throw new ExcepcionApi(self::ESTADO_URL_INCORRECTA, "Url mal formada", 400);
         }
     }   

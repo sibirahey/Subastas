@@ -29,8 +29,9 @@ class subastasautos
             return self::listarEmpresas();
         }else if ($peticion[0] == 'guardar') {
             return self::registrarOut();
-        }
-        else {
+        }else if ($peticion[0] == 'cancelar') {
+            return self::cancelar();
+        }else {
             throw new ExcepcionApi(self::ESTADO_URL_INCORRECTA, "Url mal formada", 400);
         }
     }   
@@ -74,6 +75,34 @@ class subastasautos
             
         }
 
+    }
+    public static function cancelar(){
+        if(!usuarios::ValidaSesion($_SESSION["claveapi"], $_SESSION["idusuario"])){
+            throw new ExcepcionApi("El usuario no tiene permisos de ejecutar esta operación", "error", 500);
+        }
+
+        try{
+            
+            $pdo = ConexionBD::obtenerInstancia()->obtenerBD();
+            $comando = "update " . self::NOMBRE_TABLA . " set estatus =  -1, motivo = ? where autoId = ? and subastaId = ? ";
+            $sentencia = $pdo->prepare($comando);
+           
+            $sentencia->bindParam(1, $_POST["motivo"]);
+            $sentencia->bindParam(2, $_POST["idauto"]);
+            $sentencia->bindParam(3, $_POST["idSubasta"]);
+            $resultado = $sentencia->execute();
+                        
+            if ($resultado) {
+                return true;
+            } else {
+                return false;
+            }
+
+
+        }catch(Excepcion $e){
+            throw new ExcepcionApi(self::ESTADO_URL_INCORRECTA, $e->getMessage(), 500);
+
+        }
     }
 
     
