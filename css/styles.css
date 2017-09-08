@@ -1470,6 +1470,7 @@ div[aria-describedby="divAutos"] {
 	float: left;
 	width: 50%;
 	position: relative;
+	text-align:center;
 }
 /*---------- FIN MAIN--------*/
 /*---------- REGISTRO ---------*/
