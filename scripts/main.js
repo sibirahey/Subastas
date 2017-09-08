@@ -23,7 +23,7 @@ $(document).ready(function(){
    				CargaFunciones(accion);
    			
       	});
-	}
+	}	
 	
   });
 
@@ -66,7 +66,8 @@ function CargaFunciones(o){
 
 	}
     CargaMaterial ();
-
+	debugger;
+	$(window).trigger('resize');
 	
 }
 
