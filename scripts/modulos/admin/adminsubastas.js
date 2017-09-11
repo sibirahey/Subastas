@@ -573,47 +573,17 @@ function CargaSubastas(estatus, empresa) {
 	});
 
 	$(function() {
-		// $("#divRegistroAutos").dialog({
-		// autoOpen : false,
-		// modal : true,
-		// maxHeight : 500,
-		// width : 500,
-		// resizable : false,
-		// dialogClass: 'noTitleStuff',
-		// show : {
-		// effect : "blind",
-		// duration : 500
-		// },
-		// hide : {
-		// effect : "blind",
-		// duration : 500
-		// }
-		// });
 		$("#divRegistroAutos").modal({
 			dismissible : false, // Modal can be dismissed by clicking outside of the modal
 			opacity : .5, // Opacity of modal background
+			startingTop : 0,
 			inDuration : 300, // Transition in duration
-			outDuration : 200, // Transition out duration
+			outDuration : 200 // Transition out duration
 		});
 
 	});
 
 	$(function() {
-		// $("#divAdministraUsuarios").dialog({
-		// title : "Invitar usuarios",
-		// autoOpen : false,
-		// modal : true,
-		// width : 500,
-		// resizable : false,
-		// show : {
-		// effect : "blind",
-		// duration : 500
-		// },
-		// hide : {
-		// effect : "blind",
-		// duration : 500
-		// }
-		// });
 		
 		$("#divAdministraUsuarios").modal({
 			dismissible : false, // Modal can be dismissed by clicking outside of the modal
