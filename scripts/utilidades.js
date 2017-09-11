@@ -465,24 +465,25 @@ function regresaRenglonVenta(item, subastaID) {
 
 				renglon += '    <div class="divBtnPujar" >';
 				renglon += '    	<div id="btnPujar" class="btnPujar waves-effect waves-light btn" attr-incremento="' + item.incremento + '" attr-tiposubasta="' + item.idTipoSubasta + '" attr-ultimaoferta="' + ((item.idTipoSubasta == "1") ? item.oferta : 0 ) + '" onclick=PujarAuto(' + item.idAuto + ',' + subastaID + ',' + Number(item.precio) + ',this);>Ofertar</div>';
-				renglon += '	</div>'	;
+			
 			}
 			if(sessionStorage["es_admin"] == "1"  && getUrlVars()["accion"] == "subastasadmin"){
 
 				renglon += '    <div class="divBtnEditar" >';
 				renglon += '    	<div id="btnPujar" class="btnPujar waves-effect waves-light btn" attr-incremento="' + item.incremento + '" attr-tiposubasta="' + item.idTipoSubasta + '" attr-ultimaoferta="' + ((item.idTipoSubasta == "1") ? item.oferta : 0 ) + '" attr-idauto="'+item.idAuto+'" attr-idsubasta="'+subastaID+'" onclick=EditarAuto(this);>Editar</div>';
-				renglon += '	</div>';
+				
 			}
 			if(sessionStorage["es_admin"] == "1"  && getUrlVars()["accion"] == "subastasadmin" ){
 
 				renglon += '    <div class="divBtnCancelarAuto" >';
 				renglon += '    	<div id="btnCancelarAuto" class="btnPujar waves-effect waves-light btn" attr-incremento="' + item.incremento + '" attr-tiposubasta="' + item.idTipoSubasta + '" attr-ultimaoferta="' + ((item.idTipoSubasta == "1") ? item.oferta : 0 ) + '" attr-auto="'+item.marca + ' - ' + item.modelo +'('+item.anio +')" attr-idauto="'+item.idAuto+'" attr-idsubasta="'+subastaID+'" onclick=CancelarAuto(this);>Cancelar</div>';
-				renglon += '	</div>';
+				
 			}
 
 		}
 		
 	}
+	renglon += '  </div>';
 	renglon += '  </div>';
 	$('.searchItem > .card > .card-content').css('height', '267px');
 	return renglon;

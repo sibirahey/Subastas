@@ -1470,6 +1470,7 @@ div[aria-describedby="divAutos"] {
 	float: left;
 	width: 50%;
 	position: relative;
+	text-align:center;
 }
 /*---------- FIN MAIN--------*/
 /*---------- REGISTRO ---------*/
@@ -2148,6 +2149,7 @@ button[name="contactoEnviar"] {
 	height:100%;
 	width: 100%;
 }
+
 /*---------- ENDS ADMINISTRADOR DE SUBASTAS---------*/
 /*---------  SWITCH ---------*/
 
@@ -2238,7 +2240,15 @@ input:checked + .slider:before {
 	text-align: center;
 	color: #3281B3;
 }
-
+#divRegistroAutos{
+	position:fixed;
+	top:0;
+	left:0;
+	width:100%;
+	height:80%;
+	overflow:auto;
+	z-index:10000;
+}
 #divRegistroAutos > .divegistro > label, #divRegistroAutos > .divegistro > .select-wrapper, #divRegistroAutos > .divegistro > #btnAddMarca {
 	float: left;
 }
@@ -2308,10 +2318,17 @@ input:checked + .slider:before {
 	z-index:2;
 }
 #divRegistroAutos > .modal-content{
-	padding:0;
-	height:calc(100% - 50px);
-	overflow-x: hidden !important;
+	padding: 0;
+    height: auto;
+    overflow-x: hidden !important;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    z-index: 11;
+    background-color: #ffffff;
 }
+
 .altaAutosContainer > h4{
 	margin:30px 0;
 }
@@ -2747,7 +2764,7 @@ div[name="altaautos"] > .row{
 	max-width:1024px;
 	height:calc(100% - 40px);
 	width: 100%;
-	margin:40px auto 0;
+	/*margin:40px auto 0;*/
 }
 .divDetalleAuto > .mbLeft{
 	margin:10px 2% 0;
@@ -2851,14 +2868,18 @@ div[name="altaautos"] > .row{
 	right:0;
 	bottom:0;
 	background-color:#000000;
-	z-index:1009;
+	z-index:10009;
 }
 .fullScreenImg{
 	width:100%;
 	height:auto;
 }
 /*--------- ENDS DETALLE SUBASTA --------*/
-
+/*--------- ADMIN SUBASTA --------*/
+#btnListaAutos{
+	/*z-index:10;*/
+}
+/*--------- ENDS ADMIN SUBASTA --------*/
 #listausuarios{
 	color: #000 !important;
 }
