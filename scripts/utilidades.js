@@ -480,7 +480,6 @@ function regresaRenglonVenta(item, subastaID) {
 				renglon += '	</div>';
 			}
 
-
 		}
 		
 	}
@@ -571,7 +570,7 @@ function GuardarOferta(o) {
 	} else {
 
 
-		Materialize.toast("Oferta inválida: "+MensajeOfertaInvalida(o), 5000);
+		Materialize.toast("Oferta inválida"+MensajeOfertaInvalida(o), 5000);
 
 		CancelarOferta();
 	}
@@ -581,10 +580,11 @@ function GuardarOferta(o) {
 }
 
 function MensajeOfertaInvalida(o){
-
+	debugger;
 	var precio = Number($(o).attr("attr-precio"));
 	var incremento = Number($(o).attr("attr-incremento"));
 	var ultimaoferta = Number($(o).attr("attr-ultimaoferta"));
+	var tiposubasta = Number($(o).attr("attr-tiposubasta"));
 
 	try {
 		if (isNaN(Number($("#txtOferta").val()))) {
@@ -598,15 +598,19 @@ function MensajeOfertaInvalida(o){
 	if ($(o).attr("attr-ultimaoferta") == undefined) {
 		ultimaoferta = oferta - 1;
 	}
-
-	if (oferta <= precio)
-		return ": La oferta es menor que el precio de salida";
-
+	if (oferta <= precio){
+			return ": La oferta es menor que el precio de salida";
+	}
 	else if((oferta-ultimaoferta) < incremento){
-
 		return ": Su oferta no cumple con las reglas de incremento de la subasta";
-	} else if (oferta <= ultimaoferta) {
+	}
+	else if(tiposubasta == 1 && oferta <= ultimaoferta)
+	{
 		return ": Su oferta es igual o inferior a la oferta previa";
+	}
+	else if(tiposubasta == 2 && (oferta-precio) < incremento)
+	{
+		return ":  Su oferta no cumple con las reglas de incremento de la subasta";
 	}
 }
 
@@ -616,6 +620,7 @@ function ValidaOferta(o) {
 	var precio = Number($(o).attr("attr-precio"));
 	var incremento = Number($(o).attr("attr-incremento"));
 	var ultimaoferta = Number($(o).attr("attr-ultimaoferta"));
+	var tiposubasta = Number($(o).attr("attr-tiposubasta"));
 
 	try {
 		if (isNaN(Number($("#txtOferta").val()))) {
@@ -632,10 +637,16 @@ function ValidaOferta(o) {
 	}
 
 
-	if(oferta > precio && (oferta-ultimaoferta) >= incremento && oferta > ultimaoferta) {
-
+	if(tiposubasta == 2 && oferta > precio && (oferta-precio) >= incremento ) 
+	{
 		return true;
-	} else {
+	}
+	else if(tiposubasta == 1 && oferta > precio && (oferta-ultimaoferta) >= incremento && oferta > ultimaoferta) 
+	{
+		return true;
+	} 
+	else 
+	{
 		return false;
 	}
 }
