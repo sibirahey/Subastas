@@ -17,6 +17,8 @@ class autospuja
     const ID_SUBASTA = "idSubasta";
     const ID_USUARIO = "idUsuario";
     const OFERTA = "oferta";
+    const ESTATUS = "estatus";
+    const MOTIVO = "motivo";
    
     const SIN_RESULTADOS = "No se encontraron resultados";
     const LISTO = "OK";
@@ -58,41 +60,63 @@ class autospuja
         try {
 
             
-            
+                $tiposubasta = 0;
+                $valida = 1;
+                $motivo = '';
+                $incremento = 0;
  //               print_r($_SESSION);
                 $pdo = ConexionBD::obtenerInstancia()->obtenerBD();
 
 
-                $comando = "select case when now() < fechaFin then true else false END as valida  from subastas where idSubasta = ? ";
+                $comando = "select case when now() < fechaFin then true else false END as valida, idTipoSubasta as tiposubasta, incremento  from subastas where idSubasta = ? ";
                 $sentencia = $pdo->prepare($comando);
                 $sentencia->bindParam(1, $_POST["id_subasta"]);
                 $resultado = $sentencia->execute();
                 $fetch =  $sentencia->fetch(PDO::FETCH_ASSOC);
                 
+                $tiposubasta = $fetch["tiposubasta"];
+                $incremento =  $fetch["incremento"];
+                
                 if($fetch["valida"] == 0){
-                    return "Imposible ofertar, la substasta ha terminado";
+                    $valida = 0;
+                    $motivo = "Imposible ofertar, la substasta ha terminado";
                 }
+              
 
-
-                $comando = "SELECT max(oferta) as maxoferta FROM autos_puja ap, subastas s WHERE idAuto=? and ap.idSubasta = ? and hora_puja < s.fechaFin";
+                $comando = "SELECT max(oferta) as maxoferta FROM autos_puja ap, subastas s WHERE idAuto=? and ap.idSubasta = ? and hora_puja < s.fechaFin and estatus = 1";
                 $sentencia = $pdo->prepare($comando);
                 $sentencia->bindParam(1, $_POST["id_auto"]);
                 $sentencia->bindParam(2, $_POST["id_subasta"]);
                 $resultado = $sentencia->execute();
                 $fetch =  $sentencia->fetch(PDO::FETCH_ASSOC);
                 
-                if(intval($fetch["maxoferta"]) >= $_POST["oferta"]){
-                    return "Su oferta no fue registrada debido a que existe una oferta igual o superior a la tuya";
-                }
 
+
+                if($valida == 1){
+                    if(intval($fetch["maxoferta"]) >= $_POST["oferta"] && $tiposubasta== 1){
+                        $valida = 0;
+                        $motivo =  "Su oferta no fue registrada debido a que existe una oferta igual o superior a la tuya";
+                    }else{
+                        $valida = 1;
+                        $motivo =  "";
+                    }
+                }
+                if($valida == 1){
+                    if($_POST["oferta"] -$fetch["maxoferta"] < $incremento ){
+                        $valida = 0;
+                        $motivo = "La oferta no cumple con las reglas del incremento";
+                    }
+                }
 
                 // Sentencia INSERT
                 $comando = "INSERT INTO " . self::NOMBRE_TABLA . " ( " .
                     self::ID_AUTO . "," .
                     self::ID_SUBASTA . "," .
                     self::ID_USUARIO  . "," .
-                    self::OFERTA. ")" .
-                    " VALUES(?,?,?,?)";
+                    self::OFERTA. ",".
+                    self::ESTATUS.",".
+                    self::MOTIVO.")" .
+                    " VALUES(?,?,?,?,?,?)";
 
                 $u = new usuarios();
 
@@ -112,28 +136,39 @@ class autospuja
                         break;
                     }
                 }
+                if(!$ofertavalida){
+                    $valida = 0;
+                    $motivo = "Imposible ofertar, solamente se puede participar por ".$s[0]["ofertas_x_usuarios"]. " autos en esta subasta.";
+                }
 
                 
-               if($totalxusuario < $s[0]["ofertas_x_usuarios"] || $ofertavalida){
-                    $sentencia = $pdo->prepare($comando);
-                        $sentencia->bindParam(1, $_POST["id_auto"]);
-                        $sentencia->bindParam(2, $_POST["id_subasta"]);
-                        $sentencia->bindParam(3, $_SESSION['idusuario']);
-                        $sentencia->bindParam(4, $_POST["oferta"]);
-                        $resultado = $sentencia->execute();
-                       
-                     if ($resultado) {
-                        return "Su oferta fue registrada";
-
-                    } else {
-                        return "Ocurrió un error al registrar su oferta";
+                
+               if($valida == 1){
+                    if($totalxusuario < $s[0]["ofertas_x_usuarios"] || $ofertavalida){
+                        $valida = 1;
+                    }else{
+                        $valida = 0;
+                        $motivo = "Imposible ofertar, solamente se puede participar por ".$s[0]["ofertas_x_usuarios"]. " autos en esta subasta.";
                     }
-                }else{
-                    return "Imposible ofertar, solamente se puede participar por ".$s[0]["ofertas_x_usuarios"]. " autos en esta subasta.";
-                } 
+                }
                 
+                $sentencia = $pdo->prepare($comando);
+                $sentencia->bindParam(1, $_POST["id_auto"]);
+                $sentencia->bindParam(2, $_POST["id_subasta"]);
+                $sentencia->bindParam(3, $_SESSION['idusuario']);
+                $sentencia->bindParam(4, $_POST["oferta"]);
+                $sentencia->bindParam(5, $valida);
+                $sentencia->bindParam(6, $motivo);
+                $resultado = $sentencia->execute();
+                       
+                if ($resultado) {
+                    $motivo = "Su oferta fue registrada";
 
-
+                } else {
+                    $motivo = "Ocurrió un error al registrar su oferta";
+                }
+                return $motivo;
+                
             
         } catch (Excepcion $e) {
             
@@ -172,7 +207,7 @@ class autospuja
          try{
             //$comando = "SELECT count(*) as total_ofertas FROM autos_puja ap, usuario u WHERE ap.idUsuario = u.idUsuario and ap.idSubasta = ? and u.claveApi = ?";
             
-            $comando = "SELECT distinct ap.idAuto as auto FROM autos_puja ap, usuario u WHERE ap.idUsuario = u.idUsuario and ap.idSubasta = ? and u.claveApi = ?";
+            $comando = "SELECT distinct ap.idAuto as auto FROM autos_puja ap, usuario u WHERE ap.idUsuario = u.idUsuario and ap.idSubasta = ? and u.claveApi = ? and ap.estatus = 1";
             //print_r($comando);
             //print_r($_POST);
             $pdo = ConexionBD::obtenerInstancia()->obtenerBD();

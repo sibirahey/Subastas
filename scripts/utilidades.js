@@ -403,7 +403,7 @@ function regresaRenglonVenta(item, subastaID) {
 	renglon += '		  	<img id="divContentAutoImgCancel' + item.idAuto+ '" class="imgAutoCancelado" style="'+((item.estatus == "-1") ? "": "display:none;") +'"/>	';		
 	renglon += ' 		  	<span class="contadorAuto">##num_auto##</span>	';
 	renglon += '          	<img attr-id="' + item.idAuto + '" width="100px" onclick="VerDetalleAuto(this);" src="' + siteurl + 'uploads/' + item.foto + '" onerror="imgError(this)"; />';
-	renglon += '          	<span class="card-title">' + item.marca + ' - ' + item.modelo;
+	renglon += '          	<span class="card-title" style="z-index:100;">' + item.marca + ' - ' + item.modelo;
 
 	autos = eval(sessionStorage["autos_ofertados"]);
 	var auto_ofertado = false;
@@ -548,6 +548,7 @@ function CancelarOferta() {
 
 function GuardarOferta(o) {
 
+	debugger;
 	if (ValidaOferta(o)) {
 		postrequest("pujas/ofertar", {
 			"id_subasta" : $(o).attr("attr-subastaid"),
@@ -573,7 +574,18 @@ function GuardarOferta(o) {
 
 		Materialize.toast("Oferta inválida"+MensajeOfertaInvalida(o), 5000);
 
+		
+		postrequest("pujas/ofertar", {
+			"id_subasta" : $(o).attr("attr-subastaid"),
+			"id_auto" : $(o).attr("attr-idauto"),
+			"claveapi" : sessionStorage["claveapi"],
+			"oferta" : $("#txtOferta").val()
+		}, function(data) {
+			
+		},function(data){});
 		CancelarOferta();
+
+
 	}
 	$("#btnConfirmarOferta").show();
 	$("#divConfirmarOferta").hide();
