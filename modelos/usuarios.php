@@ -561,7 +561,7 @@ class usuarios
             if($sentencia->fetch(PDO::FETCH_ASSOC)["VALIDA"] > 0)
             {
 
-                $claveApi = self::generarClaveApi();
+                $claveApi = substr(self::generarClaveApi(),23);
                 $comando = "update ".self::NOMBRE_TABLA." set claveApi = ? where correo = ?";
                 $pdo = ConexionBD::obtenerInstancia()->obtenerBD();
                 $sentencia = $pdo->prepare($comando);

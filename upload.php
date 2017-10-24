@@ -29,13 +29,16 @@ require_once('utilidades/ExcepcionApi.php');
 require_once('utilidades/Utilerias.php');
 require_once('modelos/invitacion.php');
 
-if ( 0 < $_FILES['file']['error'] ) {
-    echo 'ERROR: ' . $_FILES['file']['error'] . '<br>';
-}
-else {
+if(isset($_FILES['file'])){
+    if ( 0 < $_FILES['file']['error'] ) {
+        echo 'ERROR: ' . $_FILES['file']['error'] . '<br>';
+    }
+
     
     $ext = pathinfo($_FILES['file']['name'], PATHINFO_EXTENSION);
     $guid = guidv4();
+
+
 
     if(!isset($_POST["accion"])){
         $_POST["accion"] = "";

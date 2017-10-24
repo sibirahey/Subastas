@@ -509,15 +509,32 @@ $(document).ready(function() {
 
 	function CargaFuncionesRecuperar(){
 
+
+		$('#modalRecupera').modal({
+		      dismissible: false, // Modal can be dismissed by clicking outside of the modal
+		      opacity: .5, // Opacity of modal background
+		      inDuration: 300, // Transition in duration
+		      outDuration: 200, // Transition out duration
+		      startingTop: '4%', // Starting top style attribute
+		      endingTop: '10%'
+		    }
+		  );
+
 		$("#btnRecuperar").click(function(){
-			postrequest("usuarios/recuperar",{"mail":$("#mail").val()}, function(data){
+			postrequest("usuarios/recuperar",{"mail":$("#mail").val().trim()}, function(data){
 				if(data == -1){
 					//alert("No se encontro ninguna cuenta con estos datos");
 					Materialize.toast('No se encontro ninguna cuenta con estos datos.', 4000);
 				}else{
 					//alert("Le envíamos un correo, por favor revise su bandeja de entrada. Recuerde que el correo podría llegar a la bandeja de spam o correo no deseado");
-					Materialize.toast('Le env&iacute;amos un correo, por favor revise su bandeja de entrada. Recuerde que el correo podr&iacute;a llegar a sla bandeja de spam o correo no deseado.', 4000);
-					window.location.href="?s=nuevacontrasena&correo="+$("#mail").val();
+					//Materialize.toast('Le env&iacute;amos un correo, por favor revise su bandeja de entrada. Recuerde que el correo podr&iacute;a llegar a sla bandeja de spam o correo no deseado.', 4000);
+					$("#btnRecuperaLink").click(function(){
+						window.location.href = "?s=nuevacontrasena&correo="+$("#mail").val();
+					});
+						
+				
+					$('#modalRecupera').modal("open");
+					
 				}
 			},
 			function(data){
@@ -540,21 +557,74 @@ $(document).ready(function() {
 			$("#claveApi").val(vars["claveapi"]);
 			validaCodigoVericacion("#claveApi");
 		}
+		$("#registroMail").focus();
+		$("#claveApi").focus();
+		$("#claveApi").keyup(function(event){
+			if ( event.which == 13 ) {
+    				event.preventDefault();
+    				validaCodigoVericacion($("#claveApi"));
+			}
+
+
+		});
+
+		Materialize.updateTextFields();
+
+		$('#modalNuevaContrasena').modal({
+		      dismissible: false, // Modal can be dismissed by clicking outside of the modal
+		      opacity: .5, // Opacity of modal background
+		      inDuration: 300, // Transition in duration
+		      outDuration: 200, // Transition out duration
+		      startingTop: '4%', // Starting top style attribute
+		      endingTop: '10%'
+		    }
+		  );
+		
+		$("#btnNuevaContrasena").attr("disabled", true);
+
 		$("#btnNuevaContrasena").click(function(){
-			postrequest("usuarios/cambiarcontasena",{"mail": $("#registroMail").val() ,"claveapi":$("#claveApi").val(),"password":$("#registroPassword").val()},
-				function(data){
-					if(data == 0){
-						//alert("Ocurrió un error al guardar la contraseña");
-						Materialize.toast('Ocurri&oacute; un error al guardar la contrase&ntilde;a', 4000);
-					}else{
-						window.location.href = "?s=login";
-					}
-				},
-				function(data){
-					//alert("Ocurrió un error al guardar la contraseña");
-					Materialize.toast('Ocurri&oacute; un error al guardar la contrase&ntilde;a', 4000);
+			debugger;	
+
+
+			if (!StrongPassWord($("#registroPassword").val())) {
+				
+
+				Materialize.toast('"El password debe contener al menos una letra mayúscula, al menos una letra minúscula, al menos un número, al menos un caracter especial ([! @ # $ % ^ & *), y una longitud mínima de 8 caracteres "', 4000);
+			}else{
+				if(!validaRepetirPassword($("#registroRepetirPass"))){
+				
+					Materialize.toast('El password no coincide', 4000);
+				}else{
+
+
+					postrequest("usuarios/cambiarcontasena",{"mail": $("#registroMail").val().trim() ,"claveapi":$("#claveApi").val().trim(),"password":$("#registroPassword").val().trim()},
+						function(data){
+							if(data == 0){
+								//alert("Ocurrió un error al guardar la contraseña");
+								Materialize.toast('Ocurri&oacute; un error al guardar la contrase&ntilde;a', 4000);
+							}else{
+								
+
+								$("#modalNuevaContrasena").click(function(){
+									window.location.href = "?s=login";
+								});
+									
+							
+								$('#modalNuevaContrasena').modal("open");
+
+							}
+						},
+						function(data){
+							//alert("Ocurrió un error al guardar la contraseña");
+							Materialize.toast('Ocurri&oacute; un error al guardar la contrase&ntilde;a', 4000);
+						}
+					);
 				}
-			);
+
+			}
+		
+							
+			
 		});
 	}
 

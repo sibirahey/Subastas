@@ -51,8 +51,9 @@ class autos
             return self::actualiza($_POST);
         }
         else if($peticion[0] == 'busqueda'){
-
             return self::busqueda();
+        }else if($peticion[0] == 'quitarfoto'){
+            return autosfotos::eliminar($_POST);
         }
         else {
             throw new ExcepcionApi(self::ESTADO_URL_INCORRECTA, "Url mal formada", 400);
@@ -73,7 +74,7 @@ class autos
                         " (select GROUP_CONCAT(idFoto) from auto_fotos where idAuto = au.idAuto) AS fotos, ".
                         "   IFNULL((select oferta  from autos_puja ap where ap.idAuto = aus.autoId and ap.hora_puja < sub.fechaFin order by ap.oferta desc limit 1), au.precio) as oferta, ".
                         " (select count(*) from autos_puja ap where ap.idAuto = aus.autoId and ap.hora_puja < sub.fechaFin) as total_ofertas, ".
-                        " sub.idTipoSubasta, (CASE WHEN now() BETWEEN sub.fechaInicio and sub.fechaFin then 'ACTIVA' WHEN now() < sub.fechaInicio then 'AGENDADA' else 'TERMINADA' end) as estatus_subasta, sub.incremento, aus.estatus, aus.motivo ".
+                        " sub.idTipoSubasta, (CASE WHEN now() BETWEEN sub.fechaInicio and sub.fechaFin then 'ACTIVA' WHEN now() < sub.fechaInicio then 'AGENDADA' else 'TERMINADA' end) as estatus_subasta, sub.incremento, aus.estatus, aus.motivo,au.nombreContacto, au.telefonoContacto, au.celularContacto, au.correoContacto, au.infoContacto ".
                         " FROM subastas_autos as aus, autos as au, cat_marca as marca, cat_modelo as modelo, cat_colores as color, cat_transmision as trans, estados as est, municipios as mun, subastas sub ".
                         " WHERE aus.subastaId = ?  ".
                         " and aus.autoId = au.idAuto  ".
@@ -122,7 +123,7 @@ class autos
                 " (select idFoto from auto_fotos where idAuto = au.idAuto limit 1) as foto,  ".
                 "  (select GROUP_CONCAT(idFoto) from auto_fotos where idAuto = au.idAuto) AS fotos,  ".
                 "  (select GROUP_CONCAT(idFeature) from autos_catacteristicas where idAuto = au.idAuto) AS caracteristicasids,  ".
-                "  (select GROUP_CONCAT(feat.descripcion) from autos_catacteristicas ac, cat_features feat where  ac.idFeature = feat.id and ac.idAuto = 20 ) as caracteristicas, au.motivo_precio, au.placa, au.serie ".
+                "  (select GROUP_CONCAT(feat.descripcion) from autos_catacteristicas ac, cat_features feat where  ac.idFeature = feat.id and ac.idAuto = 20 ) as caracteristicas, au.motivo_precio, au.placa, au.serie, au.nombreContacto, au.telefonoContacto, au.celularContacto, au.correoContacto, au.infoContacto ".
                 " FROM autos as au, cat_marca as marca, cat_modelo as modelo, cat_colores as color, cat_transmision as trans, estados as est, municipios as mun  ".
                 " WHERE au.marca = marca.id   ".
                 " and au.modelo = modelo.id   ".
@@ -167,7 +168,7 @@ class autos
             " au.estado as estadoid, est.nombre as estado, au.ciudad as ciudadid, mun.nombre as ciudad, au.descripcion, au.estatus," . 
             " au.publicado, au.fechaCreacion, " . 
             " (select idFoto from auto_fotos where idAuto = au.idAuto limit 1) as foto," . 
-            " (select GROUP_CONCAT(idFoto) from auto_fotos where idAuto = au.idAuto) AS fotos " . 
+            " (select GROUP_CONCAT(idFoto) from auto_fotos where idAuto = au.idAuto) AS fotos, au.nombreContacto, au.telefonoContacto, au.celularContacto, au.correoContacto, au.infoContacto " . 
             " FROM  autos as au, cat_marca as marca, cat_modelo as modelo, cat_colores as color, cat_transmision as trans, estados as est, municipios as mun " . 
             " WHERE  au.marca = marca.id " . 
             " and au.modelo = modelo.id " . 
@@ -293,10 +294,11 @@ class autos
                 self::SERIE . ",".
                 self::ESTATUS . ",".
                 self::PUBLICADO . ",".
-                self::MOTIVO_PRECIO.")" .
-                " VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+                self::MOTIVO_PRECIO.", nombreContacto, telefonoContacto, celularContacto, correoContacto, infoContacto)" .
+                " VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
             
             $desc = json_decode($auto["descripcion"]);
+            $infoContacto = json_decode($auto["infoContacto"]);
             $sentencia = $pdo->prepare($comando);
             $sentencia->bindParam(1, $auto["enVenta"]);
             $sentencia->bindParam(2, $auto["precio"]);
@@ -313,7 +315,12 @@ class autos
             $sentencia->bindParam(13, $auto["serie"]);
             $sentencia->bindParam(14, $auto["estatus"]);                          
             $sentencia->bindParam(15, $auto["publicado"]); 
-            $sentencia->bindParam(16, $auto["motivo_precio"]);                          
+            $sentencia->bindParam(16, $auto["motivo_precio"]);    
+            $sentencia->bindParam(17, $auto["nombreContacto"]);    
+            $sentencia->bindParam(18, $auto["telefonoContacto"]);    
+            $sentencia->bindParam(19, $auto["celularContacto"]);    
+            $sentencia->bindParam(20, $auto["correoContacto"]);    
+            $sentencia->bindParam(21, $infoContacto);                          
 
             //idAuto, enVenta, marca, modelo, color, anio, km, transmision, estado, ciudad, descripcion, estatus, publicado, fechaCreacion
                    

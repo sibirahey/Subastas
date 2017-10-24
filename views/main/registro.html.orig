@@ -41,7 +41,7 @@
 		<!-- INPUT APELLIDO MATERNO -->
 			<div class="input-field col s12">
 				<input name="email" id="registroMail" type="email" class="validate" onblur="validamail(this);">
-				<label for="email">Correo Electronico:</label>
+				<label for="email">Correo Electrónico:</label>
 				<div id="divValidaCorreo" class="validaRegistro" style="display:none" >El correo ya esta registrado</div>
 			</div>
 			

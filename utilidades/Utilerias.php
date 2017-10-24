@@ -81,6 +81,7 @@ function envia_mensaje_invitacion($claveApi, $idusuario, $idsubasta){
 	}
 	$contenido = str_replace("##claveApi##", $claveApi, $contenido);
 	$contenido = str_replace("##idusuario##", $idusuario, $contenido);
+	$contenido = str_replace("##correo##", $correo, $contenido);
 	fclose($myfile);
 	return $contenido;
  }

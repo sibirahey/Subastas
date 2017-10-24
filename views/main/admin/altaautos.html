@@ -2,6 +2,7 @@
 <div class="altaAutosContainer row">
 	<h5 id="divSubastaNombre"></h5>
 	<form class="col s12">
+		<h3>Características del auto</h3>
 		<div class="input-field cbMarcaAuto">
 			<select id="cbMarcaAuto" name="cbMarcaAuto" ></select>
 			<label for="cbMarcaAuto" >Marca	:</label>
@@ -108,7 +109,7 @@
 			<div class="file-field input-field ">
 				<div class="btn">
 					<i class="material-icons">attach_file</i>
-					<input id="fotoAuto" type="file" >
+					<input id="fotoAuto" type="file" accept=".jpg,.png,.jpeg,image/png,image/jpg,image/jpeg" >
 				</div>
 				<div class="file-path-wrapper">
 					<input class="file-path validate" type="text" placeholder="Upload one or more files">
@@ -119,6 +120,28 @@
 			</div>
 			<div id="fotosSubidas" ></div>
 
+		</div>
+		<h3>Datos de contacto</h3>
+		<div class="input-field precioAuto">
+			<input type="text" name="nombreContacto" id="nombreContacto" />
+			<label for="nombreContacto" >Nombre:</label>
+		</div>
+		<div class="input-field precioAuto">
+			<input type="text" name="telefonoContacto" id="telefonoContacto" />
+			<label for="telefonoContacto" >Teléfono:</label>
+		</div>
+		<div class="input-field precioAuto">
+			<input type="text" name="celularContacto" id="celularContacto" />
+			<label for="celularContacto" >Celular:</label>
+		</div>
+		<div class="input-field precioAuto">
+			<input type="text" name="correoContacto" id="correoContacto" />
+			<label for="correoContacto" >Correo:</label>
+		</div>
+		<div class="input-field txtaDescripcionAuto">
+			<!-- <textarea id="txtaDescripcionAuto" maxlength="1000" ></textarea> -->
+			<textarea id="infoContacto" name ="infoContacto" class="materialize-textarea" maxlength="1000"></textarea>
+			<label for="infoContacto">Información adicional:</label>
 		</div>
 
 		<div class="input-field btnsAuto">

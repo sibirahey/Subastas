@@ -222,6 +222,7 @@ function CargaSubastas(estatus, empresa) {
 		$("#divListaContenido").html("");
 		$("#divListaContenido2").html("");
 		$("#divListaContenido3").html("");
+		$("#divListaContenido4").html("");
 		for (i in data) {
 
 			var div = '';
@@ -258,6 +259,8 @@ function CargaSubastas(estatus, empresa) {
 				$("#divListaContenido2").append(div);
 			}else if(data[i].estatus == "CANCELADA"){
 				$("#divListaContenido3").append(div);
+			}else if(data[i].estatus == "AGENDADA"){
+				$("#divListaContenido4").append(div);
 			}else{
 				$("#divListaContenido").append(div);
 			}
@@ -308,6 +311,7 @@ function CargaSubastas(estatus, empresa) {
 			//$('#divListaAutos').modal('open');
 			//$("#modalListaAutos").show();
 			$('.mainContainer').css('margin-bottom','0');
+			$('.searchItem > .card > .card-content').css('height', '220px');
 			$("#divRegistroAutos").show();
 		});
 

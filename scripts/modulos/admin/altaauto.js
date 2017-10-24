@@ -69,37 +69,46 @@ function CargaFuncionesRegistroAuto(idSubasta){
 	});
 	
 	$("#btnUpload").click(function() {
+		    debugger;
+		    var file_data = $('#fotoAuto').prop('files')[0];
+
+		    if(file_data["type"] == "image/png" || file_data["type"] == "image/jpg" || file_data["type"] == "image/jpeg"){
+		    	var form_data = new FormData();                  
+			    form_data.append('file', file_data);
+			    $.ajax({
+			                url: 'upload.php', // point to server-side PHP script 
+			                dataType: 'text',  // what to expect back from the PHP script, if anything
+			                cache: false,
+			                contentType: false,
+			                processData: false,
+			                data: form_data,                         
+			                type: 'post',
+			                success: function(php_script_response){
+
+			                
+			                	if(php_script_response.substring(0, 2) == "ERR"){
+									//alert(php_script_response);
+									Materialize.toast(php_script_response, 4000);
+									
+
+			                	}else{
+			                		//debugger;
+			                		var filename = $("#fotoAuto").val().replace(/C:\\fakepath\\/i, '');
+									$("#fotosSubidas").append("<div class='fotosAuto' attr-id='"+php_script_response.trim()+"'><i class='material-icons btnCierraImagen orange-text' onclick='$(this).parent().remove()' >remove_circle</i><img  class='materialboxed' data-caption='"+filename+"' width='100px' src='" + siteurl +  "uploads/" + php_script_response.trim() + "' /><span>"+filename+"</span></div>");
+									clearFileInput('fotoAuto');
+			                		$('.materialboxed').materialbox();
+			                	}
+			                    
+			                }
+			     });
+			     $("#btnUpload").removeClass('pulse');
+
+		    }else{
+		    	Materialize.toast("Sólo se admitenarchivos .jpg, .jpeg o .png", 4000);
+		    	clearFileInput('fotoAuto');
+		    	$("#btnUpload").removeClass('pulse');
+		    }   
 		    
-		    var file_data = $('#fotoAuto').prop('files')[0];   
-		    var form_data = new FormData();                  
-		    form_data.append('file', file_data);
-		    $.ajax({
-		                url: 'upload.php', // point to server-side PHP script 
-		                dataType: 'text',  // what to expect back from the PHP script, if anything
-		                cache: false,
-		                contentType: false,
-		                processData: false,
-		                data: form_data,                         
-		                type: 'post',
-		                success: function(php_script_response){
-
-		                
-		                	if(php_script_response.substring(0, 2) == "ERR"){
-								//alert(php_script_response);
-								Materialize.toast(php_script_response, 4000);
-								
-
-		                	}else{
-		                		//debugger;
-		                		var filename = $("#fotoAuto").val().replace(/C:\\fakepath\\/i, '');
-								$("#fotosSubidas").append("<div class='fotosAuto' attr-id='"+php_script_response.trim()+"'><img  class='materialboxed' data-caption='"+filename+"' width='100px' src='" + siteurl +  "uploads/" + php_script_response.trim() + "' /><span>"+filename+"</span></div>");
-								clearFileInput('fotoAuto');
-		                		$('.materialboxed').materialbox();
-		                	}
-		                    
-		                }
-		     });
-		     $("#btnUpload").removeClass('pulse');
       $('.fotoAuto').find('.file-path').val('');
 		    
 		});
@@ -402,3 +411,5 @@ function validaCamposAltaAutos(item){
 	return validado;
 
 }
+
+

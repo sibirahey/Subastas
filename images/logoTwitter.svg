@@ -138,7 +138,7 @@
 					<path fill="#EFEFEF" stroke="#B3B3B3" stroke-width="1.001" stroke-miterlimit="10" d="M585.706,3986.062c0,1.658-1.344,3-3,3
 						h-430c-1.657,0-3-1.342-3-3v-54c0-1.656,1.343-3,3-3h430c1.656,0,3,1.344,3,3V3986.062z"/>
 					<g>
-						<text transform="matrix(1 0 0 1 168.0332 3788.1533)"><tspan x="0" y="0" fill="#78818B" font-family="'OpenSans-Light'" font-size="20.0196">Nombre Completo</tspan><tspan x="0" y="90.088" fill="#78818B" font-family="'OpenSans-Light'" font-size="20.0196">Correo Electronico</tspan><tspan x="0" y="180.176" fill="#78818B" font-family="'OpenSans-Light'" font-size="20.0196">Teléfono</tspan></text>
+						<text transform="matrix(1 0 0 1 168.0332 3788.1533)"><tspan x="0" y="0" fill="#78818B" font-family="'OpenSans-Light'" font-size="20.0196">Nombre Completo</tspan><tspan x="0" y="90.088" fill="#78818B" font-family="'OpenSans-Light'" font-size="20.0196">Correo Electrónico</tspan><tspan x="0" y="180.176" fill="#78818B" font-family="'OpenSans-Light'" font-size="20.0196">Teléfono</tspan></text>
 					</g>
 					<path fill="#EFEFEF" stroke="#B3B3B3" stroke-width="1.001" stroke-miterlimit="10" d="M1067.65,4049.253c0,1.658-1.344,3-3,3
 						h-431c-1.657,0-3-1.342-3-3v-297.367c0-1.656,1.343-3,3-3h431c1.656,0,3,1.344,3,3V4049.253z"/>

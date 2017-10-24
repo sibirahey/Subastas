@@ -130,6 +130,26 @@ class autosfotos
 
     }
 
-    
+    public static function eliminar($post){
+
+        $idAuto = $post["autoid"];
+        $foto = $post["foto"];
+        $pdo = ConexionBD::obtenerInstancia()->obtenerBD();
+
+        // Sentencia INSERT
+        $comando = "delete from auto_fotos  where idFoto = ? and idAuto = ?";
+        $sentencia = $pdo->prepare($comando);
+        $sentencia->bindParam(1, $foto);
+        $sentencia->bindParam(2, $idAuto);
+     
+
+        $resultado = $sentencia->execute();
+       
+        if ($resultado) {
+            return 1;
+        } else {
+            return 0;
+        }
+    }
     
 }
