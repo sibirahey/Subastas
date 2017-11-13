@@ -293,8 +293,16 @@ function CargaSubastas(estatus, empresa) {
 		});
 
 		$("#btnListaAutos").click(function(){
-			$("#divAdminSubastas").show();
-			$("#divRegistroAutos").hide();
+			debugger;
+			if($('#divDetalleAuto').css('display') == 'block'){
+				$('#divListaAutos').show();
+				$('#divDetalleAuto').hide();
+			} else {
+				$('#divRegistroAutos').modal('close');
+				$("#divAdminSubastas").show();
+				
+			}
+			
 			$('.mainContainer').css('margin-bottom','90px');
 		});
 			

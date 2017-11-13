@@ -981,8 +981,9 @@ function VerDetalleAuto(o) {
 		cargaHTML("#divDetalleAuto", "views/interna2.html", "Detalle Auto", function() {
 
 			debugger;
-			$("#divDetalleAuto").show();
 			$("#divListaAutos").hide();
+			$("#divDetalleAuto").show();
+			
 
 			var fotos = infoAuto.fotos.split(",");
 			for (i in fotos) {
@@ -1021,20 +1022,6 @@ function VerDetalleAuto(o) {
 			});
 			
 			$('.materialboxed').materialbox();
-			// $('.carousel-item > img').on('touchstart click', function() {
-				// debugger;
-				// var modalFullScreen = $('<div class="fullScreenContainer valign-wrapper" style="display:none;">'
-									   // +'	<img src="'+$(this).attr('src')+'" alt="Imagen no disponible" class="fullScreenImg">'
-									   // +'</div>');
-				// modalFullScreen.appendTo('body');
-				// $('.fullScreenContainer').show('fast');
-// 				
-				// $('.fullScreenImg').on('touchstart click', function(){
-					// debugger;
-					// $('.fullScreenContainer').remove();
-				// });
-// 				
-			// });
 			
 
 			if (getUrlVars()["accion"] == "subastasadmin") {
@@ -1048,11 +1035,7 @@ function VerDetalleAuto(o) {
 				});
 				
 				$('.carousel.carousel-slider').carousel({fullWidth: true});
-				// $('.carousel').carousel({
-						// indicators : true,
-						// noWrap : true
-					// });
-
+				
 			} else if (getUrlVars()["accion"] == "subasta") {
 				$("#closeDetalleAuto").click(function() {
 					$('#divDetalleAuto').modal("close");
