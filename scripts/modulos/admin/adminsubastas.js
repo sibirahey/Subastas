@@ -312,7 +312,8 @@ function CargaSubastas(estatus, empresa) {
 			//$("#modalListaAutos").show();
 			$('.mainContainer').css('margin-bottom','0');
 			$('.searchItem > .card > .card-content').css('height', '220px');
-			$("#divRegistroAutos").show();
+			
+			$("#divRegistroAutos").modal('open');
 		});
 
 		

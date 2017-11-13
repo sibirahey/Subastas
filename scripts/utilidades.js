@@ -393,10 +393,9 @@ function cargaAutosPorSubasta(subastaID, controlid, tiposubasta) {
 
 }
 
-function regresaRenglonVenta(item, subastaID) {
-
+function regresaRenglonVenta(item, subastaID) {	
 	debugger;
-
+	
 	var renglon = '    <div class="searchItem">';
 	renglon += '      <div class="card">';
 	renglon += '        <div class="card-image">';
@@ -965,7 +964,8 @@ function VerDetalleAuto(o) {
 			outDuration : 200, // Transition out duration
 			ready : function(modal, trigger) {// Callback for Modal open. Modal and trigger parameters available.
 				// $('.materialboxed').materialbox();
-				$('.carousel').carousel();
+				// $('.carousel').carousel();
+				$('.carousel.carousel-slider').carousel({fullWidth: true});
 			}
 		});
 
@@ -989,7 +989,7 @@ function VerDetalleAuto(o) {
 
 				// $("#imgSnapshots").append('<a class="carousel-item"><img class="materialboxed" alt="Imagen no disponible" attr-idx="1" src="'+ siteurl+"uploads/"+fotos[i]+ '" width="200" height="160" /></div>');
 				// $("#imgSnapshots").append('<a class="carousel-item"><img class="materialboxed" alt="Imagen no disponible" src="' + siteurl + "uploads/" + fotos[i] + '" width="200" height="160" /></div>');
-				$("#imgSnapshots").append('<a class="carousel-item"><img class="" alt="Imagen no disponible" src="'+ siteurl+"uploads/"+fotos[i]+ '" width="200" height="160" /></div>');
+				$("#imgSnapshots").append('<a class="carousel-item"><img class="materialboxed" alt="Imagen no disponible" src="'+ siteurl+"uploads/"+fotos[i]+ '" width="100%" height="300" /></div>');
 			}
 			$("#detalleTitulo").html(infoAuto.marca + " " + infoAuto.modelo + " " + infoAuto.anio);
 			$("#detalleIdAuto").html(infoAuto.idAuto);
@@ -1019,33 +1019,23 @@ function VerDetalleAuto(o) {
 			}
 			
 			});
-
-			$('.carousel-item > img').on('touchstart click', function() {
-				debugger;
-				var modalFullScreen = $('<div class="fullScreenContainer valign-wrapper" style="display:none;">'
-									   +'	<img src="'+$(this).attr('src')+'" alt="Imagen no disponible" class="fullScreenImg">'
-									   +'</div>');
-				modalFullScreen.appendTo('body');
-				$('.fullScreenContainer').show('fast');
-				
-				$('.fullScreenImg').on('touchstart click', function(){
-					debugger;
-					$('.fullScreenContainer').remove();
-				});
-				
-			});
 			
+			$('.materialboxed').materialbox();
+			// $('.carousel-item > img').on('touchstart click', function() {
+				// debugger;
+				// var modalFullScreen = $('<div class="fullScreenContainer valign-wrapper" style="display:none;">'
+									   // +'	<img src="'+$(this).attr('src')+'" alt="Imagen no disponible" class="fullScreenImg">'
+									   // +'</div>');
+				// modalFullScreen.appendTo('body');
+				// $('.fullScreenContainer').show('fast');
+// 				
+				// $('.fullScreenImg').on('touchstart click', function(){
+					// debugger;
+					// $('.fullScreenContainer').remove();
+				// });
+// 				
+			// });
 			
-// 			
-// 
-			// $('.carousel-item.active').on('touchmove', function() {
-				// // console.log('touchmove');
-// 
-			// });
-			// $('#materialbox-overlay').on('touchstart', function() {
-				// // console.log('touchmove overlay');
-// 
-			// });
 
 			if (getUrlVars()["accion"] == "subastasadmin") {
 
@@ -1057,11 +1047,11 @@ function VerDetalleAuto(o) {
 					
 				});
 				
-			
-				$('.carousel').carousel({
-						indicators : true,
-						noWrap : true
-					});
+				$('.carousel.carousel-slider').carousel({fullWidth: true});
+				// $('.carousel').carousel({
+						// indicators : true,
+						// noWrap : true
+					// });
 
 			} else if (getUrlVars()["accion"] == "subasta") {
 				$("#closeDetalleAuto").click(function() {
