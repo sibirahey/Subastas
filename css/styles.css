@@ -1364,6 +1364,16 @@ img[data-u="image"] {
 	width: 30%;
 	margin: 10px 1.65%;
 }
+.searchItem2 {
+	float: left;
+	width: 100%;
+	margin: 10px 1.65%;
+}
+.searchItem2 > div{
+	float: left;
+	width: 30%;
+	margin: 10px 1.65%;
+}
 .searchItem > .card{
 	/*float:left;*/
 	margin: 0;
@@ -2911,3 +2921,4 @@ label,
     content: url("../images/cancel.png")  !important;
 
 }
+.ui-state-highlight { height: 1.5em; line-height: 1.2em; }

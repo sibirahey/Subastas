@@ -240,6 +240,8 @@ function CargaSubastas(estatus, empresa) {
 			div += '					<li><a class="btn-floating btnAgregarUsuariosAutos" attr-id="' + data[i].idSubasta + '" attr-nombresubasta="' + data[i].nombreSubasta + '" title="Agregar Usuarios"><i class="material-icons">group_add</i></a></li>';
 			div += '					<li><a class="btn-floating btnListaUsuarios" attr-id="' + data[i].idSubasta + '" attr-nombresubasta="' + data[i].nombreSubasta + '" title="Ver Usuarios"><i class="material-icons">group</i></a></li>';
 			div += '					<li><a class="btn-floating btnVerAutos" attr-id="' + data[i].idSubasta + '" attr-nombresubasta="' + data[i].nombreSubasta + '" title="Ver Autos"><i class="material-icons">drive_eta</i></a></li>';
+			div += '					<li><a class="btn-floating btnAgendarAutos" attr-id="' + data[i].idSubasta + '" attr-nombresubasta="' + data[i].nombreSubasta + '" attr-fini="'+data[i].fechaInicio+'" attr-ffin="'+data[i].fechaFin+'" attr-diff="'+data[i].diff+'" title="Ver Autos"><i class="material-icons">query_builder</i></a></li>';
+			
 			div += '				</ul>';
 			div += '			</div>';
 			div += '			<div class="card-content">';
@@ -322,6 +324,17 @@ function CargaSubastas(estatus, empresa) {
 			$('.searchItem > .card > .card-content').css('height', '220px');
 			
 			$("#divRegistroAutos").modal('open');
+		});
+
+		$(".btnAgendarAutos").click(function() {
+			
+			var datediff = $(this).attr("attr-diff");
+			var nombreSubasta = $(this).attr("attr-nombresubasta");
+			var hora_inicio = $(this).attr("attr-fini");
+			var hora_fin = $(this).attr("attr-ffin");
+			cargaListaProgramcionAutos( $(this).attr("attr-id"), "#divProgramadorAutosContenido", $(this).attr("attr-fini"), datediff, nombreSubasta, hora_inicio, hora_fin);
+
+
 		});
 
 		
@@ -588,6 +601,16 @@ function CargaSubastas(estatus, empresa) {
 	$(function() {
 		$("#divRegistroAutos").modal({
 			dismissible : false, // Modal can be dismissed by clicking outside of the modal
+			opacity : .5, // Opacity of modal background
+			startingTop : 0,
+			inDuration : 300, // Transition in duration
+			outDuration : 200 // Transition out duration
+		});
+
+	});
+	$(function() {
+		$("#divProgramadorAutos").modal({
+			dismissible : true, // Modal can be dismissed by clicking outside of the modal
 			opacity : .5, // Opacity of modal background
 			startingTop : 0,
 			inDuration : 300, // Transition in duration

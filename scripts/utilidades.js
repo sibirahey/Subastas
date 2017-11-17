@@ -13,6 +13,19 @@ String.prototype.fecha = function() {
 		;
 	}
 }
+String.prototype.fechaFromMxLargeFormat = function(){
+	try {
+		
+		var partes = this.split(" ");
+		var fecha = partes[0].split("/");
+		var hora = partes[1].split(":");
+		return new Date(fecha[2], fecha[1] - 1, fecha[0], hora[0], hora[1], 0, 0);
+	} catch(e) {
+		return new Date(0, 0, 0, 0, 0, 0, 0);
+		;
+	}
+
+}
 
 Number.prototype.formatMoney = function(c, d, t) {
 	var n = this,
@@ -99,11 +112,21 @@ Date.prototype.esMXFormatLarge = function() {
 		var mins = this.getMinutes();
 		var seconds = this.getSeconds();
 
-		return String(dd + "\/" + mm + "\/" + yyyy + "   " + ((hours > 9) ? hours : "0" + hours) + ":" + ((mins > 9) ? mins : "0" + mins))
+		return String(dd + "\/" + mm + "\/" + yyyy + " " + ((hours > 9) ? hours : "0" + hours) + ":" + ((mins > 9) ? mins : "0" + mins))
 	} catch (e) {
 		return "";
 	}
 }
+
+Date.prototype.addHours = function(h) {    
+   this.setTime(this.getTime() + (h*60*60*1000)); 
+   return this;   
+}
+Date.prototype.addMinutes = function(h) {    
+   this.setTime(this.getTime() + (h*60*1000)); 
+   return this;   
+}
+
 function ValidaSession() {
 
 	if (getCookie("escuderia-rememberme") == "" && sessionStorage.claveapi == undefined) {
@@ -391,6 +414,233 @@ function cargaAutosPorSubasta(subastaID, controlid, tiposubasta) {
 
 	});
 
+}
+
+
+function cargaListaProgramcionAutos(subastaID, controlid, fini, datediff, nombreSubasta, hora_inicio, hora_fin){
+	debugger;
+	
+
+	$(".mainBody").load("views/main/admin/ajusteautos.html" ,function() {
+			
+		
+		debugger;
+		
+		$("#divProgramadorAutosTitulo").html(nombreSubasta);
+		var idSubasta = subastaID;
+		$("#hora_inicio").html(hora_inicio);
+		$("#hora_fin").html(hora_fin);
+		
+		
+		$("#chkHabilitaSort").change(function() {
+	        
+	        if($("#chkHabilitaSort").is(":checked")) {
+	        	$( "#divProgramadorAutosContenido").sortable("enable");
+	        }else{
+	        	$( "#divProgramadorAutosContenido").sortable("disable");
+	        }
+	                
+	    });
+
+	    $("#btnGuardarOrdenamiento").click(function(){
+
+	    	
+	    });
+
+		Materialize.updateTextFields();
+
+
+		postrequest("autos/subasta", {
+			"idsubasta" : subastaID
+		}, function(data) {
+
+			var cantidad = data.length;
+			var contador = 0;
+			var finicio =  fini.fecha();
+			var fooDate = new Date(finicio.getTime());
+			var ffin = fooDate.addMinutes((datediff/cantidad)*60-  Number($("#tiempoEntreAuto").val()));
+
+			;
+			for (var val in data) {
+				debugger;
+				if(contador > 0){
+					fooDate = new Date(ffin.getTime());
+					fooDate.addMinutes(Number($("#tiempoEntreAuto").val()));
+					finicio = fooDate;	
+					ffin = new Date(finicio.getTime());
+					ffin = ffin.addMinutes((datediff/cantidad)*60-  Number($("#tiempoEntreAuto").val()));
+
+				}
+				if(contador == cantidad-1){
+					ffin = ffin.addMinutes(Number($("#tiempoEntreAuto").val()));
+				}
+				//var finicio =  fini.fecha().addHours((datediff/cantidad)*contador);
+			
+				//ffin = fooDate.addMinutes(((datediff/cantidad)*(contador+1))*60-  ((contador+1 != cantidad) ? Number($("#tiempoEntreAuto").val()):0));
+				var renglon = regresaRenglonProgramador(data[val], subastaID, finicio, ((contador == 0) ? false : true),  ((contador+1 == cantidad)? false:true),  ffin, contador);
+				
+				$(controlid).append(renglon);
+				contador = contador +1;
+
+			}
+
+
+			  
+
+			  
+			
+			 
+			 $("#divProgramadorAutosContenido").sortable({
+		      revert: true,
+		       stop: function() {
+			       	debugger;
+			      
+
+					var cantidad = $(".horarioInicio").length;
+					var contador = 0;
+					var finicio =  $("#hora_inicio").html().fecha();
+					var fooDate = new Date(finicio.getTime());
+					var ffin = fooDate.addMinutes((datediff/cantidad)*60-  Number($("#tiempoEntreAuto").val()));
+
+
+			        $.each( $(".horarioInicio"), function( key, value ) {
+					 	debugger;
+
+					 	if(contador > 0){
+							fooDate = new Date(ffin.getTime());
+							fooDate.addMinutes(Number($("#tiempoEntreAuto").val()));
+							finicio = fooDate;	
+							ffin = new Date(finicio.getTime());
+							ffin = ffin.addMinutes((datediff/cantidad)*60-  Number($("#tiempoEntreAuto").val()));
+
+						}
+						if(contador == cantidad-1){
+							ffin = ffin.addMinutes(Number($("#tiempoEntreAuto").val()));
+						}
+						//var fin
+
+
+					 	$(value).html(finicio.esMXFormatLarge());
+					 	$(value).attr("attr-idx",contador)
+					 	$($(".horarioFin")[contador]).html(ffin.esMXFormatLarge());
+					 	$($(".horarioFin")[contador]).attr("attr-idx",contador);
+					 	contador = contador+1;
+					});
+
+			        $(".showup-ctrl").show();
+			        $(".showdown-ctrl").show();
+			        //$($(".showup-ctrl")[0]).hide();
+			        //$($(".showdown-ctrl")[$(".showdown-ctrl").length-1]).hide();
+		        
+		      	}
+		    });
+
+		},
+		function(data){
+
+		});
+   			
+  	});
+
+	
+}
+
+function regresaRenglonProgramador(item, subastaID, fechatentativa, showup, showdown, fechafin, contador){
+
+debugger;
+	var renglon ='<div class="searchItem2">';
+	//renglon += '        <div class="card-image">';
+	//renglon += '          	<img attr-id="' + item.idAuto + '" width="50px" onclick="VerDetalleAuto(this);" src="' + siteurl + 'uploads/' + item.foto + '" onerror="imgError(this)"; />';
+	//renglon += '        </div>';
+	renglon += '        <div>'+item.marca + ' - ' + item.modelo+' ('+item.anio+')'+'</div>';
+	
+	
+	
+	renglon += '        <div id="horarioInicio'+ item.idAuto+'" class="horarioInicio" attr-idx="'+contador+'">'+fechatentativa.esMXFormatLarge()+'</div>';
+	renglon += '        <div id="showup-ctrl'+item.idAuto+'" class="showup-ctrl"><span onclick="quitaTiempo(this,\''+item.idAuto +'\',-5);"> -5 <i class="material-icons">arrow_downward</i></span><span onclick="quitaTiempo(this,\''+item.idAuto +'\',5);"> +5 <i class="material-icons" >arrow_upward</i></span></div>';	
+	renglon += '        <div>&nbsp; </div>';
+	renglon += '        <div id="horarioFin'+item.idAuto+'" class="horarioFin"  attr-idx="'+contador+'">'+fechafin.esMXFormatLarge()+'</div>';
+	renglon += '        <div id="showup-ctrl'+item.idAuto+'" class="showup-ctrl"><span onclick="agregaTiempo(this,\''+item.idAuto +'\',-5);"> -5 <i class="material-icons">arrow_downward</i></span><span onclick="agregaTiempo(this,\''+item.idAuto +'\',5);"> +5 <i class="material-icons" >arrow_upward</i></span></div>';	
+	//renglon += '        <div class="showdown-ctrl"><span> -5 <i class="material-icons">arrow_downward</i><span><span> +5 <i class="material-icons">arrow_downward</i><span></div>';
+	
+	renglon +='	  </div">';
+	return renglon;
+
+
+}
+
+function agregaTiempo(ctrl, idAuto, tiempo){
+	debugger;
+	var fechaFin = $("#horarioFin"+idAuto).html().fechaFromMxLargeFormat();
+	var fechaIni = $("#horarioInicio"+idAuto).html().fechaFromMxLargeFormat();
+	fechaFin.addMinutes(tiempo);
+	
+	var autoId = $(ctrl).parent().attr("id").replace("showup-ctrl","");
+	var contador = 0;
+	var idFound = false;
+	$.each( $(".horarioFin"), function( key, value ) {
+		
+		if(!idFound){
+			if($(value).attr("id") != ("horarioFin"+autoId)){
+				contador++;	
+			}else{
+				idFound = true;
+			}
+			
+		}
+	});
+
+	if(contador == ($(".horarioFin").length -1)){
+		if(fechaFin <= $("#hora_fin").html().fecha() && $("#hora_fin").html().fecha() > fechaIni){
+			$("#horarioFin"+idAuto).html(fechaFin.esMXFormatLarge());
+		}else{
+			Materialize.toast("Imposible ajustar el tiempo de subasta del auto. El horario de término no puede ser mayor a la finalización de la subasta",4000);
+		}
+	}else{
+		if(fechaFin < $($(".horarioInicio")[contador+1]).html().fechaFromMxLargeFormat() && fechaFin > fechaIni){
+			$("#horarioFin"+idAuto).html(fechaFin.esMXFormatLarge());
+		}else{
+			Materialize.toast("Imposible ajustar el tiempo de subasta del auto. El horario de término no puede ser mayor a la hora de inicio del siguiente auto y la fecha de fin de subasta del auto debe ser mayor a la hora inicial.",4000);
+		}
+	}
+
+
+}
+
+function quitaTiempo(ctrl, idAuto, tiempo){
+	debugger;
+	var fechaFin = $("#horarioFin"+idAuto).html().fechaFromMxLargeFormat();
+	var fechaIni = $("#horarioInicio"+idAuto).html().fechaFromMxLargeFormat();
+	fechaIni.addMinutes(tiempo);
+	
+	var autoId = $(ctrl).parent().attr("id").replace("showup-ctrl","");
+	var contador = 0;
+	var idFound = false;
+	$.each( $(".horarioInicio"), function( key, value ) {
+		
+		if(!idFound){
+			if($(value).attr("id") != ("horarioInicio"+autoId)){
+				contador++;	
+			}else{
+				idFound = true;
+			}
+			
+		}
+	});
+
+	if(contador == 0){
+		if(fechaIni >= $("#hora_inicio").html().fecha()){
+			$("#horarioInicio"+idAuto).html(fechaIni.esMXFormatLarge());
+		}else{
+			Materialize.toast("Imposible ajustar el tiempo de subasta del auto. El horario de inicio no puede ser menor al inicio de la subasta",4000);
+		}
+	}else{
+		if(fechaIni < $($(".horarioFin")[contador]).html().fechaFromMxLargeFormat() && fechaIni > $($(".horarioFin")[contador-1]).html().fechaFromMxLargeFormat()){
+			$("#horarioInicio"+idAuto).html(fechaIni.esMXFormatLarge());
+		}else{
+			Materialize.toast("Imposible ajustar el tiempo de subasta del auto. El horario de inicio no puede ser mayor a la hora de fin del auto y no puede ser menor a la hora final de subasta del auto anterior",4000);
+		}
+	}
 }
 
 function regresaRenglonVenta(item, subastaID) {	

@@ -201,7 +201,7 @@
 </div>
 
 <!--<div id="divRegistroAutos" class="divContenido modal modal-fixed-footer">-->
-<div id="divRegistroAutos" class="modal bottom-sheet" style="background-color: white;">
+<div id="divRegistroAutos" class="modal" style="background-color: white;">
 
 	<div class="btn waves-effect red" id="btnListaAutos" style="z-index: 13;position:absolute;right: 0;">
 		<i class="material-icons">close</i>
@@ -210,6 +210,28 @@
 	<div class="modal-content">
 		<div id="divListaAutos"></div>
 		<div id="divDetalleAuto"></div>
+	</div>
+
+</div>
+
+<div id="divProgramadorAutos" class="modal" style="background-color: white;">
+
+	<div class="btn waves-effect red  modal-close" onclick="function(){ $("#divAdminSubastas").show(); }" id="btnListaAutos" style="z-index: 13;position:absolute;right: 0;">
+		<i class="material-icons">close</i>
+	</div>
+	<h5 class="card-title" id="divProgramadorAutosTitulo"></h5>
+	<div class="modal-content col s12">
+		<div class="col s6">Hora de inicio: <span id="hora_inicio"></span></div>
+		<div class="col s6">Hora de Fin: <span id="hora_fin"></span></div>
+		<div class="input-field precioAuto col s3">
+			<input type="number" step="5"  name="tiempoEntreAuto" id="tiempoEntreAuto" value="5" />
+			<label for="tiempoEntreAuto" >Tiempo entre auto:</label>
+		</div>
+
+		<div  id="divProgramadorAutosContenido">
+		</div>
+
+
 	</div>
 
 </div>
