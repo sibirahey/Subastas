@@ -3,28 +3,31 @@
 
 
 
-<div id="divProgramadorAutos">
+<div id="divProgramadorAutos" class="container">
 
 	<div class="btn waves-effect red  modal-close" onclick="function(){ $("#divAdminSubastas").show(); }" id="btnListaAutos" style="z-index: 13;position:absolute;right: 0;">
 		<i class="material-icons">close</i>
 	</div>
 	<h5 class="card-title" id="divProgramadorAutosTitulo"></h5>
-	<div class="col s12">
+	<div class="col s12 cuerpoProgramador container">
 		<div class="col s6">Hora de inicio: <span id="hora_inicio"></span></div>
 		<div class="col s6">Hora de Fin: <span id="hora_fin"></span></div>
-		<div class="input-field precioAuto col s3">
-			<input type="number" step="5"  name="tiempoEntreAuto" id="tiempoEntreAuto" value="5" />
-			<label for="tiempoEntreAuto" >Tiempo entre auto:</label>
+		<div>
+			<div class="input-field precioAuto">
+				<input type="number" step="5"  name="tiempoEntreAuto" id="tiempoEntreAuto" value="5" />
+				<label for="tiempoEntreAuto">Tiempo entre auto:</label>
+			</div>
 		</div>
-
-		<label for="chkHabilitaSort" >Habilitar ordanamiento:</label>
-		<div class="switch">
-		    <label>
-		      Apagado
-		      <input id="chkHabilitaSort" name="chkHabilitaSort" type="checkbox" checked="checked">
-		      <span class="lever"></span>
-		      Encendido
-		    </label>
+		<div>
+			<label for="chkHabilitaSort" >Habilitar ordanamiento:</label>
+			<div class="switch">
+			    <label>
+			      Apagado
+			      <input id="chkHabilitaSort" name="chkHabilitaSort" type="checkbox" checked="checked">
+			      <span class="lever"></span>
+			      Encendido
+			    </label>
+		  	</div>
 	  	</div>
 		<div class="card-action">
 			<a id="btnGuardarOrdenamiento" class="btn">Guardar</a>

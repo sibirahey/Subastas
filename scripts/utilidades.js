@@ -392,7 +392,7 @@ function cargaAutosPorSubasta(subastaID, controlid, tiposubasta) {
 
 		}
 
-		debugger;
+		//debugger;
 		if (tiposubasta  && getUrlVars()["accion"] =="subasta") {
 			$(".divBtnPujar").show();
 			$('.card-content').css('height', '200px');
@@ -418,13 +418,13 @@ function cargaAutosPorSubasta(subastaID, controlid, tiposubasta) {
 
 
 function cargaListaProgramcionAutos(subastaID, controlid, fini, datediff, nombreSubasta, hora_inicio, hora_fin){
-	debugger;
+	//debugger;
 	
 
 	$(".mainBody").load("views/main/admin/ajusteautos.html" ,function() {
 			
 		
-		debugger;
+		//debugger;
 		
 		$("#divProgramadorAutosTitulo").html(nombreSubasta);
 		var idSubasta = subastaID;

@@ -2897,7 +2897,50 @@ div[name="altaautos"] > .row{
 #listausuarios{
 	color: #000 !important;
 }
-
+/*---------------- PROGRAMADOR AUTOS------------------------*/
+#divProgramadorAutos{
+	float:none;
+	width:100%;
+	height:auto;
+	max-width:1024px;
+	margin: 0 auto;
+}
+#divProgramadorAutos div{
+	float:left;
+	
+}
+#divProgramadorAutosContenido {
+	width:100%;
+	background-color:#ffffff;
+}
+.cuerpoProgramador{
+		width: 100%;
+}
+.cuerpoProgramador > div:nth-child(1),
+.cuerpoProgramador > div:nth-child(2){
+    margin-bottom: 20px;
+    text-align: center;
+    font-weight: bold;
+    font-size: 1.3rem;
+}
+.cuerpoProgramador > .card-action > .btn{
+	float:right!important;
+}
+.cuerpoProgramador > div:nth-child(3){
+	margin-top:10px;
+	border-top:1px solid #ffffff;
+}
+.cuerpoProgramador > div:nth-child(3),
+.cuerpoProgramador > div:nth-child(4),
+.cuerpoProgramador > div:nth-child(5){
+	width:33%;
+	text-align:center;
+}
+.cuerpoProgramador > div:nth-child(4) > label{
+	float:left;
+	width:100%;
+}
+/*---------------- ENDS PROGRAMADOR AUTOS------------------------*/
 /*---------- MATERIALIZE MODS ---------*/
 .modal-content input[disabled="disabled"],
 .modal-content textarea[disabled="disabled"]{

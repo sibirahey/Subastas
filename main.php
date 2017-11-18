@@ -18,7 +18,6 @@ unregister_GLOBALS();
 		<link href="https://fonts.googleapis.com/css?family=Oswald:300,400,700&amp;subset=latin-ext" rel="stylesheet"/>
         <link href="https://fonts.googleapis.com/css?family=Open+Sans+Condensed:300,700" rel="stylesheet"/>
         <link href="https://fonts.googleapis.com/css?family=Dosis:400,500,600,700" rel="stylesheet">
-        <!-- <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"> -->
         <link href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700" rel="stylesheet">
 
         <link href="css/jquery-ui.css" rel="stylesheet" />
