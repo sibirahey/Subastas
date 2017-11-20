@@ -76,6 +76,9 @@
 	    margin: 0 2%;
 	    float: left;
 	}
+	#divProgramadorAutos{
+		padding:0 10px;
+	}
 	
 }
 @media only screen and (max-width: 970px) {
@@ -192,6 +195,31 @@
 		top:5% !important;
 		max-height: 90%;
 	}	
+	.searchItem2 > div{
+		width:96.7%;
+		text-align:center;
+	}
+	.searchItem2 > div > span:nth-child(odd),
+	.searchItem2 > div > span:nth-child(even){
+		width: 46%;
+		margin: 0 2%;
+	}
+	.searchItem2 > div:nth-child(4){
+		margin:0;
+		height:0px;
+	}
+	.searchItem2 > div:nth-child(2),
+	.searchItem2 > div:nth-child(5){
+		text-align:center;
+	}
+	.cuerpoProgramador > div:nth-child(3), 
+	.cuerpoProgramador > div:nth-child(4){
+		width:50%;
+	} 
+	.cuerpoProgramador > div:nth-child(5){
+		width:100%;
+		margin-bottom:20px;
+	}
 }
 
 @media only screen and (max-width: 600px) {
