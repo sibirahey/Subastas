@@ -392,7 +392,7 @@ function cargaAutosPorSubasta(subastaID, controlid, tiposubasta) {
 
 		}
 
-		debugger;
+		//debugger;
 		if (tiposubasta  && getUrlVars()["accion"] =="subasta") {
 			$(".divBtnPujar").show();
 			$('.card-content').css('height', '200px');
@@ -418,13 +418,13 @@ function cargaAutosPorSubasta(subastaID, controlid, tiposubasta) {
 
 
 function cargaListaProgramcionAutos(subastaID, controlid, fini, datediff, nombreSubasta, hora_inicio, hora_fin){
-	debugger;
+	//debugger;
 	
 
 	$(".mainBody").load("views/main/admin/ajusteautos.html" ,function() {
 			
 		
-		debugger;
+		//debugger;
 		
 		$("#divProgramadorAutosTitulo").html(nombreSubasta);
 		var idSubasta = subastaID;
@@ -574,10 +574,10 @@ debugger;
 	
 	
 	renglon += '        <div id="horarioInicio'+ item.idAuto+'" class="horarioInicio" attr-idx="'+contador+'">'+fechatentativa.esMXFormatLarge()+'</div>';
-	renglon += '        <div id="showup-ctrl'+item.idAuto+'" class="showup-ctrl"><span onclick="quitaTiempo(this,\''+item.idAuto +'\',-5);"> -5 <i class="material-icons">arrow_downward</i></span><span onclick="quitaTiempo(this,\''+item.idAuto +'\',5);"> +5 <i class="material-icons" >arrow_upward</i></span></div>';	
+	renglon += '        <div id="showup-ctrl'+item.idAuto+'" class="showup-ctrl"><span class="waves-effect waves-light btn green" onclick="quitaTiempo(this,\''+item.idAuto +'\',-5);"> -5 <i class="material-icons">keyboard_arrow_down</i></span><span class="waves-effect waves-light btn orange" onclick="quitaTiempo(this,\''+item.idAuto +'\',5);"> +5 <i class="material-icons" >keyboard_arrow_up</i></span></div>';	
 	renglon += '        <div>&nbsp; </div>';
 	renglon += '        <div id="horarioFin'+item.idAuto+'" class="horarioFin"  attr-idx="'+contador+'">'+fechafin.esMXFormatLarge()+'</div>';
-	renglon += '        <div id="showup-ctrl'+item.idAuto+'" class="showup-ctrl"><span onclick="agregaTiempo(this,\''+item.idAuto +'\',-5);"> -5 <i class="material-icons">arrow_downward</i></span><span onclick="agregaTiempo(this,\''+item.idAuto +'\',5);"> +5 <i class="material-icons" >arrow_upward</i></span></div>';	
+	renglon += '        <div id="showup-ctrl'+item.idAuto+'" class="showup-ctrl"><span class="waves-effect waves-light btn green" onclick="agregaTiempo(this,\''+item.idAuto +'\',-5);"> -5 <i class="material-icons">keyboard_arrow_down</i></span><span class="waves-effect waves-light btn orange" onclick="agregaTiempo(this,\''+item.idAuto +'\',5);"> +5 <i class="material-icons" >keyboard_arrow_up</i></span></div>';	
 	//renglon += '        <div class="showdown-ctrl"><span> -5 <i class="material-icons">arrow_downward</i><span><span> +5 <i class="material-icons">arrow_downward</i><span></div>';
 	
 	renglon +='	  </div">';

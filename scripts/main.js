@@ -66,7 +66,7 @@ function CargaFunciones(o){
 
 	}
     CargaMaterial ();
-	debugger;
+	//debugger;
 	$(window).trigger('resize');
 	
 }
