@@ -31,6 +31,8 @@ class subastasautos
             return self::registrarOut();
         }else if ($peticion[0] == 'cancelar') {
             return self::cancelar();
+        }else if ($peticion[0] == 'programar') {
+            return self::programar();
         }else {
             throw new ExcepcionApi(self::ESTADO_URL_INCORRECTA, "Url mal formada", 400);
         }
@@ -38,6 +40,27 @@ class subastasautos
 
     
      
+    public function programar(){
+        $json = json_decode($_POST["datos"]);
+         
+        $pdo = ConexionBD::obtenerInstancia()->obtenerBD();
+
+        foreach ($json as &$o) {
+
+            $comando = "UPDATE  subastas_autos set hora_inicio = ? , hora_fin  = ? where autoId = ? and subastaId = ?" ;
+                
+
+            $sentencia = $pdo->prepare($comando);
+            $sentencia->bindParam(1, $o->fechaIni);
+            $sentencia->bindParam(2, $o->fechaFin);
+            $sentencia->bindParam(3, $o->idAuto);
+            $sentencia->bindParam(4, $o->idSubasta);
+
+            $resultado = $sentencia->execute();
+           
+        }
+
+    } 
 
     public static function registrar($idAuto, $idSubasta)
     {

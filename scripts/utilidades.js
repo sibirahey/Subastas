@@ -444,7 +444,24 @@ function cargaListaProgramcionAutos(subastaID, controlid, fini, datediff, nombre
 
 	    $("#btnGuardarOrdenamiento").click(function(){
 
-	    	
+	    	debugger;
+	    	var arrayAutos = [];
+	    	var arrayIds = [];
+	    	$.each($(".horarioInicio"),  function( key, value ) {
+	    		arrayIds.push($(value).attr("id").replace("horarioInicio",""));
+	    	});
+	    	for(var i in arrayIds){
+
+    			var oAS = new AutosSubastas();
+    			oAS.idSubasta = subastaID;
+				oAS.idAuto = arrayIds[i];
+				oAS.fechaIni = $("#horarioInicio"+arrayIds[i]).html().fechaFromMxLargeFormat();
+				oAS.fechaFin = $("#horarioFin"+arrayIds[i]).html().fechaFromMxLargeFormat();
+				arrayAutos.push(oAS);
+	    	}
+
+
+	    	postrequest("subastautos/programar", {'datos':JSON.stringify(arrayAutos)}, function(){},function(){});
 	    });
 
 		Materialize.updateTextFields();

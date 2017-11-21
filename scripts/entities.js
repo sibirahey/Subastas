@@ -195,3 +195,9 @@ function Contactanos(nombre,mail, telefono, mensaje){
 	this.telefono = telefono;
 	this.mensaje = mensaje;
 }
+function AutosSubastas(idSubasta, idAuto, fechaIni, fechaFin){
+	this.idSubasta = idSubasta;
+	this.idAuto = idAuto;
+	this.fechaIni = fechaIni;
+	this.fechaFin = fechaFin;
+}
