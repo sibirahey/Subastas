@@ -411,6 +411,88 @@ function cargaAutosPorSubasta(subastaID, controlid, tiposubasta) {
 			$(".divBtnEditar").hide();
 			$(".divBtnCancelarAuto").hide();
 		}
+		$.each($(".restantePorSubasta"), function(i, val){
+			debugger;
+			var fecha_ini = $(val).attr("attr-fechaini").fechaFromMxLargeFormat();
+			var fecha_fin = $(val).attr("attr-fechafin").fechaFromMxLargeFormat();
+			var idauto = $(val).attr("attr-id");
+			
+			if(Date.now() > fecha_ini && Date.now() < fecha_fin){
+				
+
+
+
+				 setInterval(function(){
+
+				 	debugger;
+				 	var _second = 1000;
+				    var _minute = _second * 60;
+				    var _hour = _minute * 60;
+				    var _day = _hour * 24;
+				    var timer;
+				    var ini = fecha_ini;
+		 			var end = fecha_fin;
+		 			var now = new Date();
+		 			var distance = end - now;
+			       
+			        var salida = "";
+			       
+			        if (distance > 0 && now > ini) {
+			        	var days = Math.floor(distance / _day);
+				        var hours = Math.floor((distance % _day) / _hour);
+				        var minutes = Math.floor((distance % _hour) / _minute);
+				        var seconds = Math.floor((distance % _minute) / _second);
+
+				        var salida =  days + ' días ' +  hours + ' hrs '+ minutes + ' mins ' + seconds + ' segs';
+				     
+				      	$("#contador"+idauto).html("Termina en: " +salida);
+			        }
+					       
+				 	
+				 }, 1000);
+
+
+
+			}else if( Date.now() < fecha_fin){
+				setInterval(function(){
+
+				 	debugger;
+				 	var _second = 1000;
+				    var _minute = _second * 60;
+				    var _hour = _minute * 60;
+				    var _day = _hour * 24;
+				    var timer;
+				    var ini = fecha_ini;
+		 			var end = fecha_fin;
+		 			var now = new Date();
+		 			var distance = ini - now;
+			       
+			        var salida = "";
+			       
+			        if (distance > 0) {
+			        	var days = Math.floor(distance / _day);
+				        var hours = Math.floor((distance % _day) / _hour);
+				        var minutes = Math.floor((distance % _hour) / _minute);
+				        var seconds = Math.floor((distance % _minute) / _second);
+
+				        var salida =  days + ' días ' +  hours + ' hrs '+ minutes + ' mins ' + seconds + ' segs';
+				     
+				      	$("#contador"+idauto).html("Inicia en: "+salida);
+			        }
+					       
+				 	
+				 }, 1000);
+			}else{
+				$("#contador"+idauto).html("Terminada");
+			}
+			/*
+			setTimeout(function(){
+			  greet(randomGreeting);
+			}, 1000);
+			*/
+
+
+		});
 
 	});
 
@@ -693,7 +775,10 @@ function regresaRenglonVenta(item, subastaID) {
 	//renglon += '      			<label>' + item.motivo + '</label>';
 	renglon += '      			<label>Retirado de la subasta</label>';
 	renglon += '    		</div>';
-	
+	renglon += '    		<div style="display:none;">';	
+	renglon += '    			<label>Inicio de subasta: </label>';
+	renglon += '    			<label class="restantePorSubasta" attr-fechaini="'+item.hora_inicio.fecha().esMXFormatLarge()+'" attr-fechafin="'+item.hora_fin.fecha().esMXFormatLarge()+'" attr-id="'+item.idAuto+'" attr-fechaini="'+item.hora_inicio+'">'+item.hora_inicio.fecha().esMXFormatLarge() + '</label	>';
+	renglon += '    		</div>';
 	renglon += '    		<div>';
 	renglon += '      			<label>Modelo: </label>';
 	renglon += '      			<label>' + item.anio + '</label>';
@@ -724,8 +809,8 @@ function regresaRenglonVenta(item, subastaID) {
 
 	}
 	renglon += '    </div>';
-	renglon += '	<div class="card-action>';
-
+	renglon += '	<div class="card-action">';
+	renglon += '		<h6 class="contadorSubastaAuto" id="contador'+item.idAuto+'">'+item.idAuto+'</h6>';
 	debugger;
 	if (subastaID > 0) {
 
@@ -743,7 +828,7 @@ function regresaRenglonVenta(item, subastaID) {
 			{
 				totalofertasposible = 99999999999;
 			}
-			if ((getUrlVars()["accion"] == "subasta" && (eval(sessionStorage["autos_ofertados"]).length <  totalofertasposible ) && item.estatus != "-1") || (auto_ofertado && item.estatus != "-1")) {
+			if (((getUrlVars()["accion"] == "subasta" && (eval(sessionStorage["autos_ofertados"]).length <  totalofertasposible ) && item.estatus != "-1") || (auto_ofertado && item.estatus != "-1")) && item.ensubasta == "1") {
 
 				renglon += '    <div class="divBtnPujar" >';
 				renglon += '    	<div id="btnPujar" class="btnPujar waves-effect waves-light btn" attr-incremento="' + item.incremento + '" attr-tiposubasta="' + item.idTipoSubasta + '" attr-ultimaoferta="' + ((item.idTipoSubasta == "1") ? item.oferta : 0 ) + '" onclick=PujarAuto(' + item.idAuto + ',' + subastaID + ',' + Number(item.precio) + ',this);>Ofertar</div>';
