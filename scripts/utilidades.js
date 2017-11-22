@@ -455,13 +455,17 @@ function cargaListaProgramcionAutos(subastaID, controlid, fini, datediff, nombre
     			var oAS = new AutosSubastas();
     			oAS.idSubasta = subastaID;
 				oAS.idAuto = arrayIds[i];
-				oAS.fechaIni = $("#horarioInicio"+arrayIds[i]).html().fechaFromMxLargeFormat();
-				oAS.fechaFin = $("#horarioFin"+arrayIds[i]).html().fechaFromMxLargeFormat();
+				oAS.fechaIni = $("#horarioInicio"+arrayIds[i]).html().fechaFromMxLargeFormat().toMysqlDate();
+				oAS.fechaFin = $("#horarioFin"+arrayIds[i]).html().fechaFromMxLargeFormat().toMysqlDate();
 				arrayAutos.push(oAS);
 	    	}
 
 
-	    	postrequest("subastautos/programar", {'datos':JSON.stringify(arrayAutos)}, function(){},function(){});
+	    	postrequest("subastautos/programar", 
+	    		{'datos':JSON.stringify(arrayAutos)}, 
+	    		function(data){ Materialize.toast("La información se guardó correctamente", 4000) },
+    			function(data){ Materialize.toast("Ocurrió un error al realizar la operación", 4000); }
+			);
 	    });
 
 		Materialize.updateTextFields();
