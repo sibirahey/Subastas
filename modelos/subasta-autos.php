@@ -58,6 +58,15 @@ class subastasautos
 
             $resultado = $sentencia->execute();
            
+
+           $comando = "UPDATE  subastas set revisada = 1 where  idSubasta = ?" ;
+                
+
+            $sentencia = $pdo->prepare($comando);
+          
+            $sentencia->bindParam(1, $o->idSubasta);
+
+            $resultado = $sentencia->execute();
         }
 
     } 

@@ -75,7 +75,7 @@ class autos
                         "   IFNULL((select oferta  from autos_puja ap where ap.idAuto = aus.autoId and ap.hora_puja < sub.fechaFin order by ap.oferta desc limit 1), au.precio) as oferta, ".
                         " (select count(*) from autos_puja ap where ap.idAuto = aus.autoId and ap.hora_puja < sub.fechaFin) as total_ofertas, ".
                         " sub.idTipoSubasta, (CASE WHEN now() BETWEEN sub.fechaInicio and sub.fechaFin then 'ACTIVA' WHEN now() < sub.fechaInicio then 'AGENDADA' else 'TERMINADA' end) as estatus_subasta, sub.incremento, aus.estatus, aus.motivo,au.nombreContacto, au.telefonoContacto, au.celularContacto, au.correoContacto, au.infoContacto, aus.hora_inicio, aus.hora_fin, ".
-                        " case when NOW() BETWEEN  aus.hora_inicio and aus.hora_fin  then 1 else 0 end AS ensubasta ".
+                        " case when NOW() BETWEEN  aus.hora_inicio and aus.hora_fin  then 1 else 0 end AS ensubasta, sub.revisada ".
                         " FROM subastas_autos as aus, autos as au, cat_marca as marca, cat_modelo as modelo, cat_colores as color, cat_transmision as trans, estados as est, municipios as mun, subastas sub ".
                         " WHERE aus.subastaId = ?  ".
                         " and aus.autoId = au.idAuto  ".
@@ -93,6 +93,7 @@ class autos
 
                         $comando .= "  order by aus.hora_inicio asc";
             
+                    
             
             $sentencia = ConexionBD::obtenerInstancia()->obtenerBD()->prepare($comando);
             

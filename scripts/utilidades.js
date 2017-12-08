@@ -445,7 +445,7 @@ function cargaAutosPorSubasta(subastaID, controlid, tiposubasta) {
 
 				        var salida =  days + ' días ' +  hours + ' hrs '+ minutes + ' mins ' + seconds + ' segs';
 				     
-				      	$("#contador"+idauto).html("Termina en: " +salida);
+				      	$("#contador"+idauto).html(salida);
 			        }
 					       
 				 	
@@ -499,6 +499,8 @@ function cargaAutosPorSubasta(subastaID, controlid, tiposubasta) {
 }
 
 
+
+
 function cargaListaProgramcionAutos(subastaID, controlid, fini, datediff, nombreSubasta, hora_inicio, hora_fin){
 	//debugger;
 	
@@ -516,11 +518,7 @@ function cargaListaProgramcionAutos(subastaID, controlid, fini, datediff, nombre
 		
 		$("#chkHabilitaSort").change(function() {
 	        
-	        if($("#chkHabilitaSort").is(":checked")) {
-	        	$( "#divProgramadorAutosContenido").sortable("enable");
-	        }else{
-	        	$( "#divProgramadorAutosContenido").sortable("disable");
-	        }
+	     	habilitaSort();
 	                
 	    });
 
@@ -562,27 +560,37 @@ function cargaListaProgramcionAutos(subastaID, controlid, fini, datediff, nombre
 			var finicio =  fini.fecha();
 			var fooDate = new Date(finicio.getTime());
 			var ffin = fooDate.addMinutes((datediff/cantidad)*60-  Number($("#tiempoEntreAuto").val()));
-
-			;
-			for (var val in data) {
-				debugger;
-				if(contador > 0){
-					fooDate = new Date(ffin.getTime());
-					fooDate.addMinutes(Number($("#tiempoEntreAuto").val()));
-					finicio = fooDate;	
-					ffin = new Date(finicio.getTime());
-					ffin = ffin.addMinutes((datediff/cantidad)*60-  Number($("#tiempoEntreAuto").val()));
-
-				}
-				if(contador == cantidad-1){
-					ffin = ffin.addMinutes(Number($("#tiempoEntreAuto").val()));
-				}
-				//var finicio =  fini.fecha().addHours((datediff/cantidad)*contador);
 			
-				//ffin = fooDate.addMinutes(((datediff/cantidad)*(contador+1))*60-  ((contador+1 != cantidad) ? Number($("#tiempoEntreAuto").val()):0));
-				var renglon = regresaRenglonProgramador(data[val], subastaID, finicio, ((contador == 0) ? false : true),  ((contador+1 == cantidad)? false:true),  ffin, contador);
+
+			for (var val in data) {
+
+				var renglon = "";
+
+				if (data[0].revisada == 1){
+					renglon = regresaRenglonProgramador(data[val], subastaID, data[val].hora_inicio.fecha(), ((contador == 0) ? false : true),  ((contador+1 == cantidad)? false:true),  data[val].hora_fin.fecha(), contador);
+				}else{
+
+					if(contador > 0){
+						fooDate = new Date(ffin.getTime());
+						fooDate.addMinutes(Number($("#tiempoEntreAuto").val()));
+						finicio = fooDate;	
+						ffin = new Date(finicio.getTime());
+						ffin = ffin.addMinutes((datediff/cantidad)*60-  Number($("#tiempoEntreAuto").val()));
+
+					}
+					if(contador == cantidad-1){
+						ffin = ffin.addMinutes(Number($("#tiempoEntreAuto").val()));
+					}
+					//var finicio =  fini.fecha().addHours((datediff/cantidad)*contador);
 				
-				$(controlid).append(renglon);
+					//ffin = fooDate.addMinutes(((datediff/cantidad)*(contador+1))*60-  ((contador+1 != cantidad) ? Number($("#tiempoEntreAuto").val()):0));
+					renglon = regresaRenglonProgramador(data[val], subastaID, finicio, ((contador == 0) ? false : true),  ((contador+1 == cantidad)? false:true),  ffin, contador);
+					
+					
+				}
+
+				debugger;
+				$(controlid).append(renglon);	
 				contador = contador +1;
 
 			}
@@ -637,11 +645,27 @@ function cargaListaProgramcionAutos(subastaID, controlid, fini, datediff, nombre
 		        
 		      	}
 		    });
+			 if(data[0].revisada == 1){
+				$("#chkHabilitaSort").attr("checked",false);
+				habilitaSort();
+			}
+			$("#btnAdminSubastas").click(function(){ 
+				window.location.href = "main.php?accion?subastasadmin";
+			});
 
 		},
 		function(data){
 
 		});
+
+		function habilitaSort(){
+
+			if($("#chkHabilitaSort").is(":checked")) {
+		    	$( "#divProgramadorAutosContenido").sortable("enable");
+		    }else{
+		    	$( "#divProgramadorAutosContenido").sortable("disable");
+		    }
+		}
    			
   	});
 
@@ -799,7 +823,10 @@ function regresaRenglonVenta(item, subastaID) {
 	renglon += '      			<label>Descripción: </label>';
 	renglon += '      			<label>' + item.descripcion + '</label>';
 	renglon += '    		</div>';
-
+	renglon += '    		<div>';
+	renglon += '      			<label>Fecha de subasta: </label>';
+	renglon += '      			<label>' + item.hora_inicio.fecha().esMXFormatLarge() +' - '+ item.hora_fin.fecha().esMXFormatLarge()+ '</label>';
+	renglon += '    		</div>';
 
 	if (item.idTipoSubasta == 1) {
 		renglon += '    	<div class="divUltimaOferta">';

@@ -240,7 +240,7 @@ function CargaSubastas(estatus, empresa) {
 			div += '					<li><a class="btn-floating btnAgregarUsuariosAutos" attr-id="' + data[i].idSubasta + '" attr-nombresubasta="' + data[i].nombreSubasta + '" title="Agregar Usuarios"><i class="material-icons">group_add</i></a></li>';
 			div += '					<li><a class="btn-floating btnListaUsuarios" attr-id="' + data[i].idSubasta + '" attr-nombresubasta="' + data[i].nombreSubasta + '" title="Ver Usuarios"><i class="material-icons">group</i></a></li>';
 			div += '					<li><a class="btn-floating btnVerAutos" attr-id="' + data[i].idSubasta + '" attr-nombresubasta="' + data[i].nombreSubasta + '" title="Ver Autos"><i class="material-icons">drive_eta</i></a></li>';
-			div += '					<li><a class="btn-floating btnAgendarAutos" attr-id="' + data[i].idSubasta + '" attr-nombresubasta="' + data[i].nombreSubasta + '" attr-fini="'+data[i].fechaInicio+'" attr-ffin="'+data[i].fechaFin+'" attr-diff="'+data[i].diff+'" title="Ver Autos"><i class="material-icons">query_builder</i></a></li>';
+			div += '					<li><a class="btn-floating btnAgendarAutos" attr-id="' + data[i].idSubasta + '" attr-nombresubasta="' + data[i].nombreSubasta + '" attr-fini="'+data[i].fechaInicio+'" attr-ffin="'+data[i].fechaFin+'" attr-diff="'+data[i].diff+'" title="Ver horarios de autos"><i class="material-icons">query_builder</i></a></li>';
 			
 			div += '				</ul>';
 			div += '			</div>';
@@ -328,12 +328,21 @@ function CargaSubastas(estatus, empresa) {
 
 		$(".btnAgendarAutos").click(function() {
 			
+			sessionStorage.setItem('datediff',  $(this).attr("attr-diff"));
+			sessionStorage.setItem('nombreSubasta',  $(this).attr("attr-nombresubasta"));
+			sessionStorage.setItem('hora_inicio',  $(this).attr("attr-fini"));
+			sessionStorage.setItem('hora_fin',  $(this).attr("attr-ffin"));
+			sessionStorage.setItem('attr-id',  $(this).attr("attr-id"));
+
+			window.location.href = "main.php?accion=ajusteautos";
+
+			/*
 			var datediff = $(this).attr("attr-diff");
 			var nombreSubasta = $(this).attr("attr-nombresubasta");
 			var hora_inicio = $(this).attr("attr-fini");
 			var hora_fin = $(this).attr("attr-ffin");
 			cargaListaProgramcionAutos( $(this).attr("attr-id"), "#divProgramadorAutosContenido", $(this).attr("attr-fini"), datediff, nombreSubasta, hora_inicio, hora_fin);
-
+			*/
 
 		});
 

@@ -58,6 +58,11 @@ function CargaFunciones(o){
 		case "contactanos":
 			cargaFuncionesContactanos();
 			break;
+		case "ajusteautos":
+		
+			
+			cargaListaProgramcionAutos( sessionStorage.getItem('attr-id'), "#divProgramadorAutosContenido", sessionStorage.getItem('hora_inicio'), sessionStorage.getItem('datediff'), sessionStorage.getItem('nombreSubasta'), sessionStorage.getItem('hora_inicio'), sessionStorage.getItem('hora_fin'));
+			break;
 		case "dashboard":
 		default:
 			CargaJsonHome();
