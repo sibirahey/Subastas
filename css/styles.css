@@ -1505,6 +1505,11 @@ div[aria-describedby="divAutos"] {
 	position: relative;
 	text-align:center;
 }
+.divBtnPujar{
+    position: relative;
+    text-align: center;
+    margin: 0 auto;
+}
 /*---------- FIN MAIN--------*/
 /*---------- REGISTRO ---------*/
 .registroLeft {
