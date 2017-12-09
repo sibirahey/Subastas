@@ -1399,10 +1399,11 @@ img[data-u="image"] {
 .searchItem > .card{
 	/*float:left;*/
 	margin: 0;
-	height:467px;
+	height:auto;
 }
 .searchItem > .card > div{
-	/*float:left;*/
+	float:left;
+	width:100%;
 }
 .searchItem > .searchItemHead {
 	height: 40px;
@@ -2551,10 +2552,13 @@ input:checked + .slider:before {
 }
 
 #ulMisSubastas > li .card-title {
-	font-size: 16px;
-	font-weight: 400;
-	padding: 5px;
-	text-transform: capitalize;
+    font-size: 16px;
+    font-weight: 400;
+    padding: 5px;
+    text-transform: capitalize;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
 }
 #ulMisSubastas > li .card-content > h6{
 	width: 50%;
@@ -2755,6 +2759,7 @@ div[name="altaautos"] > .row{
 	height:200px;
 	overflow:auto;
 	padding: 4px 24px;
+	background-color:#ffffff;
 }
 .searchItem .card-title{
 	width: 100%;
@@ -2995,3 +3000,6 @@ label,
 
 }
 .ui-state-highlight { height: 1.5em; line-height: 1.2em; }
+.card.horizontal .card-stacked {
+    width: 100%;
+}
