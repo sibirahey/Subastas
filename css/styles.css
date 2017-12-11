@@ -1499,7 +1499,7 @@ div[aria-describedby="divAutos"] {
 }
 
 
-.divBtnPujar,  .divBtnEditar, .divVerOfertas,.divBtnCancelarAuto {
+.divBtnEditar, .divVerOfertas,.divBtnCancelarAuto {
 	float: left;
 	width: 50%;
 	position: relative;
@@ -1507,6 +1507,7 @@ div[aria-describedby="divAutos"] {
 }
 .divBtnPujar{
     position: relative;
+	float:none;
     text-align: center;
     margin: 0 auto;
 }
@@ -2751,8 +2752,9 @@ div[name="altaautos"] > .row{
 	float:left;
 	margin: 0 calc(50% - 512px);
 }
-#divContenidoSubasta{
-
+#divContenidoSubasta .card > .card-action,
+#divContenidoSubasta .card > .card-action > div{
+	text-align:center;
 }
 .searchItem > .card > .card-image{
 	overflow:hidden;

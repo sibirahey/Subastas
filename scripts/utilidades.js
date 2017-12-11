@@ -382,7 +382,7 @@ function cargaAutosPorSubasta(subastaID, controlid, tiposubasta) {
 		
 		$("#divDetalleAuto").hide();
 		for (var val in data) {
-
+			debugger;
 			var renglon = regresaRenglonVenta(data[val], subastaID);
 			renglon = renglon.replace("##num_auto##", Number(val) + 1);
 			$(controlid).append(renglon);
@@ -424,7 +424,7 @@ function cargaAutosPorSubasta(subastaID, controlid, tiposubasta) {
 
 				 setInterval(function(){
 
-				 	debugger;
+				 	//debugger;
 				 	var _second = 1000;
 				    var _minute = _second * 60;
 				    var _hour = _minute * 60;
@@ -456,7 +456,7 @@ function cargaAutosPorSubasta(subastaID, controlid, tiposubasta) {
 			}else if( Date.now() < fecha_fin){
 				setInterval(function(){
 
-				 	debugger;
+				 	//debugger;
 				 	var _second = 1000;
 				    var _minute = _second * 60;
 				    var _hour = _minute * 60;
@@ -485,13 +485,16 @@ function cargaAutosPorSubasta(subastaID, controlid, tiposubasta) {
 			}else{
 				$("#contador"+idauto).html("Terminada");
 			}
-			/*
-			setTimeout(function(){
-			  greet(randomGreeting);
-			}, 1000);
-			*/
-
-
+			debugger;
+			if($('#divContenidoSubasta').find('.divBtnPujar').length != 0){	
+				//var hayONoHay = $('#divContenidoSubasta').find('.divBtnPujar').length;
+				var alturaSearchItem = $('#divContenidoSubasta').find('.divBtnPujar').closest('.searchItem').outerHeight();
+				//console.log(hayONoHay);
+				console.log(alturaSearchItem);
+				$('#divContenidoSubasta').find('.searchItem > .card').css('height', alturaSearchItem);
+			} else {
+				$('#divContenidoSubasta').find('.searchItem > .card').css('height','auto');
+			};
 		});
 
 	});
@@ -524,7 +527,7 @@ function cargaListaProgramcionAutos(subastaID, controlid, fini, datediff, nombre
 
 	    $("#btnGuardarOrdenamiento").click(function(){
 
-	    	debugger;
+	    	//debugger;
 	    	var arrayAutos = [];
 	    	var arrayIds = [];
 	    	$.each($(".horarioInicio"),  function( key, value ) {
