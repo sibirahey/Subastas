@@ -194,6 +194,17 @@ $(document).ready(function() {
 		 *Registro
 		 *
 		 */
+		 $("#registroPlaca").keydown(function(event ){
+
+		 	if ( event.which >=	48 && event.which <= 57 ||  event.which >=	96 && event.which <= 105 || event.which <= 18 || event.which <= 9 || event.which <= 46) {
+			    
+			 }else{
+			 	event.preventDefault();
+			 	Materialize.toast("Sólo se permiten números",2000);
+
+			 }
+		 });
+
 		$("#btnGuardar").click(function() {
 
 			debugger;
@@ -211,7 +222,7 @@ $(document).ready(function() {
 			oUsuario.categorias = [];
 			oUsuario.telefono = $("#registroTelefono").val();
 
-			console.log(JSON.stringify(oUsuario))	;
+			//console.log(JSON.stringify(oUsuario))	;
 			var categorias = [];
 
 			$(".chkPref:checked").each(function() {

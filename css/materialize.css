@@ -5000,6 +5000,7 @@ small {
   background-color: #fff;
   margin: 0 auto;
   white-space: nowrap;
+  text-align: center;
 }
 
 .tabs.tabs-transparent {

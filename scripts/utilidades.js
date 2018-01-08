@@ -1,3 +1,5 @@
+
+
 String.prototype.replaceAll = function(search, replacement) {
 	var target = this;
 	return target.replace(new RegExp(search, 'g'), replacement);
@@ -382,7 +384,7 @@ function cargaAutosPorSubasta(subastaID, controlid, tiposubasta) {
 		
 		$("#divDetalleAuto").hide();
 		for (var val in data) {
-			debugger;
+			
 			var renglon = regresaRenglonVenta(data[val], subastaID);
 			renglon = renglon.replace("##num_auto##", Number(val) + 1);
 			$(controlid).append(renglon);
@@ -392,7 +394,7 @@ function cargaAutosPorSubasta(subastaID, controlid, tiposubasta) {
 
 		}
 
-		//debugger;
+		
 		if (tiposubasta  && getUrlVars()["accion"] =="subasta") {
 			$(".divBtnPujar").show();
 			$('.card-content').css('height', '200px');
@@ -412,11 +414,12 @@ function cargaAutosPorSubasta(subastaID, controlid, tiposubasta) {
 			$(".divBtnCancelarAuto").hide();
 		}
 		$.each($(".restantePorSubasta"), function(i, val){
-			debugger;
+			
 			var fecha_ini = $(val).attr("attr-fechaini").fechaFromMxLargeFormat();
 			var fecha_fin = $(val).attr("attr-fechafin").fechaFromMxLargeFormat();
 			var idauto = $(val).attr("attr-id");
 			
+
 			if(Date.now() > fecha_ini && Date.now() < fecha_fin){
 				
 
@@ -440,10 +443,16 @@ function cargaAutosPorSubasta(subastaID, controlid, tiposubasta) {
 			        if (distance > 0 && now > ini) {
 			        	var days = Math.floor(distance / _day);
 				        var hours = Math.floor((distance % _day) / _hour);
-				        var minutes = Math.floor((distance % _hour) / _minute);
+ 				        var minutes = Math.floor((distance % _hour) / _minute);
 				        var seconds = Math.floor((distance % _minute) / _second);
 
 				        var salida =  days + ' días ' +  hours + ' hrs '+ minutes + ' mins ' + seconds + ' segs';
+
+				        if(days <= 0 && hours <= 0 && minutes <= 0 && seconds <= 0 ){
+
+				        	salida = "Terminada";
+				        	$(".btnPujar"+idauto).remove();
+				        }
 				     
 				      	$("#contador"+idauto).html(salida);
 			        }
@@ -453,7 +462,7 @@ function cargaAutosPorSubasta(subastaID, controlid, tiposubasta) {
 
 
 
-			}else if( Date.now() < fecha_fin){
+			}else if(Date.now() < fecha_fin){
 				setInterval(function(){
 
 				 	//debugger;
@@ -477,7 +486,19 @@ function cargaAutosPorSubasta(subastaID, controlid, tiposubasta) {
 
 				        var salida =  days + ' días ' +  hours + ' hrs '+ minutes + ' mins ' + seconds + ' segs';
 				     
-				      	$("#contador"+idauto).html("Inicia en: "+salida);
+				      	
+				      	 if(days <= 0 && hours <= 0 && minutes <= 0 && seconds <= 0 ){
+
+				      	 	
+
+				      	 	setInterval(function(){ 
+			      	 			location.reload();
+				      	 	 }, 3000);
+				        }else{
+				        	$("#contador"+idauto).html("Inicia en: "+salida);
+				        }
+
+
 			        }
 					       
 				 	
@@ -505,19 +526,19 @@ function cargaAutosPorSubasta(subastaID, controlid, tiposubasta) {
 
 
 function cargaListaProgramcionAutos(subastaID, controlid, fini, datediff, nombreSubasta, hora_inicio, hora_fin){
-	//debugger;
+	debugger;
 	
 
 	$(".mainBody").load("views/main/admin/ajusteautos.html" ,function() {
 			
 		
-		//debugger;
+		debugger;
 		
 		$("#divProgramadorAutosTitulo").html(nombreSubasta);
 		var idSubasta = subastaID;
 		$("#hora_inicio").html(hora_inicio);
 		$("#hora_fin").html(hora_fin);
-		
+		 $('#modal1').modal();
 		
 		$("#chkHabilitaSort").change(function() {
 	        
@@ -592,7 +613,7 @@ function cargaListaProgramcionAutos(subastaID, controlid, fini, datediff, nombre
 					
 				}
 
-				debugger;
+			
 				$(controlid).append(renglon);	
 				contador = contador +1;
 
@@ -677,7 +698,7 @@ function cargaListaProgramcionAutos(subastaID, controlid, fini, datediff, nombre
 
 function regresaRenglonProgramador(item, subastaID, fechatentativa, showup, showdown, fechafin, contador){
 
-debugger;
+
 	var renglon ='<div class="searchItem2">';
 	//renglon += '        <div class="card-image">';
 	//renglon += '          	<img attr-id="' + item.idAuto + '" width="50px" onclick="VerDetalleAuto(this);" src="' + siteurl + 'uploads/' + item.foto + '" onerror="imgError(this)"; />';
@@ -700,7 +721,7 @@ debugger;
 }
 
 function agregaTiempo(ctrl, idAuto, tiempo){
-	debugger;
+	
 	var fechaFin = $("#horarioFin"+idAuto).html().fechaFromMxLargeFormat();
 	var fechaIni = $("#horarioInicio"+idAuto).html().fechaFromMxLargeFormat();
 	fechaFin.addMinutes(tiempo);
@@ -719,12 +740,12 @@ function agregaTiempo(ctrl, idAuto, tiempo){
 			
 		}
 	});
-
+	debugger;
 	if(contador == ($(".horarioFin").length -1)){
-		if(fechaFin <= $("#hora_fin").html().fecha() && $("#hora_fin").html().fecha() > fechaIni){
+		if(fechaFin <= $("#hora_fin").html().fecha() && $("#hora_fin").html().fecha() > fechaIni && fechaFin > fechaIni){
 			$("#horarioFin"+idAuto).html(fechaFin.esMXFormatLarge());
 		}else{
-			Materialize.toast("Imposible ajustar el tiempo de subasta del auto. El horario de término no puede ser mayor a la finalización de la subasta",4000);
+			Materialize.toast("Imposible ajustar el tiempo de subasta del auto. El horario de término no puede ser mayor a la finalización de la subasta o menor a la hora de inicio",4000);
 		}
 	}else{
 		if(fechaFin < $($(".horarioInicio")[contador+1]).html().fechaFromMxLargeFormat() && fechaFin > fechaIni){
@@ -774,8 +795,7 @@ function quitaTiempo(ctrl, idAuto, tiempo){
 }
 
 function regresaRenglonVenta(item, subastaID) {	
-	debugger;
-	
+
 	var renglon = '    <div class="searchItem">';
 	renglon += '      <div class="card">';
 	renglon += '        <div class="card-image">';
@@ -841,13 +861,13 @@ function regresaRenglonVenta(item, subastaID) {
 	renglon += '    </div>';
 	renglon += '	<div class="card-action">';
 	renglon += '		<h6 class="contadorSubastaAuto" id="contador'+item.idAuto+'">'+item.idAuto+'</h6>';
-	debugger;
+
 	if (subastaID > 0) {
 
 		if (item.estatus_subasta == "ACTIVA" || item.estatus_subasta == "AGENDADA") {
 
 
-			debugger;
+			
 			totalofertasposible = 0;
 			try{
 				totalofertasposible = Number($("#numOfertasPosibles").html());
@@ -858,10 +878,11 @@ function regresaRenglonVenta(item, subastaID) {
 			{
 				totalofertasposible = 99999999999;
 			}
+
 			if (((getUrlVars()["accion"] == "subasta" && (eval(sessionStorage["autos_ofertados"]).length <  totalofertasposible ) && item.estatus != "-1") || (auto_ofertado && item.estatus != "-1")) && item.ensubasta == "1") {
 
 				renglon += '    <div class="divBtnPujar" >';
-				renglon += '    	<div id="btnPujar" class="btnPujar waves-effect waves-light btn" attr-incremento="' + item.incremento + '" attr-tiposubasta="' + item.idTipoSubasta + '" attr-ultimaoferta="' + ((item.idTipoSubasta == "1") ? item.oferta : 0 ) + '" onclick=PujarAuto(' + item.idAuto + ',' + subastaID + ',' + Number(item.precio) + ',this);>Ofertar</div>';
+				renglon += '    	<div id="btnPujar" class="btnPujar waves-effect waves-light btn btnPujar'+item.idAuto+ '" attr-incremento="' + item.incremento + '" attr-tiposubasta="' + item.idTipoSubasta + '" attr-ultimaoferta="' + ((item.idTipoSubasta == "1") ? item.oferta : 0 ) + '" onclick=PujarAuto(' + item.idAuto + ',' + subastaID + ',' + Number(item.precio) + ',this);>Ofertar</div>';
 			
 			}
 			if(sessionStorage["es_admin"] == "1"  && getUrlVars()["accion"] == "subastasadmin"){
@@ -1062,8 +1083,9 @@ function ValidaOferta(o) {
 	}
 }
 function CancelarAuto(o){
+	debugger;
 	$("#modal-confirm-cancelauto").show();
-	$("#divRegistroAutos").hide();
+	$("#divListaAutos").hide();
 	$("#divListaBotonera").hide();
 
 	$("#ttlCancelarAuto").html($(o).attr("attr-auto"));
@@ -1072,7 +1094,11 @@ function CancelarAuto(o){
 	$("#btnCancelarSubastaAuto2").attr("attr-idsubasta", $(o).attr("attr-idsubasta"));
 
 	$("#btnCancelarSubastaAuto").click(function(){
-		RegresarAListadoAuto();
+
+		$("#modal-confirm-cancelauto").hide();
+		$("#divListaAutos").show();
+		$("#divListaBotonera").show();
+	
 	});
 
 	$("#btnCancelarSubastaAuto2").click(function(){
@@ -1095,11 +1121,13 @@ function CancelarAuto(o){
 						Materialize.toast('Ocurrió un error al realizar la operación', 4000);
 					}
 					$("#txtCancelaAuto").val("");
+					
 					RegresarAListadoAuto();
 				}, 
 				function(data){
 					Materialize.toast('Ocurrió un error inesperado', 4000);
 					$("#txtCancelaAuto").val();
+					
 					RegresarAListadoAuto()
 				}
 
@@ -1112,9 +1140,9 @@ function CancelarAuto(o){
 
 function RegresarAListadoAuto(){
 
-	$("#modal-confirm-cancelauto").hide();
-	$("#divRegistroAutos").show();
-	$("#divListaBotonera").show();
+$("#modal-confirm-cancelauto").hide();
+		$("#divListaAutos").show();
+		$("#divListaBotonera").show();
 
 }
 
@@ -1278,13 +1306,26 @@ function GuardaDetalleAuto(opc) {
 		oAuto.enVenta = 1;
 		oAuto.idSubasta = 0;
 	}
+	try{
+		oAuto.precio = $("#precioAuto").val().trim();	
+	}catch(err){
+		oAuto.precio = "";
+	}
 	
-	oAuto.precio = $("#precioAuto").val().trim();
 	oAuto.marca = $("#cbMarcaAuto").val();
 	oAuto.modelo = $("#cbModeloAuto").val();
 	oAuto.color = $("#cbColorAuto").val();
-	oAuto.anio = $("#cbAnioAuto").val().trim();
-	oAuto.km = $("#cbKMAuto").val().trim();
+	try{
+		oAuto.anio = $("#cbAnioAuto").val().trim();	
+	}catch(err){
+		oAuto.anio = "";
+	}
+	try{
+		oAuto.km = $("#cbKMAuto").val().trim();
+	}catch(err){
+		oAuto.km = "";
+	}
+	
 	oAuto.transmision = $("#cbTipoTransmisionAuto").val();
 	oAuto.estado = $("#cbEstadoAuto").val();
 	oAuto.ciudad = $("#cbCiudadAuto").val();
@@ -1868,4 +1909,66 @@ function CargaFuncionesContactanos() {
 		}
 	}
 
+}
+
+function cargar_participantes(idSubasta, nombreSubasta){
+
+	postrequest("subastas/participantes", {"id_subasta":idSubasta}, function(data){
+
+				$("#listParticipantes").show();
+				$("#listUsuariosConfirm").hide();
+				$("#divListaUsuariosTbl").html("");
+				$("#divListaUsuariosTtl").html("Subasta: " + nombreSubasta);
+				if(data.code){
+					if(data.code == 400){
+						//alert("Ocurrió un error al obtener la lista de participantes");
+						Materialize.toast('Ocurri&oacute; un error al obtener la lista de participantes.', 4000);
+						//console.log(data.message);
+					}
+				}
+				$("#divListaUsuariosTbl").html("");
+				$tabla = "<table class='responsive-table striped centered'><tr><th>Nombre</th><th>Correo</th><th>Quitar</th></tr>"
+				for(var item in data){
+					$tabla += "<tr><td>"+ data[item].nombre + " "+data[item].appaterno+" "+data[item].apmaterno + "</td><td>"+data[item].correo +"</td><td><i class='material-icons' attr-subasta='"+data[item].idSubasta+"' attr-usuario='"+data[item].idUsuario+"' onclick='remover_usuario_subastaconfirm(this);'>remove_circle_outline</i></td></tr>";
+					console.log(data);
+				}
+				$tabla += "</table>";
+				
+				$("#divListaUsuariosTbl").html($tabla);
+				
+				$("#divListaUsuariosModal").modal("open");
+				
+			});
+}
+function remover_usuario_subastaconfirm(o){
+
+
+	$("#btnAceptarRemoverParticipante").attr("attr-usuario",  $(o).attr("attr-usuario"))
+	$("#btnAceptarRemoverParticipante").attr("attr-subasta",  $(o).attr("attr-subasta"))
+	$("#listParticipantes").hide();
+	$("#listUsuariosConfirm").show();
+}
+function  remover_usuario_subastacancelar(){
+	$("#listParticipantes").show();
+	$("#listUsuariosConfirm").hide();
+}
+
+function remover_usuario_subsata(o){
+
+		var usId = $(o).attr("attr-usuario");
+		var subId = $(o).attr("attr-subasta");
+		postrequest("subastas/remover_participante", {"subasta":subId , "usuario":usId }, function(data) { 
+				if(data == 1){
+
+					nombreSubasta =  $("#divListaUsuariosTtl").html().replace("Subasta: ");
+					$("#divListaUsuariosTbl").html("");
+					cargar_participantes(subId, nombreSubasta);
+
+				}else{
+					Materialize.toast("Ocurrió un error al procesar la solicitud", 4000);
+				}
+
+			}, function(error){
+				Materialize.toast("Ocurrió un error al procesar la solicitud", 4000);
+			});
 }

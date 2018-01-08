@@ -68,7 +68,7 @@ class autospuja
                 $pdo = ConexionBD::obtenerInstancia()->obtenerBD();
 
 
-                $comando = "select case when now() < fechaFin then true else false END as valida, idTipoSubasta as tiposubasta, incremento  from subastas where idSubasta = ? ";
+                $comando = "select case when ".setNowForSQL()." < fechaFin then true else false END as valida, idTipoSubasta as tiposubasta, incremento  from subastas where idSubasta = ? ";
                 $sentencia = $pdo->prepare($comando);
                 $sentencia->bindParam(1, $_POST["id_subasta"]);
                 $resultado = $sentencia->execute();

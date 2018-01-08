@@ -398,10 +398,45 @@ function validaCamposAltaAutos(item){
 		msj += (msj =="") ? "Descripción" : ", Descripción";
 		validado = false;
 	}
+
+
+	if(item.telefonoContacto != undefined && item.telefonoContacto.trim() != ''){
+		
+		if(/\D/.test(item.telefonoContacto)){
+
+			msj += (msj =="") ? msjSoloNumeros+" el Teléfono de contacto" : ". "+msjSoloNumeros+" el Teléfono de contacto";
+			validado = false;
+		}
+
+	}else{
+		item.telefonoContacto = "";
+	}
+
+	if(item.celularContacto != undefined && item.celularContacto.trim() != ''){
+		if(/\D/.test(item.celularContacto)){
+
+			msj += (msj =="") ? msjSoloNumeros+" el Celular de contacto" : ". "+msjSoloNumeros+" el Celular de contacto";
+			validado = false;
+		}
+
+	}else{
+		item.celularContacto = "";
+	}
+
+	if(item.correoContacto != undefined && item.correoContacto.trim() != ""){
+		if(!ValidaEmail(item.correoContacto)){
+			msj += (msj =="") ? " el correo de contacto no tiene el formato correcto" : ". el correo de contacto no tiene el formato correcto";
+		}
+	}else{
+		item.correoContacto = "";
+	}
+	
+
 	if($(".fotosAuto").length == 0){
 		msj += (msj =="") ? "Agregar al menos una foto" : ", Agregar al menos una foto";
 		validado = false;	
 	}
+
 
 	if (!validado){
 		//alert("Favor de llenar todos los campos requeridos");

@@ -353,7 +353,7 @@ class usuarios
                 $usuario->esadmin = $fetch[0]["es_admin"];
                 $usuario->claveApi = $fetch[0]["claveApi"];
 
-                $comando = "update usuario set verificado = 1, vigencia = now() where correo =? and idUsuario = ?  ";
+                $comando = "update usuario set verificado = 1, vigencia = ".setNowForSQL()." where correo =? and idUsuario = ?  ";
                 $sentencia = ConexionBD::obtenerInstancia()->obtenerBD()->prepare($comando);
                 $sentencia->bindParam(1, $correo);
                 $sentencia->bindParam(2, $idusuario);
@@ -394,7 +394,7 @@ class usuarios
             $fetch = $sentencia->fetch(PDO::FETCH_ASSOC);
             if($fetch["correo"] == $correo){
                 $claveApi = self::generarClaveApi();
-                $comando = "update ".self::NOMBRE_TABLA." set claveApi = '".$claveApi."', vigencia = DATE_ADD(NOW(), INTERVAL 8 HOUR) where correo = '".  $correo."'";
+                $comando = "update ".self::NOMBRE_TABLA." set claveApi = '".$claveApi."', vigencia = DATE_ADD(".setNowForSQL().", INTERVAL 8 HOUR) where correo = '".  $correo."'";
                 $sentencia = $sentencia = ConexionBD::obtenerInstancia()->obtenerBD()->prepare($comando);
                 if($sentencia->execute()){
 
@@ -413,7 +413,7 @@ class usuarios
 
     public function rememberme(){
         $claveapi = $_POST["claveapi"];
-        $comando = "SELECT idUsuario, nombre, appaterno, apmaterno, correo, verificado, contrasena, publico, es_admin, claveApi from usuario where ".self::CLAVE_API." = '".$claveapi."' and now() < vigencia+1 ";
+        $comando = "SELECT idUsuario, nombre, appaterno, apmaterno, correo, verificado, contrasena, publico, es_admin, claveApi from usuario where ".self::CLAVE_API." = '".$claveapi."' and ".setNowForSQL()." < vigencia+1 ";
         $sentencia = ConexionBD::obtenerInstancia()->obtenerBD()->prepare($comando);
         $sentencia->bindParam(1, $claveapi);
 
@@ -463,7 +463,7 @@ class usuarios
             
             if($valido == 1 &&  $fetch["verificado"] == 1){
                 $claveApi = self::generarClaveApi();
-                $comando = "update ".self::NOMBRE_TABLA." set claveApi = '".$claveApi."', vigencia = DATE_ADD(NOW(), INTERVAL 8 HOUR) where correo = '".  $mail."'";
+                $comando = "update ".self::NOMBRE_TABLA." set claveApi = '".$claveApi."', vigencia = DATE_ADD(".setNowForSQL().", INTERVAL 8 HOUR) where correo = '".  $mail."'";
                 $sentencia = $pdo->prepare($comando);
                 $sentencia->execute();
 

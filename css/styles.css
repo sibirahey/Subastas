@@ -2543,13 +2543,14 @@ input:checked + .slider:before {
 	width:100%;
 }
 
-#ulMisSubastas {
+#ulMisSubastas, #divListaSubastas, #divListaSubastas2, #divListaSubastas3, #divListaSubastas4{
 	white-space: nowrap;
 	overflow-x: auto;
 	overflow-y:hidden;
 	width: 100%;
+	text-align: center;
 }
-#ulMisSubastas > li {
+#ulMisSubastas > li, #divListaSubastas > li, #divListaSubastas2  > li, #divListaSubastas3  > li, #divListaSubastas4  > li{
 	display: inline-block;
 	white-space: normal;
 	vertical-align: top;
@@ -2557,7 +2558,7 @@ input:checked + .slider:before {
 	width: 360px;
 }
 
-#ulMisSubastas > li .card-title {
+#ulMisSubastas > li .card-title, #divListaSubastas > li .card-title, #divListaSubastas2  > li .card-title, #divListaSubastas3  > li .card-title, #divListaSubastas4  > li .card-title {
     font-size: 16px;
     font-weight: 400;
     padding: 5px;
@@ -2566,22 +2567,22 @@ input:checked + .slider:before {
     white-space: nowrap;
     text-overflow: ellipsis;
 }
-#ulMisSubastas > li .card-content > h6{
+#ulMisSubastas > li .card-content > h6, #divListaSubastas > li .card-content > h6, #divListaSubastas2  > li .card-content > h6, #divListaSubastas3  > li .card-content > h6, #divListaSubastas4  > li .card-content > h6{
 	width: 50%;
 	float:left;
 }
 
-#ulMisSubastas > li .card-content > h6:nth-child(odd){
+#ulMisSubastas > li .card-content > h6:nth-child(odd), #divListaSubastas > li .card-content > h6:nth-child(odd), #divListaSubastas2  > li .card-content > h6:nth-child(odd), #divListaSubastas3  > li .card-content > h6:nth-child(odd), #divListaSubastas4  > li .card-content > h6:nth-child(odd){
 	text-align: right;
 	font-weight:500;
 }
-#ulMisSubastas > li .card-content > h6:nth-child(even){
+#ulMisSubastas > li .card-content > h6:nth-child(even), #divListaSubastas > li .card-content > h6:nth-child(even), #divListaSubastas2  > li .card-content > h6:nth-child(even), #divListaSubastas3  > li .card-content > h6:nth-child(even), #divListaSubastas4  > li .card-content > h6:nth-child(even){
 	text-indent:10px;
 }
-#ulMisSubastas > li .card-action{
+#ulMisSubastas > li .card-action, #divListaSubastas > li .card-action, #divListaSubastas2  > li .card-action, #divListaSubastas3  > li .card-action, #divListaSubastas4  > li .card-action{
 	text-align:center;
 }
-#ulMisSubastas > li .card-content > h6:last-child {
+#ulMisSubastas > li .card-content > h6:last-child, #divListaSubastas > li .card-content > h6:last-child, #divListaSubastas2  > li .card-content > h6:last-child, #divListaSubastas3  > li .card-content > h6:last-child, #divListaSubastas4  > li .card-content > h6:last-child {
     width: 100%;
     text-align: center;
     font-weight: 500;

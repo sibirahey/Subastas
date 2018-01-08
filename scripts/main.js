@@ -7,6 +7,7 @@ $(document).ready(function(){
 	var accion = "";
 	if(urlvars["accion"]){
 		accion = urlvars["accion"].replace("#!","");
+		accion = urlvars["accion"].replace("?r","");
 	}
 	
 
@@ -28,7 +29,7 @@ $(document).ready(function(){
   });
 
 function CargaFunciones(o){
-	
+	debugger;
 	switch(o){
 		case "altaautos":
 			CargaFuncionesRegistroAuto();
@@ -58,9 +59,8 @@ function CargaFunciones(o){
 		case "contactanos":
 			cargaFuncionesContactanos();
 			break;
-		case "ajusteautos":
-		
-			
+		case "ajusteautos":			
+			debugger;
 			cargaListaProgramcionAutos( sessionStorage.getItem('attr-id'), "#divProgramadorAutosContenido", sessionStorage.getItem('hora_inicio'), sessionStorage.getItem('datediff'), sessionStorage.getItem('nombreSubasta'), sessionStorage.getItem('hora_inicio'), sessionStorage.getItem('hora_fin'));
 			break;
 		case "dashboard":
@@ -127,13 +127,28 @@ function CargaContenidoMain() {
 						} else{
 							subasta = subasta.replace("##CLASS##", "display:none; ");
 						}
-						$("#ulMisSubastas").append(subasta);
+
+
+						if(response[o].estatus == "TERMINADA" || response[o].estatus == "CERRADA"){
+							$("#divListaSubastas2").append(subasta);
+						}else if(response[o].estatus == "CANCELADA"){
+							$("#divListaSubastas3").append(subasta);
+						}else if(response[o].estatus == "AGENDADA"){
+							$("#divListaSubastas4").append(subasta);
+						}else{
+							$("#divListaSubastas").append(subasta);
+						}
+
+
+						//$("#ulMisSubastas2").append(subasta);
 
 						
 
 
 					}
 				}
+				$('ul.tabs').tabs();
+				
 
 				 setInterval(function(){
 

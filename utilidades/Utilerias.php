@@ -1,5 +1,13 @@
 <?php
 
+
+define("TIMEDIFF", 1);
+
+function setNowForSQL(){
+
+	return "DATE_ADD(NOW(), INTERVAL ".TIMEDIFF." HOUR)";
+}
+
 function unregister_GLOBALS()
 {
     if (!ini_get('register_globals')) {

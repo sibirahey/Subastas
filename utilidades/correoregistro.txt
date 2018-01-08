@@ -5,13 +5,13 @@
 			<h2 style="background:#1E2328;height:80px;width: 100%;float: left;margin-top:0;color: #ffffff;line-height:80px;"><img src="http://escuderia.jerocani.com/images/logoHeader.png" style="background-repeat:no-repeat;height:80px;width:300px;position: relative;float:left;" />Bienvenido a escuder&iacute;a</h2>
 			<p style="loat: left;">
 				<div style="width: 96%;float: left;margin:10px 2%;font-size:1.4rem;color:rgb(60,65,70);font-family: 'Inconsolata', monospace;text-align: center;">Gracias por inscribirte con nosotros.</div>
-				<div style="width: 96%;float: left;margin:10px 2%;font-size:1.4rem;color:rgb(60,65,70);font-family: 'Inconsolata', monospace;text-align: center;">Para terminar su registro por favor confirme su mail:</div> 
+				<div style="width: 96%;float: left;margin:10px 2%;font-size:1.4rem;color:rgb(60,65,70);font-family: 'Inconsolata', monospace;text-align: center;">Para terminar su registro por favor confirme su dirección de correo electrónico haciendo click en el siguiente vínculo:</div> 
 				<div style="width: 96%;float: left;margin:10px 2%;font-size:1.4rem;color:rgb(60,65,70);font-family: 'Inconsolata', monospace;text-align:center !important;">
 				<a style="width: 200px;height: 50px;line-height: 50px;border-radius: 2px;background-color: #26a69a;padding: .5em 1em .5em 1em;text-align: center;color: #ffffff;text-decoration: none;box-shadow: 0 0 4px #000000;font-family: 'Inconsolata', monospace;" href="http://escuderia.jerocani.com/home.php?s=valida&claveapi=##claveApi##&idusuario=##idusuario##&correo=##correo##">Confirmar mail</a>
 				</div>
-				<div style="width: 96%;float: left;margin:10px 2%;font-size:1.4rem;color:rgb(60,65,70);font-family: 'Inconsolata', monospace;text-align: center;">Si no puede dar click en el enlace puede copiar el c&oacute;digo: </div>  
+				<div style="width: 96%;float: left;margin:10px 2%;font-size:1.4rem;color:rgb(60,65,70);font-family: 'Inconsolata', monospace;text-align: center;">O bien copiando el siguiente c&oacute;digo: </div>  
 				<div style="width: 96%;float: left;margin:10px 2%;font-size:1.4rem;color:rgb(60,65,70);font-family: 'Inconsolata', monospace;text-align: center;">##claveApi##</div> 
-				<div style="width: 96%;float: left;margin:10px 2%;font-size:1.4rem;color:rgb(60,65,70);font-family: 'Inconsolata', monospace;text-align: center;">en la pantalla de verificaci&oacute;n</div>
+				<div style="width: 96%;float: left;margin:10px 2%;font-size:1.4rem;color:rgb(60,65,70);font-family: 'Inconsolata', monospace;text-align: center;">en la pantalla de verificaci&oacute;n que aparecer&aacute; cuando se firme nuevamente en el sitio.</div>
 			</p>
 		</div>
 	</body>

@@ -52,6 +52,8 @@ class subastas
 		}
         else if($peticion[0] == 'cancelar'){
             return self::cancelar($_POST);
+        }else if($peticion[0] = 'remover_participante'){
+            return self::remover_participante($_POST);
         }
         else {
             throw new ExcepcionApi(self::ESTADO_URL_INCORRECTA, "Url mal formada", 400);
@@ -83,7 +85,7 @@ class subastas
 
             }
             
-            $comando = "select s.idSubasta, nombreSubasta, idTipoSubasta, tipo.tipoSubasta, fechaInicio, fechaFin, CASE WHEN visible = -1 then 'CANCELADA' when visible = 0 then 'CERRADA' WHEN  now() BETWEEN fechaInicio and fechaFin then 'ACTIVA' WHEN now() < fechaInicio then 'AGENDADA' else 'TERMINADA' end as estatus, visible, case visible when 0 then 'NO PUBLICADA' else 'PUBLICADA' end as publicada,(select GROUP_CONCAT(emp.nombreEmpresa) from subastaempresa se, empresas emp where s.idSubasta = se.idSubasta and se.idEmpresa = emp.idEmpresa) as empresas, (select GROUP_CONCAT(emp.idEmpresa) from subastaempresa se, empresas emp where s.idSubasta = se.idSubasta and se.idEmpresa = emp.idEmpresa) as empresasId,incremento, ofertas_x_usuarios, autos_x_usuario, (select count(*) from subastas_autos suba where suba.subastaId = s.idSubasta ) as total_autos, (select count(*) from subasta_usuario subu where subu.idSubasta = s.idSubasta) as total_participantes, (select count(*) from autos_puja aupu  where aupu.idSubasta = s.idSubasta) as total_ofertas, s.revisada, s.fecha_cierre, s.autos_x_usuario,  (select count(*) from subastas_autos suba where suba.subastaId = s.idSubasta ) as total_autos,  timediff(fechaFin, fechaInicio) /10000 as diff from subastas s, tiposubastas tipo " . $empresaFrom." where s.idTipoSubasta = tipo.idTipo  " . $empresaWhere . $estatusWhere . $subastaIdWhere . " order by fechaFin desc" ; 
+            $comando = "select s.idSubasta, nombreSubasta, idTipoSubasta, tipo.tipoSubasta, fechaInicio, fechaFin, CASE WHEN visible = -1 then 'CANCELADA' when visible = 0 then 'CERRADA' WHEN  ".setNowForSQL()." BETWEEN fechaInicio and fechaFin then 'ACTIVA' WHEN ".setNowForSQL()." < fechaInicio then 'AGENDADA' else 'TERMINADA' end as estatus, visible, case visible when 0 then 'NO PUBLICADA' else 'PUBLICADA' end as publicada,(select GROUP_CONCAT(emp.nombreEmpresa) from subastaempresa se, empresas emp where s.idSubasta = se.idSubasta and se.idEmpresa = emp.idEmpresa) as empresas, (select GROUP_CONCAT(emp.idEmpresa) from subastaempresa se, empresas emp where s.idSubasta = se.idSubasta and se.idEmpresa = emp.idEmpresa) as empresasId,incremento, ofertas_x_usuarios, autos_x_usuario, (select count(*) from subastas_autos suba where suba.subastaId = s.idSubasta ) as total_autos, (select count(*) from subasta_usuario subu where subu.idSubasta = s.idSubasta) as total_participantes, (select count(*) from autos_puja aupu  where aupu.idSubasta = s.idSubasta) as total_ofertas, s.revisada, s.fecha_cierre, s.autos_x_usuario,  (select count(*) from subastas_autos suba where suba.subastaId = s.idSubasta ) as total_autos,  timediff(fechaFin, fechaInicio) /10000 as diff from subastas s, tiposubastas tipo " . $empresaFrom." where s.idTipoSubasta = tipo.idTipo  " . $empresaWhere . $estatusWhere . $subastaIdWhere . " order by fechaFin desc" ; 
 
                 
 
@@ -108,7 +110,7 @@ class subastas
         
       
         
-        $comando = "select s.idSubasta, nombreSubasta, idTipoSubasta, tipo.tipoSubasta, fechaInicio, fechaFin, CASE WHEN visible = -1 then 'CANCELADA' when visible = 0 then 'CERRADA' WHEN  now() BETWEEN fechaInicio and fechaFin then 'ACTIVA' WHEN now() < fechaInicio then 'AGENDADA' else 'TERMINADA' end as estatus, visible, case visible when 0 then 'NO PUBLICADA' else 'PUBLICADA' end as publicada,(select GROUP_CONCAT(emp.nombreEmpresa) from subastaempresa se, empresas emp where s.idSubasta = se.idSubasta and se.idEmpresa = emp.idEmpresa) as empresas, (select GROUP_CONCAT(emp.idEmpresa) from subastaempresa se, empresas emp where s.idSubasta = se.idSubasta and se.idEmpresa = emp.idEmpresa) as empresasId, incremento, ofertas_x_usuarios, autos_x_usuario, (select count(*) from subastas_autos suba where suba.subastaId = s.idSubasta ) as total_autos  from subastas s, tiposubastas tipo 
+        $comando = "select s.idSubasta, nombreSubasta, idTipoSubasta, tipo.tipoSubasta, fechaInicio, fechaFin, CASE WHEN visible = -1 then 'CANCELADA' when visible = 0 then 'CERRADA' WHEN  ".setNowForSQL()." BETWEEN fechaInicio and fechaFin then 'ACTIVA' WHEN ".setNowForSQL()." < fechaInicio then 'AGENDADA' else 'TERMINADA' end as estatus, visible, case visible when 0 then 'NO PUBLICADA' else 'PUBLICADA' end as publicada,(select GROUP_CONCAT(emp.nombreEmpresa) from subastaempresa se, empresas emp where s.idSubasta = se.idSubasta and se.idEmpresa = emp.idEmpresa) as empresas, (select GROUP_CONCAT(emp.idEmpresa) from subastaempresa se, empresas emp where s.idSubasta = se.idSubasta and se.idEmpresa = emp.idEmpresa) as empresasId, incremento, ofertas_x_usuarios, autos_x_usuario, (select count(*) from subastas_autos suba where suba.subastaId = s.idSubasta ) as total_autos  from subastas s, tiposubastas tipo 
          where s.idTipoSubasta = tipo.idTipo and s.idSubasta = ?"; 
 
         
@@ -127,10 +129,10 @@ class subastas
     {
         
         $comando = "select s.idSubasta, nombreSubasta, idTipoSubasta, tipo.tipoSubasta, fechaInicio, fechaFin, 
-(CASE WHEN now() BETWEEN fechaInicio and fechaFin then 'ACTIVA' WHEN now() <= fechaInicio then 'AGENDADA' else 'TERMINADA' end )as estatus, visible, 
+CASE WHEN visible = -1 then 'CANCELADA' when visible = 0 then 'CERRADA' WHEN  ".setNowForSQL()." BETWEEN fechaInicio and fechaFin then 'ACTIVA' WHEN ".setNowForSQL()." < fechaInicio then 'AGENDADA' else 'TERMINADA' end  as estatus, visible, 
 (case visible when 0 then 'NO PUBLICADA' else 'PUBLICADA' end) as publicada,
 (select GROUP_CONCAT(emp.nombreEmpresa) from subastaempresa se, empresas emp where s.idSubasta = se.idSubasta and se.idEmpresa = emp.idEmpresa) as empresas, (select GROUP_CONCAT(emp.idEmpresa) from subastaempresa se, empresas emp where s.idSubasta = se.idSubasta and se.idEmpresa = emp.idEmpresa) as empresasId,incremento, (select count(*) from subastas_autos suba where suba.subastaId = s.idSubasta ) as total_autos from subastas s, tiposubastas tipo  where s.idTipoSubasta = tipo.idTipo 
-and s.idSubasta in (select su.idSubasta from subasta_usuario su, usuario u, subastas sub where su.idUsuario = u.idUsuario and sub.idSubasta = su.idSubasta and sub.visible = 1 and u.claveApi = ? and now() >= sub.fechaInicio) order by fechaFin desc";
+and s.idSubasta in (select su.idSubasta from subasta_usuario su, usuario u, subastas sub where su.idUsuario = u.idUsuario and sub.idSubasta = su.idSubasta and sub.visible = 1 and u.claveApi = ? and ".setNowForSQL()." >= sub.fechaInicio and sub.fechaFin >= ".setNowForSQL()." - INTERVAL 6 MONTH) order by fechaFin desc";
 
         //print_r($comando);
 
@@ -339,7 +341,7 @@ and s.idSubasta in (select su.idSubasta from subasta_usuario su, usuario u, suba
 
 
         try{
-            $comando = "SELECT u.idUsuario, u.nombre, u.appaterno, u.apmaterno, u.correo, u.vigencia, u.verificado FROM subasta_usuario su, usuario u WHERE su.idUsuario = u.idUsuario and su.idSubasta = ?" ; 
+            $comando = "SELECT su.idSubasta, u.idUsuario, u.nombre, u.appaterno, u.apmaterno, u.correo, u.vigencia, u.verificado FROM subasta_usuario su, usuario u WHERE su.idUsuario = u.idUsuario and su.idSubasta = ?" ; 
 
             $sentencia = ConexionBD::obtenerInstancia()->obtenerBD()->prepare($comando);
             
@@ -355,6 +357,24 @@ and s.idSubasta in (select su.idSubasta from subasta_usuario su, usuario u, suba
             return new ExcepcionApi("error", $e->getMessage(), 400);
         }
             
+
+    }
+
+    private function remover_participante($params){
+
+        if($_SESSION['es_admin'] != 1){
+            return new ExcepcionApi("Error", "El usuario no tiene permisos para realizar esta operación", 500);
+        }
+
+        $comando = " delete from subasta_usuario where idSubasta = ? and idUsuario = ?";
+        $sentencia = ConexionBD::obtenerInstancia()->obtenerBD()->prepare($comando);
+        $sentencia->bindParam(1, $params["subasta"]);
+        $sentencia->bindParam(2, $params["usuario"]);
+        if ($sentencia->execute()){
+            return 1;
+        }else{
+            return 0;
+        }
 
     }
 
@@ -513,7 +533,7 @@ and s.idSubasta in (select su.idSubasta from subasta_usuario su, usuario u, suba
        }
        
         try{
-            $comando = "update subastas set motivo_cancelacion = ?, visible = -1,  fecha_cierre = now()   WHERE idSubasta = ?" ; 
+            $comando = "update subastas set motivo_cancelacion = ?, visible = -1,  fecha_cierre = ".setNowForSQL()."   WHERE idSubasta = ?" ; 
 
             $sentencia = ConexionBD::obtenerInstancia()->obtenerBD()->prepare($comando);
             

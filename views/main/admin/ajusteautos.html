@@ -30,7 +30,7 @@
 		  	</div>
 	  	</div>
 		<div class="card-action">
-			<a id="btnGuardarOrdenamiento" class="btn">Guardar</a>
+			<a class="waves-effect waves-light btn modal-trigger" href="#modal1">Guardar</a>
 		</div>	
 		
 
@@ -38,7 +38,16 @@
 
 		<div  id="divProgramadorAutosContenido">
 		</div>
-
+		<div id="modal1" class="modal modal-fixed-footer">
+		    <div class="modal-content" style="height:200px !important;">
+		      <h4>¿Está seguro que desea guardar?</h4>
+		      <p>La información previa guardada podría perderse si continuá con esta acción.</p>
+		    </div>
+		    <div class="modal-footer card-action">
+		   		<a class="waves-effect waves-light btn modal-action modal-close red">Cancelar</a>
+		      	<a  id="btnGuardarOrdenamiento" class="waves-effect waves-light btn modal-action modal-close">Aceptar</a>
+		    </div>
+		  </div>
 
 	</div>
 

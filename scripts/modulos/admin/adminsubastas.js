@@ -139,10 +139,19 @@ function guardarSubasta(obj) {
 	oSubastas.IdTipoSubasta = $('input[name=tiposubastas]:checked').val();
 	oSubastas.fechaInicio = (!$("#txtFechaInicio").datepicker('getDate')) ? "" : $("#txtFechaInicio").datepicker('getDate').getFullYear() + "-" + ($("#txtFechaInicio").datepicker('getDate').getMonth() + 1) + "-" + $("#txtFechaInicio").datepicker('getDate').getDate()+ " "+$("#dpFechaInicio").val();
 	oSubastas.fechaFin = (!$("#txtFechaFin").datepicker('getDate')) ? "" : $("#txtFechaFin").datepicker('getDate').getFullYear() + "-" + ($("#txtFechaFin").datepicker('getDate').getMonth() + 1) + "-" + $("#txtFechaFin").datepicker('getDate').getDate()+ " "+$("#dpFechaFin").val();
+
 	oSubastas.empresas = [];
 	oSubastas.incremento = $("#txtIncremento").val();
 	oSubastas.ofertas_x_usuarios = $("#txtNumPujas").val();
 	oSubastas.autos_x_usuario = $("#txtAutosGanados").val();
+
+
+	if($("#txtFechaFin").datepicker('getDate') < $("#txtFechaInicio").datepicker('getDate')){
+
+		Materialize.toast('La fecha final no puede ser menor que la de inicio de la subasta.', 4000);
+		return false;
+	}
+	
 
 	if ($("#btnGuardarSubasta").attr("attr-idsubasta") == "0" || $("#btnGuardarSubasta").attr("attr-idsubasta") == undefined) {
 		oSubastas.idSubasta = 0;
@@ -161,9 +170,10 @@ function guardarSubasta(obj) {
 			
 			debugger;
 			if (data > 0) {
-				Materialize.toast("La subasta fue creada con éxito", 5000);
-				CargaSubastas(-1, -1);
 				$('.divHeaderContenido').modal("close");
+				Materialize.toast("La subasta fue guardada con éxito", 5000);
+				CargaSubastas(-1, -1);
+				
 
 			}else{
 				Materialize.toast("Ocurrió un error al crear la subasta", 5000);
@@ -235,10 +245,10 @@ function CargaSubastas(estatus, empresa) {
 			div += '					<i class="large material-icons">menu</i>';
 			div += '				</a>';
 			div += '				<ul>';
-			div += '					<li><a class="btn-floating btnEditarSubasta" attr-id="' + data[i].idSubasta + '" title="Editar Subasta"><i class="material-icons">create</i></a></li>';
-			div += '					<li><a class="btn-floating btnAdministraAutos" attr-id="' + data[i].idSubasta + '" attr-nombresubasta="' + data[i].nombreSubasta + '" title="Administrar Autos"><i class="material-icons addCar"></i></a></li>';
+			div += '					<li><a class="btn-floating btnEditarSubasta" attr-id="' + data[i].idSubasta + '" title="Editar Subasta"><i class="material-icons">create</i></a></li>';			
 			div += '					<li><a class="btn-floating btnAgregarUsuariosAutos" attr-id="' + data[i].idSubasta + '" attr-nombresubasta="' + data[i].nombreSubasta + '" title="Agregar Usuarios"><i class="material-icons">group_add</i></a></li>';
 			div += '					<li><a class="btn-floating btnListaUsuarios" attr-id="' + data[i].idSubasta + '" attr-nombresubasta="' + data[i].nombreSubasta + '" title="Ver Usuarios"><i class="material-icons">group</i></a></li>';
+			div += '					<li><a class="btn-floating btnAdministraAutos" attr-id="' + data[i].idSubasta + '" attr-nombresubasta="' + data[i].nombreSubasta + '" title="Agregar Autos"><i class="material-icons addCar"></i></a></li>';
 			div += '					<li><a class="btn-floating btnVerAutos" attr-id="' + data[i].idSubasta + '" attr-nombresubasta="' + data[i].nombreSubasta + '" title="Ver Autos"><i class="material-icons">drive_eta</i></a></li>';
 			div += '					<li><a class="btn-floating btnAgendarAutos" attr-id="' + data[i].idSubasta + '" attr-nombresubasta="' + data[i].nombreSubasta + '" attr-fini="'+data[i].fechaInicio+'" attr-ffin="'+data[i].fechaFin+'" attr-diff="'+data[i].diff+'" title="Ver horarios de autos"><i class="material-icons">query_builder</i></a></li>';
 			
@@ -334,7 +344,7 @@ function CargaSubastas(estatus, empresa) {
 			sessionStorage.setItem('hora_fin',  $(this).attr("attr-ffin"));
 			sessionStorage.setItem('attr-id',  $(this).attr("attr-id"));
 
-			window.location.href = "main.php?accion=ajusteautos";
+			window.location.href = "main.php?accion=ajusteautos?r="+Math.random();
 
 			/*
 			var datediff = $(this).attr("attr-diff");
@@ -365,64 +375,53 @@ function CargaSubastas(estatus, empresa) {
 			debugger;
 			var nombreSubasta = $(this).attr("attr-nombresubasta");
 			var idSubasta = $(this).attr("attr-id");
-			postrequest("subastas/participantes", {"id_subasta":idSubasta}, function(data){
-				$("#divListaUsuariosTbl").html("");
-				$("#divListaUsuariosTtl").html("Subasta: " + nombreSubasta);
-				if(data.code){
-					if(data.code == 400){
-						//alert("Ocurrió un error al obtener la lista de participantes");
-						Materialize.toast('Ocurri&oacute; un error al obtener la lista de participantes.', 4000);
-						//console.log(data.message);
-					}
-				}
-				$("#divListaUsuariosTbl").html("");
-				$tabla = "<table class='responsive-table striped centered'><tr><th>Nombre</th><th>Correo</th></tr>"
-				for(var item in data){
-					$tabla += "<tr><td>"+ data[item].nombre + " "+data[item].appaterno+" "+data[item].apmaterno + "</td><td>"+data[item].correo +"</td></tr>";
-					console.log(data);
-				}
-				$tabla += "</table>";
-				
-				$("#divListaUsuariosTbl").html($tabla);
-				
-				$("#divListaUsuariosModal").modal("open");
-				
-			});
+			cargar_participantes(idSubasta, nombreSubasta);
 			
 
 		});
 
+	
+
 		$("#btnUploadUserList").click(function() {
 
-			var file_data = $('#listausuarios').prop('files')[0];
-			var form_data = new FormData();
-			form_data.append('file', file_data);
-			form_data.append('accion', 'listausuarios');
-			form_data.append('idsubasta', $(this).attr("idSubasta"));
-			$.ajax({
-				url : 'upload.php', // point to server-side PHP script
-				dataType : 'text', // what to expect back from the PHP script, if anything
-				cache : false,
-				contentType : false,
-				processData : false,
-				data : form_data,
-				type : 'post',
-				success : function(php_script_response) {
-					if (php_script_response.substring(0, 2) == "ERR") {
-						//alert(php_script_response);
-						Materialize.toast(php_script_response, 4000);
+			if($('#listausuarios').prop('files').length == 0){
+				Materialize.toast("Debe seleccionar un archivo.", 4000)
 
-						$("#divAdministraUsuarios").modal("close");
-					} else {
-						var respuesta = String(php_script_response).split(".");
-						Materialize.toast("Se agregaron correctamente: "+ respuesta[1] +" de "+ respuesta[0],4000);
-						var filename = $('input[type=file]').val().replace(/C:\\fakepath\\/i, '');
+			}else{
 
+				var file_data = $('#listausuarios').prop('files')[0];
+				var form_data = new FormData();
+				form_data.append('file', file_data);
+				form_data.append('accion', 'listausuarios');
+				form_data.append('idsubasta', $(this).attr("idSubasta"));
+				$.ajax({
+					url : 'upload.php', // point to server-side PHP script
+					dataType : 'text', // what to expect back from the PHP script, if anything
+					cache : false,
+					contentType : false,
+					processData : false,
+					data : form_data,
+					type : 'post',
+					success : function(php_script_response) {
+						if (php_script_response.substring(0, 2) == "ERR") {
+							//alert(php_script_response);
+							Materialize.toast(php_script_response, 4000);
+
+							$("#divAdministraUsuarios").modal("close");
+						} else {
+							var respuesta = String(php_script_response).split(".");
+							Materialize.toast("Se agregaron correctamente: "+ respuesta[1] +" de "+ respuesta[0],4000);
+							var filename = $('input[type=file]').val().replace(/C:\\fakepath\\/i, '');
+
+
+						}
 
 					}
+				});
 
-				}
-			});
+			}
+
+			
 
 		});
 
@@ -683,7 +682,8 @@ function ValidaCamposSubasta(objItem) {
 	}
 	if (objItem.fechaFin == '' || objItem.fechaFin == undefined) {
 		validado = false;
-	}
+	}	
+
 	if (objItem.incremento == '' || objItem.incremento == undefined) {
 		validado = false;
 	}
