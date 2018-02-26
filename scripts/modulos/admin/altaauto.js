@@ -70,12 +70,17 @@ function CargaFuncionesRegistroAuto(idSubasta){
 	
 	$("#btnUpload").click(function() {
 		    debugger;
-		    var file_data = $('#fotoAuto').prop('files')[0];
+		   	var bUpload = true;
+			 
+		   	for(var i in $('#fotoAuto').prop('files')){
 
-		    if(file_data["type"] == "image/png" || file_data["type"] == "image/jpg" || file_data["type"] == "image/jpeg"){
-		    	var form_data = new FormData();                  
-			    form_data.append('file', file_data);
-			    $.ajax({
+		   		 	
+
+	   		 	if(i < $('#fotoAuto').prop('files').length){
+		   		 	if($('#fotoAuto').prop('files')[i]["type"] == "image/png" || $('#fotoAuto').prop('files')[i]["type"] == "image/jpg" || $('#fotoAuto').prop('files')[i]["type"] == "image/jpeg"){
+				    	var form_data = new FormData();                 
+					    form_data.append('file', $('#fotoAuto').prop('files')[i]);	
+					    $.ajax({
 			                url: 'upload.php', // point to server-side PHP script 
 			                dataType: 'text',  // what to expect back from the PHP script, if anything
 			                cache: false,
@@ -100,16 +105,22 @@ function CargaFuncionesRegistroAuto(idSubasta){
 			                	}
 			                    
 			                }
-			     });
-			     $("#btnUpload").removeClass('pulse');
+			     		});			    
+					   
+				    }else{
+		    			Materialize.toast("Imposible subir el archivo "+ $('#fotoAuto').prop('files')[i]["name"]+". Sólo se admitenarchivos .jpg, .jpeg o .png", 4000);
+		    			
+		    			
+		    		}
 
-		    }else{
-		    	Materialize.toast("Sólo se admitenarchivos .jpg, .jpeg o .png", 4000);
-		    	clearFileInput('fotoAuto');
-		    	$("#btnUpload").removeClass('pulse');
-		    }   
-		    
-      $('.fotoAuto').find('.file-path').val('');
+
+				}
+
+		   	}
+		   	
+		    clearFileInput('fotoAuto');	
+			$("#btnUpload").removeClass('pulse');
+		    $('.fotoAuto').find('.file-path').val('');
 		    
 		});
 	    
@@ -303,12 +314,15 @@ function clearFileInput(id)
 
     newInput.type = "file"; 
     newInput.id = oldInput.id; 
-    newInput.name = oldInput.name; 
-    newInput.className = oldInput.className; 
-    newInput.style.cssText = oldInput.style.cssText; 
-    // TODO: copy any other relevant attributes 
+  
+
+    //var newInput = $("<input id=\"fotoAuto\" type=\"file\" accept=\".jpg,.png,.jpeg,image/png,image/jpg,image/jpeg\" multiple />");
 
     oldInput.parentNode.replaceChild(newInput, oldInput); 
+    $("#"+oldInput.id).attr("multiple","")
+  	$("#"+oldInput.id).attr("name", oldInput.name); 
+    
+    $("#"+oldInput.id).attr("accept",".jpg,.png,.jpeg,image/png,image/jpg,image/jpeg"); 
 }
 
 function validatextoVacio(inputElement,elementobloq){
