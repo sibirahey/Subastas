@@ -1,7 +1,7 @@
 <?php
 
 
-define("TIMEDIFF", 1);
+define("TIMEDIFF", 0);
 
 function setNowForSQL(){
 

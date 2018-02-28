@@ -233,6 +233,10 @@ function CargaSubastas(estatus, empresa) {
 		$("#divListaContenido2").html("");
 		$("#divListaContenido3").html("");
 		$("#divListaContenido4").html("");
+		$("#tab-terminadas").html("Terminadas");
+		$("#tab-canceladas").html("Canceladas");
+		$("#tab-agendadas").html("Agendadas");
+		$("#tab-activas").html("Activas");
 		for (i in data) {
 
 			var div = '';
@@ -246,12 +250,11 @@ function CargaSubastas(estatus, empresa) {
 			div += '				</a>';
 			div += '				<ul>';
 			div += '					<li><a class="btn-floating btnEditarSubasta" attr-id="' + data[i].idSubasta + '" title="Editar Subasta"><i class="material-icons">create</i></a></li>';			
+			div += '					<li><a class="btn-floating btnAdministraAutos" attr-id="' + data[i].idSubasta + '" attr-nombresubasta="' + data[i].nombreSubasta + '" title="Agregar Autos"><i class="material-icons addCar"></i></a></li>';
+			div += '					<li><a class="btn-floating btnAgendarAutos" attr-id="' + data[i].idSubasta + '" attr-nombresubasta="' + data[i].nombreSubasta + '" attr-fini="'+data[i].fechaInicio+'" attr-ffin="'+data[i].fechaFin+'" attr-diff="'+data[i].diff+'" title="Ver horarios de autos"><i class="material-icons">query_builder</i></a></li>';
+			div += '					<li><a class="btn-floating btnVerAutos" attr-id="' + data[i].idSubasta + '" attr-nombresubasta="' + data[i].nombreSubasta + '" title="Ver Autos"><i class="material-icons">drive_eta</i></a></li>';
 			div += '					<li><a class="btn-floating btnAgregarUsuariosAutos" attr-id="' + data[i].idSubasta + '" attr-nombresubasta="' + data[i].nombreSubasta + '" title="Agregar Usuarios"><i class="material-icons">group_add</i></a></li>';
 			div += '					<li><a class="btn-floating btnListaUsuarios" attr-id="' + data[i].idSubasta + '" attr-nombresubasta="' + data[i].nombreSubasta + '" title="Ver Usuarios"><i class="material-icons">group</i></a></li>';
-			div += '					<li><a class="btn-floating btnAdministraAutos" attr-id="' + data[i].idSubasta + '" attr-nombresubasta="' + data[i].nombreSubasta + '" title="Agregar Autos"><i class="material-icons addCar"></i></a></li>';
-			div += '					<li><a class="btn-floating btnVerAutos" attr-id="' + data[i].idSubasta + '" attr-nombresubasta="' + data[i].nombreSubasta + '" title="Ver Autos"><i class="material-icons">drive_eta</i></a></li>';
-			div += '					<li><a class="btn-floating btnAgendarAutos" attr-id="' + data[i].idSubasta + '" attr-nombresubasta="' + data[i].nombreSubasta + '" attr-fini="'+data[i].fechaInicio+'" attr-ffin="'+data[i].fechaFin+'" attr-diff="'+data[i].diff+'" title="Ver horarios de autos"><i class="material-icons">query_builder</i></a></li>';
-			
 			div += '				</ul>';
 			div += '			</div>';
 			div += '			<div class="card-content">';
@@ -268,13 +271,29 @@ function CargaSubastas(estatus, empresa) {
 			div += '		</div>';
 			div += '	</div>';
 			if(data[i].estatus == "TERMINADA" || data[i].estatus == "CERRADA"){
-				$("#divListaContenido2").append(div);
+				 $("#divListaContenido2").append(div);
+				 if($("#divListaContenido2 > .divRenglonTabla").length > 0)
+				 	$("#tab-terminadas").html("Terminadas ("+ $("#divListaContenido2 > .divRenglonTabla").length +")")
+				 else
+				 	$("#tab-terminadas").html("Terminadas");
 			}else if(data[i].estatus == "CANCELADA"){
 				$("#divListaContenido3").append(div);
+				 if($("#divListaContenido3 > .divRenglonTabla").length > 0)
+				 	$("#tab-canceladas").html("Canceladas ("+ $("#divListaContenido3 > .divRenglonTabla").length +")")
+				 else
+				 	$("#tab-canceladas").html("Canceladas");
 			}else if(data[i].estatus == "AGENDADA"){
 				$("#divListaContenido4").append(div);
+				if($("#divListaContenido4 > .divRenglonTabla").length > 0)
+				 	$("#tab-agendadas").html("Agendadas ("+ $("#divListaContenido4 > .divRenglonTabla").length +")")
+				 else
+				 	$("#tab-agendadas").html("Agendadas");
 			}else{
 				$("#divListaContenido").append(div);
+				if($("#divListaContenido > .divRenglonTabla").length > 0)
+				 	$("#tab-activas").html("Activas ("+ $("#divListaContenido > .divRenglonTabla").length +")")
+				 else
+				 	$("#tab-activas").html("Activas");
 			}
 		}
 		$('ul.tabs').tabs();

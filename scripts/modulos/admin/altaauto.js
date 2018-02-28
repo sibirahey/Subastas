@@ -150,11 +150,15 @@ function CargaFuncionesRegistroAuto(idSubasta){
    		$('#dialog').modal('open');  
    		
    		$(".modal-overlay:last-child").css("z-index", 1000);
-   		 		
+   			
    		
    		
    });
    
+   $("#btnCierraCatalogo").click(function(){
+
+   		$('#dialog').modal('close');
+   });
    
 
 
@@ -238,7 +242,7 @@ function CargaFuncionesRegistroAuto(idSubasta){
 				
 
 			}
-			$('#btnCierraCatalogo').click();
+			$('#dialog').modal('close');  
    		});
 
    });

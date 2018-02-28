@@ -381,7 +381,7 @@ function cargaAutosPorSubasta(subastaID, controlid, tiposubasta) {
 	postrequest("autos/subasta", {
 		"idsubasta" : subastaID
 	}, function(data) {
-		
+		debugger;
 		$("#divDetalleAuto").hide();
 		for (var val in data) {
 			
@@ -824,7 +824,23 @@ function regresaRenglonVenta(item, subastaID) {
 	renglon += '    		</div>';
 	renglon += '    		<div style="display:none;">';	
 	renglon += '    			<label>Inicio de subasta: </label>';
-	renglon += '    			<label class="restantePorSubasta" attr-fechaini="'+item.hora_inicio.fecha().esMXFormatLarge()+'" attr-fechafin="'+item.hora_fin.fecha().esMXFormatLarge()+'" attr-id="'+item.idAuto+'" attr-fechaini="'+item.hora_inicio+'">'+item.hora_inicio.fecha().esMXFormatLarge() + '</label	>';
+	var foo_hora_inicio = "";
+	var foo_hora_fin = "";
+	try{
+		if(item.hora_inicio == null){
+			item.hora_inicio = "";
+		}
+		if(item.hora_fin == null){
+			item.hora_fin = "";
+		}
+		foo_hora_inicio = item.hora_inicio.fecha().esMXFormatLarge();
+		foo_hora_fin = item.hora_fin.fecha().esMXFormatLarge();
+	}
+	catch(ex){
+
+	}
+
+	renglon += '    			<label class="restantePorSubasta" attr-fechaini="'+foo_hora_inicio+'" attr-fechafin="'+foo_hora_fin+'" attr-id="'+item.idAuto+'" attr-fechaini="'+item.hora_inicio+'">'+item.hora_inicio.fecha().esMXFormatLarge() + '</label	>';
 	renglon += '    		</div>';
 	renglon += '    		<div>';
 	renglon += '      			<label>Modelo: </label>';
@@ -848,7 +864,7 @@ function regresaRenglonVenta(item, subastaID) {
 	renglon += '    		</div>';
 	renglon += '    		<div>';
 	renglon += '      			<label>Fecha de subasta: </label>';
-	renglon += '      			<label>' + item.hora_inicio.fecha().esMXFormatLarge() +' - '+ item.hora_fin.fecha().esMXFormatLarge()+ '</label>';
+	renglon += '      			<label>' + foo_hora_inicio +' - '+ foo_hora_fin+ '</label>';
 	renglon += '    		</div>';
 
 	if (item.idTipoSubasta == 1) {
