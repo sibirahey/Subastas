@@ -31,7 +31,7 @@ class subastas
     public static function post($peticion)
     {
      
-	 	
+        
         if ($peticion[0] == 'listar') {
             return self::listar($_POST);
         }else if ($peticion[0] == 'guardar') {
@@ -47,15 +47,16 @@ class subastas
             return self::participantes($_POST);
         }else if($peticion[0] == 'revisarresultados'){
             return self::revisarresultados($_POST);
-		}else if($peticion[0] == 'revisarresultadosmax'){
-			return self::revisarresultadosmax($_POST);
-		}
+        }else if($peticion[0] == 'revisarresultadosmax'){
+            return self::revisarresultadosmax($_POST);
+        }
         else if($peticion[0] == 'cancelar'){
             return self::cancelar($_POST);
-        }else if($peticion[0] = 'remover_participante'){
+        }else if($peticion[0] == 'remover_participante'){
             return self::remover_participante($_POST);
-        }
-        else {
+        }else if($peticion[0] == 'estatus'){
+            return self::estatus($_POST['id']);
+        }else {
             throw new ExcepcionApi(self::ESTADO_URL_INCORRECTA, "Url mal formada", 400);
         }
     }   
@@ -109,10 +110,9 @@ class subastas
         
       
         
-        $comando = "select s.idSubasta, nombreSubasta, idTipoSubasta, tipo.tipoSubasta, fechaInicio, fechaFin, CASE WHEN visible = -1 then 'CANCELADA' when visible = 0 then 'CERRADA' WHEN  ".setNowForSQL()." BETWEEN fechaInicio and fechaFin then 'ACTIVA' WHEN ".setNowForSQL()." < fechaInicio then 'AGENDADA' else 'TERMINADA' end as estatus, visible, case visible when 0 then 'NO PUBLICADA' else 'PUBLICADA' end as publicada,(select GROUP_CONCAT(emp.nombreEmpresa) from subastaempresa se, empresas emp where s.idSubasta = se.idSubasta and se.idEmpresa = emp.idEmpresa) as empresas, (select GROUP_CONCAT(emp.idEmpresa) from subastaempresa se, empresas emp where s.idSubasta = se.idSubasta and se.idEmpresa = emp.idEmpresa) as empresasId, incremento, ofertas_x_usuarios, autos_x_usuario, (select count(*) from subastas_autos suba where suba.subastaId = s.idSubasta ) as total_autos  from subastas s, tiposubastas tipo 
+        $comando = "select s.idSubasta, nombreSubasta, idTipoSubasta, tipo.tipoSubasta, fechaInicio, fechaFin, CASE WHEN visible = -1 then 'CANCELADA' when visible = 0 then 'CERRADA' WHEN  ".setNowForSQL()." BETWEEN fechaInicio and fechaFin then 'ACTIVA' WHEN ".setNowForSQL()." < fechaInicio then 'AGENDADA' else 'TERMINADA' end as estatus, visible, case visible when 0 then 'NO PUBLICADA' else 'PUBLICADA' end as publicada,(select GROUP_CONCAT(emp.nombreEmpresa) from subastaempresa se, empresas emp where s.idSubasta = se.idSubasta and se.idEmpresa = emp.idEmpresa) as empresas, (select GROUP_CONCAT(emp.idEmpresa) from subastaempresa se, empresas emp where s.idSubasta = se.idSubasta and se.idEmpresa = emp.idEmpresa) as empresasId, incremento, ofertas_x_usuarios, autos_x_usuario, (select count(*) from subastas_autos suba where suba.subastaId = s.idSubasta ) as total_autos, IFNULL((select max(hora_fin) from subastas_autos sa where sa.subastaId = s.idSubasta),s.fechaInicio )  as fecha_tentativa, s.revisada  from subastas s, tiposubastas tipo
          where s.idTipoSubasta = tipo.idTipo and s.idSubasta = ?"; 
 
-        
         $sentencia = ConexionBD::obtenerInstancia()->obtenerBD()->prepare($comando);
         $sentencia->bindParam(1, $id);
 
@@ -131,12 +131,13 @@ class subastas
 CASE WHEN visible = -1 then 'CANCELADA' when visible = 0 then 'CERRADA' WHEN  ".setNowForSQL()." BETWEEN fechaInicio and fechaFin then 'ACTIVA' WHEN ".setNowForSQL()." < fechaInicio then 'AGENDADA' else 'TERMINADA' end  as estatus, visible, 
 (case visible when 0 then 'NO PUBLICADA' else 'PUBLICADA' end) as publicada,
 (select GROUP_CONCAT(emp.nombreEmpresa) from subastaempresa se, empresas emp where s.idSubasta = se.idSubasta and se.idEmpresa = emp.idEmpresa) as empresas, (select GROUP_CONCAT(emp.idEmpresa) from subastaempresa se, empresas emp where s.idSubasta = se.idSubasta and se.idEmpresa = emp.idEmpresa) as empresasId,incremento, (select count(*) from subastas_autos suba where suba.subastaId = s.idSubasta ) as total_autos from subastas s, tiposubastas tipo  where s.idTipoSubasta = tipo.idTipo 
-and s.idSubasta in (select su.idSubasta from subasta_usuario su, usuario u, subastas sub where su.idUsuario = u.idUsuario and sub.idSubasta = su.idSubasta and sub.visible = 1 and u.claveApi = ? and ".setNowForSQL()." >= sub.fechaInicio and sub.fechaFin >= ".setNowForSQL()." - INTERVAL 6 MONTH) order by fechaFin desc";
+and s.idSubasta in (select su.idSubasta from subasta_usuario su, usuario u, subastas sub where su.idUsuario = u.idUsuario and sub.idSubasta = su.idSubasta and sub.visible = 1 and u.claveApi =  ? and sub.fechaInicio BETWEEN 
+DATE_ADD(".setNowForSQL() .", INTERVAL -6 MONTH) AND DATE_ADD(".setNowForSQL() .", INTERVAL 6 MONTH)) order by fechaFin desc ";
 
-        //print_r($comando);
+            
 
         $pdo = ConexionBD::obtenerInstancia()->obtenerBD();
-        $sentencia = $pdo->prepare($comando);
+        $sentencia = $pdo->prepare($comando);//
         
 
         $sentencia->bindParam(1, $_POST["idusuario"]);
@@ -377,6 +378,33 @@ and s.idSubasta in (select su.idSubasta from subasta_usuario su, usuario u, suba
 
     }
 
+    private function asignarGanadorPorSubasta(&$resultados,&$oferta,&$ganadores, &$casiGanadores){
+            $resultado = $resultados[$oferta["idAuto"]];
+
+            if($resultado->usuarioganador != $oferta["idUsuario"]){
+                if($$ganadores[$resultado->usuarioganador]['contador'] > 0){
+                   $ganadores[$resultado->usuarioganador]['contador'] = $ganadores[$resultado->usuarioganador]['contador']-1;
+                    $casiGanadores[$oferta["idAuto"]] = $oferta;
+                }
+                        
+            }
+
+
+                $ganadores[$oferta["idUsuario"]]['contador'] = $ganadores[$oferta["idUsuario"]]['contador']+1;
+
+                $resultado->oferta = $oferta["oferta"];
+                $resultado->ganancia = $oferta["ganancia"];
+                $resultado->usuarioganador =$oferta["idUsuario"];
+                $resultado->usuario = $oferta["nombre_usuario"];
+            
+                $resultado->puja = $oferta;
+                $resultado->hora_puja = $oferta["hora_puja"];
+
+                $ganadores[$oferta["idUsuario"]]['gananciaOfrecida'][$oferta["idAuto"]] =  $resultado->ganancia;
+                                       
+                array_push($resultado->ofertas, $oferta);
+    }
+
     private function revisarresultados($datos){
 
         $subasta = self::listar($datos)[0];
@@ -391,6 +419,9 @@ and s.idSubasta in (select su.idSubasta from subasta_usuario su, usuario u, suba
         $participantes = $oAutospuja::participantes($subasta['idSubasta']);
         $resultados = array();
         $ganadores = array();
+
+        $casiGanadores = array();
+
         foreach ($autos as &$auto) {
             //print_r($auto);
             
@@ -400,7 +431,9 @@ and s.idSubasta in (select su.idSubasta from subasta_usuario su, usuario u, suba
 
         }
         foreach ($participantes as &$p) {
-            $ganadores[$p["idUsuario"]] =0;
+            $ganadores[$p["idUsuario"]] =array();
+            $ganadores[$p["idUsuario"]]['contador'] = 0;
+            $ganadores[$p["idUsuario"]]['gananciaOfrecida']= array();
         }
 
        // print_r($pujas);
@@ -410,27 +443,65 @@ and s.idSubasta in (select su.idSubasta from subasta_usuario su, usuario u, suba
             $resultado = $resultados[$oferta["idAuto"]];
             
 
-            if($oferta["oferta"] > $resultado->oferta && $oferta["puja_valida"] == 1 ){
+            if($oferta["ganancia"] > $resultado->ganancia && $oferta["puja_valida"] == 1 ){
 
-                if($ganadores[$oferta["idUsuario"]] < $subasta["autos_x_usuario"]) {
+                if($ganadores[$oferta["idUsuario"]]['contador'] < $subasta["autos_x_usuario"] ) {
                         if($resultado->usuarioganador != $oferta["idUsuario"]){
-                            if($ganadores[$resultado->usuarioganador] > 0){
-                                $ganadores[$resultado->usuarioganador] = $ganadores[$resultado->usuarioganador]-1;
+                            if($$ganadores[$resultado->usuarioganador]['contador'] > 0){
+                                $ganadores[$resultado->usuarioganador]['contador'] = $ganadores[$resultado->usuarioganador]['contador']-1;
+                                $casiGanadores[$oferta["idAuto"]] = $oferta;
                             }
                             
                         }
-                        $ganadores[$oferta["idUsuario"]] = $ganadores[$oferta["idUsuario"]]+1;
+
+
+                        $ganadores[$oferta["idUsuario"]]['contador'] = $ganadores[$oferta["idUsuario"]]['contador']+1;
+
                         $resultado->oferta = $oferta["oferta"];
+                        $resultado->ganancia = $oferta["ganancia"];
                         $resultado->usuarioganador =$oferta["idUsuario"];
                         $resultado->usuario = $oferta["nombre_usuario"];
                     
                         $resultado->puja = $oferta;
                         $resultado->hora_puja = $oferta["hora_puja"];
-                       
-                        
+
+                        $ganadores[$oferta["idUsuario"]]['gananciaOfrecida'][$oferta["idAuto"]] =  $oferta;
+                                               
                         array_push($resultado->ofertas, $oferta);
                 }
                 else{
+                    $menorGanancia = array('ganancia' => 0);
+
+                    foreach ($ganadores[$oferta["idUsuario"]]['gananciaOfrecida'] as $idAuto => $oferta2) {
+                        if($oferta["ganancia"] > $oferta2["ganancia"]    )                        {
+                            if($menorGanancia['ganancia'] == 0 || $oferta2["ganancia"] >  $menorGanancia['ganancia']){
+                                $menorGanancia['idAuto'] = $idAuto; 
+                                $menorGanancia['oferta'] = $oferta2; 
+                                $menorGanancia['ganancia'] = $oferta2["ganancia"];   
+                            }
+                        }
+                    }
+                    if($menorGanancia['ganancia'] != 0 ){
+                        $oferta2 = $menorGanancia['oferta'];
+                        $resultado2 = $resultados[$oferta2["idAuto"]];
+                         $ganadores[$oferta["idUsuario"]]['contador'] = $ganadores[$oferta2["idUsuario"]]['contador']+1;
+
+                        $resultado2->oferta = $oferta2["oferta"];
+                        $resultado2->ganancia = $oferta2["ganancia"];
+                        $resultado2->usuarioganador =$oferta2["idUsuario"];
+                        $resultado2->usuario = $oferta2["nombre_usuario"];
+                    
+                        $resultado2->puja = $oferta2;
+                        $resultado2->hora_puja = $oferta2["hora_puja"];
+
+                        $ganadores[$oferta2["idUsuario"]]['gananciaOfrecida'][$oferta2["idAuto"]] =  $resultado2->ganancia;
+                        
+
+                    }
+                        
+
+                        
+                    
                     array_push($resultado->ofertas, $oferta);
                 }
 
@@ -450,7 +521,7 @@ and s.idSubasta in (select su.idSubasta from subasta_usuario su, usuario u, suba
         
     }
 
-	private function revisarresultadosmax($datos){
+    private function revisarresultadosmax($datos){
 
         $subasta = self::listar($datos)[0];
         $oAutospuja = new autospuja(0,0);
@@ -566,6 +637,30 @@ and s.idSubasta in (select su.idSubasta from subasta_usuario su, usuario u, suba
             return new ExcepcionApi("error", $e->getMessage(), 500);
         }
             
+        
+    }
+     private function estatus($id)
+    {
+        $comando = "select revisada from subastas where idSubasta = ?";
+
+        //print_r($comando);
+
+        $pdo = ConexionBD::obtenerInstancia()->obtenerBD();
+        $sentencia = $pdo->prepare($comando);
+        
+
+        $sentencia->bindParam(1, $id);
+        
+
+        if ($sentencia->execute())
+        {
+            return  $sentencia->fetchall(PDO::FETCH_ASSOC); 
+
+        }
+        else{
+            return 0;
+        }
+        
         
     }
 

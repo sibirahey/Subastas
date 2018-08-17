@@ -93,7 +93,7 @@ class autos
 
                         $comando .= "  order by aus.hora_inicio asc";
             
-   
+                      
              
             
             $sentencia = ConexionBD::obtenerInstancia()->obtenerBD()->prepare($comando);
@@ -340,9 +340,12 @@ class autos
                 autosfeatures::registrar($auto["features"], $idAuto);
                 autosfotos::registrar($auto["fotos"], $idAuto);
 
+
                 if($auto["idSubasta"] > 0){
 
                   subastasautos::registrar($idAuto, $auto["idSubasta"]);  
+
+                  subastasautos::programarauto($idAuto, json_decode($auto["horaInicio"]),  json_decode($auto["horaFin"]),  $auto["idSubasta"]);  
                 }
                  
                 return $idAuto; 
@@ -415,6 +418,8 @@ class autos
                     autosfotos::elemina($idAuto);
                     autosfotos::registrar($auto["fotos"], $idAuto);
                 }
+          
+                subastasautos::programarauto($idAuto, json_decode($auto["horaInicio"]),  json_decode($auto["horaFin"]),  $auto["idSubasta"]);  
                 return true; 
                 
 

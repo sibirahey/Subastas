@@ -104,7 +104,7 @@ class usuarios
     private function crear($usuario)
     {
         
-        $contrasenaEncriptada = self::encriptarContrasena( $usuario["password"]);
+        $contrasenaEncriptada = self::encriptarContrasena( trim($usuario["password"]));
 
        
 
@@ -145,7 +145,7 @@ class usuarios
             
             $sentencia->bindParam(6, $claveApi);
 
-            $sentencia->bindParam(7, $usuario["email"]);
+            $sentencia->bindParam(7, trim($usuario["email"]));
 
             $sentencia->bindParam(8, $usuario["telefono"]);
 
@@ -172,7 +172,7 @@ class usuarios
 
     }
 
-    public function invitarUsuario($usuario, $idSubasta){
+    public static function invitarUsuario($usuario, $idSubasta){
       
        
 
@@ -299,7 +299,7 @@ class usuarios
         else return null;
     }
 
-    private function generarClaveApi()
+    private static function generarClaveApi()
     {
         return md5(microtime().rand());
     }

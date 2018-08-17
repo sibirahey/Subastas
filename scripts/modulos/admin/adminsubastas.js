@@ -113,8 +113,27 @@ function CargaFuncionesAdminSubastas() {
 		$('#txtNombreSubasta').val('');
 		$('#txtFechaInicio').val('');
 		$('#txtFechaFin').val('');
+		$("#lstEmpresa").html("");
+		$("#cmbEmpresas").material_select("destroy");
+		$("#cmbEmpresas").val(-1);
+		$("#cmbEmpresas").material_select();
+		$("#dpFechaInicio").material_select("destroy");
+		$("#dpFechaInicio").val("00:00:00");
+		$("#dpFechaInicio").material_select();
+		$("#dpFechaFin").material_select("destroy");
+		$("#dpFechaFin").val("00:00:00");
+		$("#dpFechaFin").material_select();
+
+		$("#txtIncremento").val("");
+		$("#txtNumPujas").val("");
+		$("#txtAutosGanados").val("");
+		$("input[name=tiposubastas]").prop("checked",false);
+
 		$('.divHeaderContenido').modal("open");
+
 	});
+
+
 
 	// $("#btnAgregaAuto").click(function() {
 	// 	$("#divRegistroAutos").modal("open");
@@ -221,6 +240,7 @@ function CargaTipoSubastas(estatus) {
 	});
 
 }
+var total_autos_subasta = 0;
 
 function CargaSubastas(estatus, empresa) {
 	postrequest("subastas/listar", {
@@ -252,8 +272,8 @@ function CargaSubastas(estatus, empresa) {
 			div += '					<li><a class="btn-floating btnEditarSubasta" attr-id="' + data[i].idSubasta + '" title="Editar Subasta"><i class="material-icons">create</i></a></li>';			
 			div += '					<li><a class="btn-floating btnAdministraAutos" attr-id="' + data[i].idSubasta + '" attr-nombresubasta="' + data[i].nombreSubasta + '" title="Agregar Autos"><i class="material-icons addCar"></i></a></li>';
 			div += '					<li><a class="btn-floating btnAgendarAutos" attr-id="' + data[i].idSubasta + '" attr-nombresubasta="' + data[i].nombreSubasta + '" attr-fini="'+data[i].fechaInicio+'" attr-ffin="'+data[i].fechaFin+'" attr-diff="'+data[i].diff+'" title="Ver horarios de autos"><i class="material-icons">query_builder</i></a></li>';
-			div += '					<li><a class="btn-floating btnVerAutos" attr-id="' + data[i].idSubasta + '" attr-nombresubasta="' + data[i].nombreSubasta + '" title="Ver Autos"><i class="material-icons">drive_eta</i></a></li>';
 			div += '					<li><a class="btn-floating btnAgregarUsuariosAutos" attr-id="' + data[i].idSubasta + '" attr-nombresubasta="' + data[i].nombreSubasta + '" title="Agregar Usuarios"><i class="material-icons">group_add</i></a></li>';
+			div += '					<li><a class="btn-floating btnVerAutos" attr-id="' + data[i].idSubasta + '" attr-nombresubasta="' + data[i].nombreSubasta + '" title="Ver Autos"><i class="material-icons">drive_eta</i></a></li>';
 			div += '					<li><a class="btn-floating btnListaUsuarios" attr-id="' + data[i].idSubasta + '" attr-nombresubasta="' + data[i].nombreSubasta + '" title="Ver Usuarios"><i class="material-icons">group</i></a></li>';
 			div += '				</ul>';
 			div += '			</div>';
@@ -306,25 +326,35 @@ function CargaSubastas(estatus, empresa) {
 			if (idSubasta > 0) {
 				$("#divListaAutos").load("views/main/admin/altaautos.html?rand=" + Math.random(), function() {
 
-					$("#btnGuardaAuto").show();
-	 				$("#bntActualizaAuto").hide();
-	 				$('.altaAutosTitle').hide();
-					$("#divRegistroAutos").show();
-					$("#divSubastaNombre").html(nombreSubasta);
-					$("#divSubastaNombre").show();
+					$("#divSubastaNombre").html("Subasta: "+nombreSubasta);
+					
 					$("#divSubastaNombre").css("display", "");
 					$("#btnGuardaAuto").attr("attr-nombresubasta", nombreSubasta);
 					$("#btnGuardaAuto").attr("attr-subastaid", idSubasta);
-					CargaFuncionesRegistroAuto();
+					debugger;
+					CargaFuncionesRegistroAuto(Number(idSubasta));
+					$("#btnGuardaAuto").show();
 
 				});
 			}
 
-			$("#divRegistroAutos").modal("open");
+			//$("#divRegistroAutos").modal("open");
+			$("#divRegistroAutos").show();
+			$("#divListaBotonera").hide();
+			$("#divAdminSubastas").hide();
+			$(".adminSubastasTitle").hide();
+			$("#divListaAutos").show();
+			$("#divListaAutos2").hide();
+			$("#divListaAutosTitulo").hide();
+
+
+
 		});
 
 		$("#btnListaAutos").click(function(){
 			debugger;
+			/*
+			
 			if($('#divDetalleAuto').css('display') == 'block'){
 				$('#divListaAutos').show();
 				$('#divDetalleAuto').hide();
@@ -333,6 +363,23 @@ function CargaSubastas(estatus, empresa) {
 				$("#divAdminSubastas").show();
 				
 			}
+			*/
+
+			if($("#btnListaAutos").attr("attr-origen") == "editarauto"){
+				$("#divListaAutos2").show();
+				$("#divListaAutos").hide();
+				$("#btnListaAutos").attr("attr-origen","listaautos")
+
+			}else{
+				$("#divRegistroAutos").hide();
+				$("#divListaBotonera").show();
+				$("#divAdminSubastas").show();
+				$(".adminSubastasTitle").show();
+
+
+			}
+			
+
 			
 			$('.mainContainer').css('margin-bottom','90px');
 		});
@@ -340,19 +387,41 @@ function CargaSubastas(estatus, empresa) {
 		
 
 		$(".btnVerAutos").click(function() {
+
+			
 			debugger;
 			var nombreSubasta = $(this).attr("attr-nombresubasta");
-			$("#divListaAutosTitulo").html(nombreSubasta);
+			$("#divListaAutosTitulo").html("Subasta: "+nombreSubasta);
 			var idSubasta = $(this).attr("attr-id");
-			cargaAutosPorSubasta(idSubasta, "#divListaAutos");
-			$("#divAdminSubastas").hide();
-			//$('#divListaAutos').show();
-			//$('#divListaAutos').modal('open');
-			//$("#modalListaAutos").show();
-			$('.mainContainer').css('margin-bottom','0');
-			$('.searchItem > .card > .card-content').css('height', '220px');
+			$("#btnListaAutos").attr("attr-origen","listaautos");
+			cargaAutosPorSubasta(idSubasta, "#divListaAutos2");
 			
-			$("#divRegistroAutos").modal('open');
+			
+			if(total_autos_subasta > 0){
+				
+				//$('.mainContainer').css('margin-bottom','0');
+				//$('.searchItem > .card > .card-content').css('height', '220px');
+				$("#divRegistroAutos").show();
+				$("#divListaBotonera").hide();
+				$("#divAdminSubastas").hide();
+				$(".adminSubastasTitle").hide();
+				$("#divListaAutos").hide();
+				$("#divListaAutos2").show();
+				
+
+				
+
+
+				//$("#divRegistroAutos").modal('open');
+			}else{
+				$("#divRegistroAutos").hide();
+				$("#divListaBotonera").show();
+				$("#divAdminSubastas").show();
+				$(".adminSubastasTitle").show();
+				//$("#divRegistroAutos").modal('close');	
+			}
+
+			
 		});
 
 		$(".btnAgendarAutos").click(function() {
@@ -383,11 +452,26 @@ function CargaSubastas(estatus, empresa) {
 		});
 
 		$(".btnAgregarUsuariosAutos").click(function() {
+			
 			debugger;
 			var nombreSubasta = $(this).attr("attr-nombresubasta");
 			var idSubasta = $(this).attr("attr-id");
-			$("#btnUploadUserList").attr("idSubasta", idSubasta)
-			$("#divAdministraUsuarios").modal("open");
+			$("#btnUploadUserList").attr("idSubasta", idSubasta);
+			
+			postrequest('subastas/info',{'id': idSubasta},function(data){
+				if(data[0].revisada == "1" && data[0].visible == "1"){
+					$("#divAdministraUsuarios").modal("open");	
+				}else{
+					Materialize.toast("La subasta debe estar publicada y los horarios de subasta de autos revisados antes de poder invitar usuarios", 5000);
+				}
+				
+
+			},function(){
+				Materialize.toast("Ocurrió un error al cargar la información de la subasta");
+			} );
+
+			
+			
 		});
 
 		$(".btnListaUsuarios").click(function(){
@@ -422,7 +506,7 @@ function CargaSubastas(estatus, empresa) {
 					data : form_data,
 					type : 'post',
 					success : function(php_script_response) {
-						if (php_script_response.substring(0, 2) == "ERR") {
+						if (php_script_response.trim().substring(0, 3).toUpperCase() == "ERR") {
 							//alert(php_script_response);
 							Materialize.toast(php_script_response, 4000);
 
@@ -497,6 +581,7 @@ function CargaSubastas(estatus, empresa) {
 				Materialize.updateTextFields();
 				$("#btnCancelaSubasta").show();
 
+
 				$("#btnCancelaSubasta").click(function(){
 					$("#divEditSubasta").hide();
 					$("#modal-confirm-cancel").show()
@@ -540,21 +625,44 @@ function CargaSubastas(estatus, empresa) {
 
 			var visible = ($(this).prop("checked")) ? 1 : 0;
 			var idSubasta = $(this).attr("attr-id");
+			var chk = $(this);
 
-			oSubastas = new Subastas();
-			oSubastas.idSubasta = idSubasta;
-			oSubastas.visible = visible;
-			postrequest("subastas/publicar", oSubastas, function(data) {
+			postrequest('subastas/estatus',{'id':idSubasta}, function(data){
+				debugger;
+				
+				oSubastas = new Subastas();
+				oSubastas.idSubasta = idSubasta;
 
-				if (data > 0) {
-					Materialize.toast("La operación se realizó exitosamente", 5000);
+				if(Number(data[0].revisada) == 0){
+
+					Materialize.toast("La subasta no puede ser publicada hasta que se revisen los horarios publicación de autos",5000);
+					visible = 0;
+					$(".btnPublicar").attr("checked",false)
+
+				}else{
+					oSubastas.visible = visible;
+					postrequest("subastas/publicar", oSubastas, function(data) {
+
+						if (data > 0) {
+							Materialize.toast("La operación se realizó exitosamente", 5000);
+										CargaSubastas($("#cmbPublicada option:selected").val(), $("#cmbEmpresasFiltro option:selected").val());
+						}
+					},function(){
+
+						Materialize.toast("Ocurrió un error al ejecutar la operación",4000);
+					});
 				}
-			})
-			CargaSubastas($("#cmbPublicada option:selected").val(), $("#cmbEmpresasFiltro option:selected").val());
 
-		});
+				
+				
+			}, function(error){
+				Materialize.toast("Ocurrió un error al consultar la información de la subasta",4000);
 
-	});
+			});
+		});	
+	});	
+
+	
 	//end postrequest
 	$(function() {
 		// $('#divAutos').dialog({
@@ -624,7 +732,7 @@ function CargaSubastas(estatus, empresa) {
 			outDuration : 200, // Transition out duration
 		});
 	});
-
+/*
 	$(function() {
 		$("#divRegistroAutos").modal({
 			dismissible : false, // Modal can be dismissed by clicking outside of the modal
@@ -634,7 +742,7 @@ function CargaSubastas(estatus, empresa) {
 			outDuration : 200 // Transition out duration
 		});
 
-	});
+	});*/
 	$(function() {
 		$("#divProgramadorAutos").modal({
 			dismissible : true, // Modal can be dismissed by clicking outside of the modal
@@ -680,21 +788,20 @@ function CargaSubastas(estatus, empresa) {
 	$('.tooltipped').tooltip({delay: 50});
 }
 
-//Home
-function CargaFuncionesAdminHome() {
 
-}
 
 function ValidaCamposSubasta(objItem) {
 	//debugger;
 	var validado = true;
-
+	var campos = "";
 	if (objItem.nombreSubasta == '' || objItem.nombreSubasta == undefined) {
 		validado = false;
+		campos += "Nombre de la subasta";
 	}
 
 	if (objItem.IdTipoSubasta == '' || objItem.IdTipoSubasta == undefined) {
 		validado = false;
+		campos += ((campos != "")? ", ":"") + ", Tipo de subasta";
 	}
 	if (objItem.fechaInicio == '' || objItem.fechaInicio == undefined) {
 		validado = false;

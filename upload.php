@@ -28,10 +28,14 @@ require_once('utilidades/ConexionBD.php');
 require_once('utilidades/ExcepcionApi.php');
 require_once('utilidades/Utilerias.php');
 require_once('modelos/invitacion.php');
+error_reporting(E_ERROR);
+ini_set("display_errors", 0);
+
 
 if(isset($_FILES['file'])){
     if ( 0 < $_FILES['file']['error'] ) {
-        echo 'ERROR: ' . $_FILES['file']['error'] . '<br>';
+        print_r('ERROR: ' . $_FILES['file']['name'] );
+        return 0;
     }
     
     

@@ -5,6 +5,7 @@ String.prototype.replaceAll = function(search, replacement) {
 	return target.replace(new RegExp(search, 'g'), replacement);
 };
 String.prototype.fecha = function() {
+
 	try {
 		var partes = this.split(" ");
 		var fecha = partes[0].split("-");
@@ -381,9 +382,18 @@ function cargaAutosPorSubasta(subastaID, controlid, tiposubasta) {
 	postrequest("autos/subasta", {
 		"idsubasta" : subastaID
 	}, function(data) {
-		debugger;
+
+		
+		if(data.length == 0){
+
+			Materialize.toast("No existen autos para esta subasta",5000);
+			total_autos_subasta =  0;
+		}
+
+		
 		$("#divDetalleAuto").hide();
 		for (var val in data) {
+			total_autos_subasta = 1;
 			
 			var renglon = regresaRenglonVenta(data[val], subastaID);
 			renglon = renglon.replace("##num_auto##", Number(val) + 1);
@@ -519,7 +529,6 @@ function cargaAutosPorSubasta(subastaID, controlid, tiposubasta) {
 		});
 
 	});
-
 }
 
 
@@ -529,7 +538,7 @@ function cargaListaProgramcionAutos(subastaID, controlid, fini, datediff, nombre
 	debugger;
 	
 
-	$(".mainBody").load("views/main/admin/ajusteautos.html" ,function() {
+	$(".mainBody").load("views/main/admin/ajusteautos.html?r="+Math.random() ,function() {
 			
 		
 		debugger;
@@ -544,6 +553,39 @@ function cargaListaProgramcionAutos(subastaID, controlid, fini, datediff, nombre
 	        
 	     	habilitaSort();
 	                
+	    });
+
+	    $('#modal2').modal({
+			dismissible : false, // Modal can be dismissed by clicking outside of the modal
+			opacity : .5, // Opacity of modal background
+			inDuration : 300, // Transition in duration
+			outDuration : 200 // Transition out duration
+		});
+
+	    var CambiaTiempoEntreAutos = function (){
+			if($("#chkHabilitaSort").is(":checked")) {
+		    		$("#modal2").modal("open");
+		    }else{
+		    	Materialize.toast("Para cambiar el tiempo entre autos requiere habilitar el ordenamiento automático.", 4000);
+		    }
+
+	    }
+
+	    $("#tiempoEntreAuto").blur(function(){
+	    	CambiaTiempoEntreAutos();
+	    });
+	    $("#tiempoEntreAuto").keyup(function(e){
+	    	if(e.which == "13"){
+				CambiaTiempoEntreAutos();
+	    	}
+	    
+
+	    	
+	    });
+
+	    $("#btnCambiarOrdenamiento").click(function(){
+	    	SortHorarios();
+
 	    });
 
 	    $("#btnGuardarOrdenamiento").click(function(){
@@ -574,61 +616,8 @@ function cargaListaProgramcionAutos(subastaID, controlid, fini, datediff, nombre
 
 		Materialize.updateTextFields();
 
-
-		postrequest("autos/subasta", {
-			"idsubasta" : subastaID
-		}, function(data) {
-
-			var cantidad = data.length;
-			var contador = 0;
-			var finicio =  fini.fecha();
-			var fooDate = new Date(finicio.getTime());
-			var ffin = fooDate.addMinutes((datediff/cantidad)*60-  Number($("#tiempoEntreAuto").val()));
-			
-
-			for (var val in data) {
-
-				var renglon = "";
-
-				if (data[0].revisada == 1){
-					renglon = regresaRenglonProgramador(data[val], subastaID, data[val].hora_inicio.fecha(), ((contador == 0) ? false : true),  ((contador+1 == cantidad)? false:true),  data[val].hora_fin.fecha(), contador);
-				}else{
-
-					if(contador > 0){
-						fooDate = new Date(ffin.getTime());
-						fooDate.addMinutes(Number($("#tiempoEntreAuto").val()));
-						finicio = fooDate;	
-						ffin = new Date(finicio.getTime());
-						ffin = ffin.addMinutes((datediff/cantidad)*60-  Number($("#tiempoEntreAuto").val()));
-
-					}
-					if(contador == cantidad-1){
-						ffin = ffin.addMinutes(Number($("#tiempoEntreAuto").val()));
-					}
-					//var finicio =  fini.fecha().addHours((datediff/cantidad)*contador);
-				
-					//ffin = fooDate.addMinutes(((datediff/cantidad)*(contador+1))*60-  ((contador+1 != cantidad) ? Number($("#tiempoEntreAuto").val()):0));
-					renglon = regresaRenglonProgramador(data[val], subastaID, finicio, ((contador == 0) ? false : true),  ((contador+1 == cantidad)? false:true),  ffin, contador);
-					
-					
-				}
-
-			
-				$(controlid).append(renglon);	
-				contador = contador +1;
-
-			}
-
-
-			  
-
-			  
-			
-			 
-			 $("#divProgramadorAutosContenido").sortable({
-		      revert: true,
-		       stop: function() {
-			       	debugger;
+		var SortHorarios = function(){
+			 		debugger;
 			      
 
 					var cantidad = $(".horarioInicio").length;
@@ -666,7 +655,65 @@ function cargaListaProgramcionAutos(subastaID, controlid, fini, datediff, nombre
 			        $(".showdown-ctrl").show();
 			        //$($(".showup-ctrl")[0]).hide();
 			        //$($(".showdown-ctrl")[$(".showdown-ctrl").length-1]).hide();
-		        
+
+			 } 
+
+		postrequest("autos/subasta", {
+			"idsubasta" : subastaID
+		}, function(data) {
+
+			var cantidad = data.length;
+			var contador = 0;
+			var finicio =  fini.fecha();
+			var fooDate = new Date(finicio.getTime());
+			var ffin = fooDate.addMinutes((datediff/cantidad)*60-  Number($("#tiempoEntreAuto").val()));
+			
+
+			for (var val in data) {
+
+				var renglon = "";
+
+				//if (data[0].revisada == 1){
+					renglon = regresaRenglonProgramador(data[val], subastaID, data[val].hora_inicio.fecha(), ((contador == 0) ? false : true),  ((contador+1 == cantidad)? false:true),  data[val].hora_fin.fecha(), contador);
+				/*
+				}else{
+
+					if(contador > 0){
+						fooDate = new Date(ffin.getTime());
+						fooDate.addMinutes(Number($("#tiempoEntreAuto").val()));
+						finicio = fooDate;	
+						ffin = new Date(finicio.getTime());
+						ffin = ffin.addMinutes((datediff/cantidad)*60-  Number($("#tiempoEntreAuto").val()));
+
+					}
+					if(contador == cantidad-1){
+						ffin = ffin.addMinutes(Number($("#tiempoEntreAuto").val()));
+					}
+					//var finicio =  fini.fecha().addHours((datediff/cantidad)*contador);
+				
+					//ffin = fooDate.addMinutes(((datediff/cantidad)*(contador+1))*60-  ((contador+1 != cantidad) ? Number($("#tiempoEntreAuto").val()):0));
+					renglon = regresaRenglonProgramador(data[val], subastaID, finicio, ((contador == 0) ? false : true),  ((contador+1 == cantidad)? false:true),  ffin, contador);
+					
+					
+				}*/
+
+			
+				$(controlid).append(renglon);	
+				contador = contador +1;
+
+			}
+
+
+			 
+
+			  
+			
+			 
+			 $("#divProgramadorAutosContenido").sortable({
+		      revert: true,
+		       stop: function() {
+			       
+		        	SortHorarios();
 		      	}
 		    });
 			 if(data[0].revisada == 1){
@@ -674,7 +721,16 @@ function cargaListaProgramcionAutos(subastaID, controlid, fini, datediff, nombre
 				habilitaSort();
 			}
 			$("#btnAdminSubastas").click(function(){ 
-				window.location.href = "main.php?accion?subastasadmin";
+				window.location.href = "main.php?accion=subastasadmin";
+			});
+
+			postrequest("subastas/info",{'id':subastaID},function(data){
+
+					debugger;
+					if(data[0].revisada != "1"){
+
+						SortHorarios();
+					}
 			});
 
 		},
@@ -703,13 +759,18 @@ function regresaRenglonProgramador(item, subastaID, fechatentativa, showup, show
 	//renglon += '        <div class="card-image">';
 	//renglon += '          	<img attr-id="' + item.idAuto + '" width="50px" onclick="VerDetalleAuto(this);" src="' + siteurl + 'uploads/' + item.foto + '" onerror="imgError(this)"; />';
 	//renglon += '        </div>';
-	renglon += '        <div>'+item.marca + ' - ' + item.modelo+' ('+item.anio+')'+'</div>';
+	if(item.marca == ""){
+		renglon += '        <div class="datosauto">&nbsp;</div>';
+	}else{
+		renglon += '        <div>'+item.marca + ' - ' + item.modelo+' ('+item.anio+')'+'</div>';
+	}
+	
 	
 	
 	
 	renglon += '        <div id="horarioInicio'+ item.idAuto+'" class="horarioInicio" attr-idx="'+contador+'">'+fechatentativa.esMXFormatLarge()+'</div>';
 	renglon += '        <div id="showup-ctrl'+item.idAuto+'" class="showup-ctrl"><span class="waves-effect waves-light btn green" onclick="quitaTiempo(this,\''+item.idAuto +'\',-5);"> -5 <i class="material-icons">keyboard_arrow_down</i></span><span class="waves-effect waves-light btn orange" onclick="quitaTiempo(this,\''+item.idAuto +'\',5);"> +5 <i class="material-icons" >keyboard_arrow_up</i></span></div>';	
-	renglon += '        <div>&nbsp; </div>';
+	renglon += '        <div class="datosauto">&nbsp; </div>';
 	renglon += '        <div id="horarioFin'+item.idAuto+'" class="horarioFin"  attr-idx="'+contador+'">'+fechafin.esMXFormatLarge()+'</div>';
 	renglon += '        <div id="showup-ctrl'+item.idAuto+'" class="showup-ctrl"><span class="waves-effect waves-light btn green" onclick="agregaTiempo(this,\''+item.idAuto +'\',-5);"> -5 <i class="material-icons">keyboard_arrow_down</i></span><span class="waves-effect waves-light btn orange" onclick="agregaTiempo(this,\''+item.idAuto +'\',5);"> +5 <i class="material-icons" >keyboard_arrow_up</i></span></div>';	
 	//renglon += '        <div class="showdown-ctrl"><span> -5 <i class="material-icons">arrow_downward</i><span><span> +5 <i class="material-icons">arrow_downward</i><span></div>';
@@ -741,8 +802,12 @@ function agregaTiempo(ctrl, idAuto, tiempo){
 		}
 	});
 	debugger;
+	var limitesuperior = $("#hora_fin").html().fecha();
+	if($("#hora_fin").html() == ""){
+		limitesuperior = ($("#hora_fin").val()+":00").fecha();
+	}
 	if(contador == ($(".horarioFin").length -1)){
-		if(fechaFin <= $("#hora_fin").html().fecha() && $("#hora_fin").html().fecha() > fechaIni && fechaFin > fechaIni){
+		if(fechaFin <= limitesuperior && limitesuperior > fechaIni && fechaFin > fechaIni){
 			$("#horarioFin"+idAuto).html(fechaFin.esMXFormatLarge());
 		}else{
 			Materialize.toast("Imposible ajustar el tiempo de subasta del auto. El horario de término no puede ser mayor a la finalización de la subasta o menor a la hora de inicio",4000);
@@ -780,7 +845,11 @@ function quitaTiempo(ctrl, idAuto, tiempo){
 	});
 
 	if(contador == 0){
-		if(fechaIni >= $("#hora_inicio").html().fecha()){
+		var limiteinferior = $("#hora_inicio").html().fecha();
+		if($("#hora_inicio").html() == ""){
+			limiteinferior = ($("#hora_inicio").val()+":00").fecha();
+		}
+		if(fechaIni >= limiteinferior){
 			$("#horarioInicio"+idAuto).html(fechaIni.esMXFormatLarge());
 		}else{
 			Materialize.toast("Imposible ajustar el tiempo de subasta del auto. El horario de inicio no puede ser menor al inicio de la subasta",4000);
@@ -1165,14 +1234,32 @@ $("#modal-confirm-cancelauto").hide();
 
 
 function EditarAuto(o) {
-
+	debugger;
 	var subastaid = $(o).attr("attr-idsubasta");
 	var autoid = $(o).attr("attr-idauto");
+	if(subastaid > 0 ){
+		$("#btnListaAutos").attr("attr-origen","editarauto");	
+
+	}
+	
+	$("#divListaAutos2").hide();
+	$("#divListaAutos").show();
+	
 
 	$("#divListaAutos").load("views/main/admin/altaautos.html?rand=" + Math.random(), function() {
 		debugger;
-		
-		$("#btnGuardaAuto").hide();
+ 		
+		var infoSubsata = null;
+ 		postrequest("subastas/info", {
+			"id" : subastaid
+		}, function(data) {
+			debugger;
+			infoSubsata = data;
+			$(".altaAutosTitle").hide();
+		}, Error);
+			
+		$(".divListaAutosTitulo").hide();
+		//$("#btnGuardaAuto").hide();
 		$("#bntActualizaAuto").show();
 		//debugger;
 		$("#divRegistroAutos").show();
@@ -1182,11 +1269,27 @@ function EditarAuto(o) {
 		$("#btnGuardaAuto").attr("attr-nombresubasta", "");
 		$("#btnGuardaAuto").attr("attr-subastaid", subastaid);
 		$("#btnGuardaAuto").attr("attr-autoid", autoid);
+		$("#btnGuardaAuto").hide();
 		CargaFuncionesRegistroAuto();
+
+		
 
 		postrequest("autos/info", {
 			"autoid" : autoid
 		}, function(data) {
+
+			var autoData = data;
+			postrequest("subastautos/info",{"id":autoid},function(data){
+				
+				debugger;
+				var renglon = regresaRenglonProgramador(autoData, subastaid, data.hora_inicio.fecha(), 0, 0,data.hora_fin.fecha(), 1);
+				$("#hora_inicio").val(infoSubsata[0].fechaInicio);
+				$("#divProgramadorAutosContenido").html(renglon);
+				$("#hora_fin").val(infoSubsata[0].fechaFin);
+
+			});
+
+			
 			$("#cbMarcaAuto").material_select("destroy");
 			$("#cbMarcaAuto").val(data.marcaid);
 			$("#cbMarcaAuto").material_select();
@@ -1215,23 +1318,56 @@ function EditarAuto(o) {
 			$("#cbMotivoPrecio").material_select("destroy");
 			$("#cbMotivoPrecio").val(data.motivo_precio);
 			$("#cbMotivoPrecio").material_select();
+			try{
+				var features = data.caracteristicasids.split(",");
+				for (var f in features) {
 
-			var features = data.caracteristicasids.split(",");
-			for (var f in features) {
+					$("#cbFeaturesAutos").material_select("destroy");
+					$("#cbFeaturesAutos").val(features[f]);
+					$("#cbFeaturesAutos").material_select();
+					$("#btnAddFeature").click();
 
-				$("#cbFeaturesAutos").material_select("destroy");
-				$("#cbFeaturesAutos").val(features[f]);
-				$("#cbFeaturesAutos").material_select();
-				$("#btnAddFeature").click();
-
-			}
+				}
+			}catch(e){}
 			debugger;
-			var fotos = data.fotos.split(",");
-			for(var i in fotos){
+			try{
+				var fotos = data.fotos.split(",");
+				debugger;
+				for(var i in fotos){
 
-				$("#fotosSubidas").append("<div class='fotosAuto' id='"+fotos[i].replace(".","") +"'><i class='material-icons btnCierraImagen orange-text' attr-id='"+fotos[i]+"' onclick='QuitaImagenAuto(\"" +fotos[i]+"\","+autoid+");' >remove_circle</i><img  class='materialboxed' data-caption='"+fotos[i]+"' width='100px' src='" + siteurl +  "uploads/" + fotos[i] + "' /></div>");
+					$("#fotosSubidas").append("<div class='fotosAuto' id='"+fotos[i].replace(".","") +"' attr-id='"+fotos[i] +"'><i class='material-icons btnCierraImagen orange-text' attr-id='"+fotos[i]+"' onclick='QuitaImagenAuto(\"" +fotos[i]+"\","+autoid+");' >remove_circle</i><img  class='materialboxed' data-caption='"+fotos[i]+"' width='100px' src='" + siteurl +  "uploads/" + fotos[i] + "' /></div>");
+					
+				}
+			  	
+			  	$('.materialboxed').materialbox();
+
+				$(document).keyup(function(e) {
+				    if(e.which == 27){
+				    	$("#btnListaAutos").show();
+				    }
+				});
 				
-		         $('.materialboxed').materialbox();
+			  	$('.materialboxed').click(function(){ 
+			  		debugger;
+			  		if($("#materialbox-overlay").css("opacity") == "0"){
+			  			$("#btnListaAutos").hide();	
+			  			$("#materialbox-overlay").click(function(){
+			  					$("#btnListaAutos").show();
+
+			  			});
+			  		}else{
+			  			$("#btnListaAutos").show();
+			  		}
+			  		
+			  	
+			  	});
+
+
+				  
+
+
+		  		
+			}catch(e){
 
 			}
 
@@ -1255,7 +1391,7 @@ function EditarAuto(o) {
 			$("#cbCiudadAuto").val(data.ciudadid);
 			$("#cbCiudadAuto").material_select();
 
-			
+			debugger;
 			$("#txtPlaca").val(data.placa);
 			$("#txtNoSerie").val(data.serie);
 
@@ -1267,26 +1403,30 @@ function EditarAuto(o) {
 
 			Materialize.updateTextFields();
 
+
 		});
 
 	});
 }
 
 function QuitaImagenAuto(nombreImagen, autoid){
+	$("#"+nombreImagen.replace(".","")).remove();
+	/*
 	postrequest("autos/quitarfoto", {
 			"autoid" : autoid, "foto":nombreImagen
 		}, function(data) {
 			if(data == "1"){
 				$("#"+nombreImagen.replace(".","")).remove();
+				Materialize.toast("Se eliminó la foto del registro del auto",4000);
 			}else{
-				Materialize.toast("Ocurrió un error al eliminar la imagen");
+				Materialize.toast("Ocurrió un error al eliminar la imagen",4000);
 			}
 
 		}, function (data){
 
-			Materialize.toast("Ocurrió un error inesperado");
+			Materialize.toast("Ocurrió un error inesperado",4000);
 		});
-
+	*/
 }
 
 
@@ -1356,6 +1496,11 @@ function GuardaDetalleAuto(opc) {
 	oAuto.celularContacto = $("#celularContacto").val();
 	oAuto.correoContacto = $("#correoContacto").val();
 	oAuto.infoContacto = JSON.stringify($("#infoContacto").val());;
+	oAuto.horaInicio =  JSON.stringify($(".horarioInicio").html().fechaFromMxLargeFormat().toMysqlDate());
+	oAuto.horaFin = JSON.stringify($(".horarioFin").html().fechaFromMxLargeFormat().toMysqlDate());
+	oAuto.placa = $("#txtPlaca").val();
+	oAuto.serie =$("#txtNoSerie").val();
+	
 
 	if (opc == "actualiza") {
 
@@ -1370,7 +1515,7 @@ function GuardaDetalleAuto(opc) {
 	$.each($(".fotosAuto"), function(key, value) {
 		oAuto.fotos.push($(value).attr("attr-id"));
 	});
-
+	debugger;
 	if (validaCamposAltaAutos(oAuto)) {
 
 		postrequest("autos/" + opc, oAuto, function(data) {
@@ -1378,7 +1523,7 @@ function GuardaDetalleAuto(opc) {
 			if (data > 0) {
 
 				Materialize.toast('Los datos se guardaron correctamente', 4000);
-				//$("#divRegistroAutos").dialog("close");
+				$("#btnListaAutos").click();
 
 			} else {
 
@@ -1414,6 +1559,7 @@ function VerDetalleAuto(o) {
 
 		$('#divDetalleAuto').modal("open");
 
+
 	}
 
 	postrequest("autos/info", {
@@ -1428,12 +1574,16 @@ function VerDetalleAuto(o) {
 			$("#divDetalleAuto").show();
 			
 
-			var fotos = infoAuto.fotos.split(",");
-			for (i in fotos) {
+			try{
+				var fotos = infoAuto.fotos.split(",");
+				for (i in fotos) {
 
-				// $("#imgSnapshots").append('<a class="carousel-item"><img class="materialboxed" alt="Imagen no disponible" attr-idx="1" src="'+ siteurl+"uploads/"+fotos[i]+ '" width="200" height="160" /></div>');
-				// $("#imgSnapshots").append('<a class="carousel-item"><img class="materialboxed" alt="Imagen no disponible" src="' + siteurl + "uploads/" + fotos[i] + '" width="200" height="160" /></div>');
-				$("#imgSnapshots").append('<a class="carousel-item"><img class="materialboxed" alt="Imagen no disponible" src="'+ siteurl+"uploads/"+fotos[i]+ '" width="100%" height="300" /></div>');
+					// $("#imgSnapshots").append('<a class="carousel-item"><img class="materialboxed" alt="Imagen no disponible" attr-idx="1" src="'+ siteurl+"uploads/"+fotos[i]+ '" width="200" height="160" /></div>');
+					// $("#imgSnapshots").append('<a class="carousel-item"><img class="materialboxed" alt="Imagen no disponible" src="' + siteurl + "uploads/" + fotos[i] + '" width="200" height="160" /></div>');
+					$("#imgSnapshots").append('<a class="carousel-item"><img class="materialboxed" alt="Imagen no disponible" src="'+ siteurl+"uploads/"+fotos[i]+ '" width="100%" height="300" /></div>');
+				}
+			}catch(e){
+
 			}
 			$("#detalleTitulo").html(infoAuto.marca + " " + infoAuto.modelo + " " + infoAuto.anio);
 			$("#detalleIdAuto").html(infoAuto.idAuto);
@@ -1453,18 +1603,19 @@ function VerDetalleAuto(o) {
 			$("#detalleCelularContacto").html(infoAuto.celularContacto);
 			$("#detalleCorreoContacto").html(infoAuto.correoContacto);
 			$("#detalleInfoContacto").html(infoAuto.infoContacto);
-
+			/*
 			$(".materialboxed").resize(function() {
-			if($("#closeDetalleAuto").css("display","hidden")){
-			$("#closeDetalleAuto").show();
-			
-			}else{
-			$("#closeDetalleAuto").hide();
-			}
+				alert("hola");
+				if($("#closeDetalleAuto").css("display","hidden")){
+					$("#closeDetalleAuto").show();
+				
+				}else{
+					$("#closeDetalleAuto").hide();
+				}
 			
 			});
-			
-			$('.materialboxed').materialbox();
+			*/
+			//$('.materialboxed').materialbox();
 			
 
 			if (getUrlVars()["accion"] == "subastasadmin") {
@@ -1988,3 +2139,152 @@ function remover_usuario_subsata(o){
 				Materialize.toast("Ocurrió un error al procesar la solicitud", 4000);
 			});
 }
+
+/*******************/
+/****registro*******/
+/*******************/
+
+function cargaFuncionesRegistro() {
+
+		/*
+		 *
+		 *Registro
+		 *
+		 */
+		 $("#registroPlaca").keydown(function(event ){
+
+		 	if ( event.which >=	48 && event.which <= 57 ||  event.which >=	96 && event.which <= 105 || event.which <= 18 || event.which <= 9 || event.which <= 46) {
+			    
+			 }else{
+			 	event.preventDefault();
+			 	Materialize.toast("Sólo se permiten números",2000);
+
+			 }
+		 });
+
+		$("#btnGuardar").click(function() {
+
+			debugger;
+			var oUsuario = new Usuario();
+			oUsuario.nombre = $("#registroNombre").val();
+			oUsuario.appaterno = $("#registroApPaterno").val();
+			oUsuario.apmaterno = $("#registroApMaterno").val();
+			oUsuario.email = $("#registroMail").val();
+			oUsuario.password = $("#registroPassword").val();
+			oUsuario.verificapassword = $("#registroRepetirPass").val();
+			oUsuario.dd = $("#dobday").val();
+			oUsuario.mm = $("#dobmonth").val();
+			oUsuario.yyyy = $("#dobyear").val();
+			oUsuario.placa = $("#registroPlaca").val();
+			oUsuario.categorias = [];
+			oUsuario.telefono = $("#registroTelefono").val();
+
+			//console.log(JSON.stringify(oUsuario))	;
+			var categorias = [];
+
+			$(".chkPref:checked").each(function() {
+
+				var foo = new UsuarioCategorias(-1, $(this).attr("attr-data"));
+				oUsuario.categorias.push(foo);
+			});
+
+			if (!ValidaRegistro(oUsuario)) {
+				return false;
+			} else {
+				oUsuario.fecha_nacimiento = new Date(oUsuario.yyyy, oUsuario.mm - 1, oUsuario.dd);
+
+			}
+
+			postrequest("usuarios/registro", oUsuario, function(data) {
+				//debugger;
+				if (data > 1) {
+					
+
+					
+					sessionStorage.setItem('nombre', $("#registroNombre").val() + " " + $("#registroApPaterno").val() + " " + $("#registroApMaterno").val());
+					sessionStorage.setItem('correo', $("#registroMail").val());
+					sessionStorage.setItem('idUsuario', data);
+					alert("Le hemos enviado un correo de verificación")
+					window.location.href = "home.php?s=login";
+	
+				}else{
+					
+					Materialize.toast("Ocurrió un error al realizar el registro" , 4000);
+				}
+
+			},function(data){
+				Materialize.toast("Ocurrió un error en el servidor" , 4000);
+			});
+
+		});
+
+	};
+
+	function CargaFuncionesRegistroComun(){
+
+		$(".divError").hide();
+		$(".divErrorPassword").hide();
+		$.dobPicker({
+			// Selectopr IDs
+			daySelector : '#dobday',
+			monthSelector : '#dobmonth',
+			yearSelector : '#dobyear',
+			// Default option values
+			dayDefault : 'Día',
+			monthDefault : 'Mes',
+			yearDefault : 'Año',
+			// Minimum age
+			minimumAge : 12,
+			// Maximum age
+			maximumAge : 100 // OPTIONS
+		});
+		
+		$('select').material_select();
+		
+		postrequest("categorias/listar", {
+			"estatus" : "1"
+		}, function(data) {
+
+			for (cat in data) {
+
+				// $("#divPreferencias").append('<div class="divRegistro"><input type="checkbox" attr-data="' + data[cat].id + '" class="chkPref" />' + data[cat].descripcion + "</div>");
+				$("#divPreferencias").append('<p><input type="checkbox" id="' + data[cat].id + '" attr-data="' + data[cat].id + '" class="chkPref" /><label for="' + data[cat].id + '">' + data[cat].descripcion + '</label></p>')
+			}
+
+		});
+
+		$("#btnEula").click(function() {
+			
+			cargaHTML("#dialogEula", "views/eula.html", "eula", function(){
+				console.log("EULA cargado");
+			});
+
+				
+
+			$(function() {
+				$("#dialogEula").dialog({
+					height : 400,
+					width : 500,
+					modal : true,
+					title : "Terminos y Condiciones",
+					buttons : {
+						Ok : function() {
+							$(this).dialog("close");
+						}
+					}
+				});
+			});
+
+		});
+		/*
+		$("#registroRepetirPass").focusout(function() {
+			if ($("#registroRepetirPass").val() != $("#registroPassword").val().trim()) {
+
+				$(".divErrorPassword").show();
+			} else {
+				$(".divErrorPassword").hide();
+			}
+		});
+		*/
+
+	}

@@ -17,7 +17,7 @@ class invitacion
             throw new ExcepcionApi(self::ESTADO_URL_INCORRECTA, "Url mal formada", 400);
         }
     }
-    public function crear($invitacion)
+    public static function crear($invitacion)
     {
         
         try {

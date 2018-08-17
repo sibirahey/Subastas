@@ -133,7 +133,10 @@
 	<div class="divSeccion">
 		<ul class="tabs">
 			<li class="tab col s3">
-				<a class="active" href="#divListaContenido" id="tab-activas" >Activas</a>
+				<a class="active" href="#divListaContenido4" id="tab-agendadas" >Agendadas</a>
+			</li>
+			<li class="tab col s3">
+				<a  href="#divListaContenido" id="tab-activas" >Activas</a>
 			</li>
 			<li class="tab col s3">
 				<a href="#divListaContenido2" id="tab-terminadas" >Terminadas</a>
@@ -141,9 +144,7 @@
 			<li class="tab col s3">
 				<a href="#divListaContenido3" id="tab-canceladas" >Canceladas</a>
 			</li>
-			<li class="tab col s3">
-				<a href="#divListaContenido4" id="tab-agendadas" >Agendadas</a>
-			</li>
+			
 		</ul>
 	</div>
 	<div id="divListaContenido" class="divListaContenido"></div>
@@ -215,13 +216,13 @@
 </div>
 
 <!--<div id="divRegistroAutos" class="divContenido modal modal-fixed-footer">-->
-<div id="divRegistroAutos" class="modal" style="background-color: white;">
+<div id="divRegistroAutos" style="background-color: white;">
 
-	<div class="btn waves-effect red" id="btnListaAutos" style="z-index: 13;position:fixed;right: 0; top:0; overflow: hidden;">
+	<div class="btn waves-effect red" id="btnListaAutos" style="position:relative; float: right; ">
 		<i class="material-icons">close</i>
 	</div>
 	<h5 class="card-title" id="divListaAutosTitulo"></h5>
-	<div class="modal-content">
+	<div >
 		<div id="modal-confirm-cancelauto" class="row" style="display: none;">
 			<div class="col s12">
 				<h4 id="ttlCancelarAuto"></h4>
@@ -243,12 +244,14 @@
 			</div>
 		</div>
 		<div id="divListaAutos"></div>
+		<div id="divListaAutos2"></div>
 		<div id="divDetalleAuto"></div>
 	</div>
-	
-
 </div>
 
+
+<div id="divAltaAutoSubastaAdmim">
+</div>
 <div id="divProgramadorAutos" class="modal" style="background-color: white;">
 
 	<div class="btn waves-effect red  modal-close" onclick="function(){ $("#divAdminSubastas").show(); }" id="btnListaAutos" style="z-index: 13;position:absolute;right: 0;">

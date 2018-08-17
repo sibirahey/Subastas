@@ -63,6 +63,9 @@ function CargaFunciones(o){
 			debugger;
 			cargaListaProgramcionAutos( sessionStorage.getItem('attr-id'), "#divProgramadorAutosContenido", sessionStorage.getItem('hora_inicio'), sessionStorage.getItem('datediff'), sessionStorage.getItem('nombreSubasta'), sessionStorage.getItem('hora_inicio'), sessionStorage.getItem('hora_fin'));
 			break;
+		case "useradmin":
+			cargaFuncionesUserAdmin();
+			break;
 		case "dashboard":
 		default:
 			CargaJsonHome();

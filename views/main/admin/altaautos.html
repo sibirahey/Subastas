@@ -1,4 +1,4 @@
-<h2 class="altaAutosTitle">Administrador Venta de Autos</h2>
+<h2 class="altaAutosTitle">REGISTRO DE AUTOS</h2>
 <div class="altaAutosContainer row">
 	<h5 id="divSubastaNombre"></h5>
 	<form class="col s12">
@@ -121,6 +121,11 @@
 			<div id="fotosSubidas" ></div>
 
 		</div>
+		<h3>Horario de subasta</h3>
+		<div class="input-field txtaDescripcionAuto">
+			<div  id="divProgramadorAutosContenido">
+			</div>
+		</div>
 		<h3>Datos de contacto</h3>
 		<div class="input-field precioAuto">
 			<input type="text" name="nombreContacto" id="nombreContacto" />
@@ -139,11 +144,10 @@
 			<label for="correoContacto" >Correo:</label>
 		</div>
 		<div class="input-field txtaDescripcionAuto">
-			<!-- <textarea id="txtaDescripcionAuto" maxlength="1000" ></textarea> -->
 			<textarea id="infoContacto" name ="infoContacto" class="materialize-textarea" maxlength="1000"></textarea>
 			<label for="infoContacto">Información adicional:</label>
 		</div>
-
+		
 		<div class="input-field btnsAuto">
 			<div class="btn-large waves-effect waves-light teal accent-3" id="btnGuardaAuto" attr-subastaid="0">
 				<i class="material-icons">save</i>
@@ -152,29 +156,32 @@
 				<i class="material-icons">refresh</i>
 			</div>
 		</div>
+		<input type="hidden" id="hora_fin">
+		<input type="hidden" id="hora_inicio">
+		<div id="dialog" class="modal">
+			<div id="btnCierraCatalogo" class="btn waves-effect red" id="modalListaAutos"><i class="material-icons">close</i></div>
+			<div class="modal-content">
+				<label id="labelMensaje" ><i class="material-icons">warning</i></label>
+				<div class="input-field col s12">
+					<input type="text" name="txtDescripcion" id="txtDescripcion" class="validate"/>
+					<label id="labelTxtDescripcion" for="txtDescripcion" >Descripción del vehiculo:</label>
+				</div>
+
+			</div>
+			<div class="modal-footer">
+				<div id="btnGuardarCatalogo" class="waves-effect waves-light btn green">
+					<i class="material-icons"></i>Guardar
+				</div>
+				<div id="btnActualizaCatalogo" class="waves-effect waves-light btn light-blue">
+					Actualizar
+				</div>
+				<div id="btnEliminaCatalogo" class="waves-effect waves-light btn red">
+					Eliminar
+				</div>
+			</div>
+		</div>
 
 	</form>
+
 </div>
 
-<div id="dialog" class="modal">
-	<div id="btnCierraCatalogo" class="btn waves-effect red" id="modalListaAutos"><i class="material-icons">close</i></div>
-	<div class="modal-content">
-		<label id="labelMensaje" ><i class="material-icons">warning</i></label>
-		<div class="input-field col s12">
-			<input type="text" name="txtDescripcion" id="txtDescripcion" class="validate"/>
-			<label id="labelTxtDescripcion" for="txtDescripcion" >Descripción del vehiculo:</label>
-		</div>
-
-	</div>
-	<div class="modal-footer">
-		<div id="btnGuardarCatalogo" class="waves-effect waves-light btn green">
-			<i class="material-icons"></i>Guardar
-		</div>
-		<div id="btnActualizaCatalogo" class="waves-effect waves-light btn light-blue">
-			Actualizar
-		</div>
-		<div id="btnEliminaCatalogo" class="waves-effect waves-light btn red">
-			Eliminar
-		</div>
-	</div>
-</div>

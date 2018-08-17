@@ -508,21 +508,45 @@ $(document).ready(function() {
 
 	function CargaFuncionesRecuperar(){
 
+		function validaRecuperaContrasena(){
+
+			if($("#mail").val().trim() == ""){
+				Materialize.toast("Por favor proporcioné el correo de la cuenta que desea recuperar", 4000);
+				return false;
+
+			}else if (!ValidaEmail($("#mail").val().trim())){
+				Materialize.toast("Escriba un correo válido", 4000);
+				return false;
+			}else{
+				return true;
+			}
+		}
+		$("#mail").keydown(function (e) {
+			debugger;
+	        if (e.which == 13) {
+	            e.preventDefault();
+	            $("#btnRecuperar").click();
+	         }
+        });
+
 		$("#btnRecuperar").click(function(){
-			postrequest("usuarios/recuperar",{"mail":$("#mail").val()}, function(data){
-				if(data == -1){
-					//alert("No se encontro ninguna cuenta con estos datos");
-					Materialize.toast('No se encontro ninguna cuenta con estos datos.', 4000);
-				}else{
-					//alert("Le envíamos un correo, por favor revise su bandeja de entrada. Recuerde que el correo podría llegar a la bandeja de spam o correo no deseado");
-					Materialize.toast('Le env&iacute;amos un correo, por favor revise su bandeja de entrada. Recuerde que el correo podr&iacute;a llegar a sla bandeja de spam o correo no deseado.', 4000);
-					window.location.href="?s=nuevacontrasena&correo="+$("#mail").val();
-				}
-			},
-			function(data){
-				//alert("Ocurrió un error al recuperar la contraseña");
-				Materialize.toast('Ocurri&oacute; un error al recuperar la contrase&ntilde;a', 4000);
-			} );
+
+			if(validaRecuperaContrasena()){
+				postrequest("usuarios/recuperar",{"mail":$("#mail").val()}, function(data){
+					if(data == -1){
+						//alert("No se encontro ninguna cuenta con estos datos");
+						Materialize.toast('No se encontro ninguna cuenta con estos datos.', 4000);
+					}else{
+						//alert("Le envíamos un correo, por favor revise su bandeja de entrada. Recuerde que el correo podría llegar a la bandeja de spam o correo no deseado");
+						Materialize.toast('Le env&iacute;amos un correo, por favor revise su bandeja de entrada. Recuerde que el correo podr&iacute;a llegar a sla bandeja de spam o correo no deseado.', 4000);
+						window.location.href="?s=nuevacontrasena&correo="+$("#mail").val();
+					}
+				},
+				function(data){
+					//alert("Ocurrió un error al recuperar la contraseña");
+					Materialize.toast('Ocurri&oacute; un error al recuperar la contrase&ntilde;a', 4000);
+				} );
+			}
 		});
 	}
 

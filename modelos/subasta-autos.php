@@ -28,18 +28,56 @@ class subastasautos
         if ($peticion[0] == 'listar') {
             return self::listarEmpresas();
         }else if ($peticion[0] == 'guardar') {
-            return self::registrarOut();
+            return self::registrar();
         }else if ($peticion[0] == 'cancelar') {
             return self::cancelar();
         }else if ($peticion[0] == 'programar') {
             return self::programar();
-        }else {
+        }else if ($peticion[0] == 'info') {
+            return self::info($_POST["id"]);
+        }
+        else {
             throw new ExcepcionApi(self::ESTADO_URL_INCORRECTA, "Url mal formada", 400);
         }
     }   
 
-    
-     
+    public function info($id){
+          try{
+
+            $comando =  " select hora_inicio, hora_fin, estatus, motivo from subastas_autos where autoId = ?  ";
+            $sentencia = ConexionBD::obtenerInstancia()->obtenerBD()->prepare($comando);
+             $sentencia->bindParam(1, $id);
+            if ($sentencia->execute())
+                return $sentencia->fetch(PDO::FETCH_ASSOC);
+            else
+                return null;
+    }catch(Excepcion $e){
+        throw new ExcepcionApi(self::ESTADO_URL_INCORRECTA, $e->getMessage(), 400);
+    }
+
+    }
+    public function programarauto($id, $fechaIni, $fechaFin, $idSubasta){
+        try{    
+            $comando = "UPDATE  subastas_autos set hora_inicio = ? , hora_fin  = ? where autoId = ? and subastaId = ?" ;
+            $pdo = ConexionBD::obtenerInstancia()->obtenerBD();    
+            
+            
+
+            $sentencia = $pdo->prepare($comando);
+
+            $sentencia->bindParam(1, $fechaIni);
+            $sentencia->bindParam(2, $fechaFin);
+            $sentencia->bindParam(3, $id);
+            $sentencia->bindParam(4, $idSubasta);
+           
+        
+            $sentencia->execute();
+           
+        }catch(PDOException $e){
+           
+        }  
+    }
+
     public function programar(){
         $json = json_decode($_POST["datos"]);
          

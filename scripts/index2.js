@@ -118,150 +118,9 @@ $(document).ready(function() {
 	}
 
 	
-	function CargaFuncionesRegistroComun(){
-
-		$(".divError").hide();
-		$(".divErrorPassword").hide();
-		$.dobPicker({
-			// Selectopr IDs
-			daySelector : '#dobday',
-			monthSelector : '#dobmonth',
-			yearSelector : '#dobyear',
-			// Default option values
-			dayDefault : 'Día',
-			monthDefault : 'Mes',
-			yearDefault : 'Año',
-			// Minimum age
-			minimumAge : 12,
-			// Maximum age
-			maximumAge : 100 // OPTIONS
-		});
-		
-		$('select').material_select();
-		
-		postrequest("categorias/listar", {
-			"estatus" : "1"
-		}, function(data) {
-
-			for (cat in data) {
-
-				// $("#divPreferencias").append('<div class="divRegistro"><input type="checkbox" attr-data="' + data[cat].id + '" class="chkPref" />' + data[cat].descripcion + "</div>");
-				$("#divPreferencias").append('<p><input type="checkbox" id="' + data[cat].id + '" attr-data="' + data[cat].id + '" class="chkPref" /><label for="' + data[cat].id + '">' + data[cat].descripcion + '</label></p>')
-			}
-
-		});
-
-		$("#btnEula").click(function() {
-			
-			cargaHTML("#dialogEula", "views/eula.html", "eula", function(){
-				console.log("EULA cargado");
-			});
-
-				
-
-			$(function() {
-				$("#dialogEula").dialog({
-					height : 400,
-					width : 500,
-					modal : true,
-					title : "Terminos y Condiciones",
-					buttons : {
-						Ok : function() {
-							$(this).dialog("close");
-						}
-					}
-				});
-			});
-
-		});
-		/*
-		$("#registroRepetirPass").focusout(function() {
-			if ($("#registroRepetirPass").val() != $("#registroPassword").val().trim()) {
-
-				$(".divErrorPassword").show();
-			} else {
-				$(".divErrorPassword").hide();
-			}
-		});
-		*/
-
-	}
-
-	function cargaFuncionesRegistro() {
-
-		/*
-		 *
-		 *Registro
-		 *
-		 */
-		 $("#registroPlaca").keydown(function(event ){
-
-		 	if ( event.which >=	48 && event.which <= 57 ||  event.which >=	96 && event.which <= 105 || event.which <= 18 || event.which <= 9 || event.which <= 46) {
-			    
-			 }else{
-			 	event.preventDefault();
-			 	Materialize.toast("Sólo se permiten números",2000);
-
-			 }
-		 });
-
-		$("#btnGuardar").click(function() {
-
-			debugger;
-			var oUsuario = new Usuario();
-			oUsuario.nombre = $("#registroNombre").val();
-			oUsuario.appaterno = $("#registroApPaterno").val();
-			oUsuario.apmaterno = $("#registroApMaterno").val();
-			oUsuario.email = $("#registroMail").val();
-			oUsuario.password = $("#registroPassword").val();
-			oUsuario.verificapassword = $("#registroRepetirPass").val();
-			oUsuario.dd = $("#dobday").val();
-			oUsuario.mm = $("#dobmonth").val();
-			oUsuario.yyyy = $("#dobyear").val();
-			oUsuario.placa = $("#registroPlaca").val();
-			oUsuario.categorias = [];
-			oUsuario.telefono = $("#registroTelefono").val();
-
-			//console.log(JSON.stringify(oUsuario))	;
-			var categorias = [];
-
-			$(".chkPref:checked").each(function() {
-
-				var foo = new UsuarioCategorias(-1, $(this).attr("attr-data"));
-				oUsuario.categorias.push(foo);
-			});
-
-			if (!ValidaRegistro(oUsuario)) {
-				return false;
-			} else {
-				oUsuario.fecha_nacimiento = new Date(oUsuario.yyyy, oUsuario.mm - 1, oUsuario.dd);
-
-			}
-
-			postrequest("usuarios/registro", oUsuario, function(data) {
-				//debugger;
-				if (data > 1) {
-					
-
-					
-					sessionStorage.setItem('nombre', $("#registroNombre").val() + " " + $("#registroApPaterno").val() + " " + $("#registroApMaterno").val());
-					sessionStorage.setItem('correo', $("#registroMail").val());
-					sessionStorage.setItem('idUsuario', data);
-					alert("Le hemos enviado un correo de verificación")
-					window.location.href = "home.php?s=login";
 	
-				}else{
-					
-					Materialize.toast("Ocurrió un error al realizar el registro" , 4000);
-				}
 
-			},function(data){
-				Materialize.toast("Ocurrió un error en el servidor" , 4000);
-			});
-
-		});
-
-	};
+	
 
 	function CargaFuncionesRegistroInvitacion(){
 		
@@ -531,27 +390,51 @@ $(document).ready(function() {
 		    }
 		  );
 
+		function validaRecuperaContrasena(){
+
+			if($("#mail").val().trim() == ""){
+				Materialize.toast("Por favor proporcioné el correo de la cuenta que desea recuperar", 4000);
+				return false;
+
+			}else if (!ValidaEmail($("#mail").val().trim())){
+				Materialize.toast("Escriba un correo válido", 4000);
+				return false;
+			}else{
+				return true;
+			}
+		}
+		$("#mail").keydown(function (e) {
+
+	        if (e.which == 13) {
+	            e.preventDefault();
+	            $("#btnRecuperar").click();
+	         }
+        });
+
+
 		$("#btnRecuperar").click(function(){
-			postrequest("usuarios/recuperar",{"mail":$("#mail").val().trim()}, function(data){
-				if(data == -1){
-					//alert("No se encontro ninguna cuenta con estos datos");
-					Materialize.toast('No se encontro ninguna cuenta con estos datos.', 4000);
-				}else{
-					//alert("Le envíamos un correo, por favor revise su bandeja de entrada. Recuerde que el correo podría llegar a la bandeja de spam o correo no deseado");
-					//Materialize.toast('Le env&iacute;amos un correo, por favor revise su bandeja de entrada. Recuerde que el correo podr&iacute;a llegar a sla bandeja de spam o correo no deseado.', 4000);
-					$("#btnRecuperaLink").click(function(){
-						window.location.href = "?s=nuevacontrasena&correo="+$("#mail").val();
-					});
-						
-				
-					$('#modalRecupera').modal("open");
+			if(validaRecuperaContrasena()){
+				postrequest("usuarios/recuperar",{"mail":$("#mail").val().trim()}, function(data){
+					if(data == -1){
+						//alert("No se encontro ninguna cuenta con estos datos");
+						Materialize.toast('No se encontro ninguna cuenta con estos datos.', 4000);
+					}else{
+						//alert("Le envíamos un correo, por favor revise su bandeja de entrada. Recuerde que el correo podría llegar a la bandeja de spam o correo no deseado");
+						//Materialize.toast('Le env&iacute;amos un correo, por favor revise su bandeja de entrada. Recuerde que el correo podr&iacute;a llegar a sla bandeja de spam o correo no deseado.', 4000);
+						$("#btnRecuperaLink").click(function(){
+							window.location.href = "?s=nuevacontrasena&correo="+$("#mail").val();
+						});
+							
 					
-				}
-			},
-			function(data){
-				//alert("Ocurrió un error al recuperar la contraseña");
-				Materialize.toast('Ocurri&oacute; un error al recuperar la contrase&ntilde;a', 4000);
-			} );
+						$('#modalRecupera').modal("open");
+						
+					}
+				},
+				function(data){
+					//alert("Ocurrió un error al recuperar la contraseña");
+					Materialize.toast('Ocurri&oacute; un error al recuperar la contrase&ntilde;a', 4000);
+				} );
+			}
 		});
 	}
 

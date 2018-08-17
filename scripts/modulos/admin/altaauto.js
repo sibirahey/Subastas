@@ -8,6 +8,36 @@ function CargaFuncionesRegistroAuto(idSubasta){
 		outDuration : 200, // Transition out duration
 		startingTop : '4%', // Starting top style attribute			
 	}); 	
+
+			
+				
+	debugger;
+	oAuto = new Autos();
+	oAuto.idAuto = 0;
+	oAuto.marca = "";
+	oAuto.modelo = "";
+
+	if(idSubasta > 0){
+		postrequest("subastas/info",{"id":idSubasta},function(data){
+					
+			debugger;
+            var fTIni = data[0].fecha_tentativa.fecha();
+            var fTFin = data[0].fecha_tentativa.fecha().addMinutes(5);
+            var fFin = data[0].fechaFin.fecha();
+            if(fTIni > fFin || fTFin > fFin){
+                fTFin = fFin;
+                fTIni = data[0].fechaFin.fecha().addMinutes(-5);
+            }
+			var renglon = regresaRenglonProgramador(oAuto, idSubasta, fTIni, 0, 0,fTFin, 1);
+			$("#hora_inicio").val(data[0].fecha_tentativa);
+			$("#divProgramadorAutosContenido").html(renglon);
+			$("#hora_fin").val(data[0].fechaFin);
+			
+
+		});
+	}
+		
+
 	$('#btnActualizaCatalogo').hide();
 	$('#btnEliminaCatalogo').hide();
 	$('#labelMensaje').hide();
@@ -91,7 +121,7 @@ function CargaFuncionesRegistroAuto(idSubasta){
 			                success: function(php_script_response){
 
 			                
-			                	if(php_script_response.substring(0, 2) == "ERR"){
+			                	if(php_script_response.trim().substring(0, 3).toUpperCase() == "ERR"){
 									//alert(php_script_response);
 									Materialize.toast(php_script_response, 4000);
 									
@@ -148,8 +178,7 @@ function CargaFuncionesRegistroAuto(idSubasta){
 		$('#dialog').attr("operacion", $(this).attr("operacion") );
    		$('#labelTxtDescripcion').html($(this).attr("desc"));
    		$('#dialog').modal('open');  
-   		
-   		$(".modal-overlay:last-child").css("z-index", 1000);
+
    			
    		
    		
@@ -164,86 +193,91 @@ function CargaFuncionesRegistroAuto(idSubasta){
 
     $("#btnGuardarCatalogo").add("#btnActualizaCatalogo").add('#btnEliminaCatalogo').click(function(){
    		
-   		oObj = null;
-   		var operacion = $( "#dialog" ).attr("operacion");
-   		
-   		switch(operacion){
-   			case "marcas":
-   				oObj = new Marca();
-				break;
-			case "modelos":
-				oObj = new Modelo();
-				oObj.idMarca = $("#cbMarcaAuto").val();
-				if ($("#cbMarcaAuto").val() == 0 ){
-					//alert("Seleccione una marca para poder agregar el modelo.");
-					Materialize.toast('Seleccione una marca para poder agregar el modelo.', 4000);
-					return;
-				}
-   			break;
-   			case "colores":
-   				oObj = new Colores();
-   				break;
-   			case "features":
-   				oObj = new Caracteristicas();
-   				break;
-   			case "precio":
-   				oObj = new Precio();
-   				break;
-   			default:
-   			 //alert("Operación no valida");
-   			 Materialize.toast('Operación inválida.', 4000);
-   			 break;
+   		if($("#txtDescripcion").val().trim()  == ""){
 
+   			Materialize.toast("El texto no puede estár vació", 5000)
+   		}else{
+	   		oObj = null;
+	   		var operacion = $( "#dialog" ).attr("operacion");
+	   		
+	   		switch(operacion){
+	   			case "marcas":
+	   				oObj = new Marca();
+					break;
+				case "modelos":
+					oObj = new Modelo();
+					oObj.idMarca = $("#cbMarcaAuto").val();
+					if ($("#cbMarcaAuto").val() == 0 ){
+						//alert("Seleccione una marca para poder agregar el modelo.");
+						Materialize.toast('Seleccione una marca para poder agregar el modelo.', 4000);
+						return;
+					}
+	   			break;
+	   			case "colores":
+	   				oObj = new Colores();
+	   				break;
+	   			case "features":
+	   				oObj = new Caracteristicas();
+	   				break;
+	   			case "precio":
+	   				oObj = new Precio();
+	   				break;
+	   			default:
+	   			 //alert("Operación no valida");
+	   			 Materialize.toast('Operación inválida.', 4000);
+	   			 break;
+
+	   		}
+
+
+	   		oObj.estatus = 1;
+	   		if($(this).attr('idMarca') >0){
+	   			oObj.id = $(this).attr('idMarca');
+	   			if($(this).attr('estatus')==0)
+	   				oObj.estatus = 0;
+	   		}
+	   		else{
+	   			oObj.id = 0;
+	   		}
+	   		
+	   		oObj.descripcion = $("#txtDescripcion").val();
+	   			
+	   			
+
+	   		postrequest($( "#dialog" ).attr("operacion")+"/guardar", oObj, function(data){
+	   			if(data > 0){
+					//alert("La operación se realizó con éxito");
+					Materialize.toast('La operaci&oacute;n se realiz&oacute; con &eacute;xito.', 4000);
+					if($( "#dialog" ).attr("operacion") == "marcas"){
+						$("#cbMarcaAuto").html("");
+						CargaSelectMarcas("#cbMarcaAuto", 0,1);
+					}
+					if($( "#dialog" ).attr("operacion") == "modelos"){
+						$("#cbModeloAuto").html("");
+						CargaSelectModelos("#cbModeloAuto", "#cbMarcaAuto", 0, 1);
+					}
+					if($( "#dialog" ).attr("operacion") == "colores"){
+						$("#cbColorAuto").html("");
+						CargaSelectColores("#cbColorAuto", 0, 1);
+					}
+					if($( "#dialog" ).attr("operacion") == "features"){
+						$('#cbFeaturesAutos').material_select("destroy");
+						$("#cbFeaturesAutos").html("");
+						CargaSelectFeatures("#cbFeaturesAutos","",1);
+						$('#cbFeaturesAutos').material_select();
+						$('#cbFeaturesAutos').val();
+					}
+					if($( "#dialog" ).attr("operacion") == "precio"){
+						$("#cbMotivoPrecio").html("");
+						CargaSelectMotivoPrecio("#cbMotivoPrecio");
+					}
+
+					
+
+				}
+				$('#dialog').modal('close');  
+	   		});
    		}
-
-
-   		oObj.estatus = 1;
-   		if($(this).attr('idMarca') >0){
-   			oObj.id = $(this).attr('idMarca');
-   			if($(this).attr('estatus')==0)
-   				oObj.estatus = 0;
-   		}
-   		else{
-   			oObj.id = 0;
-   		}
-   		
-   		oObj.descripcion = $("#txtDescripcion").val();
-   			
-   			
-
-   		postrequest($( "#dialog" ).attr("operacion")+"/guardar", oObj, function(data){
-   			if(data > 0){
-				//alert("La operación se realizó con éxito");
-				Materialize.toast('La operaci&oacute;n se realiz&oacute; con &eacute;xito.', 4000);
-				if($( "#dialog" ).attr("operacion") == "marcas"){
-					$("#cbMarcaAuto").html("");
-					CargaSelectMarcas("#cbMarcaAuto", 0,1);
-				}
-				if($( "#dialog" ).attr("operacion") == "modelos"){
-					$("#cbModeloAuto").html("");
-					CargaSelectModelos("#cbModeloAuto", "#cbMarcaAuto", 0, 1);
-				}
-				if($( "#dialog" ).attr("operacion") == "colores"){
-					$("#cbColorAuto").html("");
-					CargaSelectColores("#cbColorAuto", 0, 1);
-				}
-				if($( "#dialog" ).attr("operacion") == "features"){
-					$('#cbFeaturesAutos').material_select("destroy");
-					$("#cbFeaturesAutos").html("");
-					CargaSelectFeatures("#cbFeaturesAutos","",1);
-					$('#cbFeaturesAutos').material_select();
-					$('#cbFeaturesAutos').val();
-				}
-				if($( "#dialog" ).attr("operacion") == "precio"){
-					$("#cbMotivoPrecio").html("");
-					CargaSelectMotivoPrecio("#cbMotivoPrecio");
-				}
-
-				
-
-			}
-			$('#dialog').modal('close');  
-   		});
 
    });
 	

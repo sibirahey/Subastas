@@ -17,6 +17,7 @@ class resultados
     	$this->ofertas = $ofertas;
         $this->puja = $puja;
         $this->hora_puja = $hora_puja;
-       
+        $this->ganancia = 0;
+        
     }
 }
