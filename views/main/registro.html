@@ -82,8 +82,9 @@
 		<!-- INPUT APELLIDO MATERNO -->
 		<div class="row">
 			<div class="input-field col s12">
-				<input name="telefono" id="registroTelefono" type="text" class="validate" >
+				<input name="telefono" id="registroTelefono" type="text" class="validate" onkeyup="validaTelefono(this);">
 				<label for="telefono">Teléfono</label>
+				<div id="divValidaTelefono" class="validaRegistro" style="display:none" >El numero telef&oacute;nico solo puede contener numero y debe ser de 10 d&iacute;gitos</div>
 			</div>
 		</div>
 		<!-- TEMAS DE INTERES -->

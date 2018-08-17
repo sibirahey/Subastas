@@ -1864,6 +1864,11 @@ function StrongPassWord(password) {
 	return re.test(password);
 }
 
+function esNumericoTelefonicoValido(telefono){
+    var re = /^\d{10}$/;
+    return re.test(telefono);
+}
+
 function validamail(o) {
 	mail = $(o).val();
 	if (ValidaEmail(mail)) {
@@ -1901,6 +1906,20 @@ function validaStrongPassword(o) {
 		$("#btnGuardar").attr("disabled", true);
 	}
 }
+
+
+function validaTelefono(o) {
+
+    var tel = $(o).val();
+    if (esNumericoTelefonicoValido(tel)) {
+        $("#divValidaTelefono").hide();
+        $("#btnGuardar").attr("disabled", false);
+    } else {
+        $("#divValidaTelefono").show();
+        $("#btnGuardar").attr("disabled", true);
+    }
+}
+
 
 function validaRepetirPassword(o) {
 	var passv = $(o).val();
