@@ -6,9 +6,9 @@
 			<p style="loat: left;">
 				<div style="width: 96%;float: left;margin:10px 2%;font-size:1.4rem;color:rgb(60,65,70);font-family: 'Inconsolata', monospace;text-align: center;">Usted fue invitado a participar en una subasta por favor concluya el registro para poder participar.</div>
 				<div style="width: 96%;float: left;margin:10px 2%;font-size:1.4rem;color:rgb(60,65,70);font-family: 'Inconsolata', monospace;text-align:center !important;">
-				<a style="width: 200px;height: 50px;line-height: 50px;border-radius: 2px;background-color: #26a69a;padding: .5em 1em .5em 1em;text-align: center;color: #ffffff;text-decoration: none;box-shadow: 0 0 4px #000000;font-family: 'Inconsolata', monospace;" href="##DOMINIO##home.php?s=invitacion&claveapi=##claveApi##&idusuario=##idusuario##&subasta=##idsubasta##">Aceptar invitación</a>
+				<a style="width: 200px;height: 50px;line-height: 50px;border-radius: 2px;background-color: #26a69a;padding: .5em 1em .5em 1em;text-align: center;color: #ffffff;text-decoration: none;box-shadow: 0 0 4px #000000;font-family: 'Inconsolata', monospace;" href="##DOMINIO##home.php?s=invitacion&claveapi=##claveApi##&idusuario=##idusuario##&subasta=##idsubasta##">Aceptar invitaci&oacute;n</a>
 				</div>
-				<div style="width: 96%;float: left;margin:10px 2%;font-size:1.4rem;color:rgb(60,65,70);font-family: 'Inconsolata', monospace;text-align: center;">Si no puede dar click en el enlace puede copiar la dirección  en el navegador</div>  
+				<div style="width: 96%;float: left;margin:10px 2%;font-size:1.4rem;color:rgb(60,65,70);font-family: 'Inconsolata', monospace;text-align: center;">Si no puede dar click en el enlace puede copiar la direcci&oacute;n  en el navegador</div>
 				<div style="width: 96%;float: left;margin:10px 2%;font-size:1.4rem;color:rgb(60,65,70);font-family: 'Inconsolata', monospace;text-align: center;">##DOMINIO##home.php?s=invitacion&claveapi=##claveApi##&idusuario=##idusuario##&subasta=##idsubasta##</div>
 			</p>
 		</div>

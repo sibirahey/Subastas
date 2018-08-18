@@ -106,7 +106,7 @@ function CargaContenidoMain() {
 				//console.log(JSON.stringify(data.length));
 				if(data.length > 0 )
 					 $(".divMisSubastas").hide().show();
-		
+				var cuentaActivas = 0;
 				for(var o in response){
 
 					
@@ -140,6 +140,7 @@ function CargaContenidoMain() {
 							$("#divListaSubastas4").append(subasta);
 						}else{
 							$("#divListaSubastas").append(subasta);
+                            cuentaActivas++;
 						}
 
 
@@ -150,6 +151,11 @@ function CargaContenidoMain() {
 
 					}
 				}
+
+				if(cuentaActivas>0){
+					$("#linkSubastasActivasUsuario").html("Activas ("+cuentaActivas+")");
+				}
+
 				$('ul.tabs').tabs();
 				
 

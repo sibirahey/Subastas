@@ -1117,7 +1117,7 @@ function MensajeOfertaInvalida(o){
 	}
 	
 	if((oferta-ultimaoferta) < incremento){
-		return ": Su oferta no cumple con las reglas de incremento de la subasta";
+		return ": Su oferta no cumple con el precio inicial o con las reglas de incremento de la subasta";
 	}
 	else if(tiposubasta == 1 && oferta <= ultimaoferta)
 	{
@@ -1125,7 +1125,7 @@ function MensajeOfertaInvalida(o){
 	}
 	else if(tiposubasta == 2 && (oferta-precio) < incremento)
 	{
-		return ":  Su oferta no cumple con las reglas de incremento de la subasta";
+		return ":  Su oferta no cumple con el precio inicial o con las reglas de incremento de la subasta";
 	}else if (oferta <= precio){
 			return ": La oferta debe ser mayor al precio de salida";
 	}
@@ -2115,7 +2115,7 @@ function cargar_participantes(idSubasta, nombreSubasta){
 				$("#divListaUsuariosTbl").html("");
 				$tabla = "<table class='responsive-table striped centered'><tr><th>Nombre</th><th>Correo</th><th>Quitar</th></tr>"
 				for(var item in data){
-					$tabla += "<tr><td>"+ data[item].nombre + " "+data[item].appaterno+" "+data[item].apmaterno + "</td><td>"+data[item].correo +"</td><td><i class='material-icons' attr-subasta='"+data[item].idSubasta+"' attr-usuario='"+data[item].idUsuario+"' onclick='remover_usuario_subastaconfirm(this);'>remove_circle_outline</i></td></tr>";
+					$tabla += "<tr><td>"+ data[item].nombre + " "+data[item].appaterno+" "+data[item].apmaterno + "</td><td>"+data[item].correo +"</td><td><i class='material-icons' style='cursor: pointer' attr-subasta='"+data[item].idSubasta+"' attr-usuario='"+data[item].idUsuario+"' onclick='remover_usuario_subastaconfirm(this);'>remove_circle_outline</i></td></tr>";
 					console.log(data);
 				}
 				$tabla += "</table>";
