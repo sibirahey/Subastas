@@ -153,10 +153,14 @@ function CargaFuncionesRegistroAuto(idSubasta){
 		    $('.fotoAuto').find('.file-path').val('');
 		    
 		});
-	    
-	 
-	  SoloNumericos("#precioAuto");
-	  SoloNumericos("#cbKMAuto");
+
+
+    soloNumeros("#precioAuto");
+    onBlurComas("#precioAuto");
+    soloNumeros("#cbKMAuto");
+    onBlurComas("#precioAuto");
+      soloNumeros("#txtNoSerie");
+	  soloNumerosOLetras("#txtPlaca");
 
 
 	$("#btnGuardaAuto").click(function (){

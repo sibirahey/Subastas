@@ -1686,6 +1686,28 @@ jQuery.expr[':'].icontains = function(a, i, m) {
 	return jQuery(a).text().toUpperCase().indexOf(m[3].toUpperCase()) >= 0;
 };
 
+function soloNumerosOLetras(inputItem){
+
+    $(inputItem).on("keypress keyup", function(event) {
+        $(inputItem).val($(inputItem).val().replace(/[\W_]+/g,""));
+    });
+}
+
+function onBlurComas(inputItem){
+    $(inputItem).blur( function() {
+        $(inputItem).val(Number($(inputItem).val()).formatMoney(0, '.', ','));
+    });
+}
+
+
+
+function soloNumeros(inputItem){
+
+    $(inputItem).on("keypress keyup", function(event) {
+        $(inputItem).val($(inputItem).val().replace(/[\D_]+/,""));
+    });
+}
+
 function SoloNumericos(inputItem) {
 
 	$(inputItem).on("keypress keyup", function(event) {
@@ -1867,6 +1889,11 @@ function StrongPassWord(password) {
 function esNumericoTelefonicoValido(telefono){
     var re = /^\d{10}$/;
     return re.test(telefono);
+}
+
+function esNumeroOLetras(campo){
+    var re = /[A-Za-z0-9]/;
+    return re.test(campo);
 }
 
 function validamail(o) {
