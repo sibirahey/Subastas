@@ -158,7 +158,7 @@ function CargaFuncionesRegistroAuto(idSubasta){
     soloNumeros("#precioAuto");
     onBlurComas("#precioAuto");
     soloNumeros("#cbKMAuto");
-    onBlurComas("#precioAuto");
+    onBlurComas("#cbKMAuto");
       soloNumeros("#txtNoSerie");
 	  soloNumerosOLetras("#txtPlaca");
 

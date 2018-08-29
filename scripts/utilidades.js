@@ -1694,8 +1694,13 @@ function soloNumerosOLetras(inputItem){
 }
 
 function onBlurComas(inputItem){
-    $(inputItem).blur( function() {
-        $(inputItem).val(Number($(inputItem).val()).formatMoney(0, '.', ','));
+    $(inputItem).blur( function(e) {
+    	debugger;
+        var cantidad = Number($(inputItem).val().replace(/[\D_]+/,""));
+        if(!isNaN(cantidad)){
+            var cantidadTexto = cantidad.formatMoney(0, '.', ',');
+            $(inputItem).val(cantidadTexto);
+        }
     });
 }
 
