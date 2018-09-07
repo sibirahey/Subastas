@@ -1452,7 +1452,7 @@ function LimpiaNuevoAuto() {
 
 function GuardaDetalleAuto(opc) {
 
-	//debugger;
+	debugger;
 	oAuto = new Autos();
 	oAuto.idAuto = $("#btnGuardaAuto").attr("attr-idsubasta");
 	if (parseInt($("#btnGuardaAuto").attr("attr-subastaid")) > 0) {
@@ -1463,7 +1463,7 @@ function GuardaDetalleAuto(opc) {
 		oAuto.idSubasta = 0;
 	}
 	try{
-		oAuto.precio = $("#precioAuto").val().trim();	
+		oAuto.precio = $("#precioAuto").val().replace(/[\D_]+/g,"").trim();
 	}catch(err){
 		oAuto.precio = "";
 	}
@@ -1477,7 +1477,7 @@ function GuardaDetalleAuto(opc) {
 		oAuto.anio = "";
 	}
 	try{
-		oAuto.km = $("#cbKMAuto").val().trim();
+		oAuto.km = $("#cbKMAuto").val().replace(/[\D_]+/g,"").trim();
 	}catch(err){
 		oAuto.km = "";
 	}
@@ -1696,7 +1696,7 @@ function soloNumerosOLetras(inputItem){
 function onBlurComas(inputItem){
     $(inputItem).blur( function(e) {
     	debugger;
-        var cantidad = Number($(inputItem).val().replace(/[\D_]+/,""));
+        var cantidad = Number($(inputItem).val().replace(/[\D_]+/g,""));
         if(!isNaN(cantidad)){
             var cantidadTexto = cantidad.formatMoney(0, '.', ',');
             $(inputItem).val(cantidadTexto);
@@ -1709,7 +1709,7 @@ function onBlurComas(inputItem){
 function soloNumeros(inputItem){
 
     $(inputItem).on("keypress keyup", function(event) {
-        $(inputItem).val($(inputItem).val().replace(/[\D_]+/,""));
+        $(inputItem).val($(inputItem).val().replace(/[\D_]+/g,""));
     });
 }
 

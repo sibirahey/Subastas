@@ -161,6 +161,8 @@ function CargaFuncionesRegistroAuto(idSubasta){
     onBlurComas("#cbKMAuto");
       soloNumeros("#txtNoSerie");
 	  soloNumerosOLetras("#txtPlaca");
+    soloNumeros("#telefonoContacto");
+    soloNumeros("#celularContacto");
 
 
 	$("#btnGuardaAuto").click(function (){
